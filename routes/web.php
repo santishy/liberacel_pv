@@ -126,4 +126,4 @@ Route::get('transaction-products',[TransactionProductsController::class,'index']
  * Fast sales
  */
 
-Route::post('fast-sales',[FastSaleController::class,'store'])->middleware('auth');
+Route::post('fast-sales',[FastSaleController::class,'store']);
