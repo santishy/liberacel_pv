@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class FastSaleController extends Controller
 {
-    public function store(Request $request){
-        //return csrf_token(); 
+    public function store(Request $request)
+    {
+
         $data = $request->validate([
             'description' => 'required',
             'price' => 'required|numeric|min:1',
@@ -16,9 +17,12 @@ class FastSaleController extends Controller
         ]);
 
         $fastSale = FastSale::findOrCreateFastSale();
-        dd($fastSale);
+
         $fastSale->update(['concepts' => json_encode($data)]);
         return $fastSale;
+    }
 
+    public function create(){
+        return view('fast-sales.create');
     }
 }

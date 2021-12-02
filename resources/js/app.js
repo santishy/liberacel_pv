@@ -76,6 +76,11 @@ Vue.component('forbidden',require('./components/errors/Forbidden.vue').default);
  */
 Vue.component('ticket-form',require('./components/tickets/TicketForm.vue').default);
 
+/**
+ * fast sales
+ */
+Vue.component('create-fast-sale',require('./components/fast-sales/CreateFastSale.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
