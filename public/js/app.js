@@ -31303,8 +31303,15 @@ var render = function () {
   return _c("nav-component", [
     _c(
       "div",
-      { staticClass: "flex flex-wrap items-baseline md:w-9/12 mx-auto" },
-      [_c("h1", [_vm._v("Crear venta rapida")])]
+      {
+        staticClass:
+          "flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded",
+      },
+      [
+        _c("h3", { staticClass: "p-2 text-center w-full" }, [
+          _vm._v("Crear venta"),
+        ]),
+      ]
     ),
   ])
 }
