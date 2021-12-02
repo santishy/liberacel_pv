@@ -18,7 +18,7 @@ class CreateFastSalesTable extends Migration
             $table->float('total',2)->default(0);
             $table->enum('status',['pending','cancelled','completed'])->default('pending');
             $table->json('concepts')->nullable();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
