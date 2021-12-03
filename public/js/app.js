@@ -2183,10 +2183,10 @@ module.exports = {
 /*!*****************************************!*\
   !*** ./node_modules/axios/package.json ***!
   \*****************************************/
-/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, scripts, typings, unpkg, version, default */
+/*! exports provided: name, version, description, main, scripts, repository, keywords, author, license, bugs, homepage, devDependencies, browser, jsdelivr, unpkg, typings, dependencies, bundlesize, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
+module.exports = JSON.parse("{\"name\":\"axios\",\"version\":\"0.21.4\",\"description\":\"Promise based HTTP client for the browser and node.js\",\"main\":\"index.js\",\"scripts\":{\"test\":\"grunt test\",\"start\":\"node ./sandbox/server.js\",\"build\":\"NODE_ENV=production grunt build\",\"preversion\":\"npm test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\",\"postversion\":\"git push && git push --tags\",\"examples\":\"node ./examples/server.js\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"fix\":\"eslint --fix lib/**/*.js\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/axios/axios.git\"},\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"author\":\"Matt Zabriskie\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"homepage\":\"https://axios-http.com\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"jsdelivr\":\"dist/axios.min.js\",\"unpkg\":\"dist/axios.min.js\",\"typings\":\"./index.d.ts\",\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}]}");
 
 /***/ }),
 
@@ -4144,6 +4144,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../NavComponent.vue */ "./resources/js/components/NavComponent.vue");
+/* harmony import */ var _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FastSaleForm.vue */ "./resources/js/components/fast-sales/FastSaleForm.vue");
+//
 //
 //
 //
@@ -4152,9 +4154,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    NavComponent: _NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    NavComponent: _NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    FastSaleForm: _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    labelStyle: function labelStyle() {
+      return " w-3/12 text-right";
+    },
+    inputStyle: function inputStyle() {
+      return "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-2.5 dark:bg-gray-700";
+    },
+    controlsContainerStyle: function controlsContainerStyle() {
+      return "flex flex-wrap flex-row  justify-center items-center w-full ";
+    }
   }
 });
 
@@ -9084,7 +9134,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\r\n", ""]);
+exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -31305,17 +31355,112 @@ var render = function () {
       "div",
       {
         staticClass:
-          "flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded",
+          "p-2 flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded",
       },
       [
-        _c("h3", { staticClass: "p-2 text-center w-full" }, [
+        _c("h3", { staticClass: "p-2 text-center w-full font-mono text-2xl" }, [
           _vm._v("Crear venta"),
         ]),
-      ]
+        _vm._v(" "),
+        _c("fast-sale-form"),
+      ],
+      1
     ),
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "grid grid-rows-3 grid-flow-col  w-full",
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          return _vm.submit.apply(null, arguments)
+        },
+      },
+    },
+    [
+      _c("div", { class: [_vm.controlsContainerStyle] }, [
+        _c("label", { class: [_vm.labelStyle] }, [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("textarea", {
+          class: [_vm.inputStyle],
+          attrs: {
+            name: "description",
+            placeholder: "Descripción del producto o servicio",
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { class: _vm.controlsContainerStyle }, [
+        _c("label", { class: [_vm.labelStyle] }, [_vm._v("Precio")]),
+        _vm._v(" "),
+        _c("input", {
+          class: [_vm.inputStyle],
+          attrs: { type: "text", name: "price", placeholder: "Precio" },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { class: [_vm.controlsContainerStyle] }, [
+        _c("label", { class: [_vm.labelStyle] }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("input", {
+          class: [_vm.inputStyle],
+          attrs: {
+            type: "text",
+            name: "qty",
+            placeholder: "Cantidad de venta",
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: " flex justify-center items-center w-full row-span-3 " },
+      [
+        _c(
+          "button",
+          {
+            staticClass:
+              "h-24 w-24 rounded-full hover:bg-blue-500 bg-blue-700 text-white font-mono font-bold ",
+          },
+          [_vm._v("Crear")]
+        ),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -57139,6 +57284,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/fast-sales/FastSaleForm.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/fast-sales/FastSaleForm.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FastSaleForm.vue?vue&type=template&id=39566980& */ "./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980&");
+/* harmony import */ var _FastSaleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FastSaleForm.vue?vue&type=script&lang=js& */ "./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FastSaleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/fast-sales/FastSaleForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FastSaleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FastSaleForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FastSaleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FastSaleForm.vue?vue&type=template&id=39566980& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/fast-sales/FastSaleForm.vue?vue&type=template&id=39566980&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FastSaleForm_vue_vue_type_template_id_39566980___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/icons/BanIcon.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/icons/BanIcon.vue ***!
@@ -61378,8 +61592,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

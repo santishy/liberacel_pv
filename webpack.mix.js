@@ -17,8 +17,8 @@ mix.js('resources/js/app.js', 'public/js')
         tailwindcss('./tailwind.config.js')
     ])
 mix.browserSync({
-        proxy: 'http://franapp.test',
-        host: 'franapp.test',
+        proxy: 'http://liberacel-pv.test',
+        host: 'liberacel-pv.test',
         open: false,
         browser:'Google chrome',
         ghostMode: false,
