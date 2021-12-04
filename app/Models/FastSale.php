@@ -8,19 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class FastSale extends Model
 {
     use HasFactory;
-
-    protected $casts = [
-        'meta' => 'array'
-    ];
-
     protected $fillable = ['status','total','concepts'];
 
+    protected $casts = [
+        'concepts' => 'array',
+    ];
+
+   public function setConceptsAttribute(){
+       dd($this->concepts);
+   }
+   
+    
     static function findOrCreateFastSale(){
         if(session()->has('fast-sale')){
             return FastSale::find(session()->get('fast-sale'));
         }
         $fastSale = FastSale::create();
-        session()->put('fast-sale', $fastSale);
+        session()->put('fast-sale', $fastSale->id);
         return $fastSale;
     }
 }

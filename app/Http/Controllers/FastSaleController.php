@@ -9,7 +9,7 @@ class FastSaleController extends Controller
 {
     public function store(Request $request)
     {
-
+        
         $data = $request->validate([
             'description' => 'required',
             'price' => 'required|numeric|min:1',
@@ -17,8 +17,11 @@ class FastSaleController extends Controller
         ]);
 
         $fastSale = FastSale::findOrCreateFastSale();
+        
+        $fastSale->concepts = collect($fastSale->concepts)->push($data);
 
-        $fastSale->update(['concepts' => json_encode($data)]);
+        $fastSale->save();
+
         return $fastSale;
     }
 
