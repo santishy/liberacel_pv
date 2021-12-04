@@ -17,12 +17,18 @@ class FastSaleController extends Controller
         ]);
 
         $fastSale = FastSale::findOrCreateFastSale();
-        
-        $fastSale->concepts = collect($fastSale->concepts)->push($data);
+
+        $fastSale->total += $data['price'] * $data['qty']; 
+        $fastSale->concepts = $data;
 
         $fastSale->save();
 
-        return $fastSale;
+        return response()->json([
+            'products' => $fastSale->products,
+            'id' => $fastSale->id,
+            'total' => $fastSale,
+            'status' => $fastSale->status
+        ]);
     }
 
     public function create(){
