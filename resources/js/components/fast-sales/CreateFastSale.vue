@@ -25,9 +25,9 @@
             >
                 Crear venta
             </h3>
-            <fast-sale-form class="mt-4"></fast-sale-form>
+            <fast-sale-form  class="mt-4"></fast-sale-form>
         </div>
-        <concepts-list class="mt-4"></concepts-list>
+        <concepts-list :sale="sale" class="mt-4"></concepts-list>
     </nav-component>
 </template>
 <script>
@@ -41,5 +41,13 @@ export default {
         FastSaleForm,
         ConceptsList,
     },
+    props:{
+        sale:{
+            type: Object
+        }
+    },
+    created(){
+        console.log(this.sale)
+    }
 };
 </script>

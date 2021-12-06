@@ -2,7 +2,7 @@
     <div
         class="
             p-2
-            border-l-4 border-green-500
+            border-l-4 border-teal-400
             flex flex-wrap
             items-baseline
             md:w-9/12
@@ -31,7 +31,6 @@
                 sm:bg-white
                 rounded-lg
                 overflow-hidden
-                
                 my-5
             "
         >
@@ -55,27 +54,26 @@
                 </tr>
             </thead>
             <tbody class="flex-1 sm:flex-none">
-                <tr v-for="product in products" :key="product.id" class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        {{product.description}}
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        {{product.price}}
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        {{product.qty}}
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-
-                    </td>
-                </tr>
+                <concept-list-item
+                    v-for="(product, index) in products"
+                    :key="product.id"
+                    :product="product"
+                    :index="index"
+                ></concept-list-item>
             </tbody>
         </table>
     </div>
 </template>
 
 <script>
+import ConceptListItem from "./ConceptListItem.vue";
 export default {
+    components: { ConceptListItem },
+    props: {
+        sale: {
+            type: Object,
+        },
+    },
     data() {
         return {
             products: [],
@@ -86,12 +84,19 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            console.log("entro con esto", sale);
+            this.fillData(sale);
+        });
+        if (this.sale) {
+            this.fillData(this.sale);
+        }
+    },
+    methods: {
+        fillData(sale) {
             this.products = sale.products;
             this.nota = sale.id;
             this.status = sale.status;
             this.total = sale.total;
-        });
+        },
     },
 };
 </script>
