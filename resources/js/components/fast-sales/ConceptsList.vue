@@ -84,15 +84,17 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
+            this.products.unshift(sale.product)
             this.fillData(sale);
         });
         if (this.sale) {
+            this.products = this.sale.concepts;
             this.fillData(this.sale);
         }
     },
     methods: {
         fillData(sale) {
-            this.products = sale.products;
+            
             this.nota = sale.id;
             this.status = sale.status;
             this.total = sale.total;

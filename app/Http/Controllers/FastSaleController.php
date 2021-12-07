@@ -24,7 +24,7 @@ class FastSaleController extends Controller
         $fastSale->save();
 
         return response()->json([
-            'products' => $fastSale->products,
+            'product' => $data,
             'id' => $fastSale->id,
             'total' => $fastSale,
             'status' => $fastSale->status
