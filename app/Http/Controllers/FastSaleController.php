@@ -35,4 +35,23 @@ class FastSaleController extends Controller
         $sale = fastSale::find(session()->get('fast-sale'));
         return view('fast-sales.create',compact('sale'));
     }
+
+    public function update(Request $request,FastSale $sale){
+        $data = $request->validate([
+            'description' => 'required',
+            'price' => 'required|numeric|min:1',
+            'qty' => 'required|integer|min:1',
+            'index' => 'required'
+        ]);
+        
+      
+        dd($sale->concepts[$data['index']]);
+            
+        dd($sale->concepts);
+        $sale->save();
+
+        return $sale;
+
+
+    }
 }

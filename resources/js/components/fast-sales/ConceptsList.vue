@@ -59,6 +59,7 @@
                     :key="product.id"
                     :product="product"
                     :index="index"
+                    :sale="sale"
                 ></concept-list-item>
             </tbody>
         </table>
