@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Events\FastSaleUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FastSale extends Model
 {
     use HasFactory;
+
+    protected $dispatchesEvents = [
+        'updated' => FastSaleUpdated::class,
+    ];
 
     protected $fillable = ['status', 'total', 'concepts'];
     protected $appends = ['products'];

@@ -44,10 +44,8 @@ class FastSaleController extends Controller
             'index' => 'required'
         ]);
         
-      
-        dd($sale->concepts[$data['index']]);
+        $sale["concepts->$data[index]"] = collect($data)->except('index');
             
-        dd($sale->concepts);
         $sale->save();
 
         return $sale;
