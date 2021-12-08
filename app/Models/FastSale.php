@@ -10,9 +10,7 @@ class FastSale extends Model
 {
     use HasFactory;
 
-    protected $dispatchesEvents = [
-        'updated' => FastSaleUpdated::class,
-    ];
+    
 
     protected $fillable = ['status', 'total', 'concepts'];
     protected $appends = ['products'];
@@ -43,5 +41,12 @@ class FastSale extends Model
         $fastSale = FastSale::create();
         session()->put('fast-sale', $fastSale->id);
         return $fastSale;
+    }
+    public function calculateTotal(){
+        $total = 0;
+        foreach($this->concepts as $product) {
+            $total += $product->price * $product->qty;
+        }
+        return $total;
     }
 }

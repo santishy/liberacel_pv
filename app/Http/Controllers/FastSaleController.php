@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FastSaleResource;
 use App\Models\FastSale;
 use Illuminate\Http\Request;
 
@@ -17,18 +18,11 @@ class FastSaleController extends Controller
         ]);
 
         $fastSale = FastSale::findOrCreateFastSale();
-
+        
         $fastSale->total += $data['price'] * $data['qty']; 
-        $fastSale->concepts = $data;
-
+        $fastSale['concepts'] = $data;
         $fastSale->save();
-
-        return response()->json([
-            'product' => $data,
-            'id' => $fastSale->id,
-            'total' => $fastSale,
-            'status' => $fastSale->status
-        ]);
+        return FastSaleResource::make($fastSale->fresh());
     }
 
     public function create(){
@@ -45,11 +39,12 @@ class FastSaleController extends Controller
         ]);
         
         $sale["concepts->$data[index]"] = collect($data)->except('index');
-            
+
+        $sale->total = $sale->calculateTotal();
+
         $sale->save();
 
-        return $sale;
-
+        return FastSaleResource::make($sale->fresh());
 
     }
 }
