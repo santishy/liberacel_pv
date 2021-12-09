@@ -66,8 +66,15 @@ export default {
     methods: {
         async submit() {
             try {
-                const res = await axios.post("/fast-sales", this.form);
-                EventBus.$emit("fast-sale",res.data.data);
+                const {
+                    data: { data },
+                } = await axios.post("/fast-sales", this.form);
+                EventBus.$emit("fast-sale", data);
+                this.form = {};
+                this.notify({
+                    title: "Venta rapida",
+                    message: "Producto agregado",
+                });
             } catch (err) {
                 this.getErrors(err);
             }

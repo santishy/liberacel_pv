@@ -20,6 +20,18 @@ class JsonApiBuilder
         };
     }
 
+
+    public function applyRemovals()
+    {
+        return function () {
+            foreach (request('remove', []) as $method => $value) {
+                abort_unless($this->hasNamedScope($method), 400, 'El metodo no existe');
+                $this->{$method}($value);
+            }
+            return $this;
+        };
+    }
+
     public function transactions()
     {
         return function ($product) {

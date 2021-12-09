@@ -47,4 +47,10 @@ class FastSaleController extends Controller
         return FastSaleResource::make($sale->fresh());
 
     }
+
+    public function destroy(Request $request,FastSale $sale){
+        
+        $sale->applyRemovals();
+        return FastSaleResource::make($sale->fresh());
+    }
 }

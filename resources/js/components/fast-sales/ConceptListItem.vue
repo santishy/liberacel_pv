@@ -31,7 +31,7 @@
                 cursor-pointer
             "
         >
-            <delete-concept></delete-concept>
+            <delete-concept :index="index" :sale="sale"></delete-concept>
         </td>
     </tr>
     <tr v-else class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
