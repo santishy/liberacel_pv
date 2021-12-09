@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\FastSaleUpdated;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class FastSale extends Model
     
 
     protected $fillable = ['status', 'total', 'concepts'];
-    protected $appends = ['products'];
+   
     protected $casts = [
         'concepts' => 'array',
     ];
@@ -25,12 +26,7 @@ class FastSale extends Model
         $this->attributes['concepts'] = collect($this->concepts)->prepend($value);
     }
 
-    /**
-     * accesor
-     */
-    public function getProductsAttribute() {
-        return $this->concepts;
-    }
+   
 
 
     static function findOrCreateFastSale()
@@ -50,14 +46,15 @@ class FastSale extends Model
         return $total;
     }
 
-    public function scopeDeleteConcept($index){
+    public function scopeDeleteConcept(Builder $query,$index){
         if(is_null($index)){
             return null;
         }
-        dd($this['concepts']);
-        $concepts = array_splice($this['concepts'],$index,1);
-        $this['concepts'] = $concepts;
-        dd($this['concepts']);
+        
+        $products = $this->concepts;
+        array_splice($products,$index,1);
+        $this->attributes['concepts'] = collect($products);
+        $this->total = $this->calculateTotal();
         $this->save();
         return;
     }

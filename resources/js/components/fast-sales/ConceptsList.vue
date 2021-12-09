@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="products.length"
         class="
             p-2
             border-l-4 border-teal-400
@@ -14,16 +15,20 @@
     >
         <h3
             class="
-                p-2
+                
                 border-b border-gray-300
                 text-center
                 w-full
                 font-mono
                 text-2xl
+                text-teal-800
             "
         >
-            Nota
+            Nota #{{sale.id}}
         </h3>
+        <div class="flex flex-wrap justify-between items-center py-3 px-2 w-full">
+            <span>{{status}}</span><span>Total: {{total}}</span><span>{{sale.created_at}}</span>
+        </div>
         <table
             class="
                 w-full
@@ -31,7 +36,6 @@
                 sm:bg-white
                 rounded-lg
                 overflow-hidden
-                my-5
             "
         >
             <thead class="text-white">
@@ -86,11 +90,10 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            //this.products.unshift(sale.product)
+            console.log(sale)
             this.fillData(sale);
         });
         if (this.sale) {
-            //this.products = this.sale.concepts;
             this.fillData(this.sale);
         }
     },

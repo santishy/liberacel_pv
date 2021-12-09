@@ -14,20 +14,26 @@ import TrashIcon from "../icons/TrashIcon.vue";
 export default {
     components: { TrashIcon },
 
-    props:{
-        sale:{
-            type:Object
+    props: {
+        sale: {
+            type: Object,
         },
-        index:{type:Number}
+        index: { type: Number },
     },
-    methods:{
-        submit(){
-            axios.delete('/fast-sales/' + this.sale.id,{
-                params:{
-                    'remove[deleteConcept]':this.index
-                }
-            });
-        }
-    }
+    methods: {
+        async submit() {
+            try {
+                const {data:{data}} = await axios.delete("/fast-sales/" + this.sale.id, {
+                    params: {
+                        "remove[deleteConcept]": this.index,
+                    },
+                });
+                this.notify({'title':'Venta rapida','message':'Producto eliminado.','type':'warn'})
+                EventBus.$emit("fast-sale", data);
+            } catch (err) {
+                console.log(err)
+            }
+        },
+    },
 };
 </script>
