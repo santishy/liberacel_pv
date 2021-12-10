@@ -7,6 +7,7 @@
             <label :class="[labelStyle]">Descripción</label>
             <textarea
                 name="description"
+                ref="description"
                 v-model="form.description"
                 :class="[inputStyle]"
                 placeholder="Descripción del producto o servicio"
@@ -16,6 +17,7 @@
             <label :class="[labelStyle]">Precio</label>
             <input
                 type="text"
+                ref="price"
                 name="price"
                 v-model="form.price"
                 :class="[inputStyle]"
@@ -27,6 +29,7 @@
             <input
                 type="text"
                 name="qty"
+                ref="qty"
                 v-model="form.qty"
                 :class="[inputStyle]"
                 placeholder="Cantidad de venta"
@@ -71,6 +74,7 @@ export default {
                 } = await axios.post("/fast-sales", this.form);
                 EventBus.$emit("fast-sale", data);
                 this.form = {};
+                this.$refs.description.focus();
                 this.notify({
                     title: "Venta rapida",
                     message: "Producto agregado",

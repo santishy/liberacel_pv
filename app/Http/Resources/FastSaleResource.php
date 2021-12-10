@@ -17,9 +17,9 @@ class FastSaleResource extends JsonResource
         return [
             'status' => $this->status,
             'id' => $this->id,
-            'products' => $this->concepts,
+            'products' => $this->concepts ? $this->concepts : [],
             'total' =>'$'.number_format($this->total, 2),
-            'created_at' => $this->created_at->format('Y-m-d H:m:s'),
+            'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
         ];
     }
 }

@@ -10,31 +10,52 @@
             mx-auto
             bg-white
             shadow-sm
-            rounded
+            rounded-sm
         "
     >
         <h3
             class="
-                
                 border-b border-gray-300
                 text-center
                 w-full
                 font-mono
-                text-2xl
-                text-teal-800
+                text-2xl text-teal-800
             "
         >
-            Nota #{{sale.id}}
+            Nota #{{ sale.id }}
         </h3>
-        <div class="flex flex-wrap justify-between items-center py-3 px-2 w-full">
-            <span>{{status}}</span><span>Total: {{total}}</span><span>{{sale.created_at}}</span>
+        <div
+            class="flex flex-wrap justify-between items-center py-3 px-2 w-full"
+        >
+            <span :class=[statusStyle]>{{ status }}</span
+            ><span>Total: {{ total }}</span
+            ><span class="text-xs text-gray-700">{{ sale.created_at }}</span>
+        </div>
+        <div
+            class="
+                bg-blue-200
+                w-full
+                rounded
+                p-1
+                mb-1
+                text-gray-800 text-xs
+                flex flex-wrap
+                justify-center
+                items-center
+                border border-blue-600
+            "
+        >
+            <p class="mr-4">Dar doble click sobre una fila de la tabla generada abajo, para editar el producto.</p>
+
+            <pointer-icon class="text-blue-700"></pointer-icon>
+            <pointer-icon class="text-blue-700"></pointer-icon>
         </div>
         <table
             class="
                 w-full
                 flex flex-row flex-no-wrap
                 sm:bg-white
-                rounded-lg
+                rounded
                 overflow-hidden
             "
         >
@@ -51,10 +72,12 @@
                         sm:mb-0
                     "
                 >
-                    <th class="p-3 text-left">Descripción</th>
-                    <th class="p-3 text-left">Precio</th>
-                    <th class="p-3 text-left">Cantidad</th>
-                    <th class="p-3 text-left" width="110px">Actions</th>
+                    <th class="p-3 text-left sm:text-center">Descripción</th>
+                    <th class="p-3 text-left sm:text-center">Precio</th>
+                    <th class="p-3 text-left sm:text-center">Cantidad</th>
+                    <th class="p-3 text-left sm:text-center" width="110px">
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody class="flex-1 sm:flex-none">
@@ -63,7 +86,7 @@
                     :key="product.id"
                     :product="product"
                     :index="index"
-                    :sale="sale"
+                    :id="id"
                 ></concept-list-item>
             </tbody>
         </table>
@@ -72,8 +95,9 @@
 
 <script>
 import ConceptListItem from "./ConceptListItem.vue";
+import PointerIcon from "../icons/PointerIcon.vue";
 export default {
-    components: { ConceptListItem },
+    components: { ConceptListItem, PointerIcon },
     props: {
         sale: {
             type: Object,
@@ -85,12 +109,15 @@ export default {
             nota: null,
             status: null,
             total: null,
-            currentDate:null,
+            currentDate: null,
+            id: null,
         };
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            console.log(sale)
+            if (!this.sale) {
+                this.sale = sale;
+            }
             this.fillData(sale);
         });
         if (this.sale) {
@@ -99,13 +126,23 @@ export default {
     },
     methods: {
         fillData(sale) {
-            this.products =sale.products;
+            this.products = sale.products;
             this.nota = sale.id;
             this.status = sale.status;
             this.total = sale.total;
+            this.id = sale.id;
             this.currentDate = sale.created_at;
         },
     },
+    computed:{
+        statusStyle(){
+            if(this.status == 'pending'){
+                return 'text-xs text-yellow-500'
+            }
+
+            return 'text-xs text-green-700';
+        }
+    }
 };
 </script>
 <style lang="css">

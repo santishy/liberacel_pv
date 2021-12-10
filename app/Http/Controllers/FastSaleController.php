@@ -26,7 +26,8 @@ class FastSaleController extends Controller
     }
 
     public function create(){
-        $sale = FastSaleResource::make(fastSale::find(session()->get('fast-sale')));
+        $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : new FastSale;
+        $sale = FastSaleResource::make($sale);
         return view('fast-sales.create',compact('sale'));
     }
 

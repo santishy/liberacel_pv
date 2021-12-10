@@ -2183,10 +2183,10 @@ module.exports = {
 /*!*****************************************!*\
   !*** ./node_modules/axios/package.json ***!
   \*****************************************/
-/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, scripts, typings, unpkg, version, default */
+/*! exports provided: name, version, description, main, scripts, repository, keywords, author, license, bugs, homepage, devDependencies, browser, jsdelivr, unpkg, typings, dependencies, bundlesize, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
+module.exports = JSON.parse("{\"name\":\"axios\",\"version\":\"0.21.4\",\"description\":\"Promise based HTTP client for the browser and node.js\",\"main\":\"index.js\",\"scripts\":{\"test\":\"grunt test\",\"start\":\"node ./sandbox/server.js\",\"build\":\"NODE_ENV=production grunt build\",\"preversion\":\"npm test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\",\"postversion\":\"git push && git push --tags\",\"examples\":\"node ./examples/server.js\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"fix\":\"eslint --fix lib/**/*.js\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/axios/axios.git\"},\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"author\":\"Matt Zabriskie\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"homepage\":\"https://axios-http.com\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"jsdelivr\":\"dist/axios.min.js\",\"unpkg\":\"dist/axios.min.js\",\"typings\":\"./index.d.ts\",\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}]}");
 
 /***/ }),
 
@@ -4221,12 +4221,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     DeleteConcept: _DeleteConcept_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ["product", "sale", "index"],
+  props: ["product", "id", "index"],
   data: function data() {
     return {
       show: false,
@@ -4252,7 +4273,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
+        var _yield$axios$post, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -4260,31 +4282,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log("entro?");
                 _context.prev = 1;
                 _context.next = 4;
-                return axios.post("/fast-sales/".concat(_this.sale.id), _objectSpread(_objectSpread({}, _this.form), {}, {
+                return axios.post("/fast-sales/".concat(_this.id), _objectSpread(_objectSpread({}, _this.form), {}, {
                   _method: "put",
                   index: _this.index
                 }));
 
               case 4:
-                res = _context.sent;
-                _context.next = 10;
+                _yield$axios$post = _context.sent;
+                data = _yield$axios$post.data.data;
+                EventBus.$emit("fast-sale", data);
+                _context.next = 12;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
 
-              case 10:
+              case 12:
                 _this.show = false;
 
-              case 11:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 7]]);
+        }, _callee, null, [[1, 9]]);
       }))();
+    },
+    dbClick: function dbClick(name, event) {
+      this.show = true;
     }
   }
 });
@@ -4301,6 +4328,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConceptListItem.vue */ "./resources/js/components/fast-sales/ConceptListItem.vue");
+/* harmony import */ var _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons/PointerIcon.vue */ "./resources/js/components/icons/PointerIcon.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4374,9 +4425,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ConceptListItem: _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ConceptListItem: _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PointerIcon: _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     sale: {
@@ -4389,14 +4442,17 @@ __webpack_require__.r(__webpack_exports__);
       nota: null,
       status: null,
       total: null,
-      currentDate: null
+      currentDate: null,
+      id: null
     };
   },
   created: function created() {
     var _this = this;
 
     EventBus.$on("fast-sale", function (sale) {
-      console.log(sale);
+      if (!_this.sale) {
+        _this.sale = sale;
+      }
 
       _this.fillData(sale);
     });
@@ -4411,7 +4467,17 @@ __webpack_require__.r(__webpack_exports__);
       this.nota = sale.id;
       this.status = sale.status;
       this.total = sale.total;
+      this.id = sale.id;
       this.currentDate = sale.created_at;
+    }
+  },
+  computed: {
+    statusStyle: function statusStyle() {
+      if (this.status == 'pending') {
+        return 'text-xs text-yellow-500';
+      }
+
+      return 'text-xs text-green-700';
     }
   }
 });
@@ -4514,8 +4580,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     TrashIcon: _icons_TrashIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
-    sale: {
-      type: Object
+    id: {
+      type: Number
     },
     index: {
       type: Number
@@ -4534,7 +4600,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios["delete"]("/fast-sales/" + _this.sale.id, {
+                return axios["delete"]("/fast-sales/" + _this.id, {
                   params: {
                     "remove[deleteConcept]": _this.index
                   }
@@ -4647,6 +4713,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4674,26 +4743,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 EventBus.$emit("fast-sale", data);
                 _this.form = {};
 
+                _this.$refs.description.focus();
+
                 _this.notify({
                   title: "Venta rapida",
                   message: "Producto agregado"
                 });
 
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
 
                 _this.getErrors(_context.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee, null, [[0, 11]]);
       }))();
     }
   },
@@ -9636,7 +9707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\r\n", ""]);
+exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -9655,7 +9726,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -31904,16 +31975,20 @@ var render = function () {
   return !_vm.show
     ? _c(
         "tr",
-        { staticClass: "flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0" },
+        {
+          staticClass:
+            "\n        flex flex-col flex-no\n        wrap\n        sm:table-row\n        mb-2\n        sm:mb-0 sm:text-center\n    ",
+        },
         [
           _c(
             "td",
             {
-              staticClass: "border-grey-light border hover:bg-gray-100 p-3",
+              staticClass:
+                "\n            border-grey-light border\n            hover:bg-gray-100\n            p-3\n            cursor-pointer\n        ",
               on: {
                 dblclick: function ($event) {
                   $event.preventDefault()
-                  _vm.show = true
+                  return _vm.dbClick("description", $event)
                 },
               },
             },
@@ -31923,11 +31998,12 @@ var render = function () {
           _c(
             "td",
             {
-              staticClass: "border-grey-light border hover:bg-gray-100 p-3",
+              staticClass:
+                "\n            border-grey-light border\n            hover:bg-gray-100\n            p-3\n            cursor-pointer\n        ",
               on: {
                 dblclick: function ($event) {
                   $event.preventDefault()
-                  _vm.show = true
+                  return _vm.dbClick("price")
                 },
               },
             },
@@ -31937,11 +32013,12 @@ var render = function () {
           _c(
             "td",
             {
-              staticClass: "border-grey-light border hover:bg-gray-100 p-3",
+              staticClass:
+                "\n            border-grey-light border\n            hover:bg-gray-100\n            p-3\n            cursor-pointer\n        ",
               on: {
                 dblclick: function ($event) {
                   $event.preventDefault()
-                  _vm.show = true
+                  return _vm.dbClick("qty")
                 },
               },
             },
@@ -31954,11 +32031,7 @@ var render = function () {
               staticClass:
                 "\n            border-grey-light border\n            hover:bg-gray-100\n            p-3\n            text-red-400\n            hover:text-red-600 hover:font-medium\n            cursor-pointer\n        ",
             },
-            [
-              _c("delete-concept", {
-                attrs: { index: _vm.index, sale: _vm.sale },
-              }),
-            ],
+            [_c("delete-concept", { attrs: { index: _vm.index, id: _vm.id } })],
             1
           ),
         ]
@@ -32087,14 +32160,14 @@ var render = function () {
         "div",
         {
           staticClass:
-            "\n        p-2\n        border-l-4 border-teal-400\n        flex flex-wrap\n        items-baseline\n        md:w-9/12\n        mx-auto\n        bg-white\n        shadow-sm\n        rounded\n    ",
+            "\n        p-2\n        border-l-4 border-teal-400\n        flex flex-wrap\n        items-baseline\n        md:w-9/12\n        mx-auto\n        bg-white\n        shadow-sm\n        rounded-sm\n    ",
         },
         [
           _c(
             "h3",
             {
               staticClass:
-                "\n            \n            border-b border-gray-300\n            text-center\n            w-full\n            font-mono\n            text-2xl\n            text-teal-800\n        ",
+                "\n            border-b border-gray-300\n            text-center\n            w-full\n            font-mono\n            text-2xl text-teal-800\n        ",
             },
             [_vm._v("\n        Nota #" + _vm._s(_vm.sale.id) + "\n    ")]
           ),
@@ -32106,17 +32179,41 @@ var render = function () {
                 "flex flex-wrap justify-between items-center py-3 px-2 w-full",
             },
             [
-              _c("span", [_vm._v(_vm._s(_vm.status))]),
+              _c("span", { class: [_vm.statusStyle] }, [
+                _vm._v(_vm._s(_vm.status)),
+              ]),
               _c("span", [_vm._v("Total: " + _vm._s(_vm.total))]),
-              _c("span", [_vm._v(_vm._s(_vm.sale.created_at))]),
+              _c("span", { staticClass: "text-xs text-gray-700" }, [
+                _vm._v(_vm._s(_vm.sale.created_at)),
+              ]),
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "\n            bg-blue-200\n            w-full\n            rounded\n            p-1\n            mb-1\n            text-gray-800 text-xs\n            flex flex-wrap\n            justify-center\n            items-center\n            border border-blue-600\n        ",
+            },
+            [
+              _c("p", { staticClass: "mr-4" }, [
+                _vm._v(
+                  "Dar doble click sobre una fila de la tabla generada abajo, para editar el producto."
+                ),
+              ]),
+              _vm._v(" "),
+              _c("pointer-icon", { staticClass: "text-blue-700" }),
+              _vm._v(" "),
+              _c("pointer-icon", { staticClass: "text-blue-700" }),
+            ],
+            1
           ),
           _vm._v(" "),
           _c(
             "table",
             {
               staticClass:
-                "\n            w-full\n            flex flex-row flex-no-wrap\n            sm:bg-white\n            rounded-lg\n            overflow-hidden\n        ",
+                "\n            w-full\n            flex flex-row flex-no-wrap\n            sm:bg-white\n            rounded\n            overflow-hidden\n        ",
             },
             [
               _vm._m(0),
@@ -32127,7 +32224,7 @@ var render = function () {
                 _vm._l(_vm.products, function (product, index) {
                   return _c("concept-list-item", {
                     key: product.id,
-                    attrs: { product: product, index: index, sale: _vm.sale },
+                    attrs: { product: product, index: index, id: _vm.id },
                   })
                 }),
                 1
@@ -32151,16 +32248,25 @@ var staticRenderFns = [
             "\n                    bg-teal-400\n                    flex flex-col flex-no\n                    wrap\n                    sm:table-row\n                    rounded-l-lg\n                    sm:rounded-none\n                    mb-2\n                    sm:mb-0\n                ",
         },
         [
-          _c("th", { staticClass: "p-3 text-left" }, [_vm._v("Descripción")]),
+          _c("th", { staticClass: "p-3 text-left sm:text-center" }, [
+            _vm._v("Descripción"),
+          ]),
           _vm._v(" "),
-          _c("th", { staticClass: "p-3 text-left" }, [_vm._v("Precio")]),
+          _c("th", { staticClass: "p-3 text-left sm:text-center" }, [
+            _vm._v("Precio"),
+          ]),
           _vm._v(" "),
-          _c("th", { staticClass: "p-3 text-left" }, [_vm._v("Cantidad")]),
+          _c("th", { staticClass: "p-3 text-left sm:text-center" }, [
+            _vm._v("Cantidad"),
+          ]),
           _vm._v(" "),
           _c(
             "th",
-            { staticClass: "p-3 text-left", attrs: { width: "110px" } },
-            [_vm._v("Actions")]
+            {
+              staticClass: "p-3 text-left sm:text-center",
+              attrs: { width: "110px" },
+            },
+            [_vm._v("\n                    Actions\n                ")]
           ),
         ]
       ),
@@ -32309,6 +32415,7 @@ var render = function () {
               expression: "form.description",
             },
           ],
+          ref: "description",
           class: [_vm.inputStyle],
           attrs: {
             name: "description",
@@ -32338,6 +32445,7 @@ var render = function () {
               expression: "form.price",
             },
           ],
+          ref: "price",
           class: [_vm.inputStyle],
           attrs: { type: "text", name: "price", placeholder: "Precio" },
           domProps: { value: _vm.form.price },
@@ -32364,6 +32472,7 @@ var render = function () {
               expression: "form.qty",
             },
           ],
+          ref: "qty",
           class: [_vm.inputStyle],
           attrs: {
             type: "text",
@@ -32692,6 +32801,54 @@ var render = function () {
         attrs: {
           fill: "currentColor",
           d: "M325.4 289.2L224 390.6 122.6 289.2C54 295.3 0 352.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-70.2-54-127.1-122.6-133.2zM32 192c27.3 0 51.8-11.5 69.2-29.7 15.1 53.9 64 93.7 122.8 93.7 70.7 0 128-57.3 128-128S294.7 0 224 0c-50.4 0-93.6 29.4-114.5 71.8C92.1 47.8 64 32 32 32c0 33.4 17.1 62.8 43.1 80-26 17.2-43.1 46.6-43.1 80zm144-96h96c17.7 0 32 14.3 32 32H144c0-17.7 14.3-32 32-32z",
+        },
+      }),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      staticClass: "svg-inline--fa fa-mouse-pointer fa-w-10",
+      attrs: {
+        "aria-hidden": "true",
+        focusable: "false",
+        "data-prefix": "fas",
+        "data-icon": "mouse-pointer",
+        width: "1em",
+        height: "1em",
+        role: "img",
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 320 512",
+      },
+    },
+    [
+      _c("path", {
+        attrs: {
+          fill: "currentColor",
+          d: "M302.189 329.126H196.105l55.831 135.993c3.889 9.428-.555 19.999-9.444 23.999l-49.165 21.427c-9.165 4-19.443-.571-23.332-9.714l-53.053-129.136-86.664 89.138C18.729 472.71 0 463.554 0 447.977V18.299C0 1.899 19.921-6.096 30.277 5.443l284.412 292.542c11.472 11.179 3.007 31.141-12.5 31.141z",
         },
       }),
     ]
@@ -58861,6 +59018,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/icons/PointerIcon.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/icons/PointerIcon.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PointerIcon.vue?vue&type=template&id=5b5d3d86& */ "./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/icons/PointerIcon.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PointerIcon.vue?vue&type=template&id=5b5d3d86& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/icons/PointerIcon.vue?vue&type=template&id=5b5d3d86&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointerIcon_vue_vue_type_template_id_5b5d3d86___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/icons/PurchaseIcon.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/icons/PurchaseIcon.vue ***!
@@ -62766,8 +62976,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

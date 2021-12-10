@@ -15,15 +15,15 @@ export default {
     components: { TrashIcon },
 
     props: {
-        sale: {
-            type: Object,
+        id: {
+            type: Number,
         },
         index: { type: Number },
     },
     methods: {
         async submit() {
             try {
-                const {data:{data}} = await axios.delete("/fast-sales/" + this.sale.id, {
+                const {data:{data}} = await axios.delete("/fast-sales/" + this.id, {
                     params: {
                         "remove[deleteConcept]": this.index,
                     },

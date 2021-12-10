@@ -1,23 +1,44 @@
 <template>
     <tr
         v-if="!show"
-        class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
+        class="
+            flex flex-col flex-no
+            wrap
+            sm:table-row
+            mb-2
+            sm:mb-0 sm:text-center
+        "
     >
         <td
-            @dblclick.prevent="show = true"
-            class="border-grey-light border hover:bg-gray-100 p-3"
+            @dblclick.prevent="dbClick('description',$event)"
+            class="
+                border-grey-light border
+                hover:bg-gray-100
+                p-3
+                cursor-pointer
+            "
         >
             {{ product.description }}
         </td>
         <td
-            @dblclick.prevent="show = true"
-            class="border-grey-light border hover:bg-gray-100 p-3"
+            @dblclick.prevent="dbClick('price')"
+            class="
+                border-grey-light border
+                hover:bg-gray-100
+                p-3
+                cursor-pointer
+            "
         >
             <span>{{ product.price }}</span>
         </td>
         <td
-            @dblclick.prevent="show = true"
-            class="border-grey-light border hover:bg-gray-100 p-3"
+            @dblclick.prevent="dbClick('qty')"
+            class="
+                border-grey-light border
+                hover:bg-gray-100
+                p-3
+                cursor-pointer
+            "
         >
             <span>{{ product.qty }}</span>
         </td>
@@ -31,7 +52,7 @@
                 cursor-pointer
             "
         >
-            <delete-concept :index="index" :sale="sale"></delete-concept>
+            <delete-concept :index="index" :id="id"></delete-concept>
         </td>
     </tr>
     <tr v-else class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
@@ -65,7 +86,7 @@
 import DeleteConcept from "./DeleteConcept.vue";
 export default {
     components: { DeleteConcept },
-    props: ["product", "sale","index"],
+    props: ["product", "id", "index"],
     data() {
         return {
             show: false,
@@ -88,17 +109,23 @@ export default {
     },
     methods: {
         async submit() {
-            console.log("entro?")
+            console.log("entro?");
             try {
-                const res = await axios.post(`/fast-sales/${this.sale.id}`, {
+                const {
+                    data: { data },
+                } = await axios.post(`/fast-sales/${this.id}`, {
                     ...this.form,
                     _method: "put",
-                    index:this.index,
+                    index: this.index,
                 });
+                EventBus.$emit("fast-sale", data);
             } catch (e) {
                 console.log(e);
             }
             this.show = false;
+        },
+        dbClick(name,event) {
+            this.show = true;
         },
     },
 };
