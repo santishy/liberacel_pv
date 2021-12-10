@@ -50,6 +50,12 @@
                     >
                         Ventas
                     </a>
+                    <a
+                        href="/fast-sales/create"
+                        class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg"
+                    >
+                        Venta Expres
+                    </a>
                     <dropdown-component
                         name="Reportes"
                         :items="ReportsMenu"
