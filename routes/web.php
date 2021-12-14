@@ -130,3 +130,4 @@ Route::post('fast-sales',[FastSaleController::class,'store'])->middleware('auth'
 Route::get('fast-sales/create',[FastSaleController::class,'create'])->middleware('auth');
 Route::put('fast-sales/{sale}',[FastSaleController::class,'update'])->middleware('auth');
 Route::delete('fast-sales/{sale}',[FastSaleController::class,'destroy'])->middleware('auth');
+Route::post('user-relationship',[UserRelationshipController::class,'store'])->middleware('auth');

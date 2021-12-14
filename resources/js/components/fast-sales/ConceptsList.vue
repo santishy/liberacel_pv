@@ -27,7 +27,9 @@
         <div
             class="flex flex-wrap justify-between items-center py-3 px-2 w-full"
         >
-            <span :class=[statusStyle]>{{ status }}</span
+            <button @click.prevent="openModal" :class="[statusStyle]">
+                <span class="mr-2">{{ translate[status] }}</span>
+                <span><exchange></exchange></span></button
             ><span>Total: {{ total }}</span
             ><span class="text-xs text-gray-700">{{ sale.created_at }}</span>
         </div>
@@ -45,7 +47,10 @@
                 border border-blue-600
             "
         >
-            <p class="mr-4">Dar doble click sobre una fila de la tabla generada abajo, para editar el producto.</p>
+            <p class="mr-4">
+                Dar doble click sobre una fila de la tabla generada abajo, para
+                editar el producto.
+            </p>
 
             <pointer-icon class="text-blue-700"></pointer-icon>
             <pointer-icon class="text-blue-700"></pointer-icon>
@@ -96,8 +101,9 @@
 <script>
 import ConceptListItem from "./ConceptListItem.vue";
 import PointerIcon from "../icons/PointerIcon.vue";
+import Exchange from "../icons/Exchange.vue";
 export default {
-    components: { ConceptListItem, PointerIcon },
+    components: { ConceptListItem, PointerIcon, Exchange },
     props: {
         sale: {
             type: Object,
@@ -111,6 +117,11 @@ export default {
             total: null,
             currentDate: null,
             id: null,
+            translate: {
+                pending: "PENDIENTE",
+                completed: "COMPLETADO",
+                cancelled: "CANCELADO",
+            },
         };
     },
     created() {
@@ -133,16 +144,19 @@ export default {
             this.id = sale.id;
             this.currentDate = sale.created_at;
         },
+        openModal(){
+            EventBus.$emit("open-modal",true);
+        }
     },
-    computed:{
-        statusStyle(){
-            if(this.status == 'pending'){
-                return 'text-xs text-yellow-500'
+    computed: {
+        statusStyle() {
+            if (this.status == "pending") {
+                return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
             }
 
-            return 'text-xs text-green-700';
-        }
-    }
+            return "text-xs text-green-700";
+        },
+    },
 };
 </script>
 <style lang="css">

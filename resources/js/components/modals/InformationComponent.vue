@@ -65,30 +65,11 @@
                     >
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="sm:flex sm:items-start">
-                                <!-- <div
-                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
-                                >
-                                    
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                </div> -->
                                 <div
-                                    class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                    class="mt-3 text-center sm:mt-0 sm:ml-4 w-full"
                                 >
                                     <h3
-                                        class="text-lg leading-6 font-medium text-gray-900"
+                                        class="w-full text-center text-lg leading-6 font-medium text-gray-900"
                                         id="modal-title"
                                     >
                                         <slot name="title"></slot>

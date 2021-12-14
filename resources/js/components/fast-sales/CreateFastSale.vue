@@ -25,12 +25,20 @@
             >
                 Crear venta
             </h3>
-            <fast-sale-form  class="mt-4"></fast-sale-form>
+            <fast-sale-form class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
+        <information-component>
+            <template slot="title">
+                Completar venta
+            </template>
+            <authentication-form></authentication-form>
+        </information-component>
     </nav-component>
 </template>
 <script>
+import InformationComponent from "../modals/InformationComponent.vue";
+import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
@@ -39,14 +47,14 @@ export default {
     components: {
         NavComponent,
         FastSaleForm,
+        AuthenticationForm,
+        InformationComponent,
         ConceptsList,
     },
-    props:{
-        sale:{
-            type: Object
-        }
+    props: {
+        sale: {
+            type: Object,
+        },
     },
-    
-    
 };
 </script>
