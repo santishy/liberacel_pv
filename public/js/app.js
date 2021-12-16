@@ -2866,7 +2866,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    model: {
+      type: String
+    },
+    id: {
+      type: Number
+    }
+  },
   data: function data() {
     return {
       form: {}
@@ -2883,26 +2893,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                _this.form.model = _this.model;
+                _this.form.id = _this.id;
+                _context.next = 5;
                 return axios.post("/user-relationship", _this.form);
 
-              case 3:
+              case 5:
                 res = _context.sent;
-                console.log(res);
-                _context.next = 10;
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   }
@@ -4452,9 +4463,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConceptListItem.vue */ "./resources/js/components/fast-sales/ConceptListItem.vue");
-/* harmony import */ var _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons/PointerIcon.vue */ "./resources/js/components/icons/PointerIcon.vue");
-/* harmony import */ var _icons_Exchange_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../icons/Exchange.vue */ "./resources/js/components/icons/Exchange.vue");
+/* harmony import */ var _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/InformationComponent.vue */ "./resources/js/components/modals/InformationComponent.vue");
+/* harmony import */ var _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConceptListItem.vue */ "./resources/js/components/fast-sales/ConceptListItem.vue");
+/* harmony import */ var _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../icons/PointerIcon.vue */ "./resources/js/components/icons/PointerIcon.vue");
+/* harmony import */ var _icons_Exchange_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons/Exchange.vue */ "./resources/js/components/icons/Exchange.vue");
+/* harmony import */ var _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth/AuthenticationForm.vue */ "./resources/js/components/auth/AuthenticationForm.vue");
 //
 //
 //
@@ -4555,14 +4568,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ConceptListItem: _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PointerIcon: _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Exchange: _icons_Exchange_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    ConceptListItem: _ConceptListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    PointerIcon: _icons_PointerIcon_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Exchange: _icons_Exchange_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    AuthenticationForm: _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    InformationComponent: _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     sale: {
@@ -4634,11 +4658,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/InformationComponent.vue */ "./resources/js/components/modals/InformationComponent.vue");
-/* harmony import */ var _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../auth/AuthenticationForm.vue */ "./resources/js/components/auth/AuthenticationForm.vue");
-/* harmony import */ var _NavComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../NavComponent.vue */ "./resources/js/components/NavComponent.vue");
-/* harmony import */ var _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FastSaleForm.vue */ "./resources/js/components/fast-sales/FastSaleForm.vue");
-/* harmony import */ var _ConceptsList_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ConceptsList.vue */ "./resources/js/components/fast-sales/ConceptsList.vue");
+/* harmony import */ var _NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../NavComponent.vue */ "./resources/js/components/NavComponent.vue");
+/* harmony import */ var _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FastSaleForm.vue */ "./resources/js/components/fast-sales/FastSaleForm.vue");
+/* harmony import */ var _ConceptsList_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ConceptsList.vue */ "./resources/js/components/fast-sales/ConceptsList.vue");
 //
 //
 //
@@ -4672,23 +4694,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    NavComponent: _NavComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    FastSaleForm: _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    AuthenticationForm: _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    InformationComponent: _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ConceptsList: _ConceptsList_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    NavComponent: _NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    FastSaleForm: _FastSaleForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ConceptsList: _ConceptsList_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
     sale: {
@@ -30405,7 +30418,69 @@ var render = function () {
         },
       },
     },
-    [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]
+    [
+      _c("div", { staticClass: "mb-0 px-2" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.email,
+              expression: "form.email",
+            },
+          ],
+          staticClass:
+            "\n                border-2\n                placeholder-gray-600\n                bg-gray-100\n                rounded\n                relative\n                rounded-bl-none rounded-br-none\n                appearance-none\n                w-full\n                py-3\n                px-3\n                text-gray-700\n                leading-tight\n                focus:outline-none\n                focus:ring-indigo-500\n                focus:border-indigo-500\n                focus:z-10\n            ",
+          attrs: {
+            name: "email",
+            id: "email",
+            type: "email",
+            placeholder: "Email...",
+          },
+          domProps: { value: _vm.form.email },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "email", $event.target.value)
+            },
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-0 px-2" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.password,
+              expression: "form.password",
+            },
+          ],
+          staticClass:
+            "\n                border-2\n                placeholder-gray-600\n                bg-gray-100\n                relative\n                appearance-none\n                rounded rounded-tl-none rounded-tr-none\n                w-full\n                py-3\n                px-3\n                text-gray-700\n                leading-tight\n                focus:outline-none\n                focus:ring-indigo-500\n                focus:border-indigo-500\n                focus:z-10\n            ",
+          attrs: {
+            name: "password",
+            id: "password",
+            type: "password",
+            placeholder: "Contraseña...",
+          },
+          domProps: { value: _vm.form.password },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "password", $event.target.value)
+            },
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+    ]
   )
 }
 var staticRenderFns = [
@@ -30413,42 +30488,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-0 px-2" }, [
-      _c("input", {
-        staticClass:
-          "\n                border-2\n                placeholder-gray-600\n                bg-gray-100\n                rounded\n                relative\n                rounded-bl-none rounded-br-none\n                appearance-none\n                w-full\n                py-3\n                px-3\n                text-gray-700\n                leading-tight\n                focus:outline-none\n                focus:ring-indigo-500\n                focus:border-indigo-500\n                focus:z-10\n            ",
-        attrs: {
-          name: "email",
-          id: "username",
-          type: "email",
-          placeholder: "Email...",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-0 px-2" }, [
-      _c("input", {
-        staticClass:
-          "\n                border-2\n                placeholder-gray-600\n                bg-gray-100\n                relative\n                appearance-none\n                rounded rounded-tl-none rounded-tr-none\n                w-full\n                py-3\n                px-3\n                text-gray-700\n                leading-tight\n                focus:outline-none\n                focus:ring-indigo-500\n                focus:border-indigo-500\n                focus:z-10\n            ",
-        attrs: {
-          name: "password",
-          id: "password",
-          type: "password",
-          placeholder: "Contraseña...",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", [
-      _c("button", { attrs: { type: "button" } }, [_vm._v("Enviar")]),
+      _c("button", { attrs: { type: "submit" } }, [_vm._v("Enviar")]),
     ])
   },
 ]
@@ -32396,7 +32437,7 @@ var render = function () {
               staticClass:
                 "\n            border-b border-gray-300\n            text-center\n            w-full\n            font-mono\n            text-2xl text-teal-800\n        ",
             },
-            [_vm._v("\n        Nota #" + _vm._s(_vm.sale.id) + "\n    ")]
+            [_vm._v("\n        Nota #" + _vm._s(_vm.nota) + "\n    ")]
           ),
           _vm._v(" "),
           _c(
@@ -32427,7 +32468,7 @@ var render = function () {
               ),
               _c("span", [_vm._v("Total: " + _vm._s(_vm.total))]),
               _c("span", { staticClass: "text-xs text-gray-700" }, [
-                _vm._v(_vm._s(_vm.sale.created_at)),
+                _vm._v(_vm._s(_vm.currentDate)),
               ]),
             ]
           ),
@@ -32474,7 +32515,22 @@ var render = function () {
               ),
             ]
           ),
-        ]
+          _vm._v(" "),
+          _c(
+            "information-component",
+            [
+              _c("template", { slot: "title" }, [
+                _vm._v("\n            Completar venta\n        "),
+              ]),
+              _vm._v(" "),
+              _c("authentication-form", {
+                attrs: { model: "FastSale", id: _vm.nota },
+              }),
+            ],
+            2
+          ),
+        ],
+        1
       )
     : _vm._e()
 }
@@ -32562,18 +32618,6 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("concepts-list", { staticClass: "mt-4", attrs: { sale: _vm.sale } }),
-      _vm._v(" "),
-      _c(
-        "information-component",
-        [
-          _c("template", { slot: "title" }, [
-            _vm._v("\n            Completar venta\n        "),
-          ]),
-          _vm._v(" "),
-          _c("authentication-form"),
-        ],
-        2
-      ),
     ],
     1
   )

@@ -22,7 +22,7 @@
                 text-2xl text-teal-800
             "
         >
-            Nota #{{ sale.id }}
+            Nota #{{ nota }}
         </h3>
         <div
             class="flex flex-wrap justify-between items-center py-3 px-2 w-full"
@@ -31,7 +31,7 @@
                 <span class="mr-2">{{ translate[status] }}</span>
                 <span><exchange></exchange></span></button
             ><span>Total: {{ total }}</span
-            ><span class="text-xs text-gray-700">{{ sale.created_at }}</span>
+            ><span class="text-xs text-gray-700">{{ currentDate }}</span>
         </div>
         <div
             class="
@@ -95,15 +95,24 @@
                 ></concept-list-item>
             </tbody>
         </table>
+        <information-component>
+            <template slot="title">
+                Completar venta
+            </template>
+           <authentication-form model="FastSale" :id="nota"></authentication-form>
+        </information-component>
+        
     </div>
 </template>
 
 <script>
+import InformationComponent from "../modals/InformationComponent.vue";
 import ConceptListItem from "./ConceptListItem.vue";
 import PointerIcon from "../icons/PointerIcon.vue";
 import Exchange from "../icons/Exchange.vue";
+import AuthenticationForm from "../auth/AuthenticationForm.vue";
 export default {
-    components: { ConceptListItem, PointerIcon, Exchange },
+    components: { ConceptListItem, PointerIcon, Exchange, AuthenticationForm,InformationComponent },
     props: {
         sale: {
             type: Object,
@@ -144,9 +153,9 @@ export default {
             this.id = sale.id;
             this.currentDate = sale.created_at;
         },
-        openModal(){
-            EventBus.$emit("open-modal",true);
-        }
+        openModal() {
+            EventBus.$emit("open-modal", true);
+        },
     },
     computed: {
         statusStyle() {

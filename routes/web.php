@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{ClientController,FastSaleController, CurrentUserController, ImpersonationController, InventoryController, PDFController, RolesPermissionsController, SaleToClientController, TicketController, TransactionProductsController, UserController, WarehouseController};
+use App\Http\Controllers\{ClientController,FastSaleController, CurrentUserController, ImpersonationController, InventoryController, PDFController, RolesPermissionsController, SaleToClientController, TicketController, TransactionProductsController, UserController, UserRelationshipController, WarehouseController};
 use App\Http\Controllers\{PurchaseController, ProductInSaleController, RoleController};
 use App\Models\Category;
 use App\Models\Ticket;

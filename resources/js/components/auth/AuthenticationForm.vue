@@ -21,7 +21,8 @@
                     focus:border-indigo-500
                     focus:z-10
                 "
-                id="username"
+                id="email"
+                v-model="form.email"
                 type="email"
                 placeholder="Email..."
             />
@@ -48,32 +49,40 @@
                 "
                 id="password"
                 type="password"
+                v-model="form.password"
                 placeholder="Contraseña..."
             />
         </div>
         <div>
-            <button type="button" class="">Enviar</button>
+            <button type="submit" class="">Enviar</button>
         </div>
     </form>
 </template>
 <script>
 export default {
-    data(){
-        return{
-            form:{}
-        }
+    props: {
+        model: {
+            type: String,
+        },
+        id: {
+            type: Number,
+        },
     },
-    methods:{
-        async submit(){
-            try{
-                const res = await axios.post("/user-relationship",this.form);
-                console.log(res);
-            }catch(err){
-                console.log(err)
+    data() {
+        return {
+            form: {},
+        };
+    },
+    methods: {
+        async submit() {
+            try {
+                this.form.model = this.model;
+                this.form.id = this.id;
+                const res = await axios.post("/user-relationship", this.form);
+            } catch (err) {
+                console.log(err);
             }
-            
-                
-        }
-    }
-}
+        },
+    },
+};
 </script>
