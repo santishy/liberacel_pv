@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sale;
+use App\Models\FastSale;
 use App\Models\Ticket;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Dompdf\Dompdf;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-class PDFController extends Controller
+class FastSalePDFController extends Controller
 {
-    function __invoke(Sale $sale)
+    function __invoke(FastSale $sale)
     {
-        $now = $sale->created_at->format('Y-m-d');
+        $now = Carbon::now()->format('Y-m-d');
 
-        $products = $sale->products;
+        $products = $sale->concepts;
+
+        //dd($products);
         
         $ticketConfig = Ticket::first();
-        
-        $typeOfSale = 'sale';
+        $typeOfSale = 'fastsale';
         
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
         

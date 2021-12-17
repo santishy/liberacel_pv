@@ -16,7 +16,7 @@
         <h3
             class="
                 border-b border-gray-300
-                text-center
+                px-4
                 w-full
                 font-mono
                 text-2xl text-teal-800
@@ -30,7 +30,7 @@
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[status] }}</span>
                 <span><exchange></exchange></span></button
-            ><span>Total: {{ total }}</span
+            ><span class="text-2xl font-light text-red-700">Total: {{ total }}</span
             ><span class="text-xs text-gray-700">{{ currentDate }}</span>
         </div>
         <div
@@ -97,7 +97,7 @@
         </table>
         <information-component>
             <template slot="title">
-                Completar venta
+               <span class="text-xl font-mono font-semibold text-blue-700"> Completar venta </span>
             </template>
            <authentication-form model="FastSale" :id="nota"></authentication-form>
         </information-component>

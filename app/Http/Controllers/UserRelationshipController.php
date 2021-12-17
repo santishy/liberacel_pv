@@ -24,6 +24,9 @@ class UserRelationshipController extends Controller
         $model = str::of( $request->model);
         $user->{lcfirst($model)}()->associate("App\Models\\$model->ucfirst"::find($request->id));
         session()->forget('fast-sale');
+        return response()->json([
+            'sale' => $model,
+        ]);
         
     }
 }

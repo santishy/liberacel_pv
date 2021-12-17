@@ -1,6 +1,6 @@
 <template>
-    <form @submit.prevent="submit" class="px-2 py-4">
-        <div class="mb-0 px-2">
+    <form @submit.prevent="submit" class="px-2 ">
+        <div class="mb-1 px-2">
             <input
                 name="email"
                 class="
@@ -53,8 +53,8 @@
                 placeholder="Contraseña..."
             />
         </div>
-        <div>
-            <button type="submit" class="">Enviar</button>
+        <div class="mb-0 px-2">
+            <button type="submit" class="bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full">Enviar</button>
         </div>
     </form>
 </template>
@@ -79,6 +79,10 @@ export default {
                 this.form.model = this.model;
                 this.form.id = this.id;
                 const res = await axios.post("/user-relationship", this.form);
+                if(res.status === 200){
+                    EventBus.$emit("open-modal",false);
+                    window.open('/fast-sale-tickets/' + this.id, '_blank');
+                }
             } catch (err) {
                 console.log(err);
             }
