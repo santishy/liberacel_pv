@@ -30,7 +30,8 @@
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[status] }}</span>
                 <span><exchange></exchange></span></button
-            ><span class="text-2xl font-light text-red-700">Total: {{ total }}</span
+            ><span class="text-2xl font-light text-red-700"
+                >Total: {{ total }}</span
             ><span class="text-xs text-gray-700">{{ currentDate }}</span>
         </div>
         <div
@@ -97,11 +98,15 @@
         </table>
         <information-component>
             <template slot="title">
-               <span class="text-xl font-mono font-semibold text-blue-700"> Completar venta </span>
+                <span class="text-xl font-mono font-semibold text-blue-700">
+                    Completar venta
+                </span>
             </template>
-           <authentication-form model="FastSale" :id="nota"></authentication-form>
+            <authentication-form
+                model="FastSale"
+                :id="nota"
+            ></authentication-form>
         </information-component>
-        
     </div>
 </template>
 
@@ -112,7 +117,13 @@ import PointerIcon from "../icons/PointerIcon.vue";
 import Exchange from "../icons/Exchange.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 export default {
-    components: { ConceptListItem, PointerIcon, Exchange, AuthenticationForm,InformationComponent },
+    components: {
+        ConceptListItem,
+        PointerIcon,
+        Exchange,
+        AuthenticationForm,
+        InformationComponent,
+    },
     props: {
         sale: {
             type: Object,

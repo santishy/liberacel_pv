@@ -80,7 +80,7 @@ Vue.component('ticket-form',require('./components/tickets/TicketForm.vue').defau
  * fast sales
  */
 Vue.component('create-fast-sale',require('./components/fast-sales/CreateFastSale.vue').default);
-
+Vue.component('fast-sales-reports',require('./components/fast-sales/FastSalesReports').default);
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))

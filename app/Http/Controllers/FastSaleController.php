@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class FastSaleController extends Controller
 {
+    public function index(Request $request){
+        if($request->wantsJson()){
+            return $sales = FastSale::applyFilters();
+        }
+        
+        return view('fast-sales.index');
+    }
     public function store(Request $request)
     {
         

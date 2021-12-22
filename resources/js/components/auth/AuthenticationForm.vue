@@ -3,6 +3,7 @@
         <div class="mb-1 px-2">
             <input
                 name="email"
+                ref="email"
                 class="
                     border-2
                     placeholder-gray-600
@@ -73,6 +74,7 @@ export default {
             form: {},
         };
     },
+    
     methods: {
         async submit() {
             try {
