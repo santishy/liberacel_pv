@@ -22,7 +22,10 @@ class UserRelationshipController extends Controller
             return response()->json(['errors' => ['error' => 'Tu email|password es incorrecto.' ]],422);
         }
         $model = str::of( $request->model);
-        $user->{lcfirst($model)}()->associate("App\Models\\$model->ucfirst"::find($request->id));
+        $model = app("App\Models\\$model->ucfirst")->find($request->id);
+        $model->user()->associate($user);
+        $model->save();
+        //$user->{lcfirst($model)}()->associate("App\Models\\$model->ucfirst"::find($request->id));
         session()->forget('fast-sale');
         return response()->json([
             'sale' => $model,

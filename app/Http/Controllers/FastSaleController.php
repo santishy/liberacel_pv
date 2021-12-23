@@ -10,7 +10,7 @@ class FastSaleController extends Controller
 {
     public function index(Request $request){
         if($request->wantsJson()){
-            return $sales = FastSale::applyFilters();
+            return  FastSale::include()->applyFilters()->paginate(50);
         }
         
         return view('fast-sales.index');

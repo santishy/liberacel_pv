@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Events\FastSaleUpdated;
 use App\Events\TransactionComplete;
-use App\Listeners\UpdateFastSaleTotal;
 use App\Listeners\UpdateInventory;
+use App\Listeners\ChangeStatus;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
             UpdateInventory::class,
         ],
         FastSaleUpdated::class => [
-            UpdateFastSaleTotal::class
+            ChangeStatus::class
         ]
         
     ];

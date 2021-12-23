@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="products.length"
         class="
             p-2
             border-l-4 border-teal-400
@@ -14,6 +13,7 @@
         "
     >
         <table
+            v-if="params"
             class="
                 w-full
                 flex flex-row flex-no-wrap
@@ -54,13 +54,13 @@
                     :index="index"
                     :id="id"
                 ></product-sold>
+                <infinite-loading
+                    @infinite="infiniteHandler"
+                    :identifier="infiniteId"
+                    ref="infiniteLoading"
+                ></infinite-loading>
             </tbody>
         </table>
-        <infinite-loading
-            @infinite="infiniteHandler"
-            :identifier="infiniteId"
-            ref="infiniteLoading"
-        ></infinite-loading>
     </div>
 </template>
 
@@ -74,7 +74,7 @@ export default {
             page: 1,
             params: null,
             infiniteId: 1,
-            uri:'/fast-sales'
+            uri: "/fast-sales",
         };
     },
     mounted() {
@@ -84,12 +84,12 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
+            console.log("entro");
             axios
                 .get(this.uri, {
                     params: {
                         page: this.page,
                         ..._.merge(this.params, this.getRelathionships),
-                        ...this.searchTheWarehouses,
                     },
                 })
                 .then((res) => {
@@ -103,6 +103,12 @@ export default {
                         $state.complete();
                     }
                 });
+        },
+        changeParams(value) {
+            this.params = value;
+            this.page = 1;
+            this.transactions = [];
+            this.infiniteId += 1;
         },
     },
     computed: {

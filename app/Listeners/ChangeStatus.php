@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\FastSaleUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UpdateFastSaleTotal
+class ChangeStatus
 {
     /**
      * Create the event listener.
@@ -24,8 +23,11 @@ class UpdateFastSaleTotal
      * @param  object  $event
      * @return void
      */
-    public function handle(FastSaleUpdated $event)
+    public function handle($event)
     {
-        dd($event);
+        if(!is_null($event->fastSale->user_id) && $event->fastSale->status == 'pending') {
+            $event->fastSale->status = 'completed';
+            $event->fastSale->save();
+        }
     }
 }
