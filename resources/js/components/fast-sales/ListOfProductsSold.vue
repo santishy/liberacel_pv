@@ -49,10 +49,9 @@
             <tbody class="flex-1 sm:flex-none">
                 <product-sold
                     v-for="(product, index) in products"
-                    :key="product.id"
-                    :product="product"
+                    :key="index"
+                    :transaction="product"
                     :index="index"
-                    :id="id"
                 ></product-sold>
                 <infinite-loading
                     @infinite="infiniteHandler"
@@ -66,8 +65,9 @@
 
 <script>
 import InfiniteLoading from "vue-infinite-loading";
+import ProductSold from "./ProductSold.vue";
 export default {
-    components: { InfiniteLoading },
+    components: { InfiniteLoading,ProductSold },
     data() {
         return {
             products: [],
@@ -84,10 +84,10 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log("entro");
             axios
                 .get(this.uri, {
                     params: {
+                        isFastSale: true,
                         page: this.page,
                         ..._.merge(this.params, this.getRelathionships),
                     },
@@ -97,7 +97,9 @@ export default {
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
                         this.page += 1;
-                        this.products.push(...res.data.data);
+                        let products = this.structureTheData(res.data.data);
+                        console.log(products);
+                        this.products.push(...products);
                         $state.loaded();
                     } else {
                         $state.complete();
@@ -109,6 +111,28 @@ export default {
             this.page = 1;
             this.transactions = [];
             this.infiniteId += 1;
+        },
+        structureTheData(data) {
+            let newStructure = [];
+            data.forEach((item) => {
+                let { products, created_at, total, status, id, user_name } =
+                    item;
+                newStructure.push(
+                    ...products.map((product) => {
+                        return {
+                            created_at,
+                            id,
+                            status,
+                            user_name,
+                            total,
+                            description: product.description,
+                            qty: product.qty,
+                            price: product.price,
+                        };
+                    })
+                );
+            });
+            return newStructure;
         },
     },
     computed: {

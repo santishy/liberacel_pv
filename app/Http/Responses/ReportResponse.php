@@ -20,21 +20,20 @@ class ReportResponse implements Responsable
     {
         $transactions = $this->model->include()->applyFilters();
         $className = class_basename($this->model);
-        if($className == 'FastSale'){
+        if ($request->isFastSale) {
             $data = [
-                'data' =>  new FastSaleCollection(
-                    $transactions->paginate(50)
-                ),
+                'data' =>  new FastSaleCollection($transactions->paginate(50)),
             ];
-        }
-        else{
+        } else {
             $data = [
                 'data' =>  TransactionResource::collection(
                     $transactions->paginate(50)
                 ),
             ];
         }
-        
+
+
+
 
         if (request('page') == 1) {
             $data['total'] = number_format($transactions->sum('total'), 2);
