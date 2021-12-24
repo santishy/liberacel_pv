@@ -154,6 +154,10 @@ export default {
                     url: "/sales/"
                 },
                 {
+                    name: "Venta Expres",
+                    url: "/fast-sales"
+                },
+                {
                     name: "Compras",
                     url: "/purchases"
                 }

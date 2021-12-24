@@ -17,9 +17,9 @@
             </transition>
             <errors-component :errors-found="errors"></errors-component>
             <report-by class="mt-4"></report-by>
-            <list-of-products-sold></list-of-products-sold>
+            
         </div>
-        
+        <list-of-products-sold class="mt-4"></list-of-products-sold>
     </nav-component>
 </template>
 <script>

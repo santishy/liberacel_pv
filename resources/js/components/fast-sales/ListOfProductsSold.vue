@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="params"
         class="
             p-2
             border-l-4 border-teal-400
@@ -13,7 +14,6 @@
         "
     >
         <table
-            v-if="params"
             class="
                 w-full
                 flex flex-row flex-no-wrap
@@ -36,11 +36,15 @@
                     "
                 >
                     <th class="p-3 text-left sm:text-center">Nota</th>
+                    <th class="p-3 text-left sm:text-center">Usuario</th>
+                    <th class="p-3 text-left sm:text-center">Fecha</th>
                     <th class="p-3 text-left sm:text-center">Descripción</th>
                     <th class="p-3 text-left sm:text-center">Precio</th>
                     <th class="p-3 text-left sm:text-center">Cantidad</th>
-                    <th class="p-3 text-left sm:text-center">Usuario</th>
-                    <th class="p-3 text-left sm:text-center">Fecha</th>
+                    <th class="p-3 text-left sm:text-center">Subtotal</th>
+                    <th class="p-3 text-left sm:text-center">
+                        Total Venta Completa
+                    </th>
                     <th class="p-3 text-left sm:text-center" width="110px">
                         Actions
                     </th>
@@ -67,7 +71,7 @@
 import InfiniteLoading from "vue-infinite-loading";
 import ProductSold from "./ProductSold.vue";
 export default {
-    components: { InfiniteLoading,ProductSold },
+    components: { InfiniteLoading, ProductSold },
     data() {
         return {
             products: [],
@@ -109,7 +113,7 @@ export default {
         changeParams(value) {
             this.params = value;
             this.page = 1;
-            this.transactions = [];
+            this.products = [];
             this.infiniteId += 1;
         },
         structureTheData(data) {
