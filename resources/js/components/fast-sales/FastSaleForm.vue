@@ -1,9 +1,9 @@
 <template>
     <form
-        class="grid grid-rows-3 grid-flow-col w-full"
+        class="grid grid-rows-3 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
-        <div :class="[controlsContainerStyle]">
+        <div class="col-span-4" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Descripción</label>
             <textarea
                 name="description"
@@ -13,7 +13,7 @@
                 placeholder="Descripción del producto o servicio"
             ></textarea>
         </div>
-        <div :class="controlsContainerStyle">
+        <div  class="col-span-4" :class="controlsContainerStyle">
             <label :class="[labelStyle]">Precio</label>
             <input
                 type="text"
@@ -24,7 +24,7 @@
                 placeholder="Precio"
             />
         </div>
-        <div :class="[controlsContainerStyle]">
+        <div  class="col-span-4" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Cantidad</label>
             <input
                 type="text"
@@ -41,12 +41,13 @@
                 <errors-component :errors-found="errors" />
             </div>
             <button
+                v-show="!errors"
                 class="
                     h-32
                     w-32
                     text-2xl
                     rounded-full
-                    ml-4
+                    
                     hover:bg-blue-700
                     bg-blue-500
                     text-white

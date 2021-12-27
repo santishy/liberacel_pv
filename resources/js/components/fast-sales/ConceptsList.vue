@@ -106,6 +106,33 @@
                 model="FastSale"
                 :id="nota"
             ></authentication-form>
+            <template slot="button">
+                <label
+                    class="
+                        inline-flex
+                        items-start
+                        mt-3
+                        border-2
+                        p-2
+                        rounded-sm
+                        border-gray-200
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        @change="toggleStatus"
+                        class="
+                            form-checkbox
+                            h-5
+                            w-5
+                            text-pink-600
+                            checked:bg-red-500
+                        "
+                    /><span class="ml-2 text-red-700 text-sm font-bold"
+                        >Cancelar venta</span
+                    >
+                </label>
+            </template>
         </information-component>
     </div>
 </template>
@@ -166,6 +193,13 @@ export default {
         },
         openModal() {
             EventBus.$emit("open-modal", true);
+        },
+        toggleStatus(event) {
+            if (event.target.checked) {
+                EventBus.$emit("toggle-status", "cancelled");
+            } else {
+                EventBus.$emit("toggle-status", "completed");
+            }
         },
     },
     computed: {

@@ -64,14 +64,59 @@
                 ></infinite-loading>
             </tbody>
         </table>
+        <information-component>
+            <template slot="title">
+                <span class="text-xl font-mono font-semibold text-blue-700">
+                    Completar venta
+                </span>
+            </template>
+            <authentication-form
+                model="FastSale"
+                :id="nota"
+            ></authentication-form>
+            <template slot="button">
+                <label
+                    class="
+                        inline-flex
+                        items-start
+                        mt-3
+                        border-2
+                        p-2
+                        rounded-sm
+                        border-gray-200
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        @change="toggleStatus"
+                        class="
+                            form-checkbox
+                            h-5
+                            w-5
+                            text-pink-600
+                            checked:bg-red-500
+                        "
+                    /><span class="ml-2 text-red-700 text-sm font-bold"
+                        >Cancelar venta</span
+                    >
+                </label>
+            </template>
+        </information-component>
     </div>
 </template>
 
 <script>
 import InfiniteLoading from "vue-infinite-loading";
+import InformationComponent from "../modals/InformationComponent.vue";
+import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductSold from "./ProductSold.vue";
 export default {
-    components: { InfiniteLoading, ProductSold },
+    components: {
+        InfiniteLoading,
+        ProductSold,
+        InformationComponent,
+        AuthenticationForm,
+    },
     data() {
         return {
             products: [],
@@ -79,6 +124,7 @@ export default {
             params: null,
             infiniteId: 1,
             uri: "/fast-sales",
+            nota:null,
         };
     },
     mounted() {
