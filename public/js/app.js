@@ -5329,6 +5329,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })));
       });
       return newStructure;
+    },
+    toggleStatus: function toggleStatus(event) {
+      if (event.target.checked) {
+        EventBus.$emit('toggle-status', 'cancelled');
+      } else {
+        Eventbus.$emit('toggle-status', 'completed');
+      }
     }
   },
   computed: {

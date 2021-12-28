@@ -184,6 +184,14 @@ export default {
             });
             return newStructure;
         },
+        toggleStatus(event){
+            if(event.target.checked){
+                EventBus.$emit('toggle-status','cancelled')
+            }
+            else{
+                Eventbus.$emit('toggle-status','completed')
+            }
+        }
     },
     computed: {
         getRelathionships() {
