@@ -19,6 +19,7 @@
                 flex flex-row flex-no-wrap
                 sm:bg-white
                 rounded
+                text-center
                 overflow-hidden
             "
         >
