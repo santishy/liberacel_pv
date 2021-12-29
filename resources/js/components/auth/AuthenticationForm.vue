@@ -133,6 +133,7 @@ export default {
         return {
             form: {
                 status: "completed",
+                
             },
         };
     },
@@ -142,7 +143,11 @@ export default {
     //         this.form.status = value;
     //     });
     // },
-
+    mounted(){
+        EventBus.$on("id-for-authenticacion-form",id => {
+            this.id = id;
+        })
+    },
     methods: {
         async submit() {
             try {
