@@ -96,49 +96,13 @@
                 ></concept-list-item>
             </tbody>
         </table>
-        <information-component>
-            <template slot="title">
-                <span class="text-xl font-mono font-semibold text-blue-700">
-                    Completar venta
-                </span>
-            </template>
-            <authentication-form
-                model="FastSale"
-                :id="nota"
-            ></authentication-form>
-            <template slot="button">
-                <label
-                    class="
-                        inline-flex
-                        items-start
-                        mt-3
-                        border-2
-                        p-2
-                        rounded-sm
-                        border-gray-200
-                    "
-                >
-                    <input
-                        type="checkbox"
-                        @change="toggleStatus"
-                        class="
-                            form-checkbox
-                            h-5
-                            w-5
-                            text-pink-600
-                            checked:bg-red-500
-                        "
-                    /><span class="ml-2 text-red-700 text-sm font-bold"
-                        >Cancelar venta</span
-                    >
-                </label>
-            </template>
-        </information-component>
+
+        <authentication-form model="FastSale" :id="nota"></authentication-form>
     </div>
 </template>
 
 <script>
-import InformationComponent from "../modals/InformationComponent.vue";
+
 import ConceptListItem from "./ConceptListItem.vue";
 import PointerIcon from "../icons/PointerIcon.vue";
 import Exchange from "../icons/Exchange.vue";
@@ -149,7 +113,7 @@ export default {
         PointerIcon,
         Exchange,
         AuthenticationForm,
-        InformationComponent,
+       
     },
     props: {
         sale: {
@@ -194,13 +158,13 @@ export default {
         openModal() {
             EventBus.$emit("open-modal", true);
         },
-        toggleStatus(event) {
-            if (event.target.checked) {
-                EventBus.$emit("toggle-status", "cancelled");
-            } else {
-                EventBus.$emit("toggle-status", "completed");
-            }
-        },
+        // toggleStatus(event) {
+        //     if (event.target.checked) {
+        //         EventBus.$emit("toggle-status", "cancelled");
+        //     } else {
+        //         EventBus.$emit("toggle-status", "completed");
+        //     }
+        // },
     },
     computed: {
         statusStyle() {
