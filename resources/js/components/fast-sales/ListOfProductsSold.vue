@@ -112,7 +112,6 @@ export default {
                     if (res.data.data.length) {
                         this.page += 1;
                         let products = this.structureTheData(res.data.data);
-                        console.log(products);
                         this.products.push(...products);
                         $state.loaded();
                     } else {
