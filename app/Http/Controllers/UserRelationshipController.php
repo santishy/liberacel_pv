@@ -21,15 +21,23 @@ class UserRelationshipController extends Controller
         if(!Hash::check( $credentials['password'],optional($user)->password)){
             return response()->json(['errors' => ['error' => 'Tu email|password es incorrecto.' ]],422);
         }
-        $model = str::of( $request->model);
-        $model = app("App\Models\\$model->ucfirst")->find($request->id);
+        
+        $model = $this->getModel($request);
+        if($model->user()->exists()){
+            $model->user()->dissociate();
+            $model->save();
+        }
         $model->user()->associate($user);
         $model->save();
-        //$user->{lcfirst($model)}()->associate("App\Models\\$model->ucfirst"::find($request->id));
         session()->forget('fast-sale');
         return response()->json([
             'sale' => $model,
         ]);
         
+    }
+    public function getModel($request) {
+        $model = str::of( $request->model);
+        $model = app("App\Models\\$model->ucfirst")->find($request->id);
+        return $model;
     }
 }

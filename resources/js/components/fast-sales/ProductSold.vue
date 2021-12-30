@@ -42,8 +42,9 @@ export default {
     },
     methods:{
         openModal(){
-            EventBus.$emit("id-for-authenticacion-form",this.transaction.id);
+            
             EventBus.$emit("open-modal",true);
+            EventBus.$emit("id-for-authenticacion-form",this.transaction.id);
         }
     }
 };
