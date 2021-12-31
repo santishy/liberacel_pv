@@ -169,10 +169,7 @@ export default {
                 this.form.id = this.local_id;
                 const res = await axios.post("/user-relationship", this.form);
                 if (res.status === 200) {
-                    EventBus.$emit("fast-sale", { products: [] });
-                    EventBus.$emit("open-modal", false);
-                    if (this.form.status == "completed")
-                        window.open("/fast-sale-tickets/" + this.id, "_blank");
+                    EventBus.$emit("associated-user",this.form.id);
                     this.form.id = null;
                 }
             } catch (err) {

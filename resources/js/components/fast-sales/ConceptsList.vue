@@ -113,7 +113,6 @@ export default {
         PointerIcon,
         Exchange,
         AuthenticationForm,
-       
     },
     props: {
         sale: {
@@ -145,6 +144,12 @@ export default {
         if (this.sale) {
             this.fillData(this.sale);
         }
+        EventBus.$on("associated-user",val => {
+            this.products=[];
+            EventBus.$emit("open-modal", false);
+            window.open("/fast-sale-tickets/" + this.id, "_blank");
+
+        })
     },
     methods: {
         fillData(sale) {

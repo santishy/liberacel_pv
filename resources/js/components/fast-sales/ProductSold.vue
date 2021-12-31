@@ -20,6 +20,7 @@
                 <printer-icon></printer-icon>
             </a>
             <a
+                v-if="transaction.status == 'completed'"
                 href="#"
                 @click.prevent="openModal"
                 class="cursor-pointer block p-2 text-red-600 "
