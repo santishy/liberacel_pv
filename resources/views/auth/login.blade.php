@@ -18,7 +18,10 @@
                   <form method="POST" action="{{route('login')}}" class=" px-8 pt-0 pb-8 mb-4">
                   @csrf
                   <div class="mb-0 px-2">
-                    <input name="email" class="border-2 placeholder-gray-600 bg-gray-100  rounded relative rounded-bl-none rounded-br-none appearance-none  w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" id="username" type="email" placeholder="Email...">
+                    <input name="username" class="border-2 placeholder-gray-600 bg-gray-100  rounded relative rounded-bl-none rounded-br-none appearance-none  w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" id="username" type="text" placeholder="Nombre de usuario...">
+                    @error('username')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="mb-0 px-2">
                     <input name="password" class="border-2 placeholder-gray-600 bg-gray-100 relative appearance-none rounded rounded-tl-none rounded-tr-none w-full py-3 px-3 text-gray-700  leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 " id="password" type="password" placeholder="Contraseña...">

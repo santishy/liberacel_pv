@@ -12,10 +12,10 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
-        $this->authorize('viewAny',new User);
+        $this->authorize('viewAny', new User);
 
         if (request()->wantsJson()) {
             return User::with('roles:name,id')->orderBy('id', 'desc')->get();
@@ -29,7 +29,7 @@ class UserController extends Controller
         $roles  = Role::all('name', 'id');
         $inventories = Inventory::all();
         $user = $user->with('roles:id,name')->where('id', $user->id)->first();
-        return view('users.edit', compact('user', 'roles','inventories'));
+        return view('users.edit', compact('user', 'roles', 'inventories'));
     }
 
     public function update(Request $request, User $user)
@@ -43,9 +43,11 @@ class UserController extends Controller
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id)
             ],
+            'username' => ['required', 'min:4', Rule::unique(User::class)->ignore($user->id)],
             'roles.*' => 'exists:roles,id'
         ]);
         $user->inventory_id = $request->inventory_id;
+        $user->username = $request->username;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->syncRoles($request->roles);

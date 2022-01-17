@@ -35,11 +35,13 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'inventory_id' => $isAdmin,
             'password' => $this->passwordRules(),
+            'username' => [Rule::unique(User::class),'required'],
             'roles.*' => 'exists:roles,id'
         ])->validate();
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
+            'username' => $input['username'],
             'password' => Hash::make($input['password']),
             'inventory_id' => $input['inventory_id']  ,
         ]);

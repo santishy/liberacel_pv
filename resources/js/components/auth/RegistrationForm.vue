@@ -49,6 +49,21 @@
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
             <input
+                v-model="form.username"
+                name="username"
+                class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
+                type="text"
+                placeholder="Nombre completo"
+                aria-label="Full name"
+            />
+            <label
+                for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
+                >Nombre de usuario</label
+            >
+        </div>
+        <div class="flex items-center  border-t border-gray-500 py-2 relative">
+            <input
                 v-model="form.email"
                 name="email"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
