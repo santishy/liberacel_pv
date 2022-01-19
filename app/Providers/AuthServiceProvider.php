@@ -24,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Inventory' => 'App\Policies\WarehousePolicy',
         'Spatie\Permission\Models\Role' => 'App\Policies\RolePolicy',
         'App\Models\User' => 'App\Policies\UserPolicy',
+        'App\Models\FastSale' => 'App\Policies\FastSalePolicy'
     ];
 
     /**

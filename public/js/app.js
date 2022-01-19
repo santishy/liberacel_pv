@@ -30944,26 +30944,26 @@ var render = function () {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.form.email,
-                      expression: "form.email",
+                      value: _vm.form.username,
+                      expression: "form.username",
                     },
                   ],
-                  ref: "email",
+                  ref: "username",
                   staticClass:
                     "\n                        border-2\n                        placeholder-gray-600\n                        bg-gray-100\n                        rounded\n                        relative\n                        rounded-bl-none rounded-br-none\n                        appearance-none\n                        w-full\n                        py-3\n                        px-3\n                        text-gray-700\n                        leading-tight\n                        focus:outline-none\n                        focus:ring-indigo-500\n                        focus:border-indigo-500\n                        focus:z-10\n                    ",
                   attrs: {
-                    name: "email",
-                    id: "email",
-                    type: "email",
-                    placeholder: "Email...",
+                    name: "username",
+                    id: "username",
+                    type: "text",
+                    placeholder: "Nombre de usuario...",
                   },
-                  domProps: { value: _vm.form.email },
+                  domProps: { value: _vm.form.username },
                   on: {
                     input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.form, "email", $event.target.value)
+                      _vm.$set(_vm.form, "username", $event.target.value)
                     },
                   },
                 }),

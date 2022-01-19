@@ -9,8 +9,8 @@
             <form @submit.prevent="submit" class="px-2">
                 <div class="mb-1 px-2">
                     <input
-                        name="email"
-                        ref="email"
+                        name="username"
+                        ref="username"
                         class="
                             border-2
                             placeholder-gray-600
@@ -29,10 +29,10 @@
                             focus:border-indigo-500
                             focus:z-10
                         "
-                        id="email"
-                        v-model="form.email"
-                        type="email"
-                        placeholder="Email..."
+                        id="username"
+                        v-model="form.username"
+                        type="text"
+                        placeholder="Nombre de usuario..."
                     />
                 </div>
                 <div class="mb-0 px-2">

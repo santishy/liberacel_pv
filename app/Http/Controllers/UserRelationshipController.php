@@ -11,18 +11,25 @@ use Illuminate\Support\Str;
 class UserRelationshipController extends Controller
 {
     public function store(Request $request){
+        $model = $this->getModel($request);
+        /**
+         * authorize ... mandamos el model al metodo update y lo adaptaoms en el policy correspondiente
+         */
+        $this->authorize('update',$model);
+        
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'username' => 'required|min:4',
             'password' => 'required',
             'model' => 'required',
             'id' => "required|exists:App\Models\\$request->model,id"
         ]);
-        $user = User::where('email', $credentials['email'])->first();
+        
+        $user = User::where('username', $credentials['username'])->first();
         if(!Hash::check( $credentials['password'],optional($user)->password)){
             return response()->json(['errors' => ['error' => 'Tu email|password es incorrecto.' ]],422);
         }
         
-        $model = $this->getModel($request);
+        
         if($model->user()->exists()){
             $model->user()->dissociate();
             $model->save();

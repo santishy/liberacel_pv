@@ -74,5 +74,12 @@ class PermissionSeeder extends Seeder
 
         //permissions to ticket
         Permission::create(['name' => 'edit ticket']);
+
+        //permissions to fast sale
+        Permission::create(['name' => 'create fast sale']);
+        Permission::create(['name' => 'view fast sale']);
+        Permission::create(['name' => 'view fast sales']);
+        Permission::create(['name' => 'edit fast sale']);
+        Permission::create(['name' => 'delete fast sale']);
     }
 }

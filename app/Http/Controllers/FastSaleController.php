@@ -12,6 +12,7 @@ class FastSaleController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('viewAny', new FastSale);
         if ($request->wantsJson()) {
             return new  ReportResponse(FastSale::query());
         }
@@ -20,7 +21,7 @@ class FastSaleController extends Controller
     }
     public function store(Request $request)
     {
-
+        $this->authorize('create', new FastSale);
         $data = $request->validate([
             'description' => 'required',
             'price' => 'required|numeric|min:1',
@@ -37,6 +38,7 @@ class FastSaleController extends Controller
 
     public function create()
     {
+        $this->authorize('create', new FastSale);
         $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : new FastSale;
         $sale = FastSaleResource::make($sale);
         return view('fast-sales.create', compact('sale'));
@@ -44,6 +46,7 @@ class FastSaleController extends Controller
 
     public function update(Request $request, FastSale $sale)
     {
+        $this->authorize('update', new FastSale);
         $data = $request->validate([
             'description' => 'required',
             'price' => 'required|numeric|min:1',
@@ -62,7 +65,7 @@ class FastSaleController extends Controller
 
     public function destroy(Request $request, FastSale $sale)
     {
-
+        $this->authorize('delete', new FastSale);
         $sale->applyRemovals();
         return FastSaleResource::make($sale->fresh());
     }
