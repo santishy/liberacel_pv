@@ -15,7 +15,7 @@ class UserRelationshipController extends Controller
         /**
          * authorize ... mandamos el model al metodo update y lo adaptaoms en el policy correspondiente
          */
-        $this->authorize('update',$model);
+        $this->authorize('restore',$model);
         
         $credentials = $request->validate([
             'username' => 'required|min:4',
@@ -25,6 +25,7 @@ class UserRelationshipController extends Controller
         ]);
         
         $user = User::where('username', $credentials['username'])->first();
+        
         if(!Hash::check( $credentials['password'],optional($user)->password)){
             return response()->json(['errors' => ['error' => 'Tu email|password es incorrecto.' ]],422);
         }

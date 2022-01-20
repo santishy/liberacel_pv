@@ -59,5 +59,13 @@ return [
     'edit role' => 'Editar rol',
 
     //permissions to ticket
-    'edit ticket' => 'Editar ticket'
+    'edit ticket' => 'Editar ticket',
+
+    //permissions to fast sales
+    'create fast sale' => 'Crear venta rápida',
+    'edit fast sale' => 'Editar venta rápida',
+    'view fast sales' => 'Ver ventas rápidas (Reportes)',
+    'view fast sale' => 'Ver venta rápida',
+    'delete fast sale product' => 'Eliminar productos de la venta rápida actual',
+    'cancel fast sale' => 'Cancelar venta rápida'
 ];

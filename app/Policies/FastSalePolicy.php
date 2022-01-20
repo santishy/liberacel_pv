@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FastSalePolicy
 {
-    use HandlesAuthorization,HasAdministrator;
+    use HandlesAuthorization, HasAdministrator;
 
     /**
      * Determine whether the user can view any models.
@@ -54,11 +54,7 @@ class FastSalePolicy
      */
     public function update(User $user, FastSale $fastSale)
     {
-        if(request()->has('status')){
-            if(request()->get('status') == 'cancelled'){
-                return $user->hasPermissionTo('cancel fast sale');
-            }
-        }
+
         return $user->hasPermissionTo('edit fast sale');
     }
 
@@ -83,7 +79,12 @@ class FastSalePolicy
      */
     public function restore(User $user, FastSale $fastSale)
     {
-        //
+        if(request()->has('status')){
+            if(request()->get('status') == 'cancelled'){
+                return $user->hasPermissionTo('cancel fast sale');
+            }
+        }
+        return $user->hasPermissionTo('create fast sale');
     }
 
     /**
