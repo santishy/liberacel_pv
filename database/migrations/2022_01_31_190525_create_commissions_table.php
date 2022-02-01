@@ -15,6 +15,7 @@ class CreateCommissionsTable extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fast_sale_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
