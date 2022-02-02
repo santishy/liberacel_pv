@@ -6,6 +6,7 @@ use App\Events\FastSaleUpdated;
 use App\Events\TransactionComplete;
 use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
+use App\Listeners\CreateOrUpdateCommission;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         FastSaleUpdated::class => [
             ChangeStatus::class
+        ],
+        CommissionSale::class => [
+            CreateOrUpdateCommission::class
         ]
         
     ];

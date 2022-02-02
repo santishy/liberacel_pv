@@ -27,9 +27,7 @@ class FastSaleController extends Controller
             'price' => 'required|numeric|min:1',
             'qty' => 'required|integer'
         ]);
-
         $fastSale = FastSale::findOrCreateFastSale();
-
         $fastSale->total += $data['price'] * $data['qty'];
         $fastSale['concepts'] = $data;
         $fastSale->save();
