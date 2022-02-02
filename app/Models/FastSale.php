@@ -42,6 +42,17 @@ class FastSale extends Model
         session()->put('fast-sale', $fastSale->id);
         return $fastSale;
     }
+    public function addConcept(){
+        
+        $this['concepts'] = request()->only('description','price','qty');
+        $this->updateTotal();
+
+    }
+    public  function updateTotal(){
+        $this->total += request()->price * request()->qty;
+        $this->save();
+        $this->fresh();
+    }
     public function calculateTotal()
     {
         $total = 0;

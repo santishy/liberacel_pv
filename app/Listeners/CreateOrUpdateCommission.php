@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -25,6 +26,9 @@ class CreateOrUpdateCommission
      */
     public function handle($event)
     {
-        //
+        Commission::create([
+            'fast_sale_id' => $event->fastSale->id,
+            'mounted' => 5 * request('qty')
+        ]);
     }
 }

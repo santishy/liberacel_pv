@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommissionSale;
+use App\Http\Requests\StoreFastSaleRequest;
 use App\Http\Resources\FastSaleCollection;
 use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
@@ -19,19 +21,18 @@ class FastSaleController extends Controller
 
         return view('fast-sales.index');
     }
-    public function store(Request $request)
+    public function store(StoreFastSaleRequest $request)
     {
         $this->authorize('create', new FastSale);
-        $data = $request->validate([
-            'description' => 'required',
-            'price' => 'required|numeric|min:1',
-            'qty' => 'required|integer'
-        ]);
-        $fastSale = FastSale::findOrCreateFastSale();
-        $fastSale->total += $data['price'] * $data['qty'];
-        $fastSale['concepts'] = $data;
+        //$fastSale = FastSale::findOrCreateFastSale();
+       /*$fastSale->total += $request->price * $request->qty;
+        $fastSale['concepts'] = $request->only('description','price','qty');
         $fastSale->save();
-        return FastSaleResource::make($fastSale->fresh());
+        $fastSale = $fastSale->fresh(); */
+        $fastSale = FastSale::findOrCreateFastSale();
+        $fastSale->addConcept();
+        CommissionSale::dispatch($fastSale);
+        return FastSaleResource::make($fastSale);
     }
 
     public function create()
