@@ -20,7 +20,7 @@ class FastSale extends Model
     ];
     
     protected $dispatchesEvents = [
-        'updated' => FastSaleUpdated::class
+        'updating' => FastSaleUpdated::class
     ];
 
     public function setConceptsAttribute($value)

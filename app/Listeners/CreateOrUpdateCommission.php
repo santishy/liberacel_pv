@@ -36,10 +36,11 @@ class CreateOrUpdateCommission
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];
                 });
-                $commission = Commission::create([
-                    'fast_sale_id' => $event->fastSale->id,
-                    'amount' => $this->amount
-                ]);
+                //if(!Commission::where('fast_sale_id',$event->fastSale->id)->exists())
+                    $commission = Commission::create([
+                        'fast_sale_id' => $event->fastSale->id,
+                        'amount' => $this->amount
+                    ]);
                 break;
             case 'cancelled':
                 Commission::where('fast_sale_id', $event->fastSale->id)->delete();

@@ -27,8 +27,8 @@ class EventServiceProvider extends ServiceProvider
             UpdateInventory::class,
         ],
         FastSaleUpdated::class => [
-            ChangeStatus::class,
-            CreateOrUpdateCommission::class
+            CreateOrUpdateCommission::class,
+            ChangeStatus::class, 
         ],
         
     ];
