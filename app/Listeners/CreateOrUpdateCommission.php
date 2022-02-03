@@ -2,12 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Events\CommissionSale;
+use App\Events\FastSaleUpdated;
+use App\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 class CreateOrUpdateCommission
 {
+    public $amount = 0;
     /**
      * Create the event listener.
      *
@@ -21,11 +23,29 @@ class CreateOrUpdateCommission
     /**
      * Handle the event.
      *
-     * @param  \App\Events\CommissionSale  $event
+     * @param  \App\Events\FastSaleUpdated  $event
      * @return void
      */
-    public function handle(CommissionSale $event)
+    public function handle(FastSaleUpdated $event)
     {
-        dd('entro al listener');
+
+        switch ($event->fastSale->status) {
+            case 'completed':
+                $products  = collect($event->fastSale->concepts);
+
+                $products->map(function ($product) {
+                    $this->amount += 5 * $product['qty'];
+                });
+                $commission = Commission::create([
+                    'fast_sale_id' => $event->fastSale->id,
+                    'amount' => $this->amount
+                ]);
+                break;
+            case 'cancelled':
+                Commission::where('fast_sale_id', $event->fastSale->id)->delete();
+                break;
+            default:
+                return;
+        }
     }
 }

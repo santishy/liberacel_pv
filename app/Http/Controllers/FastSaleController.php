@@ -23,16 +23,13 @@ class FastSaleController extends Controller
     }
     public function store(StoreFastSaleRequest $request)
     {
-        $this->authorize('create', new FastSale);
-        //$fastSale = FastSale::findOrCreateFastSale();
-       /*$fastSale->total += $request->price * $request->qty;
-        $fastSale['concepts'] = $request->only('description','price','qty');
-        $fastSale->save();
-        $fastSale = $fastSale->fresh(); */
+        $this->authorize('create', new FastSale); 
+
         $fastSale = FastSale::findOrCreateFastSale();
         $fastSale->addConcept();
+
         $fastSaleFresh = $fastSale->fresh();
-        CommissionSale::dispatch($fastSaleFresh);
+        
         return FastSaleResource::make($fastSaleFresh);
     }
 
