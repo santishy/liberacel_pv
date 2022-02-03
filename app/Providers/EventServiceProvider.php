@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\FastSaleUpdated;
 use App\Events\TransactionComplete;
+use App\Events\CommissionSale;
 use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
 use App\Listeners\CreateOrUpdateCommission;

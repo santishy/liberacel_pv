@@ -31,8 +31,9 @@ class FastSaleController extends Controller
         $fastSale = $fastSale->fresh(); */
         $fastSale = FastSale::findOrCreateFastSale();
         $fastSale->addConcept();
-        CommissionSale::dispatch($fastSale);
-        return FastSaleResource::make($fastSale);
+        $fastSaleFresh = $fastSale->fresh();
+        CommissionSale::dispatch($fastSaleFresh);
+        return FastSaleResource::make($fastSaleFresh);
     }
 
     public function create()

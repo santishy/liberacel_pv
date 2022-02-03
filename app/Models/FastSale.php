@@ -51,7 +51,6 @@ class FastSale extends Model
     public  function updateTotal(){
         $this->total += request()->price * request()->qty;
         $this->save();
-        $this->fresh();
     }
     public function calculateTotal()
     {
