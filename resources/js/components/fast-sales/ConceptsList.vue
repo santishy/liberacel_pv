@@ -148,7 +148,6 @@ export default {
             this.products=[];
             EventBus.$emit("open-modal", false);
             window.open("/fast-sale-tickets/" + this.id, "_blank");
-
         })
     },
     methods: {
@@ -163,13 +162,6 @@ export default {
         openModal() {
             EventBus.$emit("open-modal", true);
         },
-        // toggleStatus(event) {
-        //     if (event.target.checked) {
-        //         EventBus.$emit("toggle-status", "cancelled");
-        //     } else {
-        //         EventBus.$emit("toggle-status", "completed");
-        //     }
-        // },
     },
     computed: {
         statusStyle() {

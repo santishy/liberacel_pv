@@ -27,12 +27,16 @@ class ChangeStatus
      */
     public function handle($event)
     {
-        
+
         $this->currentStatus = $event->fastSale->status;
         if (request()->has('status') && !is_null($event->fastSale->user_id))
-            if ($this->statusSentIsCompleted() || $this->statusSentIsCancelled()) {
+            if (
+                $this->statusSentIsCompleted() ||
+                $this->statusSentIsCancelled()
+            ) {
                 $event->fastSale->status = request()->get('status');
                 $event->fastSale->save();
+                session()->forget('fast-sale');
             }
     }
     public function statusSentIsCompleted()

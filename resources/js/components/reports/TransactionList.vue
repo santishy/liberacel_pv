@@ -135,6 +135,7 @@ export default {
                 })
                 .then(res => {
                     if (res.data.status == "cancelled") {
+                        console.log("index:", this.modalDataConfirm.index)
                         this.transactions.splice(
                             this.modalDataConfirm.index,
                             1

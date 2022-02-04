@@ -15,6 +15,7 @@
             <cancel-transaction
                 :uri="uri"
                 :transaction="transaction"
+                :index="index"
             ></cancel-transaction>
         </td>
     </tr>

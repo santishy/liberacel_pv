@@ -28,22 +28,31 @@ class CreateOrUpdateCommission
      */
     public function handle(FastSaleUpdated $event)
     {
-
-        switch ($event->fastSale->status) {
+        $fastSale = $event->fastSale;
+        switch ($fastSale->status) {
             case 'completed':
-                $products  = collect($event->fastSale->concepts);
+                //comprueba que no sea recursivo
+                if ($fastSale->getOriginal('status') == 'completed') {
+                    break;
+                }
+                
+                $products  = collect($fastSale->concepts);
 
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];
                 });
-                //if(!Commission::where('fast_sale_id',$event->fastSale->id)->exists())
-                    $commission = Commission::create([
-                        'fast_sale_id' => $event->fastSale->id,
-                        'amount' => $this->amount
-                    ]);
+    
+                $commission = Commission::create([
+                    'fast_sale_id' => $fastSale->id,
+                    'amount' => $this->amount
+                ]);
                 break;
             case 'cancelled':
-                Commission::where('fast_sale_id', $event->fastSale->id)->delete();
+                if ($fastSale->getOriginal('status') == 'cancelled') {
+                    break;
+                }
+
+                Commission::where('fast_sale_id', $fastSale->id)->delete();
                 break;
             default:
                 return;
