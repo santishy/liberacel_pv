@@ -160,6 +160,10 @@ export default {
                 {
                     name: "Compras",
                     url: "/purchases"
+                },
+                {
+                    name: "Comisiones",
+                    url: "/user-commissions"
                 }
             ],
             ConfigMenu: [

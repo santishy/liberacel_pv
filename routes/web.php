@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{ClientController,FastSaleController, CurrentUserController, FastSalePDFController, ImpersonationController, InventoryController, PDFController, RolesPermissionsController, SaleToClientController, TicketController, TransactionProductsController, UserController, UserRelationshipController, WarehouseController};
+use App\Http\Controllers\{ClientController,FastSaleController, CurrentUserController, FastSalePDFController, ImpersonationController, InventoryController, PDFController, RolesPermissionsController, SaleToClientController, TicketController, TransactionProductsController, UserCommissionsController, UserController, UserRelationshipController, WarehouseController};
 use App\Http\Controllers\{PurchaseController, ProductInSaleController, RoleController};
 use App\Models\Category;
 use App\Models\Ticket;
@@ -136,3 +136,9 @@ Route::get('fast-sales',[FastSaleController::class,'index'])->middleware('auth')
  * Relacionar a usuario con cualquier tabla
  */
 Route::post('user-relationship',[UserRelationshipController::class,'store'])->middleware('auth');
+
+/**
+ * Commissions
+ */
+Route::get('user-commissions',[UserCommissionsController::class,'index'])->middleware('auth');
+

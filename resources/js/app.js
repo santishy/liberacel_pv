@@ -81,6 +81,12 @@ Vue.component('ticket-form',require('./components/tickets/TicketForm.vue').defau
  */
 Vue.component('create-fast-sale',require('./components/fast-sales/CreateFastSale.vue').default);
 Vue.component('fast-sales-reports',require('./components/fast-sales/FastSalesReports').default);
+
+/**
+ * commissions
+ */
+Vue.component('commissions-index',require('./components/commissions/CommissionIndex.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
