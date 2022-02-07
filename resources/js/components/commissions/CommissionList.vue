@@ -5,7 +5,7 @@
             :key="user.id"
             class="bg-white  border border-gray-300"
         >
-            <a href="#" class="flex justify-between items-center px-2 py-3">
+            <a href="#" @click="getCommissions(user.id)" class="flex justify-between items-center px-2 py-3">
                 {{ user.name }}
                 <span
                     class="

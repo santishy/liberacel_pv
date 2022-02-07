@@ -32961,6 +32961,11 @@ var render = function () {
             {
               staticClass: "flex justify-between items-center px-2 py-3",
               attrs: { href: "#" },
+              on: {
+                click: function ($event) {
+                  return _vm.getCommissions(user.id)
+                },
+              },
             },
             [
               _vm._v("\n            " + _vm._s(user.name) + "\n            "),
