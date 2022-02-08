@@ -140,5 +140,5 @@ Route::post('user-relationship',[UserRelationshipController::class,'store'])->mi
 /**
  * Commissions
  */
-Route::get('user-commissions',[UserCommissionsController::class,'index'])->middleware('auth');
+Route::get('user-commissions/',[UserCommissionsController::class,'index'])->middleware('auth');
 

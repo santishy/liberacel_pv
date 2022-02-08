@@ -43,4 +43,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function fastSales(){
+        return $this->hasMany(FastSale::class);
+    }
 }

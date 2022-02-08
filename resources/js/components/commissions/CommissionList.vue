@@ -29,5 +29,20 @@ export default {
             type: Array,
         },
     },
+    methods:{
+        getCommissions(user_id){
+            axios.get('/user-commissions/',{
+                params:{
+                    user_id
+                }
+            })
+                .then( res  => {
+                    console.log(res.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
 };
 </script>

@@ -30,6 +30,9 @@ class FastSale extends Model
         $this->attributes['concepts'] = collect($this->concepts)->prepend($value);
     }
 
+    public function commission(){
+        return $this->hasOne(Commission::class);
+    }
 
 
 

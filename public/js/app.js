@@ -4441,6 +4441,19 @@ __webpack_require__.r(__webpack_exports__);
     users: {
       type: Array
     }
+  },
+  methods: {
+    getCommissions: function getCommissions(user_id) {
+      axios.get('/user-commissions/', {
+        params: {
+          user_id: user_id
+        }
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
