@@ -14,7 +14,7 @@ class Commission extends Model
     protected $fillable = ['amount','fast_sale_id'];
 
     public function fast_sales(){
-        return $this->belongsTo(FastSale::class);
+        return $this->belongsTo(FastSale::class,'fast_sale_id');
     }
     public function scopeBySales($query,$value){
         $query->with(['fastSales' => function($sql) use ($value){
