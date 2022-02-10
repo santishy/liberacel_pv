@@ -12,16 +12,13 @@ class UserCommissionsController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            if (request()->has('user_id')) {
-                $user = User::find(request('user_id'));
-                
-                $commissions  = Commission::with(['fastSales' => function($query){
-                    $query->where('user_id',request('user_id'));
-                }  ])->paginate();
+            
+                $commissions  = Commission::with('fast_sales')->paginate();
+                //$commissions = Commission::query()->applyFilters()->paginate(50);
                 return response()->json([
                     'commissions' => $commissions
                 ]);
-            }
+           
         }
         $users = User::all();
         return view('commissions.index', compact('users'));
