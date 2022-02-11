@@ -13,7 +13,7 @@ class UserCommissionsController extends Controller
     {
         if (request()->wantsJson()) {
 
-            $commissions  = User::with('fastSales')->paginate();
+            $commissions  = User::find(request('user_id'))->fastSales()->with('commission')->paginate();
             //$commissions = Commission::query()->applyFilters()->paginate(50);
             return response()->json([
                 'commissions' => $commissions

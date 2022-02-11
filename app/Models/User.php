@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -46,5 +50,24 @@ class User extends Authenticatable
 
     public function fastSales(){
         return $this->hasMany(FastSale::class);
+    }
+    public function scopeBySales($query,$value){
+        $query->with(['fastSales' => function($sql) use ($value){
+            $sql->where('user_id',(int)$value);
+        }]);
+    }
+    public function scopeWeek(Builder $query, $value)
+    {
+        $query->whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ]);
+    }
+    public function scopeBetweenDates(Builder $query,$value){
+
+        $dates = str::of($value)->explode(',');
+        
+        $query->whereBetween(DB::raw('Date(created_at)'),[$dates[0],$dates[1]]);
+
     }
 }

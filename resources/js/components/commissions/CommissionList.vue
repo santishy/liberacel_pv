@@ -65,9 +65,10 @@ export default {
             axios
                 .get("/user-commissions/", {
                     params: {
-                        "filter[bySales]": user_id,
+                        "filter[salesCommissions]": user_id,
                         ...this.range
                     },
+                    
                 })
                 .then((res) => {
                     console.log(res.data);
