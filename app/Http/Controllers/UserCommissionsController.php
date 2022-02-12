@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommissionResource;
 use App\Models\Commission;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,8 +14,9 @@ class UserCommissionsController extends Controller
     {
         if (request()->wantsJson()) {
             $user = User::find(request('user_id'));
-            $commissions  = $user->fastSales()->with('commission')->paginate();
-            //$commissions = Commission::query()->applyFilters()->paginate(50);
+            $commissions  = CommissionResource::collection(
+                $user->fastSaleCommission()->applyFilters()->paginate()
+            );
             return response()->json([
                 'commissions' => $commissions
             ]);

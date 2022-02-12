@@ -2,7 +2,7 @@
     <nav-component>
         <div  class="w-full px-4 mx-auto mt-24 md:mt-32 flex" v-can="'view commissions'">
             <div class="w-3/12">
-                <commission-list :users="users"></commission-list>
+                <user-list :users="users"></user-list>
             </div>
         </div>
     </nav-component>
@@ -11,9 +11,9 @@
 <script>
 
 import NavComponent from "../NavComponent.vue";
-import CommissionList from "./CommissionList.vue";
+import UserList from "./UserList.vue";
 export default {
-    components: { NavComponent, CommissionList },
+    components: { NavComponent, UserList },
     props: {
         users: {
             type: Array

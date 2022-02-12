@@ -13,7 +13,7 @@ class JsonApiBuilder
     {
         return function () {
             foreach (request('filter', []) as $filter => $value) {
-                abort_unless($this->hasNamedScope($filter), 400, 'El filtro no existe');
+                abort_unless($this->hasNamedScope($filter), 400, "El filtro {$filter} no existe");
                 $this->{$filter}($value);
             }
             return $this;
@@ -25,7 +25,7 @@ class JsonApiBuilder
     {
         return function () {
             foreach (request('remove', []) as $method => $value) {
-                abort_unless($this->hasNamedScope($method), 400, 'El metodo no existe');
+                abort_unless($this->hasNamedScope($method), 400, "El metodo {$method} no existe");
                 $this->{$method}($value);
             }
             return $this;
