@@ -12,8 +12,8 @@ class UserCommissionsController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-
-            $commissions  = User::find(request('user_id'))->fastSales()->with('commission')->paginate();
+            $user = User::find(request('user_id'));
+            $commissions  = $user->fastSales()->with('commission')->paginate();
             //$commissions = Commission::query()->applyFilters()->paginate(50);
             return response()->json([
                 'commissions' => $commissions
