@@ -4,6 +4,9 @@
             <div class="w-3/12">
                 <user-list :users="users"></user-list>
             </div>
+            <div class="w-9/12">
+                <commission-list></commission-list>
+            </div>
         </div>
     </nav-component>
 </template>
@@ -12,8 +15,9 @@
 
 import NavComponent from "../NavComponent.vue";
 import UserList from "./UserList.vue";
+import CommissionList from "./CommissionList.vue"
 export default {
-    components: { NavComponent, UserList },
+    components: { NavComponent, UserList,CommissionList },
     props: {
         users: {
             type: Array

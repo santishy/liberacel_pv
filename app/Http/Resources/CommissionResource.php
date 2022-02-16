@@ -18,7 +18,7 @@ class CommissionResource extends JsonResource
             'id' => $this->id,
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'total' => $this->total,
-            'products' => $this->concepts,
+            'products' => json_decode($this->concepts),
             'amount' => $this->amount
         ];
     }

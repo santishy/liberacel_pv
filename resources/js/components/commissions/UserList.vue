@@ -52,8 +52,8 @@ export default {
             dates: null,
             range: {},
             statusFilter: {
-                'filter[completedStatus]': "completed",
-            }
+                "filter[completedStatus]": "completed",
+            },
         };
     },
     components: {
@@ -68,30 +68,36 @@ export default {
                     params: {
                         user_id,
                         ...this.range,
-                        ...this.statusFilter
+                        ...this.statusFilter,
                     },
-                    
                 })
                 .then((res) => {
-                    console.log(res.data);
+                    if (res.data.commissions) {
+                        console.log("uno");
+                        EventBus.$emit(
+                            "commissions-earned",
+                            res.data.commissions
+                        );
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-                this.dates = null;
+            this.dates = null;
         },
         setRange() {
             this.range = {};
             if (this.dates?.length) {
-                this.range["filter[commissionsBetweenDates]"] = this.dates.toString(); //convierto el array de las dos fechas de rango a un string separado por comas
+                this.range["filter[commissionsBetweenDates]"] =
+                    this.dates.toString(); //convierto el array de las dos fechas de rango a un string separado por comas
             }
         },
         getRange() {
-            if(!this.dates){
-                this.range = {}
-                this.range["filter[weeklyCommissions]"] =''; //convierto el array de las dos fechas de,
+            if (!this.dates) {
+                this.range = {};
+                this.range["filter[weeklyCommissions]"] = ""; //convierto el array de las dos fechas de,
             }
-        }
+        },
     },
 };
 </script>
