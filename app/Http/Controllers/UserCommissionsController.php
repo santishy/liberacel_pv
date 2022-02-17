@@ -14,11 +14,13 @@ class UserCommissionsController extends Controller
     {
         if (request()->wantsJson()) {
             $user = User::find(request('user_id'));
+            $query = $user->fastSaleCommission()->applyFilters();
             $commissions  = CommissionResource::collection(
-                $user->fastSaleCommission()->applyFilters()->paginate()
+                $query->paginate()
             );
             return response()->json([
-                'commissions' => $commissions
+                'commissions' => $commissions,
+                'total' => $query->sum('amount')
             ]);
         }
         $users = User::all();

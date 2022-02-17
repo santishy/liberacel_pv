@@ -52,6 +52,20 @@
                             md:table-cell
                         "
                     >
+                        Nota 
+                    </th>
+                    <th
+                        class="
+                            bg-blue-700
+                            p-2
+                            text-white
+                            font-semibold
+                            md:border md:border-grey-500
+                            text-left
+                            block
+                            md:table-cell
+                        "
+                    >
                         Fecha 
                     </th>
                     <th
@@ -94,13 +108,19 @@
                 </commission-list-item>
             </tbody>
         </table>
+        <infinite-loading
+                @infinite="infiniteHandler"
+                :identifier="infiniteId"
+                ref="infiniteLoading"
+            ></infinite-loading>
     </div>
 </template>
 
 <script>
+import InfiniteLoading from "vue-infinite-loading";
 import CommissionListItem from "./CommissionListItem.vue";
 export default {
-    components: { CommissionListItem },
+    components: { CommissionListItem, InfiniteLoading },
     data() {
         return {
             commissions: [],

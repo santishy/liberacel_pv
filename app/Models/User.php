@@ -53,7 +53,7 @@ class User extends Authenticatable
     public function fastSaleCommission()
     {
         return $this->hasOneThrough(Commission::class, FastSale::class)
-            ->select('concepts','total');
+            ->select('concepts','total','fast_sales.id as note');
     }
     
 }
