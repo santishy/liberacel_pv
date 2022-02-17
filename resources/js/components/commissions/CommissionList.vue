@@ -1,7 +1,8 @@
 <template>
     <div
+        v-if="user_id"
         class="
-            flex
+            flex flex-col
             justify-center
             bg-white
             shadow-sm
@@ -13,7 +14,6 @@
         "
     >
         <table
-            v-if="commissions.length"
             v-can="'view warehouses'"
             class="
                 min-w-full
@@ -52,7 +52,7 @@
                             md:table-cell
                         "
                     >
-                        Nota 
+                        Nota
                     </th>
                     <th
                         class="
@@ -66,7 +66,7 @@
                             md:table-cell
                         "
                     >
-                        Fecha 
+                        Fecha
                     </th>
                     <th
                         class="
@@ -96,7 +96,6 @@
                     >
                         Monto
                     </th>
-                    
                 </tr>
             </thead>
             <tbody class="block md:table-row-group alternate-table-row">
@@ -109,10 +108,10 @@
             </tbody>
         </table>
         <infinite-loading
-                @infinite="infiniteHandler"
-                :identifier="infiniteId"
-                ref="infiniteLoading"
-            ></infinite-loading>
+            @infinite="getCommissions"
+            :identifier="infiniteId"
+            ref="infiniteLoading"
+        ></infinite-loading>
     </div>
 </template>
 
@@ -124,12 +123,52 @@ export default {
     data() {
         return {
             commissions: [],
+            user_id: null,
+            infiniteId: 1,
+            page: 1,
+            range: {},
+            statusFilter: {
+                "filter[completedStatus]": "completed",
+            },
         };
     },
     created() {
-        EventBus.$on("commissions-earned", (commissions) => {
-            this.commissions = commissions;
+        EventBus.$on("commissions-earned", (obj) => {
+            const { user_id, ...filter } = obj;
+            this.commissions = [];
+            this.range = filter;
+            this.user_id = user_id;
+
+            this.infiniteId += 1;
         });
+    },
+    methods: {
+        getCommissions($state) {
+            axios
+                .get("/user-commissions/", {
+                    params: {
+                        page: this.page,
+                        user_id: this.user_id,
+                        ...this.range,
+                        ...this.statusFilter,
+                    },
+                })
+                .then((res) => {
+                    if (this.page == 1)
+                        EventBus.$emit("calculated-total", res.data.total);
+                    if (res.data.commissions.length) {
+                        this.page += 1;
+                        this.commissions.push(...res.data.commissions);
+                        $state.loaded();
+                    } else {
+                        $state.complete();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.dates = null;
+        },
     },
 };
 </script>

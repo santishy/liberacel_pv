@@ -51,9 +51,9 @@ export default {
         return {
             dates: null,
             range: {},
-            statusFilter: {
+           /*  statusFilter: {
                 "filter[completedStatus]": "completed",
-            },
+            }, */
         };
     },
     components: {
@@ -61,29 +61,9 @@ export default {
     },
     mixins: [ConfigDatePicker],
     methods: {
-        getCommissions(user_id) {
+        getCommissions(user_id){
             this.getRange();
-            axios
-                .get("/user-commissions/", {
-                    params: {
-                        user_id,
-                        ...this.range,
-                        ...this.statusFilter,
-                    },
-                })
-                .then((res) => {
-                    if (res.data.commissions) {
-                        console.log("uno");
-                        EventBus.$emit(
-                            "commissions-earned",
-                            res.data.commissions
-                        );
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            this.dates = null;
+            EventBus.$emit('commissions-earned',{user_id,...this.range})
         },
         setRange() {
             this.range = {};
