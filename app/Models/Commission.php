@@ -34,7 +34,14 @@ class Commission extends Model
     {
         $query->where('status', $value);
     }
-    public function fastSellingProducts($products){
-        
+    public function fastSellingProducts($products)
+    {
+        return collect($products)->map(function ($product) {
+            return [
+                'Descripcion' => $product->description,
+                'Cantidad' => $product->qty,
+                'Precio' => $product->price
+            ];
+        });
     }
 }
