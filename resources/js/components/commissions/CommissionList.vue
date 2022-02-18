@@ -152,12 +152,12 @@ export default {
         };
     },
     created() {
-        EventBus.$on("commissions-earned", (obj) => {
-            const { user_id, username, ...filter } = obj;
-            this.username = username;
+        EventBus.$on("get-user-commissions", (userData) => {
+            const { user, ...filter } = userData;
+            this.username = user.username;
             this.commissions = [];
             this.range = filter;
-            this.user_id = user_id;
+            this.user_id = user.id;
             this.page = 1;
             this.infiniteId += 1;
         });

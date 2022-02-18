@@ -17,7 +17,7 @@
             >
                 <a
                     href="#"
-                    @click="getCommissions(user)"
+                    @click="selectedUser(user)"
                     class="flex justify-between items-center px-2 py-3"
                 >
                     {{ user.name }}
@@ -52,9 +52,6 @@ export default {
         return {
             dates: null,
             range: {},
-            /*  statusFilter: {
-                "filter[completedStatus]": "completed",
-            }, */
         };
     },
     components: {
@@ -62,11 +59,10 @@ export default {
     },
     mixins: [ConfigDatePicker],
     methods: {
-        getCommissions(user) {
+        selectedUser(user) {
             this.getRange();
-            EventBus.$emit("commissions-earned", {
-                user_id: user.id,
-                username: user.username,
+            EventBus.$emit("get-user-commissions", {
+                user,
                 ...this.range,
             });
         },
