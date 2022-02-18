@@ -7,12 +7,29 @@
             bg-white
             shadow-sm
             w-full
-            rounded
+            rounded-sm
             max-w-full
             sm:overflow-x-hidden
             overflow-x-auto
         "
     >
+        <div
+            v-if="commissions.length"
+            class="
+                my-2
+                mx-2
+                rounded-sm
+                bg-orange-100
+                shadow-inner
+                p-2
+                flex flex-wrap
+                justify-between
+                items-center
+            "
+        >
+            <h3 class="text-blue-800 font-mono font-extralight">Usuario: {{ username }}</h3>
+            <span class="text-green-800 rounded bg-indigo-100 p-2 font-mono font-semibold text-xl">Total: {{ total }}</span>
+        </div>
         <table
             v-can="'view warehouses'"
             class="
@@ -126,6 +143,8 @@ export default {
             user_id: null,
             infiniteId: 1,
             page: 1,
+            total: 0,
+            username: null,
             range: {},
             statusFilter: {
                 "filter[completedStatus]": "completed",
@@ -134,11 +153,12 @@ export default {
     },
     created() {
         EventBus.$on("commissions-earned", (obj) => {
-            const { user_id, ...filter } = obj;
+            const { user_id, username, ...filter } = obj;
+            this.username = username;
             this.commissions = [];
             this.range = filter;
             this.user_id = user_id;
-
+            this.page = 1;
             this.infiniteId += 1;
         });
     },
@@ -155,7 +175,7 @@ export default {
                 })
                 .then((res) => {
                     if (this.page == 1)
-                        EventBus.$emit("calculated-total", res.data.total);
+                        this.total = res.data.total;
                     if (res.data.commissions.length) {
                         this.page += 1;
                         this.commissions.push(...res.data.commissions);

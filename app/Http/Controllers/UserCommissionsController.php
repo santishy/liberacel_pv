@@ -20,7 +20,7 @@ class UserCommissionsController extends Controller
             );
             return response()->json([
                 'commissions' => $commissions,
-                'total' => $query->sum('amount')
+                'total' => "$".number_format( $query->sum('amount'),2)
             ]);
         }
         $users = User::all();

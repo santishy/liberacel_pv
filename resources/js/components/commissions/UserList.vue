@@ -6,17 +6,18 @@
             :lang="lang"
             value-type="YYYY-MM-DD"
             v-model="dates"
+            class="mb-2"
             range
         ></date-picker>
         <ul class="w-full">
             <li
                 v-for="user in users"
                 :key="user.id"
-                class="bg-white border border-gray-300"
+                class="bg-white border border-gray-300 w-full"
             >
                 <a
                     href="#"
-                    @click="getCommissions(user.id)"
+                    @click="getCommissions(user)"
                     class="flex justify-between items-center px-2 py-3"
                 >
                     {{ user.name }}
@@ -51,7 +52,7 @@ export default {
         return {
             dates: null,
             range: {},
-           /*  statusFilter: {
+            /*  statusFilter: {
                 "filter[completedStatus]": "completed",
             }, */
         };
@@ -61,9 +62,13 @@ export default {
     },
     mixins: [ConfigDatePicker],
     methods: {
-        getCommissions(user_id){
+        getCommissions(user) {
             this.getRange();
-            EventBus.$emit('commissions-earned',{user_id,...this.range})
+            EventBus.$emit("commissions-earned", {
+                user_id: user.id,
+                username: user.username,
+                ...this.range,
+            });
         },
         setRange() {
             this.range = {};
@@ -81,3 +86,11 @@ export default {
     },
 };
 </script>
+<style scoped>
+.mx-datepicker {
+    display: block;
+}
+.mx-datepicker-range {
+    width: 100%;
+}
+</style>

@@ -4,7 +4,7 @@
             <div class="w-3/12">
                 <user-list :users="users"></user-list>
             </div>
-            <div class="w-9/12">
+            <div class="w-full ml-0 md:ml-2">
                 <commission-list></commission-list>
             </div>
         </div>
