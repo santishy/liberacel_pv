@@ -26,4 +26,10 @@ class UserCommissionsController extends Controller
         $users = User::all();
         return view('commissions.index', compact('users'));
     }
+    /**
+     * 
+     */
+    public function update(Request $request,Commission $commission){
+        
+    }
 }
