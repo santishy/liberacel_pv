@@ -18,9 +18,11 @@ class UserCommissionsController extends Controller
             $commissions  = CommissionResource::collection(
                 $query->paginate()
             );
+            $total = $query->sum('amount');
             return response()->json([
                 'commissions' => $commissions,
-                'total' => "$".number_format( $query->sum('amount'),2)
+                'totalWithFormat' => "$" . number_format($total, 2),
+                'total' => $total,
             ]);
         }
         $users = User::all();
@@ -29,7 +31,17 @@ class UserCommissionsController extends Controller
     /**
      * 
      */
-    public function update(Request $request,Commission $commission){
-        
+    public function update(Request $request, Commission $commission)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:0',
+        ]);
+        $oldComission = $commission->amount;
+        $commission->amount = $request->amount;
+        $commission->save();
+        return response()->json([
+            'oldCommission' => $oldComission,
+            'updatedCommission' => $commission->fresh()->amount,
+        ]);
     }
 }

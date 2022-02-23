@@ -63,34 +63,71 @@
         >
             <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span
             ><a
-                href="#"
-                class="w-full h-full pointer text-blue-400"
                 v-if="show"
+                href="#"
+                class="w-full h-full pointer block text-blue-400"
                 @click.prevent="show = false"
                 >{{ commission.amount }}</a
             >
-            <input v-else type="text" class="rounded-sm border border-gray-400 bg-gray-200" v-model="amount" />
+            <input
+                v-else
+                @keydown.enter="updateAmount"
+                type="text"
+                class="
+                    rounded-sm
+                    border
+                    w-full
+                    shadow-inner
+                    focus:outline-none
+                    p-2
+                    border-gray-400
+                    bg-gray-200
+                "
+                v-model="amount"
+            />
         </td>
     </tr>
 </template>
 <script>
 export default {
+    data() {
+        return {
+            show: true,
+            amount: this.commission.amount,
+        };
+    },
     props: {
         commission: {
             type: Object,
         },
-    },
-    data() {
-        return {
-            show: true,
-            amount: commission.amount,
-        };
     },
     computed: {
         changeProductFormat() {
             return this.commission.products.map((product) => {
                 return `Descripción: ${product.description} Cantidad: ${product.qty} Precio: ${product.price}`;
             });
+        },
+    },
+    methods: {
+        async updateAmount(event) {
+            event.target.focus();
+            let params = { _method: "put" };
+            try {
+
+                const res = await axios.post(
+                    `/user-commissions/${this.commission.id}`,
+                    {
+                        ...params,
+                        amount: this.amount,
+                    }
+                );
+                console.log(res.data)
+                EventBus.$emit('updated-commission',res.data);
+                this.show = false;
+                
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
 };

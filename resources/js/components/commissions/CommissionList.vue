@@ -28,7 +28,7 @@
             "
         >
             <h3 class="text-blue-800 font-mono font-extralight">Usuario: {{ username }}</h3>
-            <span class="text-green-800 rounded bg-indigo-100 p-2 font-mono font-semibold text-xl">Total: {{ total }}</span>
+            <span class="text-green-800 rounded bg-indigo-100 p-2 font-mono font-semibold text-xl">Total: {{ totalWithFormat }}</span>
         </div>
         <table
             v-can="'view warehouses'"
@@ -144,6 +144,7 @@ export default {
             infiniteId: 1,
             page: 1,
             total: 0,
+            totalWithFormat:'',
             username: null,
             range: {},
             statusFilter: {
@@ -161,6 +162,10 @@ export default {
             this.page = 1;
             this.infiniteId += 1;
         });
+        EventBus.$on("updated-commission",(data) => {
+            
+            this.total = (this.total - data.oldCommission) + data.updatedCommission;
+        })
     },
     methods: {
         getCommissions($state) {
