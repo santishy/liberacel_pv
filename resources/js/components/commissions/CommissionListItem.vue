@@ -66,11 +66,12 @@
                 v-if="show"
                 href="#"
                 class="w-full h-full pointer block text-blue-400"
-                @click.prevent="show = false"
+                @click.prevent="hideItem"
                 >{{ commission.amount }}</a
             >
             <input
                 v-else
+                :ref="`element-${commission.id}`"
                 @keydown.enter="updateAmount"
                 type="text"
                 class="
@@ -110,10 +111,8 @@ export default {
     },
     methods: {
         async updateAmount(event) {
-            event.target.focus();
             let params = { _method: "put" };
             try {
-
                 const res = await axios.post(
                     `/user-commissions/${this.commission.id}`,
                     {
@@ -121,13 +120,18 @@ export default {
                         amount: this.amount,
                     }
                 );
-                console.log(res.data)
-                EventBus.$emit('updated-commission',res.data);
-                this.show = false;
-                
+                this.show = true;
+                this.commission.amount = this.amount;
+                EventBus.$emit("updated-commission", res.data);
             } catch (error) {
                 console.log(error);
             }
+        },
+        hideItem(event) {
+            this.show = false;
+            this.$nextTick(() => {
+                this.$refs[`element-${this.commission.id}`].focus();
+            });
         },
     },
 };

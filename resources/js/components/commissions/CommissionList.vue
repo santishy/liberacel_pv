@@ -163,8 +163,8 @@ export default {
             this.infiniteId += 1;
         });
         EventBus.$on("updated-commission",(data) => {
-            
-            this.total = (this.total - data.oldCommission) + data.updatedCommission;
+            this.total = this.total - data.oldCommission + data.updatedCommission;
+            this.totalWithFormat ='$' + new Intl.NumberFormat('es-MX').format(this.total);
         })
     },
     methods: {
@@ -179,8 +179,10 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if (this.page == 1)
+                    if (this.page == 1){
+                        this.totalWithFormat = res.data.totalWithFormat;
                         this.total = res.data.total;
+                        }
                     if (res.data.commissions.length) {
                         this.page += 1;
                         this.commissions.push(...res.data.commissions);
