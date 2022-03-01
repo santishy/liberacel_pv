@@ -82,5 +82,9 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'edit fast sale']);
         Permission::create(['name' => 'delete fast sale product']);
         Permission::create(['name' => 'cancel fast sale']);
+
+        //permissions to commissions 
+        Permission::create(['name' => 'view user commissions']);
+        Permission::create(['name' => 'edit user commission']);
     }
 }
