@@ -12,6 +12,7 @@ class UserCommissionsController extends Controller
 {
     public function index()
     {
+        //$this->authorize('viewAny',)
         if (request()->wantsJson()) {
             $user = User::find(request('user_id'));
             $query = $user->fastSaleCommission()->applyFilters();
