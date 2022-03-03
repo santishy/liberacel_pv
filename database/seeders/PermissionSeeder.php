@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionSeeder extends Seeder
 {
@@ -14,6 +16,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        //app()[PermissionRegistrar::class]->forgetCachedPermissions();
         Permission::truncate();
         // permissions to products
         Permission::create(['name' => 'create product']);

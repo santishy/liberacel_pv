@@ -12,20 +12,21 @@ class UserCommissionsController extends Controller
 {
     public function index()
     {
-        //$this->authorize('viewAny',)
-        if (request()->wantsJson()) {
-            $user = User::find(request('user_id'));
-            $query = $user->fastSaleCommission()->applyFilters();
-            $commissions  = CommissionResource::collection(
-                $query->paginate()
-            );
-            $total = $query->sum('amount');
-            return response()->json([
-                'commissions' => $commissions,
-                'totalWithFormat' => "$" . number_format($total, 2),
-                'total' => $total,
-            ]);
-        }
+
+        // if (request()->wantsJson()) {
+        //     // $this->authorize('viewAny',new Commission);
+        //     $user = User::find(request('user_id'));
+        //     $query = $user->fastSaleCommission()->applyFilters();
+        //     $commissions  = CommissionResource::collection(
+        //         $query->paginate()
+        //     );
+        //     $total = $query->sum('amount');
+        //     return response()->json([
+        //         'commissions' => $commissions,
+        //         'totalWithFormat' => "$" . number_format($total, 2),
+        //         'total' => $total,
+        //     ]);
+        // }
         $users = User::all();
         return view('commissions.index', compact('users'));
     }
@@ -34,6 +35,7 @@ class UserCommissionsController extends Controller
      */
     public function update(Request $request, Commission $commission)
     {
+        $this->authorize('update', $commission);
         $request->validate([
             'amount' => 'required|numeric|min:0',
         ]);

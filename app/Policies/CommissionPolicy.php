@@ -20,7 +20,7 @@ class CommissionPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermissionTo('view user commissions');
     }
 
     /**
@@ -55,7 +55,7 @@ class CommissionPolicy
      */
     public function update(User $user, Commission $commission)
     {
-        
+        return $user->hasPermissionTo('update user commission');
     }
 
     /**
