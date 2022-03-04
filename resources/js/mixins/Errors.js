@@ -13,6 +13,7 @@ module.exports = {
     methods: {
         getErrors(err) {
             console.log(err)
+            console.log('hola mundos')
             if (err?.response?.status === 403) {
                 return window.location.href = '/403';
             }

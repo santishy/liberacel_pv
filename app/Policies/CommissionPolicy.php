@@ -55,7 +55,7 @@ class CommissionPolicy
      */
     public function update(User $user, Commission $commission)
     {
-        return $user->hasPermissionTo('update user commission');
+        return $user->hasPermissionTo('edit user commission');
     }
 
     /**

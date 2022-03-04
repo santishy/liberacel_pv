@@ -27,11 +27,22 @@
                 items-center
             "
         >
-            <h3 class="text-blue-800 font-mono font-extralight">Usuario: {{ username }}</h3>
-            <span class="text-green-800 rounded bg-indigo-100 p-2 font-mono font-semibold text-xl">Total: {{ totalWithFormat }}</span>
+            <h3 class="text-blue-800 font-mono font-extralight">
+                Usuario: {{ username }}
+            </h3>
+            <span
+                class="
+                    text-green-800
+                    rounded
+                    bg-indigo-100
+                    p-2
+                    font-mono font-semibold
+                    text-xl
+                "
+                >Total: {{ totalWithFormat }}</span
+            >
         </div>
         <table
-            v-can="'view warehouses'"
             class="
                 min-w-full
                 border-collapse
@@ -135,8 +146,9 @@
 <script>
 import InfiniteLoading from "vue-infinite-loading";
 import CommissionListItem from "./CommissionListItem.vue";
+
 export default {
-    components: { CommissionListItem, InfiniteLoading },
+    components: { CommissionListItem, InfiniteLoading},
     data() {
         return {
             commissions: [],
@@ -144,7 +156,7 @@ export default {
             infiniteId: 1,
             page: 1,
             total: 0,
-            totalWithFormat:'',
+            totalWithFormat: "",
             username: null,
             range: {},
             statusFilter: {
@@ -162,10 +174,12 @@ export default {
             this.page = 1;
             this.infiniteId += 1;
         });
-        EventBus.$on("updated-commission",(data) => {
-            this.total = this.total - data.oldCommission + data.updatedCommission;
-            this.totalWithFormat ='$' + new Intl.NumberFormat('es-MX').format(this.total);
-        })
+        EventBus.$on("updated-commission", (data) => {
+            this.total =
+                this.total - data.oldCommission + data.updatedCommission;
+            this.totalWithFormat =
+                "$" + new Intl.NumberFormat("es-MX").format(this.total);
+        });
     },
     methods: {
         getCommissions($state) {
@@ -179,10 +193,10 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if (this.page == 1){
+                    if (this.page == 1) {
                         this.totalWithFormat = res.data.totalWithFormat;
                         this.total = res.data.total;
-                        }
+                    }
                     if (res.data.commissions.length) {
                         this.page += 1;
                         this.commissions.push(...res.data.commissions);
@@ -191,8 +205,8 @@ export default {
                         $state.complete();
                     }
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch((err) => {
+                    this.getErrors(err);
                 });
             this.dates = null;
         },

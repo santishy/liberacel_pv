@@ -67,5 +67,9 @@ return [
     'view fast sales' => 'Ver ventas rápidas (Reportes)',
     'view fast sale' => 'Ver venta rápida',
     'delete fast sale product' => 'Eliminar productos de la venta rápida actual',
-    'cancel fast sale' => 'Cancelar venta rápida'
+    'cancel fast sale' => 'Cancelar venta rápida',
+
+    //permissions to commissions
+    'view user commissions' => 'Ver comisiones',
+    'edit user commission' => 'Editar comisión'
 ];

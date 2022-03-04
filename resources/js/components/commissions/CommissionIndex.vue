@@ -1,7 +1,9 @@
 <template>
     <nav-component>
-        <div  class="w-full px-4 mx-auto mt-24 md:mt-32 flex" v-can="'view commissions'">
-            {{users}}
+        <div
+            class="w-full px-4 mx-auto mt-24 md:mt-32 flex"
+            v-can="'view user commissions'"
+        >
             <div class="w-3/12">
                 <user-list :users="users"></user-list>
             </div>
@@ -13,16 +15,15 @@
 </template>
 
 <script>
-
 import NavComponent from "../NavComponent.vue";
 import UserList from "./UserList.vue";
-import CommissionList from "./CommissionList.vue"
+import CommissionList from "./CommissionList.vue";
 export default {
-    components: { NavComponent, UserList,CommissionList },
+    components: { NavComponent, UserList, CommissionList },
     props: {
         users: {
-            type: Array
-        }
-    }
+            type: Array,
+        },
+    },
 };
 </script>

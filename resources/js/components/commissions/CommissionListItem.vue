@@ -62,13 +62,18 @@
             "
         >
             <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span
-            ><a
+            >
+            <div class="flex items-center">
+                <errors-component :errors-found="errors" />
+            </div>
+            <a
                 v-if="show"
                 href="#"
                 class="w-full h-full pointer block text-blue-400"
                 @click.prevent="hideItem"
                 >{{ commission.amount }}</a
             >
+            
             <input
                 v-else
                 :ref="`element-${commission.id}`"
@@ -86,6 +91,7 @@
                 "
                 v-model="amount"
             />
+            
         </td>
     </tr>
 </template>
@@ -122,9 +128,10 @@ export default {
                 );
                 this.show = true;
                 this.commission.amount = this.amount;
+                this.errors = null;
                 EventBus.$emit("updated-commission", res.data);
             } catch (error) {
-                console.log(error);
+                this.getErrors(error);
             }
         },
         hideItem(event) {
