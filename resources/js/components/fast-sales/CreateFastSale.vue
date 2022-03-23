@@ -1,5 +1,6 @@
 <template>
     <nav-component>
+        
         <div
             class="
                 p-2
