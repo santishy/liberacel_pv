@@ -12,6 +12,9 @@ class ProductBonusController extends Controller
     {
         if (request()->wantsJson()) {
             $productBonuses = ProductBonus::paginate();
+            return response()->json([
+                'productBonus' => $productBonuses
+            ]);
         }
         return view('product-bonus.index');
     }
