@@ -51,6 +51,7 @@
 export default{
     props:{
         productBonus:Object
-    }
+    },
+    
 }
 </script>

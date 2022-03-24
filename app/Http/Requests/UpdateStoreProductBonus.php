@@ -27,7 +27,7 @@ class UpdateStoreProductBonus extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('product_bonuses')->ignore(optional($this->productBonus->id))
+                Rule::unique('product_bonuses')->ignore(optional($this->productBonus)->id)
             ],
             'points' => ['required','numeric','min:1']
         ];

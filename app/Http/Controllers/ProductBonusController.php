@@ -12,22 +12,16 @@ class ProductBonusController extends Controller
     {
         if (request()->wantsJson()) {
             $productBonuses = ProductBonus::paginate();
-            return response()->json([
-                'productBonus' => $productBonuses
-            ]);
+            return $productBonuses;
+
         }
         return view('product-bonus.index');
     }
 
     public function store(UpdateStoreProductBonus $request)
     {
-        return response()
-            ->json([
-                'productBonus'
-                => ProductBonus::create([
+        return  ProductBonus::create([
                     'name' => $request->name,
-                    'points' => $request->points
-                ])
-            ]);
+                    'points' => $request->points]);
     }
 }

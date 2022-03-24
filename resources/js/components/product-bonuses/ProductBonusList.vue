@@ -95,6 +95,11 @@ export default {
             productBonuses: [],
         };
     },
+    mounted(){
+        EventBus.$on('bonus-created',productBonus => {
+            this.productBonuses.push(productBonus);
+        })
+    },
     methods: {
         infiniteHandler($state) {
             axios
@@ -104,9 +109,10 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if (res.data.productBonuses.length) {
+                    console.log(res)
+                    if (res.data.data.length) {
                         this.page += 1;
-                        this.productBonuses.push(...res.data.productBonuses);
+                        this.productBonuses.push(...res.data.data);
                         $state.loaded();
                     } else {
                         $state.complete();
