@@ -97,7 +97,8 @@ export default {
     },
     mounted(){
         EventBus.$on('bonus-created',productBonus => {
-            this.productBonuses.push(productBonus);
+            this.productBonuses.unshift(productBonus);
+            EventBus.$emit('open-modal',false);
         })
     },
     methods: {

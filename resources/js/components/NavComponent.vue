@@ -50,12 +50,17 @@
                     >
                         Ventas
                     </a>
-                    <a
+                    <dropdown-component
+                        name="Expres"
+                        :items="ExpressMenu"
+                        class="md:relative"
+                    />
+                    <!-- <a
                         href="/fast-sales/create"
                         class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg"
                     >
                         Venta Expres
-                    </a>
+                    </a> -->
                     <dropdown-component
                         name="Reportes"
                         :items="ReportsMenu"
@@ -146,6 +151,16 @@ export default {
                 {
                     name: "Comprar productos",
                     url: "/products"
+                }
+            ],
+            ExpressMenu:[
+                {
+                    name:"Venta",
+                    url:"/fast-sales/create"
+                },
+                {
+                    name:"Bonificaciones",
+                    url:"/product-bonuses"
                 }
             ],
             ReportsMenu: [

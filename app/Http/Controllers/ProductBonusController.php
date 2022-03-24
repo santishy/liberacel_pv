@@ -11,7 +11,7 @@ class ProductBonusController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            $productBonuses = ProductBonus::paginate();
+            $productBonuses = ProductBonus::orderBy('id','desc')->paginate();
             return $productBonuses;
 
         }

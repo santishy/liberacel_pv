@@ -148,13 +148,10 @@ export default {
 
     methods: {
         submit() {
-            // if (this.method == "put") this.form._method = "put";
             axios
                 .post(`/product-bonuses`, this.form)
                 .then((res) => {
-                    if(res.data.productBonus){
-                        EventBus.$on("bonus-created",res.data.productBonus)
-                    }
+                    EventBus.$emit("bonus-created",res.data)
                 })
                 .catch((err) => {
                     this.getErrors(err);
