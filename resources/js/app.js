@@ -87,6 +87,11 @@ Vue.component('fast-sales-reports',require('./components/fast-sales/FastSalesRep
  */
 Vue.component('commissions-index',require('./components/commissions/CommissionIndex.vue').default);
 
+/**
+* Product Bonuses 
+*/
+Vue.component('all-product-bonuses',require('./components/product-bonuses/AllProductBonuses.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))

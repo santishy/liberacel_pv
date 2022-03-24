@@ -16,7 +16,7 @@ use App\Http\Controllers\{
     ImpersonationController,
     InventoryController,
     PDFController,
-   // ProductBonusController,
+    ProductBonusController,
     RolesPermissionsController,
     SaleToClientController,
     TicketController,
