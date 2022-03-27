@@ -53,7 +53,8 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->hasPermissionTo('update user');
+        return $user->hasPermissionTo('edit user');
+        
     }
 
     /**
