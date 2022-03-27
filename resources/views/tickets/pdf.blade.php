@@ -195,9 +195,9 @@
             </tbody>
         </table>
         <div class="mt-0 mb-0">
-            <p style="white-space: pre-line;line-height: 15px" class="text-sm p-4">
+            <pre style="white-space: pre-line;line-height: 15px" class="text-sm p-4">
                 {{$ticketConfig->footer}}
-            </p>
+            </pre>
         </div>
     </div>
 </body>

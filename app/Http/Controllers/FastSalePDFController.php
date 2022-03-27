@@ -26,7 +26,7 @@ class FastSalePDFController extends Controller
         $pdf = PDF::loadView(
             'tickets.pdf',
             compact('sale', 'now', 'products', 'ticketConfig','typeOfSale')
-        )->setPaper(array(0, 0, 227.67, 2000));
+        )->setPaper(array(0, 0, 200, 2000));
         
         /**
          * Se obtiene la altura, la logica esta guardada en el modelo .. midiendo la altura total del body que esta dentro del padding al menos asi lo entendi
@@ -39,7 +39,7 @@ class FastSalePDFController extends Controller
         $pdf = PDF::loadView(
             'tickets.pdf',
             compact('sale', 'now', 'products', 'ticketConfig','typeOfSale')
-        )->setPaper(array(0, 0, 227.67, $height + 20));
+        )->setPaper(array(0, 0, 200, $height + 20));
 
         return $pdf->stream();
     }
