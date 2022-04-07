@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="products.length"
+        v-show="products.length"
         class="
             p-2
             border-l-4 border-teal-400
@@ -102,7 +102,6 @@
 </template>
 
 <script>
-
 import ConceptListItem from "./ConceptListItem.vue";
 import PointerIcon from "../icons/PointerIcon.vue";
 import Exchange from "../icons/Exchange.vue";
@@ -144,11 +143,11 @@ export default {
         if (this.sale) {
             this.fillData(this.sale);
         }
-        EventBus.$on("associated-user",val => {
-            this.products=[];
+        EventBus.$on("associated-user", (val) => {
+            this.products = [];
             EventBus.$emit("open-modal", false);
             window.open("/fast-sale-tickets/" + this.id, "_blank");
-        })
+        });
     },
     methods: {
         fillData(sale) {

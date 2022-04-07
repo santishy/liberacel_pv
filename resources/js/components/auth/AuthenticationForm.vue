@@ -64,6 +64,7 @@
                 <div class="mb-0 px-2">
                     <button
                         type="submit"
+                        ref="submit"
                         class="
                             bg-transparent
                             transition-all
@@ -81,6 +82,7 @@
                             hover:border-transparent
                             w-full
                         "
+                        :disabled="getStatus"
                     >
                         Enviar
                     </button>
@@ -95,10 +97,13 @@
                         "
                         role="alert"
                     >
-                        <p class="font-bold">Cancellar nota # {{local_id}} </p>
+                        <p class="font-bold">Cancellar nota # {{ local_id }}</p>
                         <p class="text-sm">
                             Esta a punto de cancelar la venta completa.
                         </p>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <errors-component :errors-found="errors" />
                     </div>
                 </div>
             </form>
@@ -152,38 +157,60 @@ export default {
             form: {
                 status: "completed",
             },
-            local_id:null,
+            local_id: null,
+            disabled: false,
         };
     },
-
+    created() {},
     mounted() {
+        console.log('cuantas veces entra al mounted?')
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
             this.local_id = id;
         });
+        EventBus.$on("open-modal", (val) => {
+            if (val) {
+                this.$nextTick(() => {
+                    if (this.$refs?.username) 
+                        this.$refs.username.focus();
+                    console.log('cuantas veces entra?')
+                });
+            }
+        });
     },
     methods: {
         async submit() {
+            // this.$refs.submit.disabled = true
+            this.disabled = true;
             try {
                 this.form.model = this.model;
                 this.form.id = this.local_id;
                 const res = await axios.post("/user-relationship", this.form);
                 if (res.status === 200) {
-                    EventBus.$emit("associated-user",this.form.id);
+                    // this.disabled = false;
+                    EventBus.$emit("associated-user", this.form.id);
                     this.form.id = null;
+                    this.form.username='';
+                    this.form.password='';
                 }
             } catch (err) {
-                console.log(err);
+                this.getErrors(err);
             }
+            this.disabled = false;
         },
         toggleStatus(event) {
             if (event.target.checked) {
                 //console.log('cancelled')
-                Vue.set(this.form,'status','cancelled')
+                Vue.set(this.form, "status", "cancelled");
             } else {
                 //console.log('completed')
-                Vue.set(this.form,'status','completed')
+                Vue.set(this.form, "status", "completed");
             }
+        },
+    },
+    computed: {
+        getStatus() {
+            return this.disabled;
         },
     },
 };

@@ -23,12 +23,19 @@ class UserRelationshipController extends Controller
             'password' => 'required',
             'model' => 'required',
             'id' => "required|exists:App\Models\\$request->model,id"
+        ], [
+            'username.required' => 'El campo nombre de usuario es requerido.',
+            'username.min' => "el campo nombre de usuario como minimo tiene que tener 4 letras.",
+            "model.required" => "Modelo requerido, hable con su proovedor.",
+            "id.required" => "Id requerido, hable con su proveedor.",
+            "password.required" => "El campo contraseña es requerido."
+
         ]);
 
         $user = User::where('username', $credentials['username'])->first();
 
         if (!Hash::check($credentials['password'], optional($user)->password)) {
-            return response()->json(['errors' => ['error' => 'Tu email|password es incorrecto.']], 422);
+            return response()->json(['errors' => ['error' => 'Nombre de usuario ó contraseña, incorrectos.']], 422);
         }
 
 
@@ -38,7 +45,7 @@ class UserRelationshipController extends Controller
         }
         $model->user()->associate($user);
         $model->save();
-        
+
         return response()->json([
             'sale' => $model,
         ]);
