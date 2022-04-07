@@ -59,7 +59,7 @@
             <label
                 for=""
                 class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Nombre de usuario</label
+                >Username</label
             >
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
@@ -78,7 +78,6 @@
             >
         </div>
         <div
-            v-if="!editableUser"
             class="flex items-center  border-t border-gray-500 py-2 relative"
         >
             <input
@@ -95,8 +94,10 @@
                 >Contraseña</label
             >
         </div>
+        <div class="px-4 bg-yellow-400 text-center" v-if="editableUser">
+            <span class="text-xs text-gray-800 font-mono  w-full">Dejar en blanco sino desea cambiar contraseña.</span>
+        </div>
         <div
-            v-if="!editableUser"
             class="flex items-center  border-t border-b border-gray-500 py-2 relative"
         >
             <input
