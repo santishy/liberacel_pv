@@ -181,10 +181,10 @@ export default {
     methods: {
         async submit() {
             // this.$refs.submit.disabled = true
-            this.disabled = true;
+            //this.disabled = true;
             try {
                 this.form.model = this.model;
-                this.form.id = this.local_id;
+                this.form.id = this.local_id ? this.local_id : this.id;
                 const res = await axios.post("/user-relationship", this.form);
                 if (res.status === 200) {
                     // this.disabled = false;
@@ -200,10 +200,8 @@ export default {
         },
         toggleStatus(event) {
             if (event.target.checked) {
-                //console.log('cancelled')
                 Vue.set(this.form, "status", "cancelled");
             } else {
-                //console.log('completed')
                 Vue.set(this.form, "status", "completed");
             }
         },

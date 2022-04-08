@@ -135,6 +135,7 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
+            console.log('fast-sale')
             if (!this.sale) {
                 this.sale = sale;
             }

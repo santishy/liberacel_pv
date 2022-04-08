@@ -73,6 +73,7 @@ export default {
                 const {
                     data: { data },
                 } = await axios.post("/fast-sales", this.form);
+                console.log(data)
                 EventBus.$emit("fast-sale", data);
                 this.form = {};
                 this.$refs.description.focus();
