@@ -4,7 +4,7 @@
             class="flex items-center justify-between flex-wrap bg-red-500 p-6 fixed w-full top-0 z-10"
         >
             <div class="flex items-center flex-shrink-0 text-white mr-6 ">
-                <span class="font-semibold text-xl tracking-tight">ISCO</span>
+                <span class="font-semibold text-xl tracking-tight">Liberacel</span>
             </div>
             <div @click="toggleNavegation" class="block lg:hidden">
                 <button
