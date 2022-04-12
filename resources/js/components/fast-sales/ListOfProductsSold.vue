@@ -97,18 +97,13 @@ export default {
         });
         EventBus.$on("associated-user", (id) => {
             EventBus.$emit("open-modal", false);
-            let index = this.products.indexOf((element) => element.id == id);
-            if (index) {
+            let index = this.products.findIndex(element =>{ 
+                return element.id == id
+                });
+            if (index != -1) {
                 this.products.splice(index, 1);
             }
         });
-        // EventBus.$on("fast-sale-cancelled",id => {
-        //     let index = this.products.indexOf( element => element.id == id );
-        //     console.log(index);
-        //     if(index){
-        //         this.products.splice(index, 1);
-        //     }
-        // })
     },
     methods: {
         infiniteHandler($state) {
@@ -125,9 +120,7 @@ export default {
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
                         this.page += 1;
-                        //let products = this.structureTheData(res.data.data);
                         this.products.push(...res.data.data);
-                        //this.products.push(...products);
                         $state.loaded();
                     } else {
                         $state.complete();
@@ -140,28 +133,6 @@ export default {
             this.products = [];
             this.infiniteId += 1;
         },
-        // structureTheData(data) {
-        //     let newStructure = [];
-        //     data.forEach((item) => {
-        //         let { products, created_at, total, status, id, user_name } =
-        //             item;
-        //         newStructure.push(
-        //             ...products.map((product) => {
-        //                 return {
-        //                     created_at,
-        //                     id,
-        //                     status,
-        //                     user_name,
-        //                     total,
-        //                     description: product.description,
-        //                     qty: product.qty,
-        //                     price: product.price,
-        //                 };
-        //             })
-        //         );
-        //     });
-        //     return newStructure;
-        // },
     },
     computed: {
         getRelathionships() {

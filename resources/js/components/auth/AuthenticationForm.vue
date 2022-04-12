@@ -163,7 +163,7 @@ export default {
     },
     created() {},
     mounted() {
-        console.log('cuantas veces entra al mounted?')
+       
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
             this.local_id = id;
@@ -171,9 +171,7 @@ export default {
         EventBus.$on("open-modal", (val) => {
             if (val) {
                 this.$nextTick(() => {
-                    if (this.$refs?.username) 
-                        this.$refs.username.focus();
-                    console.log('cuantas veces entra?')
+                    if (this.$refs?.username) this.$refs.username.focus();
                 });
             }
         });
@@ -190,8 +188,8 @@ export default {
                     // this.disabled = false;
                     EventBus.$emit("associated-user", this.form.id);
                     this.form.id = null;
-                    this.form.username='';
-                    this.form.password='';
+                    this.form.username = "";
+                    this.form.password = "";
                 }
             } catch (err) {
                 this.getErrors(err);
