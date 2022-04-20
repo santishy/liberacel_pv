@@ -1,6 +1,7 @@
 <template>
     <form
         id="fastSaleForm"
+        ref="quickSaleForm"
         class="grid grid-rows-3 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
@@ -10,9 +11,12 @@
                 name="description"
                 ref="description"
                 v-model="form.description"
-                @keydown.down="nextItem"
+                @keydown.down.exact.prevent="nextFocus"
+                @keydown.ctrl.space.exact.prevent="openModal"
+                @click.prevent="focusedIndex = 0"
                 :class="[inputStyle]"
                 placeholder="Descripción del producto o servicio"
+                autocomplete="off"
             ></textarea>
         </div>
         <div class="col-span-5" :class="controlsContainerStyle">
@@ -24,7 +28,12 @@
                 v-model="form.price"
                 :class="[inputStyle]"
                 placeholder="Precio"
+                @click.prevent="focusedIndex = 1"
                 @keydown.enter="submit"
+                @keydown.down.exact.prevent="nextFocus"
+                @keydown.up.exact.prevent="previousFocus"
+                @keydown.ctrl.space.exact.prevent="openModal"
+                autocomplete="off"
             />
         </div>
         <div class="col-span-5" :class="[controlsContainerStyle]">
@@ -37,6 +46,10 @@
                 :class="[inputStyle]"
                 placeholder="Cantidad de venta"
                 @keydown.enter="submit"
+                @click.prevent="focusedIndex = 2"
+                @keydown.up.exact.prevent="previousFocus"
+                @keydown.ctrl.space.exact.prevent="openModal"
+                autocomplete="off"
             />
         </div>
 
@@ -69,7 +82,11 @@ export default {
     data() {
         return {
             form: {},
+            focusedIndex: 0,
         };
+    },
+    mounted() {
+        this.$refs.description.focus();
     },
     methods: {
         async submit() {
@@ -80,8 +97,6 @@ export default {
                 } = await axios.post("/fast-sales", this.form);
                 EventBus.$emit("fast-sale", data);
                 this.form = {};
-                this.toggleDisabled();
-                this.$refs.description.focus();
                 this.notify({
                     title: "Venta rapida",
                     message: "Producto agregado",
@@ -89,16 +104,32 @@ export default {
             } catch (err) {
                 this.getErrors(err);
             }
+            this.toggleDisabled();
+            this.focusedIndex = 0;
+            this.$refs.description.focus();
         },
-        toggleDisabled(){
-            const fields = document.getElementById('fastSaleForm').elements;
-            for(let i=0; i<fields.length; i++) {
-                fields[i].disabled =!fields[i].disabled ;
+        toggleDisabled() {
+            const fields = document.getElementById("fastSaleForm").elements;
+            for (let i = 0; i < fields.length; i++) {
+                fields[i].disabled = !fields[i].disabled;
             }
         },
-        nextItem(e){
-            e.target.nextElementSi
-        }
+        nextFocus(e) {
+            this.focusedIndex += 1;
+            this.itemFocus();
+        },
+        previousFocus() {
+            this.focusedIndex -= 1;
+            this.itemFocus();
+        },
+        itemFocus() {
+            this.$refs.quickSaleForm.children[
+                this.focusedIndex
+            ].children[1].focus();
+        },
+        openModal() {
+            EventBus.$emit("open-modal", true);
+        },
     },
     computed: {
         labelStyle() {

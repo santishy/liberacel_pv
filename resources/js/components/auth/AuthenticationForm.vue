@@ -130,6 +130,7 @@
                             text-pink-600
                             checked:bg-red-500
                         "
+                        
                     /><span class="ml-2 text-red-700 text-sm font-bold"
                         >Cancelar venta</span
                     >

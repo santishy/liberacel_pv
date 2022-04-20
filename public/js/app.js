@@ -2967,6 +2967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -5658,11 +5659,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: {}
+      form: {},
+      focusedIndex: 0
     };
+  },
+  mounted: function mounted() {
+    this.$refs.description.focus();
   },
   methods: {
     submit: function submit() {
@@ -5688,41 +5706,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 EventBus.$emit("fast-sale", data);
                 _this.form = {};
 
-                _this.toggleDisabled();
-
-                _this.$refs.description.focus();
-
                 _this.notify({
                   title: "Venta rapida",
                   message: "Producto agregado"
                 });
 
-                _context.next = 16;
+                _context.next = 14;
                 break;
 
-              case 13:
-                _context.prev = 13;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
 
                 _this.getErrors(_context.t0);
 
-              case 16:
+              case 14:
+                _this.toggleDisabled();
+
+                _this.focusedIndex = 0;
+
+                _this.$refs.description.focus();
+
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 13]]);
+        }, _callee, null, [[0, 11]]);
       }))();
     },
     toggleDisabled: function toggleDisabled() {
-      var fields = document.getElementById('fastSaleForm').elements;
+      var fields = document.getElementById("fastSaleForm").elements;
 
       for (var i = 0; i < fields.length; i++) {
         fields[i].disabled = !fields[i].disabled;
       }
     },
-    nextItem: function nextItem(e) {
-      e.target.nextElementSi;
+    nextFocus: function nextFocus(e) {
+      this.focusedIndex += 1;
+      this.itemFocus();
+    },
+    previousFocus: function previousFocus() {
+      this.focusedIndex -= 1;
+      this.itemFocus();
+    },
+    itemFocus: function itemFocus() {
+      this.$refs.quickSaleForm.children[this.focusedIndex].children[1].focus();
+    },
+    openModal: function openModal() {
+      EventBus.$emit("open-modal", true);
     }
   },
   computed: {
@@ -34971,6 +35003,7 @@ var render = function () {
   return _c(
     "form",
     {
+      ref: "quickSaleForm",
       staticClass: "grid grid-rows-3 grid-flow-col grid-cols-5 w-full",
       attrs: { id: "fastSaleForm" },
       on: {
@@ -35001,20 +35034,55 @@ var render = function () {
             attrs: {
               name: "description",
               placeholder: "Descripción del producto o servicio",
+              autocomplete: "off",
             },
             domProps: { value: _vm.form.description },
             on: {
-              keydown: function ($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "down", 40, $event.key, [
-                    "Down",
-                    "ArrowDown",
-                  ])
-                ) {
-                  return null
-                }
-                return _vm.nextItem.apply(null, arguments)
+              keydown: [
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "down", 40, $event.key, [
+                      "Down",
+                      "ArrowDown",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (
+                    $event.ctrlKey ||
+                    $event.shiftKey ||
+                    $event.altKey ||
+                    $event.metaKey
+                  ) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.nextFocus.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "space", 32, $event.key, [
+                      " ",
+                      "Spacebar",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (!$event.ctrlKey) {
+                    return null
+                  }
+                  if ($event.shiftKey || $event.altKey || $event.metaKey) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.openModal.apply(null, arguments)
+                },
+              ],
+              click: function ($event) {
+                $event.preventDefault()
+                _vm.focusedIndex = 0
               },
               input: function ($event) {
                 if ($event.target.composing) {
@@ -35044,18 +35112,90 @@ var render = function () {
             ],
             ref: "price",
             class: [_vm.inputStyle],
-            attrs: { type: "text", name: "price", placeholder: "Precio" },
+            attrs: {
+              type: "text",
+              name: "price",
+              placeholder: "Precio",
+              autocomplete: "off",
+            },
             domProps: { value: _vm.form.price },
             on: {
-              keydown: function ($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.submit.apply(null, arguments)
+              click: function ($event) {
+                $event.preventDefault()
+                _vm.focusedIndex = 1
               },
+              keydown: [
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.submit.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "down", 40, $event.key, [
+                      "Down",
+                      "ArrowDown",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (
+                    $event.ctrlKey ||
+                    $event.shiftKey ||
+                    $event.altKey ||
+                    $event.metaKey
+                  ) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.nextFocus.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "up", 38, $event.key, [
+                      "Up",
+                      "ArrowUp",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (
+                    $event.ctrlKey ||
+                    $event.shiftKey ||
+                    $event.altKey ||
+                    $event.metaKey
+                  ) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.previousFocus.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "space", 32, $event.key, [
+                      " ",
+                      "Spacebar",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (!$event.ctrlKey) {
+                    return null
+                  }
+                  if ($event.shiftKey || $event.altKey || $event.metaKey) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.openModal.apply(null, arguments)
+                },
+              ],
               input: function ($event) {
                 if ($event.target.composing) {
                   return
@@ -35088,17 +35228,64 @@ var render = function () {
               type: "text",
               name: "qty",
               placeholder: "Cantidad de venta",
+              autocomplete: "off",
             },
             domProps: { value: _vm.form.qty },
             on: {
-              keydown: function ($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.submit.apply(null, arguments)
+              keydown: [
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.submit.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "up", 38, $event.key, [
+                      "Up",
+                      "ArrowUp",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (
+                    $event.ctrlKey ||
+                    $event.shiftKey ||
+                    $event.altKey ||
+                    $event.metaKey
+                  ) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.previousFocus.apply(null, arguments)
+                },
+                function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "space", 32, $event.key, [
+                      " ",
+                      "Spacebar",
+                    ])
+                  ) {
+                    return null
+                  }
+                  if (!$event.ctrlKey) {
+                    return null
+                  }
+                  if ($event.shiftKey || $event.altKey || $event.metaKey) {
+                    return null
+                  }
+                  $event.preventDefault()
+                  return _vm.openModal.apply(null, arguments)
+                },
+              ],
+              click: function ($event) {
+                $event.preventDefault()
+                _vm.focusedIndex = 2
               },
               input: function ($event) {
                 if ($event.target.composing) {
