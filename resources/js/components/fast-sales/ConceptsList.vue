@@ -147,6 +147,7 @@ export default {
         EventBus.$on("associated-user", (val) => {
             this.products = [];
             EventBus.$emit("open-modal", false);
+            EventBus.$emit("focus-description");
             window.open("/fast-sale-tickets/" + this.id, "_blank");
         });
     },

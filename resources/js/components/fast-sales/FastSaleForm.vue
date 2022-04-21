@@ -86,7 +86,8 @@ export default {
         };
     },
     mounted() {
-        this.$refs.description.focus();
+        this.focusDescription()
+        EventBus.$on('focus-description',this.focusDescription)
     },
     methods: {
         async submit() {
@@ -130,6 +131,9 @@ export default {
         openModal() {
             EventBus.$emit("open-modal", true);
         },
+        focusDescription(){
+            this.$refs.description.focus();
+        }
     },
     computed: {
         labelStyle() {
