@@ -36,8 +36,17 @@
                     ></toggle-purchase-visibility>
                     <button
                         @click.prevent="cleanForm"
-                        class="rounded-lg bg-white border hover:text-white hover:bg-pink-500
-                                border-pink-500 font-mono font-extralight text-xs p-2 transition-all"
+                        class="
+                            rounded-lg
+                            bg-white
+                            border
+                            hover:text-white hover:bg-pink-500
+                            border-pink-500
+                            font-mono font-extralight
+                            text-xs
+                            p-2
+                            transition-all
+                        "
                     >
                         Limpiar
                     </button>
@@ -78,13 +87,14 @@
                         </p>
                     </div>
                 </div>
-                <category-select class="border-t border-gray-500" inputClass="pl-60" :categories="categories" :product="product">
+                <category-select
+                    class="border-t border-gray-500"
+                    inputClass="pl-60"
+                    :categories="categories"
+                    :product="product"
+                >
                     <template slot="labelCategory">
-                        <label
-                            for=""
-                            :class="[labelStyle]"
-                            >Categoría</label
-                        >
+                        <label for="" :class="[labelStyle]">Categoría</label>
                     </template>
                 </category-select>
 
@@ -203,7 +213,7 @@
                             this.errors
                                 ? 'border-transparent'
                                 : 'border-gray-500',
-                            controlsContainerStyle
+                            controlsContainerStyle,
                         ]"
                     >
                         <div class="pl-60 flex-wrap flex">
@@ -284,40 +294,40 @@ export default {
     components: {
         NavComponent,
         TogglePurchaseVisibility,
-        CategorySelect
+        CategorySelect,
     },
     data() {
         return {
             form: {
-                category_id: ""
+                category_id: "",
             },
             category_name: "",
             src: null,
-            frutsi: null
+            frutsi: null,
         };
     },
     mounted() {
         if (!!this.product) {
             this.form = this.product;
         }
-        EventBus.$on("selected-category", id => {
+        EventBus.$on("selected-category", (id) => {
             this.form.category_id = id;
         });
     },
     props: {
         method: {
             type: String,
-            required: true
+            required: true,
         },
         product: {
-            type: Object
+            type: Object,
         },
         categories: {
-            type: Array
+            type: Array,
         },
         inventories: {
-            type: Array
-        }
+            type: Array,
+        },
     },
     methods: {
         async submit() {
@@ -339,20 +349,20 @@ export default {
             axios["post"](url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json"
-                }
+                    Accept: "application/json",
+                },
             })
-                .then(res => {
+                .then((res) => {
                     let obj = { title: "Productos", ...message };
                     this.notify(obj);
                     if (this.method == "post")
                         this.form = {
                             sku: this.form.sku,
-                            category_id: this.form.category_id
+                            category_id: this.form.category_id,
                         };
                     this.errors = null;
                 })
-                .catch(err => {
+                .catch((err) => {
                     this.getErrors(err);
                 });
         },
@@ -373,7 +383,7 @@ export default {
             EventBus.$emit("clean-search-term");
             this.src = null;
             document.querySelector("#image").value = null;
-        }
+        },
     },
     computed: {
         ...mapState(["purchaseVisibility"]),
@@ -395,7 +405,7 @@ export default {
         },
         controlsContainerStyle() {
             return "flex items-center border-t border-gray-500 py-2 relative";
-        }
-    }
+        },
+    },
 };
 </script>

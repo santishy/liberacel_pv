@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="current_user" content="{{ json_encode( CurrentUser::show()) }}">
     <meta name="impersonation_id" content="{{session('impersonation_id')}}">
-    <title>Franapp</title>
+    <title>Liberacel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">

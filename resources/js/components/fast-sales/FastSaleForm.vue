@@ -2,9 +2,20 @@
     <form
         id="fastSaleForm"
         ref="quickSaleForm"
-        class="grid grid-rows-3 grid-flow-col grid-cols-5 w-full"
+        class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
+        <product-bonuses
+            :class="[controlsContainerStyle]"
+            class="col-span-5"
+            inputClass=""
+            :categories="[]"
+            :product="null"
+        >
+            <template slot="labelCategory">
+                <label for="" :class="[labelStyle]">Categoría</label>
+            </template>
+        </product-bonuses>
         <div class="col-span-5" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Descripción</label>
             <textarea
@@ -57,28 +68,16 @@
             <div class="flex items-center">
                 <errors-component :errors-found="errors" />
             </div>
-            <!-- <button
-                v-show="!errors"
-                class="
-                    h-32
-                    w-32
-                    text-2xl
-                    rounded-full
-                    
-                    hover:bg-blue-700
-                    bg-blue-500
-                    text-white
-                    font-mono font-bold
-                "
-            >
-                Crear
-            </button> -->
         </div>
     </form>
 </template>
 
 <script>
+import CategorySelect from "../products/CategorySelect.vue";
 export default {
+    components: {
+        productBonuses: CategorySelect,
+    },
     data() {
         return {
             form: {},
@@ -86,8 +85,8 @@ export default {
         };
     },
     mounted() {
-        this.focusDescription()
-        EventBus.$on('focus-description',this.focusDescription)
+        this.focusDescription();
+        EventBus.$on("focus-description", this.focusDescription);
     },
     methods: {
         async submit() {
@@ -131,9 +130,9 @@ export default {
         openModal() {
             EventBus.$emit("open-modal", true);
         },
-        focusDescription(){
+        focusDescription() {
             this.$refs.description.focus();
-        }
+        },
     },
     computed: {
         labelStyle() {
