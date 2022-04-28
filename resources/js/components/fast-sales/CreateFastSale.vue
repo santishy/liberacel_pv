@@ -1,6 +1,5 @@
 <template>
     <nav-component>
-        
         <div
             class="
                 p-2
@@ -29,12 +28,9 @@
             <fast-sale-form class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
-        
     </nav-component>
 </template>
 <script>
-
-
 import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
@@ -43,12 +39,15 @@ export default {
     components: {
         NavComponent,
         FastSaleForm,
-        
+
         ConceptsList,
     },
     props: {
         sale: {
             type: Object,
+        },
+        props: {
+            productBonuses: { type: Array },
         },
     },
 };

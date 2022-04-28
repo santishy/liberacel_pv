@@ -5,17 +5,33 @@
         class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
-        <product-bonuses
-            :class="[controlsContainerStyle]"
-            class="col-span-5"
-            inputClass=""
-            :categories="[]"
-            :product="null"
-        >
-            <template slot="labelCategory">
-                <label for="" :class="[labelStyle]">Categoría</label>
-            </template>
-        </product-bonuses>
+        <div class="col-span-5 flex justify-center items-center">
+            <product-bonuses
+                class="w-11/12"
+                inputClass="pl-60"
+                :categories="[]"
+                :product="null"
+            >
+                <template slot="labelCategory">
+                    <label
+                        for=""
+                        class="
+                            absolute
+                            w-3/12
+                            text-center text-gray-700
+                            font-mono font-semibold
+                            mr-2
+                            rounded-sm
+                            py-3
+                            px-6
+                            bg-gray-200
+                        "
+                        >Categoría</label
+                    >
+                </template>
+            </product-bonuses>
+        </div>
+
         <div class="col-span-5" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Descripción</label>
             <textarea
@@ -77,6 +93,11 @@ import CategorySelect from "../products/CategorySelect.vue";
 export default {
     components: {
         productBonuses: CategorySelect,
+    },
+    props: {
+        productBonuses: {
+            type: Array,
+        },
     },
     data() {
         return {
