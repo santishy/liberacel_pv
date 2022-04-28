@@ -5,9 +5,9 @@
         class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
-        <div class="col-span-5 flex justify-center items-center">
+        <div class="col-span-5 flex justify-center items-center p-0">
             <product-bonuses
-                class="w-11/12"
+                class="w-full ml-10"
                 inputClass="pl-60"
                 :categories="[]"
                 :product="null"
@@ -157,7 +157,7 @@ export default {
     },
     computed: {
         labelStyle() {
-            return " w-3/12 text-center text-gray-700 font-mono font-semibold mr-2 rounded-sm py-3 px-6 bg-gray-200";
+            return " w-3/12 text-center text-gray-700 font-mono font-semibold mr-2 rounded-sm py-3 px-6 bg-gray-300";
         },
         inputStyle() {
             return " placeholder:italic bg-stripes-gray  font-semibold placeholder-gray-600 placeholder-shown:border-gray-500 appearance-none bg-gray-200  rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
