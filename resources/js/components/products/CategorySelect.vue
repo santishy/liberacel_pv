@@ -50,7 +50,7 @@
             "
             v-if="items.length"
         >
-            <ul class="bg-white w-fullrelative" ref="dropdown">
+            <ul class="bg-white w-full relative" ref="dropdown">
                 <li class="mt-2" v-for="(item, index) in items" :key="item.id">
                     <a
                         class="

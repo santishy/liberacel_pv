@@ -5,33 +5,14 @@
         class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
-        <div class="col-span-5 flex justify-center items-center p-0">
-            <product-bonuses
-                class="w-full ml-10"
-                inputClass="pl-60"
-                :categories="[]"
-                :product="null"
-            >
-                <template slot="labelCategory">
-                    <label
-                        for=""
-                        class="
-                            absolute
-                            w-3/12
-                            text-center text-gray-700
-                            font-mono font-semibold
-                            mr-2
-                            rounded-sm
-                            py-3
-                            px-6
-                            bg-gray-200
-                        "
-                        >Categoría</label
-                    >
-                </template>
-            </product-bonuses>
+        <div class="col-span-5" :class="[controlsContainerStyle]">
+            <label :class="[labelStyle]">Categoría</label>
+            <search-select
+                class="w-8/12"
+                :collection="productBonuses"
+                :input-class="'bg-stripes-gray w-full' + inputStyle"
+            ></search-select>
         </div>
-
         <div class="col-span-5" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Descripción</label>
             <textarea
@@ -46,7 +27,7 @@
                 autocomplete="off"
             ></textarea>
         </div>
-        <div class="col-span-5" :class="controlsContainerStyle">
+        <div class="col-span-5 w-full" :class="controlsContainerStyle">
             <label :class="[labelStyle]">Precio</label>
             <input
                 type="text"
@@ -89,10 +70,10 @@
 </template>
 
 <script>
-import CategorySelect from "../products/CategorySelect.vue";
+import SearchSelect from "../partials/SearchSelect.vue";
 export default {
     components: {
-        productBonuses: CategorySelect,
+        SearchSelect,
     },
     props: {
         productBonuses: {
@@ -178,20 +159,6 @@ export default {
         transparent 50%,
         #ec489980 0,
         #ec489980 60%,
-        transparent 0,
-        transparent
-    );
-    background-size: 7.07px 7.07px;
-}
-.bg-stripes-gray {
-    background-color: #9ca3af1a;
-    background-image: linear-gradient(
-        135deg,
-        #6b728080 10%,
-        transparent 0,
-        transparent 50%,
-        #6b728080 0,
-        #6b728080 60%,
         transparent 0,
         transparent
     );

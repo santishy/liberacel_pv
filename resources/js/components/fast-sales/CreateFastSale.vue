@@ -25,7 +25,10 @@
             >
                 Crear venta
             </h3>
-            <fast-sale-form class="mt-4"></fast-sale-form>
+            <fast-sale-form
+                :product-bonuses="productBonuses"
+                class="mt-4"
+            ></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
     </nav-component>
@@ -46,9 +49,8 @@ export default {
         sale: {
             type: Object,
         },
-        props: {
-            productBonuses: { type: Array },
-        },
+
+        productBonuses: { type: Array },
     },
 };
 </script>
