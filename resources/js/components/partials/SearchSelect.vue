@@ -50,8 +50,8 @@
                 class="
                     flex flex-col
                     divide-y-2 divide-gray-400
-                    max-h-44
-                    overflow-y-scroll
+                    max-h-64
+                    overflow-y-auto
                 "
             >
                 <a
