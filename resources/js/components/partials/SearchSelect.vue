@@ -97,15 +97,24 @@ export default {
         },
         fillItems() {
             this.searchResultsVisible = true;
-            this.items = this.collection;
+            //this.items = this.collection;
+            this.search();
         },
-        search() {
+        search(event) {
+            console.log('entro');
+            if(event)
+                if (event.key === "ArrowDown" || event.key === "ArrowUp") { return;}
+            this.highlightedIndex = 0;
+            if (this.query == "") {
+                this.items = this.collection;
+                return;
+            }
             this.items = this.collection.filter((item) => {
                 //var re = this.term_search.replace(/\s/g, '|'); idea nada mas,
                 //podria parter la cadena completa en dos partes mitad|mitad y buscar
 
                 if (
-                    item.name.search(new RegExp(this.query, "i")) != -1
+                    item.name.search(new RegExp(this.query.trim(), "i")) != -1
                     //.search(new RegExp(re,'i')) != -1
                 )
                     return item;
@@ -113,26 +122,33 @@ export default {
         },
         highligthPrevious() {
             console.log("hola ");
-            if (this.highlightedIndex > 0) {
+            if (this.highlightedIndex >= 0) {
                 this.highlightedIndex -= 1;
-                this.$refs.results.children[
-                    this.highlightedIndex
-                ].scrollIntoView({ block: "nearest" });
+                this.scrollIntoView();
             }
         },
         highlightNext() {
             if (this.highlightedIndex < this.items.length) {
                 this.highlightedIndex += 1;
-                this.$refs.results.children[
-                    this.highlightedIndex
-                ].scrollIntoView({ block: "nearest" });
+                this.scrollIntoView();
             }
         },
-        selectedItem(){
-            let item = this.items[this.highlightedIndex]
-            console.log(item)
-            EventBus.$emit('selected-item',item.id)
-        }
+        scrollIntoView() {
+            if (!this.items[this.highlightedIndex]) {
+                if (this.highlightedIndex < this.items.length)
+                    this.highlightedIndex = this.items.length - 1;
+                else this.highlightedIndex = 0;
+            }
+            this.$refs.results.children[this.highlightedIndex].scrollIntoView({
+                block: "nearest",
+            });
+        },
+        selectedItem() {
+            let item = this.items[this.highlightedIndex];
+            this.searchResultsVisible=false;
+            this.query = this.items[this.highlightedIndex].name;
+            if (item) EventBus.$emit("selected-item", item);
+        },
     },
 };
 </script>
