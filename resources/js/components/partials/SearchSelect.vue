@@ -6,11 +6,18 @@
             v-model="query"
             :class="[inputClass]"
             @blur="searchResultsVisible = false"
-            @focus="searchResultsVisible = true"
+            @focus="fillItems"
+            @keydown="search"
             @keydown.esc="searchResultsVisible = false"
+            @keydown.enter.prevent="selectedItem"
             @input="searchResultsVisible = true"
+            @keyup.up="highligthPrevious"
+            @keyup.down="highlightNext"
         />
-        <div class="absolute right-0 top-0 h-full text-red-500 bg-gray-300">
+        <div
+            v-if="searchResultsVisible"
+            class="absolute right-0 top-0 h-full text-gray-700 bg-gray-300"
+        >
             <a
                 href="#"
                 class="h-full flex items-center p-1"
@@ -53,12 +60,15 @@
                     max-h-64
                     overflow-y-auto
                 "
+                ref="results"
             >
                 <a
-                    v-for="item in collection"
+                    v-for="(item, index) in items"
                     :key="item.id"
                     href="#"
                     class="p-2 hover:bg-gray-400"
+                    @mousedown.prevent="searchResultsVisible = true"
+                    :class="{ 'bg-gray-400': highlightedIndex === index }"
                 >
                     {{ item.name }}
                 </a>
@@ -76,12 +86,53 @@ export default {
         return {
             query: "",
             searchResultsVisible: false,
+            items: [],
+            highlightedIndex: 0,
         };
     },
     methods: {
         reset() {
             this.query = "";
+            this.highlightedIndex = 0;
         },
+        fillItems() {
+            this.searchResultsVisible = true;
+            this.items = this.collection;
+        },
+        search() {
+            this.items = this.collection.filter((item) => {
+                //var re = this.term_search.replace(/\s/g, '|'); idea nada mas,
+                //podria parter la cadena completa en dos partes mitad|mitad y buscar
+
+                if (
+                    item.name.search(new RegExp(this.query, "i")) != -1
+                    //.search(new RegExp(re,'i')) != -1
+                )
+                    return item;
+            });
+        },
+        highligthPrevious() {
+            console.log("hola ");
+            if (this.highlightedIndex > 0) {
+                this.highlightedIndex -= 1;
+                this.$refs.results.children[
+                    this.highlightedIndex
+                ].scrollIntoView({ block: "nearest" });
+            }
+        },
+        highlightNext() {
+            if (this.highlightedIndex < this.items.length) {
+                this.highlightedIndex += 1;
+                this.$refs.results.children[
+                    this.highlightedIndex
+                ].scrollIntoView({ block: "nearest" });
+            }
+        },
+        selectedItem(){
+            let item = this.items[this.highlightedIndex]
+            console.log(item)
+            EventBus.$emit('selected-item',item.id)
+        }
     },
 };
 </script>
