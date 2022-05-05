@@ -42,7 +42,6 @@ export default {
     components: {
         NavComponent,
         FastSaleForm,
-
         ConceptsList,
     },
     props: {

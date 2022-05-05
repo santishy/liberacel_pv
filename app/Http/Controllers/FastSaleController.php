@@ -27,7 +27,12 @@ class FastSaleController extends Controller
         $this->authorize('create', new FastSale); 
 
         $fastSale = FastSale::findOrCreateFastSale();
+
         $fastSale->addConcept();
+
+        if(filled($request->product_bonus_id)){
+            
+        }
 
         $fastSaleFresh = $fastSale->fresh();
         

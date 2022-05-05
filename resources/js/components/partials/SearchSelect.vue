@@ -1,18 +1,19 @@
 <template>
     <div class="relative">
         <input
+            v-model="query"
             type="text"
             class="outline-none focus:border-blue-500"
-            v-model="query"
             :class="[inputClass]"
             @blur="searchResultsVisible = false"
             @focus="fillItems"
-            @keydown="search"
+            @keyup="search"
             @keydown.esc="searchResultsVisible = false"
             @keydown.enter.prevent="selectedItem"
             @input="searchResultsVisible = true"
             @keyup.up="highligthPrevious"
             @keyup.down="highlightNext"
+            
         />
         <div
             v-if="searchResultsVisible"
@@ -82,6 +83,9 @@ export default {
         collection: { type: Array },
         inputClass: { type: String, default: "" },
     },
+    mounted(){
+
+    },
     data() {
         return {
             query: "",
@@ -97,31 +101,24 @@ export default {
         },
         fillItems() {
             this.searchResultsVisible = true;
-            //this.items = this.collection;
             this.search();
         },
         search(event) {
-            console.log('entro');
-            if(event)
-                if (event.key === "ArrowDown" || event.key === "ArrowUp") { return;}
+            if (event)
+                if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                    return;
+                }
             this.highlightedIndex = 0;
-            if (this.query == "") {
+            if (this.query === "") {
                 this.items = this.collection;
                 return;
             }
             this.items = this.collection.filter((item) => {
-                //var re = this.term_search.replace(/\s/g, '|'); idea nada mas,
-                //podria parter la cadena completa en dos partes mitad|mitad y buscar
-
-                if (
-                    item.name.search(new RegExp(this.query.trim(), "i")) != -1
-                    //.search(new RegExp(re,'i')) != -1
-                )
+                if (item.name.search(new RegExp(this.query.trim(), "i")) != -1)
                     return item;
             });
         },
         highligthPrevious() {
-            console.log("hola ");
             if (this.highlightedIndex >= 0) {
                 this.highlightedIndex -= 1;
                 this.scrollIntoView();
@@ -145,7 +142,7 @@ export default {
         },
         selectedItem() {
             let item = this.items[this.highlightedIndex];
-            this.searchResultsVisible=false;
+            this.searchResultsVisible = false;
             this.query = this.items[this.highlightedIndex].name;
             if (item) EventBus.$emit("selected-item", item);
         },

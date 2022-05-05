@@ -5,14 +5,7 @@
         class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
         @submit.prevent="submit"
     >
-        <div class="col-span-5" :class="[controlsContainerStyle]">
-            <label :class="[labelStyle]">Categoría</label>
-            <search-select
-                class="w-8/12"
-                :collection="productBonuses"
-                :input-class="'bg-stripes-gray w-full' + inputStyle"
-            ></search-select>
-        </div>
+        
         <div class="col-span-5" :class="[controlsContainerStyle]">
             <label :class="[labelStyle]">Descripción</label>
             <textarea
@@ -26,6 +19,14 @@
                 placeholder="Descripción del producto o servicio"
                 autocomplete="off"
             ></textarea>
+        </div>
+        <div class="col-span-5" :class="[controlsContainerStyle]">
+            <label :class="[labelStyle]">Categoría</label>
+            <search-select
+                class="w-8/12"
+                :collection="productBonuses"
+                :input-class="'bg-stripes-gray w-full' + inputStyle"
+            ></search-select>
         </div>
         <div class="col-span-5 w-full" :class="controlsContainerStyle">
             <label :class="[labelStyle]">Precio</label>
@@ -89,6 +90,9 @@ export default {
     mounted() {
         this.focusDescription();
         EventBus.$on("focus-description", this.focusDescription);
+        EventBus.$on("selected-item" ,(item) => {
+            this.form.product_bonus_id = item.id;
+        })
     },
     methods: {
         async submit() {

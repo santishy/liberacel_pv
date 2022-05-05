@@ -2186,7 +2186,7 @@ module.exports = {
 /*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, scripts, typings, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
+module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"/home/santiago/code/liberacel-pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"/home/santiago/code/liberacel-pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
 
 /***/ }),
 
@@ -5670,6 +5670,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5687,12 +5688,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.focusDescription();
     EventBus.$on("focus-description", this.focusDescription);
+    EventBus.$on("selected-item", function (item) {
+      _this.form.product_bonus_id = item.id;
+    });
   },
   methods: {
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$axios$post, data;
@@ -5703,18 +5709,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
 
-                _this.toggleDisabled();
+                _this2.toggleDisabled();
 
                 _context.next = 4;
-                return axios.post("/fast-sales", _this.form);
+                return axios.post("/fast-sales", _this2.form);
 
               case 4:
                 _yield$axios$post = _context.sent;
                 data = _yield$axios$post.data.data;
                 EventBus.$emit("fast-sale", data);
-                _this.form = {};
+                _this2.form = {};
 
-                _this.notify({
+                _this2.notify({
                   title: "Venta rapida",
                   message: "Producto agregado"
                 });
@@ -5726,14 +5732,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 11;
                 _context.t0 = _context["catch"](0);
 
-                _this.getErrors(_context.t0);
+                _this2.getErrors(_context.t0);
 
               case 14:
-                _this.toggleDisabled();
+                _this2.toggleDisabled();
 
-                _this.focusedIndex = 0;
+                _this2.focusedIndex = 0;
 
-                _this.$refs.description.focus();
+                _this2.$refs.description.focus();
 
               case 17:
               case "end":
@@ -7000,6 +7006,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     collection: {
@@ -7010,6 +7017,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": ""
     }
   },
+  mounted: function mounted() {},
   data: function data() {
     return {
       query: "",
@@ -7024,34 +7032,27 @@ __webpack_require__.r(__webpack_exports__);
       this.highlightedIndex = 0;
     },
     fillItems: function fillItems() {
-      this.searchResultsVisible = true; //this.items = this.collection;
-
+      this.searchResultsVisible = true;
       this.search();
     },
     search: function search(event) {
       var _this = this;
 
-      console.log('entro');
       if (event) if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         return;
       }
       this.highlightedIndex = 0;
 
-      if (this.query == "") {
+      if (this.query === "") {
         this.items = this.collection;
         return;
       }
 
       this.items = this.collection.filter(function (item) {
-        //var re = this.term_search.replace(/\s/g, '|'); idea nada mas,
-        //podria parter la cadena completa en dos partes mitad|mitad y buscar
-        if (item.name.search(new RegExp(_this.query.trim(), "i")) != -1 //.search(new RegExp(re,'i')) != -1
-        ) return item;
+        if (item.name.search(new RegExp(_this.query.trim(), "i")) != -1) return item;
       });
     },
     highligthPrevious: function highligthPrevious() {
-      console.log("hola ");
-
       if (this.highlightedIndex >= 0) {
         this.highlightedIndex -= 1;
         this.scrollIntoView();
@@ -11693,7 +11694,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\r\n", ""]);
+exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -11712,7 +11713,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\r\n", ""]);
+exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -11731,7 +11732,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -11750,7 +11751,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\r\n        135deg,\r\n        #ec489980 10%,\r\n        transparent 0,\r\n        transparent 50%,\r\n        #ec489980 0,\r\n        #ec489980 60%,\r\n        transparent 0,\r\n        transparent\r\n    );\n  background-size: 7.07px 7.07px;\n}\r\n", ""]);
+exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\n        135deg,\n        #ec489980 10%,\n        transparent 0,\n        transparent 50%,\n        #ec489980 0,\n        #ec489980 60%,\n        transparent 0,\n        transparent\n    );\n  background-size: 7.07px 7.07px;\n}\n", ""]);
 
 // exports
 
@@ -35212,23 +35213,6 @@ var render = function () {
         "div",
         { staticClass: "col-span-5", class: [_vm.controlsContainerStyle] },
         [
-          _c("label", { class: [_vm.labelStyle] }, [_vm._v("Categoría")]),
-          _vm._v(" "),
-          _c("search-select", {
-            staticClass: "w-8/12",
-            attrs: {
-              collection: _vm.productBonuses,
-              "input-class": "bg-stripes-gray w-full" + _vm.inputStyle,
-            },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-span-5", class: [_vm.controlsContainerStyle] },
-        [
           _c("label", { class: [_vm.labelStyle] }, [_vm._v("Descripción")]),
           _vm._v(" "),
           _c("textarea", {
@@ -35304,6 +35288,23 @@ var render = function () {
             },
           }),
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-span-5", class: [_vm.controlsContainerStyle] },
+        [
+          _c("label", { class: [_vm.labelStyle] }, [_vm._v("Categoría")]),
+          _vm._v(" "),
+          _c("search-select", {
+            staticClass: "w-8/12",
+            attrs: {
+              collection: _vm.productBonuses,
+              "input-class": "bg-stripes-gray w-full" + _vm.inputStyle,
+            },
+          }),
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
@@ -37396,8 +37397,31 @@ var render = function () {
           _vm.searchResultsVisible = false
         },
         focus: _vm.fillItems,
-        keydown: [
+        keyup: [
           _vm.search,
+          function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "up", 38, $event.key, ["Up", "ArrowUp"])
+            ) {
+              return null
+            }
+            return _vm.highligthPrevious.apply(null, arguments)
+          },
+          function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "down", 40, $event.key, [
+                "Down",
+                "ArrowDown",
+              ])
+            ) {
+              return null
+            }
+            return _vm.highlightNext.apply(null, arguments)
+          },
+        ],
+        keydown: [
           function ($event) {
             if (
               !$event.type.indexOf("key") &&
@@ -37427,29 +37451,6 @@ var render = function () {
           },
           function ($event) {
             _vm.searchResultsVisible = true
-          },
-        ],
-        keyup: [
-          function ($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "up", 38, $event.key, ["Up", "ArrowUp"])
-            ) {
-              return null
-            }
-            return _vm.highligthPrevious.apply(null, arguments)
-          },
-          function ($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "down", 40, $event.key, [
-                "Down",
-                "ArrowDown",
-              ])
-            ) {
-              return null
-            }
-            return _vm.highlightNext.apply(null, arguments)
           },
         ],
       },
@@ -68148,8 +68149,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
