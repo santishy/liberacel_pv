@@ -30,9 +30,7 @@ class FastSaleController extends Controller
 
         $fastSale->addConcept();
 
-        if(filled($request->product_bonus_id)){
-            
-        }
+        $fastSale->addBonus();
 
         $fastSaleFresh = $fastSale->fresh();
         
