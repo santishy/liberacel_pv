@@ -13,16 +13,37 @@ class FastSale extends Model
     use HasFactory;
     use ReportBy;
 
-    protected $fillable = ['status', 'total', 'concepts','user_id'];
+    protected $fillable = ['status', 'total', 'concepts', 'user_id'];
 
     protected $casts = [
         'concepts' => 'array',
     ];
-    
+
     protected $dispatchesEvents = [
         'updating' => FastSaleUpdated::class
     ];
 
+    public function addBonus()
+    {
+        $product_bonus_id = request('product_bonus_id');
+        if (filled($product_bonus_id)) {
+            if (!$this->productBonus()->contains($product_bonus_id)) {
+                $this->productBonus()
+                    ->attach(
+                        $product_bonus_id,
+                        ['qty' => request('qty')]
+                    );
+            } else {
+                $this->productBonus()->updateExistingPivot($product_bonus_id,[
+                    'qty' => 
+                ]);
+            }
+        }
+    }
+    public function productBonuses()
+    {
+        return $this->belongsToMany('productBonus');
+    }
     public function setConceptsAttribute($value)
     {
         if (is_null($this->concepts))
@@ -30,7 +51,8 @@ class FastSale extends Model
         $this->attributes['concepts'] = collect($this->concepts)->prepend($value);
     }
 
-    public function commission(){
+    public function commission()
+    {
         return $this->hasOne(Commission::class);
     }
 
@@ -45,13 +67,14 @@ class FastSale extends Model
         session()->put('fast-sale', $fastSale->id);
         return $fastSale;
     }
-    public function addConcept(){
-        
-        $this['concepts'] = request()->only('description','price','qty');
-        $this->updateTotal();
+    public function addConcept()
+    {
 
+        $this['concepts'] = request()->only('description', 'price', 'qty');
+        $this->updateTotal();
     }
-    public  function updateTotal(){
+    public  function updateTotal()
+    {
         $this->total += request()->price * request()->qty;
         $this->save();
     }
@@ -81,5 +104,4 @@ class FastSale extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
 }
