@@ -8,7 +8,7 @@ use App\Http\Resources\FastSaleCollection;
 use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
 use App\Models\FastSale;
-use App\Models\ProductBonuses;
+use App\Models\ProductBonus;
 use Illuminate\Http\Request;
 
 class FastSaleController extends Controller
@@ -40,7 +40,7 @@ class FastSaleController extends Controller
     public function create()
     {
         $this->authorize('create', new FastSale);
-        $productBonuses = ProductBonuses::all();
+        $productBonuses = ProductBonus::all();
         $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : new FastSale;
         $sale = FastSaleResource::make($sale);
         return view('fast-sales.create', compact('sale','productBonuses'));

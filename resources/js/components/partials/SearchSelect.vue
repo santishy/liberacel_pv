@@ -7,26 +7,25 @@
             :class="[inputClass]"
             @blur="searchResultsVisible = false"
             @focus="fillItems"
-            @keyup="search"
+            @keyup="search($event)"
             @keydown.esc="searchResultsVisible = false"
-            @keydown.enter.prevent="selectedItem"
+            @keyup.enter.exact="selectedItem"
             @input="searchResultsVisible = true"
             @keyup.up="highligthPrevious"
             @keyup.down="highlightNext"
-            
         />
         <div
-            v-if="searchResultsVisible"
-            class="absolute right-0 top-0 h-full text-gray-700 bg-gray-300"
+            v-if="searchResultsVisible || query.length"
+            class="absolute top-0 right-0 h-full text-gray-700 bg-gray-300"
         >
             <a
                 href="#"
-                class="h-full flex items-center p-1"
+                class="relative z-10 flex items-center h-full p-1"
                 @click.prevent="reset"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
+                    class="w-6 h-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -44,22 +43,22 @@
             v-if="searchResultsVisible"
             class="
                 absolute
-                top-12
                 left-0
                 right-0
-                w-full
                 z-10
-                rounded
+                w-full
                 bg-gray-100
+                rounded
                 shadow
+                top-12
             "
         >
             <div
                 class="
                     flex flex-col
+                    overflow-y-auto
                     divide-y-2 divide-gray-400
                     max-h-64
-                    overflow-y-auto
                 "
                 ref="results"
             >
@@ -69,6 +68,7 @@
                     href="#"
                     class="p-2 hover:bg-gray-400"
                     @mousedown.prevent="searchResultsVisible = true"
+                    @click.prevent="selectedItem(index, $event)"
                     :class="{ 'bg-gray-400': highlightedIndex === index }"
                 >
                     {{ item.name }}
@@ -83,9 +83,7 @@ export default {
         collection: { type: Array },
         inputClass: { type: String, default: "" },
     },
-    mounted(){
-
-    },
+    mounted() {},
     data() {
         return {
             query: "",
@@ -96,18 +94,24 @@ export default {
     },
     methods: {
         reset() {
-            this.query = "";
+            Vue.set(this.$data, "query", "");
             this.highlightedIndex = 0;
+            this.items=[]
         },
-        fillItems() {
+        fillItems(event) {
             this.searchResultsVisible = true;
-            this.search();
+            this.search(event);
         },
+
         search(event) {
-            if (event)
-                if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-                    return;
-                }
+            if (
+                event.key === "ArrowDown" ||
+                event.key === "ArrowUp" ||
+                event.key == "Enter"
+            ) {
+                return;
+            }
+
             this.highlightedIndex = 0;
             if (this.query === "") {
                 this.items = this.collection;
@@ -119,13 +123,13 @@ export default {
             });
         },
         highligthPrevious() {
-            if (this.highlightedIndex >= 0) {
+            if (this.highlightedIndex > 0) {
                 this.highlightedIndex -= 1;
                 this.scrollIntoView();
             }
         },
         highlightNext() {
-            if (this.highlightedIndex < this.items.length) {
+            if (this.highlightedIndex < this.items.length - 1) {
                 this.highlightedIndex += 1;
                 this.scrollIntoView();
             }
@@ -140,10 +144,17 @@ export default {
                 block: "nearest",
             });
         },
-        selectedItem() {
+
+        selectedItem(index = "", event) {
+            if(!this.items.length) return;
+            if (!isNaN(index)) {
+                this.highlightedIndex = index;
+            }
             let item = this.items[this.highlightedIndex];
             this.searchResultsVisible = false;
             this.query = this.items[this.highlightedIndex].name;
+            this.items = [];
+            this.highlightedIndex = 0;
             if (item) EventBus.$emit("selected-item", item);
         },
     },

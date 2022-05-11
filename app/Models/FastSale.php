@@ -26,23 +26,26 @@ class FastSale extends Model
     public function addBonus()
     {
         $product_bonus_id = request('product_bonus_id');
+        
         if (filled($product_bonus_id)) {
-            if (!$this->productBonus()->contains($product_bonus_id)) {
-                $this->productBonus()
+            if (!$this->productBonuses()->where('product_bonus_id',$product_bonus_id)->exists()) {
+                $this->productBonuses()
                     ->attach(
                         $product_bonus_id,
                         ['qty' => request('qty')]
                     );
             } else {
-                $this->productBonus()->updateExistingPivot($product_bonus_id,[
-                    'qty' => 
+                $productBonus = $this->productBonuses()->wherePivot('product_bonus_id', $product_bonus_id);
+
+                $this->productBonuses()->updateExistingPivot($product_bonus_id, [
+                    'qty' => $productBonus->first()->pivot->qty + request('qty')
                 ]);
             }
         }
     }
     public function productBonuses()
     {
-        return $this->belongsToMany('productBonus');
+        return $this->belongsToMany(ProductBonus::class);
     }
     public function setConceptsAttribute($value)
     {

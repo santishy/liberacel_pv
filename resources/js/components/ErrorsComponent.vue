@@ -2,7 +2,7 @@
     
     <div
         v-if="show"
-        class="w-full mb-3 bg-blue-100 border-t border-b border-red-500 text-red-700 px-4 py-3"
+        class="w-full px-4 py-3 mb-3 text-red-700 bg-blue-100 border-t border-b border-red-500"
         role="alert"
     >
         <p class="font-bold">Se detecto los siguientes errores:</p>
