@@ -102,6 +102,7 @@ export default {
                     data: { data },
                 } = await axios.post("/fast-sales", this.form);
                 EventBus.$emit("fast-sale", data);
+                EventBus.$emit("reset-search-select");
                 this.form = {};
                 this.notify({
                     title: "Venta rapida",

@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $user->email = 'santi_shy@hotmail.com';
         $user->name = 'Santiago Martín OE';
         $user->username = 'admin';
-        $user->password = bcrypt('san10mar');
+        $user->password = 'san10mar';//bcrypt('san10mar');
         $user->inventory_id = null;
         $user->save();
         $user->assignRole($adminRole);

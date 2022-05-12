@@ -83,7 +83,9 @@ export default {
         collection: { type: Array },
         inputClass: { type: String, default: "" },
     },
-    mounted() {},
+    mounted() {
+        EventBus.$emit('reset-search-select',this.reset)
+    },
     data() {
         return {
             query: "",

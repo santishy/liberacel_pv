@@ -38,6 +38,7 @@ class CreateNewUser implements CreatesNewUsers
             'username' => [Rule::unique(User::class),'required'],
             'roles.*' => 'exists:roles,id'
         ])->validate();
+        //no encripto password, ya que se hace en el modelo con setAttribute
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
