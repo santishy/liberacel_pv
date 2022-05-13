@@ -26,7 +26,8 @@ class StoreFastSaleRequest extends FormRequest
         return [
             'description' => 'required',
             'price' => 'required|numeric|min:1',
-            'qty' => 'required|integer'
+            'qty' => 'required|integer',
+            'product_bonus_id' => 'required'
         ];
     }
 }

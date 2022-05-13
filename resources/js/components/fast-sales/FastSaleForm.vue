@@ -91,7 +91,8 @@ export default {
         this.focusDescription();
         EventBus.$on("focus-description", this.focusDescription);
         EventBus.$on("selected-item" ,(item) => {
-            this.form.product_bonus_id = item.id;
+            
+            this.form.product_bonus_id = item?.id;
         })
     },
     methods: {

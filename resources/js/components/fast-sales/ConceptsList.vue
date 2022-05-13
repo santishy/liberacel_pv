@@ -13,25 +13,29 @@
             rounded-sm
         "
     >
-        <h3
+        <div
             class="
                 border-b border-gray-300
                 px-4
                 w-full
-                font-mono
-                text-2xl text-teal-800
+                flex 
+                flex-wrap 
+                justify-between
             "
         >
-            Nota #{{ nota }}
-        </h3>
+            <span class="font-mono
+                text-2xl text-teal-800">Nota #{{ nota }}</span>    
+            
+            <span class="text-2xl font-light text-red-700"
+                >Total: {{ total }}</span
+            >
+        </div>
         <div
             class="flex flex-wrap justify-between items-center py-3 px-2 w-full"
         >
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[status] }}</span>
                 <span><exchange></exchange></span></button
-            ><span class="text-2xl font-light text-red-700"
-                >Total: {{ total }}</span
             ><span class="text-xs text-gray-700">{{ currentDate }}</span>
         </div>
         <div

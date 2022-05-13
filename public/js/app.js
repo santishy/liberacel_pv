@@ -5350,6 +5350,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -5703,7 +5707,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.focusDescription();
     EventBus.$on("focus-description", this.focusDescription);
     EventBus.$on("selected-item", function (item) {
-      _this.form.product_bonus_id = item.id;
+      _this.form.product_bonus_id = item === null || item === void 0 ? void 0 : item.id;
     });
   },
   methods: {
@@ -7025,7 +7029,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    EventBus.$emit('reset-search-select', this.reset);
+    EventBus.$on("reset-search-select", this.reset);
   },
   data: function data() {
     return {
@@ -7056,6 +7060,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.query === "") {
         this.items = this.collection;
+        EventBus.$emit("selected-item", null);
         return;
       }
 
@@ -7080,7 +7085,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.highlightedIndex < this.items.length) this.highlightedIndex = this.items.length - 1;else this.highlightedIndex = 0;
       }
 
-      this.$refs.results.children[this.highlightedIndex].scrollIntoView({
+      if (this.$refs.results) this.$refs.results.children[this.highlightedIndex].scrollIntoView({
         block: "nearest"
       });
     },
@@ -34966,12 +34971,22 @@ var render = function () {
     },
     [
       _c(
-        "h3",
+        "div",
         {
           staticClass:
-            "\n            border-b border-gray-300\n            px-4\n            w-full\n            font-mono\n            text-2xl text-teal-800\n        ",
+            "\n            border-b border-gray-300\n            px-4\n            w-full\n            flex \n            flex-wrap \n            justify-between\n        ",
         },
-        [_vm._v("\n        Nota #" + _vm._s(_vm.nota) + "\n    ")]
+        [
+          _c(
+            "span",
+            { staticClass: "font-mono\n            text-2xl text-teal-800" },
+            [_vm._v("Nota #" + _vm._s(_vm.nota))]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-2xl font-light text-red-700" }, [
+            _vm._v("Total: " + _vm._s(_vm.total)),
+          ]),
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -35000,9 +35015,6 @@ var render = function () {
               _c("span", [_c("exchange")], 1),
             ]
           ),
-          _c("span", { staticClass: "text-2xl font-light text-red-700" }, [
-            _vm._v("Total: " + _vm._s(_vm.total)),
-          ]),
           _c("span", { staticClass: "text-xs text-gray-700" }, [
             _vm._v(_vm._s(_vm.currentDate)),
           ]),

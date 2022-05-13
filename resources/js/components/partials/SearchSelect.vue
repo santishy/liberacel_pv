@@ -84,7 +84,7 @@ export default {
         inputClass: { type: String, default: "" },
     },
     mounted() {
-        EventBus.$emit('reset-search-select',this.reset)
+        EventBus.$on("reset-search-select", this.reset);
     },
     data() {
         return {
@@ -98,7 +98,7 @@ export default {
         reset() {
             Vue.set(this.$data, "query", "");
             this.highlightedIndex = 0;
-            this.items=[]
+            this.items = [];
         },
         fillItems(event) {
             this.searchResultsVisible = true;
@@ -117,6 +117,7 @@ export default {
             this.highlightedIndex = 0;
             if (this.query === "") {
                 this.items = this.collection;
+                EventBus.$emit("selected-item", null);
                 return;
             }
             this.items = this.collection.filter((item) => {
@@ -142,13 +143,16 @@ export default {
                     this.highlightedIndex = this.items.length - 1;
                 else this.highlightedIndex = 0;
             }
-            this.$refs.results.children[this.highlightedIndex].scrollIntoView({
-                block: "nearest",
-            });
+            if (this.$refs.results)
+                this.$refs.results.children[
+                    this.highlightedIndex
+                ].scrollIntoView({
+                    block: "nearest",
+                });
         },
 
         selectedItem(index = "", event) {
-            if(!this.items.length) return;
+            if (!this.items.length) return;
             if (!isNaN(index)) {
                 this.highlightedIndex = index;
             }
