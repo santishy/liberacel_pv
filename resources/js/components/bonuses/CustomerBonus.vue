@@ -1,11 +1,11 @@
 <template>
     <form>
         <div>
-            <input type="text" :class="inputStyle">
+            <input type="text" :class="inputStyle" placeholder="Ejemplo: 3531002244">
         </div>
-        <div slot="bonos-button">
+        <slot name="bonus-button">
             
-        </div>
+        </slot>
     </form>
 </template>
 <script>

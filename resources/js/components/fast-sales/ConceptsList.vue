@@ -1,37 +1,33 @@
 <template>
     <div
         v-show="products.length"
-        class="
-            p-2
-            border-l-4 border-teal-400
-            flex flex-wrap
-            items-baseline
-            md:w-9/12
-            mx-auto
-            bg-white
-            shadow-sm
-            rounded-sm
-        "
+        class="flex flex-wrap items-baseline p-2 mx-auto bg-white border-l-4 border-teal-400 rounded-sm shadow-sm md:w-9/12"
     >
         <div
-            class="
-                border-b border-gray-300
-                px-4
-                w-full
-                flex 
-                flex-wrap 
-                justify-between
-            "
+            class="flex flex-wrap items-center justify-between w-full px-4 border-b border-gray-300 "
         >
-            <span class="font-mono
-                text-2xl text-teal-800">Nota #{{ nota }}</span>    
-            
+            <span class="font-mono text-2xl text-teal-800"
+                >Nota #{{ nota }}</span
+            >
+            <customer-bonus
+                class="flex flex-wrap"
+                inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
+            >
+                <template slot="bonus-button">
+                    <button
+                        class="flex flex-wrap items-center px-2 py-2 ml-2 font-mono text-sm text-gray-700 bg-teal-200 rounded-sm shadow "
+                    >
+                        Buscar/Agregar
+                        <user-circle-icon></user-circle-icon>
+                    </button>
+                </template>
+            </customer-bonus>
             <span class="text-2xl font-light text-red-700"
                 >Total: {{ total }}</span
             >
         </div>
         <div
-            class="flex flex-wrap justify-between items-center py-3 px-2 w-full"
+            class="flex flex-wrap items-center justify-between w-full px-2 py-3"
         >
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[status] }}</span>
@@ -39,18 +35,7 @@
             ><span class="text-xs text-gray-700">{{ currentDate }}</span>
         </div>
         <div
-            class="
-                bg-blue-200
-                w-full
-                rounded
-                p-1
-                mb-1
-                text-gray-800 text-xs
-                flex flex-wrap
-                justify-center
-                items-center
-                border border-blue-600
-            "
+            class="flex flex-wrap items-center justify-center w-full p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded "
         >
             <p class="mr-4">
                 Dar doble click sobre una fila de la tabla generada abajo, para
@@ -61,26 +46,11 @@
             <pointer-icon class="text-blue-700"></pointer-icon>
         </div>
         <table
-            class="
-                w-full
-                flex flex-row flex-no-wrap
-                sm:bg-white
-                rounded
-                overflow-hidden
-            "
+            class="flex flex-row flex-no-wrap w-full overflow-hidden rounded sm:bg-white"
         >
             <thead class="text-white">
                 <tr
-                    class="
-                        bg-teal-400
-                        flex flex-col flex-no
-                        wrap
-                        sm:table-row
-                        rounded-l-lg
-                        sm:rounded-none
-                        mb-2
-                        sm:mb-0
-                    "
+                    class="flex flex-col mb-2 bg-teal-400 rounded-l-lg flex-no wrap sm:table-row sm:rounded-none sm:mb-0"
                 >
                     <th class="p-3 text-left sm:text-center">Descripción</th>
                     <th class="p-3 text-left sm:text-center">Precio</th>
@@ -108,14 +78,18 @@
 <script>
 import ConceptListItem from "./ConceptListItem.vue";
 import PointerIcon from "../icons/PointerIcon.vue";
+import UserCircleIcon from "../icons/UserCircleIcon.vue";
 import Exchange from "../icons/Exchange.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
+import CustomerBonus from "../bonuses/CustomerBonus.vue";
 export default {
     components: {
         ConceptListItem,
         PointerIcon,
         Exchange,
         AuthenticationForm,
+        CustomerBonus,
+        UserCircleIcon,
     },
     props: {
         sale: {
@@ -139,7 +113,7 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            console.log('fast-sale')
+            console.log("fast-sale");
             if (!this.sale) {
                 this.sale = sale;
             }
