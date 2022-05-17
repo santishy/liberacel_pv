@@ -17,7 +17,7 @@ class CreateCustomerBonusesTable extends Migration
             $table->id();
             $table->string('phone_number')->unique();
             $table->integer('accumulated_points')->default(0);
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
