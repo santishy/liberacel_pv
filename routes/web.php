@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{PurchaseController, ProductInSaleController, RoleController};
+use App\Http\Controllers\{CustomerBonusController, PurchaseController, ProductInSaleController, RoleController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -167,3 +167,8 @@ Route::put('user-commissions/{commission}', [UserCommissionsController::class, '
 Route::get('product-bonuses', [ProductBonusController::class, 'index'])->middleware('auth');
 Route::post('product-bonuses', [ProductBonusController::class, 'store'])->middleware('auth');
 Route::put('product-bonuses/{productBonus}', [ProductBonusController::class, 'update'])->middleware('auth');
+
+/**
+ * customer bonuses
+ */
+Route::post('customer-bonuses', [CustomerBonusController::class, 'store'])->middleware('auth');

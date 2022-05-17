@@ -40,4 +40,5 @@ class UpdateStoreProductBonus extends FormRequest
             'points.numeric' => 'El campo puntos debe ser un número entero'
         ];
     }
+    
 }

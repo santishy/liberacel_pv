@@ -1,10 +1,9 @@
 <template>
-    <form>
+    <form @submit.prevent="submit">
         <div>
-            <input type="text" :class="inputStyle" placeholder="Ejemplo: 3531002244">
+            <input type="text" v-model="form.phone_number" :class="inputStyle" placeholder="Ejemplo: 3531002244">
         </div>
         <slot name="bonus-button">
-            
         </slot>
     </form>
 </template>
@@ -16,5 +15,22 @@ export default{
             default:''
         }
     },
+    data(){
+        return{
+
+            form:{}
+        }
+    },
+    methods:{
+        async submit(){
+            try{
+                const res  = await axios.post('/customer-bonuses',this.form);
+                console.log(res);
+            }
+            catch(e){
+                console.log(e)
+            }
+        }
+    }
 }
 </script>

@@ -24,8 +24,16 @@ class StoreCustomerBonusRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'requerid|digits:10',
-            'fast_sale_id' => 'requerid'
+            'phone_number' => 'required|digits:10',
+            'fast_sale_id' => 'required'
+        ];
+    }
+
+    public function messages(){
+        return [
+            'phone_number.required' => 'El número de télefono es requerido.',
+            'phone_number.digits' => 'El número de télefono debe tener 10 digitos.',
+            'fast_sale_id.required' => 'El id de venta rápida es requerido.'
         ];
     }
 }
