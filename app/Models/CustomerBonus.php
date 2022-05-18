@@ -10,7 +10,7 @@ class CustomerBonus extends Model
 {
     use HasFactory;
 
-    protected $fillable=['phone_number','fast_sale_id','accumulated_points'];
+    protected $fillable=['phone_number','fast_sale_id','accumulated_points','status'];
 
     public function scorePoints()
     {

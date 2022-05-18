@@ -2,7 +2,7 @@
     <form
         id="fastSaleForm"
         ref="quickSaleForm"
-        class="grid grid-rows-4 grid-flow-col grid-cols-5 w-full"
+        class="grid w-full grid-flow-col grid-cols-5 grid-rows-4"
         @submit.prevent="submit"
     >
         
@@ -28,7 +28,7 @@
                 :input-class="'bg-stripes-gray w-full' + inputStyle"
             ></search-select>
         </div>
-        <div class="col-span-5 w-full" :class="controlsContainerStyle">
+        <div class="w-full col-span-5" :class="controlsContainerStyle">
             <label :class="[labelStyle]">Precio</label>
             <input
                 type="text"
@@ -62,7 +62,7 @@
             />
         </div>
 
-        <div class="flex ml-10 justify-start items-center w-full row-span-3">
+        <div class="flex items-center justify-start w-full row-span-3 ml-10">
             <div class="flex items-center">
                 <errors-component :errors-found="errors" />
             </div>

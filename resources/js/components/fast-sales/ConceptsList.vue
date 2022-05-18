@@ -10,6 +10,7 @@
                 >Nota #{{ nota }}</span
             >
             <customer-bonus
+                v-if="sale"
                 class="flex flex-wrap"
                 :fast-sale="sale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
@@ -114,9 +115,9 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            console.log("fast-sale");
-            if (!this.sale) {
+            if (!this.sale?.id) {
                 this.sale = sale;
+                console.log(this.sale)
             }
             this.fillData(sale);
         });

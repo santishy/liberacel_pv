@@ -41,7 +41,7 @@ class FastSaleController extends Controller
     {
         $this->authorize('create', new FastSale);
         $productBonuses = ProductBonus::all();
-        $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : new FastSale;
+        $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
         $sale = FastSaleResource::make($sale);
         return view('fast-sales.create', compact('sale','productBonuses'));
     }
