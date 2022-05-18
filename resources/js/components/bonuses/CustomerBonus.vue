@@ -13,6 +13,10 @@ export default{
         inputStyle:{
             type:String,
             default:''
+        },
+        fastSale:{
+            type:Object,
+            required:true,
         }
     },
     data(){
@@ -20,6 +24,9 @@ export default{
 
             form:{}
         }
+    },
+    mounted(){
+        this.form.fast_sale_id = this.fastSale.id;
     },
     methods:{
         async submit(){

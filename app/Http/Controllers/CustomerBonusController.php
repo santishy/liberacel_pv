@@ -16,6 +16,7 @@ class CustomerBonusController extends Controller
         );
 
         $customer->scorePoints();
+
         
         return response()->json(['customer' => $customer->fresh()]);
     }
