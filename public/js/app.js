@@ -2186,7 +2186,7 @@ module.exports = {
 /*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, scripts, typings, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"C:\\\\xampp\\\\htdocs\\\\liberacel_pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
+module.exports = JSON.parse("{\"_args\":[[\"axios@0.21.4\",\"/home/santiago/code/liberacel-pv\"]],\"_development\":true,\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"/localtunnel\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_spec\":\"0.21.4\",\"_where\":\"/home/santiago/code/liberacel-pv\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
 
 /***/ }),
 
@@ -3718,11 +3718,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     inputStyle: {
       type: String,
-      "default": ''
+      "default": ""
     },
     fastSale: {
       type: Object,
@@ -3736,6 +3740,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.form.fast_sale_id = this.fastSale.id;
+    console.log(this.fastSale);
   },
   methods: {
     submit: function submit() {
@@ -3749,7 +3754,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.post('/customer-bonuses', _this.form);
+                return axios.post("/customer-bonuses", _this.form);
 
               case 3:
                 res = _context.sent;
@@ -5434,11 +5439,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       products: [],
-      nota: null,
-      status: null,
-      total: null,
-      currentDate: null,
-      id: null,
+      // nota: null,
+      // status: null,
+      // total: null,
+      // currentDate: null,
+      // id: null,
+      localSale: {},
       translate: {
         pending: "PENDIENTE",
         completed: "COMPLETADO",
@@ -5450,13 +5456,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     EventBus.$on("fast-sale", function (sale) {
-      var _this$sale;
-
-      if (!((_this$sale = _this.sale) !== null && _this$sale !== void 0 && _this$sale.id)) {
-        _this.sale = sale;
-        console.log(_this.sale);
-      }
-
+      // if (!this.sale) {
+      //     this.localSale = sale;
+      // }
       _this.fillData(sale);
     });
 
@@ -5474,11 +5476,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fillData: function fillData(sale) {
       this.products = sale.products;
-      this.nota = sale.id;
-      this.status = sale.status;
-      this.total = sale.total;
-      this.id = sale.id;
-      this.currentDate = sale.created_at;
+      this.localSale = sale; // this.nota = sale.id;
+      // this.status = sale.status;
+      // this.total = sale.total;
+      // this.id = sale.id;
+      // this.currentDate = sale.created_at;
     },
     openModal: function openModal() {
       EventBus.$emit("open-modal", true);
@@ -5486,7 +5488,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     statusStyle: function statusStyle() {
-      if (this.status == "pending") {
+      if (this.localSale.status == "pending") {
         return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
       }
 
@@ -5555,7 +5557,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     sale: {
-      type: Object
+      type: Object,
+      "default": null
     },
     productBonuses: {
       type: Array
@@ -11782,7 +11785,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\r\n", ""]);
+exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -11801,7 +11804,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\r\n", ""]);
+exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -11820,7 +11823,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
@@ -11839,7 +11842,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\r\n        135deg,\r\n        #ec489980 10%,\r\n        transparent 0,\r\n        transparent 50%,\r\n        #ec489980 0,\r\n        #ec489980 60%,\r\n        transparent 0,\r\n        transparent\r\n    );\n  background-size: 7.07px 7.07px;\n}\r\n", ""]);
+exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\n        135deg,\n        #ec489980 10%,\n        transparent 0,\n        transparent 50%,\n        #ec489980 0,\n        #ec489980 60%,\n        transparent 0,\n        transparent\n    );\n  background-size: 7.07px 7.07px;\n}\n", ""]);
 
 // exports
 
@@ -35102,16 +35105,16 @@ var render = function () {
         },
         [
           _c("span", { staticClass: "font-mono text-2xl text-teal-800" }, [
-            _vm._v("Nota #" + _vm._s(_vm.nota)),
+            _vm._v("Nota #" + _vm._s(_vm.localSale.id)),
           ]),
           _vm._v(" "),
-          _vm.sale
+          _vm.localSale
             ? _c(
                 "customer-bonus",
                 {
                   staticClass: "flex flex-wrap",
                   attrs: {
-                    "fast-sale": _vm.sale,
+                    "fast-sale": _vm.localSale,
                     inputStyle:
                       "bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600",
                   },
@@ -35139,7 +35142,7 @@ var render = function () {
             : _vm._e(),
           _vm._v(" "),
           _c("span", { staticClass: "text-2xl font-light text-red-700" }, [
-            _vm._v("Total: " + _vm._s(_vm.total)),
+            _vm._v("Total: " + _vm._s(_vm.localSale.total)),
           ]),
         ],
         1
@@ -35165,14 +35168,14 @@ var render = function () {
             },
             [
               _c("span", { staticClass: "mr-2" }, [
-                _vm._v(_vm._s(_vm.translate[_vm.status])),
+                _vm._v(_vm._s(_vm.translate[_vm.localSale.status])),
               ]),
               _vm._v(" "),
               _c("span", [_c("exchange")], 1),
             ]
           ),
           _c("span", { staticClass: "text-xs text-gray-700" }, [
-            _vm._v(_vm._s(_vm.currentDate)),
+            _vm._v(_vm._s(_vm.localSale.created_at)),
           ]),
         ]
       ),
@@ -35212,7 +35215,7 @@ var render = function () {
             _vm._l(_vm.products, function (product, index) {
               return _c("concept-list-item", {
                 key: product.id,
-                attrs: { product: product, index: index, id: _vm.id },
+                attrs: { product: product, index: index, id: _vm.localSale.id },
               })
             }),
             1
@@ -35220,7 +35223,9 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _c("authentication-form", { attrs: { model: "FastSale", id: _vm.nota } }),
+      _c("authentication-form", {
+        attrs: { model: "FastSale", id: _vm.localSale.id },
+      }),
     ],
     1
   )
@@ -68516,8 +68521,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

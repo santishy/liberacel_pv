@@ -7,12 +7,12 @@
             class="flex flex-wrap items-center justify-between w-full px-4 border-b border-gray-300 "
         >
             <span class="font-mono text-2xl text-teal-800"
-                >Nota #{{ nota }}</span
+                >Nota #{{ localSale.id }}</span
             >
             <customer-bonus
-                v-if="sale"
+                v-if="localSale"
                 class="flex flex-wrap"
-                :fast-sale="sale"
+                :fast-sale="localSale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
             >
                 <template slot="bonus-button">
@@ -25,16 +25,16 @@
                 </template>
             </customer-bonus>
             <span class="text-2xl font-light text-red-700"
-                >Total: {{ total }}</span
+                >Total: {{ localSale.total }}</span
             >
         </div>
         <div
             class="flex flex-wrap items-center justify-between w-full px-2 py-3"
         >
             <button @click.prevent="openModal" :class="[statusStyle]">
-                <span class="mr-2">{{ translate[status] }}</span>
+                <span class="mr-2">{{ translate[localSale.status] }}</span>
                 <span><exchange></exchange></span></button
-            ><span class="text-xs text-gray-700">{{ currentDate }}</span>
+            ><span class="text-xs text-gray-700">{{ localSale.created_at }}</span>
         </div>
         <div
             class="flex flex-wrap items-center justify-center w-full p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded "
@@ -68,12 +68,12 @@
                     :key="product.id"
                     :product="product"
                     :index="index"
-                    :id="id"
+                    :id="localSale.id"
                 ></concept-list-item>
             </tbody>
         </table>
 
-        <authentication-form model="FastSale" :id="nota"></authentication-form>
+        <authentication-form model="FastSale" :id="localSale.id"></authentication-form>
     </div>
 </template>
 
@@ -101,11 +101,12 @@ export default {
     data() {
         return {
             products: [],
-            nota: null,
-            status: null,
-            total: null,
-            currentDate: null,
-            id: null,
+            // nota: null,
+            // status: null,
+            // total: null,
+            // currentDate: null,
+            // id: null,
+            localSale:{},
             translate: {
                 pending: "PENDIENTE",
                 completed: "COMPLETADO",
@@ -115,10 +116,10 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            if (!this.sale?.id) {
-                this.sale = sale;
-                console.log(this.sale)
-            }
+            // if (!this.sale) {
+            //     this.localSale = sale;
+                
+            // }
             this.fillData(sale);
         });
         if (this.sale) {
@@ -134,11 +135,12 @@ export default {
     methods: {
         fillData(sale) {
             this.products = sale.products;
-            this.nota = sale.id;
-            this.status = sale.status;
-            this.total = sale.total;
-            this.id = sale.id;
-            this.currentDate = sale.created_at;
+            this.localSale = sale;
+            // this.nota = sale.id;
+            // this.status = sale.status;
+            // this.total = sale.total;
+            // this.id = sale.id;
+            // this.currentDate = sale.created_at;
         },
         openModal() {
             EventBus.$emit("open-modal", true);
@@ -146,7 +148,7 @@ export default {
     },
     computed: {
         statusStyle() {
-            if (this.status == "pending") {
+            if (this.localSale.status == "pending") {
                 return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
             }
 

@@ -47,6 +47,7 @@ export default {
     props: {
         sale: {
             type: Object,
+            default: null
         },
 
         productBonuses: { type: Array },

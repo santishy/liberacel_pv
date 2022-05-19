@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommissionSale;
+
 use App\Http\Requests\StoreFastSaleRequest;
 use App\Http\Resources\FastSaleCollection;
 use App\Http\Resources\FastSaleResource;
@@ -24,7 +24,7 @@ class FastSaleController extends Controller
     }
     public function store(StoreFastSaleRequest $request)
     {
-        $this->authorize('create', new FastSale); 
+        $this->authorize('create', new FastSale);
 
         $fastSale = FastSale::findOrCreateFastSale();
 
@@ -33,7 +33,7 @@ class FastSaleController extends Controller
         $fastSale->addBonus();
 
         $fastSaleFresh = $fastSale->fresh();
-        
+
         return FastSaleResource::make($fastSaleFresh);
     }
 
@@ -41,9 +41,11 @@ class FastSaleController extends Controller
     {
         $this->authorize('create', new FastSale);
         $productBonuses = ProductBonus::all();
-        $sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
-        $sale = FastSaleResource::make($sale);
-        return view('fast-sales.create', compact('sale','productBonuses'));
+        //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
+        $sale = fastSale::find(session('fast-sale'));
+        if(isset($sale))
+            $sale = FastSaleResource::make($sale);
+        return view('fast-sales.create', compact('sale', 'productBonuses'));
     }
 
     public function update(Request $request, FastSale $sale)
