@@ -106,4 +106,7 @@ class FastSale extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function customerBonus(){
+        return $this->belongsTo(CustomerBonus::class);
+    }
 }

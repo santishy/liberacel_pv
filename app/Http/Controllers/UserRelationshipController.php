@@ -35,7 +35,11 @@ class UserRelationshipController extends Controller
         $user = User::where('username', $credentials['username'])->first();
 
         if (!Hash::check($credentials['password'], optional($user)->password)) {
-            return response()->json(['errors' => ['error' => 'Nombre de usuario ó contraseña, incorrectos.']], 422);
+            return response()
+                ->json(
+                    ['errors' => ['error' => 'Nombre de usuario ó contraseña, incorrectos.']],
+                    422
+                );
         }
 
 

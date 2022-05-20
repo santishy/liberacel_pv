@@ -20,22 +20,23 @@ class CustomerBonus extends Model
 
     public function getPoints(){
         
-        $fastSale = $this->getQuickSalePoints();
+        $fastSale = $this->getFastSale();
 
         if(!is_null($fastSale->customer_bonus_id))
             return 0;
 
-        $this->fastSales()->associate($fastSale);
+        
 
         return $fastSale->productBonuses()
         ->sum(DB::raw('product_bonuses.points * fast_sale_product_bonus.qty'));
     }
 
-    public function getQuickSalePoints()
+    public function getFastSale()
     {
         return FastSale::find(request('fast_sale_id'));
     }
     public function fastSales(){
         return $this->hasMany(FastSale::class);
     }
+    
 }

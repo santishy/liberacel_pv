@@ -4,7 +4,7 @@
         class="flex flex-wrap items-baseline p-2 mx-auto bg-white border-l-4 border-teal-400 rounded-sm shadow-sm md:w-9/12"
     >
         <div
-            class="flex flex-wrap items-center justify-between w-full px-4 border-b border-gray-300 "
+            class="flex flex-wrap items-center justify-between w-full px-4 py-2 border-b border-gray-300 "
         >
             <span class="font-mono text-2xl text-teal-800"
                 >Nota #{{ localSale.id }}</span
@@ -15,6 +15,7 @@
                 :fast-sale="localSale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
             >
+                
                 <template slot="bonus-button">
                     <button
                         class="flex flex-wrap items-center px-2 py-2 ml-2 font-mono text-sm text-gray-700 bg-teal-200 rounded-sm shadow "
@@ -129,7 +130,7 @@ export default {
             this.products = [];
             EventBus.$emit("open-modal", false);
             EventBus.$emit("focus-description");
-            window.open("/fast-sale-tickets/" + this.id, "_blank");
+            window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
         });
     },
     methods: {
