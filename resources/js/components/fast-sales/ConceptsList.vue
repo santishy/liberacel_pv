@@ -1,10 +1,29 @@
 <template>
     <div
         v-show="products.length"
-        class="flex flex-wrap items-baseline p-2 mx-auto bg-white border-l-4 border-teal-400 rounded-sm shadow-sm md:w-9/12"
+        class="
+            flex flex-wrap
+            items-baseline
+            p-2
+            mx-auto
+            bg-white
+            border-l-4 border-teal-400
+            rounded-sm
+            shadow-sm
+            md:w-9/12
+        "
     >
+    <iframe :src="`/fast-sale-tickets/${this.localSale.id}`"></iframe>
         <div
-            class="flex flex-wrap items-center justify-between w-full px-4 py-2 border-b border-gray-300 "
+            class="
+                flex flex-wrap
+                items-center
+                justify-between
+                w-full
+                px-4
+                py-2
+                border-b border-gray-300
+            "
         >
             <span class="font-mono text-2xl text-teal-800"
                 >Nota #{{ localSale.id }}</span
@@ -15,10 +34,20 @@
                 :fast-sale="localSale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
             >
-                
                 <template slot="bonus-button">
                     <button
-                        class="flex flex-wrap items-center px-2 py-2 ml-2 font-mono text-sm text-gray-700 bg-teal-200 rounded-sm shadow "
+                        class="
+                            flex flex-wrap
+                            items-center
+                            px-2
+                            py-2
+                            ml-2
+                            font-mono
+                            text-sm text-gray-700
+                            bg-teal-200
+                            rounded-sm
+                            shadow
+                        "
                     >
                         Buscar/Agregar
                         <user-circle-icon></user-circle-icon>
@@ -35,10 +64,23 @@
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[localSale.status] }}</span>
                 <span><exchange></exchange></span></button
-            ><span class="text-xs text-gray-700">{{ localSale.created_at }}</span>
+            ><span class="text-xs text-gray-700">{{
+                localSale.created_at
+            }}</span>
         </div>
         <div
-            class="flex flex-wrap items-center justify-center w-full p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded "
+            class="
+                flex flex-wrap
+                items-center
+                justify-center
+                w-full
+                p-1
+                mb-1
+                text-xs text-gray-800
+                bg-blue-200
+                border border-blue-600
+                rounded
+            "
         >
             <p class="mr-4">
                 Dar doble click sobre una fila de la tabla generada abajo, para
@@ -49,11 +91,25 @@
             <pointer-icon class="text-blue-700"></pointer-icon>
         </div>
         <table
-            class="flex flex-row flex-no-wrap w-full overflow-hidden rounded sm:bg-white"
+            class="
+                flex flex-row flex-no-wrap
+                w-full
+                overflow-hidden
+                rounded
+                sm:bg-white
+            "
         >
             <thead class="text-white">
                 <tr
-                    class="flex flex-col mb-2 bg-teal-400 rounded-l-lg flex-no wrap sm:table-row sm:rounded-none sm:mb-0"
+                    class="
+                        flex flex-col
+                        mb-2
+                        bg-teal-400
+                        rounded-l-lg
+                        flex-no
+                        wrap
+                        sm:table-row sm:rounded-none sm:mb-0
+                    "
                 >
                     <th class="p-3 text-left sm:text-center">Descripción</th>
                     <th class="p-3 text-left sm:text-center">Precio</th>
@@ -74,7 +130,10 @@
             </tbody>
         </table>
 
-        <authentication-form model="FastSale" :id="localSale.id"></authentication-form>
+        <authentication-form
+            model="FastSale"
+            :id="localSale.id"
+        ></authentication-form>
     </div>
 </template>
 
@@ -107,7 +166,7 @@ export default {
             // total: null,
             // currentDate: null,
             // id: null,
-            localSale:{},
+            localSale: {},
             translate: {
                 pending: "PENDIENTE",
                 completed: "COMPLETADO",
@@ -119,7 +178,7 @@ export default {
         EventBus.$on("fast-sale", (sale) => {
             // if (!this.sale) {
             //     this.localSale = sale;
-                
+
             // }
             this.fillData(sale);
         });
@@ -130,7 +189,7 @@ export default {
             this.products = [];
             EventBus.$emit("open-modal", false);
             EventBus.$emit("focus-description");
-            window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
+           // window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
         });
     },
     methods: {
