@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController};
+use App\Http\Controllers\{FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -154,7 +154,7 @@ Route::get('fast-sales', [FastSaleController::class, 'index'])->middleware('auth
  * Relacionar a usuario con cualquier tabla
  */
 Route::post('user-relationship', [UserRelationshipController::class, 'store'])->middleware('auth');
-
+Route::post('fast-sales/{fastSale}/associated-users',[FastSaleAssociatedUserController::class, 'store'])->middleware('auth');
 /**
  * Commissions
  */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRelationshipRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 
 class UserRelationshipController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreUserRelationshipRequest $request)
     {
         $model = $this->getModel($request);
         /**
@@ -18,7 +19,7 @@ class UserRelationshipController extends Controller
          */
         $this->authorize('restore', $model);
 
-        $credentials = $request->validate([
+        /* $credentials = $request->validate([
             'username' => 'required|min:4',
             'password' => 'required',
             'model' => 'required',
@@ -30,11 +31,11 @@ class UserRelationshipController extends Controller
             "id.required" => "Id requerido, hable con su proveedor.",
             "password.required" => "El campo contraseña es requerido."
 
-        ]);
+        ]); */
 
-        $user = User::where('username', $credentials['username'])->first();
+        $user = User::where('username', $request->username)->first();
 
-        if (!Hash::check($credentials['password'], optional($user)->password)) {
+        if (!Hash::check($request->password, optional($user)->password)) {
             return response()
                 ->json(
                     ['errors' => ['error' => 'Nombre de usuario ó contraseña, incorrectos.']],
@@ -46,7 +47,7 @@ class UserRelationshipController extends Controller
 
         if ($model->user()->exists()) {
             $model->user()->dissociate();
-            $model->save();
+            //$model->save();
         }
         $model->user()->associate($user);
         $model->save();
