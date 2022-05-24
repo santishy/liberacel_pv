@@ -42,6 +42,7 @@ class UserRelationshipController extends Controller
                 );
         }
 
+        
 
         if ($model->user()->exists()) {
             $model->user()->dissociate();

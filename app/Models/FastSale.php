@@ -42,6 +42,7 @@ class FastSale extends Model
             ]);
         }
     }
+    
     public function productBonuses()
     {
         return $this->belongsToMany(ProductBonus::class)->withPivot('qty');

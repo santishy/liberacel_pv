@@ -2967,7 +2967,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -5530,6 +5529,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5570,9 +5570,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     EventBus.$on("fast-sale", function (sale) {
-      // if (!this.sale) {
-      //     this.localSale = sale;
-      // }
       _this.fillData(sale);
     });
 
@@ -35264,10 +35261,6 @@ var render = function () {
         "\n        flex flex-wrap\n        items-baseline\n        p-2\n        mx-auto\n        bg-white\n        border-l-4 border-teal-400\n        rounded-sm\n        shadow-sm\n        md:w-9/12\n    ",
     },
     [
-      _c("iframe", {
-        attrs: { src: "/fast-sale-tickets/" + this.localSale.id },
-      }),
-      _vm._v(" "),
       _c(
         "div",
         {

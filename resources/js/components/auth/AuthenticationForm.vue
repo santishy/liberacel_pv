@@ -130,7 +130,6 @@
                             text-pink-600
                             checked:bg-red-500
                         "
-                        
                     /><span class="ml-2 text-red-700 text-sm font-bold"
                         >Cancelar venta</span
                     >
@@ -164,7 +163,6 @@ export default {
     },
     created() {},
     mounted() {
-       
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
             this.local_id = id;

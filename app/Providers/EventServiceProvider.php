@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\FastSaleUpdated;
 use App\Events\TransactionComplete;
+use App\Listeners\AddPointsToCustomerBonus;
 use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
 use App\Listeners\CreateOrUpdateCommission;
@@ -27,8 +28,8 @@ class EventServiceProvider extends ServiceProvider
             UpdateInventory::class,
         ],
         FastSaleUpdated::class => [      
+            AddPointsToCustomerBonus::class,// addpointstocustomerbonus va antes por que si pongo el otro cambia el status
             ChangeStatus::class,
-            
             CreateOrUpdateCommission::class,
         ],
         

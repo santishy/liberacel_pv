@@ -29,6 +29,7 @@ class ChangeStatus
     {
 
         $this->currentStatus = $event->fastSale->status;
+
         if (request()->has('status') && !is_null($event->fastSale->user_id))
             if (
                 $this->statusSentIsCompleted() ||

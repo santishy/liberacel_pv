@@ -12,20 +12,30 @@ class CustomerBonus extends Model
 
     protected $fillable=['phone_number','fast_sale_id','accumulated_points','status'];
 
+    public function addFastSale($fastSale){
+        
+        if(is_null($fastSale->customer_bonus_id)){
+            $this->fastSales()->save($fastSale);
+        }
+        return;
+    }
     public function scorePoints()
     {
-        $this->accumulated_points += $this->getPoints();
+        $fastSale = $this->getFastSale();
+        if($fastSale->status != 'completed'){
+            return;
+        }
+        $this->accumulated_points += $this->getPoints($fastSale);
         $this->save();
+        return $this->fresh();
     }
 
-    public function getPoints(){
+    public function getPoints($fastSale ){
         
-        $fastSale = $this->getFastSale();
+        
 
         if(!is_null($fastSale->customer_bonus_id))
             return 0;
-
-        
 
         return $fastSale->productBonuses()
         ->sum(DB::raw('product_bonuses.points * fast_sale_product_bonus.qty'));
@@ -33,7 +43,8 @@ class CustomerBonus extends Model
 
     public function getFastSale()
     {
-        return FastSale::find(request('fast_sale_id'));
+        $id = request()->has('fast_sale_id') ? request('fast_sale_id') : request('id');
+        return FastSale::find($id);
     }
     public function fastSales(){
         return $this->hasMany(FastSale::class);

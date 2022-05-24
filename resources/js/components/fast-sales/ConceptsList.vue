@@ -13,7 +13,7 @@
             md:w-9/12
         "
     >
-    <iframe :src="`/fast-sale-tickets/${this.localSale.id}`"></iframe>
+        
         <div
             class="
                 flex flex-wrap
@@ -58,6 +58,7 @@
                 >Total: {{ localSale.total }}</span
             >
         </div>
+        
         <div
             class="flex flex-wrap items-center justify-between w-full px-2 py-3"
         >
@@ -176,10 +177,6 @@ export default {
     },
     created() {
         EventBus.$on("fast-sale", (sale) => {
-            // if (!this.sale) {
-            //     this.localSale = sale;
-
-            // }
             this.fillData(sale);
         });
         if (this.sale) {
@@ -189,7 +186,7 @@ export default {
             this.products = [];
             EventBus.$emit("open-modal", false);
             EventBus.$emit("focus-description");
-           // window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
+            // window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
         });
     },
     methods: {
