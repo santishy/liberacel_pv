@@ -1,35 +1,23 @@
 <template>
-    <div v-if="customerBonus" class="flex flex-wrap items-center  px-2">
-        <span
-            class="
-                font-mono
-                text-xl
-                font-light
-                text-teal-700
-                mr-2
-            "
-            >{{ customerBonus.phone_number }}</span
-        >
+    <div v-if="customerBonus" class="flex flex-wrap items-center px-2">
+        <span class="font-mono text-xl font-light text-teal-700 mr-2">{{
+            customerBonus.phone_number
+        }}</span>
 
         <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
             Pts: {{ customerBonus.accumulated_points }}
         </span>
-    </div> 
+    </div>
     <form v-else @submit.prevent="submit">
-        <div v-if="customerBonus" class="flex flex-wrap"><span
-            class="
-                font-mono
-                text-xl
-                font-light
-                text-teal-700
-                mr-2
-            "
-            >{{ customerBonus.phone_number }}</span
-        >
+        <div v-if="customerBonus" class="flex flex-wrap">
+            <span class="font-mono text-xl font-light text-teal-700 mr-2">{{
+                customerBonus.phone_number
+            }}</span>
 
-        <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
-            Pts: {{ customerBonus.accumulated_points }}
-        </span></div>
+            <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
+                Pts: {{ customerBonus.accumulated_points }}
+            </span>
+        </div>
         <div>
             <input
                 type="text"
@@ -69,6 +57,7 @@ export default {
     },
     watch: {
         fastSale: function (val) {
+            if (this.fastSale.status != "pending") this.customerBonus = null;
             this.form.fast_sale_id = val.id;
             if (val?.customer_bonus) {
                 this.customerBonus = val.customer_bonus;
@@ -78,7 +67,10 @@ export default {
     methods: {
         async submit() {
             try {
-                const res = await axios.post("/fast-sales-customer-bonuses", this.form);
+                const res = await axios.post(
+                    "/fast-sales-customer-bonuses",
+                    this.form
+                );
 
                 if (res.data?.customer) {
                     this.customerBonus = res.data.customer;

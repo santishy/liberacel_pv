@@ -13,7 +13,6 @@
             md:w-9/12
         "
     >
-        
         <div
             class="
                 flex flex-wrap
@@ -25,9 +24,12 @@
                 border-b border-gray-300
             "
         >
-            <span class="font-mono text-2xl text-teal-800"
-                >Nota #{{ localSale.id }}</span
-            >
+            <div>
+                <span class="font-mono text-2xl text-teal-800"
+                    >Nota #{{ localSale.id }}</span
+                >
+            </div>
+
             <customer-bonus
                 v-if="localSale"
                 class="flex flex-wrap"
@@ -58,14 +60,19 @@
                 >Total: {{ localSale.total }}</span
             >
         </div>
-        
+
         <div
             class="flex flex-wrap items-center justify-between w-full px-2 py-3"
         >
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{ translate[localSale.status] }}</span>
-                <span><exchange></exchange></span></button
-            ><span class="text-xs text-gray-700">{{
+                <span><exchange></exchange></span>
+            </button>
+            <p
+                class="text-gray-700 px-2 font-semibold"
+                >Nuevos puntos: <span class="rounded-full text-white bg-blue-600 px-2 py-1">{{ getTotalPoints }}</span></p
+            >
+            <span class="text-xs text-gray-700">{{
                 localSale.created_at
             }}</span>
         </div>
@@ -210,6 +217,15 @@ export default {
             }
 
             return "text-xs text-green-700";
+        },
+        getTotalPoints() {
+            let total = 0;
+            if (this.localSale?.product_bonuses?.length) {
+                this.localSale.product_bonuses.forEach((productBonus) => {
+                    total += productBonus.points * productBonus.pivot.qty;
+                });
+            }
+            return total;
         },
     },
 };

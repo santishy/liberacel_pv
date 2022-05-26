@@ -34,7 +34,7 @@ class FastSaleController extends Controller
 
         $fastSaleFresh = $fastSale->fresh();
 
-        return FastSaleResource::make($fastSaleFresh);
+        return FastSaleResource::make($fastSaleFresh->load('productBonuses'));
     }
 
     public function create()
@@ -42,7 +42,7 @@ class FastSaleController extends Controller
         $this->authorize('create', new FastSale);
         $productBonuses = ProductBonus::all();
         //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
-        $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus');
+        $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus','productBonuses');
         if(isset($sale)){
             $sale = FastSaleResource::make($sale);
         }
@@ -66,7 +66,7 @@ class FastSaleController extends Controller
 
         $sale->save();
 
-        return FastSaleResource::make($sale->fresh());
+        return FastSaleResource::make($sale->fresh()->load('productBonuses'));
     }
 
     public function destroy(Request $request, FastSale $sale)
