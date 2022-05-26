@@ -74,8 +74,7 @@ class FastSale extends Model
     }
     public function addConcept()
     {
-
-        $this['concepts'] = request()->only('description', 'price', 'qty');
+        $this['concepts'] = request()->only('description', 'price', 'qty','product_bonus_id');
         $this->updateTotal();
     }
     public  function updateTotal()
@@ -99,6 +98,7 @@ class FastSale extends Model
         }
 
         $products = $this->concepts;
+        $this->productBonuses()->detach($products[$index]['product_bonus_id']);
         array_splice($products, $index, 1);
         $this->attributes['concepts'] = collect($products);
         $this->total = $this->calculateTotal();

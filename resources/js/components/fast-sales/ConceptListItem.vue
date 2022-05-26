@@ -109,7 +109,6 @@ export default {
     },
     methods: {
         async submit() {
-            console.log("entro?");
             try {
                 const {
                     data: { data },

@@ -57,7 +57,7 @@ export default {
     },
     watch: {
         fastSale: function (val) {
-            if (this.fastSale.status != "pending") this.customerBonus = null;
+            if (val.status != "pending") this.customerBonus = null;
             this.form.fast_sale_id = val.id;
             if (val?.customer_bonus) {
                 this.customerBonus = val.customer_bonus;

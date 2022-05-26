@@ -22,6 +22,20 @@ class FastSaleController extends Controller
 
         return view('fast-sales.index');
     }
+    
+    public function create()
+    {
+        $this->authorize('create', new FastSale);
+        $productBonuses = ProductBonus::all();
+        //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
+        $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus','productBonuses');
+        if(isset($sale)){
+            $sale = FastSaleResource::make($sale);
+        }
+        
+        return view('fast-sales.create', compact('sale', 'productBonuses'));
+    }
+
     public function store(StoreFastSaleRequest $request)
     {
         $this->authorize('create', new FastSale);
@@ -37,19 +51,6 @@ class FastSaleController extends Controller
         return FastSaleResource::make($fastSaleFresh->load('productBonuses'));
     }
 
-    public function create()
-    {
-        $this->authorize('create', new FastSale);
-        $productBonuses = ProductBonus::all();
-        //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
-        $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus','productBonuses');
-        if(isset($sale)){
-            $sale = FastSaleResource::make($sale);
-        }
-            
-        return view('fast-sales.create', compact('sale', 'productBonuses'));
-    }
-
     public function update(Request $request, FastSale $sale)
     {
         $this->authorize('update', new FastSale);
@@ -57,22 +58,33 @@ class FastSaleController extends Controller
             'description' => 'required',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|integer|min:1',
-            'index' => 'required'
+            'index' => 'required',
+            'product_bonus_id' => 'required'
         ]);
 
-        $sale["concepts->$data[index]"] = collect($data)->except('index');
 
+        $sale["concepts->$data[index]"] = collect($data)
+            ->except('index');
+        
         $sale->total = $sale->calculateTotal();
 
         $sale->save();
+
+        $sale->productBonuses()
+            ->updateExistingPivot($request->product_bonus_id,[
+            'qty' => $request->qty,
+        ]);
 
         return FastSaleResource::make($sale->fresh()->load('productBonuses'));
     }
 
     public function destroy(Request $request, FastSale $sale)
     {
+        
         $this->authorize('delete', new FastSale);
+
         $sale->applyRemovals();
-        return FastSaleResource::make($sale->fresh());
+        
+        return FastSaleResource::make($sale->fresh()->load('productBonuses'));
     }
 }
