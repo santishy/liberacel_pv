@@ -28,8 +28,8 @@ class EventServiceProvider extends ServiceProvider
             UpdateInventory::class,
         ],
         FastSaleUpdated::class => [      
-            AddPointsToCustomerBonus::class,// addpointstocustomerbonus va antes por que si pongo el otro cambia el status
             ChangeStatus::class,
+            AddPointsToCustomerBonus::class,
             CreateOrUpdateCommission::class,
         ],
         

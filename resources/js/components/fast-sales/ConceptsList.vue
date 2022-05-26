@@ -186,7 +186,7 @@ export default {
             this.products = [];
             EventBus.$emit("open-modal", false);
             EventBus.$emit("focus-description");
-            // window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
+            window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
         });
     },
     methods: {

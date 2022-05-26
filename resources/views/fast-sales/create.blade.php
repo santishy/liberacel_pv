@@ -6,4 +6,5 @@
         @endif
     >
     </create-fast-sale>
+    
 @endsection

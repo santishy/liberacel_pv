@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\FastSaleUpdated;
+use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FastSale extends Model
 {
-    use HasFactory;
+    use HasFactory,HasUserRelationship;
     use ReportBy;
 
     protected $fillable = ['status', 'total', 'concepts', 'user_id'];
@@ -19,9 +20,9 @@ class FastSale extends Model
         'concepts' => 'array',
     ];
 
-    protected $dispatchesEvents = [
-        'updating' => FastSaleUpdated::class
-    ];
+    // protected $dispatchesEvents = [
+    //     'updating' => FastSaleUpdated::class
+    // ];
 
     public function addBonus()
     {

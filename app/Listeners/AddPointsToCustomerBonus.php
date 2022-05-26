@@ -27,20 +27,19 @@ class AddPointsToCustomerBonus
      */
     public function handle($event)
     {
-        $this->currentStatus = $event->fastSale->getOriginal('status');
+        $this->currentStatus = $event->fastSale->status;
 
-        if (request()->has('status') && !is_null($event->fastSale->customer_bonus_id)) {
+        if ( !is_null($event->fastSale->customer_bonus_id)) {
             if ($this->statusSentIsCompleted()) {
                 $customerBonus = $event->fastSale->customerBonus;
-                $customerBonus->scorePoints();
-            } else {
-                dd("send: " . request('status') . " fastSale: {$this->currentStatus}");
-            }
+                $customerBonus->scorePoints($event->fastSale);
+            } 
+            
         }
     }
     public function statusSentIsCompleted()
     {
-        if (request('status') == 'completed' && $this->currentStatus == 'pending') {
+        if (request('status') == 'completed' && $this->currentStatus == 'completed') {
             return true;
         }
         return false;

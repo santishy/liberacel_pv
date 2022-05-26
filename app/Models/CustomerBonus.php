@@ -10,44 +10,49 @@ class CustomerBonus extends Model
 {
     use HasFactory;
 
-    protected $fillable=['phone_number','fast_sale_id','accumulated_points','status'];
+    protected $fillable = ['phone_number', 'fast_sale_id', 'accumulated_points', 'status'];
 
-    public function addFastSale($fastSale){
-        
-        if(is_null($fastSale->customer_bonus_id)){
+    public function addFastSale($fastSale)
+    {
+
+        if (is_null($fastSale->customer_bonus_id)) {
             $this->fastSales()->save($fastSale);
         }
         return;
     }
-    public function scorePoints()
+    public function scorePoints($fastSale = null)
     {
-        $fastSale = $this->getFastSale();
-        if($fastSale->status != 'completed'){
+
+        if (is_null($fastSale)) {
+            $fastSale = $this->getFastSale();
+        }
+
+        if ($fastSale->status != 'completed') {
             return;
         }
         $this->accumulated_points += $this->getPoints($fastSale);
         $this->save();
-        return $this->fresh();
+        return $this;
     }
 
-    public function getPoints($fastSale ){
-        
-        
+    public function getPoints($fastSale)
+    {
 
-        if(!is_null($fastSale->customer_bonus_id))
+
+
+        if (is_null($fastSale->customer_bonus_id))
             return 0;
 
         return $fastSale->productBonuses()
-        ->sum(DB::raw('product_bonuses.points * fast_sale_product_bonus.qty'));
+            ->sum(DB::raw('product_bonuses.points * fast_sale_product_bonus.qty'));
     }
 
-    public function getFastSale()
+    public function getFastSale($id = null)
     {
-        $id = request()->has('fast_sale_id') ? request('fast_sale_id') : request('id');
-        return FastSale::find($id);
+        return FastSale::find(request('fast_sale_id', $id));
     }
-    public function fastSales(){
+    public function fastSales()
+    {
         return $this->hasMany(FastSale::class);
     }
-    
 }

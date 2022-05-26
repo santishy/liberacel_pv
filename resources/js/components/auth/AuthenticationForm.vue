@@ -175,14 +175,38 @@ export default {
             }
         });
     },
+    watch: {
+        id(newVal, oldVal) {
+            this.local_id = newVal;
+        },
+    },
     methods: {
+        // async submit() {
+        //     // this.$refs.submit.disabled = true
+        //     //this.disabled = true;
+        //     try {
+        //         this.form.model = this.model;
+        //         this.form.id = this.local_id ? this.local_id : this.id;
+        //         const res = await axios.post("/user-relationship", this.form);
+        //         if (res.status === 200) {
+        //             // this.disabled = false;
+        //             EventBus.$emit("associated-user", this.form.id);
+        //             this.form.id = null;
+        //             this.form.username = "";
+        //             this.form.password = "";
+        //         }
+        //     } catch (err) {
+        //         this.getErrors(err);
+        //     }
+        //     this.disabled = false;
+        // },
         async submit() {
-            // this.$refs.submit.disabled = true
-            //this.disabled = true;
             try {
+                const res = await axios.post(
+                    `/fast-sales/${this.local_id}/associated-users`,
+                    this.form
+                );
                 this.form.model = this.model;
-                this.form.id = this.local_id ? this.local_id : this.id;
-                const res = await axios.post("/user-relationship", this.form);
                 if (res.status === 200) {
                     // this.disabled = false;
                     EventBus.$emit("associated-user", this.form.id);
@@ -191,9 +215,8 @@ export default {
                     this.form.password = "";
                 }
             } catch (err) {
-                this.getErrors(err);
+                console.log(err);
             }
-            this.disabled = false;
         },
         toggleStatus(event) {
             if (event.target.checked) {
