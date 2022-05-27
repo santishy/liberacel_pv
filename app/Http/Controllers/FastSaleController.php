@@ -48,7 +48,7 @@ class FastSaleController extends Controller
 
         $fastSaleFresh = $fastSale->fresh();
 
-        return FastSaleResource::make($fastSaleFresh->load('productBonuses'));
+        return FastSaleResource::make($fastSaleFresh->load('productBonuses','customerBonus'));
     }
 
     public function update(Request $request, FastSale $sale)
@@ -75,7 +75,7 @@ class FastSaleController extends Controller
             'qty' => $request->qty,
         ]);
 
-        return FastSaleResource::make($sale->fresh()->load('productBonuses'));
+        return FastSaleResource::make($sale->fresh()->load('productBonuses','customerBonus'));
     }
 
     public function destroy(Request $request, FastSale $sale)
@@ -85,6 +85,6 @@ class FastSaleController extends Controller
 
         $sale->applyRemovals();
         
-        return FastSaleResource::make($sale->fresh()->load('productBonuses'));
+        return FastSaleResource::make($sale->fresh()->load('productBonuses','customerBonus'));
     }
 }

@@ -57,10 +57,13 @@ export default {
     },
     watch: {
         fastSale: function (val) {
-            if (val.status != "pending") this.customerBonus = null;
             this.form.fast_sale_id = val.id;
             if (val?.customer_bonus) {
                 this.customerBonus = val.customer_bonus;
+            }
+            else{ 
+                this.customerBonus = null;
+                this.form.phone_number = '';
             }
         },
     },
