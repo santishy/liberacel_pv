@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController};
+use App\Http\Controllers\{FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -172,3 +172,9 @@ Route::put('product-bonuses/{productBonus}', [ProductBonusController::class, 'up
  * customer bonuses
  */
 Route::post('fast-sales-customer-bonuses', [FastSaleCustomerBonusController::class, 'store'])->middleware('auth');
+
+/***
+ * Settings
+ */
+
+Route::get('settings', [SettingController::class, 'create'])->middleware('auth');

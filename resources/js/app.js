@@ -92,6 +92,12 @@ Vue.component('commissions-index',require('./components/commissions/CommissionIn
 */
 Vue.component('all-product-bonuses',require('./components/product-bonuses/AllProductBonuses.vue').default);
 
+/**
+*Settings
+*/
+
+Vue.component('setting-component', require('./components/settings/SettingComponent.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
