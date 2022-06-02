@@ -197,6 +197,10 @@ export default {
                 {
                     name: "Contenido del ticket",
                     url: "/tickets/1/edit"
+                },
+                {
+                    name: "Datos adicionales",
+                    url: "/settings"
                 }
             ],
             crfsToken: document.querySelector('meta[name="csrf-token"]')

@@ -177,4 +177,5 @@ Route::post('fast-sales-customer-bonuses', [FastSaleCustomerBonusController::cla
  * Settings
  */
 
-Route::get('settings', [SettingController::class, 'create'])->middleware('auth');
+Route::get('settings', [SettingController::class, 'index'])->middleware('auth');
+Route::put('settings/{setting}',[SettingController::class, 'update'])->middleware('auth');
