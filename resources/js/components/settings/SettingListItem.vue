@@ -44,8 +44,8 @@ export default {
     },
     methods: {
         openForm() {
-            EventBus.$emit('selected-setting',this.setting);
+            EventBus.$emit('open-modal',true);
         },
-    },
+    }
 };
 </script>
