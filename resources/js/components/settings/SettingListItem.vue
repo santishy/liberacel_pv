@@ -38,14 +38,21 @@ export default {
         setting: {
             type: Object,
         },
+        index: {
+            type: Number,
+        },
     },
     components: {
         EditIcon,
     },
     methods: {
         openForm() {
-            EventBus.$emit('open-modal',true);
+            EventBus.$emit("selected-setting", {
+                setting: this.setting,
+                index: this.index,
+            });
+            EventBus.$emit("open-modal", true);
         },
-    }
+    },
 };
 </script>

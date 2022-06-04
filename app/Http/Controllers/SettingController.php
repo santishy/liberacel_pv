@@ -19,9 +19,17 @@ class SettingController extends Controller
     {
         $data = $request->validate([
             "name" => [Rule::unique('settings')->ignore($setting->id)],
-            "value" => "required",
+            "value" => "required|min:1|numeric",
+        ],[
+            "name.unique" => "El campo nombre ya existe en la base de datos.",
+            "value.required" => "El campo valor es requerido.",
+            "value.min" => "El campo valor debe ser como minimo uno.",
+            "value.numeric" => "El campo valor debe ser númerico."
         ]);
-        $setting->update($data);
-        return response()->json(['setting' => $setting]);
+        $isUpdated = $setting->update($data);
+        return response()->json([
+            'setting' => $setting,
+            'isUpdated' => $isUpdated
+        ]);
     }
 }

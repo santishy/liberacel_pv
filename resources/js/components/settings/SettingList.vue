@@ -10,9 +10,10 @@
         </thead>
         <tbody>
             <setting-list-item
-                v-for="setting in settings"
+                v-for="(setting,index) in localSettings"
                 :key="setting.id"
                 :setting="setting"
+                :index="index"
             >
             </setting-list-item>
         </tbody>
@@ -29,6 +30,20 @@ export default {
         settings:{
             type:Array
         }
+    },
+    data(){
+        return {
+            localSettings:[]
+        }
+    },
+    mounted(){
+
+        this.localSettings = this.settings;
+
+        EventBus.$on('updated-settings-data',obj => {
+            Vue.set(this.localSettings,obj.index,obj.setting)
+            console.log(this.localSettings)
+        });
     }
 }
 </script>
