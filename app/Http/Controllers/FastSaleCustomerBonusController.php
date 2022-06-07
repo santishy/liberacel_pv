@@ -6,26 +6,35 @@ use App\Models\CustomerBonus;
 use App\Models\FastSale;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCustomerBonusRequest;
+use App\Models\Setting;
 
 class FastSaleCustomerBonusController extends Controller
 {
     public function store(StoreCustomerBonusRequest $customerBonusrequest)
     {
 
-        $customer = CustomerBonus::firstOrCreate(
+        $customerBonus = CustomerBonus::firstOrCreate(
             $customerBonusrequest->only('phone_number')
         );
 
-        $fastSale = $customer->getFastSale();
+        $fastSale = $customerBonus->getFastSale();
 
-        $customer->addFastSale($fastSale);
+        $customerBonus->addFastSale($fastSale);
 
-        //$customer->scorePoints();
-        return response()->json(['customer' => $customer->fresh()]);
+        $pointData = Setting::where('name', 'precio_punto')->first();
+
+        $updatedCustomerBonus = $customerBonus->fresh();
+        
+        return response()->json(
+            [
+                'customer' => $updatedCustomerBonus,
+                'electronicMoney' => $updatedCustomerBonus->getElectronicMoney($pointData) 
+            ]
+        );
     }
     public function update(Request $request, CustomerBonus $customerBonus)
     {
-        
+
         $customerBonus->scorePoints();
 
         return response()->json(

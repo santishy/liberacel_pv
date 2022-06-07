@@ -9,6 +9,7 @@ use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
 use App\Models\FastSale;
 use App\Models\ProductBonus;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class FastSaleController extends Controller
@@ -26,13 +27,18 @@ class FastSaleController extends Controller
     public function create()
     {
         $this->authorize('create', new FastSale);
+
+        $pointData = Setting::where('name','precio_punto')->first();
+
         $productBonuses = ProductBonus::all();
         //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
         $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus','productBonuses');
-        if(isset($sale)){
+
+        if(isset($sale))
+        {
             $sale = FastSaleResource::make($sale);
-        }
-        
+        }   
+
         return view('fast-sales.create', compact('sale', 'productBonuses'));
     }
 

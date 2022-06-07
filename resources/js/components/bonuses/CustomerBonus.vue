@@ -7,6 +7,10 @@
         <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
             Pts: {{ customerBonus.accumulated_points }}
         </span>
+
+        <div class="text-sm px-2 ml-2">
+            Dinero electroinco: <span class="text-base font-semibold text-blue-700"> {{ electronicMoney }}</span>
+        </div>
     </div>
     <form v-else @submit.prevent="submit">
         <div v-if="customerBonus" class="flex flex-wrap">
@@ -47,12 +51,14 @@ export default {
         return {
             form: {},
             customerBonus: null,
+            electronicMoney: null,
         };
     },
     mounted() {
         if (this.fastSale?.id) {
             this.form.fast_sale_id = this.fastSale.id;
             this.customerBonus = this.fastSale.customer_bonus;
+            this.electronicMoney = this.fastSale.electronicMoney;
         }
     },
     watch: {
@@ -60,10 +66,9 @@ export default {
             this.form.fast_sale_id = val.id;
             if (val?.customer_bonus) {
                 this.customerBonus = val.customer_bonus;
-            }
-            else{ 
+            } else {
                 this.customerBonus = null;
-                this.form.phone_number = '';
+                this.form.phone_number = "";
             }
         },
     },
@@ -77,11 +82,13 @@ export default {
 
                 if (res.data?.customer) {
                     this.customerBonus = res.data.customer;
+                    this.electronicMoney = res.data.electronicMoney;
                 }
             } catch (e) {
                 console.log(e);
             }
         },
     },
+    
 };
 </script>

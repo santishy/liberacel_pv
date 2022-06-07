@@ -55,4 +55,13 @@ class CustomerBonus extends Model
     {
         return $this->hasMany(FastSale::class);
     }
+
+    public function getElectronicMoney($pointData){
+        return "$".number_format(
+            (
+                $this->accumulated_points * floatval($pointData->value)
+            ),
+                2
+        );
+    }
 }

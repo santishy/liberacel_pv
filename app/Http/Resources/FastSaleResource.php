@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Setting;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FastSaleResource extends JsonResource
@@ -22,6 +23,11 @@ class FastSaleResource extends JsonResource
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'customer_bonus' => $this->whenLoaded('customerBonus'),
             'product_bonuses' => $this->whenLoaded('productBonuses'),
+            'electronicMoney' => $this->whenLoaded('customerBonus',function(){
+                return $this->customerBonus->getElectronicMoney(
+                    Setting::where('name','precio_punto')->first()
+                );
+            }),
         ];
     }
 }
