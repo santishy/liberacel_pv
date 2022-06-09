@@ -17,6 +17,8 @@ export const store = new Vuex.Store({
         salePriceOption: sessionStorage.getItem("salePriceOption"),
         productsInTransaction: [],
         modalDataConfirm: {},
+        electronicMoney:null,
+        currentFastSale:{},
         purchaseVisibility:
             window.localStorage
                 .getItem("allow-to-buy-new-product")

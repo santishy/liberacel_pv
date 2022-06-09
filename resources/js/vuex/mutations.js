@@ -59,8 +59,12 @@ const SET_PURCHASE_VISIBILITY = (state, value) => {
     window.localStorage.setItem("allow-to-buy-new-product", value);
 };
 
+const SET_CURRENT_FAST_SALE = (state, value) => {
+    state.currentFastSale = value;
+}
 
 export default {
+    SET_CURRENT_FAST_SALE,
     setProductsInPurchase,
     SET_USER,
     setSalePriceOption,

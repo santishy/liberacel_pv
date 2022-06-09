@@ -152,6 +152,7 @@ import UserCircleIcon from "../icons/UserCircleIcon.vue";
 import Exchange from "../icons/Exchange.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import CustomerBonus from "../bonuses/CustomerBonus.vue";
+
 export default {
     components: {
         ConceptListItem,
@@ -169,11 +170,6 @@ export default {
     data() {
         return {
             products: [],
-            // nota: null,
-            // status: null,
-            // total: null,
-            // currentDate: null,
-            // id: null,
             localSale: {},
             translate: {
                 pending: "PENDIENTE",
@@ -200,11 +196,6 @@ export default {
         fillData(sale) {
             this.products = sale.products;
             this.localSale = sale;
-            // this.nota = sale.id;
-            // this.status = sale.status;
-            // this.total = sale.total;
-            // this.id = sale.id;
-            // this.currentDate = sale.created_at;
         },
         openModal() {
             EventBus.$emit("open-modal", true);

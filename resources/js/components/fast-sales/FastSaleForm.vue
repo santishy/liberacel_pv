@@ -72,6 +72,7 @@
 
 <script>
 import SearchSelect from "../partials/SearchSelect.vue";
+import {mapMutations} from "vuex";
 export default {
     components: {
         SearchSelect,
@@ -91,25 +92,34 @@ export default {
         this.focusDescription();
         EventBus.$on("focus-description", this.focusDescription);
         EventBus.$on("selected-item" ,(item) => {
-            
             this.form.product_bonus_id = item?.id;
         })
     },
     methods: {
+        ...mapMutations(['SET_CURRENT_FAST_SALE']),
         async submit() {
             try {
                 //this.toggleDisabled();
                 const {
                     data: { data },
                 } = await axios.post("/fast-sales", this.form);
+                
                 EventBus.$emit("fast-sale", data);
+
                 EventBus.$emit("reset-search-select");
+                
+                this.SET_CURRENT_FAST_SALE(data);
+                
                 this.form = {};
+
                 this.notify({
                     title: "Venta rapida",
                     message: "Producto agregado",
                 });
-            } catch (err) {
+
+            } 
+            catch (err) 
+            {
                 this.getErrors(err);
             }
             //this.toggleDisabled();

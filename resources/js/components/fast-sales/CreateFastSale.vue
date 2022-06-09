@@ -1,5 +1,6 @@
 <template>
     <nav-component>
+        <subtotals></subtotals>
         <div
             class="
                 p-2
@@ -37,20 +38,27 @@
 import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
-
+import Subtotals from "./Subtotals.vue";
+import {mapMutations} from "vuex"
 export default {
     components: {
         NavComponent,
         FastSaleForm,
         ConceptsList,
+        Subtotals
     },
     props: {
         sale: {
             type: Object,
             default: null
         },
-
         productBonuses: { type: Array },
     },
+    created(){
+        this.SET_CURRENT_FAST_SALE(this.sale);
+    },
+    methods: {
+        ...mapMutations(["SET_CURRENT_FAST_SALE"])
+    }
 };
 </script>
