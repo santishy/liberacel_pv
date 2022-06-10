@@ -9,7 +9,10 @@
         </span>
 
         <div class="text-sm px-2 ml-2">
-            Dinero electroinco: <span class="text-base font-semibold text-blue-700"> {{ electronicMoney }}</span>
+            Dinero electroinco:
+            <span class="text-base font-semibold text-blue-700">
+                {{ electronicMoney }}</span
+            >
         </div>
     </div>
     <form v-else @submit.prevent="submit">
@@ -35,6 +38,7 @@
 </template>
 <script>
 import UserCircleIcon from "../icons/UserCircleIcon.vue";
+import {mapMutations, mapState} from "vuex";
 export default {
     components: { UserCircleIcon },
     props: {
@@ -42,10 +46,10 @@ export default {
             type: String,
             default: "",
         },
-        fastSale: {
-            type: Object,
-            required: true,
-        },
+        // fastSale: {
+        //     type: Object,
+        //     required: true,
+        // },
     },
     data() {
         return {
@@ -54,41 +58,46 @@ export default {
             electronicMoney: null,
         };
     },
-    mounted() {
-        if (this.fastSale?.id) {
-            this.form.fast_sale_id = this.fastSale.id;
-            this.customerBonus = this.fastSale.customer_bonus;
-            this.electronicMoney = this.fastSale.electronicMoney;
+    created() {
+        if (this.currentFastSale?.id) {
+            //this.form.fast_sale_id = this.currentFastSale.id;
+            this.customerBonus = this.currentFastSale.customer_bonus;
+            this.electronicMoney = this.currentFastSale.electronicMoney;
         }
     },
-    watch: {
-        fastSale: function (val) {
-            this.form.fast_sale_id = val.id;
-            if (val?.customer_bonus) {
-                this.customerBonus = val.customer_bonus;
-            } else {
-                this.customerBonus = null;
-                this.form.phone_number = "";
-            }
-        },
-    },
+    // watch: {
+    //     fastSale: function (val) {
+    //         this.form.fast_sale_id = val.id;
+    //         if (val?.customer_bonus) {
+    //             this.customerBonus = val.customer_bonus;
+    //         } else {
+    //             this.customerBonus = null;
+    //             this.form.phone_number = "";
+    //         }
+    //     },
+    // },
     methods: {
+        ...mapMutations(['SET_CURRENT_FAST_SALE']),
         async submit() {
             try {
+                this.form.fast_sale_id = this.currentFastSale.id;
                 const res = await axios.post(
                     "/fast-sales-customer-bonuses",
                     this.form
                 );
-
-                if (res.data?.customer) {
-                    this.customerBonus = res.data.customer;
+                if (res.data?.customer_bonus) {
+                    this.customerBonus = res.data.customer_bonus;
                     this.electronicMoney = res.data.electronicMoney;
+                    this.currentFastSale.customer_bonus = this.customerBonus;
+                    this.currentFastSale.electronicMoney = this.electronicMoney;
                 }
             } catch (e) {
                 console.log(e);
             }
         },
     },
-    
+    computed:{
+        ...mapState(["currentFastSale"]),
+    }
 };
 </script>

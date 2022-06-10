@@ -27,7 +27,7 @@ class FastSaleCustomerBonusController extends Controller
         
         return response()->json(
             [
-                'customer' => $updatedCustomerBonus,
+                'customer_bonus' => $updatedCustomerBonus,
                 'electronicMoney' => $updatedCustomerBonus->getElectronicMoney($pointData) 
             ]
         );

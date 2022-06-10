@@ -106,9 +106,11 @@ export default {
                 
                 EventBus.$emit("fast-sale", data);
 
+                this.SET_CURRENT_FAST_SALE(data);
+
                 EventBus.$emit("reset-search-select");
                 
-                this.SET_CURRENT_FAST_SALE(data);
+                
                 
                 this.form = {};
 

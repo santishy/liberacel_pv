@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="currentFastSale"
+        v-if="currentFastSaleNotEmpty"
         class="
             p-2
             border-l-4 border-red-500
@@ -16,22 +16,26 @@
     >
         <div class="flex flex-wrap justify-between">
             <div class="flex flex-wrap">
-
-                <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
+                <span
+                    class="
+                        rounded-sm
+                        px-2
+                        bg-green-700
+                        text-white
+                        font-semibold
+                    "
+                >
                     Pts: {{ currentFastSale.customer_bonus.accumulated_points }}
                 </span>
-    
+
                 <div class="text-sm px-2 ml-2">
                     Dinero electroinco:
                     <span class="text-base font-semibold text-blue-700">
                         {{ currentFastSale.electronicMoney }}
                     </span>
                 </div>
-
             </div>
-            <div>
-                Total con descuento {{  }}
-            </div>
+            <div>Total con descuento {{}}</div>
         </div>
         <pre>
             {{ currentFastSale }}
@@ -45,6 +49,17 @@ export default {
     methods: {},
     computed: {
         ...mapState(["currentFastSale"]),
+        currentFastSaleNotEmpty() {
+            if (
+                this.currentFastSale &&
+                (this.currentFastSale.customer_bonus instanceof Object)
+            )
+                return true;
+            return false;
+        },
+        totalLessDiscount(){
+            return this.currentFastSale.total - this.electronicMoney
+        }
     },
 };
 </script>

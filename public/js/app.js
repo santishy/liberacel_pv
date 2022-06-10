@@ -3725,12 +3725,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _icons_UserCircleIcon_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons/UserCircleIcon.vue */ "./resources/js/components/icons/UserCircleIcon.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3766,6 +3773,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3775,11 +3786,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     inputStyle: {
       type: String,
       "default": ""
-    },
-    fastSale: {
-      type: Object,
-      required: true
-    }
+    } // fastSale: {
+    //     type: Object,
+    //     required: true,
+    // },
+
   },
   data: function data() {
     return {
@@ -3788,28 +3799,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       electronicMoney: null
     };
   },
-  mounted: function mounted() {
-    var _this$fastSale;
+  created: function created() {
+    var _this$currentFastSale;
 
-    if ((_this$fastSale = this.fastSale) !== null && _this$fastSale !== void 0 && _this$fastSale.id) {
-      this.form.fast_sale_id = this.fastSale.id;
-      this.customerBonus = this.fastSale.customer_bonus;
-      this.electronicMoney = this.fastSale.electronicMoney;
+    if ((_this$currentFastSale = this.currentFastSale) !== null && _this$currentFastSale !== void 0 && _this$currentFastSale.id) {
+      //this.form.fast_sale_id = this.currentFastSale.id;
+      this.customerBonus = this.currentFastSale.customer_bonus;
+      this.electronicMoney = this.currentFastSale.electronicMoney;
     }
   },
-  watch: {
-    fastSale: function fastSale(val) {
-      this.form.fast_sale_id = val.id;
-
-      if (val !== null && val !== void 0 && val.customer_bonus) {
-        this.customerBonus = val.customer_bonus;
-      } else {
-        this.customerBonus = null;
-        this.form.phone_number = "";
-      }
-    }
-  },
-  methods: {
+  // watch: {
+  //     fastSale: function (val) {
+  //         this.form.fast_sale_id = val.id;
+  //         if (val?.customer_bonus) {
+  //             this.customerBonus = val.customer_bonus;
+  //         } else {
+  //             this.customerBonus = null;
+  //             this.form.phone_number = "";
+  //         }
+  //     },
+  // },
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapMutations"])(['SET_CURRENT_FAST_SALE'])), {}, {
     submit: function submit() {
       var _this = this;
 
@@ -3821,34 +3831,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                _this.form.fast_sale_id = _this.currentFastSale.id;
+                _context.next = 4;
                 return axios.post("/fast-sales-customer-bonuses", _this.form);
 
-              case 3:
+              case 4:
                 res = _context.sent;
 
-                if ((_res$data = res.data) !== null && _res$data !== void 0 && _res$data.customer) {
-                  _this.customerBonus = res.data.customer;
+                if ((_res$data = res.data) !== null && _res$data !== void 0 && _res$data.customer_bonus) {
+                  _this.customerBonus = res.data.customer_bonus;
                   _this.electronicMoney = res.data.electronicMoney;
+                  _this.currentFastSale.customer_bonus = _this.customerBonus;
+                  _this.currentFastSale.electronicMoney = _this.electronicMoney;
                 }
 
-                _context.next = 10;
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
-  }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(["currentFastSale"]))
 });
 
 /***/ }),
@@ -5959,10 +5973,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _yield$axios$post = _context.sent;
                 data = _yield$axios$post.data.data;
                 EventBus.$emit("fast-sale", data);
-                EventBus.$emit("reset-search-select");
 
                 _this2.SET_CURRENT_FAST_SALE(data);
 
+                EventBus.$emit("reset-search-select");
                 _this2.form = {};
 
                 _this2.notify({
@@ -6434,10 +6448,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["currentFastSale"]))
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["currentFastSale"])), {}, {
+    currentFastSaleNotEmpty: function currentFastSaleNotEmpty() {
+      if (this.currentFastSale && this.currentFastSale.customer_bonus instanceof Object) return true;
+      return false;
+    },
+    totalLessDiscount: function totalLessDiscount() {
+      return this.currentFastSale.total - this.electronicMoney;
+    }
+  })
 });
 
 /***/ }),
@@ -33939,9 +33965,9 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "text-sm px-2 ml-2" }, [
-          _vm._v("\n        Dinero electroinco: "),
+          _vm._v("\n        Dinero electroinco:\n        "),
           _c("span", { staticClass: "text-base font-semibold text-blue-700" }, [
-            _vm._v(" " + _vm._s(_vm.electronicMoney)),
+            _vm._v("\n            " + _vm._s(_vm.electronicMoney)),
           ]),
         ]),
       ])
@@ -36644,7 +36670,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.currentFastSale
+  return _vm.currentFastSaleNotEmpty
     ? _c(
         "div",
         {
@@ -36658,7 +36684,7 @@ var render = function () {
                 "span",
                 {
                   staticClass:
-                    "rounded-sm px-2 bg-green-700 text-white font-semibold",
+                    "\n                    rounded-sm\n                    px-2\n                    bg-green-700\n                    text-white\n                    font-semibold\n                ",
                 },
                 [
                   _vm._v(
@@ -36689,11 +36715,7 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("div", [
-              _vm._v(
-                "\n            Total con descuento " + _vm._s() + "\n        "
-              ),
-            ]),
+            _c("div", [_vm._v("Total con descuento {{}}")]),
           ]),
           _vm._v(" "),
           _c("pre", [
@@ -64626,15 +64648,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/fast-sales/Subtotals.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Subtotals_vue_vue_type_template_id_7aba5b34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Subtotals.vue?vue&type=template&id=7aba5b34& */ "./resources/js/components/fast-sales/Subtotals.vue?vue&type=template&id=7aba5b34&");
 /* harmony import */ var _Subtotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Subtotals.vue?vue&type=script&lang=js& */ "./resources/js/components/fast-sales/Subtotals.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Subtotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Subtotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -64664,7 +64685,7 @@ component.options.__file = "resources/js/components/fast-sales/Subtotals.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/fast-sales/Subtotals.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
