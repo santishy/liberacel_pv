@@ -14,7 +14,7 @@
             rounded
         "
     >
-        <div class="flex flex-wrap justify-between">
+        <div class="flex flex-wrap justify-between w-full">
             <div class="flex flex-wrap">
                 <span
                     class="
@@ -29,17 +29,18 @@
                 </span>
 
                 <div class="text-sm px-2 ml-2">
-                    Dinero electroinco:
+                    Dinero electronico:
                     <span class="text-base font-semibold text-blue-700">
                         {{ currentFastSale.electronicMoney }}
                     </span>
                 </div>
             </div>
-            <div>Total con descuento {{}}</div>
+            <div class="font-black">
+                Total con descuento
+                {{ totalLessDiscount }}
+            </div>
         </div>
-        <pre>
-            {{ currentFastSale }}
-        </pre>
+    
     </div>
 </template>
 
@@ -52,14 +53,25 @@ export default {
         currentFastSaleNotEmpty() {
             if (
                 this.currentFastSale &&
-                (this.currentFastSale.customer_bonus instanceof Object)
+                this.currentFastSale.customer_bonus instanceof Object
             )
                 return true;
             return false;
         },
-        totalLessDiscount(){
-            return this.currentFastSale.total - this.electronicMoney
-        }
+        totalLessDiscount() {
+            let electronicMoney = this.currentFastSale.electronicMoney.replace(
+                "$",
+                ""
+            );
+            electronicMoney = parseFloat(electronicMoney);
+            var formatter = new Intl.NumberFormat("mx-MX", {
+                style: "currency",
+                currency: "MXN",
+            });
+            return formatter.format(
+                this.currentFastSale.total_unformatted - electronicMoney
+            );
+        },
     },
 };
 </script>
