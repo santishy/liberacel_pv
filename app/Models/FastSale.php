@@ -98,7 +98,6 @@ class FastSale extends Model
         }
 
         $products = $this->concepts;
-       // dd('product_bonus_id: '.$products[$index]['product_bonus_id']);
         $this->productBonuses()
             ->detach($products[$index]['product_bonus_id']);
         array_splice($products, $index, 1);

@@ -46,8 +46,11 @@
 
 <script>
 import { mapState } from "vuex";
+import ApplyElectronicMoneyDiscount from "./ApplyElectronicMoneyDiscount.vue";
 export default {
-    methods: {},
+    components:{
+        ApplyElectronicMoneyDiscount
+    },
     computed: {
         ...mapState(["currentFastSale"]),
         currentFastSaleNotEmpty() {

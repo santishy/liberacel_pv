@@ -71,7 +71,9 @@ class FastSaleController extends Controller
 
         $sale["concepts->$data[index]"] = collect($data)
             ->except('index');
-        
+        if(request->has('electronicMoneyDiscount')){
+            $sale->electronic_money_discount = request('electronicMoneyDiscount');
+        }
         $sale->total = $sale->calculateTotal();
 
         $sale->save();
