@@ -85,10 +85,13 @@ class FastSale extends Model
     public function calculateTotal()
     {
         $total = 0;
-        foreach ($this->concepts as $product) {
+
+        foreach ($this->concepts as $product) 
+        {
             $total += $product['price'] * $product['qty'];
         }
-        return $total;
+        
+        return $total - $this->electronic_money_discount;
     }
 
     public function scopeDeleteConcept(Builder $query, $index)

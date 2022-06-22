@@ -46,10 +46,6 @@ export default {
             type: String,
             default: "",
         },
-        // fastSale: {
-        //     type: Object,
-        //     required: true,
-        // },
     },
     data() {
         return {
@@ -60,22 +56,11 @@ export default {
     },
     created() {
         if (this.currentFastSale?.id) {
-            //this.form.fast_sale_id = this.currentFastSale.id;
             this.customerBonus = this.currentFastSale.customer_bonus;
             this.electronicMoney = this.currentFastSale.electronicMoney;
         }
     },
-    // watch: {
-    //     fastSale: function (val) {
-    //         this.form.fast_sale_id = val.id;
-    //         if (val?.customer_bonus) {
-    //             this.customerBonus = val.customer_bonus;
-    //         } else {
-    //             this.customerBonus = null;
-    //             this.form.phone_number = "";
-    //         }
-    //     },
-    // },
+
     methods: {
         ...mapMutations(['SET_CURRENT_FAST_SALE']),
         async submit() {
@@ -90,6 +75,7 @@ export default {
                     this.electronicMoney = res.data.electronicMoney;
                     this.currentFastSale.customer_bonus = this.customerBonus;
                     this.currentFastSale.electronicMoney = this.electronicMoney;
+                    this.SET_CURRENT_FAST_SALE(this.currentFastSale);
                 }
             } catch (e) {
                 console.log(e);
