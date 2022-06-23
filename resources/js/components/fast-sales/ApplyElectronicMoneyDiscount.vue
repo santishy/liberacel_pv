@@ -5,16 +5,24 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import axios from 'axios';
+import { mapState } from 'vuex'
 export default
-{
-    methods:{
-        async submit(){
-            
+    {
+        methods: {
+            async submit() {
+                try {
+                    const res = axios.post(
+                        `fast-sales/${this.currentFastSale.id}/customer-bonuses`
+                    );
+                    console.log(res)
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
+        computed: {
+            ...mapState(["currentFastSale"]),
         }
-    },
-    computed:{
-        ...mapState(["currentFastSale"])
     }
-}
 </script>

@@ -24,21 +24,32 @@ class FastSaleCustomerBonusController extends Controller
         $pointData = Setting::where('name', 'precio_punto')->first();
 
         $updatedCustomerBonus = $customerBonus->fresh();
-        
+
         return response()->json(
             [
                 'customer_bonus' => $updatedCustomerBonus,
-                'electronicMoney' => $updatedCustomerBonus->getElectronicMoney($pointData) 
+                'electronicMoney' => $updatedCustomerBonus->getElectronicMoney($pointData)
             ]
         );
     }
-    public function update(Request $request, CustomerBonus $customerBonus)
+    public function update(Request $request, FastSale $sale)
     {
-
-        $customerBonus->scorePoints();
+        $customerBonus = $sale->customerBonus()->first();
+        $pointData = Setting::where('name', 'precio_punto')->first();
+        $electronicMoney = $customerBonus->getElectronicMoney($pointData);
+        $diff = $sale->total - $electronicMoney;
+        if ($diff > 0 || $diff == 0) {
+            $sale->total = $diff;
+            $customerBonus->accumulated_points = 0;
+        }else {
+            $sale->total = 0;
+            $conversionToPoints = $diff / floatval($pointData->value);
+            $customerBonus->accumulated_points = $conversionToPoints;
+        }
+        /* $customerBonus->scorePoints();
 
         return response()->json(
             ['customerBonus' => $customerBonus->fresh()]
-        );
+        ); */
     }
 }

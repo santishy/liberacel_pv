@@ -172,6 +172,7 @@ Route::put('product-bonuses/{productBonus}', [ProductBonusController::class, 'up
  * customer bonuses
  */
 Route::post('fast-sales-customer-bonuses', [FastSaleCustomerBonusController::class, 'store'])->middleware('auth');
+Route::put('fast-sales/{sale}/customer-bonuses', [FastSaleCustomerBonusController::class,'update'])->middleware('auth');
 
 /***
  * Settings

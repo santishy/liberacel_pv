@@ -55,11 +55,8 @@ class CustomerBonus extends Model
     }
 
     public function getElectronicMoney($pointData){
-        return "$".number_format(
-            (
-                $this->accumulated_points * floatval($pointData->value)
-            ),
-                2
-        );
+        return $this->accumulated_points * floatval($pointData->value);
+           
+    
     }
 }
