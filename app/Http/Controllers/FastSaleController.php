@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\StoreFastSaleRequest;
+use App\Http\Requests\UpdateFastSaleRequest;
 use App\Http\Resources\FastSaleCollection;
 use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
@@ -56,25 +57,14 @@ class FastSaleController extends Controller
         return FastSaleResource::make($fastSaleFresh->load('productBonuses', 'customerBonus'));
     }
 
-    public function update(Request $request, FastSale $sale)
+    public function update(UpdateFastSaleRequest $request, FastSale $sale)
     {
         $this->authorize('update', new FastSale);
 
-        $data = $request->validate([
-            'description' => 'required',
-            'price' => 'required|numeric|min:1',
-            'qty' => 'required|integer|min:1',
-            'index' => 'required',
-            'product_bonus_id' => 'required'
-        ]);
+        $data = $request->all();
 
         $sale["concepts->$data[index]"] = collect($data)
             ->except('index');
-
-        if ($request->has('customer_bonus_id')) 
-        {
-            
-        }
 
         $sale->total = $sale->calculateTotal();
 

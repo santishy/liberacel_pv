@@ -8,6 +8,7 @@ use App\Listeners\AddPointsToCustomerBonus;
 use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
 use App\Listeners\CreateOrUpdateCommission;
+use App\Listeners\DecreaseCustomerBonusDiscountPoints;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,7 +33,9 @@ class EventServiceProvider extends ServiceProvider
             AddPointsToCustomerBonus::class,
             CreateOrUpdateCommission::class,
         ],
-        
+        ApplyElectronicMoneyDiscount::class => [
+            DecreaseCustomerBonusDiscountPoints::class,
+        ]
     ];
 
     /**

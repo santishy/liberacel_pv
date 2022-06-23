@@ -38,8 +38,6 @@ class CustomerBonus extends Model
     public function getPoints($fastSale)
     {
 
-
-
         if (is_null($fastSale->customer_bonus_id))
             return 0;
 
