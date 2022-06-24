@@ -35,6 +35,7 @@
                     </span>
                 </div>
             </div>
+            <apply-electronic-money-discount></apply-electronic-money-discount>
             <div class="font-black">
                 Total con descuento
                 {{ totalLessDiscount }}
@@ -62,7 +63,7 @@ export default {
             return false;
         },
         totalLessDiscount() {
-            let electronicMoney = this.currentFastSale.electronicMoney.replace(
+            let electronicMoney = this.currentFastSale.electronicMoney?.replace(
                 "$",
                 ""
             );

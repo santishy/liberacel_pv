@@ -28,7 +28,9 @@ class FastSaleCustomerBonusController extends Controller
         return response()->json(
             [
                 'customer_bonus' => $updatedCustomerBonus,
-                'electronicMoney' => $updatedCustomerBonus->getElectronicMoney($pointData)
+                'electronicMoney' => number_format(
+                    $updatedCustomerBonus->getElectronicMoney($pointData),2
+                )
             ]
         );
     }
@@ -40,12 +42,16 @@ class FastSaleCustomerBonusController extends Controller
         $diff = $sale->total - $electronicMoney;
         if ($diff > 0 || $diff == 0) {
             $sale->total = $diff;
+            $sale->electronic_money_discount = $electronicMoney;
             $customerBonus->accumulated_points = 0;
         }else {
+            $sale->electronic_money_discount = $sale->total;
             $sale->total = 0;
             $conversionToPoints = $diff / floatval($pointData->value);
             $customerBonus->accumulated_points = $conversionToPoints;
         }
+        $sale->save();
+        $customerBonus->save();
         /* $customerBonus->scorePoints();
 
         return response()->json(

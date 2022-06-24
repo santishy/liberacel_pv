@@ -13,17 +13,29 @@
             {{ $product['qty'] * $product['price']}}
         </td>
     </tr>
-    @php
+    {{-- @php
         $total += $product['qty'] * $product['price'];
-    @endphp
+    @endphp --}}
 @endforeach
+<tr>
+    <td class="bg-gray-400"> Descuento</td>
+    <td  colspan="2">
+        $
+        {{
+            number_format(
+                $sale->electronic_money_discount,
+                2
+            )
+        }}
+    </td>
+</tr>
 <tr>
     <td class="bg-gray-400"> TOTAL</td>
     <td  colspan="2">
         $
         {{
             number_format(
-                $total,
+                $sale->total,
                 2
             )
         }}

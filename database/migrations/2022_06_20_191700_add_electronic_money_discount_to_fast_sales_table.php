@@ -14,7 +14,7 @@ class AddElectronicMoneyDiscountToFastSalesTable extends Migration
     public function up()
     {
         Schema::table('fast_sales', function (Blueprint $table) {
-            $table->float('electronic_money_discount',2)->default(0);
+            $table->float('electronic_money_discount',8,2)->default(0);
         });
     }
 
