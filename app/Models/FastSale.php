@@ -116,4 +116,18 @@ class FastSale extends Model
     public function customerBonus(){
         return $this->belongsTo(CustomerBonus::class);
     }
+
+    public function applyElectronicMoneyDiscount($electronicMoney){
+        $diff = $this->total - $electronicMoney;
+        if ($diff > 0 || $diff == 0) {
+            $this->total = $diff;
+            $this->electronic_money_discount = $electronicMoney;
+            //$customerBonus->accumulated_points = 0;
+        }else {
+            $this->electronic_money_discount = $this->total;
+            $this->total = 0;
+            //$conversionToPoints = $diff / floatval($pointData->value);
+            //$customerBonus->accumulated_points = $conversionToPoints;
+        }
+    }
 }
