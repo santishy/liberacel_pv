@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Settings;
 use App\Models\CustomerBonus;
 use App\Models\FastSale;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class FastSaleCustomerBonusController extends Controller
     {
         $customerBonus = $sale->customerBonus()->first();
         $pointData = Setting::where('name', 'precio_punto')->first();
+        //$pointData = Settings::getDataFrom('precio_punto');
         $electronicMoney = $customerBonus->getElectronicMoney($pointData);
         $diff = $sale->total - $electronicMoney;
         if ($diff > 0 || $diff == 0) {

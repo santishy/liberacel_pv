@@ -6,7 +6,7 @@ use App\Models\Setting;
 
 class Settings {
 
-    public function getSettingData($name)
+    public static function getDataFrom($name)
     {
         return Setting::where('name', $name)->first();
     }
