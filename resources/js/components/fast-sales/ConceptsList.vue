@@ -31,7 +31,7 @@
             </div>
 
             <customer-bonus
-                v-if="localSale"
+                v-if="Object.keys(localSale).length"
                 class="flex flex-wrap"
                 :fast-sale="localSale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"

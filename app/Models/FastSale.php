@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class FastSale extends Model
 {
-    use HasFactory,HasUserRelationship;
+    use HasFactory, HasUserRelationship;
     use ReportBy;
 
     protected $fillable = ['status', 'total', 'concepts', 'user_id'];
@@ -44,7 +44,7 @@ class FastSale extends Model
             ]);
         }
     }
-    
+
     public function productBonuses()
     {
         return $this->belongsToMany(ProductBonus::class)->withPivot('qty');
@@ -74,7 +74,7 @@ class FastSale extends Model
     }
     public function addConcept()
     {
-        $this['concepts'] = request()->only('description', 'price', 'qty','product_bonus_id');
+        $this['concepts'] = request()->only('description', 'price', 'qty', 'product_bonus_id');
         $this->updateTotal();
     }
     public  function updateTotal()
@@ -86,11 +86,10 @@ class FastSale extends Model
     {
         $total = 0;
 
-        foreach ($this->concepts as $product) 
-        {
+        foreach ($this->concepts as $product) {
             $total += $product['price'] * $product['qty'];
         }
-        
+
         return $total - $this->electronic_money_discount;
     }
 
@@ -113,27 +112,30 @@ class FastSale extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function customerBonus(){
+    public function customerBonus()
+    {
         return $this->belongsTo(CustomerBonus::class);
     }
 
-    public function calculateDiscountToTotal($electronicMoney){
+    public function calculateDiscountToTotal($electronicMoney)
+    {
         $diff = $this->total - $electronicMoney;
-        if ($diff > 0 || $diff == 0) {
-            $this->discountAllElectronicMoney($electronicMoney,$diff);
-            //$customerBonus->accumulated_points = 0;
-            $accumulatedPoints = 0;
-            
+        if ($diff > 0 || $diff == 0) 
+        {
+            $data = $this->discountElectronicMoney($electronicMoney, $diff);
+        } else {
+            $data = $this->discountElectronicMoney($this->total, 0);
         }
-        else {
-            $this->discountElectronicMoney($this->total,0);
-            //$conversionToPoints = $diff / floatval($pointData->value);
-            //$customerBonus->accumulated_points = $conversionToPoints;
-        }
+        return $data;
     }
 
-    public function discountElectronicMoney($electronicMoney,$total){
+    public function discountElectronicMoney($discount, $total)
+    {
         $this->total = $total;
-        $this->electronic_money_discount = $electronicMoney;
+        $this->electronic_money_discount = $discount;
+        return [
+            "total" => $total,
+            "electronic_money_discount" => $discount
+        ];
     }
 }

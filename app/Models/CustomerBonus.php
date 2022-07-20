@@ -58,4 +58,8 @@ class CustomerBonus extends Model
     {
         return $this->accumulated_points * floatval($pointData->value);
     }
+    
+    public function conversionToPoints($pointData,$value){
+        return $value / floatval($pointData->value);
+    }
 }

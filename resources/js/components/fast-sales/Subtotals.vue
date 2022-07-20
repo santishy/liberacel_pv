@@ -14,34 +14,45 @@
             rounded
         "
     >
-        <div class="flex flex-wrap justify-between w-full">
-            <div class="flex flex-wrap">
-                <span
-                    class="
-                        rounded-sm
-                        px-2
-                        bg-green-700
-                        text-white
-                        font-semibold
-                    "
-                >
-                    Pts: {{ currentFastSale.customer_bonus.accumulated_points }}
+        <div
+            class="
+                flex flex-wrap
+                justify-between
+                w-full
+                items-center
+                font-serif
+            "
+        >
+            <div class="flex flex-wrap items-center">
+                <span class="rounded-sm px-2 font-serif font-base">
+                    Puntos acumulados:
+                    {{ currentFastSale.customer_bonus.accumulated_points }}
                 </span>
 
-                <div class="text-sm px-2 ml-2">
+                <div
+                    class="
+                        px-2
+                        text-base
+                        border-l-2 border-r-2 border-gray-600
+                        font-serif
+                    "
+                >
                     Dinero electronico:
-                    <span class="text-base font-semibold text-blue-700">
+                    <span class="text-base font-semibold text-gray-700">
                         {{ currentFastSale.electronicMoney }}
                     </span>
                 </div>
+                <div class="text-xl font-serif ml-2">
+                    Total con descuento:
+                    <span class="text-red-600">
+
+                        {{ totalLessDiscount }}
+                    </span>
+                </div>
             </div>
+
             <apply-electronic-money-discount></apply-electronic-money-discount>
-            <div class="font-black">
-                Total con descuento
-                {{ totalLessDiscount }}
-            </div>
         </div>
-    
     </div>
 </template>
 
@@ -49,8 +60,16 @@
 import { mapState } from "vuex";
 import ApplyElectronicMoneyDiscount from "./ApplyElectronicMoneyDiscount.vue";
 export default {
-    components:{
-        ApplyElectronicMoneyDiscount
+    data() {
+        return {
+            formatter: new Intl.NumberFormat("mx-MX", {
+                style: "currency",
+                currency: "MXN",
+            }),
+        };
+    },
+    components: {
+        ApplyElectronicMoneyDiscount,
     },
     computed: {
         ...mapState(["currentFastSale"]),
@@ -67,14 +86,12 @@ export default {
                 "$",
                 ""
             );
+
             electronicMoney = parseFloat(electronicMoney);
-            var formatter = new Intl.NumberFormat("mx-MX", {
-                style: "currency",
-                currency: "MXN",
-            });
-            return formatter.format(
-                this.currentFastSale.total_unformatted - electronicMoney
-            );
+            let total =
+                this.currentFastSale.total_unformatted - electronicMoney;
+            if (total > 0) return this.formatter.format(total);
+            else return "$0.00";
         },
     },
 };

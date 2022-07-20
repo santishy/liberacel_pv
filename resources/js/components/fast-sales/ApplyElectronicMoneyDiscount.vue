@@ -2,13 +2,16 @@
     <form @submit.prevent="submit">
         <button
             class="
-                rounded-sm
-                shadow-sm
-                bg-blue-600
-                hover:shadow-none hover:bg-blue-700
-                text-white
+                bg-transparent
+                hover:bg-blue-500
+                text-blue-700
                 font-semibold
-                px-2 py-1
+                hover:text-white
+                py-2
+                px-4
+                border border-blue-500
+                hover:border-transparent
+                rounded
             "
         >
             Aplicar Descuento
@@ -18,16 +21,19 @@
 
 <script>
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
+    ...mapMutations(["SET_CURRENT_FAST_SALE"]),
     methods: {
         async submit() {
             try {
-                const res = axios.post(
+                const res = await axios.post(
                     `/fast-sales/${this.currentFastSale.id}/customer-bonuses`,
-                    {'_method':'PUT'}
+                    { _method: "PUT" }
                 );
-                console.log(res);
+                if(res.data?.fastSale){
+                    this.SET_CURRENT_FAST_SALE(res.data.fastSale);
+                }
             } catch (error) {
                 console.error(error);
             }
