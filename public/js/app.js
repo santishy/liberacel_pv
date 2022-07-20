@@ -7810,6 +7810,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -7858,9 +7868,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     productBonus: Object
+  },
+  created: function created() {
+    this.form = this.productBonus;
+  },
+  data: function data() {
+    return {
+      show: false,
+      form: {}
+    };
+  },
+  methods: {
+    dblclick: function dblclick() {
+      this.show = true;
+    },
+    submit: function submit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _this.form._method = 'PUT';
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/product-bonuses/".concat(_this.productBonus.id), _this.form);
+
+              case 4:
+                res = _context.sent;
+                _this.productBonus.name = res.data.name;
+                _this.productBonus.points = res.data.points;
+                _this.show = false;
+                _context.next = 14;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0.message);
+
+                if (_context.t0['response'].status === 419) {
+                  window.location = '/';
+                }
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 10]]);
+      }))();
+    }
+  },
+  computed: {
+    inputStyle: function inputStyle() {
+      return "mr-1 placeholder-green-300 appearance-none bg-gray-400  rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
+    }
   }
 });
 
@@ -7890,19 +7972,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12464,7 +12533,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n", ""]);
+exports.push([module.i, ".modal[data-v-53ab54d2] {\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\r\n", ""]);
 
 // exports
 
@@ -12483,7 +12552,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, ".mx-datepicker[data-v-46cc1d8a] {\n  display: block;\n}\n.mx-datepicker-range[data-v-46cc1d8a] {\n  width: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -12502,7 +12571,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "@media (min-width: 640px) {\ntable {\n    display: inline-table !important;\n}\nthead tr:not(:first-child) {\n    display: none;\n}\n}\ntd:not(:last-child) {\n  border-bottom: 0;\n}\nth:not(:last-child) {\n  border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\r\n", ""]);
 
 // exports
 
@@ -12521,7 +12590,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\n        135deg,\n        #ec489980 10%,\n        transparent 0,\n        transparent 50%,\n        #ec489980 0,\n        #ec489980 60%,\n        transparent 0,\n        transparent\n    );\n  background-size: 7.07px 7.07px;\n}\n", ""]);
+exports.push([module.i, ".bg-stripes-pink[data-v-39566980] {\n  background-color: #f472b61a;\n  background-image: linear-gradient(\r\n        135deg,\r\n        #ec489980 10%,\r\n        transparent 0,\r\n        transparent 50%,\r\n        #ec489980 0,\r\n        #ec489980 60%,\r\n        transparent 0,\r\n        transparent\r\n    );\n  background-size: 7.07px 7.07px;\n}\r\n", ""]);
 
 // exports
 
@@ -38948,68 +39017,135 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "tr",
-    {
-      staticClass:
-        "\n        bg-white\n        border-b border-gray-400\n        md:border-none\n        block\n        md:table-row\n    ",
-    },
-    [
-      _c(
-        "td",
+  return !_vm.show
+    ? _c(
+        "tr",
         {
           staticClass:
-            "\n            p-2\n            md:border md:border-grey-500\n            text-left\n            block\n            md:table-cell\n        ",
+            "\n        bg-white\n        border-b border-gray-400\n        md:border-none\n        block\n        md:table-row\n        cursor-pointer\n    ",
         },
         [
           _c(
-            "span",
-            { staticClass: "inline-block w-1/3 md:hidden font-bold" },
-            [_vm._v("Producto/Categoría")]
+            "td",
+            {
+              staticClass:
+                "\n            p-2\n            md:border md:border-grey-500\n            text-left\n            block\n            md:table-cell\n            cursor-pointer\n        ",
+              on: {
+                dblclick: function ($event) {
+                  $event.preventDefault()
+                  return _vm.dblclick.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c(
+                "span",
+                { staticClass: "inline-block w-1/3 md:hidden font-bold" },
+                [_vm._v("Producto/Categoría")]
+              ),
+              _vm._v(_vm._s(_vm.productBonus.name) + "\n    "),
+            ]
           ),
-          _vm._v(_vm._s(_vm.productBonus.name) + "\n    "),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              staticClass:
+                "\n            p-2\n            md:border md:border-grey-500\n            text-left\n            block\n            md:table-cell\n        ",
+              on: {
+                dblclick: function ($event) {
+                  $event.preventDefault()
+                  return _vm.dblclick.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c(
+                "span",
+                { staticClass: "inline-block w-1/3 md:hidden font-bold" },
+                [_vm._v("Puntos")]
+              ),
+              _vm._v(_vm._s(_vm.productBonus.points) + "\n    "),
+            ]
+          ),
         ]
-      ),
-      _vm._v(" "),
-      _c(
-        "td",
-        {
-          staticClass:
-            "\n            p-2\n            md:border md:border-grey-500\n            text-left\n            block\n            md:table-cell\n        ",
-        },
+      )
+    : _c(
+        "tr",
+        { staticClass: "flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0" },
         [
           _c(
-            "span",
-            { staticClass: "inline-block w-1/3 md:hidden font-bold" },
-            [_vm._v("Puntos")]
+            "td",
+            {
+              staticClass: "border-grey-light border hover:bg-gray-100 p-3",
+              attrs: { colspan: "2" },
+            },
+            [
+              _c(
+                "form",
+                {
+                  staticClass: "grid grid-cols-2 gap-2",
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.submit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.name,
+                        expression: "form.name",
+                      },
+                    ],
+                    class: [_vm.inputStyle],
+                    attrs: { type: "text", name: "name" },
+                    domProps: { value: _vm.form.name },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "name", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.points,
+                        expression: "form.points",
+                      },
+                    ],
+                    class: [_vm.inputStyle],
+                    attrs: { type: "text", name: "points" },
+                    domProps: { value: _vm.form.points },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "points", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("button", { attrs: { type: "submit" } }),
+                ]
+              ),
+            ]
           ),
-          _vm._v(_vm._s(_vm.productBonus.points) + "\n    "),
         ]
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-    ]
-  )
+      )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "td",
-      {
-        staticClass:
-          "\n            p-2\n            md:border md:border-grey-500\n            text-left\n            block\n            md:table-cell\n        ",
-      },
-      [
-        _c("span", { staticClass: "inline-block w-1/3 md:hidden font-bold" }, [
-          _vm._v("Acciones"),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39094,15 +39230,6 @@ var staticRenderFns = [
                 "\n                        bg-blue-700\n                        p-2\n                        text-white\n                        font-semibold\n                        md:border md:border-grey-500\n                        text-left\n                        block\n                        md:table-cell\n                    ",
             },
             [_vm._v("\n                    Puntos\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass:
-                "\n                        bg-blue-700\n                        p-2\n                        text-white\n                        font-semibold\n                        md:border md:border-grey-500\n                        text-left\n                        block\n                        md:table-cell\n                    ",
-            },
-            [_vm._v("\n                    Acciones\n                ")]
           ),
         ]
       ),
@@ -69770,16 +69897,19 @@ module.exports = {
   },
   methods: {
     getErrors: function getErrors(err) {
-      var _err$response, _err$response2, _err$response2$data;
+      var _err$response, _err$response2, _err$response3, _err$response3$data;
 
       console.log(err);
-      console.log('hola mundos');
 
-      if ((err === null || err === void 0 ? void 0 : (_err$response = err.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 403) {
+      if ((err === null || err === void 0 ? void 0 : (_err$response = err.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 419) {
+        return window.location.href = '/';
+      }
+
+      if ((err === null || err === void 0 ? void 0 : (_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : _err$response2.status) === 403) {
         return window.location.href = '/403';
       }
 
-      this.errors = Object.values(err === null || err === void 0 ? void 0 : (_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : (_err$response2$data = _err$response2.data) === null || _err$response2$data === void 0 ? void 0 : _err$response2$data.errors).flat();
+      this.errors = Object.values(err === null || err === void 0 ? void 0 : (_err$response3 = err.response) === null || _err$response3 === void 0 ? void 0 : (_err$response3$data = _err$response3.data) === null || _err$response3$data === void 0 ? void 0 : _err$response3$data.errors).flat();
     }
   }
 };
@@ -70096,8 +70226,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/liberacel-pv/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\liberacel_pv\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

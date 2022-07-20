@@ -15,7 +15,10 @@ class FastSale extends Model
     use HasFactory, HasUserRelationship;
     use ReportBy;
 
-    protected $fillable = ['status', 'total', 'concepts', 'user_id'];
+    protected $fillable = [
+        'status',
+        'total', 'concepts', 'user_id', 'electronic_money_discount', 'customer_bonus_id'
+    ];
 
     protected $casts = [
         'concepts' => 'array',
@@ -120,8 +123,7 @@ class FastSale extends Model
     public function calculateDiscountToTotal($electronicMoney)
     {
         $diff = $this->total - $electronicMoney;
-        if ($diff > 0 || $diff == 0) 
-        {
+        if ($diff > 0 || $diff == 0) {
             $data = $this->discountElectronicMoney($electronicMoney, $diff);
         } else {
             $data = $this->discountElectronicMoney($this->total, 0);

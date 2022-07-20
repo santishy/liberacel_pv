@@ -11,9 +11,8 @@ class ProductBonusController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            $productBonuses = ProductBonus::orderBy('id','desc')->paginate();
+            $productBonuses = ProductBonus::orderBy('id', 'desc')->paginate();
             return $productBonuses;
-
         }
         return view('product-bonus.index');
     }
@@ -21,7 +20,16 @@ class ProductBonusController extends Controller
     public function store(UpdateStoreProductBonus $request)
     {
         return  ProductBonus::create([
-                    'name' => $request->name,
-                    'points' => $request->points]);
+            'name' => $request->name,
+            'points' => $request->points
+        ]);
+    }
+    public function update(UpdateStoreProductBonus $request, ProductBonus $productBonus)
+    {
+        $productBonus->update([
+            'name' => $request->name,
+            'points' => $request->points
+        ]);
+        return $productBonus;
     }
 }
