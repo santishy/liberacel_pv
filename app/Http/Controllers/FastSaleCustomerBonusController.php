@@ -50,12 +50,12 @@ class FastSaleCustomerBonusController extends Controller
         $sale->update($discountData);
 
         $remainingElectronicMoney = $electronicMoney - $sale->electronic_money_discount;
-        
+
         $accumulatedPoints = $customerBonus->conversionToPoints(
-            $pointData, 
+            $pointData,
             $remainingElectronicMoney
         );
-      
+
         $customerBonus->update(['accumulated_points' => $accumulatedPoints]);
 
         return response()->json([
