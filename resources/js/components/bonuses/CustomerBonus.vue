@@ -77,6 +77,7 @@ export default {
                     fastSale.customer_bonus = res.data.customer_bonus;
                     fastSale.electronicMoney = res.data.electronicMoney;
                     this.SET_CURRENT_FAST_SALE(fastSale);
+                    this.form = {};
                 }
             } catch (e) {
                 console.log(e);

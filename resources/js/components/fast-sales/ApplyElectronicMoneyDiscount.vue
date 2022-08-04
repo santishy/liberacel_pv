@@ -23,8 +23,9 @@
 import axios from "axios";
 import { mapState, mapMutations } from "vuex";
 export default {
-    ...mapMutations(["SET_CURRENT_FAST_SALE"]),
+   
     methods: {
+        ...mapMutations(["SET_CURRENT_FAST_SALE"]),
         async submit() {
             try {
                 const res = await axios.post(
