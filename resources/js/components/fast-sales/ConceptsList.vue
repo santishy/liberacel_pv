@@ -152,7 +152,7 @@ import UserCircleIcon from "../icons/UserCircleIcon.vue";
 import Exchange from "../icons/Exchange.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import CustomerBonus from "../bonuses/CustomerBonus.vue";
-
+import {mapState} from "vuex";
 export default {
     components: {
         ConceptListItem,
@@ -202,6 +202,7 @@ export default {
         },
     },
     computed: {
+        ...mapState(["currentFastSale"]),
         statusStyle() {
             if (this.localSale.status == "pending") {
                 return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
