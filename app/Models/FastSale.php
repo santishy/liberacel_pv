@@ -140,4 +140,13 @@ class FastSale extends Model
             "electronic_money_discount" => $discount
         ];
     }
+
+    public function removeCustomerBonus(){
+        if($this->electronic_money_discount > 0) {   
+            $this->total += $this->electronic_money_discount;
+            $this->electronic_money_discount = 0;
+        }
+        $this->customerBonus()->dissociate();
+        return $this->save();
+    }
 }

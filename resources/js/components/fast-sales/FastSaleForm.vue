@@ -25,7 +25,7 @@
             <search-select
                 class="w-8/12"
                 :collection="productBonuses"
-                :input-class="'bg-stripes-gray w-full' + inputStyle"
+                :input-class="' w-full' + inputStyle"
             ></search-select>
         </div>
         <div class="w-full col-span-5" :class="controlsContainerStyle">
@@ -110,8 +110,6 @@ export default {
 
                 EventBus.$emit("reset-search-select");
                 
-                
-                
                 this.form = {};
 
                 this.notify({
@@ -156,10 +154,10 @@ export default {
     },
     computed: {
         labelStyle() {
-            return " w-3/12 text-center text-gray-700 font-mono font-semibold mr-2 rounded-sm py-3 px-6 bg-gray-300";
+            return " w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6";
         },
         inputStyle() {
-            return " placeholder:italic bg-stripes-gray  font-semibold placeholder-gray-600 placeholder-shown:border-gray-500 appearance-none bg-gray-200  rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
+            return " placeholder:italic font-font-light placeholder-gray-500 placeholder-shown:border-gray-500 appearance-none bg-gray-300  rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
         },
         controlsContainerStyle() {
             return "flex flex-wrap flex-row  justify-center items-center w-full ";

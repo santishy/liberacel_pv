@@ -56,9 +56,9 @@ export default {
     },
     created(){
         this.SET_CURRENT_FAST_SALE(this.sale);
-        EventBus.$on('associated-user',(id)=>{
+        /* EventBus.$on('associated-user',(id)=>{
             this.SET_CURRENT_FAST_SALE({});
-        })
+        }) */
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"])

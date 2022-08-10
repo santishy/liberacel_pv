@@ -26,14 +26,13 @@
         >
             <div>
                 <span class="font-mono text-2xl text-teal-800"
-                    >Nota #{{ localSale.id }}</span
+                    >Nota #{{ currentFastSale.id }}</span
                 >
             </div>
 
             <customer-bonus
-                v-if="Object.keys(localSale).length"
+                v-if="Object.keys(currentFastSale).length"
                 class="flex flex-wrap"
-                :fast-sale="localSale"
                 inputStyle="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600"
             >
                 <template slot="bonus-button">
@@ -57,7 +56,7 @@
                 </template>
             </customer-bonus>
             <span class="text-2xl font-light text-red-700"
-                >Total: {{ localSale.total }}</span
+                >Total: {{ currentFastSale.total }}</span
             >
         </div>
 
@@ -65,7 +64,7 @@
             class="flex flex-wrap items-center justify-between w-full px-2 py-3"
         >
             <button @click.prevent="openModal" :class="[statusStyle]">
-                <span class="mr-2">{{ translate[localSale.status] }}</span>
+                <span class="mr-2">{{ translate[currentFastSale.status] }}</span>
                 <span><exchange></exchange></span>
             </button>
             <p
@@ -73,7 +72,7 @@
                 >Nuevos puntos: <span class="rounded-full text-white bg-blue-600 px-2 py-1">{{ getTotalPoints }}</span></p
             >
             <span class="text-xs text-gray-700">{{
-                localSale.created_at
+                currentFastSale.created_at
             }}</span>
         </div>
         <div
@@ -140,7 +139,7 @@
 
         <authentication-form
             model="FastSale"
-            :id="localSale.id"
+            :id="currentFastSale.id"
         ></authentication-form>
     </div>
 </template>
@@ -152,7 +151,7 @@ import UserCircleIcon from "../icons/UserCircleIcon.vue";
 import Exchange from "../icons/Exchange.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import CustomerBonus from "../bonuses/CustomerBonus.vue";
-import {mapState} from "vuex";
+import {mapState,mapMutations} from "vuex";
 export default {
     components: {
         ConceptListItem,
@@ -179,6 +178,7 @@ export default {
         };
     },
     created() {
+
         EventBus.$on("fast-sale", (sale) => {
             this.fillData(sale);
         });
@@ -189,10 +189,12 @@ export default {
             this.products = [];
             EventBus.$emit("open-modal", false);
             EventBus.$emit("focus-description");
-            window.open("/fast-sale-tickets/" + this.localSale.id, "_blank");
+            window.open("/fast-sale-tickets/" + this.currentFastSale.id, "_blank");
+            this.SET_CURRENT_FAST_SALE({});
         });
     },
     methods: {
+        ...mapMutations(["SET_CURRENT_FAST_SALE"]),
         fillData(sale) {
             this.products = sale.products;
             this.localSale = sale;
@@ -204,7 +206,7 @@ export default {
     computed: {
         ...mapState(["currentFastSale"]),
         statusStyle() {
-            if (this.localSale.status == "pending") {
+            if (this.currentFastSale.status == "pending") {
                 return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
             }
 
@@ -212,8 +214,8 @@ export default {
         },
         getTotalPoints() {
             let total = 0;
-            if (this.localSale?.product_bonuses?.length) {
-                this.localSale.product_bonuses.forEach((productBonus) => {
+            if (this.currentFastSale?.product_bonuses?.length) {
+                this.currentFastSale.product_bonuses.forEach((productBonus) => {
                     total += productBonus.points * productBonus.pivot.qty;
                 });
             }

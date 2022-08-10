@@ -24,6 +24,7 @@ class FastSaleResource extends JsonResource
             'customer_bonus' => $this->whenLoaded('customerBonus'),
             'product_bonuses' => $this->whenLoaded('productBonuses'),
             'total_unformatted' => $this->total,
+            'electronicMoneyDiscount' => $this->electronic_money_discount,
             'electronicMoney' => $this->whenLoaded('customerBonus',function(){
                 return "$".number_format(
                     ($this->customerBonus->getElectronicMoney(

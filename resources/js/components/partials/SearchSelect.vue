@@ -4,6 +4,7 @@
             v-model="query"
             type="text"
             class="outline-none focus:border-blue-500"
+            placeholder="Selecciona un producto"
             :class="[inputClass]"
             @blur="searchResultsVisible = false"
             @focus="fillItems"

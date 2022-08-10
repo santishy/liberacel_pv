@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="submit">
-        <button
-            class="
+        <button class="
                 bg-transparent
                 hover:bg-blue-500
                 text-blue-700
@@ -12,8 +11,7 @@
                 border border-blue-500
                 hover:border-transparent
                 rounded
-            "
-        >
+            ">
             Aplicar Descuento
         </button>
     </form>
@@ -23,7 +21,7 @@
 import axios from "axios";
 import { mapState, mapMutations } from "vuex";
 export default {
-   
+
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"]),
         async submit() {
@@ -32,7 +30,11 @@ export default {
                     `/fast-sales/${this.currentFastSale.id}/customer-bonuses`,
                     { _method: "PUT" }
                 );
-                if(res.data?.fastSale){
+                if (res.data?.fastSale) {
+                    this.notify({
+                        title: "Descuento aplicado",
+                        message: "Total: " + res.data.fastSale.total,
+                    });
                     this.SET_CURRENT_FAST_SALE(res.data.fastSale);
                 }
             } catch (error) {

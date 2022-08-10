@@ -5251,8 +5251,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5277,6 +5275,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 res = _context.sent;
 
                 if ((_res$data = res.data) !== null && _res$data !== void 0 && _res$data.fastSale) {
+                  _this.notify({
+                    title: "Descuento aplicado",
+                    message: "Total: " + res.data.fastSale.total
+                  });
+
                   _this.SET_CURRENT_FAST_SALE(res.data.fastSale);
                 }
 
@@ -5500,6 +5503,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icons_Exchange_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons/Exchange.vue */ "./resources/js/components/icons/Exchange.vue");
 /* harmony import */ var _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth/AuthenticationForm.vue */ "./resources/js/components/auth/AuthenticationForm.vue");
 /* harmony import */ var _bonuses_CustomerBonus_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../bonuses/CustomerBonus.vue */ "./resources/js/components/bonuses/CustomerBonus.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5646,7 +5656,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
@@ -5693,10 +5703,12 @@ __webpack_require__.r(__webpack_exports__);
       _this.products = [];
       EventBus.$emit("open-modal", false);
       EventBus.$emit("focus-description");
-      window.open("/fast-sale-tickets/" + _this.localSale.id, "_blank");
+      window.open("/fast-sale-tickets/" + _this.currentFastSale.id, "_blank");
+
+      _this.SET_CURRENT_FAST_SALE({});
     });
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapMutations"])(["SET_CURRENT_FAST_SALE"])), {}, {
     fillData: function fillData(sale) {
       this.products = sale.products;
       this.localSale = sale;
@@ -5704,29 +5716,29 @@ __webpack_require__.r(__webpack_exports__);
     openModal: function openModal() {
       EventBus.$emit("open-modal", true);
     }
-  },
-  computed: {
+  }),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapState"])(["currentFastSale"])), {}, {
     statusStyle: function statusStyle() {
-      if (this.localSale.status == "pending") {
+      if (this.currentFastSale.status == "pending") {
         return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
       }
 
       return "text-xs text-green-700";
     },
     getTotalPoints: function getTotalPoints() {
-      var _this$localSale, _this$localSale$produ;
+      var _this$currentFastSale, _this$currentFastSale2;
 
       var total = 0;
 
-      if ((_this$localSale = this.localSale) !== null && _this$localSale !== void 0 && (_this$localSale$produ = _this$localSale.product_bonuses) !== null && _this$localSale$produ !== void 0 && _this$localSale$produ.length) {
-        this.localSale.product_bonuses.forEach(function (productBonus) {
+      if ((_this$currentFastSale = this.currentFastSale) !== null && _this$currentFastSale !== void 0 && (_this$currentFastSale2 = _this$currentFastSale.product_bonuses) !== null && _this$currentFastSale2 !== void 0 && _this$currentFastSale2.length) {
+        this.currentFastSale.product_bonuses.forEach(function (productBonus) {
           total += productBonus.points * productBonus.pivot.qty;
         });
       }
 
       return total;
     }
-  }
+  })
 });
 
 /***/ }),
@@ -5809,12 +5821,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this = this;
-
     this.SET_CURRENT_FAST_SALE(this.sale);
-    EventBus.$on('associated-user', function (id) {
-      _this.SET_CURRENT_FAST_SALE({});
-    });
+    /* EventBus.$on('associated-user',(id)=>{
+        this.SET_CURRENT_FAST_SALE({});
+    }) */
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapMutations"])(["SET_CURRENT_FAST_SALE"]))
 });
@@ -6116,10 +6126,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   computed: {
     labelStyle: function labelStyle() {
-      return " w-3/12 text-center text-gray-700 font-mono font-semibold mr-2 rounded-sm py-3 px-6 bg-gray-300";
+      return " w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6";
     },
     inputStyle: function inputStyle() {
-      return " placeholder:italic bg-stripes-gray  font-semibold placeholder-gray-600 placeholder-shown:border-gray-500 appearance-none bg-gray-200  rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
+      return " placeholder:italic font-font-light placeholder-gray-500 placeholder-shown:border-gray-500 appearance-none bg-gray-300  rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent";
     },
     controlsContainerStyle: function controlsContainerStyle() {
       return "flex flex-wrap flex-row  justify-center items-center w-full ";
@@ -6490,13 +6500,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7372,6 +7375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -35950,17 +35954,16 @@ var render = function () {
         [
           _c("div", [
             _c("span", { staticClass: "font-mono text-2xl text-teal-800" }, [
-              _vm._v("Nota #" + _vm._s(_vm.localSale.id)),
+              _vm._v("Nota #" + _vm._s(_vm.currentFastSale.id)),
             ]),
           ]),
           _vm._v(" "),
-          Object.keys(_vm.localSale).length
+          Object.keys(_vm.currentFastSale).length
             ? _c(
                 "customer-bonus",
                 {
                   staticClass: "flex flex-wrap",
                   attrs: {
-                    "fast-sale": _vm.localSale,
                     inputStyle:
                       "bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 placeholder-gray-600",
                   },
@@ -35988,7 +35991,7 @@ var render = function () {
             : _vm._e(),
           _vm._v(" "),
           _c("span", { staticClass: "text-2xl font-light text-red-700" }, [
-            _vm._v("Total: " + _vm._s(_vm.localSale.total)),
+            _vm._v("Total: " + _vm._s(_vm.currentFastSale.total)),
           ]),
         ],
         1
@@ -36014,7 +36017,7 @@ var render = function () {
             },
             [
               _c("span", { staticClass: "mr-2" }, [
-                _vm._v(_vm._s(_vm.translate[_vm.localSale.status])),
+                _vm._v(_vm._s(_vm.translate[_vm.currentFastSale.status])),
               ]),
               _vm._v(" "),
               _c("span", [_c("exchange")], 1),
@@ -36031,7 +36034,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "text-xs text-gray-700" }, [
-            _vm._v(_vm._s(_vm.localSale.created_at)),
+            _vm._v(_vm._s(_vm.currentFastSale.created_at)),
           ]),
         ]
       ),
@@ -36080,7 +36083,7 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("authentication-form", {
-        attrs: { model: "FastSale", id: _vm.localSale.id },
+        attrs: { model: "FastSale", id: _vm.currentFastSale.id },
       }),
     ],
     1
@@ -36352,7 +36355,7 @@ var render = function () {
             staticClass: "w-8/12",
             attrs: {
               collection: _vm.productBonuses,
-              "input-class": "bg-stripes-gray w-full" + _vm.inputStyle,
+              "input-class": " w-full" + _vm.inputStyle,
             },
           }),
         ],
@@ -36962,7 +36965,9 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _c("apply-electronic-money-discount"),
+              !_vm.currentFastSale.electronicMoneyDiscount
+                ? _c("apply-electronic-money-discount")
+                : _vm._e(),
             ],
             1
           ),
@@ -38582,7 +38587,7 @@ var render = function () {
       ],
       staticClass: "outline-none focus:border-blue-500",
       class: [_vm.inputClass],
-      attrs: { type: "text" },
+      attrs: { type: "text", placeholder: "Selecciona un producto" },
       domProps: { value: _vm.query },
       on: {
         blur: function ($event) {
