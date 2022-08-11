@@ -1,22 +1,26 @@
 <template>
-    <div v-if="currentFastSale.customer_bonus" class="flex flex-wrap items-center px-2">
-        <span class="font-mono text-xl font-light text-teal-700 mr-2">{{
-            currentFastSale.customer_bonus.phone_number
-        }}</span>
-
-        <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
+    <div
+        v-if="currentFastSale.customer_bonus"
+        class="flex flex-wrap items-center px-2"
+    >
+        <span class="rounded-sm px-2 border-2 border-green-600 font-serif">
             Pts: {{ currentFastSale.customer_bonus.accumulated_points }}
         </span>
+        <span class="font-mono text-xl font-light text-teal-700 ml-2">{{
+            currentFastSale.customer_bonus.phone_number
+        }}</span>
+        <remove-electronic-money-discount></remove-electronic-money-discount>
+        
     </div>
     <form v-else @submit.prevent="submit">
         <div v-if="currentFastSale.customer_bonus" class="flex flex-wrap">
-            <span class="font-mono text-xl font-light text-teal-700 mr-2">{{
+            <span class="font-mono text-xl font-light text-teal-700">{{
                 currentFastSale.customer_bonus.phone_number
             }}</span>
-
             <span class="rounded-sm px-2 bg-green-700 text-white font-semibold">
                 Pts: {{ currentFastSale.customer_bonus.accumulated_points }}
             </span>
+            
         </div>
         <div>
             <input
@@ -31,9 +35,14 @@
 </template>
 <script>
 import UserCircleIcon from "../icons/UserCircleIcon.vue";
-import {mapMutations, mapState} from "vuex";
+import RemoveElectronicMoneyDiscount from "./RemoveElectronicMoneyDiscount.vue";
+import { mapMutations, mapState } from "vuex";
 export default {
-    components: { UserCircleIcon },
+    components: 
+    { 
+        UserCircleIcon, 
+        RemoveElectronicMoneyDiscount 
+    },
     props: {
         inputStyle: {
             type: String,
@@ -48,14 +57,14 @@ export default {
         };
     },
     created() {
-       /*  if (this.currentFastSale?.id) {
+        /*  if (this.currentFastSale?.id) {
             this.customerBonus = this.currentFastSale.customer_bonus;
             this.electronicMoney = this.currentFastSale.electronicMoney;
         } */
     },
 
     methods: {
-        ...mapMutations(['SET_CURRENT_FAST_SALE']),
+        ...mapMutations(["SET_CURRENT_FAST_SALE"]),
         async submit() {
             try {
                 this.form.fast_sale_id = this.currentFastSale.id;
@@ -77,8 +86,8 @@ export default {
             }
         },
     },
-    computed:{
+    computed: {
         ...mapState(["currentFastSale"]),
-    }
+    },
 };
 </script>

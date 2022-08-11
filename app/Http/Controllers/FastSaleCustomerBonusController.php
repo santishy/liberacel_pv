@@ -63,11 +63,11 @@ class FastSaleCustomerBonusController extends Controller
         ]);
     }
 
-    public function destroy(FastSale $fastSale)
+    public function destroy(FastSale $sale)
     {
-        $customerBonusStatus = $fastSale->removeCustomerBonus();
+        $customerBonusStatus = $sale->removeCustomerBonus();
         return response()->json([
-            'customerBonusStatus' => $customerBonusStatus
+            'fastSale' => FastSaleResource::make($sale->load('customerBonus', 'productBonuses'))
         ]);
     }
 }
