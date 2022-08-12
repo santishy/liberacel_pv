@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\FastSaleUpdated;
+use App\Facades\Settings;
 use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -141,12 +142,19 @@ class FastSale extends Model
         ];
     }
 
-    public function removeCustomerBonus(){
-        if($this->electronic_money_discount > 0) {   
+    public function removeCustomerBonus()
+    {
+        if ($this->electronic_money_discount > 0) {
             $this->total += $this->electronic_money_discount;
-            $this->electronic_money_discount = 0;
         }
-        $this->customerBonus()->dissociate();
+        $customerBonus = $this->customerBonus();
+        $customerBonus->dissociate();
+        $points  = $customerBonus->first()->conversionToPoints(
+            Settings::getDataFrom('precio_punto'),
+            $this->electronic_money_discount
+        );
+        $customerBonus->update(['accumulated_points' => $customerBonus->first()->accumulated_points + $points]);
+        $this->electronic_money_discount = 0;
         return $this->save();
     }
 }
