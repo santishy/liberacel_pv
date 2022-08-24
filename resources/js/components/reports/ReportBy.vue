@@ -23,6 +23,13 @@
                 <button
                     class="text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mr-4 rounded px-4 py-2"
                     href="#"
+                    @click.prevent="getReport(fridayToThursday)"
+                >
+                    Viernes a Jueves
+                </button>
+                <button
+                    class="text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mr-4 rounded px-4 py-2"
+                    href="#"
                     @click.prevent="getReport(week)"
                 >
                     Semana
@@ -67,6 +74,9 @@ export default {
             },
             month: {
                 "filter[currentMonth]": ""
+            },
+            fridayToThursday:{
+                "filter[fridayToThursday]": ""
             },
             status: { "filter[status]": "completed" },
             dates: null

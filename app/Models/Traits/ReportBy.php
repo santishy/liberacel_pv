@@ -47,6 +47,13 @@ trait ReportBy
 
     }
 
+    public function scopeFridayToThursday(Builder $query)
+    {
+        $friday = new Carbon('last friday');
+        $thursday = new Carbon('thursday');
+        $query->whereBetween(DB::raw('Date(created_at)'),[$friday,$thursday]);
+    }
+
     public function scopeTotal(Builder $query)
     {
         $query->select(DB::raw('sum(total) as total'));

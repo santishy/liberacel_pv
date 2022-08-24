@@ -32,9 +32,10 @@ class CreateOrUpdateCommission
         switch ($fastSale->status) {
             case 'completed':
                 //comprueba que no sea recursivo
-                if ($fastSale->getOriginal('status') == 'completed') {
+              
+                /* if ($fastSale->getOriginal('status') == 'completed') {
                     break;
-                }
+                } */
                 
                 $products  = collect($fastSale->concepts);
 

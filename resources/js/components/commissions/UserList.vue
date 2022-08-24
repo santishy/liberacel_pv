@@ -1,7 +1,11 @@
 <template>
     <div>
+        <div class="p-1 text-center rounded-sm mb-2 bg-purple-200 text-purple-700 font-mono">
+            Comisiones por rango.
+        </div>
         <date-picker
             @change="setRange"
+            @clear="clear"
             placeholder="Da click para eligir el rango de fechas"
             :lang="lang"
             value-type="YYYY-MM-DD"
@@ -9,6 +13,9 @@
             class="mb-2"
             range
         ></date-picker>
+        <div class="p-1 text-center rounded-sm mb-2 mt-2 text-xs bg-purple-200 text-purple-700 font-mono">
+            Jueves a viernes. (Sin elegir rango)
+        </div>
         <ul class="w-full">
             <li
                 v-for="user in users"
@@ -59,6 +66,10 @@ export default {
     },
     mixins: [ConfigDatePicker],
     methods: {
+        clear()
+        {
+           this.dates = null;
+        },
         selectedUser(user) {
             this.getRange();
             EventBus.$emit("get-user-commissions", {
@@ -76,7 +87,7 @@ export default {
         getRange() {
             if (!this.dates) {
                 this.range = {};
-                this.range["filter[weeklyCommissions]"] = ""; //convierto el array de las dos fechas de,
+                this.range["filter[ComissionsFromFridayToThursday]"] = ""; //convierto el array de las dos fechas de,
             }
         },
     },

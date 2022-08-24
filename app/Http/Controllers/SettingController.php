@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -12,6 +13,7 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::all();
+        $date = new Carbon('last friday');
         return view('settings.index',compact('settings'));
     }
 

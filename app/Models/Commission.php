@@ -17,11 +17,13 @@ class Commission extends Model
     {
         return $this->belongsTo(FastSale::class);
     }
-    public function scopeWeeklyCommissions($query, $field)
+    public function scopeComissionsFromFridayToThursday($query, $field)
     {
+        $friday = new Carbon('last friday');
+        $thursday = new Carbon('thursday');
         $query->whereBetween('commissions.created_at', [
-            Carbon::now()->startOfWeek(),
-            Carbon::now()->endOfWeek()
+            $friday,
+            $thursday
         ]);
     }
     public function scopeCommissionsBetweenDates($query, $value)
