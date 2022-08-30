@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -180,3 +180,9 @@ Route::delete('fast-sales/{sale}/customer-bonuses',[FastSaleCustomerBonusControl
 
 Route::get('settings', [SettingController::class, 'index'])->middleware('auth');
 Route::put('settings/{setting}',[SettingController::class, 'update'])->middleware('auth');
+
+/**
+ * Barcode
+ */
+
+Route::get('barcode', [BarcodeController::class, 'index'])->middleware('auth');

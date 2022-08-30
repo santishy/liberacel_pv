@@ -171,6 +171,7 @@
             <p class="mb-0 p-0 mt-0  text-center ">
                 <span>Dire: </span> {{$ticketConfig->address}}
             </p>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("12345", 'C128') !!}</div>
         </div>
         <div 
             style="width: 75%;"
