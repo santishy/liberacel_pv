@@ -48,6 +48,10 @@ export default {
         },
         setPage(page) {
             this.page = page;
+        },
+        mostrar(e)
+        {
+            console.log(this.sku)
         }
     }
 };

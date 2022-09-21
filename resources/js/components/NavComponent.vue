@@ -45,7 +45,7 @@
                         class="md:relative"
                     />
                     <a
-                        href="/sales/create"
+                        href="/sales/create/?queryType=sell"
                         class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg"
                     >
                         Ventas
@@ -150,7 +150,7 @@ export default {
                 },
                 {
                     name: "Comprar productos",
-                    url: "/products"
+                    url: "/products/?queryType=toBuy"
                 }
             ],
             ExpressMenu:[

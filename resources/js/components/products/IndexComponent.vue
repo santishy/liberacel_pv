@@ -9,14 +9,23 @@
                 ></search-by-category>
                 <search-component ref="search" class="md:w-1/4 w-3/4 " />
             </div>
-            <product-card
+           <!--  <product-card
                 v-for="(product, index) in products"
                 :key="product.id"
                 :product="product"
                 :index="index"
                 transaction-type="purchase"
                 class="col-span-3 md:col-span-1"
-            />
+            /> -->
+            <product-list  class="col-span-5">
+                <product-list-item
+                    v-for="(product, index) in products"
+                    :key="product.id"
+                    :product="product"
+                    :index="index"
+                >
+                </product-list-item>
+            </product-list>
             <infinite-loading
                 :identifier="infiniteId"
                 @infinite="infiniteHandler"
@@ -49,6 +58,8 @@ import SearchComponent from "./SearchComponent.vue";
 import SearchByCategory from "./SearchByCategory.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
 import ProductCardComponent from "./ProductCardComponent.vue";
+import ProductList from "./ProductList";
+import ProductListItem from "./ProductListItem"
 import InformationComponent from "../modals/InformationComponent.vue";
 
 export default {
@@ -88,11 +99,17 @@ export default {
         InformationComponent,
         Agree,
         Message,
-        SearchByCategory
+        SearchByCategory,
+        ProductList,
+        ProductListItem
     },
     methods: {
         ...mapActions(["getProducts", "search"]),
-        ...mapMutations(["setModalDataConfirm"]),
+        ...mapMutations(["setModalDataConfirm","SET_QUERY_TYPE"]),
+        getQueryType(){
+            let url = new URL(window.location.href);
+            this.SET_QUERY_TYPE(url.searchParams.get('queryType'));
+        },
         removeFromArray(index) {
             this.products.splice(index, 1);
         },

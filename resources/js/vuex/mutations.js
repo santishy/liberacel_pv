@@ -62,11 +62,15 @@ const SET_PURCHASE_VISIBILITY = (state, value) => {
 const SET_CURRENT_FAST_SALE = (state, value) => {
     state.currentFastSale = value;
 }
+const SET_QUERY_TYPE = (state,value) => {
+    state.queryType = value;
+}
 
 export default {
     SET_CURRENT_FAST_SALE,
     setProductsInPurchase,
     SET_USER,
+    SET_QUERY_TYPE,
     setSalePriceOption,
     deleteProductInPurchase,
     addToTransaction,
