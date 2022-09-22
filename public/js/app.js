@@ -8544,6 +8544,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {
     this.cleanLocalStorage();
+    this.getQueryType();
   },
   mounted: function mounted() {
     var _this = this;
@@ -9281,7 +9282,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _purchases_AddToPurchase_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../purchases/AddToPurchase.vue */ "./resources/js/components/purchases/AddToPurchase.vue");
 /* harmony import */ var _sales_AddToSale_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sales/AddToSale.vue */ "./resources/js/components/sales/AddToSale.vue");
-/* harmony import */ var _EditProduct_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditProduct.vue */ "./resources/js/components/products/EditProduct.vue");
+/* harmony import */ var _EditProduct_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditProduct.vue */ "./resources/js/components/products/EditProduct.vue");
 /* harmony import */ var _RemoveProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RemoveProductComponent.vue */ "./resources/js/components/products/RemoveProductComponent.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -9357,7 +9358,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     AddToPurchase: _purchases_AddToPurchase_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     AddToSale: _sales_AddToSale_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditProduct: _EditProduct_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    EditProduct: _EditProduct_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     RemoveProductComponent: _RemoveProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
@@ -9409,6 +9410,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _ProductCardComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductCardComponent */ "./resources/js/components/products/ProductCardComponent.vue");
+/* harmony import */ var _ProductList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductList */ "./resources/js/components/products/ProductList.vue");
+/* harmony import */ var _ProductListItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductListItem */ "./resources/js/components/products/ProductListItem.vue");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -9461,6 +9464,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9482,7 +9498,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   components: {
-    "product-card": _ProductCardComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+    "product-card": _ProductCardComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ProductList: _ProductList__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ProductListItem: _ProductListItem__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(["search"])), {}, {
     getProducts: function getProducts($state) {
@@ -11592,6 +11610,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this = this;
 
+    this.getQueryType();
+
     if (this.sale) {
       this.sale_status = this.sale.status;
       this.localSale = this.sale;
@@ -11620,6 +11640,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       localSale: null
     };
   },
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapMutations"])(["SET_QUERY_TYPE"])), {}, {
+    getQueryType: function getQueryType() {
+      var url = new URL(window.location.href);
+      this.SET_QUERY_TYPE(url.searchParams.get('queryType'));
+    }
+  }),
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])(["salePriceOption"])), {}, {
     typeOfSale: function typeOfSale() {
       var _this$localSale, _this$localSale2, _this$localSale2$clie;
@@ -41030,16 +41056,19 @@ var render = function () {
               _c(
                 "div",
                 { staticClass: "grid md:grid-cols-3 grid-cols-1 gap-4 " },
-                _vm._l(_vm.products, function (product, index) {
-                  return _c("product-card", {
-                    key: product.id,
-                    attrs: {
-                      product: product,
-                      "search-in-sales": true,
-                      index: index,
-                    },
-                  })
-                }),
+                [
+                  _c(
+                    "product-list",
+                    { staticClass: "col-span-5" },
+                    _vm._l(_vm.products, function (product, index) {
+                      return _c("product-list-item", {
+                        key: product.id,
+                        attrs: { product: product, index: index },
+                      })
+                    }),
+                    1
+                  ),
+                ],
                 1
               ),
               _vm._v(" "),

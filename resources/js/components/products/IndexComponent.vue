@@ -82,6 +82,7 @@ export default {
     },
     created() {
         this.cleanLocalStorage();
+        this.getQueryType();
     },
     mounted() {
         this.cleanLocalStorage();

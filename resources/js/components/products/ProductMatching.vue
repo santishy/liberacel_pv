@@ -13,14 +13,25 @@
                 </button>
             </div>
             <div class="grid md:grid-cols-3 grid-cols-1 gap-4 ">
-                <product-card
+                <product-list
+                    class="col-span-5"
+                >
+                    <product-list-item
+                        v-for="(product, index) in products"
+                        :key="product.id"
+                        :product="product"
+                        :index="index"
+                    >
+                    </product-list-item>
+                </product-list>
+                <!-- <product-card
                     v-for="(product, index) in products"
                     :key="product.id"
                     :product="product"
                     :search-in-sales="true"
                     :index="index"
                 >
-                </product-card>
+                </product-card> -->
             </div>
             <infinite-loading @infinite="getProducts"></infinite-loading>
         </div>
@@ -29,6 +40,8 @@
 <script>
 import { mapActions } from "vuex";
 import ProductCardComponent from "./ProductCardComponent";
+import ProductList from "./ProductList";
+import ProductListItem from "./ProductListItem";
 export default {
     data() {
         return {
@@ -46,7 +59,9 @@ export default {
         });
     },
     components: {
-        "product-card": ProductCardComponent
+        "product-card": ProductCardComponent,
+        ProductList,
+        ProductListItem
     },
     methods: {
         ...mapActions(["search"]),
