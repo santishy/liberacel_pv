@@ -96,6 +96,7 @@ export default {
             );
         },
         isSale() {
+        
             return (
                 this.visibleActions.sale.toUpperCase() === this.queryType.toUpperCase()
             );
