@@ -13,7 +13,7 @@
         <td>
             <div class="flex justify-center items-center">
                 <span class="mr-2">{{ product.sku }}</span>
-                <a :href="`/barcode/${product.sku}`" class="text-blue-700 "> 
+                <a :href="`/barcode/${product.sku}`" class="text-blue-700 " target="_blank"> 
                     <barcode/>
                 </a>
             </div>
