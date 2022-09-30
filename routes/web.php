@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PurchaseController, ProductInSaleController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -154,7 +154,7 @@ Route::get('fast-sales', [FastSaleController::class, 'index'])->middleware('auth
  * Relacionar a usuario con cualquier tabla
  */
 Route::post('user-relationship', [UserRelationshipController::class, 'store'])->middleware('auth');
-Route::post('fast-sales/{fastSale}/associated-users',[FastSaleAssociatedUserController::class, 'store'])->middleware('auth');
+Route::post('fast-sales/{fastSale}/associated-users', [FastSaleAssociatedUserController::class, 'store'])->middleware('auth');
 /**
  * Commissions
  */
@@ -172,17 +172,17 @@ Route::put('product-bonuses/{productBonus}', [ProductBonusController::class, 'up
  * customer bonuses
  */
 Route::post('fast-sales-customer-bonuses', [FastSaleCustomerBonusController::class, 'store'])->middleware('auth');
-Route::put('fast-sales/{sale}/customer-bonuses', [FastSaleCustomerBonusController::class,'update'])->middleware('auth');
-Route::delete('fast-sales/{sale}/customer-bonuses',[FastSaleCustomerBonusController::class,'destroy'])->middleware('auth');
+Route::put('fast-sales/{sale}/customer-bonuses', [FastSaleCustomerBonusController::class, 'update'])->middleware('auth');
+Route::delete('fast-sales/{sale}/customer-bonuses', [FastSaleCustomerBonusController::class, 'destroy'])->middleware('auth');
 /***
  * Settings
  */
 
 Route::get('settings', [SettingController::class, 'index'])->middleware('auth');
-Route::put('settings/{setting}',[SettingController::class, 'update'])->middleware('auth');
+Route::put('settings/{setting}', [SettingController::class, 'update'])->middleware('auth');
 
 /**
  * Barcode
  */
 
-Route::get('barcode', [BarcodeController::class, 'index'])->middleware('auth');
+Route::get('barcode/{product:sku}', [ProductBarcodeController::class, 'show'])->middleware('auth');

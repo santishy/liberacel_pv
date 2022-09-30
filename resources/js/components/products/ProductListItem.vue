@@ -11,7 +11,12 @@
             </div>
         </td>
         <td>
-            {{ product.sku }}
+            <div class="flex justify-center items-center">
+                <span class="mr-2">{{ product.sku }}</span>
+                <a :href="`/barcode/${product.sku}`" class="text-blue-700 "> 
+                    <barcode/>
+                </a>
+            </div>
         </td>
         <td>
             {{ product.category_name }}
@@ -52,6 +57,7 @@
 import AddToPurchase from "../purchases/AddToPurchase.vue";
 import AddToSale from "../sales/AddToSale.vue";
 import EditProduct from "./EditProduct.vue";
+import Barcode from "../icons/Barcode.vue";
 import RemoveProductComponent from "./RemoveProductComponent.vue";
 import { mapState } from "vuex";
 export default {
@@ -66,6 +72,7 @@ export default {
     components: {
         AddToPurchase,
         AddToSale,
+        Barcode,
         EditProduct,
         RemoveProductComponent,
     },

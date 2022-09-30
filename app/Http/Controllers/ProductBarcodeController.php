@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProductBarcodeController extends Controller
 {
-    function __invoke(Product $product)
+    function show(Product $product)
     {
         $pdf = PDF::loadView(
             'barcode/product_barcode.pdf',
