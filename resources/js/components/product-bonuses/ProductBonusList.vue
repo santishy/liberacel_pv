@@ -1,7 +1,6 @@
 <template>
     <div>
-        <table
-            class="
+        <table class="
                 min-w-full
                 border-collapse
                 block
@@ -9,11 +8,9 @@
                 shadow-sm
                 text-center
                 rounded-lg
-            "
-        >
+            ">
             <thead class="block md:table-header-group">
-                <tr
-                    class="
+                <tr class="
                         border-b border-gray-500
                         rounded-t-sm
                         md:border-none
@@ -24,10 +21,8 @@
                         md:top-auto
                         -left-full
                         md:left-auto md:relative
-                    "
-                >
-                    <th
-                        class="
+                    ">
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -36,12 +31,10 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Categoría/Producto
                     </th>
-                    <th
-                        class="
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -50,19 +43,27 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Puntos
                     </th>
-                    
+                    <th class="
+                    bg-blue-700
+                    p-2
+                    text-white
+                    font-semibold
+                    md:border md:border-grey-500
+                    text-left
+                    block
+                    md:table-cell
+                ">
+                        Desactivar
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <product-bonus-item
-                    v-for="productBonus in productBonuses"
-                    :key="productBonus.id"
-                    :product-bonus="productBonus"
-                ></product-bonus-item>
+                <product-bonus-item v-for="(productBonus,index) in productBonuses" :key="productBonus.id"
+                    :product-bonus="productBonus" :index="index">
+                </product-bonus-item>
             </tbody>
         </table>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -82,11 +83,15 @@ export default {
             productBonuses: [],
         };
     },
-    mounted(){
-        EventBus.$on('bonus-created',productBonus => {
+    mounted() {
+        EventBus.$on('bonus-created', productBonus => {
             this.productBonuses.unshift(productBonus);
-            EventBus.$emit('open-modal',false);
-        })
+            EventBus.$emit('open-modal', false);
+        });
+        EventBus.$on('removed-product-bonus',index => {
+            console.log('entro : ' + index)
+            this.productBonuses.splice(index,1);
+        });
     },
     methods: {
         infiniteHandler($state) {
@@ -97,7 +102,6 @@ export default {
                     },
                 })
                 .then((res) => {
-                    console.log(res)
                     if (res.data.data.length) {
                         this.page += 1;
                         this.productBonuses.push(...res.data.data);

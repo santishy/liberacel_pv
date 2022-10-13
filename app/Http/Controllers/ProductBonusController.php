@@ -11,7 +11,7 @@ class ProductBonusController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            $productBonuses = ProductBonus::orderBy('id', 'desc')->paginate();
+            $productBonuses = ProductBonus::where('status',true)->orderBy('id', 'desc')->paginate();
             return $productBonuses;
         }
         return view('product-bonus.index');
@@ -31,5 +31,12 @@ class ProductBonusController extends Controller
             'points' => $request->points
         ]);
         return $productBonus;
+    }
+    public function destroy(ProductBonus $productBonus)
+    {
+        $removedProductBonus = $productBonus->update(['status' => false]);
+        return response()->json([
+            'removedProductBonus' => $removedProductBonus
+        ]);
     }
 }

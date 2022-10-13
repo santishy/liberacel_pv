@@ -167,6 +167,7 @@ Route::put('user-commissions/{commission}', [UserCommissionsController::class, '
 Route::get('product-bonuses', [ProductBonusController::class, 'index'])->middleware('auth');
 Route::post('product-bonuses', [ProductBonusController::class, 'store'])->middleware('auth');
 Route::put('product-bonuses/{productBonus}', [ProductBonusController::class, 'update'])->middleware('auth');
+Route::delete('product-bonuses/{productBonus}', [ProductBonusController::class, 'destroy'])->middleware('auth');
 
 /**
  * customer bonuses
