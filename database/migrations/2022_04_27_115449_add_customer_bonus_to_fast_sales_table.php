@@ -29,7 +29,7 @@ class AddCustomerBonusToFastSalesTable extends Migration
     public function down()
     {
         Schema::table('fast_sales', function (Blueprint $table) {
-            $table->dropForeign('customer_bonus_id');
+            $table->dropForeign(['customer_bonus_id']);
         });
     }
 }

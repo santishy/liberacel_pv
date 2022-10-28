@@ -17,15 +17,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-        Role::truncate();
-        Ticket::truncate();
-        Inventory::truncate();
-        Inventory::factory()->create();
-        Ticket::factory()->create();
-        $adminRole = Role::create(['name' => 'admin']);
+        //User::truncate();
+        //Role::truncate();
+        //Ticket::truncate();
+        // Inventory::truncate();
+        // Inventory::factory()->create();
+        //Ticket::factory()->create();
+        $adminRole = Role::where('name','admin');
+        if(!$adminRole->exists())
+            $adminRole = Role::create(['name' => 'admin']);
+        else
+            $adminRole = $adminRole->first();
+
         $user = new User;
-        $user->email = 'santi_shy@hotmail.com';
+        $user->email = 'admin@saeseg.app';
         $user->name = 'Santiago Martín OE';
         $user->username = 'admin';
         $user->password = 'san10mar';//bcrypt('san10mar');

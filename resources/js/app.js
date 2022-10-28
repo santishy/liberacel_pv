@@ -1,5 +1,5 @@
 require('./bootstrap');
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 window.EventBus = new Vue();
 import Vuex from 'vuex'
 
@@ -53,7 +53,7 @@ Vue.component('role-component', require('./components/auth/RoleComponent.vue').d
 //permissions
 Vue.component('permission-list', require('./components/auth/PermissionList.vue').default);
 
-//users 
+//users
 Vue.component('user-list', require('./components/users/UserList.vue').default);
 
 //inventories
@@ -88,7 +88,7 @@ Vue.component('fast-sales-reports',require('./components/fast-sales/FastSalesRep
 Vue.component('commissions-index',require('./components/commissions/CommissionIndex.vue').default);
 
 /**
-* Product Bonuses 
+* Product Bonuses
 */
 Vue.component('all-product-bonuses',require('./components/product-bonuses/AllProductBonuses.vue').default);
 
