@@ -13,7 +13,9 @@ export default {
         sale: {type:Object},
     },
     methods: {
-        destroy() {
+        destroy(e) {
+
+            console.log(e.keyCode);
             axios.delete("/sales/" + this.sale.id ).then(res => {
                 if(res.data.saleDeleted){
                     EventBus.$emit('sale-deleted',res.data.saleDeleted)

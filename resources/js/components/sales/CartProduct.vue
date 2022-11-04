@@ -1,61 +1,64 @@
 <template>
-    <form @submit.prevent="submit">
-        <div
-            class="mt-2 flex  
-                flex-wrap items-center justify-center bg-gray-200 px-2 py-4 rounded"
-        >
-            <p
-                class="text-gray-700 text-center w-full col-span-2 flex-none font-semibold"
-            >
-                {{ product.sku }}
-            </p>
-            <p
-                class="text-gray-700 text-center mb-2 w-full col-span-2 flex-none "
-            >
-                {{ product.description }}
-            </p>
-
-            <div class="w-1/3 flex-grow">
-                <label> Cantidad </label>
-            </div>
-            <div class="w-2/3 flex-grow">
-                <input
-                    v-model="form.qty"
-                    name="qty"
-                    class="appearance-none bg-white border-gray-600 border-2 rounded-sm w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                    type="number"
-                    placeholder="Cantidad de venta"
-                    aria-label="Full name"
-                />
-            </div>
-            <div class="w-1/3 flex-grow mt-2">
-                <label> Precio </label>
-            </div>
-            <div class="w-2/3 flex-grow mt-2">
-                <input
-                    v-model="form.sale_price"
-                    name="qty"
-                    class="appearance-none bg-white border-gray-600 border-2 rounded-sm w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                    type="text"
-                    placeholder="Precio de venta"
-                    aria-label="Full name"
-                />
-            </div>
+    <div class="flex flex-wrap">
+        <delete-sale-product :id="product.id"> </delete-sale-product>
+        <form @submit.prevent="submit">
             <div
-                v-if="saleStatus === 'pending'"
-                class="w-full flex flex-wrap justify-center"
+                class="mt-2 flex
+                    flex-wrap items-center justify-center bg-gray-200 px-2 py-4 rounded"
             >
-                <delete-sale-product :id="product.id"> </delete-sale-product>
-                <button
-                    type="submit"
-                    class=" bg-blue-300 font-semibold mt-2 rounded transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-2/3 "
+                <p
+                    class="text-gray-700 text-center w-full col-span-2 flex-none font-semibold"
                 >
-                    <edit-icon></edit-icon>
-                    Modificar
-                </button>
+                    {{ product.sku }}
+                </p>
+                <p
+                    class="text-gray-700 text-center mb-2 w-full col-span-2 flex-none "
+                >
+                    {{ product.description }}
+                </p>
+
+                <div class="w-1/3 flex-grow">
+                    <label> Cantidad </label>
+                </div>
+                <div class="w-2/3 flex-grow">
+                    <input
+                        v-model="form.qty"
+                        name="qty"
+                        class="appearance-none bg-white border-gray-600 border-2 rounded-sm w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                        type="number"
+                        placeholder="Cantidad de venta"
+                        aria-label="Full name"
+                    />
+                </div>
+                <div class="w-1/3 flex-grow mt-2">
+                    <label> Precio </label>
+                </div>
+                <div class="w-2/3 flex-grow mt-2">
+                    <input
+                        v-model="form.sale_price"
+                        name="qty"
+                        class="appearance-none bg-white border-gray-600 border-2 rounded-sm w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                        type="text"
+                        placeholder="Precio de venta"
+                        aria-label="Full name"
+                    />
+                </div>
+                <div
+                    v-if="saleStatus === 'pending'"
+                    class="w-full flex flex-wrap justify-end"
+                >
+
+                    <button
+                        type="submit"
+                        class="flex flex-wrap items-center justify-center bg-blue-300 font-semibold mt-2 rounded transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-2/3 "
+                    >
+                        <edit-icon class="mr-2"></edit-icon>
+                        Modificar
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -92,7 +95,7 @@ export default {
             if (this.isAdmin)
                 this.form.inventory_id = sessionStorage.getItem("inventory_id");
             else {
-                thi.form.inventory_id = this.user.inventory_id;
+                this.form.inventory_id = this.user.inventory_id;
             }
             axios
                 .post(`/sales/${this.product.id}/products`, this.form)

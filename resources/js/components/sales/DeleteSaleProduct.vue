@@ -20,7 +20,10 @@ export default {
         }
     },
     methods: {
-        destroy() {
+        destroy(e) {
+            if(e.keyCode == 13)
+                return;
+            console.log(e.keyCode)
             axios
                 .delete(`/sales/${this.id}/products`)
                 .then(res => {
