@@ -151,6 +151,10 @@ export default {
                 {
                     name: "Comprar productos",
                     url: "/products/?queryType=toBuy"
+                },
+                {
+                    name: "Editar productos",
+                    url: "/products/?queryType=list"
                 }
             ],
             ExpressMenu:[

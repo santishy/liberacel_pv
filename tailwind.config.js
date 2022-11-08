@@ -4,10 +4,7 @@ module.exports = {
         // purgeLayersByDefault: true,
     },
     content: [
-        './public/css/*.css',
-        './public/js/*.js',
         './resources/js/components/*.vue',
-        './storage/framework/views/*.php',
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
