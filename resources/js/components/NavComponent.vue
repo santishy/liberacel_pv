@@ -31,6 +31,11 @@
                         :items="InventoryMenu"
                         class="md:relative"
                     />
+                    <dropdown-component
+                        name="Egresos"
+                        :items="ExpensesMenu"
+                        class="md:relative"
+                    />
                     <a
                         v-if="purchase"
                         :href="purchase ? `/purchases/${purchase}` : '#'"
@@ -125,6 +130,16 @@ export default {
                 {
                     name: "Catalago clientes",
                     url: "/clients"
+                }
+            ],
+            ExpensesMenu: [
+                {
+                    name: "Nuevo egreso",
+                    url: "/expenses/create"
+                },
+                {
+                    name: "Todos los egresos",
+                    url: "/expenses"
                 }
             ],
             InventoryMenu: [

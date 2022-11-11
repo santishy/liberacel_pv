@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -40,12 +40,12 @@ Route::get('home', function () {
     return view('dashboard');
 });
 
-//productos 
+//productos
 
 
 Route::resource('products', ProductController::class)->middleware('auth');
 
-//productos en venta 
+//productos en venta
 
 Route::post('sales/{product}/products', [ProductInSaleController::class, 'store'])->middleware('auth');
 Route::put('sales/{product}/products', [ProductInSaleController::class, 'update'])->middleware('auth');
@@ -56,7 +56,7 @@ Route::delete('sales/{product}/products', [ProductInSaleController::class, 'dest
 Route::get('searching-products', [ProductsSearchController::class, 'index'])->name('searching-produts.index')->middleware('auth');
 
 
-// compras 
+// compras
 
 Route::resource('purchases', PurchaseController::class)->middleware('auth');
 
@@ -65,7 +65,7 @@ Route::resource('purchases', PurchaseController::class)->middleware('auth');
 Route::put('products-in-purchases/{product}', [ProductInPurchaseController::class, 'update'])->middleware('auth');
 Route::delete('products-in-purchases/{product}', [ProductInPurchaseController::class, 'destroy'])->middleware('auth');
 
-//clientes 
+//clientes
 
 
 Route::resource('clients', ClientController::class)->middleware('auth');
@@ -74,7 +74,7 @@ Route::resource('clients', ClientController::class)->middleware('auth');
 
 Route::post('sales-to-clients', [SaleToClientController::class, 'store'])->middleware('auth');
 
-//categories 
+//categories
 
 Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth');
 Route::post('categories', [CategoryController::class, 'store'])->name('categories.store')->middleware('auth');
@@ -106,7 +106,7 @@ Route::get('users', [UserController::class, 'index'])->middleware('auth');
 Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
 Route::put('users/{user}', [UserController::class, 'update'])->middleware('auth');
 
-//inventories 
+//inventories
 Route::resource('inventories', InventoryController::class)->middleware('auth');
 Route::get('warehouses', [WarehouseController::class, 'index'])->middleware('auth');
 Route::delete('warehouses/{inventory}', [WarehouseController::class, 'destroy'])->middleware('auth');
@@ -187,3 +187,9 @@ Route::put('settings/{setting}', [SettingController::class, 'update'])->middlewa
  */
 
 Route::get('barcode/{product:sku}', [ProductBarcodeController::class, 'show'])->middleware('auth');
+
+/**
+ * Expenses
+ */
+
+ Route::resource('expenses',ExpenseController::class);
