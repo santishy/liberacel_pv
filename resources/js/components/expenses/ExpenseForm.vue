@@ -31,7 +31,7 @@ export default {
     data() {
         return {
             form: {},
-            uri:'/expenses/'
+            uri:'/expenses'
         };
     },
     created(){
@@ -43,7 +43,7 @@ export default {
         submit() {
             if (this.expenseMethodName.toUpperCase() === 'PATCH') {
                 this.form._method = 'PATCH';
-                this.uri = this.uri + this.currentExpense.id;
+                this.uri = this.uri + `/${this.currentExpense.id}`;
             }
             axios.post(this.uri, this.form)
                 .then(res => {
