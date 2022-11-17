@@ -65,8 +65,15 @@ const SET_CURRENT_FAST_SALE = (state, value) => {
 const SET_QUERY_TYPE = (state,value) => {
     state.queryType = value;
 }
-
+const SET_CURRENT_EXPENSE = (state,value) => {
+    state.currentExpense = value;
+}
+const SET_EXPENSE_METHOD_NAME = (state,value) => {
+    state.expenseMethodName = value;
+}
 export default {
+    SET_EXPENSE_METHOD_NAME,
+    SET_CURRENT_EXPENSE,
     SET_CURRENT_FAST_SALE,
     setProductsInPurchase,
     SET_USER,

@@ -25,28 +25,52 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
+
     data() {
         return {
             form: {},
+            uri:'/expenses/'
         };
+    },
+    created(){
+        if(this.currentExpense){
+            this.form = this.currentExpense;
+        }
     },
     methods: {
         submit() {
-            axios.post('/expenses', this.form)
+            if (this.expenseMethodName.toUpperCase() === 'PATCH') {
+                this.form._method = 'PATCH';
+                this.uri = this.uri + this.currentExpense.id;
+            }
+            axios.post(this.uri, this.form)
                 .then(res => {
                     if (res.data.data) {
                         this.notify({
                             title: "Egresos",
-                            message: "Egreso agregado",
+                            message: this.getNotificationText,
                         });
-                        this.form={}
+                        if(this.expenseMethodName.toUpperCase() === 'POST')
+                            this.form = {}
                     }
                 })
                 .catch(err => {
                     console.log(err);
                     this.getErrors(err);
                 });
+        }
+    },
+    computed:{
+        ...mapState(["expenseMethodName","currentExpense"]),
+        getNotificationText(){
+            if(this.expenseMethodName.toUpperCase() === 'POST'){
+                return 'Egreso agregado';
+            }
+            else{
+                return 'Egreso modificado';
+            }
         }
     }
 };

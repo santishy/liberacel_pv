@@ -23,6 +23,13 @@ class UserSeeder extends Seeder
         // Inventory::truncate();
         // Inventory::factory()->create();
         //Ticket::factory()->create();
+        if(Ticket::count() === 0){
+            Ticket::factory()->create();
+        }
+        if(Inventory::count() === 0)
+        {
+            Inventory::factory()->create();
+        }
         $adminRole = Role::where('name','admin');
         if(!$adminRole->exists())
             $adminRole = Role::create(['name' => 'admin']);

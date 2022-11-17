@@ -30,6 +30,14 @@ export default {
             page: 1,
         };
     },
+    created(){
+        EventBus.$on('expense-removed', (index) => {
+            if(index)
+            {
+                this.expenses.splice(index,1);
+            }
+        })
+    },
     methods: {
         getExpenses($state) {
             axios

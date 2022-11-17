@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ExpenseResource;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ExpenseController extends Controller
     public function index()
     {
         if (request()->wantsJson())
-            return Expense::paginate();
+            return ExpenseResource::collection(Expense::paginate());
         return view('expenses.index');
     }
 
@@ -37,24 +38,26 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'concept' => ['required'],
-            'amount' => ['required', 'numeric']
-        ],
-    [
-        'concept.required' => 'El concepto es requerido.',
-        'amount.required' => 'El importe es requerido.',
-        'amount.numeric' => 'El campo amount debe ser numerico'
-    ]);
+        $data = $request->validate(
+            [
+                'concept' => ['required'],
+                'amount' => ['required', 'numeric']
+            ],
+            [
+                'concept.required' => 'El concepto es requerido.',
+                'amount.required' => 'El importe es requerido.',
+                'amount.numeric' => 'El campo amount debe ser numerico'
+            ]
+        );
         $expense = Expense::create(
             $data
         );
         return response()->json([
             'data' =>   [
-                            'created_at' => $expense->created_at->format('Y-m-d H:m:s'),
-                            'concept' => $expense->concept,
-                            'amount' => $expense->amount
-                        ]
+                'created_at' => $expense->created_at->format('Y-m-d H:m:s'),
+                'concept' => $expense->concept,
+                'amount' => $expense->amount
+            ]
         ]);
     }
     /**
@@ -76,7 +79,7 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        //
+        return view('expenses.edit', compact('expense'));
     }
 
     /**
@@ -88,7 +91,16 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        //
+        $data = $request->validate([
+            "amount" => "numeric",
+            "concept" => "string"
+        ]);
+        $expense->update($data);
+
+        return response()->json([
+            'data' => $expense
+        ]);
+
     }
 
     /**
@@ -99,6 +111,7 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        $expense->delete();
+        return response()->json(null,204);
     }
 }

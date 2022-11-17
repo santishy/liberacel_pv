@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <create-expense></create-expense>
+    <create-expense method="POST"></create-expense>
 @endsection

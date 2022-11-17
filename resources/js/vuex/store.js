@@ -20,6 +20,8 @@ export const store = new Vuex.Store({
         modalDataConfirm: {},
         electronicMoney:null,
         currentFastSale:{},
+        expenseMethodName:null,
+        currentExpense:null,
         purchaseVisibility:
             window.localStorage
                 .getItem("allow-to-buy-new-product")
