@@ -4,7 +4,14 @@
             <div v-if="localSale != null">
                 <div
                     v-show="products.length"
-                    class=" flex flex-wrap justify-center items-center text-center mb-2 bg-teal-100"
+                    class="
+                        flex flex-wrap
+                        justify-center
+                        items-center
+                        text-center
+                        mb-2
+                        bg-teal-100
+                    "
                 >
                     <label class="mr-4 text-2xl">Total</label>
                     <p class="text-gray-700 text-3xl">${{ getTotal }}</p>
@@ -21,44 +28,61 @@
             <div class="flex flex-wrap justify-center">
                 <button
                     v-show="products.length"
-                    class=" rounded transition-all duration-500 ease-in-out  font-semibold hover:text-black py-2 px-4 border-l-2 border-r-2 border-green-500 hover:bg-red-500 hover:border-transparent md:w-2/4 w-full"
+                    class="
+                        rounded
+                        transition-all
+                        duration-500
+                        ease-in-out
+                        font-semibold
+                        hover:text-black
+                        py-2
+                        px-4
+                        border-l-2 border-r-2 border-green-500
+                        hover:bg-red-500 hover:border-transparent
+                        md:w-2/4
+                        w-full
+                    "
                     :class="[getClass]"
                 >
                     Cambiar a {{ modifyTo }}
                 </button>
             </div>
         </form>
-        <div v-if="localSale !== null">
-            <cart-product
-                v-for="(product, index) in products"
-                :key="product.id"
-                :product="product"
-                :sale-status="getStatus"
-                :index="index"
-            >
-            </cart-product>
+        <div v-if="localSale !== null" class="overflow-x-auto relative">
+            <product-list>
+                <product-list-item
+                    v-for="(product, index) in products"
+                    :key="product.id"
+                    :product="product"
+                    :sale-status="getStatus"
+                    :index="index"
+                >
+                </product-list-item>
+            </product-list>
         </div>
     </div>
 </template>
+
 <script>
-import CartProduct from "./CartProduct";
+import ProductListItem from "./ProductListItem";
+import ProductList from "./ProductList.vue";
 import { mapMutations } from "vuex";
 import Errors from "../../mixins/Errors";
 
 export default {
-    components: { "cart-product": CartProduct },
+    components: { ProductListItem, ProductList },
     mixins: [Errors],
     data() {
         return {
             form: {},
             products: [],
-            localSale: {}
+            localSale: {},
         };
     },
     props: {
         sale: {
-            type: Object
-        }
+            type: Object,
+        },
     },
     created() {
         if (this.sale != null) {
@@ -67,27 +91,28 @@ export default {
         }
     },
     mounted() {
-        EventBus.$on("updated-sales-product", obj => {
+        EventBus.$on("updated-sales-product", (obj) => {
             this.products[obj.index].sale_quantity = obj.transaction.qty;
             this.products[obj.index].sale_price = obj.transaction.sale_price;
         });
-        EventBus.$on("product-added-sales-cart", res => {
+        EventBus.$on("product-added-sales-cart", (res) => {
             this.localSale = res;
             this.products = res.products;
         });
-        EventBus.$on("product-removed", index => {
+        EventBus.$on("product-removed", (index) => {
             this.products.splice(index, 1);
         });
-        EventBus.$on("sale-deleted", res => {
+        EventBus.$on("sale-deleted", (res) => {
             if (res) {
                 this.products = [];
                 this.localSale = {};
                 this.form = {};
             }
         });
-        EventBus.$on("sale-to-client", data => {
+        EventBus.$on("sale-to-client", (data) => {
             this.localSale = data.sale;
         });
+        EventBus.$on("update-cart",data => this.updateCart(data))
     },
     computed: {
         getClass() {
@@ -98,7 +123,7 @@ export default {
         },
         getTotal() {
             var total = 0;
-            this.products.map(product => {
+            this.products.map((product) => {
                 total += product.sale_price * product.sale_quantity;
             });
             return total.toFixed(2);
@@ -110,7 +135,7 @@ export default {
         },
         getStatus() {
             return this.localSale.status;
-        }
+        },
     },
     methods: {
         submit() {
@@ -121,23 +146,36 @@ export default {
             else this.form.status = "pending";
             axios
                 .post(`/sales/${this.localSale.id}`, this.form)
-                .then(res => {
+                .then((res) => {
                     this.localSale.status = res.data.sale_status;
                     if (this.localSale.status == "completed") {
                         sessionStorage.removeItem("salePriceOption");
                     }
-                    window.open(`/pdf-tickets/${this.localSale.id}`, '_blank');
+                    window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
                 })
-                .catch(err => {
+                .catch((err) => {
                     this.getErrors(err);
                     this.$notify({
                         group: "foo",
                         title: "Error",
                         type: "error",
-                        text: this.errors[0]
+                        text: this.errors[0],
                     });
                 });
+        },
+        async updateCart(data){
+            try{
+
+                const res = await axios.post(`/sales/${data?.product_id}/products`,
+                    {_method:'put',...data}
+                    );
+                EventBus.$emit('enabled');
+
+            }catch(error)
+            {
+                console.log(error);
+            }
         }
-    }
+    },
 };
 </script>

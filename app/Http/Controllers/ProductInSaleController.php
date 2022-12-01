@@ -39,14 +39,12 @@ class ProductInSaleController extends Controller
     {
         $this->authorize('update',  $sale = Sale::find(session()->get('sale_id')));
         $fields = $request->validate([
-            'qty' => 'numeric|required|min:1',
-            'sale_price' => 'numeric|required|min:1',
+            'qty' => 'numeric|min:1',
+            'sale_price' => 'numeric|min:1',
             'product_id' => 'required|exists:product_sale,product_id'
         ]);
 
         Inventory::find($request->inventory_id)->hasStock($product, $request->qty);
-
-
 
         $sale->products()
             ->updateExistingPivot(
@@ -65,7 +63,7 @@ class ProductInSaleController extends Controller
          * pongo el update ya que en si es actualizar la compra aun que borre elementos de la tabla pivot
          */
         $this->authorize('update',new Sale);
-        
+
         if (!session()->exists('sale_id'))
             return new SessionInactive('venta');
 
