@@ -71,5 +71,12 @@ return [
 
     //permissions to commissions
     'view user commissions' => 'Ver comisiones',
-    'edit user commission' => 'Editar comisión'
+    'edit user commission' => 'Editar comisión',
+
+    //permissions to expenses
+    'view expenses' => 'Ver egresos',
+    'view gasto' => 'Ver egreso',
+    'create expense' => 'Crear egreso',
+    'edit expense' => 'Editar egreso',
+    'delete expense' => 'Eliminar egreso'
 ];

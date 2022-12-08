@@ -11,7 +11,7 @@ class ProductPolicy
 {
     use HandlesAuthorization;
     use HasAdministrator;
-    
+
 
     /**
      * Determine whether the user can view any models.

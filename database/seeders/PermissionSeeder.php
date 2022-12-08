@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -16,8 +17,12 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        //app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('permissions')->delete();
         Permission::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // permissions to products
         Permission::create(['name' => 'create product']);
         Permission::create(['name' => 'view product']);
@@ -86,8 +91,15 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'delete fast sale product']);
         Permission::create(['name' => 'cancel fast sale']);
 
-        //permissions to commissions 
+        //permissions to commissions
         Permission::create(['name' => 'view user commissions']);
         Permission::create(['name' => 'edit user commission']);
+
+        //permissions to expenses
+        Permission::create(['name' => 'create expense']);
+        Permission::create(['name' => 'view expense']);
+        Permission::create(['name' => 'view expenses']);
+        Permission::create(['name' => 'edit expense']);
+        Permission::create(['name' => 'delete expense']);
     }
 }
