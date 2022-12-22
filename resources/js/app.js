@@ -105,6 +105,11 @@ Vue.component('setting-component', require('./components/settings/SettingCompone
 Vue.component('expenses-component',require('./components/expenses/ExpensesComponent.vue').default);
 Vue.component('create-expense',require('./components/expenses/CreateExpense.vue').default);
 
+/**
+ * refunds
+ */
+Vue.component('create-refund',require('./components/refunds/Create.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))

@@ -24,9 +24,12 @@ class SaleController extends Controller
     {
         $this->authorize('viewAny',new Sale);
 
+        //return response()->json(['ok' => request('filter')]);
+
         if (request()->wantsJson()) {
             return new ReportResponse(Sale::query());
         }
+
         $inventories = Inventory::all('id','name');
 
         return view('transactions.index', [
@@ -38,7 +41,6 @@ class SaleController extends Controller
     public function create()
     {
         $this->authorize('create',new Sale);
-
         $sale = Sale::with('client')->where('id', session('sale_id'))->first();
         $inventories = Inventory::all();
         $categories = Category::all();

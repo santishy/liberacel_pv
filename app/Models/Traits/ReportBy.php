@@ -42,7 +42,7 @@ trait ReportBy
     public function scopeBetweenDates(Builder $query,$value){
 
         $dates = str::of($value)->explode(',');
-        
+
         $query->whereBetween(DB::raw('Date(created_at)'),[$dates[0],$dates[1]]);
 
     }
@@ -65,5 +65,8 @@ trait ReportBy
         if (count($warehouses)) {
             $query->whereIn('inventory_id', $warehouses);
         }
+    }
+    public function scopeSearchById(Builder $query,$id){
+        $query->where('id',$id);
     }
 }

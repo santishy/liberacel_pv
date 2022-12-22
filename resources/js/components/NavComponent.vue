@@ -55,6 +55,12 @@
                     >
                         Ventas
                     </a>
+                    <a
+                    href="/refunds/create"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg"
+                >
+                    Devoluciones
+                </a>
                     <dropdown-component
                         name="Expres"
                         :items="ExpressMenu"

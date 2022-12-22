@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -46,7 +46,7 @@ Route::get('home', function () {
 Route::resource('products', ProductController::class)->middleware('auth');
 
 //productos en venta
-
+Route::get('sale-with-products',[ProductInSaleController::class,'index'])->middleware('auth');
 Route::post('sales/{product}/products', [ProductInSaleController::class, 'store'])->middleware('auth');
 Route::put('sales/{product}/products', [ProductInSaleController::class, 'update'])->middleware('auth');
 Route::delete('sales/{product}/products', [ProductInSaleController::class, 'destroy'])->middleware('auth');
@@ -192,4 +192,10 @@ Route::get('barcode/{product:sku}', [ProductBarcodeController::class, 'show'])->
  * Expenses
  */
 
- Route::resource('expenses',ExpenseController::class);
+Route::resource('expenses', ExpenseController::class);
+
+/**
+ * Refunds
+ */
+
+Route::get('refunds/create',[RefundController::class,'create'])->middleware('auth');

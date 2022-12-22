@@ -42,7 +42,7 @@ class Sale extends Model
         return $this->belongsToMany('App\Models\Product')->withPivot('qty', 'sale_price');
     }
 
-    
+
 
     public function productInTransaction($product)
     {
@@ -61,8 +61,10 @@ class Sale extends Model
                 ]
             );
     }
-    
+
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+
 }

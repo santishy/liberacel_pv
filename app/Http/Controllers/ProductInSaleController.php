@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\TransactionResource;
 use App\Http\Responses\SessionInactive;
 use App\Http\Responses\TransactionResponse;
 use App\Http\Traits\HasTransaction;
@@ -17,7 +18,15 @@ class ProductInSaleController extends Controller
 
     use HasTransaction;
 
-
+    public function index(){
+        if(request()->wantsJson()){
+            $sale = TransactionResource::make(sale::with('client','products')->applyFilters()->first());
+            session()->put('sale_id',$sale->id);
+            return response()->json([
+                'sale' => $sale
+            ]);
+        }
+    }
     public function store(Request $request, Product $product)
     {
         $this->authorize('create', new Sale);
