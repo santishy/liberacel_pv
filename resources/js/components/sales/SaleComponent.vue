@@ -2,7 +2,7 @@
     <nav-component>
         <transition name="fade">
             <div
-                v-if="seletedInventoryId == null && isAdmin"
+                v-if="seletedInventoryId == null && (isAdmin && !localSale.inventory_id)"
                 class="flex flex-col justify-center mx-auto px-4 w-full"
             >
                 <p
@@ -175,7 +175,7 @@ export default {
         return {
             seletedInventoryId: null,
             show: false,
-            localSale: null,
+            localSale: {},
         };
     },
     methods:{

@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="submit" v-can="'create sale'">
-            <div v-if="localSale != null">
+            <div v-if="Object.keys(localSale).length">
                 <div
                     v-show="products.length"
                     class="
@@ -173,7 +173,13 @@ export default {
 
             }catch(error)
             {
-                console.log(error);
+                this.getErrors(error);
+                this.$notify({
+                    group: "foo",
+                    title: "Error",
+                    type: "error",
+                    text: this.errors[0],
+                });
             }
         }
     },

@@ -31,7 +31,10 @@ class Sale extends Model
     public function scopeFindOrCreateTheTransaction(Builder $query)
     {
         if (!session()->has('sale_id')) {
-            $sale = $query->create(['user_id' => auth()->id()]);
+            $sale = $query->create([
+                'user_id' => auth()->id(),
+                'inventory_id' => request('inventory_id', null)
+            ]);
             session()->put('sale_id', $sale->id);
         }
         return $query->find(session()->get('sale_id'));
@@ -62,9 +65,8 @@ class Sale extends Model
             );
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-
-
 }

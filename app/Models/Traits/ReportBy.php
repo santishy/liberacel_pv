@@ -66,7 +66,8 @@ trait ReportBy
             $query->whereIn('inventory_id', $warehouses);
         }
     }
-    public function scopeSearchById(Builder $query,$id){
-        $query->where('id',$id);
+    public function scopeSearchByIdAndCompletedStatus(Builder $query,$id){
+        $query->where('id',$id)
+            ->where('status','completed');
     }
 }

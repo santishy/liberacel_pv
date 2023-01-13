@@ -15,11 +15,11 @@ trait HasStock{
             if($product->pivot->stock >  $qty || $product->pivot->stock == $qty)
                 return $product->pivot->stock;
         }
-                
+
         throw ValidationException::withMessages([
             'stock' => 'Las existencias no son suficientes'
         ]);
-        
+
     }
 }
 
