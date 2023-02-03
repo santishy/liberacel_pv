@@ -34,7 +34,6 @@ class UpdateInventory
         DB::beginTransaction();
         $event->transaction->products()->get()->map(
             function ($product) use ($inventory, $factor) {
-
                 $productInTransaction = $inventory->products()->wherePivot('product_id', $product->id);
                 if ($productInTransaction->exists()) {
 
@@ -53,7 +52,7 @@ class UpdateInventory
                     $inventory->products()->attach($product->id, ['stock' => $product->pivot->qty]);
                 }
             }
-        
+
         );
         DB::commit();
     }

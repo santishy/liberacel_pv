@@ -66,7 +66,6 @@
 <script>
 import ProductListItem from "./ProductListItem";
 import ProductList from "./ProductList.vue";
-import { mapMutations } from "vuex";
 import Errors from "../../mixins/Errors";
 
 export default {

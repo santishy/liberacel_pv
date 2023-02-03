@@ -17,7 +17,7 @@ export default {
     components:{ InventoryList },
     data() {
         return {
-            uri: '/sale-with-products',
+            uri: '/refunds/sales',
             id: null
         }
     },

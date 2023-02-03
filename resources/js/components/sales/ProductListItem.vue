@@ -1,5 +1,16 @@
 <template>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <product-list-item-base :product="product">
+        <template v-slot:product-qty>
+            <editable-product-quantity :product="product"></editable-product-quantity>
+        </template>
+        <template v-slot:product-price>
+            <editable-product-price :product="product"></editable-product-price>
+        </template>
+        <template v-slot:product-destroy>
+            <delete-sale-product :id="product.id" :index="index"></delete-sale-product>
+        </template>
+    </product-list-item-base>
+    <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <td class="py-4 px-6 w-20">
             <img class="w-100" :src="product?.image_url" :alt="product?.sku" />
         </td>
@@ -10,18 +21,18 @@
             {{ product.description }}
         </td>
         <td class="py-4 px-6">
-            <editable-product-quantity :product="product"></editable-product-quantity>
+
         </td>
         <td class="py-4 px-6">
-            <editable-product-price :product="product"></editable-product-price>
+
         </td>
         <td class="py-4 px-6">
             {{ product.sale_price * product.sale_quantity }}
         </td>
         <td class="py-4 px-6">
-            <delete-sale-product :id="product.id" :index="index"></delete-sale-product>
+
         </td>
-    </tr>
+    </tr> -->
 
 </template>
 
@@ -29,6 +40,7 @@
 import DeleteSaleProduct from "./DeleteSaleProduct.vue";
 import EditableProductQuantity from "./partials/EditableProductQuantity.vue";
 import EditableProductPrice from "./partials/EditableProductPrice.vue";
+import ProductListItemBase from "./ProductListItemBase.vue";
 import { mapState } from "vuex";
 import EditIcon from "../icons/EditIcon.vue";
 export default {
@@ -44,7 +56,11 @@ export default {
             type: String,
         },
     },
-    components: { DeleteSaleProduct, EditIcon, EditableProductQuantity, EditableProductPrice },
+    components:
+    {
+        DeleteSaleProduct, EditIcon,ProductListItemBase,
+        EditableProductQuantity, EditableProductPrice
+    },
     data() {
         return {
             form: {},

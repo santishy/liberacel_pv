@@ -1,0 +1,36 @@
+<template>
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td class="py-4 px-6 w-20">
+            <img class="w-100" :src="product?.image_url" :alt="product?.sku" />
+        </td>
+        <td class="py-4 px-6 font-normal text-gray-800">
+            {{ product.sku }}
+        </td>
+        <td class="py-4 px-6">
+            {{ product.description }}
+        </td>
+        <td class="py-4 px-6">
+            <!-- <editable-product-quantity :product="product"></editable-product-quantity> -->
+            <slot name="product-qty">
+            </slot>
+        </td>
+        <td class="py-4 px-6">
+            <!-- <editable-product-price :product="product"></editable-product-price> -->
+            <slot name="product-price"></slot>
+        </td>
+        <td class="py-4 px-6">
+            {{ product.sale_price * product.sale_quantity }}
+        </td>
+        <td class="py-4 px-6">
+            <slot name="product-destroy"></slot>
+            <!-- <delete-sale-product :id="product.id" :index="index"></delete-sale-product> -->
+        </td>
+    </tr>
+
+</template>
+
+<script>
+export default{
+    props:['product']
+}
+</script>

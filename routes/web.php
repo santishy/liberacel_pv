@@ -199,3 +199,5 @@ Route::resource('expenses', ExpenseController::class);
  */
 
 Route::get('refunds/create',[RefundController::class,'create'])->middleware('auth');
+Route::get('refunds/sales',[RefundController::class,'findSale'])->middleware(('auth'));
+Route::post('refunds',[RefundController::class,'store'])->middleware('auth');

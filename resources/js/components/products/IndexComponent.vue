@@ -2,14 +2,11 @@
     <nav-component>
         <div class="grid  grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-4 ">
             <div class="col-span-4 2xl:col-span-5 flex justify-center items-baseline">
-                
-                <search-by-category
-                    class="md:w-1/4 w-3/4 mr-2"
-                    :categories="categories"
-                ></search-by-category>
+
+                <search-by-category class="md:w-1/4 w-3/4 mr-2" :categories="categories"></search-by-category>
                 <search-component ref="search" class="md:w-1/4 w-3/4 " />
             </div>
-           <!--  <product-card
+            <!--  <product-card
                 v-for="(product, index) in products"
                 :key="product.id"
                 :product="product"
@@ -17,34 +14,21 @@
                 transaction-type="purchase"
                 class="col-span-3 md:col-span-1"
             /> -->
-            <product-list  class="col-span-5">
-                <product-list-item
-                    v-for="(product, index) in products"
-                    :key="product.id"
-                    :product="product"
-                    :index="index"
-                >
+            <product-list class="col-span-5">
+                <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
+                    :index="index">
                 </product-list-item>
             </product-list>
-            <infinite-loading
-                :identifier="infiniteId"
-                @infinite="infiniteHandler"
-            ></infinite-loading>
+            <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"></infinite-loading>
         </div>
         <information-component>
             <template slot="title">
                 Productos
             </template>
 
-            <message
-                :title="modalDataConfirm.title"
-                :message="modalDataConfirm.message"
-            ></message>
+            <message :title="modalDataConfirm.title" :message="modalDataConfirm.message"></message>
             <template slot="button">
-                <agree
-                    :method="modalDataConfirm.action"
-                    @deleteProduct="deleteProduct"
-                ></agree>
+                <agree :method="modalDataConfirm.action" @deleteProduct="deleteProduct"></agree>
             </template>
         </information-component>
     </nav-component>
@@ -106,8 +90,8 @@ export default {
     },
     methods: {
         ...mapActions(["getProducts", "search"]),
-        ...mapMutations(["setModalDataConfirm","SET_QUERY_TYPE"]),
-        getQueryType(){
+        ...mapMutations(["setModalDataConfirm", "SET_QUERY_TYPE"]),
+        getQueryType() {
             let url = new URL(window.location.href);
             this.SET_QUERY_TYPE(url.searchParams.get('queryType'));
         },
@@ -125,7 +109,7 @@ export default {
                         $state.complete();
                     }
                 })
-                .catch(err => {});
+                .catch(err => { });
         },
         matchingProducts(data) {
             this.products = data.products;

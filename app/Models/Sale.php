@@ -14,7 +14,14 @@ class Sale extends Model
     use HasFactory, ReportBy;
 
     protected $guarded = ['id'];
-
+    public function refunds()
+    {
+        return $this->morphMany(Refund::class, 'refundable');
+    }
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
+    }
     public function scopeAdd(Builder $query)
     {
         $query->attach(request()->product_id, [
@@ -68,5 +75,19 @@ class Sale extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function refundProduct($product_id,$qty)
+    {
+        $this->products()->updateExistingPivot($product_id, [
+            'qty' => $qty
+        ]);
+        $isQtyZero = $this->products()
+            ->wherePivot('product_id', $product_id)
+            ->wherePivot('qty', 0)->exists();
+
+        if($isQtyZero){
+            $this->products()->detach($product_id);
+        }
     }
 }

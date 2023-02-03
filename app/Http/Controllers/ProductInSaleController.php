@@ -20,22 +20,22 @@ class ProductInSaleController extends Controller
 
     use HasTransaction;
 
-    public function index()
-    {
-        if (request()->wantsJson()) {
-            $sale = sale::with('client', 'products')->applyFilters();
-            if ($sale->count() <= 0) {
-                throw ValidationException::withMessages([
-                    'id' => 'La venta no fue encontrada o el estado no es completado.'
-                ]);
-            }
-                $sale = $sale->first();
-                session()->put('sale_id', $sale->id);
-                return response()->json([
-                    'sale' => TransactionResource::make($sale)
-                ]);
-        }
-    }
+    // public function index()
+    // {
+    //     if (request()->wantsJson()) {
+    //         $sale = sale::with('client', 'products')->applyFilters();
+    //         if ($sale->count() <= 0) {
+    //             throw ValidationException::withMessages([
+    //                 'id' => 'La venta no fue encontrada o el estado no es completado.'
+    //             ]);
+    //         }
+    //         $sale = $sale->first();
+    //         session()->put('sale_id', $sale->id);
+    //         return response()->json([
+    //             'sale' => TransactionResource::make($sale)
+    //         ]);
+    //     }
+    // }
     public function store(Request $request, Product $product)
     {
         $sale = Sale::getTransaction();
@@ -61,11 +61,11 @@ class ProductInSaleController extends Controller
             'qty' => 'numeric|min:1',
             'sale_price' => 'numeric|min:1',
             'product_id' => 'required|exists:product_sale,product_id',
-            //'inventory_id' => [ new TransactionInventory($sale)]
         ]);
 
-        //Inventory::find($request->inventory_id)->hasStock($product, $request->qty);
+
         Inventory::find($sale->inventory_id)->hasStock($product, $request->qty);
+
         $sale->products()
             ->updateExistingPivot(
                 $request->product_id,
