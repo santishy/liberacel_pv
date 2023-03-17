@@ -1,0 +1,65 @@
+<template>
+    <div>
+        <a
+            href="#"
+            @click.prevent="toggle"
+            class="w-full flex text-xl font-semibold"
+            :class="[titleFontColor]"
+        >
+            <span class="mr-2">
+                <slot name="icon"></slot>
+            </span>
+            {{ title }}</a
+        >
+        <transition
+            name="expand"
+            @enter="enter"
+            @after-enter="afterEnter"
+            @leave="leave"
+        >
+            <ul v-if="isOpen" class=" py-2 ">
+                <li
+                    v-for="item in menu"
+                    :key="item.url"
+                    class="pl-8 pr-2w-full bg-gray-300 border-b border-purple-800 last:border-b-0"
+                >
+                    <a :href="item.url" class="block w-full px-0 py-1" :class="[itemFontColor]"> {{ item.name }} </a>
+                </li>
+            </ul>
+        </transition>
+    </div>
+</template>
+<script>
+export default {
+    props: ["title", "menu", "titleFontColor", "item-font-color"],
+    data() {
+        return {
+            isOpen: false,
+        };
+    },
+    methods: {
+        toggle() {
+            this.isOpen = !this.isOpen;
+        },
+        enter(el) {
+            el.style.height = "auto";
+            const height = getComputedStyle(el).height;
+            el.style.height = 0;
+            //getComputedStyle(el);
+            setTimeout(() => {
+                el.style.height = height;
+            });
+        },
+        afterEnter(el) {
+            el.style.height = "auto";
+        },
+        leave(el) {
+            el.style.height = getComputedStyle(el).height;
+            // getComputedStyle(el);
+            setTimeout(() => {
+                el.style.height = 0;
+            });
+        },
+    },
+};
+</script>

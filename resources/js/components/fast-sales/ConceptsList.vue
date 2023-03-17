@@ -1,6 +1,6 @@
 <template>
     <div
-        v-show="products.length"
+        v-if="products.length"
         class="
             flex flex-wrap
             items-baseline

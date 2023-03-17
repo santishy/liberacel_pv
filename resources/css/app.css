@@ -1,13 +1,19 @@
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
- 
-@import "tailwindcss/utilities"; 
 
-html,body{
-  font-family: 'Roboto', sans-serif; 
-  max-width: 100vw !important;
-  overflow-x:hidden;
+@import "tailwindcss/utilities";
+
+html,
+body {
+    font-family: "Roboto", sans-serif;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+}
+.expand-enter-active,
+.expand-leave-active {
+    transition: height 0.3s ease-in-out;
+    overflow: hidden;
 }
 .bg-stripes-gray {
     background-color: #9ca3af1a;
@@ -25,45 +31,45 @@ html,body{
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s;
+    transition: all 0.5s;
 }
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
-  .bounce-enter-active {
-    animation: bounce-in .5s;
-  }
-  .bounce-leave-active {
-    animation: bounce-in .5s reverse;
-  }
-  @keyframes bounce-in {
+.bounce-enter-active {
+    animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+    animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
     0% {
-      transform: scale(0);
+        transform: scale(0);
     }
     50% {
-      transform: scale(1.5);
+        transform: scale(1.5);
     }
     100% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  }
+}
 
-  .odd-table:nth-child(odd) {
+.odd-table:nth-child(odd) {
     --tw-bg-opacity: 1;
     background-color: rgba(247, 250, 252, var(--tw-bg-opacity));
-  }
+}
 
-  .fruit-list-move {
+.fruit-list-move {
     transition: transform 1s;
-  }
-  .fruit-table-move {
+}
+.fruit-table-move {
     transition: transform 1s;
-  }
-  .logo{
-    background-image: url('/images/logo.png') ;
+}
+.logo {
+    background-image: url("/images/logo.png");
     background-size: auto;
-    background-position: bottom center ;
+    background-position: bottom center;
     background-repeat: no-repeat;
-  }
+}
