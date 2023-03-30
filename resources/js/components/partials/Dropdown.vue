@@ -17,13 +17,19 @@
             @after-enter="afterEnter"
             @leave="leave"
         >
-            <ul v-if="isOpen" class=" py-2 ">
+            <ul v-if="isOpen" class="bg-white rounded p-1">
                 <li
                     v-for="item in menu"
                     :key="item.url"
-                    class="pl-8 pr-2w-full bg-gray-300 border-b border-purple-800 last:border-b-0"
+                    class="pl-8 pr-2w-full bg-white hover:bg-gray-200 duration-100 border-b border-gray-300 last:border-b-0"
                 >
-                    <a :href="item.url" class="block w-full px-0 py-1" :class="[itemFontColor]"> {{ item.name }} </a>
+                    <a
+                        :href="item.url"
+                        class="block w-full px-0 py-1 font-normal hover:font-semibold text-sm  hover:text-gray-800 duration-100"
+                        :class="[itemFontColor]"
+                    >
+                        {{ item.name }}
+                    </a>
                 </li>
             </ul>
         </transition>
@@ -32,12 +38,19 @@
 <script>
 export default {
     props: ["title", "menu", "titleFontColor", "item-font-color"],
+    created(){
+        EventBus.$on('close-dropdown',() => {
+            this.isOpen = false;
+            console.log('close-dropdown')
+        })
+    },
     data() {
         return {
             isOpen: false,
         };
     },
     methods: {
+
         toggle() {
             this.isOpen = !this.isOpen;
         },

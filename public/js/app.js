@@ -2276,7 +2276,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     highlight: function highlight() {
-      return this.purchase ? "text-lg text-black-700 border-teal-300 border-b-2" : "text-gray-200";
+      return this.purchase ? "text-lg text-white hover:animate-none" : "text-gray-200";
     }
   }
 });
@@ -5192,13 +5192,16 @@ __webpack_require__.r(__webpack_exports__);
       ExpressMenu: _utilities_menuData_js__WEBPACK_IMPORTED_MODULE_1__.ExpressMenu,
       InventoryMenu: _utilities_menuData_js__WEBPACK_IMPORTED_MODULE_1__.InventoryMenu,
       ReportsMenu: _utilities_menuData_js__WEBPACK_IMPORTED_MODULE_1__.ReportsMenu,
-      isOpen: true
+      isOpen: false
     };
   },
   methods: {
     toggleIsOpen: function toggleIsOpen() {
       console.log("isOpen");
       this.isOpen = !this.isOpen;
+    },
+    closeDropdown: function closeDropdown() {
+      EventBus.$emit('close-dropdown');
     }
   }
 });
@@ -5256,6 +5259,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["title", "menu", "titleFontColor", "item-font-color"],
+  created: function created() {
+    var _this = this;
+    EventBus.$on('close-dropdown', function () {
+      _this.isOpen = false;
+      console.log('close-dropdown');
+    });
+  },
   data: function data() {
     return {
       isOpen: false
@@ -9018,7 +9028,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("a", {
-    staticClass: "block transition-all duration-500 ease-in-out mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4",
+    staticClass: "block transition-all duration-500 ease-in-out mt-4 lg:inline-block lg:mt-0 text-gray-900 md:hover:text-gray-800 mr-4",
     "class": _vm.getZ,
     attrs: {
       href: "#responsive-header"
@@ -9181,7 +9191,7 @@ var render = function render() {
     staticClass: "w-full"
   }, [_c("nav", {
     staticClass: "flex w-full max-w-full sticky items-center justify-between flex-wrap bg-white p-6 top-0 z-10"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
     staticClass: "block lg:hidden",
     on: {
       click: _vm.toggleNavegation
@@ -9199,65 +9209,61 @@ var render = function render() {
       d: "M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
     }
   })])])]), _vm._v(" "), _c("div", {
-    staticClass: "w-full block sm:invisible flex-grow lg:flex lg:items-center lg:w-auto",
+    staticClass: "w-full block flex-grow lg:flex lg:items-center lg:w-auto",
     attrs: {
       id: "navegation"
     }
   }, [_c("div", {
-    staticClass: "text-sm lg:flex-grow"
-  }, [_c("dropdown-component", {
-    staticClass: "md:relative",
-    attrs: {
-      name: "Inventario",
-      items: _vm.InventoryMenu
-    }
-  }), _vm._v(" "), _c("dropdown-component", {
-    staticClass: "md:relative",
-    attrs: {
-      name: "Egresos",
-      items: _vm.ExpensesMenu
-    }
-  }), _vm._v(" "), _vm.purchase ? _c("a", {
-    staticClass: "block mt-4 lg:inline-block lg:mt-0 md:hover:text-white mr-4",
+    staticClass: "text-sm lg:flex-grow flex justify-center"
+  }, [_vm.purchase ? _c("a", {
+    staticClass: "block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0 mr-4",
     "class": _vm.highlight,
     attrs: {
       href: _vm.purchase ? "/purchases/".concat(_vm.purchase) : "#"
     }
-  }, [_vm._v("\n                        Realizar Compra\n                    ")]) : _vm._e(), _vm._v(" "), _c("dropdown-component", {
-    staticClass: "md:relative",
-    attrs: {
-      name: "Clientes",
-      items: _vm.clientsMenu
-    }
-  }), _vm._v(" "), _c("a", {
-    staticClass: "block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg",
+  }, [_vm._v("\n                        Finalizar Compra\n                    ")]) : _vm._e(), _vm._v(" "), _c("a", {
+    staticClass: "flex relative border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-sm",
     attrs: {
       href: "/sales/create/?queryType=sell"
     }
-  }, [_vm._v("\n                        Ventas\n                    ")]), _vm._v(" "), _c("a", {
-    staticClass: "block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg",
+  }, [_c("svg", {
+    staticClass: "w-4 h-4 mr-2",
     attrs: {
-      href: "/refunds/create"
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      "stroke-width": "1.5",
+      stroke: "currentColor"
     }
-  }, [_vm._v("\n                        Devoluciones\n                    ")]), _vm._v(" "), _c("dropdown-component", {
-    staticClass: "md:relative",
+  }, [_c("path", {
     attrs: {
-      name: "Expres",
-      items: _vm.ExpressMenu
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
     }
-  }), _vm._v(" "), _c("dropdown-component", {
-    staticClass: "md:relative",
+  })]), _vm._v(" "), _c("span", {
+    staticClass: "before:absolute before:bottom-1 before:h-px before:w-0 before:bg-gradient-to-r before:from-transparent before:to-gray-500 before:transition-all before:duration-500 hover:before:w-full"
+  }), _vm._v("\n                        Ventas Stock\n\n                    ")]), _vm._v(" "), _c("a", {
+    staticClass: "flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg",
     attrs: {
-      name: "Reportes",
-      items: _vm.ReportsMenu
+      href: "/expenses/create"
     }
-  }), _vm._v(" "), _c("dropdown-component", {
-    staticClass: "md:relative",
+  }, [_c("svg", {
+    staticClass: "w-4 h-4 mr-2",
     attrs: {
-      name: "Configuración",
-      items: _vm.ConfigMenu
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      "stroke-width": "1.5",
+      stroke: "currentColor"
     }
-  })], 1), _vm._v(" "), _c("div", {
+  }, [_c("path", {
+    attrs: {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+    }
+  })]), _vm._v("\n                        Ventas Expres\n                    ")])]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-wrap items-center"
   }, [_vm.impersonation_id ? _c("form", {
     staticClass: "block mt-4 lg:inline-block lg:mt-0 md:hover:text-white mr-4",
@@ -9279,7 +9285,7 @@ var render = function render() {
     domProps: {
       value: _vm.crfsToken
     }
-  }), _vm._v(" "), _vm._m(1)]) : _vm._e(), _vm._v(" "), _c("form", {
+  }), _vm._v(" "), _vm._m(0)]) : _vm._e(), _vm._v(" "), _c("form", {
     attrs: {
       action: "/logout",
       method: "POST"
@@ -9293,11 +9299,26 @@ var render = function render() {
       value: _vm.crfsToken
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent md:hover:text-teal-500 md:hover:bg-white mt-4 lg:mt-0",
+    staticClass: "flex shadow-lg hover:bg-teal-700 hover:font-bold hover:shadow-none transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-white bg-teal-500 mt-4 lg:mt-0",
     attrs: {
       href: "/logout"
     }
-  }, [_vm._v("\n                            " + _vm._s(_vm.getCurrentUser.name) + " | Salir\n                        ")])])])])]), _vm._v(" "), _c("main", {
+  }, [_vm._v("\n                            " + _vm._s(_vm.getCurrentUser.name) + "\n                            "), _c("svg", {
+    staticClass: "w-5 h-5 ml-1",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      "stroke-width": "1.5",
+      stroke: "currentColor"
+    }
+  }, [_c("path", {
+    attrs: {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+    }
+  })])])])])])]), _vm._v(" "), _c("main", {
     staticClass: "mt-24 sm:mt-32 z-0"
   }, [_vm._t("default")], 2), _vm._v(" "), _c("notifications", {
     attrs: {
@@ -9306,14 +9327,6 @@ var render = function render() {
   })], 1)], 1);
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "flex items-center flex-shrink-0 text-white mr-6"
-  }, [_c("span", {
-    staticClass: "font-semibold text-xl tracking-tight"
-  }, [_vm._v("Liberacel")])]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("button", {
@@ -13354,23 +13367,21 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("aside", {
-    staticClass: "min-h-full bg-purple-600 px-2 py-4 relative duration-300",
-    "class": [_vm.isOpen ? "w-72" : "w-20"]
-  }, [_c("div", {
-    staticClass: "w-full inset-y-0 sticky"
-  }, [_c("div", {
-    staticClass: "absolute -right-3 cursor-pointer rounded-full bg-white border border-gray-900 z-30",
+    staticClass: "min-h-full z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72",
+    "class": [_vm.isOpen ? "w-72" : "w-10"],
     on: {
-      click: _vm.toggleIsOpen
+      mouseleave: _vm.closeDropdown
     }
-  }, [_c("arrow-left")], 1), _vm._v(" "), _c("h3", {
-    staticClass: "text-white text-center font-medium mb-16 p-2 border border-gray-700 rounded-sm"
+  }, [_c("div", {
+    staticClass: "w-full inset-y-0"
+  }, [_c("h3", {
+    staticClass: "text-white overflow-hidden text-center font-mono text-xl mb-16 p-2 border border-purple-200 rounded-sm"
   }, [_vm._v("\n            Liberacel\n        ")]), _vm._v(" "), _c("dropdown", {
     attrs: {
       title: "Inventario",
       menu: _vm.InventoryMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13378,8 +13389,8 @@ var render = function render() {
     staticClass: "w-6 h-6",
     attrs: {
       xmlns: "http://www.w3.org/2000/svg",
-      width: "1em",
-      height: "1em",
+      width: "1rem",
+      height: "1rem",
       fill: "none",
       viewBox: "0 0 24 24",
       "stroke-width": "1.5",
@@ -13396,8 +13407,8 @@ var render = function render() {
     attrs: {
       title: "Expres",
       menu: _vm.ExpressMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13421,8 +13432,8 @@ var render = function render() {
     attrs: {
       title: "Egresos",
       menu: _vm.ExpensesMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13439,15 +13450,15 @@ var render = function render() {
     attrs: {
       "stroke-linecap": "round",
       "stroke-linejoin": "round",
-      d: "M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+      d: "M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
     }
   })])])], 2), _vm._v(" "), _c("dropdown", {
     staticClass: "mt-4",
     attrs: {
       title: "Clientes",
       menu: _vm.clientsMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13471,8 +13482,8 @@ var render = function render() {
     attrs: {
       title: "Reportes",
       menu: _vm.ReportsMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13496,8 +13507,8 @@ var render = function render() {
     attrs: {
       title: "Configuración",
       menu: _vm.ConfigMenu,
-      "title-font-color": "text-purple-300",
-      "item-font-color": "text-purple-700"
+      "title-font-color": "text-purple-100",
+      "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
     slot: "icon"
@@ -13668,18 +13679,18 @@ var render = function render() {
       leave: _vm.leave
     }
   }, [_vm.isOpen ? _c("ul", {
-    staticClass: "py-2"
+    staticClass: "bg-white rounded p-1"
   }, _vm._l(_vm.menu, function (item) {
     return _c("li", {
       key: item.url,
-      staticClass: "pl-8 pr-2w-full bg-gray-300 border-b border-purple-800 last:border-b-0"
+      staticClass: "pl-8 pr-2w-full bg-white hover:bg-gray-200 duration-100 border-b border-gray-300 last:border-b-0"
     }, [_c("a", {
-      staticClass: "block w-full px-0 py-1",
+      staticClass: "block w-full px-0 py-1 font-normal hover:font-semibold text-sm hover:text-gray-800 duration-100",
       "class": [_vm.itemFontColor],
       attrs: {
         href: item.url
       }
-    }, [_vm._v(" " + _vm._s(item.name) + " ")])]);
+    }, [_vm._v("\n                    " + _vm._s(item.name) + "\n                ")])]);
   }), 0) : _vm._e()])], 1);
 };
 var staticRenderFns = [];

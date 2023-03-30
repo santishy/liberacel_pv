@@ -3,9 +3,9 @@
         <sidebar class="flex-shrink-0 "></sidebar>
         <div class="w-full ">
             <nav class="flex w-full max-w-full sticky  items-center justify-between flex-wrap bg-white p-6  top-0 z-10">
-                <div class="flex items-center flex-shrink-0 text-white mr-6 ">
+                <!-- <div class="flex items-center flex-shrink-0 text-white mr-6 ">
                     <span class="font-semibold text-xl tracking-tight">Liberacel</span>
-                </div>
+                </div> -->
                 <div @click="toggleNavegation" class="block lg:hidden">
                     <button
                         class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
@@ -15,35 +15,48 @@
                         </svg>
                     </button>
                 </div>
-                <div id="navegation" class="w-full block sm:invisible flex-grow lg:flex lg:items-center lg:w-auto ">
-                    <div class="text-sm lg:flex-grow">
-
-                        <dropdown-component name="Inventario" :items="InventoryMenu" class="md:relative" />
-                        <dropdown-component name="Egresos" :items="ExpensesMenu" class="md:relative" />
+                <div id="navegation" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
+                    <div class="text-sm lg:flex-grow  flex justify-center">
+                        <!-- <dropdown-component name="Inventario" :items="InventoryMenu" class="md:relative" /> -->
+                        <!-- <dropdown-component name="Egresos" :items="ExpensesMenu" class="md:relative" /> -->
                         <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
-                            class="block mt-4 lg:inline-block lg:mt-0  md:hover:text-white mr-4">
-                            Realizar Compra
+                            class="block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0   mr-4">
+                            Finalizar Compra
                         </a>
-                        <dropdown-component name="Clientes" :items="clientsMenu" class="md:relative" />
+
+
+                        <!-- <dropdown-component name="Clientes" :items="clientsMenu" class="md:relative" /> -->
                         <a href="/sales/create/?queryType=sell"
-                            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg">
-                            Ventas
+                            class="flex relative border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span
+                                class="before:absolute before:bottom-1 before:h-px before:w-0 before:bg-gradient-to-r before:from-transparent before:to-gray-500 before:transition-all before:duration-500 hover:before:w-full"></span>
+                            Ventas Stock
+
                         </a>
-                        <a href="/refunds/create"
+                        <a href="/expenses/create"
+                            class="flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            </svg>
+                            Ventas Expres
+                        </a>
+                        <!-- <a href="/refunds/create"
                             class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg">
                             Devoluciones
-                        </a>
-                        <dropdown-component name="Expres" :items="ExpressMenu" class="md:relative" />
-                        <!-- <a
-                            href="/fast-sales/create"
-                            class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 md:hover:text-white mr-4 md:text-base text-lg"
-                        >
-                            Venta Expres
                         </a> -->
-                        <dropdown-component name="Reportes" :items="ReportsMenu" class="md:relative" />
-                        <dropdown-component name="Configuración" :items="ConfigMenu" class="md:relative" />
+                        <!-- <dropdown-component name="Expres" :items="ExpressMenu" class="md:relative" /> -->
+
+                        <!-- <dropdown-component name="Reportes" :items="ReportsMenu" class="md:relative" /> -->
+                        <!-- <dropdown-component name="Configuración" :items="ConfigMenu" class="md:relative" /> -->
                     </div>
-                    <div class=" flex flex-wrap items-center">
+                    <div class=" flex flex-wrap items-center ">
                         <form v-if="impersonation_id" action="/impersonations" method="post"
                             class="block mt-4 lg:inline-block lg:mt-0  md:hover:text-white mr-4">
                             <input type="hidden" name="_method" value="delete" />
@@ -55,8 +68,14 @@
                         <form action="/logout" method="POST">
                             <input type="hidden" name="_token" :value="crfsToken" />
                             <button href="/logout"
-                                class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent md:hover:text-teal-500 md:hover:bg-white mt-4 lg:mt-0">
-                                {{ getCurrentUser.name }} | Salir
+                                class="flex shadow-lg hover:bg-teal-700 hover:font-bold hover:shadow-none transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-white bg-teal-500  mt-4 lg:mt-0">
+                                {{ getCurrentUser.name }}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-5 h-5 ml-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                                </svg>
+
                             </button>
                         </form>
                     </div>
@@ -116,7 +135,7 @@ export default {
     computed: {
         highlight() {
             return this.purchase
-                ? "text-lg text-black-700 border-teal-300 border-b-2"
+                ? "text-lg text-white hover:animate-none"
                 : "text-gray-200";
         }
     }
