@@ -3,12 +3,10 @@
         <div
             class="
                 w-full
-                px-4
                 flex
                 justify-center
                 bg-transparent
-                md:mt-32
-                mt-24
+
             "
         >
             <setting-list :settings="settings"></setting-list>
@@ -38,6 +36,6 @@ export default {
             type: Array,
         },
     },
-    
+
 };
 </script>

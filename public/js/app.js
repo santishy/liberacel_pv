@@ -5197,10 +5197,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggleIsOpen: function toggleIsOpen() {
-      console.log("isOpen");
       this.isOpen = !this.isOpen;
     },
     closeDropdown: function closeDropdown() {
+      this.isOpen = false;
       EventBus.$emit('close-dropdown');
     }
   }
@@ -9299,7 +9299,7 @@ var render = function render() {
       value: _vm.crfsToken
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "flex shadow-lg hover:bg-teal-700 hover:font-bold hover:shadow-none transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-white bg-teal-500 mt-4 lg:mt-0",
+    staticClass: "flex hover:bg-gray-400 shadow hover:shadow-none hover:font-bold transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-gray-800 bg-gray-200 mt-4 lg:mt-0",
     attrs: {
       href: "/logout"
     }
@@ -9319,7 +9319,7 @@ var render = function render() {
       d: "M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
     }
   })])])])])])]), _vm._v(" "), _c("main", {
-    staticClass: "mt-24 sm:mt-32 z-0"
+    staticClass: "mt-12 z-0 px-12"
   }, [_vm._t("default")], 2), _vm._v(" "), _c("notifications", {
     attrs: {
       group: "foo"
@@ -10859,7 +10859,7 @@ var render = function render() {
       value: "view user commissions",
       expression: "'view user commissions'"
     }],
-    staticClass: "w-full px-4 mx-auto mt-24 md:mt-32 flex"
+    staticClass: "w-full px-4 mx-auto flex"
   }, [_c("div", {
     staticClass: "w-3/12"
   }, [_c("user-list", {
@@ -11140,7 +11140,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "w-full p-4 flex flex-wrap flex-col items-center justify-center"
+    staticClass: "w-full flex flex-wrap flex-col items-center justify-center"
   }, [_c("h3", {
     staticClass: "bg-white shadow-sm rounded-sm p-2 mb-2 w-10/12 text-center text-xl font-medium"
   }, [_vm._v(_vm._s(_vm.getTitle) + "\n        ")]), _vm._v(" "), _c("expense-form")], 1)]);
@@ -11396,7 +11396,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "w-10/12 mx-auto mt-24 md:mt-24"
+    staticClass: "w-10/12 mx-auto"
   }, [_c("h3", {
     staticClass: "w-full rounded-sm p-4 bg-white shadow-sm text-center font-semibold text-xl"
   }, [_vm._v("Egresos")]), _vm._v(" "), _c("expense-list")], 1)]);
@@ -12947,7 +12947,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "w-full px-4 flex justify-center bg-transparent md:mt-32 mt-24"
+    staticClass: "w-full px-4 flex justify-center bg-transparent"
   }, [_c("form", {
     directives: [{
       name: "can",
@@ -13222,7 +13222,7 @@ var render = function render() {
       value: "view warehouses",
       expression: "'view warehouses'"
     }],
-    staticClass: "w-10/12 mx-auto mt-24 md:mt-32 flex"
+    staticClass: "w-10/12 mx-auto flex"
   }, [_c("div", {
     staticClass: "w-1/5 px-2"
   }, [_c("inventory-list")], 1), _vm._v(" "), _c("div", {
@@ -13367,16 +13367,22 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("aside", {
-    staticClass: "min-h-full z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72",
+    staticClass: "min-h-full h-screen scroll-smooth scrollbar-track-transparent scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72",
     "class": [_vm.isOpen ? "w-72" : "w-10"],
     on: {
+      mouseenter: function mouseenter($event) {
+        _vm.isOpen = true;
+      },
       mouseleave: _vm.closeDropdown
     }
   }, [_c("div", {
-    staticClass: "w-full inset-y-0"
+    staticClass: "w-full overflow-x-hidden overflow-y-auto"
   }, [_c("h3", {
-    staticClass: "text-white overflow-hidden text-center font-mono text-xl mb-16 p-2 border border-purple-200 rounded-sm"
-  }, [_vm._v("\n            Liberacel\n        ")]), _vm._v(" "), _c("dropdown", {
+    staticClass: "text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm",
+    "class": [_vm.isOpen ? "p-2" : "p-1 bg-teal-800"]
+  }, [_vm.isOpen ? _c("span", [_vm._v("Liberacel ")]) : _c("span", {
+    staticClass: "x text-white font-bold"
+  }, [_vm._v("L")])]), _vm._v(" "), _c("dropdown", {
     attrs: {
       title: "Inventario",
       menu: _vm.InventoryMenu,
@@ -15493,7 +15499,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "grid md:grid-cols-5 mt-24 md:mt-32 grid-flow-row mx-auto w-11/12"
+    staticClass: "grid md:grid-cols-5 grid-flow-row mx-auto w-11/12"
   }, [_c("div", {
     staticClass: "col-span-5 flex justify-between items-center row-span-1 bg-white px-2 py-2"
   }, [_c("div", {
@@ -16865,7 +16871,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "w-full px-4 flex justify-center bg-transparent md:mt-32 mt-24"
+    staticClass: "w-full flex justify-center bg-transparent"
   }, [_c("setting-list", {
     attrs: {
       settings: _vm.settings
@@ -17063,7 +17069,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("div", {
-    staticClass: "md:w-9/12 mx-auto px-4 flex justify-center bg-transparent md:mt-32 mt-24"
+    staticClass: "md:w-9/12 mx-auto flex justify-center bg-transparent"
   }, [_c("form", {
     staticClass: "w-full shadow-lg rounded-lg bg-white px-6 py-8",
     on: {

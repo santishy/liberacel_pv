@@ -1,7 +1,7 @@
 <template>
     <nav-component>
         <div
-            class="w-full px-4 mx-auto mt-24 md:mt-32 flex"
+            class="w-full px-4 mx-auto  flex"
             v-can="'view user commissions'"
         >
             <div class="w-3/12">

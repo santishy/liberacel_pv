@@ -68,7 +68,7 @@
                         <form action="/logout" method="POST">
                             <input type="hidden" name="_token" :value="crfsToken" />
                             <button href="/logout"
-                                class="flex shadow-lg hover:bg-teal-700 hover:font-bold hover:shadow-none transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-white bg-teal-500  mt-4 lg:mt-0">
+                                class="flex  hover:bg-gray-400 shadow hover:shadow-none hover:font-bold  transition-all duration-300 text-sm px-4 py-2 leading-none border font-medium items-center justify-center rounded text-gray-800 bg-gray-200 mt-4 lg:mt-0">
                                 {{ getCurrentUser.name }}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-5 h-5 ml-1">
@@ -82,7 +82,7 @@
                 </div>
             </nav>
             <!-- Page Content -->
-            <main class="mt-24 sm:mt-32  z-0">
+            <main class="mt-12 z-0 px-12">
                 <slot />
             </main>
             <notifications group="foo"></notifications>

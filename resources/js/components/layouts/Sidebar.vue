@@ -1,11 +1,11 @@
 <template>
-    <aside :class="[isOpen ? 'w-72' : 'w-10']"
-        @mouseleave="closeDropdown"
-        class="min-h-full  z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72">
-        <div class="w-full inset-y-0 ">
-            <h3
-                class="text-white overflow-hidden text-center font-mono text-xl mb-16 p-2 border border-purple-200 rounded-sm">
-                Liberacel
+    <aside :class="[isOpen ? 'w-72' : 'w-10']" @mouseenter="isOpen=true" @mouseleave="closeDropdown"
+        class="min-h-full h-screen scroll-smooth scrollbar-track-transparent  scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72">
+        <div class="w-full overflow-x-hidden overflow-y-auto ">
+            <h3 :class="[isOpen ? 'p-2' : 'p-1 bg-teal-800']"
+                class="text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm">
+                <span v-if="isOpen">Liberacel </span>
+                <span v-else class="x text-white font-bold">L</span>
             </h3>
             <dropdown title="Inventario" :menu="InventoryMenu" title-font-color="text-purple-100"
                 item-font-color="text-gray-700">
@@ -100,10 +100,11 @@ export default {
     },
     methods: {
         toggleIsOpen() {
-            console.log("isOpen");
+
             this.isOpen = !this.isOpen;
         },
-        closeDropdown(){
+        closeDropdown() {
+            this.isOpen = false;
             EventBus.$emit('close-dropdown');
         }
     },

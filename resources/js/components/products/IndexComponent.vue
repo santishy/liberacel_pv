@@ -1,6 +1,6 @@
 <template>
     <nav-component>
-        <div class="grid  grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-4 ">
+        <div class="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-4">
             <div class="col-span-4 2xl:col-span-5 flex justify-center items-baseline">
 
                 <search-by-category class="md:w-1/4 w-3/4 mr-2" :categories="categories"></search-by-category>

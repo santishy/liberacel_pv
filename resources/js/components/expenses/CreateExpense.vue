@@ -1,6 +1,6 @@
 <template>
     <nav-component>
-        <div class="w-full p-4  flex flex-wrap flex-col items-center  justify-center">
+        <div class="w-full  flex flex-wrap flex-col items-center  justify-center">
             <h3 class="bg-white shadow-sm rounded-sm p-2 mb-2 w-10/12 text-center text-xl font-medium">{{ getTitle }}
             </h3>
             <expense-form></expense-form>

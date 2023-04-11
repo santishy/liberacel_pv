@@ -1,7 +1,7 @@
 <template>
     <nav-component>
         <div
-            class="w-full px-4  flex justify-center bg-transparent md:mt-32 mt-24 "
+            class="w-full px-4  flex justify-center bg-transparent "
         >
             <form
                 @submit.prevent="submit"

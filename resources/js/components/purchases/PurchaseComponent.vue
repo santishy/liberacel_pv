@@ -1,7 +1,7 @@
 <template>
     <nav-component>
         <div
-            class="grid md:grid-cols-5  mt-24 md:mt-32 grid-flow-row mx-auto w-11/12"
+            class="grid md:grid-cols-5   grid-flow-row mx-auto w-11/12"
         >
             <div
                 class="col-span-5 flex justify-between items-center row-span-1  bg-white px-2 py-2"
