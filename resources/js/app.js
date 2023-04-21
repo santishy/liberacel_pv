@@ -13,6 +13,8 @@ import Notify from "./mixins/Notify";
 
 //await store.dispatch('getUser');
 store.commit('SET_USER');
+store.commit('SET_APP_NAME');
+
 Vue.mixin(Errors);
 Vue.mixin(Authorizations);
 Vue.mixin(Notify);

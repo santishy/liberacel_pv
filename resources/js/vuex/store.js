@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
         ),
         purchaseStatus: "",
         user: {},
+        appName:'',
         auth: false,
         salePriceOption: sessionStorage.getItem("salePriceOption"),
         productsInTransaction: [],

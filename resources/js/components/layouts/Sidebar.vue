@@ -4,8 +4,8 @@
         <div class="w-full overflow-x-hidden overflow-y-auto ">
             <h3 :class="[isOpen ? 'p-2' : 'p-1 bg-teal-800']"
                 class="text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm">
-                <span v-if="isOpen">Liberacel </span>
-                <span v-else class="x text-white font-bold">L</span>
+                <span v-if="isOpen"> {{ appName }} </span>
+                <span v-else class="x text-white font-bold"> {{ appName.charAt(0) }}</span>
             </h3>
             <dropdown title="Inventario" :menu="InventoryMenu" title-font-color="text-purple-100"
                 item-font-color="text-gray-700">
@@ -85,6 +85,7 @@ import {
 } from "../../utilities/menuData.js";
 import ArrowLeft from "../icons/ArrowLeft.vue";
 import Dropdown from "../partials/Dropdown.vue";
+import { mapState } from "vuex"
 export default {
     components: { ArrowLeft, Dropdown },
     data() {
@@ -108,6 +109,9 @@ export default {
             EventBus.$emit('close-dropdown');
         }
     },
+    computed:{
+        ...mapState(["appName"]),
+    }
 };
 </script>
 

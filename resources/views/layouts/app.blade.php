@@ -8,17 +8,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="current_user" content="{{ json_encode( CurrentUser::show()) }}">
     <meta name="impersonation_id" content="{{session('impersonation_id')}}">
-    <title>Liberacel</title>
+    <meta name="app_name" content="{{ config("dashboard.APP_NAME") }}">
+    <title>{{ config('dashboard.APP_NAME') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}"> 
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
 </head>
-<body class="bg-gray-300 h-screen">
+<body class="bg-gray-600 h-screen">
     <div id="app">
-    {{-- <nav-component></nav-component> --}}
-            @yield('content')
+        @yield('content')
     </div>
     <script src="{{asset('js/app.js')}}"></script>
 </body>

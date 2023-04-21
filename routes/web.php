@@ -46,7 +46,7 @@ Route::get('home', function () {
 Route::resource('products', ProductController::class)->middleware('auth');
 
 //productos en venta
-Route::get('sale-with-products',[ProductInSaleController::class,'index'])->middleware('auth');
+Route::get('sale-with-products', [ProductInSaleController::class, 'index'])->middleware('auth');
 Route::post('sales/{product}/products', [ProductInSaleController::class, 'store'])->middleware('auth');
 Route::put('sales/{product}/products', [ProductInSaleController::class, 'update'])->middleware('auth');
 Route::delete('sales/{product}/products', [ProductInSaleController::class, 'destroy'])->middleware('auth');
@@ -198,6 +198,7 @@ Route::resource('expenses', ExpenseController::class);
  * Refunds
  */
 
-Route::get('refunds/create',[RefundController::class,'create'])->middleware('auth');
-Route::get('refunds/sales',[RefundController::class,'findSale'])->middleware(('auth'));
-Route::post('refunds',[RefundController::class,'store'])->middleware('auth');
+Route::get('refunds/create', [RefundController::class, 'create'])->middleware('auth');
+Route::get('refunds/sales', [RefundController::class, 'findSale'])->middleware(('auth'));
+Route::post('refunds', [RefundController::class, 'store'])->middleware('auth');
+

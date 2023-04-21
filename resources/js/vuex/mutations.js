@@ -54,6 +54,10 @@ const SET_USER = (state, user) => {
     );
     state.auth = Boolean(user);
 };
+
+const SET_APP_NAME = (state) => {
+    state.appName = document.head.querySelector("meta[name='app_name']").content
+}
 const SET_PURCHASE_VISIBILITY = (state, value) => {
     state.purchaseVisibility = value;
     window.localStorage.setItem("allow-to-buy-new-product", value);
@@ -84,4 +88,5 @@ export default {
     removeTransactionProduct,
     setModalDataConfirm,
     SET_PURCHASE_VISIBILITY,
+    SET_APP_NAME
 };

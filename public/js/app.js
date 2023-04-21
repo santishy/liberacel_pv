@@ -5175,6 +5175,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_menuData_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_utilities_menuData_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _icons_ArrowLeft_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../icons/ArrowLeft.vue */ "./resources/js/components/icons/ArrowLeft.vue");
 /* harmony import */ var _partials_Dropdown_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../partials/Dropdown.vue */ "./resources/js/components/partials/Dropdown.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5203,7 +5208,8 @@ __webpack_require__.r(__webpack_exports__);
       this.isOpen = false;
       EventBus.$emit('close-dropdown');
     }
-  }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)(["appName"]))
 });
 
 /***/ }),
@@ -12955,7 +12961,7 @@ var render = function render() {
       value: "create warehouse",
       expression: "'create warehouse'"
     }],
-    staticClass: "w-9/12 shadow-xl rounded bg-white px-2 py-2",
+    staticClass: "w-6/12 shadow rounded-sm border border-teal-500 bg-white p-4",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -12963,21 +12969,26 @@ var render = function render() {
       }
     }
   }, [_c("div", {
-    staticClass: "flex items-center p-2 text-dark text-center justify-center text-xl font-semibold font-roboto"
+    staticClass: "flex items-center p-2 text-dark text-xl font-semibold font-roboto"
   }, [_vm._v("\n                Crear Almacen\n            ")]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-b border-t border-gray-500 py-2 relative"
-  }, [_c("input", {
+    staticClass: "border-gray-500 py-2 w-full"
+  }, [_c("label", {
+    staticClass: "pl-2 flex items-center text-indigo-800 font-mono",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Nombre")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.name,
       expression: "form.name"
     }],
-    staticClass: "appearance-none static bg-transparent border-none w-full text-gray-700 mr-3 py-1 pr-2 pl-56 leading-tight focus:outline-none",
+    staticClass: "appearance-none placeholder-gray-500 bg-gray-200 rounded-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 border border-gray-300 shadow-sm p-2 w-full",
     attrs: {
       name: "name",
       type: "text",
-      placeholder: "Jiquilpan...",
+      placeholder: "Jiquilpan ",
       "aria-label": "Full name"
     },
     domProps: {
@@ -12989,14 +13000,11 @@ var render = function render() {
         _vm.$set(_vm.form, "name", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-52 justify-center text-indigo-800 font-mono",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Nombre")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center border-b border-gray-500 py-2 relative"
-  }, [_c("input", {
+  }, [_c("label", {
+    staticClass: "pl-2 flex items-center text-indigo-800 font-mono"
+  }, [_vm._v("Dirección")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -13007,7 +13015,7 @@ var render = function render() {
     attrs: {
       name: "address",
       type: "text",
-      placeholder: "DIRECCION",
+      placeholder: "Sor Juana Inés #34 ",
       "aria-label": "Full name"
     },
     domProps: {
@@ -13019,9 +13027,7 @@ var render = function render() {
         _vm.$set(_vm.form, "address", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-52 justify-center text-indigo-800 font-mono"
-  }, [_vm._v("Dirección")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center"
   }, [_c("errors-component", {
     attrs: {
@@ -13380,9 +13386,9 @@ var render = function render() {
   }, [_c("h3", {
     staticClass: "text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm",
     "class": [_vm.isOpen ? "p-2" : "p-1 bg-teal-800"]
-  }, [_vm.isOpen ? _c("span", [_vm._v("Liberacel ")]) : _c("span", {
+  }, [_vm.isOpen ? _c("span", [_vm._v(" " + _vm._s(_vm.appName) + " ")]) : _c("span", {
     staticClass: "x text-white font-bold"
-  }, [_vm._v("L")])]), _vm._v(" "), _c("dropdown", {
+  }, [_vm._v(" " + _vm._s(_vm.appName.charAt(0)))])]), _vm._v(" "), _c("dropdown", {
     attrs: {
       title: "Inventario",
       menu: _vm.InventoryMenu,
@@ -17623,6 +17629,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((vue_notification__WEBPACK_IMPOR
 
 //await store.dispatch('getUser');
 _vuex_store_js__WEBPACK_IMPORTED_MODULE_3__.store.commit('SET_USER');
+_vuex_store_js__WEBPACK_IMPORTED_MODULE_3__.store.commit('SET_APP_NAME');
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin((_mixins_Errors__WEBPACK_IMPORTED_MODULE_4___default()));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin((_mixins_Authorizations_js__WEBPACK_IMPORTED_MODULE_6___default()));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin((_mixins_Notify__WEBPACK_IMPORTED_MODULE_5___default()));
@@ -18179,6 +18186,9 @@ var SET_USER = function SET_USER(state, user) {
   state.user = JSON.parse(document.head.querySelector("meta[name='current_user']").content);
   state.auth = Boolean(user);
 };
+var SET_APP_NAME = function SET_APP_NAME(state) {
+  state.appName = document.head.querySelector("meta[name='app_name']").content;
+};
 var SET_PURCHASE_VISIBILITY = function SET_PURCHASE_VISIBILITY(state, value) {
   state.purchaseVisibility = value;
   window.localStorage.setItem("allow-to-buy-new-product", value);
@@ -18207,7 +18217,8 @@ var SET_EXPENSE_METHOD_NAME = function SET_EXPENSE_METHOD_NAME(state, value) {
   addToTransaction: addToTransaction,
   removeTransactionProduct: removeTransactionProduct,
   setModalDataConfirm: setModalDataConfirm,
-  SET_PURCHASE_VISIBILITY: SET_PURCHASE_VISIBILITY
+  SET_PURCHASE_VISIBILITY: SET_PURCHASE_VISIBILITY,
+  SET_APP_NAME: SET_APP_NAME
 });
 
 /***/ }),
@@ -18240,6 +18251,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     productsInPurchase: JSON.parse(localStorage.getItem("productsInPurchase")),
     purchaseStatus: "",
     user: {},
+    appName: '',
     auth: false,
     salePriceOption: sessionStorage.getItem("salePriceOption"),
     productsInTransaction: [],
