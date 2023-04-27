@@ -9,7 +9,7 @@
             class="border-gray-500 border-b last:border-b-0"
             :class="{ 'bg-gray-500 text-white': selectedIndex === index }"
         >
-            <a href="#" class="block p-4" @click.prevent="">{{
+            <a href="#" class="block p-2" @click.prevent="">{{
                 inventory.name
             }}</a>
         </li>

@@ -1,9 +1,9 @@
 <template>
-    <tr>
-        <td class="border px-4 py-2">{{product.category_name}}</td>
-        <td class="border px-4 py-2">{{ product.sku }}</td>
-        <td class="border px-4 py-2">{{ product.description }}</td>
-        <td class="border px-4 py-2">
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{product.category_name}}</th>
+        <td class="px-6 py-4">{{ product.sku }}</td>
+        <td class="px-6 py-4">{{ product.description }}</td>
+        <td class="px-6 py-4">
             <input-stock
                 v-if="show"
                 :product="product"

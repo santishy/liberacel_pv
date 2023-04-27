@@ -1,48 +1,31 @@
 <template>
     <nav-component>
-        <div class="w-9/12 mx-auto flex justify-center ">
-            <div
-                class="bg-white shadow rounded max-w-full sm:overflow-x-hidden overflow-x-auto"
-            >
-                <table
-                    v-if="inventories.length"
-                    v-can="'view warehouses'"
-                    class="table-auto"
-                >
-                    <thead>
-                        <tr class="bg-danger">
-                            <th class="px-4 py-2">Nombre</th>
-                            <th class="px-4 py-2">Dirección</th>
-                            <th class="px-4 py-2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <warehouse-list-item
-                            v-for="(inventory, index) in localInventories"
-                            :key="inventory.id"
-                            :inventory="inventory"
-                            :index="index"
-                        />
-                    </tbody>
-                </table>
-            </div>
+        <div class="relative overflow-x-auto bg-white">
+            <table v-if="inventories.length" v-can="'view warehouses'"
+                class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <tr class="bg-danger">
+                        <th scope="col" class="px-6 py-3">Nombre</th>
+                        <th scope="col" class="px-6 py-3">Dirección</th>
+                        <th scope="col" class="px-6 py-3">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <warehouse-list-item v-for="(inventory, index) in localInventories" :key="inventory.id"
+                        :inventory="inventory" :index="index" />
+                </tbody>
+            </table>
         </div>
+
         <information-component>
             <template slot="title">
                 Almacenes
             </template>
 
-            <message
-                :title="modalDataConfirm.title"
-                :message="modalDataConfirm.message"
-            ></message>
+            <message :title="modalDataConfirm.title" :message="modalDataConfirm.message"></message>
             <template slot="button">
-                <agree
-                    v-if="modalDataConfirm.actionEnabled"
-                    :method="modalDataConfirm.action"
-                    @deleteWarehouse="deleteWarehouse"
-                    @emptyWarehouse="emptyWarehouse"
-                ></agree>
+                <agree v-if="modalDataConfirm.actionEnabled" :method="modalDataConfirm.action"
+                    @deleteWarehouse="deleteWarehouse" @emptyWarehouse="emptyWarehouse"></agree>
             </template>
         </information-component>
     </nav-component>
@@ -72,7 +55,7 @@ export default {
     data() {
         return {
             localInventories: [],
-            show:true
+            show: true
         };
     },
     created() {
@@ -97,7 +80,7 @@ export default {
                             this.setModalDataConfirm({
                                 title: "No se pudo eliminar",
                                 message: res.data.message,
-                                actionEnabled:false
+                                actionEnabled: false
                             });
                             EventBus.$emit("open-modal", true);
                         }
@@ -109,17 +92,17 @@ export default {
                     });
         },
         emptyWarehouse() {
-            EventBus.$emit('open-modal',false);
+            EventBus.$emit('open-modal', false);
             axios
                 .delete("/inventories/" + this.modalDataConfirm.inventory.id, {
                     id: this.modalDataConfirm.inventory.id
                 })
                 .then(res => {
-                    if(res.data.empty){
-                        this.notify({title:'Almacenes',message:'El almacén se vacio correctamente.'});
+                    if (res.data.empty) {
+                        this.notify({ title: 'Almacenes', message: 'El almacén se vacio correctamente.' });
                     }
                 })
-                .catch(err =>{
+                .catch(err => {
                     this.getErrors(err);
                 });
         }

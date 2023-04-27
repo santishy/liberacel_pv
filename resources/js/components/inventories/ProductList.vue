@@ -1,61 +1,45 @@
 <template>
     <div v-if="inventory" class="justify-center">
-        <div
-            class="
+        <div class="
                 flex flex-wrap
                 justify-center
                 items-center
                 mb-4
                 border-gray-300
                 relative
-            "
-        >
-            <h3
-                class="
+            ">
+            <h3 class="
                     w-64
                     text-gray-800
                     font-mono font-semibold
                     text-center
-                    bg-purple-200
+                    bg-gray-100
                     absolute
                     left-0
                     border-l-4 border-teal-500
                     py-5
                     px-4
-                    leading-tight
-                "
-            >
+                ">
                 <warehouse-icon></warehouse-icon> {{ inventory.name }}
             </h3>
             <inventory-search-filter class="w-full"></inventory-search-filter>
         </div>
-        <table v-if="inventory" class="text-center bg-white">
-            <thead class="bg-purple-200">
-                <th class="p-3">Categoría</th>
-                <th class="p-3">SKU</th>
-                <th class="p-3">Descripción</th>
-                <th class="p-3">Existencias</th>
-            </thead>
-            <transition-group
-                tag="tbody"
-                name="bounce"
-                @after-leave="afterLeave"
-            >
-                <produc-list-item
-                    v-for="(product, index) in products"
-                    :key="product.id"
-                    :index="index"
-                    :product="product"
-                    :inventory="inventory"
-                >
-                </produc-list-item>
-            </transition-group>
-        </table>
-        <infinite-loading
-            :identifier="infiniteId"
-            @infinite="getProducts"
-            ref="infiniteLoading"
-        ></infinite-loading>
+        <div class="relative overflow-x-auto bg-white rounded-lg">
+            <table v-if="inventory" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <th scope="col" class="px-6 py-3">Categoría</th>
+                    <th scope="col" class="px-6 py-3">SKU</th>
+                    <th scope="col" class="px-6 py-3">Descripción</th>
+                    <th scope="col" class="px-6 py-3">Existencias</th>
+                </thead>
+                <transition-group tag="tbody" name="bounce" @after-leave="afterLeave">
+                    <produc-list-item v-for="(product, index) in products" :key="product.id" :index="index"
+                        :product="product" :inventory="inventory">
+                    </produc-list-item>
+                </transition-group>
+            </table>
+        </div>
+        <infinite-loading :identifier="infiniteId" @infinite="getProducts" ref="infiniteLoading"></infinite-loading>
     </div>
 </template>
 <script>
