@@ -1,19 +1,12 @@
 <template>
-    <div class="flex items-center  py-2 relative">
+    <div class="relative ">
+        <slot name="labelCategory"> </slot>
         <input
             v-model="term_search"
             :class="[inputClass]"
             class="
-                appearance-none
-                bg-transparent
-                border-none
+                form-text-input
                 w-full
-                text-gray-700
-                mr-3
-                py-1
-                leading-tight
-                focus:outline-none
-                placeholder-blue-400
             "
             autocomplete="off"
             @focus="allCategories"
@@ -26,11 +19,10 @@
             placeholder="Click o Enter para seleccionar | Presione la tecla ESC para limpiar"
             aria-label="Full name"
         />
-        <slot name="labelCategory"> </slot>
 
         <button
             @click.prevent="close"
-            class="absolute  text-gray-700 border border-gray-400  font-semibold right-0 px-3 py-1 hover:bg-gray-300 rounded-sm shadow"
+            class="absolute  right-2 text-gray-700 bg-white text-center  font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow"
         >
             X
         </button>
@@ -46,7 +38,7 @@
                 rounded
                 max-h-64
                 overflow-x-auto
-                
+
             "
             v-if="items.length"
         >

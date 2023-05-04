@@ -8,7 +8,7 @@
             <label for=""
                 class="form-label">Nombre</label>
             <input v-model="form.name" name="name"
-                class="form-text-input"
+                class="form-text-input w-full"
                 :class="[
                         'flex',
                         'items-center',

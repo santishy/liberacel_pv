@@ -1,7 +1,7 @@
 <template>
-    <div v-if="method.toUpperCase() == 'POST' " class="flex flex-col justify-center rounded bg-white p-2 border border-indigo-500">
-        <div class="flex flex-wrap justify-center">
-            <p class="text-xs font-mono">Compras:</p>
+    <div v-if="method.toUpperCase() == 'POST' " class="flex flex-col justify-center rounded  p-2 ">
+        <div class="flex flex-wrap justify-center mb-2">
+            <p class="text-xs font-bold ">Compras:</p>
             <span
                 :class="[getTextColor]"
                 class="font-semibold text-xs ml-2 font-mono"
@@ -12,7 +12,7 @@
         <div class="flex flex-wrap mt-0 justify-center">
             <button
                 @click.prevent="togglePurchaseVisibility(true)"
-                class="mr-2 text-green-700"
+                class="mr-2 text-green-700 hover:bg-blue-700 hover:text-white p-2 rounded"
             >
                 <div class="flex flex-wrap">
                     <check-circle></check-circle>
@@ -21,7 +21,7 @@
             </button>
             <button
                 @click.prevent="togglePurchaseVisibility(false)"
-                class="text-orange-700"
+                class="text-orange-700 hover:bg-yellow-600 hover:text-white p-2 rounded"
             >
                 <div class="flex flex-wrap">
                     <times-circle />

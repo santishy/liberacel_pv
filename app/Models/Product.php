@@ -58,7 +58,6 @@ class Product extends Model
         if (request()->exists('image')) {
             if (!is_null($this->image)) {
                 if (file_exists(storage_path('app/' . $this->image))) {
-
                     Storage::delete($this->image);
                 }
             }
@@ -73,6 +72,6 @@ class Product extends Model
             return Storage::url("public/images/$name");
         }
         return "/images/not-found.png";
-        
+
     }
 }

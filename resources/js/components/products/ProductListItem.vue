@@ -1,6 +1,6 @@
 <template>
-    <tr class="border-b text-center">
-        <td class="flex flex-wrap justify-center items-center">
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td class="px-6 py-4">
             <div class="image-container">
                 <img
                     :src="product.image_url"
@@ -10,30 +10,30 @@
                 />
             </div>
         </td>
-        <td>
-            <div class="flex justify-center items-center">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <div class="flex justify-start items-center">
                 <span class="mr-2">{{ product.sku }}</span>
-                <a :href="`/barcode/${product.sku}`" class="text-blue-700 " target="_blank"> 
+                <a :href="`/barcode/${product.sku}`" class="text-blue-700 " target="_blank">
                     <barcode/>
                 </a>
             </div>
-        </td>
-        <td>
+        </th>
+        <td class="px-6 py-4">
             {{ product.category_name }}
         </td>
-        <td>
+        <td class="px-6 py-4">
             {{ product.description }}
         </td>
-        <td>
+        <td class="px-6 py-4">
             {{ product.formatted_wholesale_price }}
         </td>
-        <td>
+        <td class="px-6 py-4">
             {{ product.formatted_retail_price }}
         </td>
-        <td>
+        <td class="px-6 py-4">
             {{ product.formatted_distributor_price }}
         </td>
-        <td>
+        <td class="px-6 py-4">
             <div v-if="queryTypeExists" class="flex flex-wrap justify-center items-center">
                 <add-to-purchase
                     v-show="isPurchase"
@@ -103,7 +103,7 @@ export default {
             );
         },
         isSale() {
-        
+
             return (
                 this.visibleActions.sale.toUpperCase() === this.queryType.toUpperCase()
             );

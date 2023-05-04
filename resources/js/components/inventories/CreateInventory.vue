@@ -10,7 +10,7 @@
                     <label for=""
                         class="form-label">Nombre</label>
                     <input v-model="form.name" name="name"
-                        class="form-text-input"
+                        class="form-text-input w-full"
                         type="text" placeholder="Jiquilpan " aria-label="Full name" />
 
                 </div>
@@ -18,7 +18,7 @@
                     <label
                         class="form-label">Dirección</label>
                     <input v-model="form.address" name="address"
-                        class="form-text-input"
+                        class="form-text-input w-full"
                         type="text" placeholder="Sor Juana Inés #34 " aria-label="Full name" />
                 </div>
                 <div class="flex items-center ">

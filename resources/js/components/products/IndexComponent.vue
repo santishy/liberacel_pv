@@ -1,19 +1,10 @@
 <template>
     <nav-component>
-        <div class="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 gap-4">
-            <div class="col-span-4 2xl:col-span-5 flex justify-center items-baseline">
-
+        <div class="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 ">
+            <div class="col-span-4 2xl:col-span-5 flex justify-end items-baseline rounded-t-sm p-4 bg-white">
                 <search-by-category class="md:w-1/4 w-3/4 mr-2" :categories="categories"></search-by-category>
                 <search-component ref="search" class="md:w-1/4 w-3/4 " />
             </div>
-            <!--  <product-card
-                v-for="(product, index) in products"
-                :key="product.id"
-                :product="product"
-                :index="index"
-                transaction-type="purchase"
-                class="col-span-3 md:col-span-1"
-            /> -->
             <product-list class="col-span-5">
                 <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
                     :index="index">

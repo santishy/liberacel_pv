@@ -1,12 +1,12 @@
 <template>
     <nav-component>
-        <div class="flex flex-wrap items-baseline md:w-9/12 mx-auto">
+        <div class="flex flex-wrap  md:w-10/12 mx-auto justify-center">
             <category-form
-                class="self-start"
+                class="self-start w-6/12"
                 uri='/categories'
             ></category-form>
-            <div class="ml-6 ">
-                <category-list ></category-list>
+            <div class="ml-6 w-6/12 ">
+                <category-list class="w-full" ></category-list>
             </div>
         </div>
     </nav-component>

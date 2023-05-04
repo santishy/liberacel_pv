@@ -1,11 +1,5 @@
 <template>
-    <nav-component>
-        <create-inventory
-            :inventory="inventory"
-            method="put"
-            :uri="`/warehouses/${inventory.id}`"
-        ></create-inventory>
-    </nav-component>
+    <create-inventory :inventory="inventory" method="put" :uri="`/warehouses/${inventory.id}`"></create-inventory>
 </template>
 <script>
 import CreateInventory from "../inventories/CreateInventory.vue";
