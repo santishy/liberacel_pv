@@ -1,26 +1,26 @@
 <template>
-    <form @submit.prevent="submit" v-can="'create purchase'">
+    <form @submit.prevent="submit" v-can="'create purchase'" class="flex justify-center items-center gap-2">
         <input type="hidden" name="product_id" />
-        <button
-            class="  border-yellow-500 border-b-2 hover:text-yellow-700 border-t-2 shadow-xs hover:border-yellow-700 text-yellow-500 font-bold py-1 px-4 rounded text-2xl"
-        >
-            <div
-                v-if="qtyPurchase(productExistsInPurchase(product_id))"
-                class="inline-block"
-            >
-                <span class="bg-purple-900 rounded-full py-0 px-2 text-xl">{{
-                    qtyPurchase(productExistsInPurchase(product_id))
-                }}</span>
-            </div>
-            <purchase-icon></purchase-icon>
+        <button class=" p-1 bg-blue-400  text-black rounded-sm shadow hover:bg-gray-300 hover:shadow-none font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+
+
         </button>
+        <div v-if="qtyPurchase(productExistsInPurchase(product_id))" class="inline-block">
+            <span class="bg-blue-600 text-white font-bold rounded-full px-2 py-1 text-xs">{{
+                qtyPurchase(productExistsInPurchase(product_id))
+            }}</span>
+        </div>
     </form>
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import PurchaseIcon from '../icons/PurchaseIcon.vue';
 export default {
-    components:{PurchaseIcon},
+    components: { PurchaseIcon },
     props: {
         product_id: {
             type: Number
