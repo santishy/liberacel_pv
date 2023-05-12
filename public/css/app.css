@@ -1037,10 +1037,6 @@ select {
   display: table;
 }
 
-.inline-table {
-  display: inline-table;
-}
-
 .grid {
   display: grid;
 }
@@ -1169,6 +1165,10 @@ select {
   width: 66.666667%;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-9 {
   width: 2.25rem;
 }
@@ -1227,14 +1227,6 @@ select {
 
 .w-2\/6 {
   width: 33.333333%;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
-.w-80 {
-  width: 20rem;
 }
 
 .min-w-full {
