@@ -30,7 +30,14 @@
                 currentFastSale.created_at
             }}</span>
         </div>
-        <div class="w-full flex justify-end p-2">
+        <div class="w-full flex justify-end  items-baseline gap-4 p-2">
+            <!-- <div
+                class="flex flex-wrap  items-start w-80  p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded">
+                <p class="mr-4">
+                    Dar doble click sobre una fila de la tabla generada abajo, para
+                    editar el producto.
+                </p>
+            </div> -->
             <customer-bonus v-if="Object.keys(currentFastSale).length" class="flex flex-wrap"
                 inputStyle="form-text-input w-full">
                 <template slot="bonus-button">
@@ -46,16 +53,7 @@
                 </template>
             </customer-bonus>
         </div>
-        <div
-            class="flex flex-wrap items-center justify-center w-full p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded">
-            <p class="mr-4">
-                Dar doble click sobre una fila de la tabla generada abajo, para
-                editar el producto.
-            </p>
 
-            <pointer-icon class="text-blue-700"></pointer-icon>
-            <pointer-icon class="text-blue-700"></pointer-icon>
-        </div>
         <div class="relative overflow-x-auto bg-white w-full">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -161,22 +159,4 @@ export default {
     },
 };
 </script>
-<style lang="css" scoped>
-@media (min-width: 640px) {
-    table {
-        display: inline-table !important;
-    }
 
-    thead tr:not(:first-child) {
-        display: none;
-    }
-}
-
-td:not(:last-child) {
-    border-bottom: 0;
-}
-
-th:not(:last-child) {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-}
-</style>
