@@ -58,8 +58,11 @@ class CustomerBonus extends Model
     {
         return $this->accumulated_points * floatval($pointData->value);
     }
-    
+
     public function conversionToPoints($pointData,$value){
+        if($value == 0)/**Revisar aqui, me marcaba un error por division entre 0 , al parecer si en ventas
+        rapidas buscas un cliente como 3531097842 y no tiene puntos acumulados, y le pones borrar entonces marca este error */
+            return;
         return $value / floatval($pointData->value);
     }
 }

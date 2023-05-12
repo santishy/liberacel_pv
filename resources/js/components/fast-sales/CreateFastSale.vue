@@ -3,8 +3,8 @@
         <subtotals></subtotals>
         <div
             class="
-                p-2
-                border-l-4 border-blue-500
+                p-4
+
                 flex flex-wrap
                 items-baseline
                 md:w-9/12
@@ -16,9 +16,6 @@
         >
             <h3
                 class="
-                    p-2
-                    border-b border-gray-300
-                    text-center
                     w-full
                     font-mono
                     text-2xl

@@ -1,81 +1,25 @@
 <template>
-    <tr
-        v-if="!show"
-        class="
-            flex flex-col flex-no
-            wrap
-            sm:table-row
-            mb-2
-            sm:mb-0 sm:text-center
-        "
-    >
-        <td
-            @dblclick.prevent="dbClick('description',$event)"
-            class="
-                border-grey-light border
-                hover:bg-gray-100
-                p-3
-                cursor-pointer
-            "
-        >
+    <tr v-if="!show" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th @dblclick.prevent="dbClick('description', $event)" scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{ product.description }}
+        </th>
+        <td @dblclick.prevent="dbClick('price')" class="px-6 py-4">
+            {{ product.price }}
         </td>
-        <td
-            @dblclick.prevent="dbClick('price')"
-            class="
-                border-grey-light border
-                hover:bg-gray-100
-                p-3
-                cursor-pointer
-            "
-        >
-            <span>{{ product.price }}</span>
+        <td @dblclick.prevent="dbClick('qty')" class="px-6 py-4">
+            {{ product.qty }}
         </td>
-        <td
-            @dblclick.prevent="dbClick('qty')"
-            class="
-                border-grey-light border
-                hover:bg-gray-100
-                p-3
-                cursor-pointer
-            "
-        >
-            <span>{{ product.qty }}</span>
-        </td>
-        <td
-            class="
-                border-grey-light border
-                hover:bg-gray-100
-                p-3
-                text-red-400
-                hover:text-red-600 hover:font-medium
-                cursor-pointer
-            "
-        >
+        <td class="px-6 py-4">
             <delete-concept :index="index" :id="id"></delete-concept>
         </td>
     </tr>
-    <tr v-else class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+    <tr v-else class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <td colspan="4" class="border-grey-light border hover:bg-gray-100 p-3">
             <form class="grid grid-cols-3 gap-2" @submit.prevent="submit">
-                <input
-                    type="text"
-                    name="description"
-                    v-model="form.description"
-                    :class="[inputStyle]"
-                />
-                <input
-                    type="text"
-                    name="price"
-                    v-model="form.price"
-                    :class="[inputStyle]"
-                />
-                <input
-                    type="text"
-                    name="qty"
-                    v-model="form.qty"
-                    :class="[inputStyle]"
-                />
+                <input type="text" name="description" v-model="form.description" :class="[inputStyle]" />
+                <input type="text" name="price" v-model="form.price" :class="[inputStyle]" />
+                <input type="text" name="qty" v-model="form.qty" :class="[inputStyle]" />
                 <button type="submit"></button>
             </form>
         </td>
@@ -123,7 +67,7 @@ export default {
             }
             this.show = false;
         },
-        dbClick(name,event) {
+        dbClick(name, event) {
             this.show = true;
         },
     },

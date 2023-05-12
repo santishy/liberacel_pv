@@ -1,69 +1,33 @@
 <template>
-    <form
-        id="fastSaleForm"
-        ref="quickSaleForm"
-        class="grid w-full grid-flow-col grid-cols-5 grid-rows-4"
-        @submit.prevent="submit"
-    >
-        
-        <div class="col-span-5" :class="[controlsContainerStyle]">
-            <label :class="[labelStyle]">Descripción</label>
-            <textarea
-                name="description"
-                ref="description"
-                v-model="form.description"
-                @keydown.down.exact.prevent="nextFocus"
-                @keydown.ctrl.space.exact.prevent="openModal"
-                @click.prevent="focusedIndex = 0"
-                :class="[inputStyle]"
-                placeholder="Descripción del producto o servicio"
-                autocomplete="off"
-            ></textarea>
+    <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
+
+        <div>
+            <label class="form-label">Descripción</label>
+            <input name="description" ref="description" v-model="form.description" @keydown.down.exact.prevent="nextFocus"
+                @keydown.ctrl.space.exact.prevent="openModal" @click.prevent="focusedIndex = 0"
+                class="form-text-input w-full" placeholder="Descripción del producto o servicio" autocomplete="off" />
         </div>
-        <div class="col-span-5" :class="[controlsContainerStyle]">
-            <label :class="[labelStyle]">Categoría</label>
-            <search-select
-                class="w-8/12"
-                :collection="productBonuses"
-                :input-class="' w-full' + inputStyle"
-            ></search-select>
+        <div>
+            <label class="form-label">Categoría</label>
+            <search-select class="w-full" :collection="productBonuses" input-class="form-text-input w-full"></search-select>
         </div>
-        <div class="w-full col-span-5" :class="controlsContainerStyle">
-            <label :class="[labelStyle]">Precio</label>
-            <input
-                type="text"
-                ref="price"
-                name="price"
-                v-model="form.price"
-                :class="[inputStyle]"
-                placeholder="Precio"
-                @click.prevent="focusedIndex = 1"
-                @keydown.enter="submit"
-                @keydown.down.exact.prevent="nextFocus"
-                @keydown.up.exact.prevent="previousFocus"
-                @keydown.ctrl.space.exact.prevent="openModal"
-                autocomplete="off"
-            />
+        <div>
+            <label class="form-label">Precio</label>
+            <input type="text" ref="price" name="price" v-model="form.price" class="form-text-input w-full"
+                placeholder="Precio" @click.prevent="focusedIndex = 1" @keydown.enter="submit"
+                @keydown.down.exact.prevent="nextFocus" @keydown.up.exact.prevent="previousFocus"
+                @keydown.ctrl.space.exact.prevent="openModal" autocomplete="off" />
         </div>
-        <div class="col-span-5" :class="[controlsContainerStyle]">
-            <label :class="[labelStyle]">Cantidad</label>
-            <input
-                type="text"
-                name="qty"
-                ref="qty"
-                v-model="form.qty"
-                :class="[inputStyle]"
-                placeholder="Cantidad de venta"
-                @keydown.enter="submit"
-                @click.prevent="focusedIndex = 2"
-                @keydown.up.exact.prevent="previousFocus"
-                @keydown.ctrl.space.exact.prevent="openModal"
-                autocomplete="off"
-            />
+        <div>
+            <label class="form-label">Cantidad</label>
+            <input type="text" name="qty" ref="qty" v-model="form.qty" class="form-text-input w-full"
+                placeholder="Cantidad de venta" @keydown.enter="submit" @click.prevent="focusedIndex = 2"
+                @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
+                autocomplete="off" />
         </div>
 
-        <div class="flex items-center justify-start w-full row-span-3 ml-10">
-            <div class="flex items-center">
+        <div class="flex items-center justify-start w-full col-span-2">
+            <div class="flex items-center w-full">
                 <errors-component :errors-found="errors" />
             </div>
         </div>
@@ -72,7 +36,7 @@
 
 <script>
 import SearchSelect from "../partials/SearchSelect.vue";
-import {mapMutations} from "vuex";
+import { mapMutations } from "vuex";
 export default {
     components: {
         SearchSelect,
@@ -91,7 +55,7 @@ export default {
     mounted() {
         this.focusDescription();
         EventBus.$on("focus-description", this.focusDescription);
-        EventBus.$on("selected-item" ,(item) => {
+        EventBus.$on("selected-item", (item) => {
             this.form.product_bonus_id = item?.id;
         })
     },
@@ -103,13 +67,13 @@ export default {
                 const {
                     data: { data },
                 } = await axios.post("/fast-sales", this.form);
-                
+
                 EventBus.$emit("fast-sale", data);
 
                 this.SET_CURRENT_FAST_SALE(data);
 
                 EventBus.$emit("reset-search-select");
-                
+
                 this.form = {};
 
                 this.notify({
@@ -117,9 +81,8 @@ export default {
                     message: "Producto agregado",
                 });
 
-            } 
-            catch (err) 
-            {
+            }
+            catch (err) {
                 this.getErrors(err);
             }
             //this.toggleDisabled();
@@ -168,16 +131,14 @@ export default {
 <style scoped>
 .bg-stripes-pink {
     background-color: #f472b61a;
-    background-image: linear-gradient(
-        135deg,
-        #ec489980 10%,
-        transparent 0,
-        transparent 50%,
-        #ec489980 0,
-        #ec489980 60%,
-        transparent 0,
-        transparent
-    );
+    background-image: linear-gradient(135deg,
+            #ec489980 10%,
+            transparent 0,
+            transparent 50%,
+            #ec489980 0,
+            #ec489980 60%,
+            transparent 0,
+            transparent);
     background-size: 7.07px 7.07px;
 }
 </style>
