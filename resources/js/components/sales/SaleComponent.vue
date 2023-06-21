@@ -1,12 +1,9 @@
 <template>
     <nav-component>
         <transition name="fade">
-            <div
-                v-if="seletedInventoryId == null && (isAdmin && !localSale.inventory_id)"
-                class="flex flex-col justify-center mx-auto px-4 w-full"
-            >
-                <p
-                    class="
+            <div v-if="seletedInventoryId == null && (isAdmin && !localSale.inventory_id)"
+                class="flex flex-col justify-center mx-auto px-4 w-full">
+                <p class="
                         border
                         w-full
                         px-4
@@ -18,34 +15,27 @@
                         bg-indigo-100
                         mb-2
                         text-center
-                    "
-                >
+                    ">
                     Al ser un usuario administrador, puedes elegir el inventario
                     para realizar la venta
                 </p>
                 <inventory-list @click.prevent=""></inventory-list>
             </div>
             <div v-else class="w-full px-4">
-                <div
-                    class="
+                <div class="
 
                         flex flex-col
                         sm:flex-row
                         justify-center
                         items-baseline
                         mb-4
-                    "
-                >
-                    <search-by-category
-                        class="sm:w-2/4 w-full sm:mr-2 "
-                        :categories="categories"
-                    ></search-by-category>
+                    ">
+                    <search-by-category class="sm:w-2/4 w-full sm:mr-2 " :categories="categories"></search-by-category>
                     <search-component class="md:w-2/4 w-full sm:mt-0 mt-4" />
                 </div>
                 <product-matching></product-matching>
                 <div class="w-full flex flex-wrap justify-center items-center">
-                    <div
-                        class="
+                    <div class="
                             bg-white
                             mt-4
                             sm:mt-0
@@ -55,22 +45,25 @@
                             md:mx-0
                             rounded-sm
                             shadow-sm
-                        "
-                    >
-                        <div
-                            class="
+                        ">
+
+                        <div class="
                                 w-full
                                 flex flex-wrap
                                 md:justify-between
                                 text-gray-600
                                 md:items-center
-                            "
-                        >
+                            ">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div
+                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 ">A crédito</span>
+                            </label>
                             <sale-to-customer class="mr-4" v-if="show" />
-                            <button
-                                v-else
-                                @click="show = true"
-                                class="
+
+                            <button v-else @click="show = true" class="
                                     bg-teal-300
                                     rounded
                                     transition-all
@@ -85,22 +78,16 @@
                                     border-b-2 border-teal-500
                                     hover:border-transparent
                                     mr-1
-                                "
-                            >
+                                ">
                                 Cliente registrado
                             </button>
-                            <delete-sale
-                                v-if="localSale"
-                                :sale="localSale"
-                            ></delete-sale>
+
+                            <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
                         </div>
-                        <div
-                            v-if="localSale"
-                            :class="[
-                                'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
-                                alignStatus,
-                            ]"
-                        >
+                        <div v-if="localSale" :class="[
+                            'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
+                            alignStatus,
+                        ]">
                             <div class="text-gray-600">
                                 ID Venta - #{{ localSale.id }}
                             </div>
@@ -178,9 +165,9 @@ export default {
             localSale: {},
         };
     },
-    methods:{
+    methods: {
         ...mapMutations(["SET_QUERY_TYPE"]),
-        getQueryType(){
+        getQueryType() {
             let url = new URL(window.location.href);
             this.SET_QUERY_TYPE(url.searchParams.get('queryType'));
         },

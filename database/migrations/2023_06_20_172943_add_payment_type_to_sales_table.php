@@ -14,7 +14,7 @@ class AddPaymentTypeToSalesTable extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->enum('payment_type', ['cash', 'credit'])->default('cash');
+            $table->boolean('is_credit')->default(false);
         });
     }
 
