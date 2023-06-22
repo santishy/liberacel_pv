@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\TransactionComplete;
+use App\Http\Requests\StoreSaleRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Resources\TransactionResource;
@@ -53,31 +54,34 @@ class SaleController extends Controller
 
 
 
-    public function store(Request $request, Sale $sale)
+    public function store(StoreSaleRequest $request, Sale $sale)
     {
         $this->authorize('create',$sale);
 
-        $fields = $request->validate([
-            'status' => ['required', 'regex:/completed|cancelled|pending/'],
-            'total' => 'numeric|required',
-            'inventory_id' => ['required'],
+        $fields = $request->validated();
 
-        ]);
+        $factors = [
+            "completed" => -1,
+            "pending" => 1
+        ];
 
         if ($fields['status'] == 'completed') {
-            $factor = -1;
+            //$factor = -1;
             request()->session()->forget('sale_id');
-        }
-        if ($fields['status'] == 'pending') {
-            $factor = 1;
+        }elseif($fields['status'] == 'pending') {
+            //$factor = 1;
             request()->session()->put('sale_id', $sale->id);
         }
 
 
         // ver la primera validacion que hay dentro de este evento refernte a status ;)
-        TransactionComplete::dispatch($sale, $factor);
+        TransactionComplete::dispatch($sale, $factors[$fields['status']]);
 
         $sale->update($fields);
+
+        if ($fields['is_credit'] && $sale->client_id && $sale->status === "completed"){
+            $sale->handleCredit();
+        }
 
         return response()->json([
             'sale_status' => $sale->status
