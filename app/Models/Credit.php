@@ -9,11 +9,20 @@ class Credit extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["client_id"];
+
     public function creditables()
     {
         return $this->hasMany(Creditable::class);
     }
-
+    static public function findOrCreate($client_id)
+    {
+        $credit = Credit::where('status', '!=', 'paid')
+            ->where('client_id', $client_id)
+            ->first();
+            
+        return $credit ?? Credit::create(['client_id' => $client_id]);
+    }
     public function sales()
     {
         return $this->morphedByMany(Sale::class, 'creditable');

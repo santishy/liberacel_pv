@@ -2,33 +2,31 @@
     <div>
         <form @submit.prevent="submit" v-can="'create sale'">
             <div v-if="Object.keys(localSale).length">
-                <div
-                    v-show="products.length"
-                    class="
+                <div v-show="products.length" class="
                         flex flex-wrap
                         justify-center
                         items-center
                         text-center
                         mb-2
                         bg-teal-100
-                    "
-                >
+                    ">
                     <label class="mr-4 text-2xl">Total</label>
                     <p class="text-gray-700 text-3xl">${{ getTotal }}</p>
-                    <input
-                        name="total"
-                        type="hidden"
-                        :v-model="(form.total = getTotal)"
-                    />
+                    <input name="total" type="hidden" :v-model="(form.total = getTotal)" />
                 </div>
             </div>
             <div v-if="errors" class="flex items-center mb-3">
                 <errors-component :errors="errors" />
             </div>
-            <div class="flex flex-wrap justify-center">
-                <button
-                    v-show="products.length"
-                    class="
+            <div class="flex flex-wrap justify-between items-center">
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input v-model="form.is_credit" type="checkbox" value="" class="sr-only peer">
+                    <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 ">A crédito</span>
+                </label>
+                <button v-show="products.length" class="
                         rounded
                         transition-all
                         duration-500
@@ -41,22 +39,15 @@
                         hover:bg-red-500 hover:border-transparent
                         md:w-2/4
                         w-full
-                    "
-                    :class="[getClass]"
-                >
+                    " :class="[getClass]">
                     Cambiar a {{ modifyTo }}
                 </button>
             </div>
         </form>
         <div v-if="localSale !== null" class="overflow-x-auto relative">
             <product-list>
-                <product-list-item
-                    v-for="(product, index) in products"
-                    :key="product.id"
-                    :product="product"
-                    :sale-status="getStatus"
-                    :index="index"
-                >
+                <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
+                    :sale-status="getStatus" :index="index">
                 </product-list-item>
             </product-list>
         </div>
@@ -111,7 +102,7 @@ export default {
         EventBus.$on("sale-to-client", (data) => {
             this.localSale = data.sale;
         });
-        EventBus.$on("update-cart",data => this.updateCart(data))
+        EventBus.$on("update-cart", data => this.updateCart(data))
     },
     computed: {
         getClass() {
@@ -138,9 +129,15 @@ export default {
     },
     methods: {
         submit() {
+            if (this.sale)
+                if (this.sale.inventory_id)
+                    sessionStorage.setItem("inventory_id", this.sale.inventory_id)
+
             this.form.inventory_id = this.isAdmin
                 ? sessionStorage.getItem("inventory_id")
                 : this.user.inventory_id;
+
+
             if (this.getStatus === "pending") this.form.status = "completed";
             else this.form.status = "pending";
             axios
@@ -162,16 +159,15 @@ export default {
                     });
                 });
         },
-        async updateCart(data){
-            try{
+        async updateCart(data) {
+            try {
 
                 const res = await axios.post(`/sales/${data?.product_id}/products`,
-                    {_method:'put',...data}
-                    );
+                    { _method: 'put', ...data }
+                );
                 EventBus.$emit('enabled');
 
-            }catch(error)
-            {
+            } catch (error) {
                 this.getErrors(error);
                 this.$notify({
                     group: "foo",

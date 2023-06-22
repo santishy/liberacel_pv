@@ -6,14 +6,15 @@ use Illuminate\Contracts\Validation\Rule;
 
 class NotNullIsCreditRule implements Rule
 {
+    private $sale;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($sale)
     {
-        //
+        $this->sale = $sale;
     }
 
     /**
@@ -26,7 +27,7 @@ class NotNullIsCreditRule implements Rule
     public function passes($attribute, $value)
     {
 
-        return $attribute && $this->route('sale')->client_id;
+        return $value && $this->sale->client_id;
     }
 
     /**

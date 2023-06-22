@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class Sale extends Model
 {
-    use HasFactory, ReportBy;
+    use HasFactory, ReportBy, ManagesCredits;
 
     protected $guarded = ['id'];
     public function refunds()
