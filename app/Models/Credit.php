@@ -9,7 +9,7 @@ class Credit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["client_id"];
+    protected $fillable = ["client_id","total_amount","amount_paid"];
 
     public function creditables()
     {
@@ -20,7 +20,7 @@ class Credit extends Model
         $credit = Credit::where('status', '!=', 'paid')
             ->where('client_id', $client_id)
             ->first();
-            
+
         return $credit ?? Credit::create(['client_id' => $client_id]);
     }
     public function sales()

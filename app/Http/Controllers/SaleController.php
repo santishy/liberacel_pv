@@ -23,7 +23,7 @@ class SaleController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny',new Sale);
+        $this->authorize('viewAny', new Sale);
 
         //return response()->json(['ok' => request('filter')]);
 
@@ -31,7 +31,7 @@ class SaleController extends Controller
             return new ReportResponse(Sale::query());
         }
 
-        $inventories = Inventory::all('id','name');
+        $inventories = Inventory::all('id', 'name');
 
         return view('transactions.index', [
             'uri' => '/sales',
@@ -41,7 +41,7 @@ class SaleController extends Controller
     }
     public function create()
     {
-        $this->authorize('create',new Sale);
+        $this->authorize('create', new Sale);
         $sale = Sale::with('client')->where('id', session('sale_id'))->first();
         $inventories = Inventory::all();
         $categories = Category::all();
@@ -56,7 +56,7 @@ class SaleController extends Controller
 
     public function store(StoreSaleRequest $request, Sale $sale)
     {
-        $this->authorize('create',$sale);
+        $this->authorize('create', $sale);
 
         $fields = $request->validated();
 
@@ -68,7 +68,7 @@ class SaleController extends Controller
         if ($fields['status'] == 'completed') {
             //$factor = -1;
             request()->session()->forget('sale_id');
-        }elseif($fields['status'] == 'pending') {
+        } elseif ($fields['status'] == 'pending') {
             //$factor = 1;
             request()->session()->put('sale_id', $sale->id);
         }
@@ -79,8 +79,8 @@ class SaleController extends Controller
 
         $sale->update($fields);
 
-        if ($fields['is_credit'] && $sale->client_id && $sale->status === "completed"){
-            $sale->handleCredit();
+        if ($fields['is_credit'] && $sale->client_id) {
+            $sale->handleCredit($factors[$fields['status']]);
         }
 
         return response()->json([
@@ -90,7 +90,7 @@ class SaleController extends Controller
 
     public function destroy(Sale $sale)
     {
-        $this->authorize('delete',$sale);
+        $this->authorize('delete', $sale);
 
         if ($sale->status != 'completed') {
             $saleDeleted = $sale->delete();

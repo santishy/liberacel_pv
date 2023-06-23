@@ -3,17 +3,12 @@
         <div class="flex items-center border-b border-teal-500 py-2">
             <input
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                placeholder="Número de teléfono del cliente."
-                name="phone_number"
-                v-model="form.phone_number"
-                aria-label="Full name"
-            />
+                type="text" placeholder="Número de teléfono del cliente." name="phone_number" v-model="form.phone_number"
+                aria-label="Full name" />
 
             <button
                 class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-                type="submit"
-            >
+                type="submit">
                 Venta a cliente
             </button>
             <information-component>
@@ -28,7 +23,7 @@
                 </template>
             </information-component>
         </div>
-        <div  class="flex items-center ">
+        <div class="flex items-center ">
             <errors-component :errors-found="errors" />
         </div>
     </form>
@@ -47,6 +42,8 @@ export default {
     },
     methods: {
         submit() {
+            if (sessionStorage.getItem('inventory_id'))
+                this.form.inventory_id = sessionStorage.getItem('inventory_id');
             axios
                 .post("/sales-to-clients", this.form)
                 .then(res => {

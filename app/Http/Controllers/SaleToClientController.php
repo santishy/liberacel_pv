@@ -15,11 +15,14 @@ class SaleToClientController extends Controller
         $this->authorize('create',new Sale);
         $fields = $request->validate([
             'phone_number' => 'exists:clients,phone_number|required',
+            'inventory_id' => 'required'
         ]);
-        
+
         $this->validateTypeOfSale();
 
         $sale = Sale::getTransaction();
+
+        $sale->update(["inventory_id" => $fields["inventory_id"]]);
 
         $client = $sale->client_id ? $sale->client : Client::where(
             'phone_number',
@@ -30,7 +33,7 @@ class SaleToClientController extends Controller
             ->associate($client);
 
         $sale->save();
-        
+
         return response()->json([
             'sale' =>  TransactionResource::make(
                 sale::with('client')->where('id',session('sale_id'))->first()

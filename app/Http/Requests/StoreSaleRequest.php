@@ -28,7 +28,7 @@ class StoreSaleRequest extends FormRequest
             'status' => ['required', 'regex:/completed|cancelled|pending/'],
             'total' => 'numeric|required',
             'inventory_id' => ['required'],
-            'is_credit' => ["accepted", new NotNullIsCreditRule($this->route('sale'))]
+            'is_credit' => ["nullable","accepted", new NotNullIsCreditRule($this->route('sale'))]
         ];
     }
 }
