@@ -1940,11 +1940,6 @@ select {
   background-color: rgb(236 201 75 / var(--tw-bg-opacity));
 }
 
-.bg-teal-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(56 178 172 / var(--tw-bg-opacity));
-}
-
 .bg-teal-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(230 255 250 / var(--tw-bg-opacity));
@@ -1958,6 +1953,11 @@ select {
 .bg-yellow-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 240 137 / var(--tw-bg-opacity));
+}
+
+.bg-teal-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 178 172 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-75 {
@@ -3169,10 +3169,6 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(116 66 16 / var(--tw-bg-opacity));
 }
-.hover\:bg-teal-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(44 122 123 / var(--tw-bg-opacity));
-}
 .hover\:bg-green-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(72 187 120 / var(--tw-bg-opacity));
@@ -3180,6 +3176,10 @@ body {
 .hover\:bg-yellow-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(236 201 75 / var(--tw-bg-opacity));
+}
+.hover\:bg-teal-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(44 122 123 / var(--tw-bg-opacity));
 }
 .hover\:bg-orange-800:hover {
   --tw-bg-opacity: 1;
