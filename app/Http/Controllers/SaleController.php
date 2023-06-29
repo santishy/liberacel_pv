@@ -79,9 +79,9 @@ class SaleController extends Controller
 
         $sale->update($fields);
 
-        if ($fields['is_credit'] && $sale->client_id) {
-            $sale->handleCredit($factors[$fields['status']]);
-        }
+        // if ($fields['is_credit'] && $sale->client_id) {
+        //     $sale->handleCredit($factors[$fields['status']]);
+        // }
 
         return response()->json([
             'sale_status' => $sale->status

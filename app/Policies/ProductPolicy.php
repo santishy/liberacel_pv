@@ -56,7 +56,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        return $user->hasPermissionTo('edit product ');
+        return $user->hasPermissionTo('edit product');
     }
 
     /**
