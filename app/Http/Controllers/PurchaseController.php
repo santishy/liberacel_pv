@@ -13,6 +13,7 @@ use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\ValidationException;
 
 class PurchaseController extends Controller
 {
@@ -86,12 +87,10 @@ class PurchaseController extends Controller
             'status' => ['required'],
             'inventory_id' => ['required']
         ]);
-        if($request->status !== 'completed'){
-            return response()->json([
-                ""
-            ])
+        if ($request->status === 'completed' && $purchase->status === "completed") {
+            //new ValidationException()
         }
-        if ($request->status === 'completed' )
+        if ($request->status === 'completed')
             $this->deleteSessionVariable('purchase_id');
 
 
