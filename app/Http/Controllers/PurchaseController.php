@@ -86,8 +86,12 @@ class PurchaseController extends Controller
             'status' => ['required'],
             'inventory_id' => ['required']
         ]);
-
-        if ($request->status === 'completed')
+        if($request->status !== 'completed'){
+            return response()->json([
+                ""
+            ])
+        }
+        if ($request->status === 'completed' )
             $this->deleteSessionVariable('purchase_id');
 
 
