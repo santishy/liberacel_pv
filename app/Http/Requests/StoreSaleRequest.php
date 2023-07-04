@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IsCreditAccepted;
 use App\Rules\NotNullIsCreditRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,7 +29,7 @@ class StoreSaleRequest extends FormRequest
             'status' => ['required', 'regex:/completed|cancelled|pending/'],
             'total' => 'numeric|required',
             'inventory_id' => ['required'],
-            //'is_credit' => ""
+            'is_credit' => ['nullable', new IsCreditAccepted]
         ];
     }
 }
