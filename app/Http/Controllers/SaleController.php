@@ -62,26 +62,24 @@ class SaleController extends Controller
 
         $factors = [
             "completed" => -1,
-            "pending" => 1
+            "pending" => 1,
         ];
-
-        if ($fields['status'] == 'completed') {
-            //$factor = -1;
-            request()->session()->forget('sale_id');
-        } elseif ($fields['status'] == 'pending') {
-            //$factor = 1;
-            request()->session()->put('sale_id', $sale->id);
-        }
-
 
         // ver la primera validacion que hay dentro de este evento refernte a status ;)
         TransactionComplete::dispatch($sale, $factors[$fields['status']]);
 
+        if ($fields['status'] == 'completed') {
+            request()->session()->forget('sale_id');
+        } elseif ($fields['status'] == 'pending') {
+            request()->session()->put('sale_id', $sale->id);
+        }
+
         $sale->update($fields);
 
-        // if ($fields['is_credit'] && $sale->client_id) {
-        //     $sale->handleCredit($factors[$fields['status']]);
-        // }
+        if ($sale->is_credit && $sale->client_id) {
+            $inverse = -1;
+            $sale->handleCredit($factors[$sale->status] * $inverse);
+        }
 
         return response()->json([
             'sale_status' => $sale->status

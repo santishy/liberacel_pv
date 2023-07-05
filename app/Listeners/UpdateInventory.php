@@ -36,7 +36,6 @@ class UpdateInventory
             function ($product) use ($inventory, $factor) {
                 $productInTransaction = $inventory->products()->wherePivot('product_id', $product->id);
                 if ($productInTransaction->exists()) {
-
                     $stock = $productInTransaction->first()->pivot->stock + ($factor * $product->pivot->qty);
                     if ($stock < 0) {
                         DB::rollBack();
