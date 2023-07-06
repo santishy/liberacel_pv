@@ -19,7 +19,7 @@ class CreateCreditsTable extends Migration
             $table->unsignedBigInteger('client_id');
             $table->decimal('total_amount', 10, 2)->default(0);
             $table->decimal('amount_paid', 10, 2)->default(0);
-            $table->enum('status', ['pending', 'paid', 'overdue'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'overdue', 'cancelled'])->default('pending');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }

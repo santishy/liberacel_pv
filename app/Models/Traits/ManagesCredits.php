@@ -19,6 +19,18 @@ trait ManagesCredits
         $credit->update([
             "total_amount" => $credit->total_amount + ($this->total * $factor)
         ]);
+        $isNewCredit = $this->isNewCredit($credit);
+
+        if ($isNewCredit) {
+            $this->credits()->detach($credit->id);
+            return $credit->delete();
+        }
         return $this->credits()->attach($credit->id);
+    }
+    private function isNewCredit($credit)
+    {
+        if ($credit->fresh()->total_amount != 0.00)
+            return false;
+        return $credit->status === 'pending';
     }
 }
