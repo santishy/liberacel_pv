@@ -1,43 +1,27 @@
 <template>
-    <div class="flex flex-wrap justify-center">
-        <button
-            @click.prevent="increase"
-            :disabled="disabled"
-            class="
-                px-3
-                py-2
+    <div class="flex  justify-center ">
+        <button @click.prevent="increase" :disabled="disabled" class="
+                px-2
+                py-1
                 rounded-l
                 text-center
                 font-bold
                 shadow-sm
-            "
-            :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-200 text-gray-700']"
-        >
+            " :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-200 text-gray-700']">
             +
         </button>
-        <input
-            v-model="product.sale_quantity"
-            name="qty"
-            class="px-4 py-2 text-center sm:w-3/12 "
-            type="text"
-            :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-100 text-gray-600']"
-            placeholder="Precio de venta"
-            aria-label="Full name"
-            :disabled="disabled"
-        />
-        <button
-            @click.prevent="decrease"
-            class="
-                px-3
-                py-2
+        <input v-model="product.sale_quantity" name="qty"
+            class="px-2 py-1 text-center sm:w-24 border-none focus:border-none focus:ring-0" type="text"
+            :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-100 text-gray-600']" placeholder="Precio de venta"
+            aria-label="Full name" :disabled="disabled" />
+        <button @click.prevent="decrease" class="
+                px-2
+                py-1
                 rounded-r
                 text-center
                 font-bold
                 shadow-sm
-            "
-            :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-200 text-gray-700']"
-            :disabled="disabled"
-        >
+            " :class="[disabled ? 'bg-gray-100 text-gray-400' : 'bg-gray-200 text-gray-700']" :disabled="disabled">
             -
         </button>
     </div>
@@ -50,14 +34,14 @@ export default {
             type: Object,
         },
     },
-    data(){
+    data() {
         return {
-            disabled:false
+            disabled: false
         }
     },
     created() {
         this.$watch("product.sale_quantity", this.updateCart);
-        EventBus.$on('enabled',this.enabled)
+        EventBus.$on('enabled', this.enabled)
     },
     methods: {
         increase() {
@@ -80,10 +64,10 @@ export default {
                     product_id: this.product.id,
                     inventory_id: inventory_id,
                 });
-                this.disabled=true;
+                this.disabled = true;
             }
         },
-        enabled(){
+        enabled() {
             this.disabled = false;
         }
     },

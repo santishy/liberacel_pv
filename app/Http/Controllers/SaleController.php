@@ -20,7 +20,10 @@ use SebastianBergmann\Environment\Console;
 class SaleController extends Controller
 {
     use HasTransaction;
-
+    private $factors = [
+        "completed" => -1,
+        "pending" => 1,
+    ];
     public function index()
     {
         $this->authorize('viewAny', new Sale);
@@ -60,25 +63,16 @@ class SaleController extends Controller
 
         $fields = $request->validated();
 
-        $factors = [
-            "completed" => -1,
-            "pending" => 1,
-        ];
-
         // ver la primera validacion que hay dentro de este evento refernte a status ;)
-        TransactionComplete::dispatch($sale, $factors[$fields['status']]);
+        TransactionComplete::dispatch($sale, $this->factors[$fields['status']]);
 
-        if ($fields['status'] == 'completed') {
-            request()->session()->forget('sale_id');
-        } elseif ($fields['status'] == 'pending') {
-            request()->session()->put('sale_id', $sale->id);
-        }
+        $this->buildSaleIDSession($fields, $sale);
 
         $sale->update($fields);
 
         if ($sale->is_credit && $sale->client_id) {
             $inverse = -1;
-            $sale->handleCredit($factors[$sale->status] * $inverse);
+            $sale->handleCredit($this->factors[$sale->status] * $inverse);
         }
 
         return response()->json([
@@ -102,5 +96,13 @@ class SaleController extends Controller
         return response()->json([
             'status' => $sale->status
         ]);
+    }
+    private function buildSaleIDSession($fields, $sale)
+    {
+        if ($fields['status'] == 'completed') {
+            request()->session()->forget('sale_id');
+        } elseif ($fields['status'] == 'pending') {
+            request()->session()->put('sale_id', $sale->id);
+        }
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <table class="w-full table-auto text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase  dark:text-gray-400">
+    <table class="w-full table-auto text-sm text-center text-gray-500 ">
+        <thead class="text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase ">
             <tr>
                 <th class="py-3 px-6">Imagen</th>
                 <th class="py-3 px-6">SKU</th>

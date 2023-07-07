@@ -3,8 +3,7 @@
         <form class="block" @submit.prevent="submit">
             <input type="hidden" name="product_id" />
             <button
-                class=" border-green-500 border-b-2 border-t-2 hover:border-green-700 shadow-xs hover:text-green-700 w-full text-green-500 font-bold py-1 rounded text-2xl"
-            >
+                class=" border-green-500 border-b-2 border-t-2 hover:border-green-700 shadow-xs hover:text-green-700 w-full text-green-500 font-bold py-1 rounded text-2xl">
                 <shopping-cart-icon></shopping-cart-icon>
             </button>
         </form>
@@ -16,7 +15,7 @@ import Errors from "../../mixins/Errors";
 import Transaction from "../../mixins/Transaction.js";
 import ShoppingCartIcon from "../icons/ShoppingCartIcon.vue"
 export default {
-    components:{ShoppingCartIcon},
+    components: { ShoppingCartIcon },
     props: {
         product: {
             type: Object
@@ -26,10 +25,10 @@ export default {
         }
     },
 
-    mixins: [Transaction,Errors],
+    mixins: [Transaction, Errors],
     methods: {
         submit() {
-            const inventory_id =  this.isAdmin ? sessionStorage.getItem('inventory_id') : this.user.inventory_id;
+            const inventory_id = this.isAdmin ? sessionStorage.getItem('inventory_id') : this.user.inventory_id;
             axios
                 .post(`/sales/${this.product.id}/products`, {
                     salePriceOption: this.salePriceOption,
@@ -40,6 +39,7 @@ export default {
                         "product-added-sales-cart",
                         res.data.transaction
                     );
+                    EventBus.$emit("toggle-product-list");
                     this.addProductToTranscation();
                 })
                 .catch(err => {

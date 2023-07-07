@@ -1,37 +1,18 @@
 <template>
     <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center z-20">
         <div @click="isOpen = false" class="fixed inset-0 z-10"></div>
-        <div
-            class="w-full md:w-10/12 shadow z-20 h-screen overflow-y-scroll overflow-x-hidden bg-white py-6 px-6"
-        >
+        <div class="w-full md:w-10/12 shadow z-20 h-screen overflow-y-scroll overflow-x-hidden bg-white py-6 px-6">
             <div class="flex justify-end">
-                <button
-                    @click="isOpen = false"
-                    class="mt-2 mb-2 text-2xl p-0 m-0"
-                >
+                <button @click="isOpen = false" class="mt-2 mb-2 text-2xl p-0 m-0">
                     <i class="far fa-window-close"></i>
                 </button>
             </div>
             <div class="grid md:grid-cols-3 grid-cols-1 gap-4 ">
-                <product-list
-                    class="col-span-5"
-                >
-                    <product-list-item
-                        v-for="(product, index) in products"
-                        :key="product.id"
-                        :product="product"
-                        :index="index"
-                    >
+                <product-list class="col-span-5">
+                    <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
+                        :index="index">
                     </product-list-item>
                 </product-list>
-                <!-- <product-card
-                    v-for="(product, index) in products"
-                    :key="product.id"
-                    :product="product"
-                    :search-in-sales="true"
-                    :index="index"
-                >
-                </product-card> -->
             </div>
             <infinite-loading @infinite="getProducts"></infinite-loading>
         </div>
@@ -47,8 +28,8 @@ export default {
         return {
             products: [],
             isOpen: false,
-            sku:'',
-            params:{},
+            sku: '',
+            params: {},
         };
     },
     created() {
@@ -57,6 +38,10 @@ export default {
             this.params = obj.params;
             this.isOpen = true;
         });
+        EventBus.$on("toggle-product-list", () => {
+            console.log({ isOpen: this.isOpen })
+            this.isOpen = !this.isOpen;
+        })
     },
     components: {
         "product-card": ProductCardComponent,
@@ -74,10 +59,10 @@ export default {
                     this.products.push(...data.data);
                     $state.loaded();
                 }
-                else{
+                else {
                     $state.complete();
                 }
-            } catch (error) {}
+            } catch (error) { }
         }
     }
 };

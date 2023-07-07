@@ -16,21 +16,32 @@ trait ManagesCredits
     public function handleCredit($factor)
     {
         $credit = Credit::findOrCreate($this->client_id);
+
         $credit->update([
             "total_amount" => $credit->total_amount + ($this->total * $factor)
         ]);
+
         $isNewCredit = $this->isNewCredit($credit);
 
         if ($isNewCredit) {
-            $this->credits()->detach($credit->id);
-            return $credit->delete();
+            return $this->deleteCredit($credit);
         }
-        return $this->credits()->attach($credit->id);
+        return $this->syncCredit($credit);
     }
     private function isNewCredit($credit)
     {
         if ($credit->fresh()->total_amount != 0.00)
             return false;
         return $credit->status === 'pending';
+    }
+    private function deleteCredit($credit)
+    {
+        $this->credits()->detach($credit->id);
+        return $credit->delete();
+    }
+
+    private function syncCredit($credit)
+    {
+        return $this->credits()->sync([$credit->id]);
     }
 }

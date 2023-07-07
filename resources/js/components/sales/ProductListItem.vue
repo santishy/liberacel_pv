@@ -10,30 +10,6 @@
             <delete-sale-product :id="product.id" :index="index"></delete-sale-product>
         </template>
     </product-list-item-base>
-    <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <td class="py-4 px-6 w-20">
-            <img class="w-100" :src="product?.image_url" :alt="product?.sku" />
-        </td>
-        <td class="py-4 px-6 font-normal text-gray-800">
-            {{ product.sku }}
-        </td>
-        <td class="py-4 px-6">
-            {{ product.description }}
-        </td>
-        <td class="py-4 px-6">
-
-        </td>
-        <td class="py-4 px-6">
-
-        </td>
-        <td class="py-4 px-6">
-            {{ product.sale_price * product.sale_quantity }}
-        </td>
-        <td class="py-4 px-6">
-
-        </td>
-    </tr> -->
-
 </template>
 
 <script>
@@ -58,7 +34,7 @@ export default {
     },
     components:
     {
-        DeleteSaleProduct, EditIcon,ProductListItemBase,
+        DeleteSaleProduct, EditIcon, ProductListItemBase,
         EditableProductQuantity, EditableProductPrice
     },
     data() {

@@ -6317,6 +6317,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.params = obj.params;
       _this.isOpen = true;
     });
+    EventBus.$on("toggle-product-list", function () {
+      console.log({
+        isOpen: _this.isOpen
+      });
+      _this.isOpen = !_this.isOpen;
+    });
   },
   components: {
     "product-card": _ProductCardComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -7815,6 +7821,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         inventory_id: inventory_id
       }).then(function (res) {
         EventBus.$emit("product-added-sales-cart", res.data.transaction);
+        EventBus.$emit("toggle-product-list");
         _this.addProductToTranscation();
       })["catch"](function (err) {
         _this.getErrors(err);
@@ -9282,7 +9289,7 @@ var render = function render() {
   }), _vm._v("\n                        Ventas Stock\n\n                    ")]), _vm._v(" "), _c("a", {
     staticClass: "flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg",
     attrs: {
-      href: "/expenses/create"
+      href: "/fast-sales/create"
     }
   }, [_c("svg", {
     staticClass: "w-4 h-4 mr-2",
@@ -16491,14 +16498,14 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("table", {
-    staticClass: "w-full table-auto text-sm text-center text-gray-500 dark:text-gray-400"
+    staticClass: "w-full table-auto text-sm text-center text-gray-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._t("default")], 2)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase dark:text-gray-400"
+    staticClass: "text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase"
   }, [_c("tr", [_c("th", {
     staticClass: "py-3 px-6"
   }, [_vm._v("Imagen")]), _vm._v(" "), _c("th", {
@@ -16596,7 +16603,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", {
-    staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    staticClass: "bg-white border-b"
   }, [_c("td", {
     staticClass: "py-4 px-6 w-20"
   }, [_c("img", {
@@ -16606,7 +16613,7 @@ var render = function render() {
       alt: (_vm$product2 = _vm.product) === null || _vm$product2 === void 0 ? void 0 : _vm$product2.sku
     }
   })]), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6 font-normal text-gray-800"
+    staticClass: "py-4 px-6 font-normal text-gray-700"
   }, [_vm._v("\n        " + _vm._s(_vm.product.sku) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-4 px-6"
   }, [_vm._v("\n        " + _vm._s(_vm.product.description) + "\n    ")]), _vm._v(" "), _c("td", {
@@ -16934,7 +16941,7 @@ var render = function render() {
       value: _vm.product.sale_price,
       expression: "product.sale_price"
     }],
-    staticClass: "px-4 py-2 text-center sm:w-4/12",
+    staticClass: "px-2 py-1 border-none focus:ring-0 focus:border-none text-center sm:w-32 rounded",
     "class": [_vm.disabled ? "bg-gray-100 text-gray-400" : "bg-gray-100 text-gray-600"],
     attrs: {
       name: "sale_price",
@@ -16976,9 +16983,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "flex flex-wrap justify-center"
+    staticClass: "flex justify-center"
   }, [_c("button", {
-    staticClass: "px-3 py-2 rounded-l text-center font-bold shadow-sm",
+    staticClass: "px-2 py-1 rounded-l text-center font-bold shadow-sm",
     "class": [_vm.disabled ? "bg-gray-100 text-gray-400" : "bg-gray-200 text-gray-700"],
     attrs: {
       disabled: _vm.disabled
@@ -16996,7 +17003,7 @@ var render = function render() {
       value: _vm.product.sale_quantity,
       expression: "product.sale_quantity"
     }],
-    staticClass: "px-4 py-2 text-center sm:w-3/12",
+    staticClass: "px-2 py-1 text-center sm:w-24 border-none focus:border-none focus:ring-0",
     "class": [_vm.disabled ? "bg-gray-100 text-gray-400" : "bg-gray-100 text-gray-600"],
     attrs: {
       name: "qty",
@@ -17015,7 +17022,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "px-3 py-2 rounded-r text-center font-bold shadow-sm",
+    staticClass: "px-2 py-1 rounded-r text-center font-bold shadow-sm",
     "class": [_vm.disabled ? "bg-gray-100 text-gray-400" : "bg-gray-200 text-gray-700"],
     attrs: {
       disabled: _vm.disabled

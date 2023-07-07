@@ -3,9 +3,6 @@
         <sidebar class="flex-shrink-0 "></sidebar>
         <div class="w-full ">
             <nav class="flex w-full max-w-full sticky  items-center justify-between flex-wrap bg-white p-6  top-0 z-10">
-                <!-- <div class="flex items-center flex-shrink-0 text-white mr-6 ">
-                    <span class="font-semibold text-xl tracking-tight">Liberacel</span>
-                </div> -->
                 <div @click="toggleNavegation" class="block lg:hidden">
                     <button
                         class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
@@ -38,7 +35,7 @@
                             Ventas Stock
 
                         </a>
-                        <a href="/expenses/create"
+                        <a href="/fast-sales/create"
                             class="flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4 mr-2">
