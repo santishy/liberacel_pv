@@ -9233,7 +9233,7 @@ var render = function render() {
   }), _vm._v(" "), _c("div", {
     staticClass: "w-full"
   }, [_c("nav", {
-    staticClass: "flex w-full max-w-full sticky items-center justify-between flex-wrap bg-white p-6 top-0 z-10"
+    staticClass: "flex w-full max-w-full sticky items-center justify-between flex-wrap bg-white p-4 top-0 z-10"
   }, [_c("div", {
     staticClass: "block lg:hidden",
     on: {
@@ -16605,7 +16605,7 @@ var render = function render() {
   return _c("tr", {
     staticClass: "bg-white border-b"
   }, [_c("td", {
-    staticClass: "py-4 px-6 w-20"
+    staticClass: "py-2 px-2 w-20"
   }, [_c("img", {
     staticClass: "w-100",
     attrs: {
@@ -16613,17 +16613,17 @@ var render = function render() {
       alt: (_vm$product2 = _vm.product) === null || _vm$product2 === void 0 ? void 0 : _vm$product2.sku
     }
   })]), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6 font-normal text-gray-700"
+    staticClass: "py-2 px-2 font-normal text-gray-700"
   }, [_vm._v("\n        " + _vm._s(_vm.product.sku) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6"
+    staticClass: "py-2 px-2"
   }, [_vm._v("\n        " + _vm._s(_vm.product.description) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6"
+    staticClass: "py-2 px-2"
   }, [_vm._t("product-qty")], 2), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6"
+    staticClass: "py-2 px-2"
   }, [_vm._t("product-price")], 2), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6"
+    staticClass: "py-2 px-2"
   }, [_vm._v("\n        " + _vm._s(_vm.product.sale_price * _vm.product.sale_quantity) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "py-4 px-6"
+    staticClass: "py-2 px-2"
   }, [_vm._t("product-destroy")], 2)]);
 };
 var staticRenderFns = [];
