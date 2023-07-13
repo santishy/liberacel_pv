@@ -1,7 +1,7 @@
 <template>
     <div class=" w-full flex min-h-screen">
         <sidebar class="flex-shrink-0 "></sidebar>
-        <div class="w-full ">
+        <div class="w-full min-h-screen">
             <nav class="flex w-full max-w-full sticky  items-center justify-between flex-wrap bg-white p-4  top-0 z-10">
                 <div @click="toggleNavegation" class="block lg:hidden">
                     <button
@@ -79,7 +79,7 @@
                 </div>
             </nav>
             <!-- Page Content -->
-            <main class="mt-12 z-0 px-12">
+            <main class="mt-8 z-0 px-12 py-4">
                 <slot />
             </main>
             <notifications group="foo"></notifications>

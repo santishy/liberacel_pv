@@ -17,7 +17,7 @@ class ExpenseController extends Controller
     {
         $this->authorize('viewAny', new Expense);
         if (request()->wantsJson())
-            return ExpenseResource::collection(Expense::paginate());
+            return ExpenseResource::collection(Expense::paginate(5));
         return view('expenses.index');
     }
 
@@ -28,7 +28,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        $this->authorize('create',new Expense());
+        $this->authorize('create', new Expense());
         return view('expenses.create');
     }
 
@@ -40,7 +40,7 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create',new Expense);
+        $this->authorize('create', new Expense);
         $data = $request->validate(
             [
                 'concept' => ['required'],
@@ -82,7 +82,7 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        $this->authorize('update',$expense);
+        $this->authorize('update', $expense);
         return view('expenses.edit', compact('expense'));
     }
 
@@ -95,7 +95,7 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        $this->authorize('update',$expense);
+        $this->authorize('update', $expense);
         $data = $request->validate([
             "amount" => "numeric",
             "concept" => "string"
@@ -105,7 +105,6 @@ class ExpenseController extends Controller
         return response()->json([
             'data' => $expense
         ]);
-
     }
 
     /**
@@ -116,8 +115,8 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        $this->authorize('delete',$expense);
+        $this->authorize('delete', $expense);
         $expense->delete();
-        return response()->json(null,204);
+        return response()->json(null, 204);
     }
 }

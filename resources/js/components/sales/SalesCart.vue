@@ -64,7 +64,7 @@ export default {
     mixins: [Errors],
     data() {
         return {
-            form: { is_credit: null },
+            form: { is_credit: false },
             products: [],
             localSale: {},
         };

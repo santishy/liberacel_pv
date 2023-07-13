@@ -27,9 +27,10 @@ class IsCreditAccepted implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ($value == 1 || $value == true || $value === 'on')
+
+        return (($value == 1 || $value == true || $value === 'on')
             &&
-            optional($this->sale)->client_id;
+            optional($this->sale)->client_id) || $value === false;
     }
 
     /**

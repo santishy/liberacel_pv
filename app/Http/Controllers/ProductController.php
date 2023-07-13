@@ -56,7 +56,7 @@ class ProductController extends Controller
 
         $purchase = Purchase::findOrCreateThePurchase();
 
-        $purchase->addProduct($product->id,$product->distributor_price);
+        $purchase->addProduct($product->id, $product->distributor_price);
 
         $this->deleteSessionVariable('purchase_id');
 

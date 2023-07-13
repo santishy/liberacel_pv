@@ -5,16 +5,9 @@
                 Reportes
             </template>
 
-            <message
-                :title="modalDataConfirm.title"
-                :message="modalDataConfirm.message"
-            ></message>
+            <message :title="modalDataConfirm.title" :message="modalDataConfirm.message"></message>
 
-            <agree
-                slot="button"
-                :method="modalDataConfirm.action"
-                @cancelTransaction="cancelTransaction"
-            ></agree>
+            <agree slot="button" :method="modalDataConfirm.action" @cancelTransaction="cancelTransaction"></agree>
         </information-component>
 
         <table v-if="params" class="table-auto bg-white text-center">
@@ -31,29 +24,18 @@
             </thead>
 
             <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
-                <transaction-list-item
-                    v-for="(transaction, index) in transactions"
-                    :transaction="transaction"
-                    :index="index"
-                    :transaction-type="transaction.transactionType"
-                    :key="transaction.id"
-                    :uri="uri"
-                    :are-they-sales="areTheySales"
-                >
+                <transaction-list-item v-for="(transaction, index) in transactions" :transaction="transaction"
+                    :index="index" :transaction-type="transaction.transactionType" :key="transaction.id" :uri="uri"
+                    :are-they-sales="areTheySales">
                 </transaction-list-item>
             </transition-group>
-
-            <infinite-loading
-                @infinite="infiniteHandler"
-                :identifier="infiniteId"
-                ref="infiniteLoading"
-            ></infinite-loading>
+            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
-import InfiniteLoading from "vue-infinite-loading";
+//import InfiniteLoading from "vue-infinite-loading";
 
 import Message from "../alerts/Message.vue";
 import Agree from "../alerts/Agree.vue";
@@ -64,7 +46,7 @@ export default {
         TransactionListItem,
         Message,
         Agree,
-        InfiniteLoading,
+        // InfiniteLoading,
         InformationComponent
     },
     props: {
@@ -98,6 +80,7 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
+            console.log('es aqui')
             axios
                 .get(this.uri, {
                     params: {
@@ -107,13 +90,16 @@ export default {
                     }
                 })
                 .then(res => {
+
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
+                        console.log({ length: res.data.data.length })
                         this.page += 1;
                         this.transactions.push(...res.data.data);
-                        $state.loaded();
+                        $state.loaded()
                     } else {
+                        console.log('entra aki tambien?')
                         $state.complete();
                     }
                 });
