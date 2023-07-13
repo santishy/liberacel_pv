@@ -15,13 +15,13 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('tailwindcss'),
         tailwindcss('./tailwind.config.js')
-    ])
+    ]).version()
 mix.browserSync({
-        proxy: 'http://liberacel-pv.test',
-        host: 'liberacel-pv.test',
-        open: false,
-        browser:'Google chrome',
-        ghostMode: false,
-        online:true,
-        watch:true,
-    });
+    proxy: 'http://liberacel-pv.test',
+    host: 'liberacel-pv.test',
+    open: false,
+    browser: 'Google chrome',
+    ghostMode: false,
+    online: true,
+    watch: true,
+});
