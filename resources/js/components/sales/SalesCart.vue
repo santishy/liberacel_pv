@@ -2,18 +2,8 @@
     <div>
         <form @submit.prevent="submit" v-can="'create sale'">
             <div v-if="Object.keys(localSale).length">
-                <div v-show="products.length" class="
-                        flex flex-wrap
-                        justify-center
-                        items-center
-                        text-center
-                        mb-2
-                        bg-teal-100
-                    ">
-                    <label class="mr-4 text-2xl">Total</label>
-                    <p class="text-gray-700 text-3xl">${{ getTotal }}</p>
-                    <input name="total" type="hidden" :v-model="(form.total = getTotal)" />
-                </div>
+                <input name="total" type="hidden" :v-model="(form.total = getTotal)" />
+
             </div>
             <div v-if="errors" class="flex items-center mb-3">
                 <errors-component :errors="errors" />
@@ -26,30 +16,32 @@
                     </div>
                     <span class="ml-3 text-sm font-medium text-gray-900 ">A crédito</span>
                 </label>
-                <button v-show="products.length" class="
-                        rounded
-                        transition-all
-                        duration-500
-                        ease-in-out
-                        font-semibold
-                        hover:text-black
-                        py-2
-                        px-4
-                        border-l-2 border-r-2 border-green-500
-                        hover:bg-red-500 hover:border-transparent
-                        md:w-2/4
-                        w-full
-                    " :class="[getClass]">
-                    Cambiar a {{ modifyTo }}
+                <button v-show="Object.keys(localSale).length" class="w-2/6 px-3 py-2 rounded " :class="[getClass]">
+                    {{ modifyTo }}
                 </button>
             </div>
         </form>
-        <div v-if="localSale !== null" class="overflow-x-auto relative">
+        <div v-if="localSale !== null" class="overflow-x-auto relative max-h-80 overflow-y-auto">
             <product-list>
-                <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
+                <product-list-item v-for="( product, index ) in  products " :key="product.id" :product="product"
                     :sale-status="getStatus" :index="index">
                 </product-list-item>
             </product-list>
+        </div>
+        <div v-show="products.length" class="
+                        flex flex-wrap
+                        justify-end
+                        items-center
+                        my-2
+                        px-6 py-2
+                        bg-amber-300
+                        rounded
+                    ">
+            <label class="mr-4 text-2xl">Total</label>
+            <p class="text-gray-700 text-3xl font-bold">{{ getTotal.toLocaleString("es-MX", {
+                style: "currency",
+                currency: "MXN",
+            }) }}</p>
         </div>
     </div>
 </template>
@@ -107,21 +99,24 @@ export default {
     computed: {
         getClass() {
             if (this.getStatus == "pending")
-                return "hover:bg-green-500 text-green-700 bg-green-300";
+                return "bg-sky-500 text-slate-200 hover:text-sky-800 hover:bg-sky-300";
             if (this.getStatus == "completed")
-                return "hover:bg-yellow-500 text-yellow-700 bg-yellow-300";
+                return "bg-amber-500 text-slate-200 hover:text-slate-700 hover:bg-amber-300";
         },
         getTotal() {
             var total = 0;
+            if (!this.products.length) {
+                return this.localSale?.total || "";
+            }
             this.products.map((product) => {
                 total += product.sale_price * product.sale_quantity;
             });
-            return total.toFixed(2);
+            return total
         },
 
         modifyTo() {
-            if (this.localSale.status == "pending") return "Completada";
-            if (this.localSale.status == "completed") return "Pendiente";
+            if (this.localSale.status == "pending") return "Finalizar venta";
+            if (this.localSale.status == "completed") return `Modificar venta #${this.localSale.id}`;
         },
         getStatus() {
             return this.localSale.status;
@@ -144,8 +139,13 @@ export default {
                 .post(`/sales/${this.localSale.id}`, this.form)
                 .then((res) => {
                     this.localSale.status = res.data.sale_status;
+                    this.localSale.total = Number(res.data.total);
                     if (this.localSale.status == "completed") {
                         sessionStorage.removeItem("salePriceOption");
+                        this.products = []
+                    }
+                    else if (this.localSale.status === "pending") {
+                        this.products = this.localSale.products;
                     }
                     window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
                 })
@@ -161,12 +161,10 @@ export default {
         },
         async updateCart(data) {
             try {
-
                 const res = await axios.post(`/sales/${data?.product_id}/products`,
                     { _method: 'put', ...data }
                 );
                 EventBus.$emit('enabled');
-
             } catch (error) {
                 this.getErrors(error);
                 this.$notify({

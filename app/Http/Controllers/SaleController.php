@@ -76,7 +76,8 @@ class SaleController extends Controller
         }
 
         return response()->json([
-            'sale_status' => $sale->status
+            'sale_status' => $sale->status,
+            'total' => $sale->total
         ]);
     }
 
