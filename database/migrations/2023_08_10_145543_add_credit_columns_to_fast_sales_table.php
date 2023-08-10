@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPaymentTypeToSalesTable extends Migration
+class AddCreditColumnsToFastSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class AddPaymentTypeToSalesTable extends Migration
      */
     public function up()
     {
-        Schema::table('sales', function (Blueprint $table) {
+        Schema::table('fast_sales', function (Blueprint $table) {
+            $table->foreignId('client_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
+
             $table->boolean('is_credit')->default(false);
         });
     }
@@ -25,9 +30,8 @@ class AddPaymentTypeToSalesTable extends Migration
      */
     public function down()
     {
-        Schema::table('sales', function (Blueprint $table) {
-            //aqui tenia otro nombre asi que lo subi con ana y cuando haga un refrsh no funcionara creo 
-            $table->dropColumn('is_credit');
+        Schema::table('fast_sales', function (Blueprint $table) {
+            $table->dropColumn(['client_id', 'is_credit']);
         });
     }
 }

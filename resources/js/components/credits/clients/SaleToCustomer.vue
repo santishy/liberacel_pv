@@ -29,7 +29,7 @@
     </form>
 </template>
 <script>
-import InformationComponent from "../modals/InformationComponent.vue";
+import InformationComponent from "../../modals/InformationComponent.vue";
 export default {
     components: {
         InformationComponent

@@ -54,7 +54,7 @@
                                 text-gray-600
                                 md:items-center
                             ">
-                            
+
                             <sale-to-customer class="mr-4" v-if="show" />
 
                             <button v-else @click="show = true" class="
@@ -108,7 +108,7 @@ import InventoryList from "../inventories/InventoryList.vue";
 import { mapState, mapMutations } from "vuex";
 import SalesCart from "./SalesCart";
 import NavComponent from "../NavComponent.vue";
-import SaleToCustomer from "./SaleToCustomer.vue";
+import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import SearchByCategory from "../products/SearchByCategory.vue";
 import DeleteSale from "./DeleteSale.vue";
 export default {
