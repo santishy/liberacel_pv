@@ -1,69 +1,31 @@
 <template>
-    <div
-        v-if="params"
-        class="
-            p-2
-            border-l-4 border-teal-400
-            flex flex-wrap
-            items-baseline
-            md:w-9/12
-            mx-auto
-            bg-white
-            shadow-sm
-            rounded-sm
-        "
-    >
-        <table
-            class="
-                w-full
-                flex flex-row flex-no-wrap
-                sm:bg-white
-                rounded
-                text-center
-                overflow-hidden
-            "
-        >
-            <thead class="text-white">
-                <tr
-                    class="
-                        bg-teal-400
-                        flex flex-col flex-no
-                        wrap
-                        sm:table-row
-                        rounded-l-lg
-                        sm:rounded-none
-                        mb-2
-                        sm:mb-0
-                    "
-                >
-                    <th class="p-3 text-left sm:text-center">Nota</th>
-                    <th class="p-3 text-left sm:text-center">Usuario</th>
-                    <th class="p-3 text-left sm:text-center">Fecha</th>
-                    <th class="p-3 text-left sm:text-center">Descripción</th>
-                    <th class="p-3 text-left sm:text-center">Precio</th>
-                    <th class="p-3 text-left sm:text-center">Cantidad</th>
-                    <th class="p-3 text-left sm:text-center">Subtotal</th>
-                    <th class="p-3 text-left sm:text-center">
+    <div v-if="params"
+        class="overflow-x-auto relative max-h-80 overflow-y-auto max-w-6xl mx-auto rounded shadow-lg bg-white">
+        <table class="
+                w-full table-auto text-sm text-center text-gray-500
+            ">
+            <thead class="text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase ">
+                <tr>
+                    <th class="py-1 px-2">Nota</th>
+                    <th class="py-1 px-2">Usuario</th>
+                    <th class="py-1 px-2">Fecha</th>
+                    <th class="py-1 px-2">Descripción</th>
+                    <th class="py-1 px-2">Precio</th>
+                    <th class="py-1 px-2">Cantidad</th>
+                    <th class="py-1 px-2">Subtotal</th>
+                    <th class="py-1 px-2">
                         Total Venta Completa
                     </th>
-                    <th class="p-3 text-left sm:text-center" width="110px">
+                    <th class="py-1 px-2 text-left sm:text-center" width="110px">
                         Actions
                     </th>
                 </tr>
             </thead>
             <tbody class="flex-1 sm:flex-none">
-                <product-sold
-                    v-for="(product, index) in structureTheData"
-                    :key="index"
-                    :transaction="product"
-                    :index="index"
-                ></product-sold>
-                <infinite-loading
-                    @infinite="infiniteHandler"
-                    :identifier="infiniteId"
-                    ref="infiniteLoading"
-                ></infinite-loading>
+                <product-sold v-for="(product, index) in structureTheData" :key="index" :transaction="product"
+                    :index="index"></product-sold>
             </tbody>
+            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
         </table>
 
         <authentication-form model="FastSale" :id="nota"></authentication-form>
@@ -93,13 +55,14 @@ export default {
     },
     mounted() {
         EventBus.$on("set-parameters", (data) => {
+            console.log({ "aqui": data })
             this.changeParams(data);
         });
         EventBus.$on("associated-user", (id) => {
             EventBus.$emit("open-modal", false);
-            let index = this.products.findIndex(element =>{ 
+            let index = this.products.findIndex(element => {
                 return element.id == id
-                });
+            });
             if (index != -1) {
                 this.products.splice(index, 1);
             }
@@ -107,12 +70,13 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
+            console.log("Entro al infinite handler")
             axios
                 .get(this.uri, {
                     params: {
                         isFastSale: true,
                         page: this.page,
-                        ..._.merge(this.params, this.getRelathionships),
+                        ..._.merge(this.params, this.getRelationships),
                     },
                 })
                 .then((res) => {
@@ -135,7 +99,7 @@ export default {
         },
     },
     computed: {
-        getRelathionships() {
+        getRelationships() {
             return { include: "user" };
         },
         structureTheData() {
