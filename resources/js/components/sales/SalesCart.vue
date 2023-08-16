@@ -9,6 +9,7 @@
                 <errors-component :errors="errors" />
             </div>
             <div class="flex flex-wrap justify-between items-center">
+                <!-- <credit-status :form="form"></credit-status> -->
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input v-model="form.is_credit" type="checkbox" class="sr-only peer">
                     <div
@@ -50,9 +51,9 @@
 import ProductListItem from "./ProductListItem";
 import ProductList from "./ProductList.vue";
 import Errors from "../../mixins/Errors";
-
+import CreditStatus from "../credits/CreditStatus.vue";
 export default {
-    components: { ProductListItem, ProductList },
+    components: { ProductListItem, ProductList, CreditStatus },
     mixins: [Errors],
     data() {
         return {

@@ -1,6 +1,6 @@
 <template>
     <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
-
+        <credit-status :form="form"></credit-status>
         <div>
             <label class="form-label">Descripción</label>
             <input name="description" ref="description" v-model="form.description" @keydown.down.exact.prevent="nextFocus"
@@ -35,11 +35,14 @@
 </template>
 
 <script>
-import SearchSelect from "../partials/SearchSelect.vue";
 import { mapMutations } from "vuex";
+import SearchSelect from "../partials/SearchSelect.vue";
+import CreditStatus from "../credits/CreditStatus.vue";
+
 export default {
     components: {
         SearchSelect,
+        CreditStatus,
     },
     props: {
         productBonuses: {
