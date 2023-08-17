@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IsCreditAccepted;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFastSaleRequest extends FormRequest
@@ -27,7 +28,9 @@ class StoreFastSaleRequest extends FormRequest
             'description' => 'required',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|integer',
-            'product_bonus_id' => 'required'
+            'product_bonus_id' => 'required',
+            'client_id' => 'exists:clients,id',
+            'is_credit' => [new IsCreditAccepted(optional($this->route('client_id')))]
         ];
     }
 }

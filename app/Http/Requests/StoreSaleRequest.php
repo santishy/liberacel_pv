@@ -31,7 +31,7 @@ class StoreSaleRequest extends FormRequest
             'inventory_id' => ['required'],
             'is_credit' => [
                 'nullable',
-                new IsCreditAccepted($this->route('sale'))
+                new IsCreditAccepted(optional($this->route('sale'))->client_id)
             ]
         ];
     }

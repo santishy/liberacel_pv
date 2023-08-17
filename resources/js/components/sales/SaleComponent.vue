@@ -55,7 +55,7 @@
                                 md:items-center
                             ">
 
-                            <sale-to-customer class="mr-4" v-if="show" />
+                            <sale-to-customer uri="/sales-to-clients" class="mr-4" v-if="show" />
 
                             <button v-else @click="show = true" class="
                                     bg-teal-300

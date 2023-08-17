@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 class FastSaleController extends Controller
 {
+    private $factors = [
+        "completed" => -1,
+        "pending" => 1,
+    ];
     public function index(Request $request)
     {
         $this->authorize('viewAny', new FastSale);
@@ -52,6 +56,13 @@ class FastSaleController extends Controller
 
         $fastSale->addBonus();
 
+        if ($request->is_credit && $request->client_id) {
+            $inverse = -1;
+            $fastSale->update([
+                $request->only(['is_credit', 'client_id'])
+            ]);
+            $fastSale->handleCredit($this->factors[$fastSale->status] * $inverse);
+        }
         $fastSaleFresh = $fastSale->fresh();
 
         return FastSaleResource::make($fastSaleFresh->load('productBonuses', 'customerBonus'));

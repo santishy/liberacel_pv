@@ -6,16 +6,16 @@ use Illuminate\Contracts\Validation\Rule;
 
 class IsCreditAccepted implements Rule
 {
-    private $sale;
+    private $client_id;
 
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($sale = null)
+    public function __construct($client_id = null)
     {
-        $this->sale = $sale;
+        $this->client_id = $client_id;
     }
 
     /**
@@ -30,7 +30,7 @@ class IsCreditAccepted implements Rule
 
         return (($value == 1 || $value == true || $value === 'on')
             &&
-            optional($this->sale)->client_id) || $value === false;
+            $this->client_id) || $value === false;
     }
 
     /**

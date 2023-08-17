@@ -3,7 +3,6 @@
         <form @submit.prevent="submit" v-can="'create sale'">
             <div v-if="Object.keys(localSale).length">
                 <input name="total" type="hidden" :v-model="(form.total = getTotal)" />
-
             </div>
             <div v-if="errors" class="flex items-center mb-3">
                 <errors-component :errors="errors" />

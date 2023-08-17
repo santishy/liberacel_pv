@@ -48,7 +48,8 @@ export default {
                 .post("/sales-to-clients", this.form)
                 .then(res => {
                     EventBus.$emit("open-modal", true);
-                    this.client = res.data.sale.client;
+                    if (res.data?.sale)
+                        this.client = res.data.sale.client;
                     EventBus.$emit("sale-to-client", res.data);
                 })
                 .catch(err => {

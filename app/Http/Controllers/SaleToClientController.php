@@ -12,7 +12,7 @@ class SaleToClientController extends Controller
 {
     public function store(Request $request)
     {
-        $this->authorize('create',new Sale);
+        $this->authorize('create', new Sale);
         $fields = $request->validate([
             'phone_number' => 'exists:clients,phone_number|required',
             'inventory_id' => 'required'
@@ -36,7 +36,7 @@ class SaleToClientController extends Controller
 
         return response()->json([
             'sale' =>  TransactionResource::make(
-                sale::with('client')->where('id',session('sale_id'))->first()
+                sale::with('client')->where('id', session('sale_id'))->first()
             )
         ]);
     }

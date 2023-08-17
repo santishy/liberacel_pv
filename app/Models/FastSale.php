@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\FastSaleUpdated;
 use App\Facades\Settings;
 use App\Models\Traits\HasUserRelationship;
+use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class FastSale extends Model
 {
     use HasFactory, HasUserRelationship;
-    use ReportBy;
+    use ReportBy, ManagesCredits;
 
     protected $fillable = [
         'status',
