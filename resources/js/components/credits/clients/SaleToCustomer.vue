@@ -31,21 +31,45 @@
 <script>
 import InformationComponent from "../../modals/InformationComponent.vue";
 export default {
+    props: {
+        uri: {
+            type: String,
+            required: true,
+        },
+    },
     components: {
         InformationComponent
     },
     data() {
         return {
             form: {},
-            client: {}
+            client: {},
+            uriCopy: null,
         };
+    },
+    mounted() {
+        this.uriCopy = this.uri;
     },
     methods: {
         submit() {
+            let method = 'POST';
+            let data = null;
             if (sessionStorage.getItem('inventory_id'))
                 this.form.inventory_id = sessionStorage.getItem('inventory_id');
+            if (this.uriCopy === '/clients/') {
+                this.uriCopy = this.uriCopy + this.form.phone_number;
+                method = 'GET'
+            } else {
+                data = this.form;
+            }
             axios
-                .post("/sales-to-clients", this.form)
+                (
+                    {
+                        method,
+                        url: this.uriCopy,
+                        data
+                    }
+                )
                 .then(res => {
                     EventBus.$emit("open-modal", true);
                     if (res.data?.sale)

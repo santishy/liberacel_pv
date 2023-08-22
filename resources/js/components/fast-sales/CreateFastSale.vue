@@ -19,7 +19,7 @@
                 ">
                 Crear venta
             </h3>
-            <sale-to-customer class="w-full"></sale-to-customer>
+            <sale-to-customer uri="/clients/" class="w-full"></sale-to-customer>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
