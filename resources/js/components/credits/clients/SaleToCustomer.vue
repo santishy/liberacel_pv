@@ -45,6 +45,7 @@ export default {
             form: {},
             client: {},
             uriCopy: null,
+            method: 'POST',
         };
     },
     mounted() {
@@ -52,33 +53,39 @@ export default {
     },
     methods: {
         submit() {
-            let method = 'POST';
-            let data = null;
             if (sessionStorage.getItem('inventory_id'))
                 this.form.inventory_id = sessionStorage.getItem('inventory_id');
-            if (this.uriCopy === '/clients/') {
-                this.uriCopy = this.uriCopy + this.form.phone_number;
-                method = 'GET'
-            } else {
-                data = this.form;
-            }
-            axios
-                (
-                    {
-                        method,
-                        url: this.uriCopy,
-                        data
-                    }
-                )
+
+            axios(this.axiosConfig)
                 .then(res => {
+
                     EventBus.$emit("open-modal", true);
                     if (res.data?.sale)
                         this.client = res.data.sale.client;
+                    else
+                        this.client = res.data.data
                     EventBus.$emit("sale-to-client", res.data);
                 })
                 .catch(err => {
                     this.getErrors(err);
                 });
+        },
+
+    },
+    computed: {
+        axiosConfig() {
+            if (this.uriCopy === '/clients/' ||
+                this.uriCopy === `/clients/${this.form.phone_number}`) {
+                this.uriCopy = this.uri + this.form.phone_number;
+                this.method = 'GET'
+            } else {
+                this.method = 'POST';
+            }
+            return {
+                url: this.uriCopy,
+                method: this.method,
+                data: this.form,
+            }
         }
     }
 };

@@ -3,7 +3,6 @@
         <subtotals></subtotals>
         <div class="
                 p-4
-
                 flex flex-wrap
                 items-baseline
                 md:w-9/12

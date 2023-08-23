@@ -55,7 +55,6 @@ export default {
     },
     mounted() {
         EventBus.$on("set-parameters", (data) => {
-            console.log({ "aqui": data })
             this.changeParams(data);
         });
         EventBus.$on("associated-user", (id) => {
