@@ -8,10 +8,7 @@
             </template>
             <form @submit.prevent="submit" class="px-2">
                 <div class="mb-1 px-2">
-                    <input
-                        name="username"
-                        ref="username"
-                        class="
+                    <input name="username" ref="username" class="
                             border-2
                             placeholder-gray-600
                             bg-gray-100
@@ -28,17 +25,10 @@
                             focus:ring-indigo-500
                             focus:border-indigo-500
                             focus:z-10
-                        "
-                        id="username"
-                        v-model="form.username"
-                        type="text"
-                        placeholder="Nombre de usuario..."
-                    />
+                        " id="username" v-model="form.username" type="text" placeholder="Nombre de usuario..." />
                 </div>
                 <div class="mb-0 px-2">
-                    <input
-                        name="password"
-                        class="
+                    <input name="password" class="
                             border-2
                             placeholder-gray-600
                             bg-gray-100
@@ -54,18 +44,10 @@
                             focus:ring-indigo-500
                             focus:border-indigo-500
                             focus:z-10
-                        "
-                        id="password"
-                        type="password"
-                        v-model="form.password"
-                        placeholder="Contraseña..."
-                    />
+                        " id="password" type="password" v-model="form.password" placeholder="Contraseña..." />
                 </div>
                 <div class="mb-0 px-2">
-                    <button
-                        type="submit"
-                        ref="submit"
-                        class="
+                    <button type="submit" ref="submit" class="
                             bg-transparent
                             transition-all
                             duration-500
@@ -81,22 +63,16 @@
                             bg-blue-500
                             hover:border-transparent
                             w-full
-                        "
-                        :disabled="getStatus"
-                    >
+                        " :disabled="getStatus">
                         Enviar
                     </button>
-                    <div
-                        v-if="form.status == 'cancelled'"
-                        class="
+                    <div v-if="form.status == 'cancelled'" class="
                             bg-orange-100
                             border-l-4 border-orange-500
                             text-orange-700
                             p-2
                             mt-2
-                        "
-                        role="alert"
-                    >
+                        " role="alert">
                         <p class="font-bold">Cancellar nota # {{ local_id }}</p>
                         <p class="text-sm">
                             Esta a punto de cancelar la venta completa.
@@ -109,8 +85,7 @@
             </form>
 
             <template slot="button">
-                <label
-                    class="
+                <label class="
                         inline-flex
                         items-start
                         mt-3
@@ -118,21 +93,14 @@
                         p-2
                         rounded-sm
                         border-gray-200
-                    "
-                >
-                    <input
-                        type="checkbox"
-                        @change="toggleStatus"
-                        class="
+                    ">
+                    <input type="checkbox" @change="toggleStatus" class="
                             form-checkbox
                             h-5
                             w-5
                             text-pink-600
                             checked:bg-red-500
-                        "
-                    /><span class="ml-2 text-red-700 text-sm font-bold"
-                        >Cancelar venta</span
-                    >
+                        " /><span class="ml-2 text-red-700 text-sm font-bold">Cancelar venta</span>
                 </label>
             </template>
         </information-component>
@@ -161,7 +129,7 @@ export default {
             disabled: false,
         };
     },
-    created() {},
+    created() { },
     mounted() {
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
@@ -181,25 +149,6 @@ export default {
         },
     },
     methods: {
-        // async submit() {
-        //     // this.$refs.submit.disabled = true
-        //     //this.disabled = true;
-        //     try {
-        //         this.form.model = this.model;
-        //         this.form.id = this.local_id ? this.local_id : this.id;
-        //         const res = await axios.post("/user-relationship", this.form);
-        //         if (res.status === 200) {
-        //             // this.disabled = false;
-        //             EventBus.$emit("associated-user", this.form.id);
-        //             this.form.id = null;
-        //             this.form.username = "";
-        //             this.form.password = "";
-        //         }
-        //     } catch (err) {
-        //         this.getErrors(err);
-        //     }
-        //     this.disabled = false;
-        // },
         async submit() {
             try {
                 const res = await axios.post(
