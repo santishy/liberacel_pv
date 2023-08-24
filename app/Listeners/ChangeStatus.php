@@ -9,6 +9,11 @@ use Illuminate\Queue\InteractsWithQueue;
 class ChangeStatus
 {
     protected $currentStatus = null;
+    private $factors = [
+        "completed" => -1,
+        "pending" => 1,
+        "cancelled" => 1
+    ];
     /**
      * Create the event listener.
      *
@@ -25,6 +30,7 @@ class ChangeStatus
      * @param  object  $event
      * @return void
      */
+
     public function handle($event)
     {
 
@@ -37,6 +43,10 @@ class ChangeStatus
             ) {
                 $event->fastSale->status = request()->get('status');
                 $event->fastSale->save();
+                if ($event->fastSale->is_credit && $event->fastSale->client_id) {
+                    $inverse = -1;
+                    $event->fastSale->handleCredit($this->factors[$event->fastSale->status] * $inverse);
+                }
                 session()->forget('fast-sale');
             }
     }

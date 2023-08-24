@@ -18,7 +18,7 @@
                 ">
                 Crear venta
             </h3>
-            <sale-to-customer uri="/clients/" class="w-full"></sale-to-customer>
+            <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
@@ -46,11 +46,19 @@ export default {
         },
         productBonuses: { type: Array },
     },
+    data() {
+        return {
+            showSaleToCustomer: false
+        }
+    },
     created() {
         this.SET_CURRENT_FAST_SALE(this.sale);
         /* EventBus.$on('associated-user',(id)=>{
             this.SET_CURRENT_FAST_SALE({});
         }) */
+        EventBus.$on('credit-status-change', (status) => {
+            this.showSaleToCustomer = status;
+        })
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"])

@@ -19,7 +19,13 @@ class FastSale extends Model
 
     protected $fillable = [
         'status',
-        'total', 'concepts', 'user_id', 'electronic_money_discount', 'customer_bonus_id'
+        'total',
+        'concepts',
+        'user_id',
+        'electronic_money_discount',
+        'customer_bonus_id',
+        'client_id',
+        'is_credit'
     ];
 
     protected $casts = [

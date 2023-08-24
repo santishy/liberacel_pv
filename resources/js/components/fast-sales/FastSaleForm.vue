@@ -1,6 +1,6 @@
 <template>
     <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
-        <credit-status :form="form"></credit-status>
+        <credit-status :form="form" class="col-span-2"></credit-status>
         <div>
             <label class="form-label">Descripción</label>
             <input name="description" ref="description" v-model="form.description" @keydown.down.exact.prevent="nextFocus"
@@ -60,6 +60,10 @@ export default {
         EventBus.$on("focus-description", this.focusDescription);
         EventBus.$on("selected-item", (item) => {
             this.form.product_bonus_id = item?.id;
+        });
+        EventBus.$on("sale-to-client", (res) => {
+            console.log(res.data)
+            this.form.client_id = res.data.id;
         })
     },
     methods: {

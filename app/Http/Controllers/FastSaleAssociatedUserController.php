@@ -16,10 +16,17 @@ class FastSaleAssociatedUserController extends Controller
             $request->username,
             $request->password
         );
-    
+
         $fastSale->toggleUser($associatedUser);
 
         FastSaleUpdated::dispatch($fastSale);
+        // if ($request->is_credit && $request->client_id) {
+        //     $inverse = -1;
+        //     $fastSale->update(
+        //         $request->only(['is_credit', 'client_id'])
+        //     );
+        //     $fastSale->handleCredit($this->factors[$fastSale->status] * $inverse);
+        // }
 
         return response()->json([
             'sale' => $fastSale

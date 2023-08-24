@@ -72,15 +72,39 @@ export default {
             modal: false
         };
     },
-    created() {
-        if (this.id) {
-            EventBus.$on("open-modal-" + parseInt(this.id, 10), value => {
-                this.modal = value;
-            });
-        } else {
-            EventBus.$on("open-modal", value => {
-                this.modal = value;
-            });
+    mounted() {
+        // if (this.id) {
+
+        EventBus.$on(this.openModalID, value => {
+            console.log('entro aki')
+            this.modal = value;
+        });
+        //else {
+        EventBus.$on("open-modal", value => {
+
+            this.modal = value;
+        });
+        //}
+    },
+    computed: {
+        openModalID() {
+            return `open-modal-${this.id}`;
+        }
+    },
+    watch: {
+        id: {
+            immediate: true, // Esto permite que el watcher se ejecute inmediatamente cuando el componente se crea
+            handler(newVal, oldVal) {
+                // Este es el cuerpo del watcher
+                // "newVal" es el nuevo valor de la prop "id"
+                // "oldVal" es el valor anterior de la prop "id"
+                if (newVal !== oldVal) {
+                    console.log('hola')
+
+                    // Realiza acciones en respuesta al cambio de "id"
+                    //this.modal = newVal; // Por ejemplo, actualiza "modal" con el nuevo valor de "id"
+                }
+            }
         }
     }
 };

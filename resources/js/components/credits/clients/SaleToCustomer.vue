@@ -11,7 +11,7 @@
                 type="submit">
                 Buscar Cliente
             </button>
-            <information-component :id="form.phone_number">
+            <information-component :id="'client'">
                 <template v-slot:title>Información del cliente</template>
                 <template v-if="Object.keys(client).length">
                     <p class="text-sm text-gray-700">{{ client.name }}</p>
@@ -58,12 +58,15 @@ export default {
 
             axios(this.axiosConfig)
                 .then(res => {
-                    console.log(`open-modal-${this.form.phone_number}`)
-                    EventBus.$emit(`open-modal-${this.form.phone_number}`, true);
-                    if (res.data?.sale)
+                    EventBus.$emit(`open-modal-client`, true);
+                    if (res.data?.sale) {
+
                         this.client = res.data.sale.client;
-                    else
+                    }
+                    else {
+
                         this.client = res.data.data
+                    }
                     EventBus.$emit("sale-to-client", res.data);
                 })
                 .catch(err => {
