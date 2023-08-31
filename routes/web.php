@@ -202,3 +202,8 @@ Route::get('refunds/create', [RefundController::class, 'create'])->middleware('a
 Route::get('refunds/sales', [RefundController::class, 'findSale'])->middleware(('auth'));
 Route::post('refunds', [RefundController::class, 'store'])->middleware('auth');
 
+/**
+ * Credits
+ */
+
+ //Route::resource('credits',[CreditController])
