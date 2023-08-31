@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, CreditController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -206,4 +206,4 @@ Route::post('refunds', [RefundController::class, 'store'])->middleware('auth');
  * Credits
  */
 
- //Route::resource('credits',[CreditController])
+Route::resource('credits', CreditController::class)->middleware('auth');
