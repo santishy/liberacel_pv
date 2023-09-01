@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,5 +33,13 @@ class Credit extends Model
     public function fastSales()
     {
         return $this->morphedByMany(FastSale::class, 'creditable');
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+    public function scopeWithStatus(Builder $query, $status)
+    {
+        $query->where('status', $status);
     }
 }

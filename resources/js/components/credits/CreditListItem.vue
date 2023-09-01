@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="py-2 px-1">
         <td class="text-center">
             {{ credit.created_at }}
         </td>
@@ -7,18 +7,16 @@
             {{ credit.client.name }}
         </td>
         <td class="text-center">
-            {{ credit.amount_paid_formatted }}
+            {{ credit.client.phone_number }}
         </td>
         <td class="text-center">
-            {{ credit.formatted_total_amount }}
+            {{ credit.formatted_amount_paid }}
         </td>
         <td class="text-center">
-            <div class="flex flex-wrap space-x-2 items-center w-full justify-center">
-                <a :href="`/credits/${credit.id}/edit`">
-                    <edit-icon></edit-icon>
-                </a>
-                <!-- <delete-expense :expense="expense" :index="index"></delete-expense> -->
-            </div>
+            {{ credit.total_amount_formatted }}
+        </td>
+        <td class="text-center">
+            Abonar
         </td>
     </tr>
 </template>

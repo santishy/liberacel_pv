@@ -5,6 +5,7 @@
                 <tr class="text-white font-extralight">
                     <th class="px-1 py-2">FECHA CREDITO</th>
                     <th class="px-1 py-2">ClIENTE</th>
+                    <th class="px-1 py-2">NUMERO TEL.</th>
                     <th class="px-1 py-2">MONTO PAGADO</th>
                     <th class="px-1 py-2">TOTAL</th>
                     <th class="px-1 py-2">Acciones</th>
@@ -19,12 +20,17 @@
     </div>
 </template>
 <script>
+import CreditListItem from './CreditListItem.vue';
 export default {
     data() {
         return {
             credits: [],
             page: 1,
+
         };
+    },
+    components: {
+        CreditListItem,
     },
     created() {
         EventBus.$on('credit-removed', (index) => {
@@ -39,9 +45,11 @@ export default {
                 .get("/credits", {
                     params: {
                         page: this.page,
+                        "filter[withStatus]": "pending",
                     }
                 },)
                 .then((res) => {
+                    console.log(res.data.data)
                     if (res.data.data.length) {
                         this.page += 1;
                         this.credits.push(...res.data.data);

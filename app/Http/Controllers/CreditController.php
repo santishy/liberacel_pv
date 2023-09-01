@@ -11,7 +11,9 @@ class CreditController extends Controller
     function index()
     {
         if (request()->wantsJson()) {
-            return CreditResource::collection(Credit::paginate(25)->with('clients'));
+            return CreditResource::collection(
+                Credit::with('client')->applyFilters()->paginate(25)
+            );
         }
         return view('credits.index');
     }

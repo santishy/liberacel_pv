@@ -49,14 +49,14 @@ const menuData = {
             url: "/products/?queryType=list"
         }
     ],
-    ExpressMenu:[
+    ExpressMenu: [
         {
-            name:"Venta",
-            url:"/fast-sales/create"
+            name: "Venta",
+            url: "/fast-sales/create"
         },
         {
-            name:"Bonificaciones",
-            url:"/product-bonuses"
+            name: "Bonificaciones",
+            url: "/product-bonuses"
         }
     ],
     ReportsMenu: [
@@ -99,6 +99,12 @@ const menuData = {
             url: "/settings"
         }
     ],
+    CreditsMenu: [
+        {
+            name: "Catálago Créditos",
+            url: "/credits",
+        }
+    ]
 }
 
 

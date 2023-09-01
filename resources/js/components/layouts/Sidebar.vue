@@ -1,5 +1,5 @@
 <template>
-    <aside :class="[isOpen ? 'w-72' : 'w-10']" @mouseenter="isOpen=true" @mouseleave="closeDropdown"
+    <aside :class="[isOpen ? 'w-72' : 'w-10']" @mouseenter="isOpen = true" @mouseleave="closeDropdown"
         class="min-h-full h-screen scroll-smooth scrollbar-track-transparent  scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72">
         <div class="w-full overflow-x-hidden overflow-y-auto ">
             <h3 :class="[isOpen ? 'p-2' : 'p-1 bg-teal-800']"
@@ -48,6 +48,17 @@
                     </svg>
                 </template>
             </dropdown>
+            <dropdown class="mt-4" title="Créditos" :menu="CreditsMenu" title-font-color="text-purple-100"
+                item-font-color="text-gray-700">
+                <template slot="icon">
+                    <svg fill="none" stroke="currentColor" class="w-6 h-6" stroke-width="1.5" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z">
+                        </path>
+                    </svg>
+                </template>
+            </dropdown>
             <dropdown class="mt-4" title="Reportes" :menu="ReportsMenu" title-font-color="text-purple-100"
                 item-font-color="text-gray-700">
                 <template slot="icon">
@@ -82,6 +93,7 @@ import {
     ExpressMenu,
     InventoryMenu,
     ReportsMenu,
+    CreditsMenu,
 } from "../../utilities/menuData.js";
 import ArrowLeft from "../icons/ArrowLeft.vue";
 import Dropdown from "../partials/Dropdown.vue";
@@ -96,6 +108,7 @@ export default {
             ExpressMenu,
             InventoryMenu,
             ReportsMenu,
+            CreditsMenu,
             isOpen: false,
         };
     },
@@ -109,7 +122,7 @@ export default {
             EventBus.$emit('close-dropdown');
         }
     },
-    computed:{
+    computed: {
         ...mapState(["appName"]),
     }
 };
