@@ -16,7 +16,7 @@
             {{ credit.total_amount_formatted }}
         </td>
         <td class="text-center">
-            Abonar
+            <button @click.prevent="openPaymentModal(credit)">Abonar</button>
         </td>
     </tr>
 </template>
@@ -36,6 +36,11 @@ export default {
     components: {
         EditIcon,
         //DeleteExpense
+    },
+    methods: {
+        openPaymentModal(credit) {
+            EventBus.$emit("open-payment-modal", credit);
+        }
     }
 }
 </script>

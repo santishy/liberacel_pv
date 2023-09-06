@@ -15,6 +15,7 @@ class CreditResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->resource->id,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
             'amount_paid' => $this->resource->amount_paid,
             'total_amount' => $this->resource->total_amount,
