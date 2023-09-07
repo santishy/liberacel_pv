@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credit;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class PaymentsController extends Controller
 {
@@ -14,9 +17,18 @@ class PaymentsController extends Controller
             "credit_id" => ["required", "exists:credits,id"],
             "amount" => ["required", "min:1", "numeric"]
         ]);
-
-        $payment = Payment::create($data);
-
-        return response(["payment" => $payment->load('client', 'credit')]);
+        DB::beginTransaction();
+        try {
+            $data['status'] = true;
+            $payment = Payment::create($data);
+            $updatedCredit = $payment->handleCredit();
+            DB::commit();
+            return $updatedCredit;
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw ValidationException::withMessages([
+                'db' => $e->getMessage()
+            ]);
+        }
     }
 }

@@ -10,7 +10,7 @@
     </nav-component>
 </template>
 <script>
-import CreditList from './creditlist.vue';
+import CreditList from './CreditList.vue';
 import NavComponent from '../NavComponent.vue';
 import PaymentForm from '../payments/PaymentForm.vue';
 import InformationComponent from '../modals/InformationComponent.vue';
