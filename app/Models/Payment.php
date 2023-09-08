@@ -24,13 +24,22 @@ class Payment extends Model
         $credit = $this->credit;
 
         if ($this->status) {
-            $credit->total_amount -= $this->amount;
-            $credit->amount_paid += $this->amount;
+            $this->DecreaseTotalCreditAndIncreaseAmountPaid($credit);
         } else {
-            $credit->total_amount += $this->amount;
-            $credit->amount_paid  -= $this->amount;
+            $this->IncreaseTotalCreditAndDecreaseAmountPaid($credit);
         }
+
         $credit->save();
         return $credit;
+    }
+    public function IncreaseTotalCreditAndDecreaseAmountPaid($credit)
+    {
+        $credit->total_amount += $this->amount;
+        $credit->amount_paid  -= $this->amount;
+    }
+    public function DecreaseTotalCreditAndIncreaseAmountPaid($credit)
+    {
+        $credit->total_amount -= $this->amount;
+        $credit->amount_paid += $this->amount;
     }
 }

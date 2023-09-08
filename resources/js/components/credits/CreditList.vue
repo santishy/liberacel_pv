@@ -37,6 +37,17 @@ export default {
             if (index) {
                 this.credits.splice(index, 1);
             }
+        });
+        EventBus.$on('saved-payment', (credit) => {
+            const index = this.findIndexById(credit.id);
+            if (index === -1) {
+                throw new Error('The element was not found in the array.')
+            }
+            this.credits[index].total_amount = credit.total_amount;
+            this.credits[index].amount_paid = credit.amount_paid;
+            this.credits[index].total_amount_formatted = this.formattedCurrency.format(this.credits[index].total_amount)
+            this.credits[index].formatted_amount_paid = this.formattedCurrency.format(this.credits[index].amount_paid)
+            console.log(this.credits[index]);
         })
     },
     methods: {
@@ -49,7 +60,6 @@ export default {
                     }
                 },)
                 .then((res) => {
-                    console.log(res.data.data)
                     if (res.data.data.length) {
                         this.page += 1;
                         this.credits.push(...res.data.data);
@@ -63,7 +73,18 @@ export default {
                     console.log(err);
                 });
         },
+        findIndexById(id) {
+            return this.credits.findIndex((credit) => credit.id === id);
+        }
     },
+    computed: {
+        formattedCurrency() {
+            return new Intl.NumberFormat("mx-MX", {
+                style: "currency",
+                currency: "MXN",
+            })
+        }
+    }
 };
 
 </script>

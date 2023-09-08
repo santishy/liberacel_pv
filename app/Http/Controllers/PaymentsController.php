@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SavePaymentRequest;
 use App\Models\Credit;
 use App\Models\Payment;
 use Illuminate\Http\Request;
@@ -10,20 +11,21 @@ use Illuminate\Validation\ValidationException;
 
 class PaymentsController extends Controller
 {
-    public function store(Request $request)
+    public function store(SavePaymentRequest $request)
     {
-        $data = $request->validate([
-            "client_id" => ["required", "exists:clients,id"],
-            "credit_id" => ["required", "exists:credits,id"],
-            "amount" => ["required", "min:1", "numeric"]
-        ]);
+        $request->merge(['status' => true]);
+        $data = $request->all();
+
         DB::beginTransaction();
+
         try {
-            $data['status'] = true;
             $payment = Payment::create($data);
             $updatedCredit = $payment->handleCredit();
             DB::commit();
-            return $updatedCredit;
+            return response([
+                'payment' => $payment,
+                'credit' => $updatedCredit
+            ], 201);
         } catch (\Exception $e) {
             DB::rollback();
             throw ValidationException::withMessages([

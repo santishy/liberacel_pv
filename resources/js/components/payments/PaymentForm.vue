@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submit" class="w-full px-2 py-2  flex flex-col gap-2">
+    <form @submit.prevent="submit" class="w-full  py-2  flex flex-col gap-2">
         <div
             class="flex justify-left gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center">
             <span>Adeudo Total</span>
@@ -15,13 +15,16 @@
             class="px-4 py-1 text-xl flex items-center justify-left text-slate-500 text-left leading-tight border rounded-sm border-slate-400">
             Número telefonico: {{ credit.client.phone_number }}
         </div>
-        <div class="px-4 py-1 ">
+        <div class="border-b border-t py-1 border-slate-400">
             <label class="form-label">Monto</label>
             <input type="number" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-300"
                 placeholder="Monto" autocomplete="off" />
         </div>
-        <div class=" py-1 ">
-            <button>Abonar</button>
+        <div class="w-full py-1 ">
+            <button
+                class="w-full py-2 bg-white border text-xs border-green-600 items-center justify-center flex flex-wrap gap-2 hover:bg-green-700 text-slate-700 hover:text-white duration-150 font-semibold  px-2 rounded">
+                Guardar
+            </button>
         </div>
     </form>
 </template>
@@ -48,8 +51,12 @@ export default {
                     this.form.client_id = client.id;
                     this.form.credit_id = this.credit.id;
                 }
-                const res = axios.post('payments', this.form)
-                console.log({ res });
+                const res = await axios.post('payments', this.form)
+                if (res?.data.credit) {
+                    const { credit } = res.data;
+                    EventBus.$emit('saved-payment', credit)
+                    EventBus.$emit("open-modal", false);
+                }
             } catch (err) {
                 console.log(err)
             }
