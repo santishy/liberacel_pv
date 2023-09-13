@@ -42,4 +42,10 @@ class Credit extends Model
     {
         $query->where('status', $status);
     }
+    public function scopeSearchByPhoneNumber(Builder $query, $phoneNumber)
+    {
+        $query->whereHas('client', function ($clientQuery) use ($phoneNumber) {
+            $clientQuery->where('phone_number',  $phoneNumber);
+        });
+    }
 }

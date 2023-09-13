@@ -33,6 +33,12 @@ export default {
         CreditListItem,
     },
     created() {
+        EventBus.$on('fetch-client-credit', (data) => {
+            if (data?.data) {
+                data = data.data
+            }
+            this.credits = data;
+        });
         EventBus.$on('credit-removed', (index) => {
             if (index) {
                 this.credits.splice(index, 1);
@@ -47,7 +53,6 @@ export default {
             this.credits[index].amount_paid = credit.amount_paid;
             this.credits[index].total_amount_formatted = this.formattedCurrency.format(this.credits[index].total_amount)
             this.credits[index].formatted_amount_paid = this.formattedCurrency.format(this.credits[index].amount_paid)
-            console.log(this.credits[index]);
         })
     },
     methods: {

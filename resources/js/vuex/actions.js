@@ -25,7 +25,20 @@ const search = ({ context }, params) => {
                 reject(err);
             })
     })
-} 
+}
+const searchCreditByClient = ({ context }, params) => {
+    return new Promise((resolve, reject) => {
+        axios.get('/credits', {
+            params
+        })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+    })
+}
 /* const search = ({ context }, data) => {
     return new Promise((resolve, reject) => {
         axios.get('/searching-products', {
@@ -50,5 +63,6 @@ const search = ({ context }, params) => {
 export default {
     getProducts,
     search,
-   // getUser
+    searchCreditByClient,
+    // getUser
 }

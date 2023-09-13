@@ -1,5 +1,6 @@
 <template>
     <nav-component>
+        <search-by-phone-number />
         <credit-list />
         <information-component v-if="credit">
             <template slot="title">
@@ -14,6 +15,7 @@ import CreditList from './CreditList.vue';
 import NavComponent from '../NavComponent.vue';
 import PaymentForm from '../payments/PaymentForm.vue';
 import InformationComponent from '../modals/InformationComponent.vue';
+import SearchByPhoneNumber from './clients/SearchByPhoneNumber.vue';
 export default {
     data() {
         return {
@@ -25,6 +27,7 @@ export default {
         CreditList,
         InformationComponent,
         PaymentForm,
+        SearchByPhoneNumber,
     },
     mounted() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
