@@ -18,27 +18,24 @@ class SaleToClientController extends Controller
             'inventory_id' => 'required'
         ]);
 
-        $this->validateTypeOfSale();
+        //$this->validateTypeOfSale();
 
         $sale = Sale::getTransaction();
 
-        $sale->update(["inventory_id" => $fields["inventory_id"]]);
-
-        $client = $sale->client_id ? $sale->client : Client::where(
-            'phone_number',
-            $fields['phone_number']
-        )->first();
-
-        $sale->client()
-            ->associate($client);
-
-        $sale->save();
-
-        return response()->json([
-            'sale' =>  TransactionResource::make(
-                sale::with('client')->where('id', session('sale_id'))->first()
-            )
-        ]);
+        if (!is_null($sale->inventory_id)) {
+            $sale->update(["inventory_id" => $fields["inventory_id"]]);
+        }
+        if (is_null($sale->client_id)) {
+            $sale->addClient($fields["phone_number"]);
+            if ($sale->products()->exists()) {
+                dd($sale->modifyPricesSales());
+            }
+            return response()->json([
+                'sale' =>  TransactionResource::make(
+                    sale::with('client')->where('id', session('sale_id'))->first()
+                )
+            ]);
+        }
     }
 
     public function validateTypeOfSale()

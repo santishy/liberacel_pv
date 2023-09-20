@@ -78,7 +78,7 @@ class Sale extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function refundProduct($product_id,$qty)
+    public function refundProduct($product_id, $qty)
     {
         $this->products()->updateExistingPivot($product_id, [
             'qty' => $qty
@@ -87,8 +87,29 @@ class Sale extends Model
             ->wherePivot('product_id', $product_id)
             ->wherePivot('qty', 0)->exists();
 
-        if($isQtyZero){
+        if ($isQtyZero) {
             $this->products()->detach($product_id);
         }
+    }
+
+    public function addClient($phoneNumber = "")
+    {
+        $client = $this->searchForClientPhoneNumber($phoneNumber);
+        $this->client()->associate($client);
+        $this->save();
+    }
+
+    public function searchForClientPhoneNumber($phoneNumber)
+    {
+        return $this->client_id ? $this->client : Client::where(
+            'phone_number',
+            $phoneNumber
+        )->first();
+    }
+
+    public function modifyPricesSales()
+    {
+        $products = $this->products()->pluck('products.id');
+        return "hola";
     }
 }

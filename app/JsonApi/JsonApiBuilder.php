@@ -39,9 +39,9 @@ class JsonApiBuilder
             $price = $this->model->client()->count() ? $this->model->client->assigned_price : 'retail_price';
             if (!$transaction->where('product_id', $product->id)->exists()) {
                 $transaction->attach($product->id, [
-                    /** 
-                     * PONGO RETAIL PRICE DEBIDO A QUE SINO SE MANDA NINGUN 
-                     * VALOR U OPCION DE PRECIO ESA SERA POR DEFAULT 
+                    /**
+                     * PONGO RETAIL PRICE DEBIDO A QUE SINO SE MANDA NINGUN
+                     * VALOR U OPCION DE PRECIO ESA SERA POR DEFAULT
                      * */
                     'sale_price' => $product->{$price},
                     'qty' => 1
