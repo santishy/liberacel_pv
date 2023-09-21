@@ -25,17 +25,15 @@ class SaleToClientController extends Controller
         if (!is_null($sale->inventory_id)) {
             $sale->update(["inventory_id" => $fields["inventory_id"]]);
         }
-        if (is_null($sale->client_id)) {
-            $sale->addClient($fields["phone_number"]);
-            if ($sale->products()->exists()) {
-                dd($sale->modifyPricesSales());
-            }
-            return response()->json([
-                'sale' =>  TransactionResource::make(
-                    sale::with('client')->where('id', session('sale_id'))->first()
-                )
-            ]);
+        $sale->addClient($fields["phone_number"]);
+        if ($sale->products()->exists()) {
+            dd($sale->modifyPricesSales());
         }
+        return response()->json([
+            'sale' =>  TransactionResource::make(
+                sale::with('client')->where('id', session('sale_id'))->first()
+            )
+        ]);
     }
 
     public function validateTypeOfSale()

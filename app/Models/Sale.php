@@ -15,6 +15,7 @@ class Sale extends Model
     use HasFactory, ReportBy, ManagesCredits;
 
     protected $guarded = ['id'];
+    protected $client;
     public function refunds()
     {
         return $this->morphMany(Refund::class, 'refundable');
@@ -101,15 +102,19 @@ class Sale extends Model
 
     public function searchForClientPhoneNumber($phoneNumber)
     {
-        return $this->client_id ? $this->client : Client::where(
+        $client =  $this->client_id ? $this->client : Client::where(
             'phone_number',
             $phoneNumber
         )->first();
+        $this->client = $client;
+        return $client;
     }
 
     public function modifyPricesSales()
     {
-        $products = $this->products()->pluck('products.id');
-        return "hola";
+        $products = $this->products();
+        $prices = $products->pluck("products.{$this->client->assigned_price}");
+        $productSaleIds = $products->pluck("product_sale.id");
+        return $productSaleIds;
     }
 }
