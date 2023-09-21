@@ -113,7 +113,7 @@ class Sale extends Model
     public function modifyPricesSales()
     {
         $products = $this->products();
-        $prices = $products->pluck("products.{$this->client->assigned_price}");
+        $prices = $products->pluck("products.{$this->client->assigned_price}",);
         $productSaleIds = $products->pluck("product_sale.id");
         return $productSaleIds;
     }
