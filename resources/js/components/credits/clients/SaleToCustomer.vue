@@ -53,8 +53,9 @@ export default {
     },
     methods: {
         submit() {
-            if (sessionStorage.getItem('inventory_id'))
+            if (sessionStorage.getItem('inventory_id')) {
                 this.form.inventory_id = sessionStorage.getItem('inventory_id');
+            }
 
             axios(this.axiosConfig)
                 .then(res => {

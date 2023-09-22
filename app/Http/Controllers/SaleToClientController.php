@@ -27,7 +27,7 @@ class SaleToClientController extends Controller
         }
         $sale->addClient($fields["phone_number"]);
         if ($sale->products()->exists()) {
-            dd($sale->modifyPricesSales());
+            $sale->modifyPricesSales();
         }
         return response()->json([
             'sale' =>  TransactionResource::make(

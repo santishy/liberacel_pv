@@ -3926,7 +3926,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submit: function submit() {
       var _this = this;
-      if (sessionStorage.getItem('inventory_id')) this.form.inventory_id = sessionStorage.getItem('inventory_id');
+      if (sessionStorage.getItem('inventory_id')) {
+        this.form.inventory_id = sessionStorage.getItem('inventory_id');
+      }
       axios(this.axiosConfig).then(function (res) {
         var _res$data;
         EventBus.$emit("open-modal-client", true);

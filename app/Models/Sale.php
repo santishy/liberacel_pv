@@ -95,6 +95,7 @@ class Sale extends Model
 
     public function addClient($phoneNumber = "")
     {
+        //hay q usar dissociate por si ya existe y establecer la nueva
         $client = $this->searchForClientPhoneNumber($phoneNumber);
         $this->client()->associate($client);
         $this->save();
@@ -112,9 +113,13 @@ class Sale extends Model
 
     public function modifyPricesSales()
     {
-        $products = $this->products();
-        $prices = $products->pluck("products.{$this->client->assigned_price}",);
-        $productSaleIds = $products->pluck("product_sale.id");
-        return $productSaleIds;
+        $products = $this->products()
+            ->pluck("products.{$this->client->assigned_price}", "products.id")->toArray();
+        $sync = [];
+        foreach ($products as $productId => $price) {
+            $sync[$productId] = ["sale_price" => $price];
+        }
+        $this->products()->sync($sync);
+        return;
     }
 }
