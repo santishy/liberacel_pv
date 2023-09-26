@@ -20,19 +20,17 @@ class SaleToClientController extends Controller
 
         //$this->validateTypeOfSale();
 
-        $sale = Sale::getTransaction();
+        $sale = Sale::with('products')->getTransaction();
 
         if (!is_null($sale->inventory_id)) {
             $sale->update(["inventory_id" => $fields["inventory_id"]]);
         }
         $sale->addClient($fields["phone_number"]);
-        if ($sale->products()->exists()) {
+        if ($sale->products->isNotEmpty()) {
             $sale->modifyPricesSales();
         }
         return response()->json([
-            'sale' =>  TransactionResource::make(
-                sale::with('client')->where('id', session('sale_id'))->first()
-            )
+            'sale' =>  TransactionResource::make($sale->load('products', 'client'))
         ]);
     }
 

@@ -68,6 +68,8 @@ export default {
 
                         this.client = res.data.data
                     }
+                    EventBus.$emit("product-added-sales-cart", res.data.sale)
+
                     EventBus.$emit("sale-to-client", res.data);
                 })
                 .catch(err => {

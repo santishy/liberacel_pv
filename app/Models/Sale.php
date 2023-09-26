@@ -97,13 +97,16 @@ class Sale extends Model
     {
         //hay q usar dissociate por si ya existe y establecer la nueva
         $client = $this->searchForClientPhoneNumber($phoneNumber);
+        if ($this->client_id) {
+            $this->client()->dissociate($this->client_id);
+        }
         $this->client()->associate($client);
         $this->save();
     }
 
     public function searchForClientPhoneNumber($phoneNumber)
     {
-        $client =  $this->client_id ? $this->client : Client::where(
+        $client = Client::where(
             'phone_number',
             $phoneNumber
         )->first();

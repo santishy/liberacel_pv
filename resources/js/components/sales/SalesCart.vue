@@ -78,6 +78,7 @@ export default {
             this.products[obj.index].sale_price = obj.transaction.sale_price;
         });
         EventBus.$on("product-added-sales-cart", (res) => {
+            console.log({ res })
             this.localSale = res;
             this.products = res.products;
         });
