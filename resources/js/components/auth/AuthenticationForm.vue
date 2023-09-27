@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white w-full">
-        <information-component>
+        <information-component :id="id">
             <template slot="title">
                 <span class="text-xl font-mono font-semibold text-blue-700">
                     Completar venta

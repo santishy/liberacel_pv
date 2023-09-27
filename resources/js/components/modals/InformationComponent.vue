@@ -76,7 +76,7 @@ export default {
         // if (this.id) {
 
         EventBus.$on(this.openModalID, value => {
-            console.log('entro aki')
+            console.log('entro aki', this.openModalID)
             this.modal = value;
         });
         //else {
@@ -99,7 +99,6 @@ export default {
                 // "newVal" es el nuevo valor de la prop "id"
                 // "oldVal" es el valor anterior de la prop "id"
                 if (newVal !== oldVal) {
-                    console.log('hola')
 
                     // Realiza acciones en respuesta al cambio de "id"
                     //this.modal = newVal; // Por ejemplo, actualiza "modal" con el nuevo valor de "id"

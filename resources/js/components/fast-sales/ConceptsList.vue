@@ -73,7 +73,7 @@
             </table>
         </div>
 
-        <authentication-form model="FastSale" :id="currentFastSale.id"></authentication-form>
+        <authentication-form model="FastSale" :id="currentFastSale.id" />
     </div>
 </template>
 
@@ -135,7 +135,7 @@ export default {
             this.localSale = sale;
         },
         openModal() {
-            EventBus.$emit("open-modal", true);
+            EventBus.$emit(`open-modal-${this.localSale.id}`, true);
         },
     },
     computed: {

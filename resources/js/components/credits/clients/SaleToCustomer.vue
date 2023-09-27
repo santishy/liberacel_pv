@@ -14,12 +14,19 @@
             <information-component :id="'client'">
                 <template v-slot:title>Información del cliente</template>
                 <template v-if="Object.keys(client).length">
-                    <p class="text-sm text-gray-700">{{ client.name }}</p>
-                    <p class="text-sm text-gray-700">{{ client.address }}</p>
-                    <p class="text-sm text-gray-700">
-                        {{ client.phone_number }}
-                    </p>
-                    <p class="text-sm text-gray-700">{{ client.company }}</p>
+                    <div class="border-t border-b py-2 border-slate-300 flex flex-col gap-1 justify-start items-start">
+
+                        <p class="uppercase border-yellow-400 border text-sm  text-slate-700 px-2 py-1 rounded-sm">{{
+                            client.name }}
+                        </p>
+                        <p class="border-yellow-400 border text-sm text-slate-500  px-2 py-1 rounded-sm">{{ client.address
+                        }}</p>
+                        <p class=" border-yellow-400 border text-sm text-slate-700 px-2 py-1 rounded-sm">
+                            {{ client.phone_number }}
+                        </p>
+                        <p class="border-yellow-400 border text-sm text-slate-500 px-2 py-1 rounded-sm">{{ client.company }}
+                        </p>
+                    </div>
                 </template>
             </information-component>
         </div>
