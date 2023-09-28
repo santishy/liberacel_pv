@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto mt-4 flex justify-center">
-        <table v-if="params" class="table-auto bg-white text-center">
+        <table v-if="params" class="table-auto bg-white  text-center">
             <thead>
                 <tr class="bg-purple-200">
                     <th class="px-4 py-2">Fecha</th>
