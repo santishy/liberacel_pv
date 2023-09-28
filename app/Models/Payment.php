@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use HasFactory;
+    use HasFactory, ReportBy;
     protected $fillable = ['credit_id', 'client_id', 'amount', 'status'];
+
     public function client()
     {
         return $this->belongsTo(Client::class);

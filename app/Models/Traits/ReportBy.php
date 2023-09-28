@@ -29,6 +29,9 @@ trait ReportBy
     }
     public function scopeStatus(Builder $query, $value)
     {
+        if ($value === "1") {
+            $value = 1;
+        }
         $query->where('status', $value);
     }
     public function scopeWeek(Builder $query, $value)
@@ -39,19 +42,18 @@ trait ReportBy
         ]);
     }
 
-    public function scopeBetweenDates(Builder $query,$value){
+    public function scopeBetweenDates(Builder $query, $value)
+    {
 
         $dates = str::of($value)->explode(',');
-
-        $query->whereBetween(DB::raw('Date(created_at)'),[$dates[0],$dates[1]]);
-
+        $query->whereBetween(DB::raw('Date(created_at)'), [$dates[0], $dates[1]]);
     }
 
     public function scopeFridayToThursday(Builder $query)
     {
         $friday = new Carbon('last friday');
         $thursday = new Carbon('thursday');
-        $query->whereBetween(DB::raw('Date(created_at)'),[$friday,$thursday]);
+        $query->whereBetween(DB::raw('Date(created_at)'), [$friday, $thursday]);
     }
 
     public function scopeTotal(Builder $query)
@@ -66,8 +68,9 @@ trait ReportBy
             $query->whereIn('inventory_id', $warehouses);
         }
     }
-    public function scopeSearchByIdAndCompletedStatus(Builder $query,$id){
-        $query->where('id',$id)
-            ->where('status','completed');
+    public function scopeSearchByIdAndCompletedStatus(Builder $query, $id)
+    {
+        $query->where('id', $id)
+            ->where('status', 'completed');
     }
 }

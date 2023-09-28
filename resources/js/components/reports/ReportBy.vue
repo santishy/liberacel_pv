@@ -72,7 +72,6 @@ export default {
     },
     methods: {
         getReport(value, reportBy = "") {
-            console.log("value: ", value)
             if (reportBy === "betweenDates") {
                 if (this.dates?.length) {
                     this.range["filter[betweenDates]"] = this.dates.toString(); //convierto el array de las dos fechas de rango a un string separado por comas

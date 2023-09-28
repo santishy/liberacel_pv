@@ -213,3 +213,4 @@ Route::resource('credits', CreditController::class)->middleware('auth');
  */
 
 Route::post('payments', [PaymentsController::class, 'store'])->middleware('auth');
+Route::get('payments', [PaymentsController::class, 'index'])->middleware('auth');

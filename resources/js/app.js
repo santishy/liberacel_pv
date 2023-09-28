@@ -115,6 +115,10 @@ Vue.component('create-refund', require('./components/refunds/Create.vue').defaul
  * Credits
  */
 Vue.component('credits-component', require('./components/credits/IndexComponent.vue').default);
+/**
+ * Payments
+ */
+Vue.component('payment-report', require('./components/reports/payments/IndexComponent.vue').default);
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
