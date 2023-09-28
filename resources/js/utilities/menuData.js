@@ -75,6 +75,10 @@ const menuData = {
         {
             name: "Comisiones",
             url: "/user-commissions"
+        },
+        {
+            name: "Pagos",
+            url: "/payments"
         }
     ],
     ConfigMenu: [
