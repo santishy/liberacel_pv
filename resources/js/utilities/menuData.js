@@ -79,6 +79,10 @@ const menuData = {
         {
             name: "Pagos",
             url: "/payments"
+        },
+        {
+            name: "Egresos",
+            url: "/expense-report"
         }
     ],
     ConfigMenu: [

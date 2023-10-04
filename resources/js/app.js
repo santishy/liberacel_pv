@@ -106,7 +106,7 @@ Vue.component('setting-component', require('./components/settings/SettingCompone
 
 Vue.component('expenses-component', require('./components/expenses/ExpensesComponent.vue').default);
 Vue.component('create-expense', require('./components/expenses/CreateExpense.vue').default);
-
+Vue.component('expense-report', require('./components/reports/expenses/IndexComponent.vue').default)
 /**
  * refunds
  */

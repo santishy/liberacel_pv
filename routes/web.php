@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, CreditController, ExpenseController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, CreditController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -192,7 +192,9 @@ Route::get('barcode/{product:sku}', [ProductBarcodeController::class, 'show'])->
  * Expenses
  */
 
-Route::resource('expenses', ExpenseController::class);
+Route::resource('expenses', ExpenseController::class)->middleware('auth');
+
+Route::get('expense-report', [ExpenseReportController::class, 'index'])->middleware('auth');
 
 /**
  * Refunds
