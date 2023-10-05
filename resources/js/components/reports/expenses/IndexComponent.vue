@@ -16,7 +16,7 @@
             <!-- <warehouse-checklist :warehouses="warehouses">
             </warehouse-checklist> -->
         </div>
-        <expense-list></expense-list>
+        <expense-list uri="/expense-report" name="Egresos"></expense-list>
     </nav-component>
 </template>
 <script>

@@ -30,11 +30,10 @@ export default {
             page: 1,
         };
     },
-    created(){
+    created() {
         EventBus.$on('expense-removed', (index) => {
-            if(index)
-            {
-                this.expenses.splice(index,1);
+            if (index) {
+                this.expenses.splice(index, 1);
             }
         })
     },
@@ -52,7 +51,7 @@ export default {
                         this.expenses.push(...res.data.data);
                         $state.loaded();
                     }
-                    else{
+                    else {
                         $state.complete();
                     }
                 })

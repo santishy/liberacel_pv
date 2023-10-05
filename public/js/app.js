@@ -8164,9 +8164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _alerts_Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../alerts/Message.vue */ "./resources/js/components/alerts/Message.vue");
-/* harmony import */ var _alerts_Agree_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../alerts/Agree.vue */ "./resources/js/components/alerts/Agree.vue");
-/* harmony import */ var _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PaymentListItem.vue */ "./resources/js/components/reports/expenses/PaymentListItem.vue");
+/* harmony import */ var _ExpenseListItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExpenseListItem.vue */ "./resources/js/components/reports/expenses/ExpenseListItem.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -8176,15 +8174,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
+// import Message from "../../alerts/Message.vue";
+// import Agree from "../../alerts/Agree.vue";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    PaymentListItem: _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Message: _alerts_Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Agree: _alerts_Agree_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ExpenseListItem: _ExpenseListItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    // Message,
+    // Agree,
   },
+
   props: {
     name: {
       type: String
@@ -8216,9 +8215,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     infiniteHandler: function infiniteHandler($state) {
       var _this2 = this;
-      this.params = _objectSpread(_objectSpread({}, this.params), {}, {
-        "filter[status]": 1
-      });
+      if (this.params["filter[status]"]) {
+        delete this.params["filter[status]"];
+      }
       axios.get(this.uri, {
         params: _objectSpread(_objectSpread({
           page: this.page
@@ -8227,9 +8226,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (_this2.page == 1) EventBus.$emit("calculated-total", res.data.total);
         if (res.data.data.length) {
           var _this2$expenses;
-          console.log({
-            length: res.data.data.length
-          });
           _this2.page += 1;
           (_this2$expenses = _this2.expenses).push.apply(_this2$expenses, _toConsumableArray(res.data.data));
           $state.loaded();
@@ -8253,6 +8249,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// import DeleteExpense from "./DeleteExpense.vue";
+// import EditIcon from "../icons/EditIcon.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    expense: {
+      type: Object
+    },
+    index: {
+      type: Number
+    }
+  }
+  // components: {
+  //     EditIcon,
+  //     DeleteExpense
+  // }
 });
 
 /***/ }),
@@ -8312,38 +8338,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     errorsFound: function errorsFound(errors) {
       this.getErrors(errors);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    payment: {
-      type: Object
-    },
-    uri: {
-      type: String
-    },
-    index: {
-      type: Number
-    }
-  },
-  computed: {
-    getCustomerName: function getCustomerName() {
-      return this.transaction.client ? this.transaction.client.name : "Publico en general";
     }
   }
 });
@@ -12639,7 +12633,12 @@ var render = function render() {
     staticClass: "w-10/12 mx-auto"
   }, [_c("h3", {
     staticClass: "w-full rounded-sm p-4 bg-white shadow-sm text-center font-semibold text-xl"
-  }, [_vm._v("Egresos")]), _vm._v(" "), _c("expense-list")], 1)]);
+  }, [_vm._v("Egresos")]), _vm._v(" "), _c("expense-list", {
+    attrs: {
+      uri: "/expenses",
+      name: "Expenses"
+    }
+  })], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -17616,7 +17615,7 @@ var render = function render() {
     staticClass: "shadow-sm bg-white"
   }, [_vm.params ? _c("table", {
     staticClass: "table-auto w-full"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_c("transition-group", {
+  }, [_vm._m(0), _vm._v(" "), _c("transition-group", {
     attrs: {
       name: "bounce",
       tag: "tbody"
@@ -17632,7 +17631,11 @@ var render = function render() {
         index: index
       }
     });
-  }), 1)], 1), _vm._v(" "), _c("infinite-loading", {
+  }), 1), _vm._v(" "), _c("infinite-loading", {
+    ref: "infiniteLoading",
+    attrs: {
+      identifier: _vm.infiniteId
+    },
     on: {
       infinite: _vm.infiniteHandler
     }
@@ -17655,6 +17658,37 @@ var staticRenderFns = [function () {
     staticClass: "px-1 py-2"
   }, [_vm._v("ACCIONES")])])]);
 }];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("tr", [_c("td", {
+    staticClass: "text-center"
+  }, [_vm._v("\n\n        " + _vm._s(_vm.expense.created_at) + "\n    ")]), _vm._v(" "), _c("td", {
+    staticClass: "text-center"
+  }, [_vm._v("\n        " + _vm._s(_vm.expense.concept) + "\n    ")]), _vm._v(" "), _c("td", {
+    staticClass: "text-center"
+  }, [_vm._v("\n        " + _vm._s(_vm.expense.amount) + "\n    ")]), _vm._v(" "), _c("td", {
+    staticClass: "text-center"
+  }, [_vm._v("\n        ...\n    ")])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -17695,42 +17729,12 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("report-by", {
     staticClass: "mt-4"
-  })], 1), _vm._v(" "), _c("expense-list")], 1);
-};
-var staticRenderFns = [];
-render._withStripped = true;
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("tr", [_c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v(_vm._s(_vm.payment.created_at))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v(_vm._s(_vm.payment.credit.id))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v(_vm._s(_vm.payment.amount))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v(_vm._s(_vm.payment.client.name))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v("\n        " + _vm._s(_vm.payment.credit.formatted_amount_paid) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
-  }, [_vm._v("\n        " + _vm._s(_vm.payment.credit.total_amount_formatted) + "\n    ")]), _vm._v(" "), _c("td")]);
+  })], 1), _vm._v(" "), _c("expense-list", {
+    attrs: {
+      uri: "/expense-report",
+      name: "Egresos"
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -43408,6 +43412,45 @@ component.options.__file = "resources/js/components/reports/expenses/ExpenseList
 
 /***/ }),
 
+/***/ "./resources/js/components/reports/expenses/ExpenseListItem.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/reports/expenses/ExpenseListItem.vue ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExpenseListItem.vue?vue&type=template&id=4ac65a50& */ "./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50&");
+/* harmony import */ var _ExpenseListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExpenseListItem.vue?vue&type=script&lang=js& */ "./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ExpenseListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reports/expenses/ExpenseListItem.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/reports/expenses/IndexComponent.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/reports/expenses/IndexComponent.vue ***!
@@ -43443,45 +43486,6 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/reports/expenses/IndexComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/expenses/PaymentListItem.vue":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/reports/expenses/PaymentListItem.vue ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaymentListItem.vue?vue&type=template&id=7bb2a204& */ "./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204&");
-/* harmony import */ var _PaymentListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaymentListItem.vue?vue&type=script&lang=js& */ "./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PaymentListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__.render,
-  _PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/reports/expenses/PaymentListItem.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -46157,6 +46161,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExpenseListItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=script&lang=js& ***!
@@ -46170,22 +46190,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndexComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./IndexComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndexComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PaymentListItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -48611,6 +48615,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExpenseListItem_vue_vue_type_template_id_4ac65a50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExpenseListItem.vue?vue&type=template&id=4ac65a50& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/ExpenseListItem.vue?vue&type=template&id=4ac65a50&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=template&id=fff346d8&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=template&id=fff346d8& ***!
@@ -48624,23 +48645,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_IndexComponent_vue_vue_type_template_id_fff346d8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_IndexComponent_vue_vue_type_template_id_fff346d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./IndexComponent.vue?vue&type=template&id=fff346d8& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/IndexComponent.vue?vue&type=template&id=fff346d8&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204& ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PaymentListItem_vue_vue_type_template_id_7bb2a204___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PaymentListItem.vue?vue&type=template&id=7bb2a204& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/reports/expenses/PaymentListItem.vue?vue&type=template&id=7bb2a204&");
 
 
 /***/ }),

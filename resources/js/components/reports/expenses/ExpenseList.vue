@@ -9,28 +9,27 @@
                     <th class="px-1 py-2">ACCIONES</th>
                 </tr>
             </thead>
-            <tbody>
-                <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
-                    <expense-list-item v-for="(expense, index) in expenses" :key="expense.id" :expense="expense"
-                        :index="index">
-                    </expense-list-item>
-                </transition-group>
-            </tbody>
-            <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+            <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
+                <expense-list-item v-for="(expense, index) in expenses" :key="expense.id" :expense="expense" :index="index">
+                </expense-list-item>
+            </transition-group>
+
+            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
 </template>
 
 <script>
 
-import Message from "../../alerts/Message.vue";
-import Agree from "../../alerts/Agree.vue";
-import PaymentListItem from "./PaymentListItem.vue";
+// import Message from "../../alerts/Message.vue";
+// import Agree from "../../alerts/Agree.vue";
+import ExpenseListItem from "./ExpenseListItem.vue";
 export default {
     components: {
-        PaymentListItem,
-        Message,
-        Agree,
+        ExpenseListItem,
+        // Message,
+        // Agree,
     },
     props: {
         name: {
@@ -63,9 +62,8 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            this.params = {
-                ...this.params,
-                "filter[status]": 1,
+            if (this.params["filter[status]"]) {
+                delete this.params["filter[status]"];
             }
             axios
                 .get(this.uri, {
@@ -76,11 +74,9 @@ export default {
                     }
                 })
                 .then(res => {
-
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
-                        console.log({ length: res.data.data.length })
                         this.page += 1;
                         this.expenses.push(...res.data.data);
                         $state.loaded()
