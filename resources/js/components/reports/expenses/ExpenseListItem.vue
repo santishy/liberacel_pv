@@ -1,7 +1,6 @@
 <template>
     <tr>
         <td class="text-center">
-
             {{ expense.created_at }}
         </td>
         <td class="text-center">

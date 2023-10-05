@@ -17680,7 +17680,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("tr", [_c("td", {
     staticClass: "text-center"
-  }, [_vm._v("\n\n        " + _vm._s(_vm.expense.created_at) + "\n    ")]), _vm._v(" "), _c("td", {
+  }, [_vm._v("\n        " + _vm._s(_vm.expense.created_at) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "text-center"
   }, [_vm._v("\n        " + _vm._s(_vm.expense.concept) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "text-center"
