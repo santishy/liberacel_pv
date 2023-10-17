@@ -106,7 +106,8 @@ Vue.component('setting-component', require('./components/settings/SettingCompone
 
 Vue.component('expenses-component', require('./components/expenses/ExpensesComponent.vue').default);
 Vue.component('create-expense', require('./components/expenses/CreateExpense.vue').default);
-Vue.component('expense-report', require('./components/reports/expenses/IndexComponent.vue').default)
+Vue.component('expense-report', require('./components/reports/expenses/IndexComponent.vue').default);
+Vue.component('expense-list', require('./components/reports/expenses/ExpenseList.vue').default)
 /**
  * refunds
  */
@@ -119,6 +120,12 @@ Vue.component('credits-component', require('./components/credits/IndexComponent.
  * Payments
  */
 Vue.component('payment-report', require('./components/reports/payments/IndexComponent.vue').default);
+
+/**
+ * Reports
+ */
+Vue.component('report-component', require('./components/reports/Index.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
