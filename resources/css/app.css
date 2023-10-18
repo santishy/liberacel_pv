@@ -65,8 +65,9 @@ body {
     animation: bounce-in 0.5s reverse;
 }
 .report-button {
-    @apply text-slate-700 hover:text-white font-semibold bg-sky-300 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-opacity-50 rounded;
+    @apply text-slate-700 hover:text-white font-semibold bg-sky-300 hover:bg-sky-500 focus:outline-none focus:ring-sky-500 focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 rounded;
 }
+
 @keyframes bounce-in {
     0% {
         transform: scale(0);

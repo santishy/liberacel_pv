@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto mt-4 flex justify-center">
+    <div class="container mx-auto mt-4 flex justify-center w-full">
         <information-component>
             <template slot="title">
                 Reportes
@@ -10,7 +10,7 @@
             <agree slot="button" :method="modalDataConfirm.action" @cancelTransaction="cancelTransaction"></agree>
         </information-component>
 
-        <table v-if="params" class="table-auto bg-white text-center">
+        <table v-if="params" class="table-auto bg-white text-center w-full">
             <thead>
                 <tr class="bg-purple-200">
                     <th class="px-4 py-2">ID</th>

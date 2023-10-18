@@ -37,7 +37,7 @@ Vue.component('edit-category', require('./components/categories/EditCategory.vue
 
 //VENTAS COMPONENTES
 Vue.component('sale-component', require('./components/sales/SaleComponent').default)
-Vue.component('transaction-report', require('./components/reports/Transactions').default)
+
 
 
 //transactions
@@ -82,8 +82,7 @@ Vue.component('ticket-form', require('./components/tickets/TicketForm.vue').defa
  * fast sales
  */
 Vue.component('create-fast-sale', require('./components/fast-sales/CreateFastSale.vue').default);
-Vue.component('fast-sales-reports', require('./components/fast-sales/FastSalesReports').default);
-
+Vue.component('list-of-products-sold', require('./components/fast-sales/ListOfProductsSold').default);
 /**
  * commissions
  */
@@ -106,7 +105,6 @@ Vue.component('setting-component', require('./components/settings/SettingCompone
 
 Vue.component('expenses-component', require('./components/expenses/ExpensesComponent.vue').default);
 Vue.component('create-expense', require('./components/expenses/CreateExpense.vue').default);
-Vue.component('expense-report', require('./components/reports/expenses/IndexComponent.vue').default);
 Vue.component('expense-list', require('./components/reports/expenses/ExpenseList.vue').default)
 /**
  * refunds
@@ -119,8 +117,8 @@ Vue.component('credits-component', require('./components/credits/IndexComponent.
 /**
  * Payments
  */
-Vue.component('payment-report', require('./components/reports/payments/IndexComponent.vue').default);
 
+Vue.component('payment-list', require('./components/reports/payments/PaymentList.vue').default);
 /**
  * Reports
  */

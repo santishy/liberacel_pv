@@ -1,6 +1,5 @@
 <template>
-    <div v-if="params"
-        class="overflow-x-auto relative max-h-80 overflow-y-auto max-w-6xl mx-auto rounded shadow-lg bg-white">
+    <div v-if="params" class="overflow-x-auto relative max-h-80 overflow-y-auto w-full mx-auto rounded shadow-lg bg-white">
         <table class="
                 w-full table-auto text-sm text-center text-gray-500
             ">

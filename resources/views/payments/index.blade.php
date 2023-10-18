@@ -1,4 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <payment-report uri="/payments" name="Pagos" :warehouses="{{ json_encode($inventories) }}" />
+    <report-component name="Pagos">
+        <payment-list uri="/payments"></payment-list>
+    </report-component>
+    {{-- <payment-report uri="/payments" name="Pagos" :warehouses="{{ json_encode($inventories) }}" /> --}}
 @endsection
