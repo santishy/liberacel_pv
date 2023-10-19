@@ -1,14 +1,15 @@
 <template>
-    <div class="shadow-sm bg-white">
-        <table class="table-auto w-full">
-            <thead class="bg-blue-700">
-                <tr class="text-white font-extralight">
-                    <th class="px-1 py-2">FECHA CREDITO</th>
-                    <th class="px-1 py-2">ClIENTE</th>
-                    <th class="px-1 py-2">NUMERO TEL.</th>
-                    <th class="px-1 py-2">MONTO PAGADO</th>
-                    <th class="px-1 py-2">TOTAL</th>
-                    <th class="px-1 py-2">Acciones</th>
+    <div class="table-container-responsive">
+        <table class="report-table">
+            <thead class="report-table-thead">
+                <tr class="bg-emerald-200">
+                    <th class="px-2 py-2">FECHA CREDITO</th>
+                    <th class="px-2 py-2">Status</th>
+                    <th class="px-2 py-2">ClIENTE</th>
+                    <th class="px-2 py-2">NUMERO TEL.</th>
+                    <th class="px-2 py-2">MONTO PAGADO</th>
+                    <th class="px-2 py-2">TOTAL</th>
+                    <th class="px-2 py-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>

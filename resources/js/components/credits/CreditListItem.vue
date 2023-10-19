@@ -1,21 +1,24 @@
 <template>
     <tr class="py-2 px-1">
-        <td class="text-center">
+        <td class="py-1 px-2 text-xs">
             {{ credit.created_at }}
         </td>
-        <td class="text-center">
+        <td class="py-2 px-2">
+            {{ credit.status }}
+        </td>
+        <td class="py-1 px-2">
             {{ credit.client.name }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2">
             {{ credit.client.phone_number }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2 text-green-800">
             {{ credit.formatted_amount_paid }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2 font-semibold text-green-800">
             {{ credit.total_amount_formatted }}
         </td>
-        <td class="flex justify-center">
+        <td class="py-1 px-2 flex justify-center">
             <button
                 class="bg-white border text-xs border-green-600 items-center justify-center flex flex-wrap gap-2 hover:bg-green-700 text-slate-700 hover:text-white duration-150 font-semibold py-1 px-2 rounded"
                 @click.prevent="openPaymentModal(credit)">
@@ -49,6 +52,7 @@ export default {
     methods: {
         openPaymentModal(credit) {
             EventBus.$emit("open-payment-modal", credit);
+
         }
     }
 }

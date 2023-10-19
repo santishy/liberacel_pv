@@ -17,6 +17,7 @@ class CreditResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
+            'status' => __("status.{$this->resource->status}"),
             'amount_paid' => $this->resource->amount_paid,
             'total_amount' => $this->resource->total_amount,
             'formatted_amount_paid' => "$" . number_format($this->resource->amount_paid, 2),

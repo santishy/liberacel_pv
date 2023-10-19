@@ -19,7 +19,10 @@ class Payment extends Model
     {
         return $this->belongsTo(Credit::class);
     }
-
+    /**
+     * Nota, en DecreaseTotalCreditAndIncreaseAmountPaid podria ser que el abono supera el adeudo ...
+     * quedaria pendiente avisarle al usuario que hay que regresar el cambio $
+     */
     public function handleCredit()
     {
 
@@ -30,9 +33,17 @@ class Payment extends Model
         } else {
             $this->IncreaseTotalCreditAndDecreaseAmountPaid($credit);
         }
+        if ($this->checkIfBalanceIsZero($credit)) {
+            $credit->status = "paid";
+        }
 
         $credit->save();
+
         return $credit;
+    }
+    protected function checkIfBalanceIsZero($credit)
+    {
+        return $credit->total_amount === 0;
     }
     public function IncreaseTotalCreditAndDecreaseAmountPaid($credit)
     {
@@ -41,7 +52,12 @@ class Payment extends Model
     }
     public function DecreaseTotalCreditAndIncreaseAmountPaid($credit)
     {
-        $credit->total_amount -= $this->amount;
+        $newTotal = $credit->total_amount - $this->amount;
+        if ($newTotal < 0) {
+            $credit->total_amount = 0;
+        } else {
+            $credit->total_amount -= $this->amount;
+        }
         $credit->amount_paid += $this->amount;
     }
 }

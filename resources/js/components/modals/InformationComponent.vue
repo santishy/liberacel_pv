@@ -72,19 +72,14 @@ export default {
             modal: false
         };
     },
-    mounted() {
-        // if (this.id) {
-
+    created() {
         EventBus.$on(this.openModalID, value => {
             console.log('entro aki', this.openModalID)
             this.modal = value;
         });
-        //else {
         EventBus.$on("open-modal", value => {
-
             this.modal = value;
         });
-        //}
     },
     computed: {
         openModalID() {
