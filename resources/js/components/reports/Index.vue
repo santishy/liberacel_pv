@@ -6,7 +6,7 @@
             </h1>
             <transition name="fade">
                 <div v-if="total != null"
-                    class=" py-3 px-4 text-green-900 font-bold text-2xl rounded-sm duration-300 transition-all bg-green-300 flex justify-end items-center">
+                    class=" py-3 px-4 text-green-900 font-bold text-2xl rounded-sm duration-300 transition-all bg-green-200 flex justify-end items-center">
                     <span class="font-semibold text-xl ">Total:</span>
                     <div class="font-bold text-2xl ml-2">${{ total }}</div>
                 </div>

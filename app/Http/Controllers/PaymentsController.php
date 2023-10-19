@@ -16,9 +16,16 @@ class PaymentsController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            return PaymentResource::collection(
-                Payment::with(['client', 'credit'])->applyFilters()->paginate(25)
-            );
+            $payments = Payment::with(['client', 'credit'])->applyFilters();
+            $data = [
+                "data" => PaymentResource::collection(
+                    $payments->paginate(25)
+                )
+            ];
+            if (request('page') == 1) {
+                $data['total'] = $payments->sum('amount');
+            }
+            return response()->json($data);
         }
         $inventories = Inventory::all('id', 'name');
         return view('payments.index', [

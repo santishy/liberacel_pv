@@ -4,33 +4,34 @@
             <template slot="title">
                 Reportes
             </template>
-
             <message :title="modalDataConfirm.title" :message="modalDataConfirm.message"></message>
-
             <agree slot="button" :method="modalDataConfirm.action" @cancelTransaction="cancelTransaction"></agree>
         </information-component>
+        <div class="table-container-responsive">
+            <table v-if="params" class="report-table">
 
-        <table v-if="params" class="table-auto bg-white text-center w-full">
-            <thead>
-                <tr class="bg-purple-200">
-                    <th class="px-4 py-2">ID</th>
-                    <th class="px-4 py-2">Usuario</th>
-                    <th v-if="areTheySales">Cliente</th>
-                    <th class="px-4 py-2">Fecha</th>
-                    <th class="px-4 py-2">Total</th>
-                    <th class="px-4 py-2">Ver</th>
-                    <th class="px-4 py-2">Acciones</th>
-                </tr>
-            </thead>
+                <thead class="report-table-thead">
+                    <tr class="bg-green-200">
+                        <th class="py-2 px-2">ID</th>
+                        <th class="py-2 px-2 ">Usuario</th>
+                        <th v-if="areTheySales" class="py-2 px-2">Cliente</th>
+                        <th class="px-2 py-2">Fecha</th>
+                        <th class="px-2 py-2">Total</th>
+                        <th class="px-2 py-2">Ver</th>
+                        <th class="px-2 py-2">Acciones</th>
+                    </tr>
+                </thead>
 
-            <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
-                <transaction-list-item v-for="(transaction, index) in transactions" :transaction="transaction"
-                    :index="index" :transaction-type="transaction.transactionType" :key="transaction.id" :uri="uri"
-                    :are-they-sales="areTheySales">
-                </transaction-list-item>
-            </transition-group>
-            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
-        </table>
+                <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
+                    <transaction-list-item v-for="(transaction, index) in transactions" :transaction="transaction"
+                        :index="index" :transaction-type="transaction.transactionType" :key="transaction.id" :uri="uri"
+                        :are-they-sales="areTheySales">
+                    </transaction-list-item>
+                </transition-group>
+                <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId"
+                    ref="infiniteLoading"></infinite-loading>
+            </table>
+        </div>
     </div>
 </template>
 <script>

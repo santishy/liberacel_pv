@@ -1,21 +1,19 @@
 <template>
-    <div v-if="params" class="overflow-x-auto relative max-h-80 overflow-y-auto w-full mx-auto rounded shadow-lg bg-white">
-        <table class="
-                w-full table-auto text-sm text-center text-gray-500
-            ">
-            <thead class="text-xs font-mono border-b-2 border-gray-100 text-gray-700 uppercase ">
-                <tr>
-                    <th class="py-1 px-2">Nota</th>
-                    <th class="py-1 px-2">Usuario</th>
-                    <th class="py-1 px-2">Fecha</th>
-                    <th class="py-1 px-2">Descripción</th>
-                    <th class="py-1 px-2">Precio</th>
-                    <th class="py-1 px-2">Cantidad</th>
-                    <th class="py-1 px-2">Subtotal</th>
-                    <th class="py-1 px-2">
+    <div v-if="params" class="table-container-responsive">
+        <table class="report-table">
+            <thead class="report-table-thead">
+                <tr class="bg-green-200">
+                    <th class="py-2 px-2">Nota</th>
+                    <th class="py-2 px-2">Usuario</th>
+                    <th class="py-2 px-2">Fecha</th>
+                    <th class="py-2 px-2">Descripción</th>
+                    <th class="py-2 px-2">Precio</th>
+                    <th class="py-2 px-2">Cantidad</th>
+                    <th class="py-2 px-2">Subtotal</th>
+                    <th class="py-2 px-2">
                         Total Venta Completa
                     </th>
-                    <th class="py-1 px-2 text-left sm:text-center" width="110px">
+                    <th class="py-2 px-2 text-left sm:text-center" width="110px">
                         Actions
                     </th>
                 </tr>

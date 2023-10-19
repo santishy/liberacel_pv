@@ -3,7 +3,7 @@
         <toggle-component class="col-span-1 mr-2 mb-4"></toggle-component>
         <div class="flex justify-center flex-wrap items-center w-full">
             <div class="w-full flex flex-wrap justify-center gap-4  ">
-                <div class="p-1 border bg-sky-300 rounded text-slate-700 font-semibold px-3">
+                <div class="p-1 border bg-orange-100 rounded text-slate-700 font-mono px-3">
                     <span>Reporte por rango</span>
                     <date-picker @change="getReport(range, 'betweenDates')"
                         placeholder="Da click para eligir el rango de fechas" :lang="lang" value-type="YYYY-MM-DD"

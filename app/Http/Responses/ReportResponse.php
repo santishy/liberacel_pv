@@ -22,18 +22,15 @@ class ReportResponse implements Responsable
         $className = class_basename($this->model);
         if ($request->isFastSale) {
             $data = [
-                'data' =>  new FastSaleCollection($transactions->paginate(50)),
+                'data' =>  new FastSaleCollection($transactions->paginate(25)),
             ];
         } else {
             $data = [
                 'data' =>  TransactionResource::collection(
-                    $transactions->paginate(10)
+                    $transactions->paginate(25)
                 ),
             ];
         }
-
-
-
 
         if (request('page') == 1) {
             $data['total'] = number_format($transactions->sum('total'), 2);

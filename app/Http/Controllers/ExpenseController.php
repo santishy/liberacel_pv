@@ -16,8 +16,16 @@ class ExpenseController extends Controller
     public function index()
     {
         $this->authorize('viewAny', new Expense);
-        if (request()->wantsJson())
-            return ExpenseResource::collection(Expense::paginate(5));
+        if (request()->wantsJson()) {
+            $expenses = Expense::applyFilters();
+            $data = [
+                "data" => ExpenseResource::collection($expenses->paginate(25))
+            ];
+            if (request('page') == 1) {
+                $data['total'] = $expenses->sum('amount');
+            }
+            return response()->json($data);
+        }
         return view('expenses.index');
     }
 

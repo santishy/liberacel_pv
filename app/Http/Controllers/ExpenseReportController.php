@@ -11,7 +11,14 @@ class ExpenseReportController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            return ExpenseResource::collection(Expense::applyFilters()->paginate(25));
+            $expenses = Expense::applyFilters();
+            $data = [
+                "data" => ExpenseResource::collection($expenses->paginate(25))
+            ];
+            if (request('page') == 1) {
+                $data['total'] = $expenses->sum('amount');
+            }
+            return response()->json($data);
         }
         return view('reports.expenses.index');
     }

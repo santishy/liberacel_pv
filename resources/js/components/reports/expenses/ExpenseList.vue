@@ -1,12 +1,12 @@
 <template>
-    <div class="shadow-sm bg-white">
-        <table v-if="params" class="table-auto w-full">
-            <thead class="bg-blue-700">
-                <tr class="text-white font-extralight">
-                    <th class="px-1 py-2">FECHA</th>
-                    <th class="px-1 py-2">CONCEPTO</th>
-                    <th class="px-1 py-2">IMPORTE</th>
-                    <th class="px-1 py-2">ACCIONES</th>
+    <div class="table-container-responsive">
+        <table v-if="params" class="report-table">
+            <thead class="report-table-thead">
+                <tr class="bg-green-200">
+                    <th class="py-2 px-2">FECHA</th>
+                    <th class="py-2 px-2">CONCEPTO</th>
+                    <th class="py-2 px-2">IMPORTE</th>
+                    <th class="py-2 px-2">ACCIONES</th>
                 </tr>
             </thead>
 
@@ -74,6 +74,7 @@ export default {
                     }
                 })
                 .then(res => {
+                    console.log({ res })
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {

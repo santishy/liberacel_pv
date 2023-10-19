@@ -1,15 +1,15 @@
 <template>
-    <div class="container w-full mx-auto mt-4 flex justify-center">
-        <table v-if="params" class="table-auto bg-white  text-center w-full">
-            <thead>
-                <tr class="bg-purple-200">
-                    <th class="px-4 py-2">Fecha</th>
-                    <th class="px-4 py-2">ID Credito</th>
-                    <th class="px-4 py-2">Monto</th>
-                    <th class="px-4 py-2">Cliente</th>
-                    <th class="px-4 py-2">Monto Pagado</th>
-                    <th class="px-4 py-2">Saldo</th>
-                    <th class="px-4 py-2">Acciones</th>
+    <div class="table-container-responsive">
+        <table v-if="params" class="report-table">
+            <thead class="report-table-responsive">
+                <tr class="bg-green-200">
+                    <th class="py-2 px-2">Fecha</th>
+                    <th class="py-2 px-2">ID Credito</th>
+                    <th class="py-2 px-2">Monto</th>
+                    <th class="py-2 px-2">Cliente</th>
+                    <th class="py-2 px-2">Monto Pagado</th>
+                    <th class="py-2 px-2">Saldo</th>
+                    <th class="py-2 px-2">Acciones</th>
                 </tr>
             </thead>
 
