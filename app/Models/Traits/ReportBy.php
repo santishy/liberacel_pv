@@ -73,4 +73,8 @@ trait ReportBy
         $query->where('id', $id)
             ->where('status', 'completed');
     }
+    public function scopeIsCredit(Builder $query, $value)
+    {
+        $query->where('is_credit', $value);
+    }
 }

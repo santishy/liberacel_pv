@@ -66,6 +66,7 @@ export default {
             searchTheWarehouses: {
                 "filter[byWarehouses]": null
             },
+
             infiniteId: 1
         };
     },
@@ -81,17 +82,16 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log('es aqui')
+
             axios
                 .get(this.uri, {
                     params: {
                         page: this.page,
-                        ..._.merge(this.params, this.getRelathionships),
+                        ..._.merge(this.getParams, this.getRelathionships),
                         ...this.searchTheWarehouses
                     }
                 })
                 .then(res => {
-
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
@@ -162,6 +162,15 @@ export default {
         areTheySales() {
             return this.name.toUpperCase() == "VENTAS";
         },
+        getParams() {
+            if (this.areTheySales) {
+                return {
+                    ...this.params,
+                    "filter[isCredit]": false
+                }
+            }
+            return this.params;
+        }
     }
 };
 </script>

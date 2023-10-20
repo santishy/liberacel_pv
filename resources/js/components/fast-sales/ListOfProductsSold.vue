@@ -71,6 +71,7 @@ export default {
                 .get(this.uri, {
                     params: {
                         isFastSale: true,
+                        "filter[isCredit]": false, //me hace falta cambiar filtro aqui
                         page: this.page,
                         ..._.merge(this.params, this.getRelationships),
                     },
