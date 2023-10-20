@@ -4,10 +4,13 @@ module.exports = {
         // purgeLayersByDefault: true,
     },
     content: [
-        './resources/js/components/*.vue',
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+        // './resources/js/components/*.vue',
+        // './resources/**/*.blade.php',
+        //'./resources/**/*.js',
+        // './resources/**/*.vue',
     ],
     theme: {
         extend: {},
