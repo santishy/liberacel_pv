@@ -1,5 +1,5 @@
 <template>
-    <form class="bg-white w-96 mb-4 rounded-sm py-2 flex flex-nowrap items-center px-4 gap-4" @submit.prevent="">
+    <form class="bg-white  w-96  rounded-sm py-2 flex flex-nowrap items-center px-4 gap-4" @submit.prevent="">
         <label class="text-slate-600" for="phone_number">Buscar</label>
         <input v-model="phoneNumber" @keyup.enter.prevent="submit" placeholder="3531004304"
             class="bg-slate-100 w-full placeholder:text-slate-400 px-2 py-1 rounded-sm" />

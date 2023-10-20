@@ -54,6 +54,7 @@ class Payment extends Model
     {
         $newTotal = $credit->total_amount - $this->amount;
         if ($newTotal < 0) {
+            $this->amount = $credit->total_amount;
             $credit->total_amount = 0;
         } else {
             $credit->total_amount -= $this->amount;

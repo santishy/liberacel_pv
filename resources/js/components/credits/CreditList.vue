@@ -17,7 +17,7 @@
                 </credit-list-item>
             </tbody>
         </table>
-        <infinite-loading @infinite="getCredits"></infinite-loading>
+        <infinite-loading @infinite="getCredits" :identifier="infiniteId"></infinite-loading>
     </div>
 </template>
 <script>
@@ -27,13 +27,17 @@ export default {
         return {
             credits: [],
             page: 1,
-
+            infiniteId: 1,
+            params: {
+                "filter[withStatus]": "pending",
+            }
         };
     },
     components: {
         CreditListItem,
     },
     created() {
+        EventBus.$on("filter-credits", this.changeParams)
         EventBus.$on('fetch-client-credit', (data) => {
             if (data?.data) {
                 data = data.data
@@ -62,9 +66,9 @@ export default {
                 .get("/credits", {
                     params: {
                         page: this.page,
-                        "filter[withStatus]": "pending",
+                        ...this.params
                     }
-                },)
+                })
                 .then((res) => {
                     if (res.data.data.length) {
                         this.page += 1;
@@ -78,6 +82,12 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        changeParams(value) {
+            this.params = value;
+            this.page = 1;
+            this.credits = [];
+            this.infiniteId += 1;
         },
         findIndexById(id) {
             return this.credits.findIndex((credit) => credit.id === id);
