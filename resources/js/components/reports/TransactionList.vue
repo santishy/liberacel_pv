@@ -87,7 +87,7 @@ export default {
                 .get(this.uri, {
                     params: {
                         page: this.page,
-                        ..._.merge(this.getParams, this.getRelathionships),
+                        ..._.merge(this.getParams, this.getRelationships),
                         ...this.searchTheWarehouses
                     }
                 })
@@ -100,7 +100,6 @@ export default {
                         this.transactions.push(...res.data.data);
                         $state.loaded()
                     } else {
-                        console.log('entra aki tambien?')
                         $state.complete();
                     }
                 });
@@ -152,7 +151,7 @@ export default {
     },
     computed: {
         ...mapState(["modalDataConfirm"]),
-        getRelathionships() {
+        getRelationships() {
             if (this.name.toUpperCase() == "VENTAS") {
                 return { include: "user,client" };
             } else if (this.name.toUpperCase() == "COMPRAS") {

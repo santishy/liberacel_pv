@@ -48,4 +48,8 @@ class Credit extends Model
             $clientQuery->where('phone_number',  $phoneNumber);
         });
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

@@ -7,7 +7,7 @@
         <credit-list />
         <information-component v-show="Object.keys(credit).length">
             <template slot="title">
-                Pago a credito
+                {{ title }}
             </template>
             <payment-form v-if="Object.keys(credit).length" :credit="credit" />
         </information-component>
@@ -23,7 +23,8 @@ import SearchByPhoneNumber from './clients/SearchByPhoneNumber.vue';
 export default {
     data() {
         return {
-            credit: {}
+            credit: {},
+            title: '',
         }
     },
     components: {
@@ -36,12 +37,22 @@ export default {
     },
     created() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
+        EventBus.$on('show-credit-payments', this.showCreditPayments)
     },
     methods: {
         openModalCredit(credit) {
             Vue.set(this.$data, 'credit', credit);
-            //this.credit = credit;
+            this.title = "Crear Pago"
             EventBus.$emit("open-modal", true);
+        },
+        async showCreditPayments(credit) {
+            try {
+                this.title = "Lista de Pagos"
+                const res = await axios.get(`/credit/${credit.id}/payments`)
+
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }
