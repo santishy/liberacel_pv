@@ -1,7 +1,7 @@
 <template>
-    <div class="table-container-responsive">
+    <div class="table-container-responsive ">
         <table class="report-table">
-            <thead :class="" class="report-table-thead">
+            <thead class="report-table-thead">
                 <tr class="bg-green-200">
                     <th class="py-2 px-2 ">Fecha</th>
                     <th class="px-2 py-2">Monto</th>
@@ -58,12 +58,20 @@ export default {
                     }
                 });
         },
-        changeParams(value) {
+        changeParams() {
             // this.params = value;
             this.page = 1;
             this.payments = [];
             this.infiniteId += 1;
         },
     },
+    watch: {
+        credit: {
+            handler(newCredit, oldCredit) {
+                this.changeParams();
+            },
+            deep: true
+        }
+    }
 };
 </script>
