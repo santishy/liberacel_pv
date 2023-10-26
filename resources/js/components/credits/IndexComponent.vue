@@ -9,7 +9,8 @@
             <template slot="title">
                 {{ title }}
             </template>
-            <payment-form v-if="Object.keys(credit).length" :credit="credit" />
+            <component :is="selectedComponent" v-if="Object.keys(credit).length" :credit="credit" />
+            <!-- <payment-form v-if="Object.keys(credit).length" :credit="credit" /> -->
         </information-component>
     </nav-component>
 </template>
@@ -17,6 +18,7 @@
 import CreditList from './CreditList.vue';
 import StatusFilter from './StatusFilter.vue'
 import NavComponent from '../NavComponent.vue';
+import CreditPayments from './payments/CreditPayments.vue';
 import PaymentForm from '../payments/PaymentForm.vue';
 import InformationComponent from '../modals/InformationComponent.vue';
 import SearchByPhoneNumber from './clients/SearchByPhoneNumber.vue';
@@ -25,6 +27,7 @@ export default {
         return {
             credit: {},
             title: '',
+            selectedComponent: ''
         }
     },
     components: {
@@ -33,7 +36,8 @@ export default {
         InformationComponent,
         PaymentForm,
         SearchByPhoneNumber,
-        StatusFilter
+        StatusFilter,
+        CreditPayments,
     },
     created() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
@@ -43,16 +47,14 @@ export default {
         openModalCredit(credit) {
             Vue.set(this.$data, 'credit', credit);
             this.title = "Crear Pago"
+            this.selectedComponent = "payment-form"
             EventBus.$emit("open-modal", true);
         },
-        async showCreditPayments(credit) {
-            try {
-                this.title = "Lista de Pagos"
-                const res = await axios.get(`/credit/${credit.id}/payments`)
-
-            } catch (error) {
-                console.log(error)
-            }
+        showCreditPayments(credit) {
+            Vue.set(this.$data, 'credit', credit);
+            this.title = "Lista de Pagos"
+            this.selectedComponent = "credit-payments"
+            EventBus.$emit("open-modal", true);
         }
     }
 }
