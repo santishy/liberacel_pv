@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SavePaymentRequest;
+use App\Http\Resources\CreditResource;
 use App\Http\Resources\PaymentResource;
 use App\Models\Credit;
 use App\Models\Inventory;
@@ -52,6 +53,30 @@ class PaymentsController extends Controller
             throw ValidationException::withMessages([
                 'db' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function update(Request $request, Payment $payment)
+    {
+        $data = $request->validate([
+            "amount" => ['required', 'min:1', 'numeric']
+        ]);
+        DB::beginTransaction();
+        try {
+            $payment->increaseCreditByOldPayment();
+            $payment->update($data);
+            $updatedCredit = $payment->handleCredit();
+            DB::commit();
+            return response()->json([
+                "payment" => PaymentResource::make($payment),
+                "credit" => CreditResource::make($updatedCredit),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                "error" => "An error has ocurred",
+                "exception" => $e->getMessage()
+            ], 500);
         }
     }
 }

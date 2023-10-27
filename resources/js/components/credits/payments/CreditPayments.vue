@@ -1,6 +1,6 @@
 <template>
     <div>
-        <payment-list class="bg-green-100 !shadow-none" :credit="credit"></payment-list>
+        <payment-list class="!bg-green-100 !shadow-none" :credit="credit"></payment-list>
     </div>
 </template>
 

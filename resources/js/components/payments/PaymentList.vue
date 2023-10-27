@@ -28,6 +28,15 @@ export default {
             default: () => { }
         }
     },
+    created() {
+        EventBus.$on('updated-payment', res => {
+            const { index, data } = res;
+            console.log({ index })
+            if (index) {
+                this.payments[index] = data.payment;
+            }
+        })
+    },
     data() {
         return {
             payments: [],
@@ -46,7 +55,6 @@ export default {
                     }
                 })
                 .then(res => {
-
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.payments.length) {
