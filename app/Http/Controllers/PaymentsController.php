@@ -69,7 +69,7 @@ class PaymentsController extends Controller
             DB::commit();
             return response()->json([
                 "payment" => PaymentResource::make($payment),
-                "credit" => CreditResource::make($updatedCredit),
+                "credit" => CreditResource::make($updatedCredit->load('client')),
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

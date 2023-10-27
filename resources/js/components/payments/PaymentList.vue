@@ -26,14 +26,19 @@ export default {
         credit: {
             type: Object,
             default: () => { }
+        },
+        index: {
+            type: Number,
+            default: null
         }
     },
     created() {
         EventBus.$on('updated-payment', res => {
             const { index, data } = res;
-            console.log({ index })
-            if (index) {
-                this.payments[index] = data.payment;
+
+            if (index >= 0) {
+                console.log({ index })
+                Vue.set(this.payments, index, data.payment)
             }
         })
     },

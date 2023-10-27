@@ -37,6 +37,7 @@ export default {
         CreditListItem,
     },
     created() {
+        EventBus.$on('updated-payment', this.updateCreditList)
         EventBus.$on("filter-credits", this.changeParams)
         EventBus.$on('fetch-client-credit', (data) => {
             if (data?.data) {
@@ -91,6 +92,16 @@ export default {
         },
         findIndexById(id) {
             return this.credits.findIndex((credit) => credit.id === id);
+        },
+        updateCreditList(res) {
+            console.log("hola entro aki")
+            const { data } = res;
+            if (data) {
+                const index = this.findIndexById(data.payment.id)
+                Vue.set(this.credits, index, data.credit)
+            } else {
+                throw new Error("data object does not exist.")
+            }
         }
     },
     computed: {

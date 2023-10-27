@@ -10,7 +10,6 @@
                 {{ title }}
             </template>
             <component :is="selectedComponent" v-if="Object.keys(credit).length" :credit="credit" />
-            <!-- <payment-form v-if="Object.keys(credit).length" :credit="credit" /> -->
         </information-component>
     </nav-component>
 </template>
@@ -42,6 +41,7 @@ export default {
     created() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
         EventBus.$on('show-credit-payments', this.showCreditPayments)
+        EventBus.$on('updated-payment', this.updateCredit)
     },
     methods: {
         openModalCredit(credit) {
@@ -55,6 +55,10 @@ export default {
             this.title = "Lista de Pagos"
             this.selectedComponent = "credit-payments"
             EventBus.$emit("open-modal", true);
+        },
+        updateCredit(res) {
+            const { data } = res;
+            Vue.set(this.$data, 'credit', data.credit)
         }
     }
 }
