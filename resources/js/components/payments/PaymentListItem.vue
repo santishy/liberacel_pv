@@ -41,9 +41,11 @@ export default {
     methods: {
         showInput() {
             this.show = !this.show;
-            this.$nextTick(() => {
-                this.$refs[`amount_${this.index}`].focus();
-            });
+            if (!this.show) {
+                this.$nextTick(() => {
+                    this.$refs[`amount_${this.index}`].focus();
+                });
+            }
         },
         async updatePayment() {
             try {
