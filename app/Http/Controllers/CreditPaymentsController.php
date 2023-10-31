@@ -16,7 +16,9 @@ class CreditPaymentsController extends Controller
     {
         return response()->json([
             "credit" => CreditResource::make($credit),
-            "payments" => PaymentResource::collection($credit->payments()->paginate(5))
+            "payments" => PaymentResource::collection(
+                $credit->payments()->where('status', true)->orderBy('id', 'desc')->paginate(5)
+            )
         ]);
     }
 }

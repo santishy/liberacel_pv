@@ -7,7 +7,7 @@
             <input type="text" :ref="`amount_${index}`" @keydown.enter="updatePayment" v-model="amount"
                 class="form-text-input !p-1" />
         </td>
-        <td class="py-1 px-2">
+        <td class="py-1 px-2 flex flex-wrap justify-center items-center gap-2">
             <button @click="showInput" class="text-sky-500 font-bold">
                 <svg fill="none" stroke="currentColor" class="h-4 w-4" stroke-width="1.5" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -16,11 +16,16 @@
                     </path>
                 </svg>
             </button>
+            <button @click="deletePayment" class="text-red-500 font-bold">
+                <trash-icon></trash-icon>
+            </button>
         </td>
     </tr>
 </template>
 <script>
 
+import axios from "axios";
+import TrashIcon from "../icons/TrashIcon.vue"
 export default {
     props: {
         payment: {
@@ -32,6 +37,7 @@ export default {
         },
 
     },
+    components: { TrashIcon },
     data() {
         return {
             show: true,
@@ -45,6 +51,19 @@ export default {
                 this.$nextTick(() => {
                     this.$refs[`amount_${this.index}`].focus();
                 });
+            }
+        },
+        async deletePayment() {
+            try {
+                const res = await axios.delete(`/payments/${this.payment.id}`);
+
+                if (res.data) {
+                    EventBus.$emit('updated-payment',
+                        { index: this.index, data: res.data }
+                    );
+                }
+            } catch (error) {
+                console.log(error)
             }
         },
         async updatePayment() {

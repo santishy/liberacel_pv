@@ -72,11 +72,31 @@ class PaymentsController extends Controller
                 "credit" => CreditResource::make($updatedCredit->load('client')),
             ]);
         } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                "error" => "An error has ocurred",
-                "exception" => $e->getMessage()
-            ], 500);
+            $this->handleErrorWithRollback($e);
         }
+    }
+    public function destroy(Payment $payment)
+    {
+        DB::beginTransaction();
+        try {
+            $payment->update(["status" => 0]);
+            $updatedCredit = $payment->handleCredit();
+            return response()->json([
+                "payment" => PaymentResource::make($payment),
+                "credit" => CreditResource::make($updatedCredit),
+            ]);
+            DB::commit();
+            return response()->json(["id" => $payment->id], 202);
+        } catch (\Exception $e) {
+            $this->handleErrorWithRollback($e);
+        }
+    }
+    private function handleErrorWithRollback($e)
+    {
+        DB::rollBack();
+        return response()->json([
+            "error" => "An error has ocurred",
+            "exception" => $e->getMessage()
+        ], 500);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,6 +54,9 @@ class Payment extends Model
     }
     public function IncreaseTotalCreditAndDecreaseAmountPaid($credit)
     {
+        if (Str::upper($credit->status) === "PAID") {
+            $credit->status = "pending";
+        }
         $credit->total_amount += $this->amount;
         $credit->amount_paid  -= $this->amount;
     }

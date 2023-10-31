@@ -21,6 +21,7 @@ class Credit extends Model
         $credit = Credit::where('status', '!=', 'cancelled')
             ->where('status', '!=', 'paid')
             ->where('client_id', $client_id)
+            ->orderBy('id', 'desc')
             ->first();
 
         return $credit ?? Credit::create(['client_id' => $client_id]);

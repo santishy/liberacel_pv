@@ -35,12 +35,15 @@ export default {
     created() {
         EventBus.$on('updated-payment', res => {
             const { index, data } = res;
-
             if (index >= 0) {
-                console.log({ index })
+                if (!data.payment.status) {
+                    this.payments.slice(index, 1);
+                    return;
+                }
                 Vue.set(this.payments, index, data.payment)
             }
-        })
+        });
+
     },
     data() {
         return {
