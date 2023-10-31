@@ -81,12 +81,12 @@ class PaymentsController extends Controller
         try {
             $payment->update(["status" => 0]);
             $updatedCredit = $payment->handleCredit();
+
+            DB::commit();
             return response()->json([
                 "payment" => PaymentResource::make($payment),
-                "credit" => CreditResource::make($updatedCredit),
-            ]);
-            DB::commit();
-            return response()->json(["id" => $payment->id], 202);
+                "credit" => CreditResource::make($updatedCredit->load('client')),
+            ], 202);
         } catch (\Exception $e) {
             $this->handleErrorWithRollback($e);
         }
