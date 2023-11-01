@@ -94,11 +94,19 @@ export default {
             return this.credits.findIndex((credit) => credit.id === id);
         },
         updateCreditList(res) {
-            console.log("hola entro aki")
             const { data } = res;
             if (data) {
-                const index = this.findIndexById(data.payment.id)
-                Vue.set(this.credits, index, data.credit)
+                const index = this.findIndexById(data.payment.credit_id)
+                if (index != -1) {
+                    const credit = this.credits[index];
+                    /**
+             *  aqui hago ...this.credit, para q m conserve el cliente y no volverlo a cargar
+             * */
+                    Vue.set(this.credits, index, {
+                        ...credit,
+                        ...data.payment.credit
+                    })
+                }
             } else {
                 throw new Error("data object does not exist.")
             }

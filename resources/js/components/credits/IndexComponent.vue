@@ -58,7 +58,13 @@ export default {
         },
         updateCredit(res) {
             const { data } = res;
-            Vue.set(this.$data, 'credit', data.credit)
+            /**
+             *  aqui hago ...this.credit, para q m conserve el cliente y no volverlo a cargar
+             * */
+            Vue.set(this.$data, 'credit', {
+                ...this.credit,
+                ...data.payment.credit
+            })
         }
     }
 }

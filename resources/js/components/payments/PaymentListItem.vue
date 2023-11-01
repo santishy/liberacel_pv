@@ -8,7 +8,7 @@
                 class="form-text-input !p-1" />
         </td>
         <td class="py-1 px-2 flex flex-wrap justify-center items-center gap-2">
-            <button @click="showInput" class="text-sky-500 font-bold">
+            <button @click.prevent="showInput" class="text-sky-500 font-bold">
                 <svg fill="none" stroke="currentColor" class="h-4 w-4" stroke-width="1.5" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -16,7 +16,7 @@
                     </path>
                 </svg>
             </button>
-            <button @click="deletePayment" class="text-red-500 font-bold">
+            <button @click.prevent="deletePayment" class="text-red-500 font-bold">
                 <trash-icon></trash-icon>
             </button>
         </td>
@@ -58,9 +58,9 @@ export default {
                 const res = await axios.delete(`/payments/${this.payment.id}`);
 
                 if (res.data) {
-                    EventBus.$emit('updated-payment',
-                        { index: this.index, data: res.data }
-                    );
+                    EventBus.$emit(
+                        "updated-payment", { data: res.data, index: this.index }
+                    )
                 }
             } catch (error) {
                 console.log(error)

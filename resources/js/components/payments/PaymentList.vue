@@ -1,5 +1,5 @@
 <template>
-    <div class="table-container-responsive ">
+    <div class="table-container-responsive">
         <table class="report-table">
             <thead class="report-table-thead">
                 <tr class="bg-green-200">
@@ -37,7 +37,8 @@ export default {
             const { index, data } = res;
             if (index >= 0) {
                 if (!data.payment.status) {
-                    this.payments.slice(index, 1);
+
+                    this.payments.splice(index, 1);
                     return;
                 }
                 Vue.set(this.payments, index, data.payment)
@@ -84,7 +85,11 @@ export default {
     watch: {
         credit: {
             handler(newCredit, oldCredit) {
-                this.changeParams();
+
+                if (newCredit.id != oldCredit.id) {
+                    this.changeParams();
+                }
+
             },
             deep: true
         }

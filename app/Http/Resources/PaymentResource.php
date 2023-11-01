@@ -18,6 +18,8 @@ class PaymentResource extends JsonResource
             "id" => $this->resource->id,
             "created_at" => $this->resource->created_at->format('Y-m-d H:i:s'),
             "amount" => $this->resource->amount,
+            "status" => $this->resource->status,
+            "credit_id" => $this->resource->credit_id,
             "currency_amount" => "$" . number_format($this->resource->amount, 2),
             "client" => ClientResource::make($this->whenLoaded('client')),
             "credit" => CreditResource::make($this->whenLoaded('credit')),

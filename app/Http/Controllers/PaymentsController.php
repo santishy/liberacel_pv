@@ -45,8 +45,7 @@ class PaymentsController extends Controller
             $updatedCredit = $payment->handleCredit();
             DB::commit();
             return response([
-                'payment' => $payment,
-                'credit' => $updatedCredit
+                'payment' => PaymentResource::make($payment),
             ], 201);
         } catch (\Exception $e) {
             DB::rollback();
@@ -69,7 +68,8 @@ class PaymentsController extends Controller
             DB::commit();
             return response()->json([
                 "payment" => PaymentResource::make($payment),
-                "credit" => CreditResource::make($updatedCredit->load('client')),
+
+                //"credit" => CreditResource::make($updatedCredit->load('client')),
             ]);
         } catch (\Exception $e) {
             $this->handleErrorWithRollback($e);
@@ -85,7 +85,7 @@ class PaymentsController extends Controller
             DB::commit();
             return response()->json([
                 "payment" => PaymentResource::make($payment),
-                "credit" => CreditResource::make($updatedCredit->load('client')),
+                //"credit" => CreditResource::make($updatedCredit->load('client')),
             ], 202);
         } catch (\Exception $e) {
             $this->handleErrorWithRollback($e);

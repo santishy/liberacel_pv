@@ -17,7 +17,7 @@
         </div>
         <div class="border-b border-t py-1 border-slate-400">
             <label class="form-label">Monto</label>
-            <input type="number" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-300"
+            <input type="text" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-300"
                 placeholder="Monto" autocomplete="off" />
         </div>
         <div class="w-full py-1 ">
@@ -52,9 +52,9 @@ export default {
                     this.form.credit_id = this.credit.id;
                 }
                 const res = await axios.post('payments', this.form)
-                if (res?.data.credit) {
-                    const { credit } = res.data;
-                    EventBus.$emit('saved-payment', credit)
+                if (res?.data.payment.credit) {
+                    const { payment } = res.data;
+                    EventBus.$emit('saved-payment', payment.credit)
                     EventBus.$emit("open-modal", false);
                 }
             } catch (err) {

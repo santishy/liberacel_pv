@@ -38,7 +38,6 @@ class Payment extends Model
         if ($this->checkIfBalanceIsZero($credit)) {
             $credit->status = "paid";
         }
-
         $credit->save();
 
         return $credit;
