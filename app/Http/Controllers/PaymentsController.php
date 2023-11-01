@@ -37,9 +37,11 @@ class PaymentsController extends Controller
     {
         $request->merge(['status' => true]);
         $data = $request->all();
-
+        $credit = Credit::find(request()->credit_id);
+        if ($credit->total_amount == 0) {
+            return response([], 204);
+        }
         DB::beginTransaction();
-
         try {
             $payment = Payment::create($data);
             $updatedCredit = $payment->handleCredit();
@@ -80,8 +82,8 @@ class PaymentsController extends Controller
         DB::beginTransaction();
         try {
             $payment->update(["status" => 0]);
+            $payment->fresh();
             $updatedCredit = $payment->handleCredit();
-
             DB::commit();
             return response()->json([
                 "payment" => PaymentResource::make($payment),
