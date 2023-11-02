@@ -56,6 +56,7 @@ export default {
                     const { payment } = res.data;
                     EventBus.$emit('saved-payment', payment.credit)
                     EventBus.$emit("open-modal", false);
+                    window.open(`/payments-pdf/${res.data.payment.id}`, "_blank")
                 }
             } catch (err) {
                 console.log(err)

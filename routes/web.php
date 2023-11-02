@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
+use App\Http\Controllers\{BarcodeController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -218,6 +218,12 @@ Route::post('payments', [PaymentsController::class, 'store'])->middleware('auth'
 Route::get('payments', [PaymentsController::class, 'index'])->middleware('auth');
 Route::put('payments/{payment}', [PaymentsController::class, 'update'])->middleware('auth');
 Route::delete('payments/{payment}', [PaymentsController::class, 'destroy'])->middleware('auth');
+
+/**
+ * Payment PDF
+ */
+Route::get('payments-pdf/{payment}', PaymentPDFController::class)->middleware('auth');
+
 //credit - payments
 Route::get('credit/{credit}/payments', [CreditPaymentsController::class, 'show'])->middleware('auth');
 

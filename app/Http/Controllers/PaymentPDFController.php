@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentResource;
 use App\Models\Payment;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -11,13 +13,23 @@ class PaymentPDFController extends Controller
     function __invoke(Payment $payment)
     {
         $now = $payment->created_at->format('Y-m-d');
+        $payment = PaymentResource::make(
+            $payment->load(
+                'client',
+                'credit'
+            )
+        );
 
-
+        $ticketConfig = Ticket::first();
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
 
         $pdf = PDF::loadView(
-            'tickets.pdf',
-            compact('payment', 'now', 'products', 'ticketConfig', 'typeOfpayment')
+            'payments.pdf',
+            [
+                "now" => $now,
+                "payment" => json_encode($payment),
+                "ticketConfig" => $ticketConfig
+            ]
         )->setPaper(array(0, 0, 227.67, 2000));
 
         /**
@@ -29,10 +41,13 @@ class PaymentPDFController extends Controller
          * Se vuelve a mandar a crear el frame con la altura correspondiente al documento, de forma mas precisa y se manda pintar al final
          */
         $pdf = PDF::loadView(
-            'tickets.pdf',
-            compact('payment', 'now', 'products', 'ticketConfig', 'typeOfpayment')
+            'payments.pdf',
+            [
+                "now" => $now,
+                "payment" => json_encode($payment),
+                "ticketConfig" => $ticketConfig
+            ]
         )->setPaper(array(0, 0, 227.67, $height + 20));
-
         return $pdf->stream();
     }
 }
