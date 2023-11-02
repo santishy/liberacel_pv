@@ -36,11 +36,9 @@ class Payment extends Model
             $this->IncreaseTotalCreditAndDecreaseAmountPaid($credit);
         }
         if ($this->checkIfBalanceIsZero($credit)) {
-
             $credit->status = "paid";
         }
         $credit->save();
-
         return $credit;
     }
     function increaseCreditByOldPayment()

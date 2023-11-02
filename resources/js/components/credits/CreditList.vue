@@ -57,6 +57,7 @@ export default {
             }
             this.credits[index].total_amount = credit.total_amount;
             this.credits[index].amount_paid = credit.amount_paid;
+            this.credits[index].status = credit.status;
             this.credits[index].total_amount_formatted = this.formattedCurrency.format(this.credits[index].total_amount)
             this.credits[index].formatted_amount_paid = this.formattedCurrency.format(this.credits[index].amount_paid)
         })

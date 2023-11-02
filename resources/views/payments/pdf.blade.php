@@ -201,6 +201,7 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
         }
+        
     </style>
     <script type="text/javascript">
         document.querySelector('#fecha').style.background = 'blue';
@@ -214,7 +215,7 @@
 
         </div>
         <h1 class="text-xl text-center m-1 mb-0">{{ $ticketConfig->company }}</h1>
-        <div class="mb-4 ">
+        <div class="mb-2">
             <p class="mb-0 text-center  ">
                 <span>Tel: </span> {{ $ticketConfig->phone_number }}
             </p>
