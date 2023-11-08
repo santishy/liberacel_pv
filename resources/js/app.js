@@ -123,7 +123,7 @@ Vue.component('payment-list', require('./components/reports/payments/PaymentList
  * Reports
  */
 Vue.component('report-component', require('./components/reports/Index.vue').default);
-
+Vue.component('general-report', require('./components/reports/GeneralComponent.vue').default);
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
