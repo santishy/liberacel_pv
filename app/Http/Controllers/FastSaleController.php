@@ -21,7 +21,6 @@ class FastSaleController extends Controller
         if ($request->wantsJson()) {
             return new  ReportResponse(FastSale::query());
         }
-
         return view('fast-sales.index');
     }
 
