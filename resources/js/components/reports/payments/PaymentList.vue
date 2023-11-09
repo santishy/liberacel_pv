@@ -86,7 +86,6 @@ export default {
                         this.payments.push(...res.data.data);
                         $state.loaded()
                     } else {
-                        console.log('entra aki tambien?')
                         $state.complete();
                     }
                 });
