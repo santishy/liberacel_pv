@@ -1,5 +1,6 @@
 <template>
-    <div class="container mx-auto mt-4 flex justify-center w-full">
+    <!-- <div class="container mx-auto  flex justify-center w-full"> -->
+    <div>
         <information-component>
             <template slot="title">
                 Reportes

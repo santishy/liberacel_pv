@@ -74,7 +74,6 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log({ res })
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {

@@ -1105,6 +1105,14 @@ select {
   max-height: 20rem;
 }
 
+.max-h-96 {
+  max-height: 24rem;
+}
+
+.max-h-56 {
+  max-height: 14rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1494,6 +1502,10 @@ select {
 
 .overflow-y-hidden {
   overflow-y: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
 }
 
 .overflow-y-scroll {
