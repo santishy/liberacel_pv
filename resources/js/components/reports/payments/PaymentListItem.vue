@@ -23,18 +23,11 @@ export default {
         payment: {
             type: Object
         },
-        uri: {
-            type: String
-        },
         index: {
             type: Number
         },
 
     },
-    computed: {
-        getCustomerName() {
-            return this.transaction.client ? this.transaction.client.name : "Publico en general"
-        }
-    }
+
 };
 </script>

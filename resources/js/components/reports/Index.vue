@@ -19,7 +19,6 @@
         <div class="mt-4 max-w-6xl mx-auto">
             <slot></slot>
         </div>
-        <!-- <transaction-list :uri="uri" :name="name"> </transaction-list> -->
     </nav-component>
 </template>
 <script>

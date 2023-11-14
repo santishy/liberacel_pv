@@ -13,16 +13,17 @@ export const store = new Vuex.Store({
         ),
         purchaseStatus: "",
         user: {},
-        appName:'',
+        appName: '',
         auth: false,
         salePriceOption: sessionStorage.getItem("salePriceOption"),
         productsInTransaction: [],
-        queryType:null,
+        queryType: null,
         modalDataConfirm: {},
-        electronicMoney:null,
-        currentFastSale:{},
-        expenseMethodName:null,
-        currentExpense:null,
+        electronicMoney: null,
+        currentFastSale: {},
+        expenseMethodName: null,
+        isInGeneralReport: false,
+        currentExpense: null,
         purchaseVisibility:
             window.localStorage
                 .getItem("allow-to-buy-new-product")

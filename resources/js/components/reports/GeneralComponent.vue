@@ -1,25 +1,26 @@
 <template>
     <div class="flex flex-wrap flex-col gap-4">
-        <div class="payment-container max-h-56 overflow-hidden">
-            <div class="font-mono text-xl text-slate-600">Pagos</div>
+        <div class=" p-2 max-h-56 overflow-hidden">
+            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Pagos</div>
             <payment-list :uri="URIs[0]"></payment-list>
         </div>
-        <div class="sales-container max-h-56 overflow-hidden">
-            <div class="font-mono text-xl text-slate-600">Ventas Stock</div>
+        <div class="p-2 max-h-56 overflow-hidden">
+            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Ventas Stock</div>
             <transaction-list name="Ventas" :uri="URIs[2]"></transaction-list>
         </div>
-        <div class="express-sales-container max-h-56 overflow-hidden">
-            <div class="font-mono text-xl text-slate-600">Ventas Expres</div>
+        <div class="p-2 max-h-56 overflow-hidden">
+            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Ventas Expres</div>
             <list-of-products-sold :uri="URIs[3]"></list-of-products-sold>
         </div>
-        <div class="expenditure-container max-h-56 overflow-hidden">
-            <div class="font-mono text-xl text-slate-600">Egresos</div>
+        <div class=" p-2 expenditure-container max-h-56 overflow-hidden">
+            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Egresos</div>
             <expense-list :uri="URIs[1]"></expense-list>
         </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 
 export default {
     data() {
@@ -29,14 +30,20 @@ export default {
                 '/expenses/',
                 '/sales/',
                 '/fast-sales/'
-            ]
+            ],
+            expenses: [],
+            payments: [],
+            sales: [],
+            fastSales: []
         }
     },
     created() {
         EventBus.$on('set-parameters', this.getReports)
     },
     methods: {
+        ...mapMutations(["SET_IS_IN_GENERAL_REPORT"]),
         async getReports(params) {
+            this.SET_IS_IN_GENERAL_REPORT(true);
             const reports = this.URIs.map(
                 uri => {
                     if (uri === '/expenses/') {
@@ -48,8 +55,11 @@ export default {
                     return axios.get(uri, { params })
                 }
             );
-            const data = await Promise.all(reports);
-            console.log({ data })
+            const [payments, expenses, sales, fastSales] = await Promise.all(reports);
+            this.payments = payments;
+            this.expenses = expenses;
+            this.sales = sales;
+            this.fastSales = fastSales;
         }
     }
 }

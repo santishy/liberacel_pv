@@ -83,7 +83,6 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-
             axios
                 .get(this.uri, {
                     params: {
@@ -96,7 +95,6 @@ export default {
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
-                        console.log({ length: res.data.data.length })
                         this.page += 1;
                         this.transactions.push(...res.data.data);
                         $state.loaded()

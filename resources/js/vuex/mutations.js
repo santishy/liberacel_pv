@@ -66,19 +66,23 @@ const SET_PURCHASE_VISIBILITY = (state, value) => {
 const SET_CURRENT_FAST_SALE = (state, value) => {
     state.currentFastSale = value;
 }
-const SET_QUERY_TYPE = (state,value) => {
+const SET_QUERY_TYPE = (state, value) => {
     state.queryType = value;
 }
-const SET_CURRENT_EXPENSE = (state,value) => {
+const SET_CURRENT_EXPENSE = (state, value) => {
     state.currentExpense = value;
 }
-const SET_EXPENSE_METHOD_NAME = (state,value) => {
+const SET_EXPENSE_METHOD_NAME = (state, value) => {
     state.expenseMethodName = value;
+}
+const SET_IS_IN_GENERAL_REPORT = (state, value) => {
+    state.isInGeneralReport = value;
 }
 export default {
     SET_EXPENSE_METHOD_NAME,
     SET_CURRENT_EXPENSE,
     SET_CURRENT_FAST_SALE,
+    SET_IS_IN_GENERAL_REPORT,
     setProductsInPurchase,
     SET_USER,
     SET_QUERY_TYPE,

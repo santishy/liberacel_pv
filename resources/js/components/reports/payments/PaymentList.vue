@@ -12,10 +12,8 @@
                     <th class="py-2 px-2">Acciones</th>
                 </tr>
             </thead>
-
             <transition-group name="bounce" tag="tbody" @after-leave="afterLeave">
-                <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id"
-                    :uri="uri">
+                <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
             <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
@@ -27,6 +25,7 @@
 import Message from "../../alerts/Message.vue";
 import Agree from "../../alerts/Agree.vue";
 import PaymentListItem from "./PaymentListItem.vue";
+import { mapState } from 'vuex';
 export default {
     components: {
         PaymentListItem,
@@ -77,11 +76,9 @@ export default {
                     }
                 })
                 .then(res => {
-
                     if (this.page == 1)
                         EventBus.$emit("calculated-total", res.data.total);
                     if (res.data.data.length) {
-                        console.log({ length: res.data.data.length })
                         this.page += 1;
                         this.payments.push(...res.data.data);
                         $state.loaded()
@@ -104,6 +101,8 @@ export default {
             });
         },
     },
-
+    computed: {
+        ...mapState(["isInGeneralReport"])
+    }
 };
 </script>
