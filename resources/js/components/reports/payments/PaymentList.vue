@@ -16,7 +16,8 @@
                 <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
-            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+            <infinite-loading v-if="enableInfiniteLoading" @infinite="infiniteHandler" :identifier="infiniteId"
+                ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
 </template>
@@ -38,6 +39,10 @@ export default {
         },
         uri: {
             type: String
+        },
+        firstLoad: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -48,7 +53,8 @@ export default {
             searchTheWarehouses: {
                 "filter[byWarehouses]": null
             },
-            infiniteId: 1
+            infiniteId: 1,
+            enableInfiniteLoading: true,
         };
     },
     mounted() {
@@ -61,8 +67,22 @@ export default {
             ] = warehouses.toString();
         });
     },
+    watch: {
+        firstLoad: {
+            handler(newValue, oldValue) {
+                if (!Array.isArray(newValue)) {
+                    throw new Error("It is not an array")
+                }
+                if (newValue.length) {
+                    this.enableInfiniteLoading = false;
+                }
+            },
+            deep: true
+        }
+    },
     methods: {
         infiniteHandler($state) {
+            console.log('payments infiniteHandler')
             this.params = {
                 ...this.params,
                 "filter[status]": 1,
@@ -89,7 +109,7 @@ export default {
         },
         changeParams(value) {
             this.params = value;
-            this.page = 1;
+            this.page = this.firstLoad.length ? 2 : 1;
             this.payments = [];
             this.infiniteId += 1;
         },

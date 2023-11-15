@@ -66,7 +66,6 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log("Entro al infinite handler")
             axios
                 .get(this.uri, {
                     params: {

@@ -2,7 +2,7 @@
     <div class="flex flex-wrap flex-col gap-4">
         <div class=" p-2 max-h-56 overflow-hidden">
             <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Pagos</div>
-            <payment-list :uri="URIs[0]"></payment-list>
+            <payment-list :first-load="payments" :uri="URIs[0]"></payment-list>
         </div>
         <div class="p-2 max-h-56 overflow-hidden">
             <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Ventas Stock</div>
@@ -34,16 +34,17 @@ export default {
             expenses: [],
             payments: [],
             sales: [],
-            fastSales: []
+            fastSales: [],
+            // show: false,
         }
     },
     created() {
         EventBus.$on('set-parameters', this.getReports)
     },
     methods: {
-        ...mapMutations(["SET_IS_IN_GENERAL_REPORT"]),
+        // ...mapMutations(["SET_IS_IN_GENERAL_REPORT"]),
         async getReports(params) {
-            this.SET_IS_IN_GENERAL_REPORT(true);
+            // this.SET_IS_IN_GENERAL_REPORT(true);
             const reports = this.URIs.map(
                 uri => {
                     if (uri === '/expenses/') {
@@ -55,11 +56,13 @@ export default {
                     return axios.get(uri, { params })
                 }
             );
+
             const [payments, expenses, sales, fastSales] = await Promise.all(reports);
-            this.payments = payments;
-            this.expenses = expenses;
-            this.sales = sales;
-            this.fastSales = fastSales;
+
+            this.payments = payments.data.data;
+            this.expenses = expenses.data.data;
+            this.sales = sales.data.data;
+            this.fastSales = fastSales.data.data;
         }
     }
 }
