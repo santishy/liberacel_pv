@@ -16,7 +16,7 @@
                 <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
-            <infinite-loading v-if="!hasFirstLoad" @infinite="infiniteHandler" :identifier="infiniteId"
+            <infinite-loading v-if="!isInGeneralReport" @infinite="infiniteHandler" :identifier="infiniteId"
                 ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
@@ -98,6 +98,7 @@ export default {
                     if (res.data.data.length) {
                         this.page += 1;
                         this.payments.push(...res.data.data);
+                        this.isInGeneralReport = false;
                         $state.loaded()
                     } else {
                         $state.complete();
