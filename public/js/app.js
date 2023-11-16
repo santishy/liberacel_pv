@@ -8093,7 +8093,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -8102,14 +8101,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       payments: [],
       sales: [],
       fastSales: []
-      // show: false,
     };
   },
   created: function created() {
     EventBus.$on('set-parameters', this.getReports);
   },
   methods: {
-    // ...mapMutations(["SET_IS_IN_GENERAL_REPORT"]),
     getReports: function getReports(params) {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8118,7 +8115,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                // this.SET_IS_IN_GENERAL_REPORT(true);
                 reports = _this.URIs.map(function (uri) {
                   if (uri === '/expenses/') {
                     delete params['filter[status]'];
@@ -8670,10 +8666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _alerts_Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../alerts/Message.vue */ "./resources/js/components/alerts/Message.vue");
-/* harmony import */ var _alerts_Agree_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../alerts/Agree.vue */ "./resources/js/components/alerts/Agree.vue");
-/* harmony import */ var _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PaymentListItem.vue */ "./resources/js/components/reports/payments/PaymentListItem.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaymentListItem.vue */ "./resources/js/components/reports/payments/PaymentListItem.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -8684,14 +8677,9 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
-
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    PaymentListItem: _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Message: _alerts_Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Agree: _alerts_Agree_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PaymentListItem: _PaymentListItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     name: {
@@ -8705,6 +8693,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": function _default() {
         return [];
       }
+    },
+    isInGeneralReport: {
+      type: Boolean,
+      "default": function _default() {
+        return false;
+      }
     }
   },
   data: function data() {
@@ -8715,8 +8709,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       searchTheWarehouses: {
         "filter[byWarehouses]": null
       },
-      infiniteId: 1,
-      enableInfiniteLoading: true
+      infiniteId: 1
     };
   },
   mounted: function mounted() {
@@ -8734,9 +8727,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (!Array.isArray(newValue)) {
           throw new Error("It is not an array");
         }
-        if (newValue.length) {
-          this.enableInfiniteLoading = false;
-        }
+        this.payments = newValue;
       },
       deep: true
     }
@@ -8779,7 +8770,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)(["isInGeneralReport"]))
+  computed: {
+    hasFirstLoad: function hasFirstLoad() {
+      var _this4 = this;
+      var value;
+      this.$nextTick(function () {
+        value = _this4.firstLoad.length > 0;
+      });
+      return value;
+    }
+  }
 });
 
 /***/ }),
@@ -17909,6 +17909,7 @@ var render = function render() {
   }, [_vm._v("Pagos")]), _vm._v(" "), _c("payment-list", {
     attrs: {
       "first-load": _vm.payments,
+      "is-in-general-report": true,
       uri: _vm.URIs[0]
     }
   })], 1), _vm._v(" "), _c("div", {
@@ -18394,7 +18395,7 @@ var render = function render() {
         index: index
       }
     });
-  }), 1), _vm._v(" "), _vm.enableInfiniteLoading ? _c("infinite-loading", {
+  }), 1), _vm._v(" "), !_vm.hasFirstLoad ? _c("infinite-loading", {
     ref: "infiniteLoading",
     attrs: {
       identifier: _vm.infiniteId

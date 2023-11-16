@@ -16,22 +16,18 @@
                 <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
-            <infinite-loading v-if="enableInfiniteLoading" @infinite="infiniteHandler" :identifier="infiniteId"
+            <infinite-loading v-if="!hasFirstLoad" @infinite="infiniteHandler" :identifier="infiniteId"
                 ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
 </template>
 <script>
 
-import Message from "../../alerts/Message.vue";
-import Agree from "../../alerts/Agree.vue";
 import PaymentListItem from "./PaymentListItem.vue";
-import { mapState } from 'vuex';
+
 export default {
     components: {
         PaymentListItem,
-        Message,
-        Agree,
     },
     props: {
         name: {
@@ -43,6 +39,10 @@ export default {
         firstLoad: {
             type: Array,
             default: () => []
+        },
+        isInGeneralReport: {
+            type: Boolean,
+            default: () => false
         }
     },
     data() {
@@ -54,7 +54,6 @@ export default {
                 "filter[byWarehouses]": null
             },
             infiniteId: 1,
-            enableInfiniteLoading: true,
         };
     },
     mounted() {
@@ -73,9 +72,7 @@ export default {
                 if (!Array.isArray(newValue)) {
                     throw new Error("It is not an array")
                 }
-                if (newValue.length) {
-                    this.enableInfiniteLoading = false;
-                }
+                this.payments = newValue;
             },
             deep: true
         }
@@ -122,7 +119,13 @@ export default {
         },
     },
     computed: {
-        ...mapState(["isInGeneralReport"])
+        hasFirstLoad() {
+            let value;
+            this.$nextTick(() => {
+                value = this.firstLoad.length > 0;
+            });
+            return value;
+        }
     }
 };
 </script>
