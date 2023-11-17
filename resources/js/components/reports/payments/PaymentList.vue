@@ -17,7 +17,6 @@
                 <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
-
             <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
                 ref="infiniteLoading"></infinite-loading>
         </table>
