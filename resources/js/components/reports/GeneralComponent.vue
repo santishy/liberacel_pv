@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-wrap flex-col gap-4">
-        <div class=" p-2 max-h-56 overflow-hidden">
+    <div v-if="show" class="flex flex-wrap flex-col gap-4">
+        <div class=" p-2 max-h-56 overflow-y-hidden">
             <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Pagos</div>
             <payment-list :first-load="payments" :is-in-general-report="true" :uri="URIs[0]"></payment-list>
         </div>
@@ -34,6 +34,7 @@ export default {
             payments: [],
             sales: [],
             fastSales: [],
+            show: false
         }
     },
     created() {
@@ -52,12 +53,16 @@ export default {
                     return axios.get(uri, { params })
                 }
             );
-
-            const [payments, expenses, sales, fastSales] = await Promise.all(reports);
-            this.payments = payments.data.data;
-            this.expenses = expenses.data.data;
-            this.sales = sales.data.data;
-            this.fastSales = fastSales.data.data;
+            try {
+                const [payments, expenses, sales, fastSales] = await Promise.all(reports);
+                this.payments = payments.data.data;
+                this.expenses = expenses.data.data;
+                this.sales = sales.data.data;
+                this.fastSales = fastSales.data.data;
+                this.show = true;
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 }

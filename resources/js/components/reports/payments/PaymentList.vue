@@ -1,5 +1,6 @@
 <template>
     <div class="table-container-responsive">
+        <div v-if="firstLoad.length" class="h-9 bg-red-300 p-2 w-full"></div>
         <table v-if="params" class="report-table">
             <thead class="report-table-responsive">
                 <tr class="bg-green-200">
@@ -16,7 +17,8 @@
                 <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
                 </payment-list-item>
             </transition-group>
-            <infinite-loading v-if="!isInGeneralReport" @infinite="infiniteHandler" :identifier="infiniteId"
+
+            <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
                 ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
@@ -39,10 +41,6 @@ export default {
         firstLoad: {
             type: Array,
             default: () => []
-        },
-        isInGeneralReport: {
-            type: Boolean,
-            default: () => false
         }
     },
     data() {
@@ -54,9 +52,11 @@ export default {
                 "filter[byWarehouses]": null
             },
             infiniteId: 1,
+
         };
     },
     mounted() {
+        this.payments = this.firstLoad;
         EventBus.$on("set-parameters", data => {
             this.changeParams(data);
         });
@@ -73,6 +73,7 @@ export default {
                     throw new Error("It is not an array")
                 }
                 this.payments = newValue;
+
             },
             deep: true
         }
@@ -98,7 +99,7 @@ export default {
                     if (res.data.data.length) {
                         this.page += 1;
                         this.payments.push(...res.data.data);
-                        this.isInGeneralReport = false;
+
                         $state.loaded()
                     } else {
                         $state.complete();
@@ -119,14 +120,5 @@ export default {
             });
         },
     },
-    computed: {
-        hasFirstLoad() {
-            let value;
-            this.$nextTick(() => {
-                value = this.firstLoad.length > 0;
-            });
-            return value;
-        }
-    }
 };
 </script>
