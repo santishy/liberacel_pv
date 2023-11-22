@@ -20,7 +20,7 @@ class PaymentsController extends Controller
             $payments = Payment::with(['client', 'credit'])->applyFilters();
             $data = [
                 "data" => PaymentResource::collection(
-                    $payments->paginate(7)
+                    $payments->paginate(5)
                 )
             ];
             if (request('page') == 1) {

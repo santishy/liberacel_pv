@@ -1,6 +1,5 @@
 <template>
     <div class="table-container-responsive">
-        <div v-if="firstLoad.length" class="h-9 bg-red-300 p-2 w-full"></div>
         <table v-if="params" class="report-table">
             <thead class="report-table-responsive">
                 <tr class="bg-green-200">
@@ -55,10 +54,16 @@ export default {
         };
     },
     mounted() {
-        this.payments = this.firstLoad;
+        console.log({ payments: this.firstLoad })
+        console.log({ params: this.params })
+        EventBus.$on("activate-infinite-loading", () => {
+
+        })
         EventBus.$on("set-parameters", data => {
             this.changeParams(data);
+            console.log('change params', this.page)
         });
+
         EventBus.$on("selected-warehouses", warehouses => {
             this.searchTheWarehouses[
                 "filter[byWarehouses]"
@@ -71,15 +76,18 @@ export default {
                 if (!Array.isArray(newValue)) {
                     throw new Error("It is not an array")
                 }
+                if (!newValue.length) {
+                    return;
+                }
                 this.payments = newValue;
-
+                this.page = 2;
             },
             deep: true
         }
     },
     methods: {
         infiniteHandler($state) {
-            console.log('payments infiniteHandler')
+            console.log('payments infiniteHandler', this.page)
             this.params = {
                 ...this.params,
                 "filter[status]": 1,
@@ -98,7 +106,6 @@ export default {
                     if (res.data.data.length) {
                         this.page += 1;
                         this.payments.push(...res.data.data);
-
                         $state.loaded()
                     } else {
                         $state.complete();
@@ -107,14 +114,14 @@ export default {
         },
         changeParams(value) {
             this.params = value;
-            this.page = this.firstLoad.length ? 2 : 1;
+            this.page = 1;
             this.payments = [];
             this.infiniteId += 1;
         },
         afterLeave() {
             this.$nextTick(() => {
-                if (!this.$refs.infiniteLoading.status) {
-                    this.$refs.infiniteLoading.stateChanger.reset();
+                if (!this.$refs?.infiniteLoading?.status) {
+                    this.$refs?.infiniteLoading?.stateChanger?.reset();
                 }
             });
         },

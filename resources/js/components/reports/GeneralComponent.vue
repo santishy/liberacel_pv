@@ -1,7 +1,9 @@
 <template>
-    <div v-if="show" class="flex flex-wrap flex-col gap-4">
-        <div class=" p-2 max-h-56 overflow-y-hidden">
-            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Pagos</div>
+    <div v-show="show" class="flex flex-wrap flex-col gap-4">
+        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-scroll bg-slate-50 shadow-inner rounded-sm">
+            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
+                Pagos
+            </div>
             <payment-list :first-load="payments" :is-in-general-report="true" :uri="URIs[0]"></payment-list>
         </div>
         <div class="p-2 max-h-56 overflow-hidden">
@@ -41,6 +43,11 @@ export default {
         EventBus.$on('set-parameters', this.getReports)
     },
     methods: {
+        handleScroll(el) {
+            if (Math.ceil(el.srcElement.offsetHeight + el.srcElement.scrollTop) >= el.srcElement.scrollHeight) {
+                this.payments = []
+            }
+        },
         async getReports(params) {
             const reports = this.URIs.map(
                 uri => {

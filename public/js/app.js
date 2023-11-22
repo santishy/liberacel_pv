@@ -8108,6 +8108,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     EventBus.$on('set-parameters', this.getReports);
   },
   methods: {
+    handleScroll: function handleScroll(el) {
+      if (Math.ceil(el.srcElement.offsetHeight + el.srcElement.scrollTop) >= el.srcElement.scrollHeight) {
+        this.payments = [];
+      }
+    },
     getReports: function getReports(params) {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8717,9 +8722,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     var _this = this;
-    this.payments = this.firstLoad;
+    console.log({
+      payments: this.firstLoad
+    });
+    console.log({
+      params: this.params
+    });
+    EventBus.$on("activate-infinite-loading", function () {});
     EventBus.$on("set-parameters", function (data) {
       _this.changeParams(data);
+      console.log('change params', _this.page);
     });
     EventBus.$on("selected-warehouses", function (warehouses) {
       _this.searchTheWarehouses["filter[byWarehouses]"] = warehouses.toString();
@@ -8731,7 +8743,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (!Array.isArray(newValue)) {
           throw new Error("It is not an array");
         }
+        if (!newValue.length) {
+          return;
+        }
         this.payments = newValue;
+        this.page = 2;
       },
       deep: true
     }
@@ -8739,7 +8755,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     infiniteHandler: function infiniteHandler($state) {
       var _this2 = this;
-      console.log('payments infiniteHandler');
+      console.log('payments infiniteHandler', this.page);
       this.params = _objectSpread(_objectSpread({}, this.params), {}, {
         "filter[status]": 1
       });
@@ -8761,15 +8777,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     changeParams: function changeParams(value) {
       this.params = value;
-      this.page = this.firstLoad.length ? 2 : 1;
+      this.page = 1;
       this.payments = [];
       this.infiniteId += 1;
     },
     afterLeave: function afterLeave() {
       var _this3 = this;
       this.$nextTick(function () {
-        if (!_this3.$refs.infiniteLoading.status) {
-          _this3.$refs.infiniteLoading.stateChanger.reset();
+        var _this3$$refs, _this3$$refs$infinite;
+        if (!((_this3$$refs = _this3.$refs) !== null && _this3$$refs !== void 0 && (_this3$$refs$infinite = _this3$$refs.infiniteLoading) !== null && _this3$$refs$infinite !== void 0 && _this3$$refs$infinite.status)) {
+          var _this3$$refs2, _this3$$refs2$infinit, _this3$$refs2$infinit2;
+          (_this3$$refs2 = _this3.$refs) === null || _this3$$refs2 === void 0 ? void 0 : (_this3$$refs2$infinit = _this3$$refs2.infiniteLoading) === null || _this3$$refs2$infinit === void 0 ? void 0 : (_this3$$refs2$infinit2 = _this3$$refs2$infinit.stateChanger) === null || _this3$$refs2$infinit2 === void 0 ? void 0 : _this3$$refs2$infinit2.reset();
         }
       });
     }
@@ -17894,13 +17912,22 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.show ? _c("div", {
+  return _c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.show,
+      expression: "show"
+    }],
     staticClass: "flex flex-wrap flex-col gap-4"
   }, [_c("div", {
-    staticClass: "p-2 max-h-56 overflow-y-hidden"
+    staticClass: "p-4 max-h-56 overflow-y-scroll bg-slate-50 shadow-inner rounded-sm",
+    on: {
+      scroll: _vm.handleScroll
+    }
   }, [_c("div", {
-    staticClass: "bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700"
-  }, [_vm._v("Pagos")]), _vm._v(" "), _c("payment-list", {
+    staticClass: "bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700"
+  }, [_vm._v("\n            Pagos\n        ")]), _vm._v(" "), _c("payment-list", {
     attrs: {
       "first-load": _vm.payments,
       "is-in-general-report": true,
@@ -17931,7 +17958,7 @@ var render = function render() {
     attrs: {
       uri: _vm.URIs[1]
     }
-  })], 1)]) : _vm._e();
+  })], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18371,9 +18398,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "table-container-responsive"
-  }, [_vm.firstLoad.length ? _c("div", {
-    staticClass: "h-9 bg-red-300 p-2 w-full"
-  }) : _vm._e(), _vm._v(" "), _vm.params ? _c("table", {
+  }, [_vm.params ? _c("table", {
     staticClass: "report-table"
   }, [_vm._m(0), _vm._v(" "), _c("transition-group", {
     attrs: {
