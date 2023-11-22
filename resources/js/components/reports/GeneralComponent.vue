@@ -1,21 +1,27 @@
 <template>
     <div v-show="show" class="flex flex-wrap flex-col gap-4">
-        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-scroll bg-slate-50 shadow-inner rounded-sm">
+        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
             <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
                 Pagos
             </div>
-            <payment-list :first-load="payments" :is-in-general-report="true" :uri="URIs[0]"></payment-list>
+            <payment-list :first-load="payments" :uri="URIs[0]"></payment-list>
         </div>
-        <div class="p-2 max-h-56 overflow-hidden">
-            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Ventas Stock</div>
+        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
+                Ventas
+                Stock</div>
             <transaction-list name="Ventas" :uri="URIs[2]"></transaction-list>
         </div>
-        <div class="p-2 max-h-56 overflow-hidden">
-            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Ventas Expres</div>
+        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
+                Ventas
+                Expres</div>
             <list-of-products-sold :uri="URIs[3]"></list-of-products-sold>
         </div>
-        <div class=" p-2 expenditure-container max-h-56 overflow-hidden">
-            <div class="bg-yellow-300 rounded-sm shadow-sm mb-2 p-2 font-mono text-xl text-slate-700">Egresos</div>
+        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
+                Egresos
+            </div>
             <expense-list :uri="URIs[1]"></expense-list>
         </div>
     </div>
@@ -49,6 +55,7 @@ export default {
             }
         },
         async getReports(params) {
+            this.show = false;
             const reports = this.URIs.map(
                 uri => {
                     if (uri === '/expenses/') {

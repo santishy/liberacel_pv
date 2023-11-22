@@ -54,11 +54,6 @@ export default {
         };
     },
     mounted() {
-        console.log({ payments: this.firstLoad })
-        console.log({ params: this.params })
-        EventBus.$on("activate-infinite-loading", () => {
-
-        })
         EventBus.$on("set-parameters", data => {
             this.changeParams(data);
             console.log('change params', this.page)
@@ -87,7 +82,7 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log('payments infiniteHandler', this.page)
+            console.log('payments-infiniteHandler', this.page)
             this.params = {
                 ...this.params,
                 "filter[status]": 1,
