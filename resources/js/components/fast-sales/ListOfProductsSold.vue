@@ -22,7 +22,8 @@
                 <product-sold v-for="(product, index) in structureTheData" :key="index" :transaction="product"
                     :index="index"></product-sold>
             </tbody>
-            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+            <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
+                ref="infiniteLoading"></infinite-loading>
         </table>
 
         <authentication-form model="FastSale" :id="nota"></authentication-form>
@@ -35,6 +36,12 @@ import InfiniteLoading from "vue-infinite-loading";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductSold from "./ProductSold.vue";
 export default {
+    props: {
+        firstLoad: {
+            type: Array,
+            default: () => [],
+        }
+    },
     components: {
         InfiniteLoading,
         ProductSold,
@@ -64,8 +71,24 @@ export default {
             }
         });
     },
+    watch: {
+        firstLoad: {
+            handler(newValue, oldValue) {
+                if (!Array.isArray(newValue)) {
+                    throw new Error("It is not an array")
+                }
+                if (!newValue.length) {
+                    return;
+                }
+                this.products = newValue;
+                this.page = 2;
+            },
+            deep: true
+        }
+    },
     methods: {
         infiniteHandler($state) {
+            console.log("infiniteHandler express page: ", this.page)
             axios
                 .get(this.uri, {
                     params: {
@@ -118,7 +141,6 @@ export default {
                     })
                 );
             });
-
             return newStructure;
         },
     },

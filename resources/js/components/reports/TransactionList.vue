@@ -29,7 +29,7 @@
                         :are-they-sales="areTheySales">
                     </transaction-list-item>
                 </transition-group>
-                <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId"
+                <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
                     ref="infiniteLoading"></infinite-loading>
             </table>
         </div>
@@ -57,6 +57,10 @@ export default {
         },
         uri: {
             type: String
+        },
+        firstLoad: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -83,6 +87,7 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
+            console.log('infiniteHandler: page', this.page)
             axios
                 .get(this.uri, {
                     params: {
@@ -120,7 +125,6 @@ export default {
                 })
                 .then(res => {
                     if (res.data.status == "cancelled") {
-                        console.log("index:", this.modalDataConfirm.index)
                         this.transactions.splice(
                             this.modalDataConfirm.index,
                             1
@@ -147,6 +151,21 @@ export default {
                 }
             });
         },
+    },
+    watch: {
+        firstLoad: {
+            handler(newValue, oldValue) {
+                if (!Array.isArray(newValue)) {
+                    throw new Error("It is not an array")
+                }
+                if (!newValue.length) {
+                    return;
+                }
+                this.transactions = newValue;
+                this.page = 2;
+            },
+            deep: true
+        }
     },
     computed: {
         ...mapState(["modalDataConfirm"]),

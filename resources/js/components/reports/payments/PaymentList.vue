@@ -56,7 +56,6 @@ export default {
     mounted() {
         EventBus.$on("set-parameters", data => {
             this.changeParams(data);
-            console.log('change params', this.page)
         });
 
         EventBus.$on("selected-warehouses", warehouses => {
@@ -82,7 +81,6 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log('payments-infiniteHandler', this.page)
             this.params = {
                 ...this.params,
                 "filter[status]": 1,

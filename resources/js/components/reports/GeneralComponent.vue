@@ -1,28 +1,32 @@
 <template>
     <div v-show="show" class="flex flex-wrap flex-col gap-4">
-        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+        <div @scroll="handleScroll" id="payments-container"
+            class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
             <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
                 Pagos
             </div>
             <payment-list :first-load="payments" :uri="URIs[0]"></payment-list>
         </div>
-        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+        <div @scroll="handleScroll" id="sales-container"
+            class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
             <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
                 Ventas
                 Stock</div>
-            <transaction-list name="Ventas" :uri="URIs[2]"></transaction-list>
+            <transaction-list name="Ventas" :first-load="sales" :uri="URIs[2]"></transaction-list>
         </div>
-        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+        <div @scroll="handleScroll" id="fast-sales-container"
+            class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
             <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
                 Ventas
                 Expres</div>
-            <list-of-products-sold :uri="URIs[3]"></list-of-products-sold>
+            <list-of-products-sold :first-load="fastSales" :uri="URIs[3]"></list-of-products-sold>
         </div>
-        <div @scroll="handleScroll" class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
+        <div @scroll="handleScroll" id="expenses-container"
+            class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
             <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
                 Egresos
             </div>
-            <expense-list :uri="URIs[1]"></expense-list>
+            <expense-list :first-load="expenses" :uri="URIs[1]"></expense-list>
         </div>
     </div>
 </template>
@@ -49,9 +53,24 @@ export default {
         EventBus.$on('set-parameters', this.getReports)
     },
     methods: {
-        handleScroll(el) {
-            if (Math.ceil(el.srcElement.offsetHeight + el.srcElement.scrollTop) >= el.srcElement.scrollHeight) {
-                this.payments = []
+        handleScroll(event) {
+            if (Math.ceil(event.srcElement.offsetHeight + event.srcElement.scrollTop) >= event.srcElement.scrollHeight) {
+                switch (event.target.id) {
+                    case "sales-container":
+                        this.sales = []
+                        break;
+                    case "fast-sales-container":
+                        this.fastSales = []
+                        break;
+                    case "expenses-container":
+                        this.expenses = []
+                        break;
+                    case "payments-container":
+                        this.payments = []
+                        break;
+                    default:
+                        console.error("ID not found");
+                }
             }
         },
         async getReports(params) {
@@ -64,6 +83,9 @@ export default {
                     if (uri === '/payments/') {
                         params['filter[status]'] = 1;
                     }
+                    if (uri === '/fast-sales/') {
+                        params = _.merge({ include: "user", isFastSale: true, "filter[isCredit]": false, "filter[status]": "completed" }, params)
+                    }
                     return axios.get(uri, { params })
                 }
             );
@@ -73,6 +95,7 @@ export default {
                 this.expenses = expenses.data.data;
                 this.sales = sales.data.data;
                 this.fastSales = fastSales.data.data;
+                console.log({ fastSales: this.fastSales })
                 this.show = true;
             } catch (err) {
                 console.log(err);

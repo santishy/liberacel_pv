@@ -15,21 +15,18 @@
                 </expense-list-item>
             </transition-group>
 
-            <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+            <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
+                ref="infiniteLoading"></infinite-loading>
         </table>
     </div>
 </template>
 
 <script>
 
-// import Message from "../../alerts/Message.vue";
-// import Agree from "../../alerts/Agree.vue";
 import ExpenseListItem from "./ExpenseListItem.vue";
 export default {
     components: {
         ExpenseListItem,
-        // Message,
-        // Agree,
     },
     props: {
         name: {
@@ -37,6 +34,10 @@ export default {
         },
         uri: {
             type: String
+        },
+        firstLoad: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -60,8 +61,24 @@ export default {
             ] = warehouses.toString();
         });
     },
+    watch: {
+        firstLoad: {
+            handler(newValue, oldValue) {
+                if (!Array.isArray(newValue)) {
+                    throw new Error("It is not an array")
+                }
+                if (!newValue.length) {
+                    return;
+                }
+                this.expenses = newValue;
+                this.page = 2;
+            },
+            deep: true
+        }
+    },
     methods: {
         infiniteHandler($state) {
+            console.log("expenses-infiniteHandler page: ", this.page)
             if (this.params["filter[status]"]) {
                 delete this.params["filter[status]"];
             }
@@ -93,6 +110,7 @@ export default {
         },
         afterLeave() {
             this.$nextTick(() => {
+                if (!this.$refs?.infiniteLoading) return;
                 if (!this.$refs.infiniteLoading.status) {
                     this.$refs.infiniteLoading.stateChanger.reset();
                 }
