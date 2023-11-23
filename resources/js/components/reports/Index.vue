@@ -4,6 +4,33 @@
             <h1 class=" text-gray-800   py-3 text-2xl font-extralight">
                 Reporte de {{ name }}
             </h1>
+            <div class="w-full flex justify-end">
+                <ul class=" divide-y-2 flex flex-wrap flex-col md:w-60  ">
+                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
+                            class="text-xl font-mono text-slate-700">Ventas</span>
+                        <span class="font-semibold">{{ salesTotal }}</span>
+                    </li>
+                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
+                            class="text-xl font-mono text-slate-700">Expres</span>
+                        <span class="font-semibold">{{ fastSalesTotal }}</span>
+                    </li>
+                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
+                            class="text-xl font-mono text-slate-700">Pagos</span>
+                        <span class="font-semibold">{{ paymentsTotal }}</span>
+                    </li>
+                    <li class="flex flex-wrap justify-between items-center text-red-500 rounded-sm p-1 px-2"><span
+                            class="text-xl font-mono text-slate-700">Egresos</span>
+                        <span class="font-semibold">{{ expensesTotal }}</span>
+                    </li>
+                    <li class="flex flex-wrap justify-between items-center bg-sky-200 text-slate-700 rounded-sm p-1 px-2">
+                        <span class="text-xl font-mono text-slate-700">Total</span>
+                        <span class="font-bold">{{ getTotal }}</span>
+                    </li>
+                </ul>
+                <div>
+
+                </div>
+            </div>
             <transition name="fade">
                 <div v-if="total != null"
                     class=" py-3 px-4 text-green-900 font-bold text-2xl rounded-sm duration-300 transition-all bg-green-200 flex justify-end items-center">
@@ -43,18 +70,39 @@ export default {
     },
     data() {
         return {
-            total: null
+            total: null,
+            fastSalesTotal: null,
+            expensesTotal: null,
+            salesTotal: null,
+            paymentsTotal: null
         };
     },
     mounted() {
-        EventBus.$on("calculated-total", total => {
+        EventBus.$on("calculated-total", (total) => {
             this.total = total;
         });
+        EventBus.$on("calculate-overall-report-total", totals => {
+            this.fastSalesTotal = totals.fastSalesTotal;
+            this.salesTotal = totals.salesTotal;
+            this.expensesTotal = totals.expensesTotal;
+            this.paymentsTotal = totals.paymentsTotal;
+        })
         EventBus.$on("errors-found", this.errorsFound);
     },
     methods: {
         errorsFound(errors) {
             this.getErrors(errors);
+        },
+        formattedNumber(amount) {
+            amount.toLocaleString('es-MX', {
+                style: 'currency',
+                currency: 'MXN'
+            });
+        }
+    },
+    computed: {
+        getTotal() {
+            return this.formattedNumber((this.fastSalesTotal + this.salesTotal + this.paymentsTotal));
         }
     }
 };

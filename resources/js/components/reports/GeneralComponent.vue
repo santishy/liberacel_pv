@@ -86,16 +86,26 @@ export default {
                     if (uri === '/fast-sales/') {
                         params = _.merge({ include: "user", isFastSale: true, "filter[isCredit]": false, "filter[status]": "completed" }, params)
                     }
-                    return axios.get(uri, { params })
+                    return axios.get(uri + '?page=1', { params })
                 }
             );
             try {
-                const [payments, expenses, sales, fastSales] = await Promise.all(reports);
-                this.payments = payments.data.data;
-                this.expenses = expenses.data.data;
-                this.sales = sales.data.data;
-                this.fastSales = fastSales.data.data;
-                console.log({ fastSales: this.fastSales })
+                const [
+                    { data: { data: paymentsData, total: paymentsTotal } },
+                    { data: { data: expensesData, total: expensesTotal } },
+                    { data: { data: salesData, total: salesTotal } },
+                    { data: { data: fastSalesData, total: fastSalesTotal } }
+                ] = await Promise.all(reports);
+                this.payments = paymentsData;
+                this.expenses = expensesData;
+                this.sales = salesData
+                this.fastSales = this.fastSalesData;
+                EventBus.$emit(
+                    'calculate-overall-report-total',
+                    {
+                        paymentsTotal, fastSalesTotal, expensesTotal, salesTotal
+                    }
+                )
                 this.show = true;
             } catch (err) {
                 console.log(err);

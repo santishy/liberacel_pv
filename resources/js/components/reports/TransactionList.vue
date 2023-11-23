@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class="container mx-auto  flex justify-center w-full"> -->
     <div>
         <information-component>
             <template slot="title">
@@ -37,7 +36,6 @@
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
-//import InfiniteLoading from "vue-infinite-loading";
 
 import Message from "../alerts/Message.vue";
 import Agree from "../alerts/Agree.vue";
@@ -146,6 +144,7 @@ export default {
         },
         afterLeave() {
             this.$nextTick(() => {
+                if (!this.$refs?.infiniteLoading) return;
                 if (!this.$refs.infiniteLoading.status) {
                     this.$refs.infiniteLoading.stateChanger.reset();
                 }
