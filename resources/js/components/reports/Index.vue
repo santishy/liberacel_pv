@@ -114,7 +114,7 @@ export default {
             this.getErrors(errors);
         },
         formattedNumber(amount) {
-            if (!amount) return;
+            if (!amount) return 0;
             return amount.toLocaleString('es-MX', {
                 style: 'currency',
                 currency: 'MXN'
@@ -123,10 +123,8 @@ export default {
     },
     computed: {
         getTotal() {
-            return this.formattedNumber(
-                (this.fastSalesTotal + this.salesTotal + this.paymentsTotal
-                ) - this.expensesTotal
-            );
+            return this.formattedNumber((parseFloat(this.fastSalesTotal) + parseFloat(this.salesTotal) + parseFloat(this.paymentsTotal)) - parseFloat(this.expensesTotal))
+
         }
     }
 };
