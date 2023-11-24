@@ -33,7 +33,9 @@ class ReportResponse implements Responsable
         }
 
         if (request('page') == 1) {
-            $data['total'] = number_format($transactions->sum('total'), 2);
+            $total = $transactions->sum('total');
+            $data["rawTotal"] = $total;
+            $data['total'] = number_format($total, 2);
         }
 
         return response()->json($data);

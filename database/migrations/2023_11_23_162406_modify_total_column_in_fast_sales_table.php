@@ -14,7 +14,7 @@ class ModifyTotalColumnInFastSalesTable extends Migration
     public function up()
     {
         Schema::table('fast_sales', function (Blueprint $table) {
-            $table->float('total', 8, 2)->default(0)->change();
+            $table->decimal('total', 8, 2)->default(0)->change();
         });
     }
 

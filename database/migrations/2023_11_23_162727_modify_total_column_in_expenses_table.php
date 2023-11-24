@@ -14,7 +14,7 @@ class ModifyTotalColumnInExpensesTable extends Migration
     public function up()
     {
         Schema::table('expenses', function (Blueprint $table) {
-            $table->float('amount', 8, 2)->default(0)->change();
+            $table->decimal('amount', 8, 2)->default(0)->change();
         });
     }
 

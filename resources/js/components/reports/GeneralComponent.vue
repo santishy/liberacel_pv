@@ -93,13 +93,14 @@ export default {
                 const [
                     { data: { data: paymentsData, total: paymentsTotal } },
                     { data: { data: expensesData, total: expensesTotal } },
-                    { data: { data: salesData, total: salesTotal } },
-                    { data: { data: fastSalesData, total: fastSalesTotal } }
+                    { data: { data: salesData, rawTotal: salesTotal } },
+                    { data: { data: fastSalesData, rawTotal: fastSalesTotal } }
                 ] = await Promise.all(reports);
                 this.payments = paymentsData;
                 this.expenses = expensesData;
                 this.sales = salesData
-                this.fastSales = this.fastSalesData;
+                this.fastSales = fastSalesData;
+                console.log("fast sales total", fastSalesTotal)
                 EventBus.$emit(
                     'calculate-overall-report-total',
                     {

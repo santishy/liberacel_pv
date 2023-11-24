@@ -4,27 +4,47 @@
             <h1 class=" text-gray-800   py-3 text-2xl font-extralight">
                 Reporte de {{ name }}
             </h1>
-            <div class="w-full flex justify-end">
+            <div class="w-full flex justify-center items-center">
                 <ul class=" divide-y-2 flex flex-wrap flex-col md:w-60  ">
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
                             class="text-xl font-mono text-slate-700">Ventas</span>
-                        <span class="font-semibold">{{ salesTotal }}</span>
+                        <span class="font-semibold flex flex-wrap items-center">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                            </svg>
+                            {{ formattedNumber(salesTotal) }}</span>
                     </li>
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
                             class="text-xl font-mono text-slate-700">Expres</span>
-                        <span class="font-semibold">{{ fastSalesTotal }}</span>
+                        <span class="font-semibold flex flex-wrap items-center">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                            </svg>
+                            {{ formattedNumber(fastSalesTotal) }}</span>
                     </li>
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
                             class="text-xl font-mono text-slate-700">Pagos</span>
-                        <span class="font-semibold">{{ paymentsTotal }}</span>
+                        <span class="font-semibold flex flex-wrap items-center">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                            </svg>
+                            {{ formattedNumber(paymentsTotal) }}</span>
                     </li>
                     <li class="flex flex-wrap justify-between items-center text-red-500 rounded-sm p-1 px-2"><span
                             class="text-xl font-mono text-slate-700">Egresos</span>
-                        <span class="font-semibold">{{ expensesTotal }}</span>
+                        <span class="font-semibold flex flex-wrap gap-2 items-center">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path>
+                            </svg>
+                            {{ formattedNumber(expensesTotal) }}</span>
                     </li>
                     <li class="flex flex-wrap justify-between items-center bg-sky-200 text-slate-700 rounded-sm p-1 px-2">
-                        <span class="text-xl font-mono text-slate-700">Total</span>
-                        <span class="font-bold">{{ getTotal }}</span>
+                        <span class="text-xl font-semibold text-slate-800">Total</span>
+                        <span class="font-bold text-slate-900">{{ getTotal }}</span>
                     </li>
                 </ul>
                 <div>
@@ -94,7 +114,8 @@ export default {
             this.getErrors(errors);
         },
         formattedNumber(amount) {
-            amount.toLocaleString('es-MX', {
+            if (!amount) return;
+            return amount.toLocaleString('es-MX', {
                 style: 'currency',
                 currency: 'MXN'
             });
@@ -102,7 +123,10 @@ export default {
     },
     computed: {
         getTotal() {
-            return this.formattedNumber((this.fastSalesTotal + this.salesTotal + this.paymentsTotal));
+            return this.formattedNumber(
+                (this.fastSalesTotal + this.salesTotal + this.paymentsTotal
+                ) - this.expensesTotal
+            );
         }
     }
 };
