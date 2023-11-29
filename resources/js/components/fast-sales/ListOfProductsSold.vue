@@ -99,8 +99,9 @@ export default {
                     },
                 })
                 .then((res) => {
-                    if (this.page == 1)
+                    if (this.page == 1) {
                         EventBus.$emit("calculated-total", res.data.total);
+                    }
                     if (res.data.data.length) {
                         this.page += 1;
                         this.products.push(...res.data.data);

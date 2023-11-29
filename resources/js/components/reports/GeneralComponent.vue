@@ -1,37 +1,38 @@
 <template>
-    <div v-show="show" class="flex flex-wrap flex-col gap-4">
+    <div v-show="show" class="flex flex-wrap flex-col gap-2">
+        <div class="bg-white w-full md:w-4/12 rounded border border-sky-300  p-1 pl-2 font-mono text-xl text-sky-500">
+            Pagos
+        </div>
         <div @scroll="handleScroll" id="payments-container"
             class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
-            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
-                Pagos
-            </div>
             <payment-list :first-load="payments" :uri="URIs[0]"></payment-list>
         </div>
+        <div class="bg-white w-full md:w-4/12 rounded border border-sky-300  p-1 pl-2 font-mono text-xl text-sky-500">
+            Ventas
+            Stock</div>
         <div @scroll="handleScroll" id="sales-container"
             class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
-            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
-                Ventas
-                Stock</div>
             <transaction-list name="Ventas" :first-load="sales" :uri="URIs[2]"></transaction-list>
         </div>
+        <div class="bg-white w-full md:w-4/12 rounded border border-sky-300  p-1 pl-2 font-mono text-xl text-sky-500">
+            Ventas
+            Expres</div>
         <div @scroll="handleScroll" id="fast-sales-container"
             class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
-            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
-                Ventas
-                Expres</div>
             <list-of-products-sold :first-load="fastSales" :uri="URIs[3]"></list-of-products-sold>
+        </div>
+        <div class="bg-white w-full md:w-4/12 rounded border border-sky-300  p-1 pl-2 font-mono text-xl text-sky-500">
+            Egresos
         </div>
         <div @scroll="handleScroll" id="expenses-container"
             class="p-4 max-h-56 overflow-y-auto bg-slate-50 shadow-inner rounded-sm">
-            <div class="bg-white mb-1 rounded border border-yellow-300 shadow p-1 pl-2 font-mono text-xl text-slate-700">
-                Egresos
-            </div>
             <expense-list :first-load="expenses" :uri="URIs[1]"></expense-list>
         </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 
 export default {
     data() {
@@ -51,8 +52,10 @@ export default {
     },
     created() {
         EventBus.$on('set-parameters', this.getReports)
+        this.SET_IS_IN_GENERAL_REPORT(true);
     },
     methods: {
+        ...mapMutations(["SET_IS_IN_GENERAL_REPORT"]),
         handleScroll(event) {
             if (Math.ceil(event.srcElement.offsetHeight + event.srcElement.scrollTop) >= event.srcElement.scrollHeight) {
                 switch (event.target.id) {
@@ -100,7 +103,6 @@ export default {
                 this.expenses = expensesData;
                 this.sales = salesData
                 this.fastSales = fastSalesData;
-                console.log("fast sales total", fastSalesTotal)
                 EventBus.$emit(
                     'calculate-overall-report-total',
                     {

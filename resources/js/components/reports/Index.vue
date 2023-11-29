@@ -1,13 +1,13 @@
 <template>
     <nav-component>
         <div class="max-w-6xl mx-auto shadow  pb-4 bg-white rounded-sm px-4">
-            <h1 class=" text-gray-800   py-3 text-2xl font-extralight">
+            <h1 class=" text-gray-700 border-b-2 border-sky-500  py-3 text-2xl font-extralight">
                 Reporte de {{ name }}
             </h1>
-            <div class="w-full flex justify-center items-center">
-                <ul class=" divide-y-2 flex flex-wrap flex-col md:w-60  ">
-                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
-                            class="text-xl font-mono text-slate-700">Ventas</span>
+            <div v-if="isInGeneralReport" class="w-full mt-4 flex justify-start items-center">
+                <ul v-if="paymentsTotal != null" class=" divide-y-2 flex flex-wrap flex-col w-full">
+                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2">
+                        <span class="text-xl font-mono text-slate-600 mr-4">Ventas</span>
                         <span class="font-semibold flex flex-wrap items-center">
                             <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -15,8 +15,8 @@
                             </svg>
                             {{ formattedNumber(salesTotal) }}</span>
                     </li>
-                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
-                            class="text-xl font-mono text-slate-700">Expres</span>
+                    <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2">
+                        <span class="text-xl font-mono text-slate-600 mr-4">Expres</span>
                         <span class="font-semibold flex flex-wrap items-center">
                             <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -25,7 +25,7 @@
                             {{ formattedNumber(fastSalesTotal) }}</span>
                     </li>
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
-                            class="text-xl font-mono text-slate-700">Pagos</span>
+                            class="text-xl font-mono text-slate-600 mr-4">Pagos</span>
                         <span class="font-semibold flex flex-wrap items-center">
                             <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -33,27 +33,24 @@
                             </svg>
                             {{ formattedNumber(paymentsTotal) }}</span>
                     </li>
-                    <li class="flex flex-wrap justify-between items-center text-red-500 rounded-sm p-1 px-2"><span
-                            class="text-xl font-mono text-slate-700">Egresos</span>
-                        <span class="font-semibold flex flex-wrap gap-2 items-center">
+                    <li class="flex flex-wrap justify-between items-center text-red-500 rounded-sm p-1 px-2">
+                        <span class="text-xl font-mono text-slate-600 mr-4">Egresos</span>
+                        <span class="font-semibold flex flex-wrap items-center">
                             <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path>
                             </svg>
                             {{ formattedNumber(expensesTotal) }}</span>
                     </li>
-                    <li class="flex flex-wrap justify-between items-center bg-sky-200 text-slate-700 rounded-sm p-1 px-2">
-                        <span class="text-xl font-semibold text-slate-800">Total</span>
+                    <li class="flex flex-wrap justify-end items-center bg-yellow-400 text-slate-700 rounded-sm p-1 px-2">
+                        <span class="text-xl mr-4 font-semibold text-slate-800">Total</span>
                         <span class="font-bold text-slate-900">{{ getTotal }}</span>
                     </li>
                 </ul>
-                <div>
-
-                </div>
             </div>
-            <transition name="fade">
+            <transition v-else name="fade">
                 <div v-if="total != null"
-                    class=" py-3 px-4 text-green-900 font-bold text-2xl rounded-sm duration-300 transition-all bg-green-200 flex justify-end items-center">
+                    class=" py-2 mt-4 px-4 text-green-900 font-bold text-2xl rounded-sm duration-300 transition-all bg-yellow-400 flex justify-end items-center">
                     <span class="font-semibold text-xl ">Total:</span>
                     <div class="font-bold text-2xl ml-2">${{ total }}</div>
                 </div>
@@ -69,7 +66,7 @@
     </nav-component>
 </template>
 <script>
-
+import { mapState } from "vuex";
 import ReportBy from "./ReportBy.vue";
 import NavComponent from "../NavComponent.vue";
 import ErrorsComponent from "../ErrorsComponent.vue";
@@ -94,7 +91,8 @@ export default {
             fastSalesTotal: null,
             expensesTotal: null,
             salesTotal: null,
-            paymentsTotal: null
+            paymentsTotal: null,
+
         };
     },
     mounted() {
@@ -122,9 +120,9 @@ export default {
         }
     },
     computed: {
+        ...mapState(["isInGeneralReport"]),
         getTotal() {
             return this.formattedNumber((parseFloat(this.fastSalesTotal) + parseFloat(this.salesTotal) + parseFloat(this.paymentsTotal)) - parseFloat(this.expensesTotal))
-
         }
     }
 };

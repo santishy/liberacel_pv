@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-wrap flex-col items-start justify-start">
-        <toggle-component class="col-span-1 mr-2 mb-4"></toggle-component>
+        <toggle-component v-if="!isInGeneralReport" class="col-span-1 mr-2 mb-4"></toggle-component>
         <div class="flex justify-center flex-wrap items-center w-full">
             <div class="w-full flex flex-wrap justify-center gap-4  ">
                 <div class="p-1 border bg-orange-100 rounded text-slate-700 font-mono px-3">
@@ -26,10 +26,11 @@
     </div>
 </template>
 <script>
-import ToggleComponent from "./ToggleComponent.vue";
+import { mapState } from "vuex";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 import ConfigDatePicker from "../../mixins/ConfigDatePicker.js";
+import ToggleComponent from "./ToggleComponent.vue";
 export default {
     components: {
         ToggleComponent,
@@ -71,6 +72,9 @@ export default {
             }
             EventBus.$emit("set-parameters", _.merge(value, this.status)); //._merge conbina dos json
         }
+    },
+    computed: {
+        ...mapState(["isInGeneralReport"])
     }
 };
 </script>
