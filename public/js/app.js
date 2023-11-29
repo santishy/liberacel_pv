@@ -10517,7 +10517,7 @@ var render = function render() {
       "stroke-linejoin": "round",
       d: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
     }
-  })]), _vm._v("\n                        Ventas Expres\n                    ")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v("\n                        Ventas Express\n                    ")])]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-wrap items-center"
   }, [_vm.impersonation_id ? _c("form", {
     staticClass: "block mt-4 lg:inline-block lg:mt-0 md:hover:text-white mr-4",
@@ -20595,6 +20595,9 @@ var menuData = {
     url: "/product-bonuses"
   }],
   ReportsMenu: [{
+    name: "Reporte General",
+    url: "/general-report/"
+  }, {
     name: "Ventas",
     url: "/sales/"
   }, {

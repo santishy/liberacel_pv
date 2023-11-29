@@ -61,6 +61,10 @@ const menuData = {
     ],
     ReportsMenu: [
         {
+            name: "Reporte General",
+            url: "/general-report/"
+        },
+        {
             name: "Ventas",
             url: "/sales/"
         },
@@ -112,7 +116,8 @@ const menuData = {
             name: "Catálago Créditos",
             url: "/credits",
         }
-    ]
+    ],
+
 }
 
 
