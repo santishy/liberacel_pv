@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'create product'=> 'Crear producto',
+    'create product' => 'Crear producto',
     'view product' => 'Ver producto',
     'delete product' => 'Borrar producto',
     'edit product' => 'Editar producto',
@@ -75,8 +75,22 @@ return [
 
     //permissions to expenses
     'view expenses' => 'Ver egresos',
-    'view gasto' => 'Ver egreso',
+    'view expense' => 'Ver egreso',
     'create expense' => 'Crear egreso',
     'edit expense' => 'Editar egreso',
-    'delete expense' => 'Eliminar egreso'
+    'delete expense' => 'Eliminar egreso',
+
+    //permissions to expenses
+    'view payments' => 'Ver pagos',
+    'view payment' => 'Ver pago',
+    'create payment' => 'Crear pago',
+    'edit payment' => 'Editar pago',
+    'delete payment' => 'Eliminar pago',
+
+    //permissions to credits
+    'view credits' => 'Ver creditos',
+    'view credit' => 'Ver credito',
+    'create credit' => 'Crear credito',
+    'edit credit' => 'Editar credito',
+    'delete credit' => 'Eliminar credito',
 ];

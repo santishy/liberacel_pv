@@ -14,6 +14,9 @@ class CreditPaymentsController extends Controller
      */
     public function show(Credit $credit)
     {
+
+        $this->authorize("view", $credit);
+
         return response()->json([
             "credit" => CreditResource::make($credit),
             "payments" => PaymentResource::collection(

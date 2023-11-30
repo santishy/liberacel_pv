@@ -63,6 +63,7 @@ export default {
                     )
                 }
             } catch (error) {
+                this.getErrors(error)
                 console.log(error)
             }
         },
@@ -79,6 +80,7 @@ export default {
                     )
                 }
             } catch (error) {
+                this.getErrors(error)
                 console.log(error)
             }
         }

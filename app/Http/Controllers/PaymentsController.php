@@ -16,6 +16,8 @@ class PaymentsController extends Controller
 {
     public function index()
     {
+        $this->authorize("viewAny", new Payment);
+
         if (request()->wantsJson()) {
             $payments = Payment::with(['client', 'credit'])->applyFilters();
             $data = [
@@ -35,6 +37,7 @@ class PaymentsController extends Controller
     }
     public function store(SavePaymentRequest $request)
     {
+        $this->authorize("create", new Payment);
         $request->merge(['status' => true]);
         $data = $request->all();
         $credit = Credit::find(request()->credit_id);
@@ -59,6 +62,7 @@ class PaymentsController extends Controller
 
     public function update(Request $request, Payment $payment)
     {
+        $this->authorize("update", $payment);
         $data = $request->validate([
             "amount" => ['required', 'min:1', 'numeric']
         ]);
@@ -79,6 +83,7 @@ class PaymentsController extends Controller
     }
     public function destroy(Payment $payment)
     {
+        $this->authorize("delete", $payment);
         DB::beginTransaction();
         try {
             $payment->update(["status" => 0]);

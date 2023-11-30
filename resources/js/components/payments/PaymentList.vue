@@ -73,6 +73,9 @@ export default {
                     } else {
                         $state.complete();
                     }
+                })
+                .catch(error => {
+                    this.getErrors(error)
                 });
         },
         changeParams() {

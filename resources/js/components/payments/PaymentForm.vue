@@ -20,6 +20,9 @@
             <input type="text" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-300"
                 placeholder="Monto" autocomplete="off" />
         </div>
+        <div class="flex items-center mt-2">
+            <errors-component :errors-found="errors" />
+        </div>
         <div class="w-full py-1 ">
             <button
                 class="w-full py-2 bg-white border text-xs border-green-600 items-center justify-center flex flex-wrap gap-2 hover:bg-green-700 text-slate-700 hover:text-white duration-150 font-semibold  px-2 rounded">
@@ -59,6 +62,7 @@ export default {
                     window.open(`/payments-pdf/${res.data.payment.id}`, "_blank")
                 }
             } catch (err) {
+                this.getErrors(err);
                 console.log(err)
             }
         }

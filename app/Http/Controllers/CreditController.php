@@ -10,6 +10,9 @@ class CreditController extends Controller
 {
     function index()
     {
+
+        $this->authorize("viewAny", new Credit);
+
         if (request()->wantsJson()) {
             return CreditResource::collection(
                 Credit::with('client')->applyFilters()->paginate(25)

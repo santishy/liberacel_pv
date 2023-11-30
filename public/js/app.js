@@ -5910,13 +5910,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   EventBus.$emit("open-modal", false);
                   window.open("/payments-pdf/".concat(res.data.payment.id), "_blank");
                 }
-                _context.next = 12;
+                _context.next = 13;
                 break;
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](1);
+                _this.getErrors(_context.t0);
                 console.log(_context.t0);
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -6002,6 +6003,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         } else {
           $state.complete();
         }
+      })["catch"](function (error) {
+        _this2.getErrors(error);
       });
     },
     changeParams: function changeParams() {
@@ -6093,13 +6096,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     index: _this2.index
                   });
                 }
-                _context.next = 10;
+                _context.next = 11;
                 break;
               case 7:
                 _context.prev = 7;
                 _context.t0 = _context["catch"](0);
+                _this2.getErrors(_context.t0);
                 console.log(_context.t0);
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -6129,13 +6133,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     index: _this3.index
                   });
                 }
-                _context2.next = 10;
+                _context2.next = 11;
                 break;
               case 7:
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
+                _this3.getErrors(_context2.t0);
                 console.log(_context2.t0);
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -10517,7 +10522,7 @@ var render = function render() {
       "stroke-linejoin": "round",
       d: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
     }
-  })]), _vm._v("\n                        Ventas Express\n                    ")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v("\n                        Ventas Expres\n                    ")])]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-wrap items-center"
   }, [_vm.impersonation_id ? _c("form", {
     staticClass: "block mt-4 lg:inline-block lg:mt-0 md:hover:text-white mr-4",
@@ -15793,7 +15798,13 @@ var render = function render() {
         _vm.$set(_vm.form, "amount", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _vm._m(0)]);
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center mt-2"
+  }, [_c("errors-component", {
+    attrs: {
+      "errors-found": _vm.errors
+    }
+  })], 1), _vm._v(" "), _vm._m(0)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,

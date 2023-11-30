@@ -101,5 +101,19 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'view expenses']);
         Permission::create(['name' => 'edit expense']);
         Permission::create(['name' => 'delete expense']);
+
+        //permissions to payments
+        Permission::create(['name' => 'create payment']);
+        Permission::create(['name' => 'view payment']);
+        Permission::create(['name' => 'view payments']);
+        Permission::create(['name' => 'edit payment']);
+        Permission::create(['name' => 'delete payment']);
+
+        //permissions to credits
+        Permission::create(['name' => 'create credit']);
+        Permission::create(['name' => 'view credit']);
+        Permission::create(['name' => 'view credits']);
+        Permission::create(['name' => 'edit credit']);
+        Permission::create(['name' => 'delete credit']);
     }
 }
