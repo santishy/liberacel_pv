@@ -10,6 +10,8 @@ class ExpenseReportController extends Controller
 {
     public function index()
     {
+        $this->authorize("viewAny", new Expense);
+
         if (request()->wantsJson()) {
             $expenses = Expense::applyFilters();
             $data = [

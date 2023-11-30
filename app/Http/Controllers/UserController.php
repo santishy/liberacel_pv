@@ -33,26 +33,13 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'roles', 'inventories'));
     }
 
-    
+
     public function update(UpdateUserRequest $request, User $user)
     {
         $this->authorize('update', $user);
-        // $fields = Validator::make($request->all(), [
-        //     'name' => ['string', 'max:255'],
-        //     'email' => [
-        //         'string',
-        //         'email',
-        //         'max:255',
-        //         Rule::unique(User::class)->ignore($user->id)
-        //     ],
-        //     'username' => ['required', 'min:4', Rule::unique(User::class)->ignore($user->id)],
-        //     'roles.*' => 'exists:roles,id'
-        // ]);
+
         $user->update($request->safe()->except('roles'));
-        // $user->inventory_id = $request->inventory_id;
-        // $user->username = $request->username;
-        // $user->name = $request->name;
-        // $user->email = $request->email;
+
         $user->syncRoles($request->roles);
         return $user->save();
     }

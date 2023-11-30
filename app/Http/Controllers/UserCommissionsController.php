@@ -12,9 +12,9 @@ class UserCommissionsController extends Controller
 {
     public function index()
     {
-
+        $this->authorize("viewAny", new Commission);
         if (request()->wantsJson()) {
-            $this->authorize('viewAny',new Commission);
+            $this->authorize('viewAny', new Commission);
             $user = User::find(request('user_id'));
             $query = $user->fastSaleCommission()->applyFilters();
             $commissions  = CommissionResource::collection(
@@ -38,7 +38,7 @@ class UserCommissionsController extends Controller
         $this->authorize('update', $commission);
         $request->validate([
             'amount' => 'required|numeric|min:0',
-        ],[
+        ], [
             'amount.required' => 'El campo monto es requerido.',
             'amount.min' => 'El valor de monto como minímo debe ser cero.',
             'amount.numeric' => 'El campo monto debe ser númerico.'

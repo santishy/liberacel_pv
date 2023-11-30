@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Traits\HasAdministrator;
 use App\Models\Credit;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -9,7 +10,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class CreditPolicy
 {
     use HandlesAuthorization;
-
+    use HasAdministrator;
     /**
      * Determine whether the user can view any models.
      *

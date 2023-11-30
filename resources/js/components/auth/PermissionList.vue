@@ -1,30 +1,23 @@
 <template>
-    <div
-        class="rounded bg-white shadow py-2 px-4 grid grid-cols-3"
-    >
-        <div
-            v-if="role != null"
-            class="w-full text-xl border-gray-300 border-b-2 pb-1 col-span-3 mb-2"
-        >
+    <div class="rounded bg-white shadow py-2 px-4 flex flex-wrap justify-center items-center">
+        <div v-if="role != null" class="w-full text-xl border-gray-300 border-b-2 pb-1 col-span-3 mb-2">
             Agregar permisos al rol:
             <span v-if="!!role" class="text-dark font-semibold">{{
                 role.name.toUpperCase()
             }}</span>
         </div>
         <div
-            v-for="permission in permissions"
-            :key="permission.id"
-            class="mr-8 mb-1"
-        >
-            <label class="inline-flex items-center">
-                <input
-                    @change="togglePermission(permission, $event)"
-                    type="checkbox"
-                    class="form-checkbox"
-                    :checked="isChecked(permission.name)"
-                />
-                <span class="ml-2 text-gray-900 text-xs">{{ permission.translate.toUpperCase() }}</span>
-            </label>
+            class="flex p-2 scroll-smooth scrollbar-track-transparent scrollbar-thumb-teal-800 scrollbar-thin md:max-h-96 flex-col overflow-y-hidden w-full border flex-wrap gap-4">
+            <div v-for="permission in permissions" :key="permission.id"
+                class="md:w-48 bg-teal-50 border border-teal-700 w-full p-1 px-4 justify-start rounded-sm flex items-center">
+                <label class="flex items-center cursor-pointer">
+                    <input @change="togglePermission(permission, $event)" type="checkbox"
+                        class="form-checkbox border border-teal-700" :checked="isChecked(permission.name)" />
+                    <span class="ml-2 text-teal-700 text-xs font-semibold">{{
+                        permission.translate.toUpperCase()
+                    }}</span>
+                </label>
+            </div>
         </div>
     </div>
 </template>
@@ -33,14 +26,14 @@
 export default {
     props: {
         permissions: {
-            type: Array
-        }
+            type: Array,
+        },
     },
     data: () => ({
         role: false,
     }),
     created() {
-        EventBus.$on("permissions-found", role => {
+        EventBus.$on("permissions-found", (role) => {
             Vue.set(this.$data, "role", role.data);
         });
     },
@@ -62,13 +55,13 @@ export default {
                 params = { data: params };
             }
             axios[method](`/roles/${this.role.id}/permissions`, params)
-                .then(res => {
+                .then((res) => {
                     this.role.permissions = res.data.permissions;
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err);
                 });
         },
-    }
+    },
 };
 </script>
