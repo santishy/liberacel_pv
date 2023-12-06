@@ -20,7 +20,7 @@ class TransactionResource extends JsonResource
             'transactionType' => Str::lower(class_basename($this->resource)),
             'total' => $this->resource->total,
             'formatted_total' => "$" . number_format($this->resource->total, 2),
-            'created_at' => $this->resource->created_at->format('Y-m-d H:m:s'),
+            'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
             'status' => $this->resource->status,
             'client_id' => optional($this->resource)->client_id,
             'client' => $this->whenLoaded('client'),

@@ -32,17 +32,17 @@ class CreateOrUpdateCommission
         switch ($fastSale->status) {
             case 'completed':
                 //comprueba que no sea recursivo
-              
+
                 /* if ($fastSale->getOriginal('status') == 'completed') {
                     break;
                 } */
-                
+
                 $products  = collect($fastSale->concepts);
 
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];
                 });
-    
+
                 $commission = Commission::create([
                     'fast_sale_id' => $fastSale->id,
                     'amount' => $this->amount
