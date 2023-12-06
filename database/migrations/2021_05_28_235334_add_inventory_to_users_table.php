@@ -29,7 +29,8 @@ class AddInventoryToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('inventory_id');
+            $table->dropForeign(['inventory_id']);
+            $table->dropColumn(['inventory_id']);
         });
     }
 }

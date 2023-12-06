@@ -31,6 +31,7 @@ class AddCreditColumnsToFastSalesTable extends Migration
     public function down()
     {
         Schema::table('fast_sales', function (Blueprint $table) {
+            $table->dropForeign(["client_id"]);
             $table->dropColumn(['client_id', 'is_credit']);
         });
     }

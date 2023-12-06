@@ -15,9 +15,9 @@ class AddInventoryToPurchasesTable extends Migration
     {
         Schema::table('purchases', function (Blueprint $table) {
             $table->foreignId('inventory_id')
-            ->nullable()
-            ->constrained()
-            ->onDelete('set null');
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
         });
     }
 
@@ -29,7 +29,8 @@ class AddInventoryToPurchasesTable extends Migration
     public function down()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->dropForeign('inventory_id');
+            $table->dropForeign(['inventory_id']);
+            $table->dropColumn("inventory_id");
         });
     }
 }
