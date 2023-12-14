@@ -6,6 +6,7 @@ use App\Models\Traits\HasStock;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Inventory extends Model
@@ -34,5 +35,10 @@ class Inventory extends Model
     public function updateStock($product_id, $stock)
     {
         return $this->products()->updateExistingPivot($product_id, ['stock' => $stock]);
+    }
+
+    public function getTotalCostOfProductsInStock()
+    {
+        return $this->products()->get();
     }
 }

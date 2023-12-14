@@ -9,6 +9,10 @@ class WarehouseCostsController extends Controller
 {
     public function index(Inventory $inventory)
     {
-        return $inventory->products();
+        return response()->json(
+            [
+                "total_cost" => $inventory
+            ]
+        );
     }
 }
