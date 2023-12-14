@@ -16,6 +16,7 @@ class Inventory extends Model
 
     public function products()
     {
+        //en la coudmentaicon decia ->withPivot('campo_1','campo_2');
         return $this->belongsToMany(Product::class)->withPivot('stock');
     }
 
@@ -32,6 +33,6 @@ class Inventory extends Model
 
     public function updateStock($product_id, $stock)
     {
-        return $this->products()->updateExistingPivot($product_id,['stock' => $stock]);
+        return $this->products()->updateExistingPivot($product_id, ['stock' => $stock]);
     }
 }
