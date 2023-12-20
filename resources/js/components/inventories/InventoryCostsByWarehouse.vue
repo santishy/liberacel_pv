@@ -1,6 +1,6 @@
 <template>
-    <div>
-        {{ total_cost }}
+    <div class="px-4 py-2 rounded bg-white shadow text-center text-lg font-semibold">
+        <span class="text-slate-700">Total: </span> <span class="text-slate-800">{{ total_cost }}</span>
     </div>
 </template>
 
@@ -22,7 +22,9 @@ export default {
         getTotalCost() {
             axios.get(`/warehouse-costs/${this.inventory_id}`)
                 .then(res => {
-                    console.log(res.data)
+                    if (res?.data) {
+                        this.total_cost = res.data.total_cost;
+                    }
                 })
                 .catch(err => {
                     console.log(err)

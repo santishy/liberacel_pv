@@ -69,7 +69,7 @@ class FastSale extends Model
 
     public function commission()
     {
-        return $this->hasOne(Commission::class);
+        return $this->morphOne(Commission::class, "commissionable");
     }
 
 

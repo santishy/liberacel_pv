@@ -12,10 +12,10 @@ class Credit extends Model
 
     protected $fillable = ["client_id", "total_amount", "amount_paid"];
 
-    public function creditables()
-    {
-        return $this->hasMany(Creditable::class);
-    }
+    // public function creditables()
+    // {
+    //     return $this->hasMany(Creditable::class);
+    // }
     static public function findOrCreate($client_id)
     {
         $credit = Credit::where('status', '!=', 'cancelled')

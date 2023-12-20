@@ -39,6 +39,9 @@ class Inventory extends Model
 
     public function getTotalCostOfProductsInStock()
     {
-        return $this->products()->get();
+        return $this->products()
+            ->sum(
+                DB::raw('inventory_product.stock * products.distributor_price')
+            );
     }
 }

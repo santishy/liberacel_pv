@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ApplyElectronicMoneyDiscount;
 use App\Events\FastSaleUpdated;
+use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Listeners\AddPointsToCustomerBonus;
 use App\Listeners\UpdateInventory;
@@ -28,9 +30,12 @@ class EventServiceProvider extends ServiceProvider
         TransactionComplete::class => [
             UpdateInventory::class,
         ],
-        FastSaleUpdated::class => [      
+        FastSaleUpdated::class => [
             ChangeStatus::class,
             AddPointsToCustomerBonus::class,
+            // CreateOrUpdateCommission::class,
+        ],
+        SaleTransactionProcessed::class => [
             CreateOrUpdateCommission::class,
         ],
         ApplyElectronicMoneyDiscount::class => [

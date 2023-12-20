@@ -236,4 +236,4 @@ Route::get('general-report', [GeneralReportController::class, 'index'])->middlew
 /**
  * Costs
  */
-Route::get('warehouse-costs/{inventory_id}', [WarehouseCostsController::class, 'index'])->middleware('auth');
+Route::get('warehouse-costs/{inventory}', [WarehouseCostsController::class, 'index'])->middleware('auth');

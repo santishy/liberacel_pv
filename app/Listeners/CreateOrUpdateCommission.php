@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\FastSaleUpdated;
+use App\Events\SaleTransactionProcessed;
 use App\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,37 +23,37 @@ class CreateOrUpdateCommission
     /**
      * Handle the event.
      *
-     * @param  \App\Events\FastSaleUpdated  $event
+     * @param  \App\Events\SaleTransactionProcessed  $event
      * @return void
      */
-    public function handle(FastSaleUpdated $event)
+    public function handle(SaleTransactionProcessed $event)
     {
-        $fastSale = $event->fastSale;
-        switch ($fastSale->status) {
+        $model = $event->model;
+        switch ($model->status) {
             case 'completed':
                 //comprueba que no sea recursivo
 
-                /* if ($fastSale->getOriginal('status') == 'completed') {
+                /* if ($model->getOriginal('status') == 'completed') {
                     break;
                 } */
 
-                $products  = collect($fastSale->concepts);
+                $products  = collect($model->concepts);
 
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];
                 });
-
-                $commission = Commission::create([
-                    'fast_sale_id' => $fastSale->id,
-                    'amount' => $this->amount
-                ]);
+                $model->commission()->create(['amount' => $this->amount]);
                 break;
             case 'cancelled':
-                if ($fastSale->getOriginal('status') == 'cancelled') {
-                    break;
+                // if ($model->getOriginal('status') == 'cancelled') {
+                //     break;
+                // }
+                $commission = $model->commission();
+                if ($commission->exists()) {
+                    $model->commission()->delete();
                 }
 
-                Commission::where('fast_sale_id', $fastSale->id)->delete();
+                //Commission::where('fast_sale_id', $model->id)->delete();
                 break;
             default:
                 return;

@@ -11,8 +11,12 @@ use Illuminate\Support\Facades\DB;
 class Commission extends Model
 {
     use HasFactory;
-    protected $fillable = ['amount', 'fast_sale_id'];
+    protected $fillable = ['amount'];
 
+    public function commissionable()
+    {
+        return $this->morphTo();
+    }
     public function fastSale()
     {
         return $this->belongsTo(FastSale::class);

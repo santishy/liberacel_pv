@@ -11,7 +11,7 @@ class WarehouseCostsController extends Controller
     {
         return response()->json(
             [
-                "total_cost" => $inventory
+                "total_cost" => "$" . number_format($inventory->getTotalCostOfProductsInStock(), 2)
             ]
         );
     }
