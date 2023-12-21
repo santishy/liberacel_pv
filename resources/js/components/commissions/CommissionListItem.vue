@@ -1,85 +1,60 @@
 <template>
-    <tr
-        class="
+    <tr class="
             bg-white
             border-b border-gray-400
             md:border-none
             block
             md:table-row
-        "
-    >
-        <td
-            class="
+        ">
+        <td class="
                 p-2
                 md:border md:border-grey-500
                 text-left
                 block
                 md:table-cell
-            "
-        >
-            <span class="inline-block w-1/3 md:hidden font-bold">Nota</span
-            >{{ commission.note }}
+            ">
+            <span class="inline-block w-1/3 md:hidden font-bold">Nota</span>{{ commission.note }}
         </td>
-        <td
-            class="
+        <td class="
                 p-2
                 md:border md:border-grey-500
                 text-left
                 block
                 md:table-cell
-            "
-        >
-            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span
-            >{{ commission.created_at }}
+            ">
+            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span>{{ commission.created_at }}
         </td>
-        <td
-            class="
+        <td class="
                 p-2
                 md:border md:border-grey-500
                 text-left
                 block
                 md:table-cell
-            "
-        >
-            <span class="inline-block w-1/3 md:hidden font-bold"
-                >Productos</span
-            >
-            <p
+            ">
+            <span class="inline-block w-1/3 md:hidden font-bold">Productos</span>
+            <!-- <p
                 v-for="item in changeProductFormat"
                 :key="item.product"
                 class="text-xs text-gray-800"
             >
                 {{ item }}
-            </p>
+            </p> -->
         </td>
-        <td
-            class="
+        <td class="
                 p-2
                 md:border md:border-grey-500
                 text-left
                 block
                 md:table-cell
-            "
-        >
-            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span
-            >
+            ">
+            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span>
             <div class="flex items-center">
                 <errors-component :errors-found="errors" />
             </div>
-            <a
-                v-if="show"
-                href="#"
-                class="w-full h-full pointer block text-blue-400"
-                @click.prevent="hideItem"
-                >{{ commission.amount }}</a
-            >
-            
-            <input
-                v-else
-                :ref="`element-${commission.id}`"
-                @keydown.enter="updateAmount"
-                type="text"
-                class="
+            <a v-if="show" href="#" class="w-full h-full pointer block text-blue-400" @click.prevent="hideItem">{{
+                commission.amount }}</a>
+
+            <input v-else :ref="`element-${commission.id}`" @keydown.enter="updateAmount" type="text" class="
                     rounded-sm
                     border
                     w-full
@@ -88,10 +63,8 @@
                     p-2
                     border-gray-400
                     bg-gray-200
-                "
-                v-model="amount"
-            />
-            
+                " v-model="amount" />
+
         </td>
     </tr>
 </template>

@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\SaleTransactionProcessed;
-use App\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -42,7 +41,10 @@ class CreateOrUpdateCommission
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];
                 });
-                $model->commission()->create(['amount' => $this->amount]);
+                $model->commission()->create([
+                    'amount' => $this->amount,
+                    'user_id' => $model->user_id,
+                ]);
                 break;
             case 'cancelled':
                 // if ($model->getOriginal('status') == 'cancelled') {

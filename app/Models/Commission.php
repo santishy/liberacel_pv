@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class Commission extends Model
 {
     use HasFactory;
-    protected $fillable = ['amount'];
+    protected $fillable = ['amount', 'user_id'];
 
     public function commissionable()
     {
@@ -20,6 +20,10 @@ class Commission extends Model
     public function fastSale()
     {
         return $this->belongsTo(FastSale::class);
+    }
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
     }
     public function scopeComissionsFromFridayToThursday($query, $field)
     {

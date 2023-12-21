@@ -3512,10 +3512,10 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     getCommissions: function getCommissions($state) {
       var _this2 = this;
       axios.get("/user-commissions/", {
-        params: _objectSpread(_objectSpread({
+        params: _objectSpread({
           page: this.page,
           user_id: this.user_id
-        }, this.range), this.statusFilter)
+        }, this.range)
       }).then(function (res) {
         if (_this2.page == 1) {
           _this2.totalWithFormat = res.data.totalWithFormat;
@@ -12318,16 +12318,7 @@ var render = function render() {
     staticClass: "p-2 md:border md:border-grey-500 text-left block md:table-cell"
   }, [_c("span", {
     staticClass: "inline-block w-1/3 md:hidden font-bold"
-  }, [_vm._v("Fecha")]), _vm._v(_vm._s(_vm.commission.created_at) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "p-2 md:border md:border-grey-500 text-left block md:table-cell"
-  }, [_c("span", {
-    staticClass: "inline-block w-1/3 md:hidden font-bold"
-  }, [_vm._v("Productos")]), _vm._v(" "), _vm._l(_vm.changeProductFormat, function (item) {
-    return _c("p", {
-      key: item.product,
-      staticClass: "text-xs text-gray-800"
-    }, [_vm._v("\n            " + _vm._s(item) + "\n        ")]);
-  })], 2), _vm._v(" "), _c("td", {
+  }, [_vm._v("Fecha")]), _vm._v(_vm._s(_vm.commission.created_at) + "\n    ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("td", {
     staticClass: "p-2 md:border md:border-grey-500 text-left block md:table-cell"
   }, [_c("span", {
     staticClass: "inline-block w-1/3 md:hidden font-bold"
@@ -12375,7 +12366,15 @@ var render = function render() {
     }
   })])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", {
+    staticClass: "p-2 md:border md:border-grey-500 text-left block md:table-cell"
+  }, [_c("span", {
+    staticClass: "inline-block w-1/3 md:hidden font-bold"
+  }, [_vm._v("Productos")])]);
+}];
 render._withStripped = true;
 
 

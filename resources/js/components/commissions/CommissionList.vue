@@ -1,7 +1,5 @@
 <template>
-    <div
-        v-if="user_id"
-        class="
+    <div v-if="user_id" class="
             flex flex-col
             justify-center
             bg-white
@@ -11,11 +9,8 @@
             max-w-full
             sm:overflow-x-hidden
             overflow-x-auto
-        "
-    >
-        <div
-            v-if="commissions.length"
-            class="
+        ">
+        <div v-if="commissions.length" class="
                 my-2
                 mx-2
                 rounded-sm
@@ -25,25 +20,20 @@
                 flex flex-wrap
                 justify-between
                 items-center
-            "
-        >
+            ">
             <h3 class="text-blue-800 font-mono font-extralight">
                 Usuario: {{ username }}
             </h3>
-            <span
-                class="
+            <span class="
                     text-green-800
                     rounded
                     bg-indigo-100
                     p-2
                     font-mono font-semibold
                     text-xl
-                "
-                >Total: {{ totalWithFormat }}</span
-            >
+                ">Total: {{ totalWithFormat }}</span>
         </div>
-        <table
-            class="
+        <table class="
                 min-w-full
                 border-collapse
                 block
@@ -51,11 +41,9 @@
                 shadow-sm
                 text-center
                 rounded-lg
-            "
-        >
+            ">
             <thead class="block md:table-header-group">
-                <tr
-                    class="
+                <tr class="
                         border-b border-gray-500
                         rounded-t-sm
                         md:border-none
@@ -66,10 +54,8 @@
                         md:top-auto
                         -left-full
                         md:left-auto md:relative
-                    "
-                >
-                    <th
-                        class="
+                    ">
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -78,12 +64,10 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Nota
                     </th>
-                    <th
-                        class="
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -92,12 +76,10 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Fecha
                     </th>
-                    <th
-                        class="
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -106,12 +88,10 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Producto/s
                     </th>
-                    <th
-                        class="
+                    <th class="
                             bg-blue-700
                             p-2
                             text-white
@@ -120,26 +100,17 @@
                             text-left
                             block
                             md:table-cell
-                        "
-                    >
+                        ">
                         Monto
                     </th>
                 </tr>
             </thead>
             <tbody class="block md:table-row-group alternate-table-row">
-                <commission-list-item
-                    v-for="commission in commissions"
-                    :key="commission.id"
-                    :commission="commission"
-                >
+                <commission-list-item v-for="commission in commissions" :key="commission.id" :commission="commission">
                 </commission-list-item>
             </tbody>
         </table>
-        <infinite-loading
-            @infinite="getCommissions"
-            :identifier="infiniteId"
-            ref="infiniteLoading"
-        ></infinite-loading>
+        <infinite-loading @infinite="getCommissions" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
     </div>
 </template>
 
@@ -148,7 +119,7 @@ import InfiniteLoading from "vue-infinite-loading";
 import CommissionListItem from "./CommissionListItem.vue";
 
 export default {
-    components: { CommissionListItem, InfiniteLoading},
+    components: { CommissionListItem, InfiniteLoading },
     data() {
         return {
             commissions: [],
@@ -189,7 +160,7 @@ export default {
                         page: this.page,
                         user_id: this.user_id,
                         ...this.range,
-                        ...this.statusFilter,
+                        //...this.statusFilter,
                     },
                 })
                 .then((res) => {

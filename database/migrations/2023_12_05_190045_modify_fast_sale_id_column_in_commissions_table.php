@@ -17,6 +17,7 @@ class ModifyFastSaleIdColumnInCommissionsTable extends Migration
             $table->decimal("amount", 8, 2)->default(0)->change();
             $table->dropForeign(["fast_sale_id"]);
             $table->dropColumn("fast_sale_id");
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->morphs("commissionable");
         });
     }

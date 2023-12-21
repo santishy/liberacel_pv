@@ -14,9 +14,10 @@ class UserCommissionsController extends Controller
     {
         $this->authorize("viewAny", new Commission);
         if (request()->wantsJson()) {
-            $this->authorize('viewAny', new Commission);
             $user = User::find(request('user_id'));
-            $query = $user->fastSaleCommission()->applyFilters();
+            //$query = $user->fastSaleCommission()->applyFilters();
+            $query = Commission::with(['commissionable'])->applyFilters()->where('user_id', $user->id);
+            //$query = $user->commissions()->applyFilters();
             $commissions  = CommissionResource::collection(
                 $query->paginate()
             );
@@ -31,7 +32,7 @@ class UserCommissionsController extends Controller
         return view('commissions.index', compact('users'));
     }
     /**
-     * 
+     *
      */
     public function update(Request $request, Commission $commission)
     {
@@ -43,11 +44,11 @@ class UserCommissionsController extends Controller
             'amount.min' => 'El valor de monto como minímo debe ser cero.',
             'amount.numeric' => 'El campo monto debe ser númerico.'
         ]);
-        $oldComission = $commission->amount;
+        $oldCommission = $commission->amount;
         $commission->amount = $request->amount;
         $commission->save();
         return response()->json([
-            'oldCommission' => $oldComission,
+            'oldCommission' => $oldCommission,
             'updatedCommission' => $commission->fresh()->amount,
         ]);
     }

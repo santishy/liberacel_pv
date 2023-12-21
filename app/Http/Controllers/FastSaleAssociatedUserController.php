@@ -22,6 +22,7 @@ class FastSaleAssociatedUserController extends Controller
 
         FastSaleUpdated::dispatch($fastSale);
         SaleTransactionProcessed::dispatch($fastSale);
+
         // if ($request->is_credit && $request->client_id) {
         //     $inverse = -1;
         //     $fastSale->update(
