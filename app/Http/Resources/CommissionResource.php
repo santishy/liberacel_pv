@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\FastSale;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommissionResource extends JsonResource
@@ -19,8 +20,15 @@ class CommissionResource extends JsonResource
             'note' => $this->note,
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'total' => $this->total,
-            'commissionable' => $this->whenLoaded('commissionable'), //json_decode($this->concepts),
+            'commissionable' => $this->getResourceCommissionable($this->whenLoaded('commissionable')), //json_decode($this->concepts),
             'amount' => $this->amount
         ];
+    }
+
+    public function getResourceCommissionable($relationship)
+    {
+        return $relationship instanceof FastSale ?
+            FastSaleResource::make($relationship) :
+            TransactionResource::make($relationship);
     }
 }

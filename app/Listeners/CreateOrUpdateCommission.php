@@ -3,6 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\SaleTransactionProcessed;
+use App\Http\Resources\ProductResource;
+use App\Models\FastSale;
+use App\Models\Sale;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -18,7 +21,9 @@ class CreateOrUpdateCommission
     {
         //
     }
-
+    public function getAmount()
+    {
+    }
     /**
      * Handle the event.
      *
@@ -36,7 +41,7 @@ class CreateOrUpdateCommission
                     break;
                 } */
 
-                $products  = collect($model->concepts);
+                $products  = $model->products();
 
                 $products->map(function ($product) {
                     $this->amount += 5 * $product['qty'];

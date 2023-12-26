@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Http\Requests\StoreSaleRequest;
 use App\Models\Client;
@@ -65,6 +66,9 @@ class SaleController extends Controller
 
         // ver la primera validacion que hay dentro de este evento refernte a status ;)
         TransactionComplete::dispatch($sale, $this->factors[$fields['status']]);
+
+        //Commission
+        SaleTransactionProcessed::dispatch($sale);
 
         $this->buildSaleIDSession($fields, $sale);
 

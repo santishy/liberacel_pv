@@ -32,10 +32,10 @@ class FastSale extends Model
         'concepts' => 'array',
     ];
 
-    // protected $dispatchesEvents = [
-    //     'updating' => FastSaleUpdated::class
-    // ];
-
+    public function products()
+    {
+        return collect($this->concepts);
+    }
     public function addBonus()
     {
         $product_bonus_id = request('product_bonus_id');
