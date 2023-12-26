@@ -50,9 +50,14 @@ class Sale extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product')->withPivot('qty', 'sale_price');
+        return $this->belongsToMany('App\Models\Product')
+            ->withPivot('qty', 'sale_price');
     }
 
+    public function commission()
+    {
+        return $this->morphOne(Commission::class, "commissionable");
+    }
 
 
     public function productInTransaction($product)

@@ -11,7 +11,6 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class CreateOrUpdateCommission
 {
-    public $amount = 0;
     /**
      * Create the event listener.
      *
@@ -21,8 +20,23 @@ class CreateOrUpdateCommission
     {
         //
     }
-    public function getAmount()
+    public function getAmount($model)
     {
+        $amount = 0;
+        $products  = $model->products();
+
+        if ($model instanceof FastSale) {
+            $products->map(function ($product) use ($amount) {
+                $amount += 5 * $product['qty'];
+            });
+        }
+
+        if ($model instanceof Sale) {
+            $products->get()->map(function ($product) use ($amount) {
+                $amount += $product->pivot->qty * 5;
+            });
+        }
+        return $amount;
     }
     /**
      * Handle the event.
@@ -41,17 +55,13 @@ class CreateOrUpdateCommission
                     break;
                 } */
 
-                $products  = $model->products();
-
-                $products->map(function ($product) {
-                    $this->amount += 5 * $product['qty'];
-                });
                 $model->commission()->create([
-                    'amount' => $this->amount,
+                    'amount' => $this->getAmount($model),
                     'user_id' => $model->user_id,
                 ]);
                 break;
             case 'cancelled':
+            case 'pending':
                 // if ($model->getOriginal('status') == 'cancelled') {
                 //     break;
                 // }

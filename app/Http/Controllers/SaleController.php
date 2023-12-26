@@ -67,8 +67,6 @@ class SaleController extends Controller
         // ver la primera validacion que hay dentro de este evento refernte a status ;)
         TransactionComplete::dispatch($sale, $this->factors[$fields['status']]);
 
-        //Commission
-        SaleTransactionProcessed::dispatch($sale);
 
         $this->buildSaleIDSession($fields, $sale);
 
@@ -78,6 +76,9 @@ class SaleController extends Controller
             $inverse = -1;
             $sale->handleCredit($this->factors[$sale->status] * $inverse);
         }
+
+        //Commission
+        SaleTransactionProcessed::dispatch($sale);
 
         return response()->json([
             'sale_status' => $sale->status,
