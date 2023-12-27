@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CommissionResource;
 use App\Models\Commission;
+use App\Models\FastSale;
+use App\Models\Sale;
 use App\Models\User;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 
 class UserCommissionsController extends Controller
@@ -15,9 +18,13 @@ class UserCommissionsController extends Controller
         $this->authorize("viewAny", new Commission);
         if (request()->wantsJson()) {
             $user = User::find(request('user_id'));
-            //$query = $user->fastSaleCommission()->applyFilters();
-            $query = Commission::with(['commissionable'])->applyFilters()->where('user_id', $user->id);
-            //$query = $user->commissions()->applyFilters();
+
+            $query = Commission::with(['commissionable' => function (MorphTo $query) {
+                $query->morphWith([
+                    Sale::class => ['products']
+                ]);
+            }])->applyFilters()->where('user_id', $user->id);
+
             $commissions  = CommissionResource::collection(
                 $query->paginate()
             );
