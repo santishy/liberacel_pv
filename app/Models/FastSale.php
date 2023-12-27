@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use App\Events\FastSaleUpdated;
 use App\Facades\Settings;
+use App\Models\Traits\HasCommission;
 use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class FastSale extends Model
 {
     use HasFactory, HasUserRelationship;
-    use ReportBy, ManagesCredits;
+    use ReportBy, ManagesCredits, HasCommission;
 
     protected $fillable = [
         'status',
@@ -67,11 +66,12 @@ class FastSale extends Model
         $this->attributes['concepts'] = collect($this->concepts)->prepend($value);
     }
 
-    public function commission()
+    public function calculateCommissionAmount($products)
     {
-        return $this->morphOne(Commission::class, "commissionable");
+        return $products->sum(function ($product) {
+            return 5 * $product['qty'];
+        });
     }
-
 
 
     static function findOrCreateFastSale()

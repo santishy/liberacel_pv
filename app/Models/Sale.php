@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasCommission;
 use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,10 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    use HasFactory, ReportBy, ManagesCredits;
+    use HasFactory, ReportBy, ManagesCredits, HasCommission;
 
     protected $guarded = ['id'];
     protected $client;
+
     public function refunds()
     {
         return $this->morphMany(Refund::class, 'refundable');
@@ -54,10 +56,6 @@ class Sale extends Model
             ->withPivot('qty', 'sale_price');
     }
 
-    public function commission()
-    {
-        return $this->morphOne(Commission::class, "commissionable");
-    }
 
 
     public function productInTransaction($product)
@@ -128,5 +126,11 @@ class Sale extends Model
         }
         $this->products()->sync($sync);
         return;
+    }
+    public function calculateCommissionAmount($products)
+    {
+        return $products->sum(function ($product) {
+            return 5 * $product->pivot->qty;
+        });
     }
 }
