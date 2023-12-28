@@ -14,103 +14,52 @@
                 my-2
                 mx-2
                 rounded-sm
-                bg-orange-100
-                shadow-inner
+                bg-yellow-300
                 p-2
                 flex flex-wrap
                 justify-between
                 items-center
             ">
-            <h3 class="text-blue-800 font-mono font-extralight">
-                Usuario: {{ username }}
+            <h3 class="text-slate-600 font-mono font-extralight">
+                Usuario: {{ name }}
             </h3>
             <span class="
                     text-green-800
                     rounded
-                    bg-indigo-100
                     p-2
                     font-mono font-semibold
                     text-xl
                 ">Total: {{ totalWithFormat }}</span>
         </div>
-        <table class="
-                min-w-full
-                border-collapse
-                block
-                md:table
-                shadow-sm
-                text-center
-                rounded-lg
-            ">
-            <thead class="block md:table-header-group">
-                <tr class="
-                        border-b border-gray-500
-                        rounded-t-sm
-                        md:border-none
-                        block
-                        md:table-row
-                        absolute
-                        -top-full
-                        md:top-auto
-                        -left-full
-                        md:left-auto md:relative
-                    ">
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
-                        Nota
-                    </th>
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
-                        Fecha
-                    </th>
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
-                        Producto/s
-                    </th>
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
-                        Monto
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="block md:table-row-group alternate-table-row">
-                <commission-list-item v-for="commission in commissions" :key="commission.id" :commission="commission">
-                </commission-list-item>
-            </tbody>
-        </table>
-        <infinite-loading @infinite="getCommissions" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+        <div class="table-container-responsive">
+
+            <table class="report-table">
+                <thead class="report-table-thead">
+                    <tr class="bg-emerald-200">
+                        <th class="px-2 py-2">
+                            Tipo de venta
+                        </th>
+                        <th class="px-2 py-2">
+                            Nota
+                        </th>
+                        <th class="px-2 py-2">
+                            Fecha
+                        </th>
+                        <th class="px-2 py-2">
+                            Producto/s
+                        </th>
+                        <th class="px-2 py-2">
+                            Monto
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <commission-list-item v-for="commission in commissions" :key="commission.id" :commission="commission">
+                    </commission-list-item>
+                </tbody>
+            </table>
+            <infinite-loading @infinite="getCommissions" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+        </div>
     </div>
 </template>
 
@@ -128,7 +77,7 @@ export default {
             page: 1,
             total: 0,
             totalWithFormat: "",
-            username: null,
+            name: null,
             range: {},
             statusFilter: {
                 "filter[completedStatus]": "completed",
@@ -138,7 +87,8 @@ export default {
     created() {
         EventBus.$on("get-user-commissions", (userData) => {
             const { user, ...filter } = userData;
-            this.username = user.username;
+            this.name = user.name;
+
             this.commissions = [];
             this.range = filter;
             this.user_id = user.id;

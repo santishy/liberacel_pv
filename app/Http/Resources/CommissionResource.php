@@ -18,7 +18,7 @@ class CommissionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'note' => $this->note,
+            'note' => $this->commissionable->id,
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'total' => $this->total,
             'commissionable' => $this->getResourceCommissionable($this->whenLoaded('commissionable')), //json_decode($this->concepts),

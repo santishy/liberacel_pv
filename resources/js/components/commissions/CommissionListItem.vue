@@ -1,53 +1,25 @@
 <template>
     <tr class="
-            bg-white
-            border-b border-gray-400
-            md:border-none
-            block
-            md:table-row
+            py-2 px-1
         ">
-        <td class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Nota</span>{{ commission.note }}
+        <td class="py-2 px-1 text-slate-600">
+            {{ commission.type_of_sale }}
         </td>
-        <td class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span>{{ commission.created_at }}
+        <td class="py-2 px-1 text-slate-700 font-semibold">
+            {{ commission.note }}
         </td>
-        <td class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Productos</span>
-            <!-- <p
-                v-for="item in changeProductFormat"
-                :key="item.product"
-                class="text-xs text-gray-800"
-            >
-                {{ item }}
-            </p> -->
+        <td class="py-2 px-1 text-xs text-slate-600">
+            {{ commission.created_at }}
         </td>
-        <td class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Fecha</span>
+        <td class="py-2 px-1 max-w-xs sm:max-w-sm md:max-w-2xl">
+            <p class="flex flex-wrap divide-x-2 gap-2  ">
+                <span class="text-xs px-2 py-[.15rem] rounded bg-sky-600 font-light text-slate-50"
+                    v-for="product in commission.commissionable.products" :key="`${product.id}-${commission.type_of_sale}`">
+                    {{ product.description }}
+                </span>
+            </p>
+        </td>
+        <td class="py-2 px-1">
             <div class="flex items-center">
                 <errors-component :errors-found="errors" />
             </div>
