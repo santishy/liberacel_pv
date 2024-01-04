@@ -130,7 +130,7 @@ class Sale extends Model
     public function calculateCommissionAmount($products)
     {
         return $products->sum(function ($product) {
-            return 5 * $product->pivot->qty;
+            return $product->commission_amount * $product->pivot->qty;
         });
     }
 }

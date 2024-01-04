@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-        <product-form 
-                method="post" 
-                :categories="{{json_encode($categories)}}"
-                :inventories="{{json_encode($inventories)}}"
-        ></product-form>   
+    <product-form method="post" :categories="{{ json_encode($categories) }}" :inventories="{{ json_encode($inventories) }}"
+        title="Nuevo producto"></product-form>
 @endsection

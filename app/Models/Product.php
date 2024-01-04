@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sku', 'distributor_price', 'image', 'wholesale_price', 'retail_price', 'description', 'category_id'];
+    protected $fillable = ['sku', 'commission_amount', 'distributor_price', 'image', 'wholesale_price', 'retail_price', 'description', 'category_id'];
 
     public function scopeSearch(Builder $query, $values)
     {
@@ -68,10 +68,9 @@ class Product extends Model
                 $constraint->aspectRatio();
             });
             $name = str::uuid() . '.' . request()->file('image')->extension();
-            $resize->save(storage_path('app/public/images/'.$name));
+            $resize->save(storage_path('app/public/images/' . $name));
             return Storage::url("public/images/$name");
         }
         return "/images/not-found.png";
-
     }
 }

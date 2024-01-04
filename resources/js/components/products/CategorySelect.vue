@@ -1,33 +1,19 @@
 <template>
     <div class="relative ">
         <slot name="labelCategory"> </slot>
-        <input
-            v-model="term_search"
-            :class="[inputClass]"
-            class="
+        <input v-model="term_search" :class="[inputClass]" class="
                 form-text-input
                 w-full
-            "
-            autocomplete="off"
-            @focus="allCategories"
-            @keyup.prevent="search"
-            @keyup.esc.prevent="close"
-            @keyup.down.prevent="nextFocused"
-            @keyup.up.prevent="previousFocused"
-            @keyup.exact.enter.prevent="selectedCategory(focusedIndex, $event)"
-            type="text"
-            placeholder="Click o Enter para seleccionar | Presione la tecla ESC para limpiar"
-            aria-label="Full name"
-        />
+            " autocomplete="off" @focus="allCategories" @keyup.prevent="search" @keyup.esc.prevent="close"
+            @keyup.down.prevent="nextFocused" @keyup.up.prevent="previousFocused"
+            @keyup.exact.enter.prevent="selectedCategory(focusedIndex, $event)" type="text"
+            placeholder="Click o Enter para seleccionar | Presione la tecla ESC para limpiar" aria-label="Full name" />
 
-        <button
-            @click.prevent="close"
-            class="absolute  right-2 text-gray-700 bg-white text-center  font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow"
-        >
+        <button @click.prevent="close"
+            class="absolute  right-2 text-gray-700 bg-white text-center  font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow">
             X
         </button>
-        <div
-            class="
+        <div class="
                 absolute
                 mt-4
                 top-10
@@ -39,13 +25,10 @@
                 max-h-64
                 overflow-x-auto
 
-            "
-            v-if="items.length"
-        >
+            " v-if="items.length">
             <ul class="bg-white w-full relative" ref="dropdown">
                 <li class="mt-2" v-for="(item, index) in items" :key="item.id">
-                    <a
-                        class="
+                    <a class="
                             pl-4
                             block
                             w-full
@@ -55,13 +38,8 @@
                             font-mono font-light
                             hover:bg-gray-300
                             cursor-pointer
-                        "
-                        href="#"
-                        :class="{ 'bg-gray-300': index == focusedIndex }"
-                        @keyup.exact.down="nextFocused"
-                        @keyup.exact.up="previousFocused"
-                        @click.prevent="selectedCategory(index)"
-                    >
+                        " href="#" :class="{ 'bg-gray-300': index == focusedIndex }" @keyup.exact.down="nextFocused"
+                        @keyup.exact.up="previousFocused" @click.prevent="selectedCategory(index)">
                         {{ item.name }}
                     </a>
                 </li>
@@ -78,14 +56,18 @@ export default {
         product: {
             type: Object
         },
-        inputClass: { type:String }
+        inputClass: { type: String }
     },
     mounted() {
         if (this.product) {
             const category = this.categories.find(
-                ele => ele.id === this.product.id
+                ele => ele.id == this.product.category_id
             );
-            this.term_search = category.name;
+            if (category) {
+                this.term_search = category.name;
+            } else {
+                console.log("not found category")
+            }
         }
         EventBus.$on("clean-search-term", () => {
             this.term_search = "";

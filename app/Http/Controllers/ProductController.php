@@ -95,6 +95,7 @@ class ProductController extends Controller
         return $request->validate([
             'sku' => $request->id
                 ? "unique:products,sku,$request->id|required" : 'unique:products,sku|required',
+            'commission_amount' => 'required|numeric|min:1',
             'description' => 'required',
             'wholesale_price' => 'required|numeric',
             'retail_price' => 'required|numeric',
