@@ -91,7 +91,8 @@ class SaleController extends Controller
         $this->authorize('delete', $sale);
 
         if ($sale->status != 'completed') {
-            $saleDeleted = $sale->delete();
+            //$saleDeleted = $sale->delete();
+            $saleDeleted = $sale->update(["status" => "cancelled"]);
             session()->forget('sale_id');
             return response()->json(['saleDeleted' => $saleDeleted]);
         }

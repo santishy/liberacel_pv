@@ -46,7 +46,6 @@ export default {
         TransactionListItem,
         Message,
         Agree,
-        // InfiniteLoading,
         InformationComponent
     },
     props: {
@@ -75,6 +74,7 @@ export default {
     },
     mounted() {
         EventBus.$on("set-parameters", data => {
+            this.params = null;
             this.changeParams(data);
         });
         EventBus.$on("selected-warehouses", warehouses => {
@@ -85,7 +85,6 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-            console.log('infiniteHandler: page', this.page)
             axios
                 .get(this.uri, {
                     params: {
@@ -107,7 +106,7 @@ export default {
                 });
         },
         changeParams(value) {
-            this.params = value;
+            Vue.set(this.$data, 'params', value);
             this.page = 1;
             this.transactions = [];
             this.infiniteId += 1;
