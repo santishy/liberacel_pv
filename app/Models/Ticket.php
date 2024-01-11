@@ -20,8 +20,9 @@ class Ticket extends Model
         $dompdf->setCallbacks(
             array(
                 'myCallbacks' => array(
-                    'event' => 'end_frame', 'f' => function ($infos) {
-                        $frame = $infos["frame"];
+                    'event' => 'end_frame',
+                    'f' => function (\Dompdf\Frame $frame) { //function ($infos) {
+                        //  $frame = $infos["frame"];
                         if (strtolower($frame->get_node()->nodeName) === "body") {
                             $padding_box = $frame->get_padding_box();
                             $GLOBALS['bodyHeight'] += $padding_box['h'];

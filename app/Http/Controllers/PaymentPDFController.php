@@ -6,7 +6,8 @@ use App\Http\Resources\PaymentResource;
 use App\Models\Payment;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
+//use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaymentPDFController extends Controller
 {
