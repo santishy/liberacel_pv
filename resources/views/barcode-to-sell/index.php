@@ -25,7 +25,7 @@
 <body class="m-0">
     <div class="w-full ">
         <div class="border border-black m-0 ">
-            {!! DNS1D::getBarcodeHTML("$product->sku", 'C128') !!}
+            {!! DNS1D::getBarcodeHTML("$saleID", 'C128') !!}
         </div>
     </div>
 </body>
