@@ -43,6 +43,7 @@
                 currency: "MXN",
             }) }}</p>
         </div>
+
     </div>
 </template>
 
@@ -148,7 +149,7 @@ export default {
                     else if (this.localSale.status === "pending") {
                         this.products = this.localSale.products;
                     }
-                    window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
+                    //window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
                 })
                 .catch((err) => {
                     this.getErrors(err);
@@ -159,6 +160,25 @@ export default {
                         text: this.errors[0],
                     });
                 });
+        },
+        async getBarcodeToSellUrl(typeOfSale, saleID) {
+
+            try {
+                const res = await axios.post("/barcode-to-sell", {
+                    type_of_sale: typeOfSale,
+                    sale_id: saleID,
+                });
+                // Crear un blob desde la respuesta para el contenido del PDF
+                const blob = new Blob([response.data], { type: 'application/pdf' });
+
+                // Crear una URL para el blob
+                const url = URL.createObjectURL(blob);
+
+                // Abrir la URL en una nueva pestaña
+                window.open(url, '_blank');
+            } catch (error) {
+                console.log(error)
+            }
         },
         async updateCart(data) {
             try {
