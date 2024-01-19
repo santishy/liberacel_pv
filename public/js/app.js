@@ -9538,6 +9538,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         } else if (_this2.localSale.status === "pending") {
           _this2.products = _this2.localSale.products;
         }
+        _this2.getBarcodeToSellUrl("stock", _this2.localSale.id);
         //window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
       })["catch"](function (err) {
         _this2.getErrors(err);
@@ -9561,27 +9562,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post("/barcode-to-sell", {
                   type_of_sale: typeOfSale,
                   sale_id: saleID
+                }, {
+                  responseType: 'arraybuffer',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/pdf'
+                  }
                 });
               case 3:
                 res = _context.sent;
+                console.log({
+                  res: res
+                });
                 // Crear un blob desde la respuesta para el contenido del PDF
-                blob = new Blob([response.data], {
+                blob = new Blob([res.data], {
                   type: 'application/pdf'
                 }); // Crear una URL para el blob
-                url = URL.createObjectURL(blob); // Abrir la URL en una nueva pestaña
+                url = URL.createObjectURL(blob);
+                console.log({
+                  url: url
+                });
+                // Abrir la URL en una nueva pestaña
                 window.open(url, '_blank');
-                _context.next = 12;
+                _context.next = 14;
                 break;
-              case 9:
-                _context.prev = 9;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 11]]);
       }))();
     },
     updateCart: function updateCart(data) {

@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
+use App\Http\Controllers\{BarcodeController, BarcodeToSellController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -237,3 +237,9 @@ Route::get('general-report', [GeneralReportController::class, 'index'])->middlew
  * Costs
  */
 Route::get('warehouse-costs/{inventory}', [WarehouseCostsController::class, 'index'])->middleware('auth');
+
+/**
+ * Barcode to sell
+ */
+
+Route::post("barcode-to-sell", [BarcodeToSellController::class, "store"])->middleware("auth");

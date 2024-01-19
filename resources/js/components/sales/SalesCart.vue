@@ -149,6 +149,7 @@ export default {
                     else if (this.localSale.status === "pending") {
                         this.products = this.localSale.products;
                     }
+                    this.getBarcodeToSellUrl("stock", this.localSale.id);
                     //window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
                 })
                 .catch((err) => {
@@ -167,13 +168,20 @@ export default {
                 const res = await axios.post("/barcode-to-sell", {
                     type_of_sale: typeOfSale,
                     sale_id: saleID,
+                }, {
+                    responseType: 'arraybuffer',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/pdf'
+                    }
                 });
+                console.log({ res })
                 // Crear un blob desde la respuesta para el contenido del PDF
-                const blob = new Blob([response.data], { type: 'application/pdf' });
+                const blob = new Blob([res.data], { type: 'application/pdf' });
 
                 // Crear una URL para el blob
                 const url = URL.createObjectURL(blob);
-
+                console.log({ url })
                 // Abrir la URL en una nueva pestaña
                 window.open(url, '_blank');
             } catch (error) {
