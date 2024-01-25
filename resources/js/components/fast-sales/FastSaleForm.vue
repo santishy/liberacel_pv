@@ -60,6 +60,7 @@ export default {
         EventBus.$on("focus-description", this.focusDescription);
         EventBus.$on("selected-item", (item) => {
             this.form.product_bonus_id = item?.id;
+            this.form.commission_amount = item?.commission_amount;
         });
         EventBus.$on("sale-to-client", (res) => {
             console.log(res.data)

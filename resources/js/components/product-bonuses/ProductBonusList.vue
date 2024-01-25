@@ -47,6 +47,18 @@
                         Puntos
                     </th>
                     <th class="
+                            bg-blue-700
+                            p-2
+                            text-white
+                            font-semibold
+                            md:border md:border-grey-500
+                            text-left
+                            block
+                            md:table-cell
+                        ">
+                        Valor de comisión
+                    </th>
+                    <th class="
                     bg-blue-700
                     p-2
                     text-white
@@ -61,7 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-                <product-bonus-item v-for="(productBonus,index) in productBonuses" :key="productBonus.id"
+                <product-bonus-item v-for="(productBonus, index) in productBonuses" :key="productBonus.id"
                     :product-bonus="productBonus" :index="index">
                 </product-bonus-item>
             </tbody>
@@ -88,9 +100,8 @@ export default {
             this.productBonuses.unshift(productBonus);
             EventBus.$emit('open-modal', false);
         });
-        EventBus.$on('removed-product-bonus',index => {
-            console.log('entro : ' + index)
-            this.productBonuses.splice(index,1);
+        EventBus.$on('removed-product-bonus', index => {
+            this.productBonuses.splice(index, 1);
         });
     },
     methods: {

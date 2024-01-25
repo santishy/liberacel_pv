@@ -26,6 +26,7 @@ class StoreFastSaleRequest extends FormRequest
     {
         return [
             'description' => 'required',
+            'commission_amount' => 'numeric',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|integer',
             'product_bonus_id' => 'required',

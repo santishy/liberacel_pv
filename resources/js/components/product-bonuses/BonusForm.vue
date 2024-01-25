@@ -1,119 +1,78 @@
 <template>
-    <form
-        @submit.prevent="submit"
-        class="w-full  md:mt-0"
-    >
-        <div
-            class="
+    <form @submit.prevent="submit" class="w-full  md:mt-0">
+        <div class="
                 flex
-                items-center
-                border-b border-t border-gray-500
-                py-2
-                relative
-            "
-        >
-            <input
-                v-model="form.name"
-                name="name"
-                class="
-                    appearance-none
-                    bg-transparent
-                    border-none
-                    w-full
-                    text-gray-700
-                    mr-3
+                gap-2
+                flex-col
+                py-1
+            ">
+            <label for="" class="
+                    text-slate-700
+                    text-start
                     py-1
-                    pl-32
+                    font-mono
+                ">Nombre</label>
+            <input v-model="form.name" name="name" class="
+                    appearance-none
+                    bg-slate-200
+                    rounded-sm
+                    w-full
+                    text-slate-600
+                    py-1
                     leading-tight
                     focus:outline-none
-                "
-                :class="[
-                    'flex',
-                    'items-center',
-                    'border-b',
-                    'border-teal-500',
-                    'py-2',
-                ]"
-                type="text"
-                placeholder="CATEGORÍA"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="
-                    absolute
-                    pl-0
-                    bg-gray-200
-                    h-full
-                    flex
-                    items-center
-                    w-32
-                    justify-center
-                    text-indigo-800
-                    font-mono
-                "
-                >Nombre</label
-            >
+                " type="text" placeholder="CATEGORÍA" aria-label="Full name" />
         </div>
-        <div
-            class="
+        <div class="
                 flex
-                items-center
-                border-b border-t border-gray-500
+                flex-col
                 py-2
-                relative
-            "
-        >
-            <input
-                v-model="form.points"
-                name="points"
-                class="
-                    appearance-none
-                    bg-transparent
-                    border-none
-                    w-full
-                    text-gray-700
-                    mr-3
+            ">
+            <label for="" class="
+                    text-slate-700
+                    text-start
                     py-1
-                    pl-32
+                    font-mono
+                ">Puntos</label>
+            <input v-model="form.points" name="points" class="
+                    appearance-none
+                    bg-slate-200
+                    rounded-sm
+                    w-full
+                    text-slate-600
+                    py-1
                     leading-tight
                     focus:outline-none
-                "
-                :class="[
-                    'flex',
-                    'items-center',
-                    'border-b',
-                    this.errors ? 'border-transparent' : 'border-teal-500',
-                    'py-2',
-                ]"
-                type="number"
-                placeholder="CATEGORÍA"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="
-                    absolute
-                    pl-0
-                    bg-gray-200
-                    h-full
-                    flex
-                    items-center
-                    w-32
-                    justify-center
-                    text-indigo-800
+                " type="number" placeholder="NOM PUNTOS" aria-label="Full name" />
+        </div>
+        <div class="
+                flex
+                flex-col
+                py-2
+            ">
+            <label for="" class="
+                    text-slate-700
+                    text-start
+                    py-1
                     font-mono
-                "
-                >Puntos</label
-            >
+                ">Comisión</label>
+            <input v-model="form.commission_amount" name="commission_amount" class="
+                    appearance-none
+                    bg-slate-200
+                    rounded-sm
+                    w-full
+                    text-slate-600
+                    py-1
+                    leading-tight
+                    focus:outline-none
+                " type="number" placeholder="Valor de comisión en pesos" aria-label="Full name" />
         </div>
         <div class="flex items-center">
             <errors-component :errors-found="errors" />
         </div>
 
         <div class="flex justify-center mt-0 mb-0">
-            <button
-                class="
+            <button class="
                     bg-transparent
                     transition-all
                     duration-500
@@ -127,8 +86,7 @@
                     border-b-2 border-blue-500
                     hover:border-transparent
                     w-full
-                "
-            >
+                ">
                 Guardar
             </button>
         </div>
@@ -151,7 +109,7 @@ export default {
             axios
                 .post(`/product-bonuses`, this.form)
                 .then((res) => {
-                    EventBus.$emit("bonus-created",res.data)
+                    EventBus.$emit("bonus-created", res.data)
                 })
                 .catch((err) => {
                     this.getErrors(err);

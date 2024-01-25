@@ -26,6 +26,16 @@
             ">
             <span class="inline-block w-1/3 md:hidden font-bold">Puntos</span>{{ productBonus.points }}
         </td>
+        <td @dblclick.prevent="dblclick" class="
+                p-2
+                md:border md:border-grey-500
+                text-left
+                block
+                md:table-cell
+            ">
+            <span class="inline-block w-1/3 md:hidden font-bold">Valor de comisión</span>{{ productBonus.commission_amount
+            }}
+        </td>
         <td class="
             p-2
             md:border md:border-grey-500
@@ -40,9 +50,10 @@
     </tr>
     <tr v-else class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
         <td colspan="2" class="border-grey-light border hover:bg-gray-100 p-3">
-            <form class="grid grid-cols-2 gap-2" @submit.prevent="submit">
+            <form class="grid grid-cols-3 gap-4" @submit.prevent="submit">
                 <input type="text" name="name" v-model="form.name" :class="[inputStyle]" />
                 <input type="text" name="points" v-model="form.points" :class="[inputStyle]" />
+                <input type="text" name="commission_amount" v-model="form.commission_amount" :class="[inputStyle]" />
                 <button type="submit"></button>
             </form>
         </td>
@@ -84,6 +95,7 @@ export default {
                 );
                 this.productBonus.name = res.data.name;
                 this.productBonus.points = res.data.points;
+                this.productBonus.commission_amount = res.data.commission_amount;
                 this.show = false;
             } catch (error) {
                 console.log(error.message);

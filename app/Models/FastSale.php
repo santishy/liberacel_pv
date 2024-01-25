@@ -68,8 +68,9 @@ class FastSale extends Model
 
     public function calculateCommissionAmount($products)
     {
+
         return $products->sum(function ($product) {
-            return 5 * $product['qty'];
+            return $product['commission_amount'] * $product['qty'];
         });
     }
 
@@ -85,7 +86,7 @@ class FastSale extends Model
     }
     public function addConcept()
     {
-        $this['concepts'] = request()->only('description', 'price', 'qty', 'product_bonus_id');
+        $this['concepts'] = request()->only('description', 'price', 'qty', 'product_bonus_id', 'commission_amount');
         $this->updateTotal();
     }
     public  function updateTotal()
@@ -109,7 +110,6 @@ class FastSale extends Model
         if (is_null($index)) {
             return null;
         }
-
         $products = $this->concepts;
         $this->productBonuses()
             ->detach($products[$index]['product_bonus_id']);

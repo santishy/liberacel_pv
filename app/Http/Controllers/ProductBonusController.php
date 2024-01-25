@@ -11,7 +11,7 @@ class ProductBonusController extends Controller
     public function index()
     {
         if (request()->wantsJson()) {
-            $productBonuses = ProductBonus::where('status',true)->orderBy('id', 'desc')->paginate();
+            $productBonuses = ProductBonus::where('status', true)->orderBy('id', 'desc')->paginate();
             return $productBonuses;
         }
         return view('product-bonus.index');
@@ -21,14 +21,20 @@ class ProductBonusController extends Controller
     {
         return  ProductBonus::create([
             'name' => $request->name,
-            'points' => $request->points
+            'points' => $request->points,
+            'commission_amount' => $this->getCommissionAmount()
         ]);
+    }
+    private function getCommissionAmount()
+    {
+        return request()->has('commission_amount') ? request()->commission_amount : 5;
     }
     public function update(UpdateStoreProductBonus $request, ProductBonus $productBonus)
     {
         $productBonus->update([
             'name' => $request->name,
-            'points' => $request->points
+            'points' => $request->points,
+            'commission_amount' => $this->getCommissionAmount()
         ]);
         return $productBonus;
     }
