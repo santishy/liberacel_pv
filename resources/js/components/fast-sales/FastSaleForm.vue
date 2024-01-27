@@ -71,7 +71,7 @@ export default {
         ...mapMutations(['SET_CURRENT_FAST_SALE']),
         async submit() {
             try {
-                //this.toggleDisabled();
+                this.toggleDisabled();
                 const {
                     data: { data },
                 } = await axios.post("/fast-sales", this.form);
@@ -93,7 +93,7 @@ export default {
             catch (err) {
                 this.getErrors(err);
             }
-            //this.toggleDisabled();
+            this.toggleDisabled();
             this.focusedIndex = 0;
             this.$refs.description.focus();
         },

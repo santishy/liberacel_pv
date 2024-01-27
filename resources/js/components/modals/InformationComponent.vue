@@ -74,7 +74,6 @@ export default {
     },
     created() {
         EventBus.$on(this.openModalID, value => {
-            console.log('entro aki', this.openModalID)
             this.modal = value;
         });
         EventBus.$on("open-modal", value => {

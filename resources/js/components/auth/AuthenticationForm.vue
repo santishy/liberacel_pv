@@ -134,8 +134,11 @@ export default {
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
             this.local_id = id;
+            this.$refs.username.focus();
+
         });
-        EventBus.$on("open-modal", (val) => {
+
+        EventBus.$on(`open-modal-${this.id}`, (val) => {
             if (val) {
                 this.$nextTick(() => {
                     if (this.$refs?.username) this.$refs.username.focus();
