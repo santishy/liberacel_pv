@@ -30,13 +30,13 @@ class EventServiceProvider extends ServiceProvider
         TransactionComplete::class => [
             UpdateInventory::class,
         ],
+        SaleTransactionProcessed::class => [
+            CreateOrUpdateCommission::class,
+        ],
         FastSaleUpdated::class => [
             ChangeStatus::class,
             AddPointsToCustomerBonus::class,
             // CreateOrUpdateCommission::class,
-        ],
-        SaleTransactionProcessed::class => [
-            CreateOrUpdateCommission::class,
         ],
         ApplyElectronicMoneyDiscount::class => [
             DecreaseCustomerBonusDiscountPoints::class,
