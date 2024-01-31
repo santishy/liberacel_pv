@@ -16,8 +16,6 @@ class FastSalePDFController extends Controller
 
         $products = $sale->concepts;
 
-        //dd($products);
-
         $ticketConfig = Ticket::first();
         $typeOfSale = 'fastsale';
 

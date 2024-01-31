@@ -3,6 +3,9 @@
 @endphp
 @foreach ($products as $product )
     <tr class="text-sm">
+        <td class="border-b border-gray-400 ">
+            {{$product['qty'] * $product['commission_amount']}}
+        </td>
         <td class="border-b border-gray-400 py-1">
             {{$product['description']}}
         </td>

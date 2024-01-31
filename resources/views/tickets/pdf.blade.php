@@ -171,7 +171,7 @@
             <p class="mb-0 p-0 mt-0  text-center ">
                 <span>Dire: </span> {{$ticketConfig->address}}
             </p>
-            <div class="mb-3">{!! DNS1D::getBarcodeHTML("12345", 'C128') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$sale->id", 'C128') !!}</div>
         </div>
         <div 
             style="width: 75%;"
@@ -182,8 +182,9 @@
         <table class="mt-1 mb-0 table-auto text-center rounded">
             <thead>
                 <tr class="bg-gray-400 px-2">
-                    <th>Producto</th>
-                    <th>Cantidad</th>
+                    <th>Cod.</th>
+                    <th>Prod.</th>
+                    <th>Cant.</th>
                     <th>Subtotal</th>
                 </tr>
             </thead>
