@@ -63,7 +63,7 @@
                             bg-blue-500
                             hover:border-transparent
                             w-full
-                        " :disabled="getStatus">
+                        " :disabled="loading">
                         Enviar
                     </button>
                     <div v-if="form.status == 'cancelled'" class="
@@ -127,6 +127,7 @@ export default {
             },
             local_id: null,
             disabled: false,
+            loading: false,
         };
     },
     created() { },
@@ -154,6 +155,7 @@ export default {
     methods: {
         async submit() {
             try {
+                this.loading = true;
                 const res = await axios.post(
                     `/fast-sales/${this.local_id}/associated-users`,
                     this.form
@@ -168,6 +170,8 @@ export default {
                 }
             } catch (err) {
                 console.log(err);
+            } finally {
+                this.loading = false;
             }
         },
         toggleStatus(event) {

@@ -35,7 +35,12 @@ class FastSaleController extends Controller
         $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus', 'productBonuses');
 
         if (isset($sale)) {
-            $sale = FastSaleResource::make($sale);
+            if ($sale->status != "pending") {
+                session()->forget("sale-id");
+                $sale = null;
+            } elseif ($sale->status === "pending") {
+                $sale = FastSaleResource::make($sale);
+            }
         }
 
         return view('fast-sales.create', compact('sale', 'productBonuses'));
@@ -45,7 +50,7 @@ class FastSaleController extends Controller
     {
         $this->authorize('create', new FastSale);
 
-        $fastSale = FastSale::findOrCreateFastSale();
+        $fastSale = $this->isTheStatusCompleted(FastSale::findOrCreateFastSale());
 
         $fastSale->addConcept();
 
@@ -64,6 +69,14 @@ class FastSaleController extends Controller
         $fastSaleFresh = $fastSale->fresh();
 
         return FastSaleResource::make($fastSaleFresh->load('productBonuses', 'customerBonus'));
+    }
+    private function isTheStatusCompleted($fastSale)
+    {
+        if ($fastSale->status === "completed") {
+            session()->forget("fast-sale");
+            return FastSale::findOrCreateFastSale();
+        }
+        return $fastSale;
     }
 
     public function update(UpdateFastSaleRequest $request, FastSale $sale)
