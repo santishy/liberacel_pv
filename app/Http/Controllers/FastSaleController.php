@@ -29,9 +29,7 @@ class FastSaleController extends Controller
         $this->authorize('create', new FastSale);
 
         $pointData = Setting::where('name', 'precio_punto')->first();
-
         $productBonuses = ProductBonus::all();
-        //$sale = session()->has('fast-sale') ? fastSale::find(session('fast-sale')) : null;
         $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus', 'productBonuses');
 
         if (isset($sale)) {
@@ -42,7 +40,6 @@ class FastSaleController extends Controller
                 $sale = FastSaleResource::make($sale);
             }
         }
-
         return view('fast-sales.create', compact('sale', 'productBonuses'));
     }
 
@@ -69,6 +66,12 @@ class FastSaleController extends Controller
         $fastSaleFresh = $fastSale->fresh();
 
         return FastSaleResource::make($fastSaleFresh->load('productBonuses', 'customerBonus'));
+    }
+    private function clearFastSaleSessionIfNotPending($fastSale)
+    {
+        if ($fastSale->status != "pending") {
+            session()->forget('fast-sale');
+        }
     }
     private function isTheStatusCompleted($fastSale)
     {
