@@ -15,7 +15,7 @@ class FastSalePDFController extends Controller
         $now = Carbon::now()->format('Y-m-d');
 
         $products = $sale->concepts;
-
+        $user = $sale->user;
         $ticketConfig = Ticket::first();
         $typeOfSale = 'fastsale';
 
@@ -23,7 +23,7 @@ class FastSalePDFController extends Controller
 
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale')
+            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale', 'user')
         )->setPaper(array(0, 0, 225, 2000));
 
         /**
@@ -36,7 +36,7 @@ class FastSalePDFController extends Controller
          */
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale')
+            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale', 'user')
         )->setPaper(array(0, 0, 225, $height + 20));
 
         return $pdf->stream();
