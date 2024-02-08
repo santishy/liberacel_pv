@@ -18,15 +18,17 @@ class PDFController extends Controller
 
         $products = $sale->products;
 
+        $user = $sale->user;
+
         $ticketConfig = Ticket::first();
 
-        $typeOfSale = 'sale';
+        $typeOfSale = 'stock';
 
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
 
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale')
+            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale', 'user')
         )->setPaper(array(0, 0, 227.67, 2000));
 
         /**
@@ -39,7 +41,7 @@ class PDFController extends Controller
          */
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale')
+            compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale', 'user')
         )->setPaper(array(0, 0, 227.67, $height + 20));
 
         return $pdf->stream();

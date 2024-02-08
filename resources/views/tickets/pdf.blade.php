@@ -245,7 +245,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($typeOfSale == 'sale')
+                @if ($typeOfSale == 'stock')
                     @include('tickets.sale-table')
                 @elseif($typeOfSale == 'express')
                     @include('tickets.fast-sale-table')

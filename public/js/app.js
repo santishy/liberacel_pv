@@ -9546,8 +9546,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         } else if (_this2.localSale.status === "pending") {
           _this2.products = _this2.localSale.products;
         }
-        _this2.getBarcodeToSellUrl("stock", _this2.localSale.id);
-        //window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
+        //  this.getBarcodeToSellUrl("stock", this.localSale.id);
+        window.open("/pdf-tickets/".concat(_this2.localSale.id), "_blank");
       })["catch"](function (err) {
         _this2.getErrors(err);
         _this2.$notify({

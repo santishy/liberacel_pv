@@ -149,8 +149,8 @@ export default {
                     else if (this.localSale.status === "pending") {
                         this.products = this.localSale.products;
                     }
-                    this.getBarcodeToSellUrl("stock", this.localSale.id);
-                    //window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
+                    //  this.getBarcodeToSellUrl("stock", this.localSale.id);
+                    window.open(`/pdf-tickets/${this.localSale.id}`, "_blank");
                 })
                 .catch((err) => {
                     this.getErrors(err);
