@@ -17,7 +17,7 @@ class FastSalePDFController extends Controller
         $products = $sale->concepts;
         $user = $sale->user;
         $ticketConfig = Ticket::first();
-        $typeOfSale = 'fastsale';
+        $typeOfSale = 'express';
 
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
 
