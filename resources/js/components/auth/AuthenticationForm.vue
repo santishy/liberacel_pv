@@ -116,6 +116,10 @@ export default {
         id: {
             type: Number,
         },
+        uri: {
+            type: String,
+            required: true
+        }
     },
     components: {
         InformationComponent,
@@ -135,8 +139,6 @@ export default {
         this.local_id = this.id;
         EventBus.$on("id-for-authenticacion-form", (id) => {
             this.local_id = id;
-            this.$refs.username.focus();
-
         });
 
         EventBus.$on(`open-modal-${this.id}`, (val) => {
@@ -154,10 +156,11 @@ export default {
     },
     methods: {
         async submit() {
+            //`/fast-sales/${this.local_id}/associated-users`
             try {
                 this.loading = true;
                 const res = await axios.post(
-                    `/fast-sales/${this.local_id}/associated-users`,
+                    this.uri,
                     this.form
                 );
                 this.form.model = this.model;

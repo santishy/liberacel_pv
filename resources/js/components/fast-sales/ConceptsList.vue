@@ -73,7 +73,8 @@
             </table>
         </div>
 
-        <authentication-form model="FastSale" :id="currentFastSale.id" />
+        <authentication-form model="FastSale" :uri="`/fast-sales/${currentFastSale.id}/associated-users`"
+            :id="currentFastSale.id" />
     </div>
 </template>
 

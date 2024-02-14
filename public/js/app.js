@@ -2394,6 +2394,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     id: {
       type: Number
+    },
+    uri: {
+      type: String,
+      required: true
     }
   },
   components: {
@@ -2415,7 +2419,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.local_id = this.id;
     EventBus.$on("id-for-authenticacion-form", function (id) {
       _this.local_id = id;
-      _this.$refs.username.focus();
     });
     EventBus.$on("open-modal-".concat(this.id), function (val) {
       if (val) {
@@ -2443,7 +2446,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 0;
                 _this2.loading = true;
                 _context.next = 4;
-                return axios.post("/fast-sales/".concat(_this2.local_id, "/associated-users"), _this2.form);
+                return axios.post(_this2.uri, _this2.form);
               case 4:
                 res = _context.sent;
                 _this2.form.model = _this2.model;
@@ -13669,6 +13672,7 @@ var render = function render() {
   }), 1)])]), _vm._v(" "), _c("authentication-form", {
     attrs: {
       model: "FastSale",
+      uri: "/fast-sales/".concat(_vm.currentFastSale.id, "/associated-users"),
       id: _vm.currentFastSale.id
     }
   })], 1) : _vm._e();
