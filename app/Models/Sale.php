@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasCommission;
+use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    use HasFactory, ReportBy, ManagesCredits, HasCommission;
+    use HasFactory, ReportBy, HasUserRelationship, ManagesCredits, HasCommission;
 
     protected $guarded = ['id'];
     protected $client;

@@ -9384,7 +9384,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.localSale = this.sale;
     }
     EventBus.$on("selected-inventory", function (inventory) {
-      _this.seletedInventoryId = inventory.id;
+      _this.selectedInventoryId = inventory.id;
     });
     EventBus.$on("sale-deleted", function (res) {
       _this.sale_status = null;
@@ -9402,7 +9402,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      seletedInventoryId: null,
+      selectedInventoryId: null,
       show: false,
       localSale: {}
     };
@@ -19420,7 +19420,7 @@ var render = function render() {
     attrs: {
       name: "fade"
     }
-  }, [_vm.seletedInventoryId == null && _vm.isAdmin && !_vm.localSale.inventory_id ? _c("div", {
+  }, [_vm.selectedInventoryId == null && _vm.isAdmin && !_vm.localSale.inventory_id ? _c("div", {
     staticClass: "flex flex-col justify-center mx-auto px-4 w-full"
   }, [_c("p", {
     staticClass: "border w-full px-4 py-2 ring-2 ring-blue-500 decoration-dotted text-gray-700 rounded-sm bg-indigo-100 mb-2 text-center"
@@ -19479,7 +19479,13 @@ var render = function render() {
     attrs: {
       sale: _vm.sale
     }
-  })], 1)])], 1)])], 1);
+  })], 1)])], 1)]), _vm._v(" "), _c("authentication-form", {
+    attrs: {
+      model: "Sale",
+      uri: "/sales/".concat(_vm.sale.id, "/associated-users"),
+      id: _vm.sale.id
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -21106,6 +21112,39 @@ var getCurrentUser = function getCurrentUser(state) {
 
 /***/ }),
 
+/***/ "./resources/js/vuex/modules/sales/index.js":
+/*!**************************************************!*\
+  !*** ./resources/js/vuex/modules/sales/index.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var module = {
+  namespace: true,
+  state: function state() {
+    return {
+      sale: null
+    };
+  },
+  getters: {
+    currentSale: function currentSale(state) {
+      return state.sale;
+    }
+  },
+  mutations: {
+    setSale: function setSale(state, sale) {
+      state.sale = sale;
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (module);
+
+/***/ }),
+
 /***/ "./resources/js/vuex/mutations.js":
 /*!****************************************!*\
   !*** ./resources/js/vuex/mutations.js ***!
@@ -21214,10 +21253,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./resources/js/vuex/actions.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mutations */ "./resources/js/vuex/mutations.js");
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getters */ "./resources/js/vuex/getters.js");
+/* harmony import */ var _modules_sales__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sales */ "./resources/js/vuex/modules/sales/index.js");
 var _window$localStorage$;
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -21241,7 +21282,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   },
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_3__["default"],
   actions: _actions__WEBPACK_IMPORTED_MODULE_2__["default"],
-  getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"]
+  getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
+  modules: {
+    sales: _modules_sales__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }
 });
 
 /***/ }),

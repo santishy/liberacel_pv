@@ -5,6 +5,7 @@ Vue.use(Vuex);
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
+import sales from "./modules/sales"
 
 export const store = new Vuex.Store({
     state: {
@@ -32,4 +33,7 @@ export const store = new Vuex.Store({
     mutations,
     actions,
     getters,
+    modules:{
+        sales,
+    }
 });

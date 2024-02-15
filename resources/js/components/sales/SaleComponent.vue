@@ -1,7 +1,7 @@
 <template>
     <nav-component>
         <transition name="fade">
-            <div v-if="seletedInventoryId == null && (isAdmin && !localSale.inventory_id)"
+            <div v-if="selectedInventoryId == null && (isAdmin && !localSale.inventory_id)"
                 class="flex flex-col justify-center mx-auto px-4 w-full">
                 <p class="
                         border
@@ -99,6 +99,10 @@
                 </div>
             </div>
         </transition>
+        <authentication-form model="Sale"
+            :uri="`/sales/${sale.id}/associated-users`"
+            :id="sale.id"
+        />
     </nav-component>
 </template>
 <script>
@@ -136,7 +140,7 @@ export default {
             this.localSale = this.sale;
         }
         EventBus.$on("selected-inventory", (inventory) => {
-            this.seletedInventoryId = inventory.id;
+            this.selectedInventoryId = inventory.id;
         });
         EventBus.$on("sale-deleted", (res) => {
             this.sale_status = null;
@@ -154,7 +158,7 @@ export default {
     },
     data() {
         return {
-            seletedInventoryId: null,
+            selectedInventoryId: null,
             show: false,
             localSale: {},
         };
