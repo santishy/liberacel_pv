@@ -16,9 +16,10 @@
                     </div>
                     <span class="ml-3 text-sm font-medium text-gray-900 ">A crédito</span>
                 </label>
-                <button v-show="Object.keys(localSale).length" class="w-2/6 px-3 py-2 rounded " :class="[getClass]">
+                <!-- aqui Termino la venta, solo que lo comente para agregar usuario desde otra parte a la venta -->
+                <!-- <button v-show="Object.keys(localSale).length" class="w-2/6 px-3 py-2 rounded " :class="[getClass]">
                     {{ modifyTo }}
-                </button>
+                </button> -->
             </div>
         </form>
         <div v-if="localSale !== null" class="overflow-x-auto relative max-h-80 overflow-y-auto">

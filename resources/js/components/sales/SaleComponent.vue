@@ -75,7 +75,9 @@
                                 ">
                                 Cliente registrado
                             </button>
-
+                            <button @click.prevent=""
+                                class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold">Finalizar
+                                venta</button>
                             <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
                         </div>
                         <div v-if="localSale" :class="[
@@ -99,17 +101,16 @@
                 </div>
             </div>
         </transition>
-        <authentication-form model="Sale"
-            :uri="`/sales/${sale.id}/associated-users`"
-            :id="sale.id"
-        />
+        <authentication-form v-if="currentSale" model="Sale" :uri="`/sales/${currentSale.id}/associated-users`"
+            :id="sale.id" />
     </nav-component>
 </template>
 <script>
+import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductMatching from "../products/ProductMatching.vue";
 import SearchComponent from "../products/SearchComponent.vue";
 import InventoryList from "../inventories/InventoryList.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 import SalesCart from "./SalesCart";
 import NavComponent from "../NavComponent.vue";
 import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
@@ -125,6 +126,7 @@ export default {
         SaleToCustomer,
         SearchByCategory,
         DeleteSale,
+        AuthenticationForm
     },
     props: {
         sale: {
@@ -172,6 +174,7 @@ export default {
     },
     computed: {
         ...mapState(["salePriceOption"]),
+        ...mapGetters("sales", ["currentSale"]),
         typeOfSale() {
             return this.localSale?.client_id
                 ? "Cliente " + this.localSale?.client?.name.toUpperCase()

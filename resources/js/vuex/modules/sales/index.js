@@ -1,17 +1,17 @@
 const module = {
-    namespace:true,
-    state(){
-        return{
-            sale:null,
+    namespaced: true,
+    state() {
+        return {
+            sale: null,
         }
     },
-    getters:{
-        currentSale(state){
+    getters: {
+        currentSale(state) {
             return state.sale;
         }
     },
-    mutations:{
-        setSale(state,sale){
+    mutations: {
+        setSale(state, sale) {
             state.sale = sale;
         }
     }
