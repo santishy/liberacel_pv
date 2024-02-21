@@ -6,12 +6,13 @@ const module = {
         }
     },
     getters: {
-        currentSale(state) {
+        currentSale: (state) => {
             return state.sale;
         }
     },
     mutations: {
-        setSale(state, sale) {
+        setSale: (state, sale) => {
+            console.log("set sale", sale)
             state.sale = sale;
         }
     }

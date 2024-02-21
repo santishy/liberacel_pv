@@ -75,9 +75,9 @@
                                 ">
                                 Cliente registrado
                             </button>
-                            <button @click.prevent=""
+                            <button v-if="currentSale" @click.prevent=""
                                 class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold">Finalizar
-                                venta</button>
+                                venta - {{ currentSale?.id }}</button>
                             <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
                         </div>
                         <div v-if="localSale" :class="[
