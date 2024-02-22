@@ -102,7 +102,6 @@
             </div>
         </transition>
         <template v-if="currentSale">
-            {{ currentSale.id }}
             <authentication-form model="Sale" :uri="`/user-relationship`" :id="currentSale?.id" />
         </template>
     </nav-component>

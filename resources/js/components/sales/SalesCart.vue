@@ -79,6 +79,7 @@ export default {
             this.products[obj.index].sale_quantity = obj.transaction.qty;
             this.products[obj.index].sale_price = obj.transaction.sale_price;
         });
+        EventBus.$on("associated-user", this.printTicket);
         EventBus.$on("product-added-sales-cart", (res) => {
             this.localSale = res;
             this.products = res.products;
@@ -125,6 +126,10 @@ export default {
         },
     },
     methods: {
+        printTicket(id) {
+            window.open(`/pdf-tickets/${id}`, "_blank");
+            EventBus.$emit(`open-modal-${id}`, false);
+        },
         submit() {
             if (this.sale)
                 if (this.sale.inventory_id)
@@ -188,6 +193,7 @@ export default {
                 console.log(error)
             }
         },
+
         async updateCart(data) {
             try {
                 const res = await axios.post(`/sales/${data?.product_id}/products`,

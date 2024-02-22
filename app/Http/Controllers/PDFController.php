@@ -44,6 +44,10 @@ class PDFController extends Controller
             compact('sale', 'now', 'products', 'ticketConfig', 'typeOfSale', 'user')
         )->setPaper(array(0, 0, 227.67, $height + 20));
 
+        if (session()->has("sale_id")) {
+            session()->forget('sale_id');
+        }
+
         return $pdf->stream();
     }
 }
