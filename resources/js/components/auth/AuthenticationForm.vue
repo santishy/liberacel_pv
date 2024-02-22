@@ -159,11 +159,12 @@ export default {
             //`/fast-sales/${this.local_id}/associated-users`
             try {
                 this.loading = true;
+                this.form.model = this.model;
+                this.form.id = this.id;
                 const res = await axios.post(
                     this.uri,
                     this.form
                 );
-                this.form.model = this.model;
                 if (res.status === 200) {
                     // this.disabled = false;
                     EventBus.$emit("associated-user", this.form.id);

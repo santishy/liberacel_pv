@@ -46,9 +46,7 @@ class ProductInSaleController extends Controller
                 'inventory_id' => ['required', new TransactionInventory($sale)],
             ],
         );
-
         Inventory::find($request->inventory_id)->existsProductInStock($product);
-
         $sale->transactions($product);
         $request->product = $product;
         return new TransactionResponse($sale->load('products'));

@@ -75,9 +75,9 @@
                                 ">
                                 Cliente registrado
                             </button>
-                            <button v-if="currentSale" @click.prevent=""
-                                class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold">Finalizar
-                                venta - {{ currentSale?.id }}</button>
+                            <button v-if="currentSale" @click.prevent="openModal"
+                                class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold hover:bg-green-600 hover:text-white">Finalizar
+                                venta </button>
                             <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
                         </div>
                         <div v-if="localSale" :class="[
@@ -85,7 +85,7 @@
                             alignStatus,
                         ]">
                             <div class="text-gray-600">
-                                ID Venta - #{{ localSale.id }}
+                                ID Venta - #{{ localSale?.id }}
                             </div>
                             <div class="text-xl text-green-900">
                                 {{ typeOfSale }}
@@ -101,8 +101,10 @@
                 </div>
             </div>
         </transition>
-        <authentication-form v-if="currentSale" model="Sale" :uri="`/sales/${currentSale.id}/associated-users`"
-            :id="sale.id" />
+        <template v-if="currentSale">
+            {{ currentSale.id }}
+            <authentication-form model="Sale" :uri="`/user-relationship`" :id="currentSale?.id" />
+        </template>
     </nav-component>
 </template>
 <script>
@@ -140,6 +142,7 @@ export default {
         if (this.sale) {
             this.sale_status = this.sale.status;
             this.localSale = this.sale;
+            this.setSale(this.sale)
         }
         EventBus.$on("selected-inventory", (inventory) => {
             this.selectedInventoryId = inventory.id;
@@ -167,6 +170,10 @@ export default {
     },
     methods: {
         ...mapMutations(["SET_QUERY_TYPE"]),
+        ...mapMutations("sales", ["setSale"]),
+        openModal() {
+            EventBus.$emit(`open-modal-${this.currentSale?.id}`, true)
+        },
         getQueryType() {
             let url = new URL(window.location.href);
             this.SET_QUERY_TYPE(url.searchParams.get('queryType'));
