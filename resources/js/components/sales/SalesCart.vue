@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import ProductListItem from "./ProductListItem";
 import ProductList from "./ProductList.vue";
 import Errors from "../../mixins/Errors";
@@ -126,9 +127,16 @@ export default {
         },
     },
     methods: {
+        ...mapMutations("sales", ["setSale"]),
         printTicket(id) {
-            window.open(`/pdf-tickets/${id}`, "_blank");
             EventBus.$emit(`open-modal-${id}`, false);
+            window.open(`/pdf-tickets/${id}`, "_blank");
+            this.clearCurrentSale();
+        },
+        clearCurrentSale() {
+            sessionStorage.removeItem("salePriceOption");
+            this.products = []
+            this.setSale(null);
         },
         submit() {
             if (this.sale)

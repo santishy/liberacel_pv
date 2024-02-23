@@ -179,7 +179,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(["salePriceOption"]),
+        //...mapState(["salePriceOption"]),
         ...mapGetters("sales", ["currentSale"]),
         typeOfSale() {
             return this.localSale?.client_id

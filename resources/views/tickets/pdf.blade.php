@@ -235,6 +235,8 @@
             Nota #{{ $sale->id }}
         </div>
         <div class="mb-2 mt-1 flex justify-center text-center">{!! DNS1D::getBarcodeHTML("$typeOfSale-$sale->id", 'C128', 1, 20) !!}</div>
+        <div class="text-right font-bold p-1 text-sm border-b border-t">Status: {{ __('status.' . $sale->status) }}
+        </div>
         <table class="mt-1 mb-0 table-auto text-center rounded">
             <thead>
                 <tr class="bg-gray-400 px-2">
