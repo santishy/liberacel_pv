@@ -248,3 +248,4 @@ Route::post("barcode-to-sell", [BarcodeToSellController::class, "store"])->middl
  * Checkout
  */
 Route::get("checkout", [CheckoutController::class, "create"])->middleware("auth");
+Route::post("checkout", [CheckoutController::class, "store"])->middleware("auth");

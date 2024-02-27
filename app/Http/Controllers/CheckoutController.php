@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
@@ -12,6 +14,16 @@ class CheckoutController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'model' => [Rule::in(['FastSale', 'Sale']), "required"],
+            "id" => ["number", "required"]
+        ]);
+        return;
+    }
+    public function getModel($request)
+    {
+        $model = str::of($request->model);
+        $model = app("App\Models\\$model->ucfirst")->find($request->id);
+        return $model;
     }
 }
