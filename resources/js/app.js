@@ -124,6 +124,11 @@ Vue.component('payment-list', require('./components/reports/payments/PaymentList
  */
 Vue.component('report-component', require('./components/reports/Index.vue').default);
 Vue.component('general-report', require('./components/reports/GeneralComponent.vue').default);
+/**
+ * Checkout
+ */
+Vue.component('checkout', require('./components/payment-point/Checkout.vue').default);
+
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))
