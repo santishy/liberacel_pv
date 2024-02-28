@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TransactionComplete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
+    private $factors = [
+        "completed" => -1,
+        "pending" => 1,
+    ];
     public function create()
     {
         return view('payment-point.create');
@@ -18,13 +23,22 @@ class CheckoutController extends Controller
             'model' => [Rule::in(['FastSale', 'Sale']), "required"],
             "id" => ["numeric", "required"]
         ]);
+
         $model = $this->getModel($request->model, $request->id);
+
+        if ($this->getModelName($model) === "Sale") {
+            TransactionComplete::dispatch($model, $this->factors["completed"]);
+        }
 
         return response()->json([
             "model" => class_basename($model)
         ]);
     }
-    public function getModel($model, $id)
+    private function getModelName($model)
+    {
+        return class_basename($model);
+    }
+    private function getModel($model, $id)
     {
         $model = app("App\Models\\$model")->find($id);
         return $model;
