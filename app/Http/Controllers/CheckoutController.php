@@ -16,14 +16,17 @@ class CheckoutController extends Controller
     {
         $request->validate([
             'model' => [Rule::in(['FastSale', 'Sale']), "required"],
-            "id" => ["number", "required"]
+            "id" => ["numeric", "required"]
         ]);
-        return;
+        $model = $this->getModel($request->model, $request->id);
+
+        return response()->json([
+            "model" => class_basename($model)
+        ]);
     }
-    public function getModel($request)
+    public function getModel($model, $id)
     {
-        $model = str::of($request->model);
-        $model = app("App\Models\\$model->ucfirst")->find($request->id);
+        $model = app("App\Models\\$model")->find($id);
         return $model;
     }
 }

@@ -234,7 +234,7 @@
         <div style="width: 75%;" class="text-center  text-xl rounded border border-black mx-auto">
             Nota #{{ $sale->id }}
         </div>
-        <div class="mb-2 mt-1 flex justify-center text-center">{!! DNS1D::getBarcodeHTML("$typeOfSale-$sale->id", 'C128', 1, 20) !!}</div>
+        <div class="mb-2 mt-1 flex justify-center text-center">{!! DNS1D::getBarcodeHTML("$model-$sale->id", 'C128', 1, 20) !!}</div>
         <div class="text-right font-bold p-1 text-sm border-b border-t">Status: {{ __('status.' . $sale->status) }}
         </div>
         <table class="mt-1 mb-0 table-auto text-center rounded">
@@ -247,9 +247,9 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($typeOfSale == 'stock')
+                @if ($model == 'Sale')
                     @include('tickets.sale-table')
-                @elseif($typeOfSale == 'express')
+                @elseif($model == 'FastSale')
                     @include('tickets.fast-sale-table')
                 @endif
             </tbody>
