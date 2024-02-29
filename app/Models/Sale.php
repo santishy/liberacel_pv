@@ -134,4 +134,9 @@ class Sale extends Model
             return $product->commission_amount * $product->pivot->qty;
         });
     }
+    // public function calculateTotalSale($products = []){
+    //     if(count($products) == 0){
+    //         $products = $this->products()->get
+    //     }
+    // }
 }

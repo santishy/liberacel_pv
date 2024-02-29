@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -30,9 +31,23 @@ class CheckoutController extends Controller
             TransactionComplete::dispatch($model, $this->factors["completed"]);
         }
 
+        $model->update(['status' => "completed"]);
+
+        if ($this->hasCredit($model)) {
+            $inverse = -1;
+            $model->handleCredit($this->factors["completed"] * $inverse);
+        }
+
+        SaleTransactionProcessed::dispatch($model);
+
+        $model->fresh();
         return response()->json([
-            "model" => class_basename($model)
+            "model" => $model
         ]);
+    }
+    private function hasCredit($model)
+    {
+        return $model->client_id && $model->is_credit;
     }
     private function getModelName($model)
     {
