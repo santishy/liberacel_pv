@@ -24,14 +24,15 @@ class CheckoutController extends Controller
             'model' => [Rule::in(['FastSale', 'Sale']), "required"],
             "id" => ["numeric", "required"]
         ]);
-
+        $data = ['status' => "completed"];
         $model = $this->getModel($request->model, $request->id);
 
         if ($this->getModelName($model) === "Sale") {
             TransactionComplete::dispatch($model, $this->factors["completed"]);
+            $data["total"] = $model->calculateTotalSale();
         }
 
-        $model->update(['status' => "completed"]);
+        $model->update($data);
 
         if ($this->hasCredit($model)) {
             $inverse = -1;

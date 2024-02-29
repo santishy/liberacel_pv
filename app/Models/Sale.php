@@ -134,9 +134,15 @@ class Sale extends Model
             return $product->commission_amount * $product->pivot->qty;
         });
     }
-    // public function calculateTotalSale($products = []){
-    //     if(count($products) == 0){
-    //         $products = $this->products()->get
-    //     }
-    // }
+    public function calculateTotalSale($products = [])
+    {
+        $total = 0;
+        if (count($products) == 0) {
+            $products = $this->products()->get();
+        }
+        foreach ($products as $product) {
+            $total += $product->pivot->sale_price * $product->pivot->qty;
+        }
+        return $total;
+    }
 }

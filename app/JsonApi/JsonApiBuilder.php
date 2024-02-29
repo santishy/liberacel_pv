@@ -31,12 +31,15 @@ class JsonApiBuilder
             return $this;
         };
     }
-
+    /**
+     * 
+     */
     public function transactions()
     {
         return function ($product) {
             $transaction = $this->model->products();
-            $price = $this->model->client()->count() ? $this->model->client->assigned_price : 'retail_price';
+            $price = $this->model->client()->count() ?
+                $this->model->client->assigned_price : 'retail_price';
             if (!$transaction->where('product_id', $product->id)->exists()) {
                 $transaction->attach($product->id, [
                     /**
