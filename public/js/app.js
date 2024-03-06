@@ -13042,7 +13042,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("form", {
+  return _c("div", [_c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -13079,7 +13079,13 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n            Buscar Cliente\n        ")]), _vm._v(" "), _c("information-component", {
+  }, [_vm._v("\n                Buscar Cliente\n            ")])]), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center"
+  }, [_c("errors-component", {
+    attrs: {
+      "errors-found": _vm.errors
+    }
+  })], 1)]), _vm._v(" "), _c("information-component", {
     attrs: {
       id: "client"
     },
@@ -13094,19 +13100,13 @@ var render = function render() {
     staticClass: "border-t border-b py-2 border-slate-300 flex flex-col gap-1 justify-start items-start"
   }, [_c("p", {
     staticClass: "uppercase border-yellow-400 border text-sm text-slate-700 px-2 py-1 rounded-sm"
-  }, [_vm._v(_vm._s(_vm.client.name) + "\n                    ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.client.name) + "\n                ")]), _vm._v(" "), _c("p", {
     staticClass: "border-yellow-400 border text-sm text-slate-500 px-2 py-1 rounded-sm"
   }, [_vm._v(_vm._s(_vm.client.address))]), _vm._v(" "), _c("p", {
     staticClass: "border-yellow-400 border text-sm text-slate-700 px-2 py-1 rounded-sm"
-  }, [_vm._v("\n                        " + _vm._s(_vm.client.phone_number) + "\n                    ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.client.phone_number) + "\n                ")]), _vm._v(" "), _c("p", {
     staticClass: "border-yellow-400 border text-sm text-slate-500 px-2 py-1 rounded-sm"
-  }, [_vm._v(_vm._s(_vm.client.company) + "\n                    ")])])] : _vm._e()], 2)], 1), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1)]);
+  }, [_vm._v(_vm._s(_vm.client.company) + "\n                ")])])] : _vm._e()], 2)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

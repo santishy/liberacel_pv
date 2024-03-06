@@ -6,6 +6,7 @@ use App\Http\Resources\CreditResource;
 use App\Models\Credit;
 use Illuminate\Http\Request;
 
+
 class CreditController extends Controller
 {
     function index()
@@ -23,6 +24,9 @@ class CreditController extends Controller
 
     function store(Request $request)
     {
+        $data = $request->validate([
+            "model" => ["request",]
+        ]);
     }
     function update(Request $request, Credit $credit)
     {
