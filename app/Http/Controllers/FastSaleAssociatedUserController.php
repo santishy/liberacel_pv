@@ -30,7 +30,6 @@ class FastSaleAssociatedUserController extends Controller
         //     );
         //     $fastSale->handleCredit($this->factors[$fastSale->status] * $inverse);
         // }
-
         return response()->json([
             'sale' => $fastSale
         ]);

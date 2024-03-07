@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, BarcodeToSellController, CheckoutController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
+use App\Http\Controllers\{BarcodeController, BarcodeToSellController, CheckoutController, ClientFastSaleController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -249,3 +249,9 @@ Route::post("barcode-to-sell", [BarcodeToSellController::class, "store"])->middl
  */
 Route::get("checkout", [CheckoutController::class, "create"])->middleware("auth");
 Route::post("checkout", [CheckoutController::class, "store"])->middleware("auth");
+
+/**
+ * client-FastSale
+ */
+
+Route::post("client/{sale}/fast-sales", [ClientFastSaleController::class, "store"])->middleware("auth");

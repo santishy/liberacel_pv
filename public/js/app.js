@@ -4762,7 +4762,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.showSaleToCustomer = status;
     });
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)(["SET_CURRENT_FAST_SALE"]))
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)(["SET_CURRENT_FAST_SALE"])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(["currentFastSale"]))
 });
 
 /***/ }),
@@ -13079,7 +13080,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n                Buscar Cliente\n            ")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                Asociar Cliente\n            ")])]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center"
   }, [_c("errors-component", {
     attrs: {
@@ -13835,6 +13836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function render() {
+  var _vm$currentFastSale;
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav-component", [_c("subtotals"), _vm._v(" "), _c("div", {
@@ -13848,9 +13850,8 @@ var render = function render() {
       value: _vm.showSaleToCustomer,
       expression: "showSaleToCustomer"
     }],
-    staticClass: "w-full",
     attrs: {
-      uri: "/clients/"
+      uri: "/client/".concat((_vm$currentFastSale = _vm.currentFastSale) === null || _vm$currentFastSale === void 0 ? void 0 : _vm$currentFastSale.id, "/fast-sales")
     }
   }), _vm._v(" "), _c("fast-sale-form", {
     staticClass: "mt-4",
@@ -21284,6 +21285,36 @@ var getCurrentUser = function getCurrentUser(state) {
 
 /***/ }),
 
+/***/ "./resources/js/vuex/modules/clients/index.js":
+/*!****************************************************!*\
+  !*** ./resources/js/vuex/modules/clients/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: {
+    phoneNumber: null
+  },
+  mutations: {
+    setPhoneNumber: function setPhoneNumber(state, phoneNumber) {
+      state.phoneNumber = phoneNumber;
+    }
+  },
+  getters: {
+    getPhoneNumber: function getPhoneNumber(state) {
+      return state.phoneNumber;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/vuex/modules/sales/index.js":
 /*!**************************************************!*\
   !*** ./resources/js/vuex/modules/sales/index.js ***!
@@ -21426,10 +21457,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mutations */ "./resources/js/vuex/mutations.js");
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getters */ "./resources/js/vuex/getters.js");
 /* harmony import */ var _modules_sales___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sales/ */ "./resources/js/vuex/modules/sales/index.js");
+/* harmony import */ var _modules_clients___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/clients/ */ "./resources/js/vuex/modules/clients/index.js");
 var _window$localStorage$;
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -21456,7 +21489,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   actions: _actions__WEBPACK_IMPORTED_MODULE_2__["default"],
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
   modules: {
-    sales: _modules_sales___WEBPACK_IMPORTED_MODULE_5__["default"]
+    sales: _modules_sales___WEBPACK_IMPORTED_MODULE_5__["default"],
+    clients: _modules_clients___WEBPACK_IMPORTED_MODULE_6__["default"]
   }
 });
 

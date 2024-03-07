@@ -18,14 +18,16 @@
                 ">
                 Crear venta
             </h3>
-            <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>
+            <!-- <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>-->
+            <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" />
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
     </nav-component>
 </template>
+
 <script>
-import { mapMutations } from "vuex"
+import { mapMutations, mapState } from "vuex"
 import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
@@ -62,6 +64,9 @@ export default {
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"])
+    },
+    computed: {
+        ...mapState(["currentFastSale"]),
     }
 };
 </script>
