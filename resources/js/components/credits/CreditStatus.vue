@@ -12,7 +12,7 @@ export default {
     props: ['form'],
     methods: {
         creditStatusChange() {
-            EventBus.$emit('credit-status-change', this.form.is_credit)
+            //EventBus.$emit('credit-status-change', this.form.is_credit)
         }
     }
 }

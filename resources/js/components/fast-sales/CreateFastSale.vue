@@ -1,25 +1,13 @@
 <template>
     <nav-component>
         <subtotals></subtotals>
-        <div class="
-                p-4
-                flex flex-wrap
-                items-baseline
-                md:w-9/12
-                mx-auto
-                bg-white
-                shadow-sm
-                rounded
-            ">
-            <h3 class="
-                    w-full
-                    font-mono
-                    text-2xl
-                ">
+        <div class="p-4 flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded">
+            <h3 class="w-full font-mono text-2xl">
                 Crear venta
             </h3>
             <!-- <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>-->
-            <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" />
+            <!-- <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" /> -->
+            <sale-to-customer :uri="` /client/${currentFastSale?.id}/fast-sales`" />
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
@@ -48,19 +36,24 @@ export default {
         },
         productBonuses: { type: Array },
     },
-    data() {
+    /* data() {
         return {
             showSaleToCustomer: false
         }
-    },
+    }, */
     created() {
         this.SET_CURRENT_FAST_SALE(this.sale);
         /* EventBus.$on('associated-user',(id)=>{
             this.SET_CURRENT_FAST_SALE({});
         }) */
-        EventBus.$on('credit-status-change', (status) => {
-            this.showSaleToCustomer = status;
-        })
+        /**
+         * Listens for the 'credit-status-change' event and updates the 'showSaleToCustomer' property accordingly.
+         * 
+         * @param {string} status - The new credit status.
+         */
+        /*  EventBus.$on('credit-status-change', (status) => {
+             this.showSaleToCustomer = status;
+         }) */
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"])
