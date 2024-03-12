@@ -17,8 +17,12 @@ export default {
         }
     },
     methods: {
-        creditStatusChange() {
-            axios.post(this.url, { _method: 'PATCH', is_credit: this.is_credit });
+        async creditStatusChange() {
+            try {
+                const res = await axios.post(this.url, { _method: 'PATCH', is_credit: this.is_credit });
+            } catch (e) {
+                console.log(e)
+            }
             //EventBus.$emit('credit-status-change', this.form.is_credit)
         }
     }

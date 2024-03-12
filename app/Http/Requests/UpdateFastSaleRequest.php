@@ -28,7 +28,8 @@ class UpdateFastSaleRequest extends FormRequest
             'price' => 'required|numeric|min:1',
             'qty' => 'required|integer|min:1',
             'index' => 'required',
-            'product_bonus_id' => 'required'
+            'product_bonus_id' => 'required',
+            'is_credit' => 'boolean',
         ];
     }
 }
