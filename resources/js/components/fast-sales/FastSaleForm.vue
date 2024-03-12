@@ -1,15 +1,17 @@
 <template>
     <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
-        <credit-status :form="form" class="col-span-2"></credit-status>
+        <!-- <credit-status :form="form" class="col-span-2"></credit-status> -->
         <div>
             <label class="form-label">Descripción</label>
-            <input name="description" ref="description" v-model="form.description" @keydown.down.exact.prevent="nextFocus"
-                @keydown.ctrl.space.exact.prevent="openModal" @click.prevent="focusedIndex = 0"
-                class="form-text-input w-full" placeholder="Descripción del producto o servicio" autocomplete="off" />
+            <input name="description" ref="description" v-model="form.description"
+                @keydown.down.exact.prevent="nextFocus" @keydown.ctrl.space.exact.prevent="openModal"
+                @click.prevent="focusedIndex = 0" class="form-text-input w-full"
+                placeholder="Descripción del producto o servicio" autocomplete="off" />
         </div>
         <div>
             <label class="form-label">Categoría</label>
-            <search-select class="w-full" :collection="productBonuses" input-class="form-text-input w-full"></search-select>
+            <search-select class="w-full" :collection="productBonuses"
+                input-class="form-text-input w-full"></search-select>
         </div>
         <div>
             <label class="form-label">Precio</label>
@@ -37,12 +39,12 @@
 <script>
 import { mapMutations } from "vuex";
 import SearchSelect from "../partials/SearchSelect.vue";
-import CreditStatus from "../credits/CreditStatus.vue";
+// import CreditStatus from "../credits/CreditStatus.vue";
 
 export default {
     components: {
         SearchSelect,
-        CreditStatus,
+        // CreditStatus,
     },
     props: {
         productBonuses: {

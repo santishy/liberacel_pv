@@ -7,7 +7,10 @@
             </h3>
             <!-- <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>-->
             <!-- <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" /> -->
-            <sale-to-customer :uri="` /client/${currentFastSale?.id}/fast-sales`" />
+            <div class="flex py-2 items-center justify-between w-full flex-reverse gap-4">
+                <credit-status />
+                <sale-to-customer :uri="` /client/${currentFastSale?.id}/fast-sales`" />
+            </div>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
@@ -21,6 +24,7 @@ import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
 import Subtotals from "./Subtotals.vue";
 import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
+import CreditStatus from "../credits/CreditStatus.vue";
 export default {
     components: {
         NavComponent,
@@ -28,6 +32,7 @@ export default {
         ConceptsList,
         Subtotals,
         SaleToCustomer,
+        CreditStatus
     },
     props: {
         sale: {
@@ -48,7 +53,7 @@ export default {
         }) */
         /**
          * Listens for the 'credit-status-change' event and updates the 'showSaleToCustomer' property accordingly.
-         * 
+         *
          * @param {string} status - The new credit status.
          */
         /*  EventBus.$on('credit-status-change', (status) => {

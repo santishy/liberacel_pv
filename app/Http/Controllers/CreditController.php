@@ -25,7 +25,7 @@ class CreditController extends Controller
     function store(Request $request)
     {
         $data = $request->validate([
-            "model" => ["request",]
+            "model" => ["request"]
         ]);
     }
     function update(Request $request, Credit $credit)
