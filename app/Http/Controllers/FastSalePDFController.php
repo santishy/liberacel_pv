@@ -12,7 +12,7 @@ class FastSalePDFController extends Controller
 {
     function __invoke(FastSale $sale)
     {
-        $now = Carbon::now()->format('Y-m-d');
+        $now = $sale->created_at->format('Y-m-d H:i:s');
 
         $products = $sale->concepts;
         $user = $sale->user;

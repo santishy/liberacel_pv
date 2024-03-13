@@ -88,10 +88,21 @@ class FastSaleController extends Controller
 
         $data = $request->all();
 
+        //dd($sale["concepts->$data[index]"]);
+
         $sale["concepts->$data[index]"] = collect($data)
-            ->except('index');
+            ->except(['index']);
 
         $sale->total = $sale->calculateTotal();
+
+        // if ($request->has('is_credit')) {
+        //     if ($sale->client_id === null && $request->is_credit) {
+        //         return response()->json([
+        //             'message' => 'El cliente es requerido para realizar una venta a crédito'
+        //         ], 422);
+        //     }
+        //     $sale->is_credit = $request->is_credit;
+        // }
 
         $sale->save();
 

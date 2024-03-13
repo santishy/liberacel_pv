@@ -218,12 +218,12 @@
 
 <body>
     <div class="p-1">
-        <div id="fecha" class="text-right text-sm">
+        <div id="fecha" class="text-right text-sm px-2">
             {{ $now }}
         </div>
         <h1 class="text-xl text-center m-1 mb-0">{{ $ticketConfig->company }}</h1>
         <div class="mb-4 ">
-            <p class="mb-0 text-center  ">
+            <p class="mb-0 text-center text-xl  ">
                 <span>Tel: </span> {{ $ticketConfig->phone_number }}
             </p>
             <p class="mb-0 p-0 mt-0  text-center ">

@@ -19,7 +19,7 @@ export default {
     methods: {
         async creditStatusChange() {
             try {
-                const res = await axios.post(this.url, { _method: 'PATCH', is_credit: this.is_credit });
+                const res = await axios.post(this.url, { _method: 'PUT', is_credit: this.is_credit });
             } catch (e) {
                 console.log(e)
             }

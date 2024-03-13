@@ -7,8 +7,8 @@
             </h3>
             <!-- <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>-->
             <!-- <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" /> -->
-            <div class="flex py-2 items-center justify-between w-full flex-reverse gap-4">
-                <credit-status />
+            <div v-if="currentFastSale?.id" class="flex py-2 items-center justify-between w-full flex-reverse gap-4">
+                <credit-status :url="`/fast-sales/${currentFastSale?.id}`" />
                 <sale-to-customer :uri="` /client/${currentFastSale?.id}/fast-sales`" />
             </div>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
