@@ -24,6 +24,8 @@ class ClientFastSaleController extends Controller
 
         $sale->client()->associate($client);
 
+        $sale->save();
+
         return response()->json([
             "fast_sale" => $sale,
         ]);

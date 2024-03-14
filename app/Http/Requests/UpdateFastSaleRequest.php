@@ -24,11 +24,11 @@ class UpdateFastSaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required',
-            'price' => 'required|numeric|min:1',
-            'qty' => 'required|integer|min:1',
-            'index' => 'required',
-            'product_bonus_id' => 'required',
+            'description' => 'required_if:index,',
+            'price' => 'required_if:index,|numeric|min:1',
+            'qty' => 'required_if:index,|integer|min:1',
+            'index' => 'numeric|min:0',
+            'product_bonus_id' => 'required_if:index,',
             'is_credit' => 'boolean',
         ];
     }
