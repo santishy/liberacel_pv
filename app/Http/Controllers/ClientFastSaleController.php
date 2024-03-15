@@ -27,7 +27,7 @@ class ClientFastSaleController extends Controller
         $sale->save();
 
         return response()->json([
-            "fast_sale" => $sale,
+            "sale" => $sale,
         ]);
     }
 }

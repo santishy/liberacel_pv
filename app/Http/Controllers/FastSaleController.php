@@ -12,6 +12,7 @@ use App\Models\FastSale;
 use App\Models\ProductBonus;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class FastSaleController extends Controller
 {
@@ -98,9 +99,10 @@ class FastSaleController extends Controller
 
         if ($request->has('is_credit')) {
             if ($sale->client_id === null && $request->is_credit) {
-                return response()->json([
-                    'message' => 'El cliente es requerido para realizar una venta a crédito'
-                ], 422);
+                throw
+                throw ValidationException::withMessages([
+                    'client_id' => 'El cliente es requerido para realizar una venta a crédito'
+                ]);
             }
             $sale->is_credit = $request->is_credit;
         }

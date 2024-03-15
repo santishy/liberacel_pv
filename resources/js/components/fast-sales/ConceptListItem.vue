@@ -63,7 +63,7 @@ export default {
                 });
                 EventBus.$emit("fast-sale", data);
             } catch (e) {
-                console.log(e);
+                EventBus.$emit("errors-found", e);
             }
             this.show = false;
         },

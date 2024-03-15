@@ -60,6 +60,7 @@ export default {
     mounted() {
         this.focusDescription();
         EventBus.$on("focus-description", this.focusDescription);
+        EventBus.$on("errors-found", this.showErrors);
         EventBus.$on("selected-item", (item) => {
             this.form.product_bonus_id = item?.id;
             this.form.commission_amount = item?.commission_amount;
@@ -98,6 +99,9 @@ export default {
             this.toggleDisabled();
             this.focusedIndex = 0;
             this.$refs.description.focus();
+        },
+        showErrors(err) {
+            this.getErrors(err);
         },
         toggleDisabled() {
             const fields = document.getElementById("fastSaleForm").elements;

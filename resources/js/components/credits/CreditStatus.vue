@@ -20,8 +20,8 @@ export default {
         async creditStatusChange() {
             try {
                 const res = await axios.post(this.url, { _method: 'PUT', is_credit: this.is_credit });
-            } catch (e) {
-                console.log(e)
+            } catch (error) {
+                EventBus.$emit('errors-found', error);
             }
             //EventBus.$emit('credit-status-change', this.form.is_credit)
         }
