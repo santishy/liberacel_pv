@@ -26,7 +26,8 @@
                 ref="infiniteLoading"></infinite-loading>
         </table>
 
-        <authentication-form model="FastSale" :id="nota"></authentication-form>
+        <authentication-form model="FastSale" :uri="`/fast-sales/${selectedFastSaleId}/associated-users`"
+            :id="nota"></authentication-form>
     </div>
 </template>
 
@@ -55,9 +56,13 @@ export default {
             infiniteId: 1,
             uri: "/fast-sales",
             nota: null,
+            selectedFastSaleId: null,
         };
     },
     mounted() {
+        EventBus.$on("id-for-authentication-form", (id) => {
+            this.selectedFastSaleId = id;
+        });
         EventBus.$on("set-parameters", (data) => {
             this.changeParams(data);
         });

@@ -137,7 +137,7 @@ export default {
     created() { },
     mounted() {
         this.local_id = this.id;
-        EventBus.$on("id-for-authenticacion-form", (id) => {
+        EventBus.$on("id-for-authentication-form", (id) => {
             this.local_id = id;
         });
 
