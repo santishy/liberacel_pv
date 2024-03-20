@@ -13,6 +13,7 @@ use App\Http\Traits\HasTransaction;
 use App\Models\Category;
 use App\Models\Inventory;
 use App\Models\Sale;
+use Illuminate\Validation\ValidationException;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -56,8 +57,6 @@ class SaleController extends Controller
         ]);
     }
 
-
-
     public function store(StoreSaleRequest $request, Sale $sale)
     {
         $this->authorize('create', $sale);
@@ -84,6 +83,29 @@ class SaleController extends Controller
             'sale_status' => $sale->status,
             'total' => $sale->total
         ]);
+    }
+
+    public function update(Sale $sale, Request $request)
+    {
+
+        $data = $request->validate([
+            'status' => 'in:completed,cancelled,pending',
+            "is_credit" => "nullable|boolean",
+            "client_id" => "nullable|exists:clients,id",
+            "total" => "numeric",
+        ]);
+
+        if ($data['is_credit']) {
+            if (!$sale->client_id) {
+                throw ValidationException::withMessages([
+                    'client_id' => 'El campo cliente es requerido'
+                ]);
+            }
+        }
+        $sale->update($data);
+        //$this->authorize('update', $sale);
+
+
     }
 
     public function destroy(Sale $sale)

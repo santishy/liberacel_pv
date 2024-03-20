@@ -99,7 +99,6 @@ class FastSaleController extends Controller
 
         if ($request->has('is_credit')) {
             if ($sale->client_id === null && $request->is_credit) {
-                throw
                 throw ValidationException::withMessages([
                     'client_id' => 'El cliente es requerido para realizar una venta a crédito'
                 ]);
