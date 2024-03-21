@@ -1,5 +1,33 @@
 <template>
     <nav-component>
+
+        <div class="flex">
+            <div class="flex items-center me-4">
+                <input id="inline-radio" type="radio" value="" name="inline-radio-group"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inline
+                    1</label>
+            </div>
+            <div class="flex items-center me-4">
+                <input id="inline-2-radio" type="radio" value="" name="inline-radio-group"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inline
+                    2</label>
+            </div>
+            <div class="flex items-center me-4">
+                <input checked id="inline-checked-radio" type="radio" value="" name="inline-radio-group"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="inline-checked-radio"
+                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inline checked</label>
+            </div>
+            <div class="flex items-center">
+                <input disabled id="inline-disabled-radio" type="radio" value="" name="inline-radio-group"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="inline-disabled-radio"
+                    class="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">Inline disabled</label>
+            </div>
+        </div>
+
         <div class="max-w-4xl m-auto bg-white rounded shadow p-4">
             <h1 class="font-bold text-2xl text-slate-800 p-2 text-center">Caja de cobro</h1>
 
@@ -42,7 +70,6 @@ export default {
             }
         },
         parseBarcodeData() {
-            console.log(this.barcode)
             const [model, id] = this.barcode.split('-');
             this.model = model;
             this.id = id;
