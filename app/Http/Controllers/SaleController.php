@@ -105,7 +105,7 @@ class SaleController extends Controller
         $sale->update($data);
         //$this->authorize('update', $sale);
 
-
+        return new TransactionResource($sale->load('client'));
     }
 
     public function destroy(Sale $sale)

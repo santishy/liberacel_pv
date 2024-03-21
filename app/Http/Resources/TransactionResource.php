@@ -27,6 +27,7 @@ class TransactionResource extends JsonResource
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'inventory_id' => $this->inventory_id,
             'username' => $this->resource->user->name,
+            'is_credit' => $this->resource->is_credit, // Agregar esta línea
         ];
     }
 }

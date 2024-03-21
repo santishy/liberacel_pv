@@ -8,14 +8,14 @@
                 <errors-component :errors="errors" />
             </div>
             <div class="flex flex-wrap justify-between items-center">
-                <!-- <credit-status :form="form"></credit-status> -->
-                <label class="relative inline-flex items-center cursor-pointer">
+
+                <!-- <label class="relative inline-flex items-center cursor-pointer">
                     <input v-model="form.is_credit" type="checkbox" class="sr-only peer">
                     <div
                         class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                     </div>
                     <span class="ml-3 text-sm font-medium text-gray-900 ">A crédito</span>
-                </label>
+                </label> -->
                 <!-- aqui Termino la venta, solo que lo comente para agregar usuario desde otra parte a la venta -->
                 <!-- <button v-show="Object.keys(localSale).length" class="w-2/6 px-3 py-2 rounded " :class="[getClass]">
                     {{ modifyTo }}
@@ -40,9 +40,9 @@
                     ">
             <label class="mr-4 text-2xl">Total</label>
             <p class="text-gray-700 text-3xl font-bold">{{ getTotal.toLocaleString("es-MX", {
-                style: "currency",
-                currency: "MXN",
-            }) }}</p>
+            style: "currency",
+            currency: "MXN",
+                }) }}</p>
         </div>
 
     </div>
@@ -53,9 +53,9 @@ import { mapMutations } from "vuex";
 import ProductListItem from "./ProductListItem";
 import ProductList from "./ProductList.vue";
 import Errors from "../../mixins/Errors";
-import CreditStatus from "../credits/CreditStatus.vue";
+
 export default {
-    components: { ProductListItem, ProductList, CreditStatus },
+    components: { ProductListItem, ProductList },
     mixins: [Errors],
     data() {
         return {

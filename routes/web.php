@@ -89,7 +89,7 @@ Route::get('sales', [SaleController::class, 'index'])->middleware('auth');
 Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create')->middleware('auth');
 Route::post('sales/{sale}', [SaleController::class, 'store'])->name('sales.store')->middleware('auth');
 Route::delete('sales/{sale}', [SaleController::class, 'destroy'])->middleware('auth');
-
+Route::put('sales/{sale}', [SaleController::class, 'update'])->middleware('auth');
 //ROLES
 
 Route::get('roles/create', [RoleController::class, 'create'])->middleware('auth');

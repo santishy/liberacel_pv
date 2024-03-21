@@ -53,37 +53,21 @@
                                 md:justify-between
                                 text-gray-600
                                 md:items-center
+                                mb-2
                             ">
-
-                            <sale-to-customer uri="/sales-to-clients" class="mr-4" v-if="show" />
-
-                            <button v-else @click="show = true" class="
-                                    bg-teal-300
-                                    rounded
-                                    transition-all
-                                    duration-500
-                                    ease-in-out
-                                    hover:bg-teal-500
-                                    text-teal-700
-                                    font-semibold
-                                    hover:text-white
-                                    py-1
-                                    px-4
-                                    border-b-2 border-teal-500
-                                    hover:border-transparent
-                                    mr-1
-                                ">
-                                Cliente registrado
-                            </button>
+                            <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
                             <button v-if="currentSale" @click.prevent="openModal"
                                 class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold hover:bg-green-600 hover:text-white">Finalizar
                                 venta </button>
-                            <delete-sale v-if="localSale" :sale="localSale"></delete-sale>
+                            <div class="flex gap-4 flex-wrap items-center">
+                                <credit-status v-if="localSale?.id" :url="`/sales/${localSale.id}`"></credit-status>
+                                <sale-to-customer uri="/sales-to-clients" />
+                            </div>
                         </div>
                         <div v-if="localSale" :class="[
-                            'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
-                            alignStatus,
-                        ]">
+                'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
+                alignStatus,
+            ]">
                             <div class="text-gray-600">
                                 ID Venta - #{{ localSale?.id }}
                             </div>
@@ -107,11 +91,12 @@
     </nav-component>
 </template>
 <script>
+import CreditStatus from "../credits/CreditStatus.vue";
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductMatching from "../products/ProductMatching.vue";
 import SearchComponent from "../products/SearchComponent.vue";
 import InventoryList from "../inventories/InventoryList.vue";
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import SalesCart from "./SalesCart";
 import NavComponent from "../NavComponent.vue";
 import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
@@ -127,7 +112,8 @@ export default {
         SaleToCustomer,
         SearchByCategory,
         DeleteSale,
-        AuthenticationForm
+        AuthenticationForm,
+        CreditStatus
     },
     props: {
         sale: {
@@ -149,7 +135,6 @@ export default {
         EventBus.$on("sale-deleted", (res) => {
             this.sale_status = null;
             this.localSale = null;
-            this.show = false;
         });
         EventBus.$on("product-added-sales-cart", (sale) => {
             this.localSale = sale;
@@ -163,7 +148,6 @@ export default {
     data() {
         return {
             selectedInventoryId: null,
-            show: false,
             localSale: {},
         };
     },
