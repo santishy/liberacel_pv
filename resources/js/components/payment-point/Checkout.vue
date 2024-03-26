@@ -21,12 +21,14 @@
 
             </div>
 
-            <form class="w-full" @submit.prevent="submit">
-                <div v-if="show" class="">
+            <form class="w-full" v-if="show" @submit.prevent="submit">
+                <div class="">
                     <input name="checkout" placeholder="Haz click y escanea el codigo de barras" v-model="barcode"
                         class="w-full px-4 py-2 rounded-sm bg-slate-200" />
                 </div>
-                <div v-else class="flex flex-wrap gap-4">
+            </form>
+            <form class="w-full" v-else>
+                <div class="flex flex-wrap gap-4">
                     <div>
                         <label class="form-label">Categoría</label>
                         <search-select :collection="options" input-class=" form-text-input w-full" />
