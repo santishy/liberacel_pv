@@ -5898,6 +5898,15 @@ __webpack_require__.r(__webpack_exports__);
       "default": ""
     }
   },
+  created: function created() {
+    var _this = this;
+    EventBus.$on("focus-search-select", function () {
+      console.log(_this.$refs);
+      _this.$nextTick(function () {
+        return _this.$refs["search-select"].focus();
+      });
+    });
+  },
   mounted: function mounted() {
     EventBus.$on("reset-search-select", this.reset);
   },
@@ -5920,7 +5929,7 @@ __webpack_require__.r(__webpack_exports__);
       this.search(event);
     },
     search: function search(event) {
-      var _this = this;
+      var _this2 = this;
       if (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key == "Enter") {
         return;
       }
@@ -5931,7 +5940,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
       this.items = this.collection.filter(function (item) {
-        if (item.name.search(new RegExp(_this.query.trim(), "i")) != -1) return item;
+        if (item.name.search(new RegExp(_this2.query.trim(), "i")) != -1) return item;
       });
     },
     highligthPrevious: function highligthPrevious() {
@@ -6005,11 +6014,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     var _this = this;
+    this.focusBarcodeInput();
     EventBus.$on('selected-item', function (item) {
       if (!item) {
         return;
       }
-      _this.id = item.value;
+      _this.model = item.value;
     });
   },
   data: function data() {
@@ -6028,6 +6038,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    focusSearchSelect: function focusSearchSelect() {
+      EventBus.$emit('focus-search-select');
+    },
     submit: function submit() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -6036,41 +6049,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this2.parseBarcodeData();
-                _context.prev = 1;
+                _context.prev = 0;
                 if (!(!_this2.model || !_this2.id)) {
-                  _context.next = 5;
+                  _context.next = 4;
                   break;
                 }
                 console.warn("Warning: Either 'model' or 'id' variable is empty or null. Model: ".concat(_this2.model, ", ID: ").concat(_this2.id));
                 return _context.abrupt("return");
-              case 5:
-                _context.next = 7;
+              case 4:
+                _context.next = 6;
                 return axios.post('/checkout', {
                   model: _this2.model,
                   id: _this2.id
                 });
-              case 7:
+              case 6:
                 res = _context.sent;
                 console.log({
                   res: res
                 });
-                _context.next = 14;
+                _context.next = 13;
                 break;
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](1);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
-              case 14:
-                _context.prev = 14;
-                return _context.finish(14);
-              case 16:
+              case 13:
+                _context.prev = 13;
+                return _context.finish(13);
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 11, 14, 16]]);
+        }, _callee, null, [[0, 10, 13, 15]]);
       }))();
+    },
+    processBarcodeForm: function processBarcodeForm() {
+      this.parseBarcodeData();
+      this.submit();
+    },
+    processManualForm: function processManualForm() {
+      this.submit();
+    },
+    focusBarcodeInput: function focusBarcodeInput() {
+      var _this3 = this;
+      this.$nextTick(function () {
+        var _this3$$refs;
+        if ((_this3$$refs = _this3.$refs) !== null && _this3$$refs !== void 0 && _this3$$refs.barcode) _this3.$refs.barcode.focus();
+      });
     },
     parseBarcodeData: function parseBarcodeData() {
       var _this$barcode$split = this.barcode.split('-'),
@@ -16065,6 +16091,7 @@ var render = function render() {
       value: _vm.query,
       expression: "query"
     }],
+    ref: "search-select",
     "class": [_vm.inputClass],
     attrs: {
       type: "text",
@@ -16188,12 +16215,26 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "flex items-center gap-2"
   }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.show,
+      expression: "show"
+    }],
     staticClass: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600",
     attrs: {
       id: "inline-radio",
       type: "radio",
-      value: "",
       name: "inline-radio-group"
+    },
+    domProps: {
+      value: true,
+      checked: _vm._q(_vm.show, true)
+    },
+    on: {
+      change: [function ($event) {
+        _vm.show = true;
+      }, _vm.focusBarcodeInput]
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300",
@@ -16203,12 +16244,26 @@ var render = function render() {
   }, [_vm._v("Lector")])]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center gap-2"
   }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.show,
+      expression: "show"
+    }],
     staticClass: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600",
     attrs: {
       id: "inline-2-radio",
       type: "radio",
-      value: "",
       name: "inline-radio-group"
+    },
+    domProps: {
+      value: false,
+      checked: _vm._q(_vm.show, false)
+    },
+    on: {
+      change: [function ($event) {
+        _vm.show = false;
+      }, _vm.focusSearchSelect]
     }
   }), _vm._v(" "), _c("label", {
     staticClass: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300",
@@ -16220,7 +16275,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        return _vm.submit.apply(null, arguments);
+        return _vm.processBarcodeForm.apply(null, arguments);
       }
     }
   }, [_c("div", {}, [_c("input", {
@@ -16230,6 +16285,7 @@ var render = function render() {
       value: _vm.barcode,
       expression: "barcode"
     }],
+    ref: "barcode",
     staticClass: "w-full px-4 py-2 rounded-sm bg-slate-200",
     attrs: {
       name: "checkout",
@@ -16245,17 +16301,27 @@ var render = function render() {
       }
     }
   })])]) : _c("form", {
-    staticClass: "w-full"
+    staticClass: "w-full",
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.processManualForm.apply(null, arguments);
+      }
+    }
   }, [_c("div", {
     staticClass: "flex flex-wrap gap-4"
-  }, [_c("div", [_c("label", {
+  }, [_c("div", {
+    staticClass: "flex-grow"
+  }, [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Categoría")]), _vm._v(" "), _c("search-select", {
     attrs: {
       collection: _vm.options,
-      "input-class": " form-text-input w-full"
+      "input-class": "form-text-input w-full"
     }
-  })], 1), _vm._v(" "), _c("div", [_c("label", {
+  })], 1), _vm._v(" "), _c("div", {
+    staticClass: "flex-grow"
+  }, [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Nota")]), _vm._v(" "), _c("input", {
     directives: [{

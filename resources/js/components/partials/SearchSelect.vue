@@ -1,10 +1,11 @@
 <template>
     <div class="relative">
-        <input v-model="query" type="text" placeholder="Selecciona un producto" :class="[inputClass]"
-            @blur="searchResultsVisible = false" @focus="fillItems" @keyup="search($event)"
+        <input v-model="query" type="text" ref="search-select" placeholder="Selecciona un producto"
+            :class="[inputClass]" @blur="searchResultsVisible = false" @focus="fillItems" @keyup="search($event)"
             @keydown.esc="searchResultsVisible = false" @keyup.enter.exact="selectedItem"
             @input="searchResultsVisible = true" @keyup.up="highligthPrevious" @keyup.down="highlightNext" />
-        <div v-if="searchResultsVisible || query.length" class="absolute top-0 right-0 h-full text-gray-700 bg-gray-300">
+        <div v-if="searchResultsVisible || query.length"
+            class="absolute top-0 right-0 h-full text-gray-700 bg-gray-300">
             <a href="#" class="relative z-10 flex items-center h-full p-1" @click.prevent="reset">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
@@ -45,8 +46,16 @@ export default {
         collection: { type: Array },
         inputClass: { type: String, default: "" },
     },
+    created() {
+        EventBus.$on("focus-search-select", () => {
+            console.log(this.$refs)
+            this.$nextTick(() => this.$refs["search-select"].focus());
+
+        });
+    },
     mounted() {
         EventBus.$on("reset-search-select", this.reset);
+
     },
     data() {
         return {
