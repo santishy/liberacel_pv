@@ -43,7 +43,8 @@ class CheckoutController extends Controller
 
         $model->fresh();
         return response()->json([
-            "model" => $model
+            "model" => $model,
+            "products" => $model->products,
         ]);
     }
     private function hasCredit($model)

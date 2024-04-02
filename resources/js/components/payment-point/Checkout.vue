@@ -2,20 +2,18 @@
     <nav-component>
         <div class="max-w-4xl m-auto bg-white rounded shadow p-4">
             <h1 class="font-bold text-2xl text-slate-800 p-2 text-center">Caja de cobro</h1>
-            <div class="flex px-4 py-3 w-full gap-4 bg-slate-900 mb-4 rounded-sm">
+            <div class="flex px-4 py-3 w-full gap-4 border border-gray-200 mb-4 rounded-sm">
                 <div class="flex items-center gap-2 ">
                     <input id="inline-radio" type="radio" v-model="show" @change="focusBarcodeInput" :value="true"
                         name="inline-radio-group"
-                        class="w-4 h-4 text-blue-600  bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="inline-radio"
-                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lector</label>
+                        class="w-4 h-4 text-blue-600  bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2 ">
+                    <label for="inline-radio" class="cursor-pointer text-sm font-medium text-gray-900 ">Lector</label>
                 </div>
                 <div class="flex items-center gap-2">
                     <input id="inline-2-radio" type="radio" v-model="show" @change="focusSearchSelect" :value="false"
                         name="inline-radio-group"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="inline-2-radio"
-                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Manual</label>
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2 ">
+                    <label for="inline-2-radio" class=" cursor-pointer text-sm font-medium text-gray-900">Manual</label>
                 </div>
             </div>
             <form class="w-full" v-if="show" @submit.prevent="processBarcodeForm">
@@ -38,15 +36,18 @@
                 </div>
             </form>
         </div>
+        <products></products>
     </nav-component>
 </template>
 <script>
 import NavComponent from "../NavComponent.vue";
 import SearchSelect from "../partials/SearchSelect.vue";
+import Products from "./products/Index.vue";
 export default {
     components: {
         NavComponent,
-        SearchSelect
+        SearchSelect,
+        Products
     },
     created() {
         this.focusBarcodeInput();
@@ -71,7 +72,9 @@ export default {
     },
     methods: {
         focusSearchSelect() {
-            EventBus.$emit('focus-search-select');
+            this.$nextTick(() => {
+                EventBus.$emit('focus-search-select');
+            });
         },
         async submit() {
             try {

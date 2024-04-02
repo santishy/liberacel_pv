@@ -47,15 +47,14 @@ export default {
         inputClass: { type: String, default: "" },
     },
     created() {
-        EventBus.$on("focus-search-select", () => {
-            console.log(this.$refs)
-            this.$nextTick(() => this.$refs["search-select"].focus());
 
-        });
     },
     mounted() {
         EventBus.$on("reset-search-select", this.reset);
-
+        EventBus.$on("focus-search-select", () => {
+            if (!this.$refs?.["search-select"]) return;
+            this.$refs["search-select"].focus();
+        });
     },
     data() {
         return {
