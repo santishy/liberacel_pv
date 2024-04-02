@@ -23,6 +23,7 @@ export default {
     components: {
         ProductListItem,
         ProductList
-    }
+    },
+    props: ['products']
 }
 </script>

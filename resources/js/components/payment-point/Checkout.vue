@@ -36,7 +36,7 @@
                 </div>
             </form>
         </div>
-        <products></products>
+        <products v-if="products.length" class="max-w-4xl m-auto mt-4" :products="products" />
     </nav-component>
 </template>
 <script>
@@ -67,7 +67,8 @@ export default {
             options: [
                 { name: 'Express', value: 'FastSale' },
                 { name: 'Stock', value: 'Sale' }
-            ]
+            ],
+            products: []
         }
     },
     methods: {
@@ -83,7 +84,9 @@ export default {
                     return;
                 }
                 const res = await axios.post('/checkout', { model: this.model, id: this.id });
-                console.log({ res })
+                if (res.data.products) {
+                    this.products = res.data.products;
+                }
             } catch (error) {
                 console.error(error);
             }
