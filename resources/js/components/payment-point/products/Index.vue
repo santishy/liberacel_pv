@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-sm shadow-sm px-4 py-4">
+    <div class="bg-white rounded-sm ">
         <product-list></product-list>
     </div>
 </template>
