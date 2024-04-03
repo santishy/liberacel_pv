@@ -24,6 +24,11 @@ export default {
         ProductListItem,
         ProductList
     },
-    props: ['products']
+    props: {
+        products: {
+            type: Array,
+            default: () => []
+        }
+    }
 }
 </script>

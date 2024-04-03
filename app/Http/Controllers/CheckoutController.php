@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
+use App\Http\Requests\StoreCheckoutRequest;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
+
 
 class CheckoutController extends Controller
 {
@@ -18,43 +19,41 @@ class CheckoutController extends Controller
     {
         return view('payment-point.create');
     }
-    public function store(Request $request)
+    public function store(StoreCheckoutRequest $request)
     {
-        $request->validate([
-            'model' => [Rule::in(['FastSale', 'Sale']), "required"],
-            "id" => ["numeric", "required"]
-        ]);
-        $data = ['status' => "completed"];
+
         $model = $this->getModel($request->model, $request->id);
 
-        if ($this->getModelName($model) === "Sale") {
+        if ($model->status === "completed") {
+            throw new \Exception("La venta ya ha sido completada");
+        }
+        $data = ['status' => "completed"];
+
+        if ($model->isStockSale()) {
             TransactionComplete::dispatch($model, $this->factors["completed"]);
             $data["total"] = $model->calculateTotalSale();
         }
 
         $model->update($data);
 
-        if ($this->hasCredit($model)) {
+        if ($model->hasCredit()) {
             $inverse = -1;
             $model->handleCredit($this->factors["completed"] * $inverse);
         }
 
         SaleTransactionProcessed::dispatch($model);
-
         $model->fresh();
+
+        if ($model->isStockSale()) {
+            $products = ProductResource::collection($model->products);
+        }
         return response()->json([
-            "model" => $model,
-            "products" => $model->products,
+            "model" => $model->load('client'), // no siempre hay cliente verificar
+            "products" => $products,
         ]);
     }
-    private function hasCredit($model)
-    {
-        return $model->client_id && $model->is_credit;
-    }
-    private function getModelName($model)
-    {
-        return class_basename($model);
-    }
+
+
     private function getModel($model, $id)
     {
         $model = app("App\Models\\$model")->find($id);

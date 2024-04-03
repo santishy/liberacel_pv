@@ -84,6 +84,7 @@ export default {
                     return;
                 }
                 const res = await axios.post('/checkout', { model: this.model, id: this.id });
+                console.log({ res })
                 if (res.data.products) {
                     this.products = res.data.products;
                 }
