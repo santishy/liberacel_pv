@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Http\Requests\StoreCheckoutRequest;
-use App\Http\Resources\ProductResource;
+use App\Http\Responses\SaleDetailsCheckoutResponse;
 use Illuminate\Http\Request;
 
 
@@ -24,9 +24,8 @@ class CheckoutController extends Controller
 
         $model = $this->getModel($request->model, $request->id);
 
-        if ($model->status === "completed") {
-            throw new \Exception("La venta ya ha sido completada");
-        }
+        $model->validateSaleNotCompleted();
+
         $data = ['status' => "completed"];
 
         if ($model->isStockSale()) {
@@ -42,15 +41,10 @@ class CheckoutController extends Controller
         }
 
         SaleTransactionProcessed::dispatch($model);
-        $model->fresh();
 
-        if ($model->isStockSale()) {
-            $products = ProductResource::collection($model->products);
-        }
-        return response()->json([
-            "model" => $model->load('client'), // no siempre hay cliente verificar
-            "products" => $products,
-        ]);
+        $model->load('client');
+
+        return new SaleDetailsCheckoutResponse($model);
     }
 
 

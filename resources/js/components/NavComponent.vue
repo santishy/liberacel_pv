@@ -13,18 +13,18 @@
                     </button>
                 </div>
                 <div id="navegation" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
-                    <div class="text-sm lg:flex-grow  flex justify-center">
+                    <div class="text-sm lg:flex-grow  gap-4 flex justify-center ">
                         <!-- <dropdown-component name="Inventario" :items="InventoryMenu" class="md:relative" /> -->
                         <!-- <dropdown-component name="Egresos" :items="ExpensesMenu" class="md:relative" /> -->
                         <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
-                            class="block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0   mr-4">
+                            class="block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0   ">
                             Finalizar Compra
                         </a>
 
 
                         <!-- <dropdown-component name="Clientes" :items="clientsMenu" class="md:relative" /> -->
                         <a href="/sales/create/?queryType=sell"
-                            class="flex relative border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-sm">
+                            class="flex relative  border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800  md:text-base text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -36,7 +36,7 @@
 
                         </a>
                         <a href="/fast-sales/create"
-                            class="flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg">
+                            class="flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800  md:text-base text-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,7 +45,7 @@
                             Ventas Expres
                         </a>
                         <a href="/checkout"
-                            class="flex items-center relative border-center justify-center mt-4 lg:mt-0 text-gray-600 sm:hover:text-gray-800 mr-4 md:text-base text-lg">
+                            class="flex items-center relative font-semibold border-center justify-center mt-4 lg:mt-0 text-gray-700 sm:hover:text-gray-900 mr-4 md:text-base text-lg">
                             <svg class="w-4 h-4 mr-2" data-slot="icon" fill="none" stroke-width="1.5"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 aria-hidden="true">

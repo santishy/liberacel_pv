@@ -14,4 +14,10 @@ trait SaleModelHandler
     {
         return $this->client_id && $this->is_credit;
     }
+    public function validateSaleNotCompleted()
+    {
+        if ($this->status === "completed") {
+            throw new \Exception("La venta ya ha sido completada");
+        }
+    }
 }

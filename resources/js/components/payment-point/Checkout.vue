@@ -36,6 +36,7 @@
                 </div>
             </form>
         </div>
+        <sale-details-checkout class="max-w-4xl m-auto mt-4" v-if="products.length" :sale-details="saleDetails" />
         <products v-if="products.length" class="max-w-4xl m-auto mt-4" :products="products" />
     </nav-component>
 </template>
@@ -43,11 +44,13 @@
 import NavComponent from "../NavComponent.vue";
 import SearchSelect from "../partials/SearchSelect.vue";
 import Products from "./products/Index.vue";
+import SaleDetailsCheckout from "./SaleDetailsCheckout.vue";
 export default {
     components: {
         NavComponent,
         SearchSelect,
-        Products
+        Products,
+        SaleDetailsCheckout
     },
     created() {
         this.focusBarcodeInput();
@@ -68,7 +71,8 @@ export default {
                 { name: 'Express', value: 'FastSale' },
                 { name: 'Stock', value: 'Sale' }
             ],
-            products: []
+            products: [],
+            saleDetails: null
         }
     },
     methods: {
@@ -84,10 +88,12 @@ export default {
                     return;
                 }
                 const res = await axios.post('/checkout', { model: this.model, id: this.id });
-                console.log({ res })
+
                 if (res.data.products) {
                     this.products = res.data.products;
                 }
+                delete res.data.products;
+                this.saleDetails = res.data;
             } catch (error) {
                 console.error(error);
             }
