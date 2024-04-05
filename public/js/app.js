@@ -6077,35 +6077,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
                 delete res.data.products;
                 _this2.saleDetails = res.data;
-                _context.next = 15;
+                _context.next = 16;
                 break;
               case 12:
                 _context.prev = 12;
                 _context.t0 = _context["catch"](0);
+                _this2.getErrors(_context.t0);
                 console.error(_context.t0);
-              case 15:
-                _context.prev = 15;
-                return _context.finish(15);
-              case 17:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 12, 15, 17]]);
+        }, _callee, null, [[0, 12]]);
       }))();
     },
     processBarcodeForm: function processBarcodeForm() {
-      this.parseBarcodeData();
-      this.submit();
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this3.parseBarcodeData();
+                _context2.next = 3;
+                return _this3.submit();
+              case 3:
+                _this3.barcode = '';
+                _this3.focusBarcodeInput();
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     processManualForm: function processManualForm() {
-      this.submit();
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this4.submit();
+              case 2:
+                _this4.id = null;
+                _this4.model = null;
+                EventBus.$emit('reset-search-select');
+                _this4.focusSearchSelect();
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     focusBarcodeInput: function focusBarcodeInput() {
-      var _this3 = this;
+      var _this5 = this;
       this.$nextTick(function () {
-        var _this3$$refs;
-        if ((_this3$$refs = _this3.$refs) !== null && _this3$$refs !== void 0 && _this3$$refs.barcode) _this3.$refs.barcode.focus();
+        var _this5$$refs;
+        if ((_this5$$refs = _this5.$refs) !== null && _this5$$refs !== void 0 && _this5$$refs.barcode) _this5.$refs.barcode.focus();
       });
     },
     parseBarcodeData: function parseBarcodeData() {
@@ -16489,14 +16523,19 @@ var render = function render() {
     on: {
       keydown: function keydown($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.submit.apply(null, arguments);
+        return _vm.processManualForm.apply(null, arguments);
       },
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.id = $event.target.value;
       }
     }
-  })])])])]), _vm._v(" "), _vm.products.length ? _c("sale-details-checkout", {
+  })])])])]), _vm._v(" "), _c("errors-component", {
+    staticClass: "max-w-4xl m-auto mt-4",
+    attrs: {
+      "errors-found": _vm.errors
+    }
+  }), _vm._v(" "), _vm.products.length ? _c("sale-details-checkout", {
     staticClass: "max-w-4xl m-auto mt-4",
     attrs: {
       "sale-details": _vm.saleDetails
@@ -16539,6 +16578,10 @@ var render = function render() {
   }, [_vm._v(_vm._s((_vm$saleDetails = _vm.saleDetails) === null || _vm$saleDetails === void 0 ? void 0 : _vm$saleDetails.client_name))]), _vm._v(" "), _c("span", {
     staticClass: "text-sm text-gray-600"
   }, [_vm._v(_vm._s(_vm.saleDetails.created_at))])]), _vm._v(" "), _c("div", [_c("span", {
+    staticClass: "text-sm text-gray-600"
+  }, [_vm._v("Nota #:")]), _vm._v(" "), _c("span", {
+    staticClass: "text-lg font-semibold text-gray-900"
+  }, [_vm._v("#" + _vm._s(_vm.saleDetails.id))])]), _vm._v(" "), _c("div", [_c("span", {
     staticClass: "text-sm text-gray-600"
   }, [_vm._v("Status: ")]), _vm._v(" "), _c("span", {
     staticClass: "text-sm font-semibold capitalize text-blue-600"

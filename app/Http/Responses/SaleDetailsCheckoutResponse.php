@@ -17,6 +17,7 @@ class SaleDetailsCheckoutResponse implements Responsable
         $products = $this->getProducts();
 
         return response()->json([
+            'id' => $this->model->id,
             'client_name' => optional($this->model->client)->name ? $this->model->client->name : 'Publico en general',
             'products' => $products,
             'status' =>  $this->model->status,

@@ -24,6 +24,7 @@ class CheckoutController extends Controller
 
         $model = $this->getModel($request->model, $request->id);
 
+
         $model->validateSaleNotCompleted();
 
         $data = ['status' => "completed"];

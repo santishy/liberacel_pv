@@ -3,6 +3,7 @@
 namespace App\Models\Traits;
 
 use App\Models\Sale;
+use Illuminate\Validation\ValidationException;
 
 trait SaleModelHandler
 {
@@ -17,7 +18,7 @@ trait SaleModelHandler
     public function validateSaleNotCompleted()
     {
         if ($this->status === "completed") {
-            throw new \Exception("La venta ya ha sido completada");
+            throw ValidationException::withMessages(["status" => "La venta ya ha sido completada"]);
         }
     }
 }

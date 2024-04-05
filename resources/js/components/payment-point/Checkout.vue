@@ -31,11 +31,13 @@
                     <div class=" flex-grow">
                         <label class="form-label">Nota</label>
                         <input type="number" v-model="id" class="form-text-input w-full"
-                            placeholder="Escribe el número de nota" @keydown.enter="submit" autocomplete="off" />
+                            placeholder="Escribe el número de nota" @keydown.enter="processManualForm"
+                            autocomplete="off" />
                     </div>
                 </div>
             </form>
         </div>
+        <errors-component :errors-found="errors" class="max-w-4xl m-auto mt-4" />
         <sale-details-checkout class="max-w-4xl m-auto mt-4" v-if="products.length" :sale-details="saleDetails" />
         <products v-if="products.length" class="max-w-4xl m-auto mt-4" :products="products" />
     </nav-component>
@@ -95,18 +97,24 @@ export default {
                 delete res.data.products;
                 this.saleDetails = res.data;
             } catch (error) {
+                this.getErrors(error);
                 console.error(error);
             }
-            finally {
 
-            }
         },
-        processBarcodeForm() {
+        async processBarcodeForm() {
+
             this.parseBarcodeData();
-            this.submit();
+            await this.submit();
+            this.barcode = '';
+            this.focusBarcodeInput();
         },
-        processManualForm() {
-            this.submit();
+        async processManualForm() {
+            await this.submit();
+            this.id = null;
+            this.model = null;
+            EventBus.$emit('reset-search-select');
+            this.focusSearchSelect();
         },
         focusBarcodeInput() {
             this.$nextTick(() => {
