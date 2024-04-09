@@ -52,7 +52,10 @@ class FastSaleController extends Controller
 
         $fastSale->addConcept();
 
-        $fastSale->addBonus();
+        /**
+         * Pasar a controlador CheckoutController
+         */
+        //$fastSale->addBonus();
 
         if (
             $request->is_credit &&
