@@ -61,6 +61,13 @@ export default {
                 return;
             }
             this.model = item.value;
+        });
+        EventBus.$on("clean-checkout", () => {
+            this.products = [];
+            this.saleDetails = null;
+            if (this.show) this.focusBarcodeInput()
+            else
+                this.focusSearchSelect();
         })
     },
     data() {

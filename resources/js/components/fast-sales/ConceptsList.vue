@@ -20,24 +20,19 @@
                     <exchange></exchange>
                 </span>
             </button>
-            <p class="text-gray-700 px-2 font-semibold">
+            <!-- esto es de bonus del dinero electronico -->
+            <!-- <p class="text-gray-700 px-2 font-semibold">
                 Nuevos puntos:
                 <span class="rounded-full text-white bg-blue-600 px-2 py-1">{{
             getTotalPoints
         }}</span>
-            </p>
+            </p> -->
             <span class="text-xs text-gray-700">{{
             currentFastSale.created_at
         }}</span>
         </div>
-        <div class="w-full flex justify-end  items-baseline gap-4 p-2">
-            <!-- <div
-                class="flex flex-wrap  items-start w-80  p-1 mb-1 text-xs text-gray-800 bg-blue-200 border border-blue-600 rounded">
-                <p class="mr-4">
-                    Dar doble click sobre una fila de la tabla generada abajo, para
-                    editar el producto.
-                </p>
-            </div> -->
+        <!-- esto es del dinero electronico -->
+        <!-- <div class="w-full flex justify-end  items-baseline gap-4 p-2">
             <customer-bonus v-if="Object.keys(currentFastSale).length" class="flex flex-wrap"
                 inputStyle="form-text-input w-full">
                 <template slot="bonus-button">
@@ -51,8 +46,8 @@
                         </svg>
                     </button>
                 </template>
-            </customer-bonus>
-        </div>
+</customer-bonus>
+</div> -->
 
         <div class="relative overflow-x-auto bg-white w-full">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

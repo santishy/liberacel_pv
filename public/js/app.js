@@ -6025,6 +6025,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
       _this.model = item.value;
     });
+    EventBus.$on("clean-checkout", function () {
+      _this.products = [];
+      _this.saleDetails = null;
+      if (_this.show) _this.focusBarcodeInput();else _this.focusSearchSelect();
+    });
   },
   data: function data() {
     return {
@@ -6170,6 +6175,11 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     saleDetails: {
       type: Object
+    }
+  },
+  methods: {
+    cleanCheckout: function cleanCheckout() {
+      EventBus.$emit("clean-checkout");
     }
   }
 });
@@ -14002,7 +14012,7 @@ var render = function render() {
     staticClass: "text-2xl font-semibold text-blue-700"
   }, [_vm._v("Total:")]), _c("span", {
     staticClass: "text-2xl font-semibold text-blue-700"
-  }, [_vm._v("\n                " + _vm._s(_vm.currentFastSale.total))])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.currentFastSale.total))])])]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-wrap items-center justify-between w-full px-2 py-3"
   }, [_c("button", {
     "class": [_vm.statusStyle],
@@ -14014,39 +14024,9 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "mr-2"
-  }, [_vm._v(_vm._s(_vm.translate[_vm.currentFastSale.status]))]), _vm._v(" "), _c("span", [_c("exchange")], 1)]), _vm._v(" "), _c("p", {
-    staticClass: "text-gray-700 px-2 font-semibold"
-  }, [_vm._v("\n            Nuevos puntos:\n            "), _c("span", {
-    staticClass: "rounded-full text-white bg-blue-600 px-2 py-1"
-  }, [_vm._v(_vm._s(_vm.getTotalPoints))])]), _vm._v(" "), _c("span", {
+  }, [_vm._v(_vm._s(_vm.translate[_vm.currentFastSale.status]))]), _vm._v(" "), _c("span", [_c("exchange")], 1)]), _vm._v(" "), _c("span", {
     staticClass: "text-xs text-gray-700"
   }, [_vm._v(_vm._s(_vm.currentFastSale.created_at))])]), _vm._v(" "), _c("div", {
-    staticClass: "w-full flex justify-end items-baseline gap-4 p-2"
-  }, [Object.keys(_vm.currentFastSale).length ? _c("customer-bonus", {
-    staticClass: "flex flex-wrap",
-    attrs: {
-      inputStyle: "form-text-input w-full"
-    }
-  }, [_c("template", {
-    slot: "bonus-button"
-  }, [_c("button", {
-    staticClass: "flex flex-wrap items-center px-2 py-2 ml-2 font-mono text-sm text-gray-800 bg-blue-400 hover:bg-blue-600 hover:shadow-none hover:text-white hover:font-bold duration-300 rounded-sm shadow"
-  }, [_vm._v("\n                    Buscar|Agregar\n                    "), _c("svg", {
-    staticClass: "w-4 h-4",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      fill: "none",
-      viewBox: "0 0 24 24",
-      "stroke-width": "1.5",
-      stroke: "currentColor"
-    }
-  }, [_c("path", {
-    attrs: {
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round",
-      d: "M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-    }
-  })])])])], 2) : _vm._e()], 1), _vm._v(" "), _c("div", {
     staticClass: "relative overflow-x-auto bg-white w-full"
   }, [_c("table", {
     staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
@@ -14077,7 +14057,7 @@ var staticRenderFns = [function () {
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("\n                        Descripción\n                    ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("\n                            Descripción\n                        ")]), _vm._v(" "), _c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
@@ -16572,6 +16552,33 @@ var render = function render() {
   return _c("div", {
     staticClass: "bg-white rounded-sm shadow-md p-4"
   }, [_c("div", {
+    staticClass: "flex items-center justify-end border-b border-slate-400 pb-2 mb-4"
+  }, [_c("button", {
+    staticClass: "p-1 text-slate-700",
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.cleanCheckout.apply(null, arguments);
+      }
+    }
+  }, [_c("svg", {
+    staticClass: "w-6 h-6",
+    attrs: {
+      "data-slot": "icon",
+      fill: "none",
+      "stroke-width": "1.5",
+      stroke: "currentColor",
+      viewBox: "0 0 24 24",
+      xmlns: "http://www.w3.org/2000/svg",
+      "aria-hidden": "true"
+    }
+  }, [_c("path", {
+    attrs: {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      d: "M6 18 18 6M6 6l12 12"
+    }
+  })])])]), _vm._v(" "), _c("div", {
     staticClass: "flex justify-between items-center mb-4"
   }, [_c("h2", {
     staticClass: "text-lg font-semibold"
