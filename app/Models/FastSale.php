@@ -7,6 +7,7 @@ use App\Models\Traits\HasCommission;
 use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ManagesCredits;
 use App\Models\Traits\ReportBy;
+use App\Models\Traits\SaleModelHandler;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ class FastSale extends Model
 {
     use HasFactory, HasUserRelationship;
     use ReportBy, ManagesCredits, HasCommission;
+    use SaleModelHandler;
 
     protected $fillable = [
         'status',

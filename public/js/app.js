@@ -14062,7 +14062,7 @@ var render = function render() {
   }), 1)])]), _vm._v(" "), _c("authentication-form", {
     attrs: {
       model: "FastSale",
-      uri: "/fast-sales/".concat(_vm.currentFastSale.id, "/associated-users"),
+      uri: "/user-relationship",
       id: _vm.currentFastSale.id
     }
   })], 1) : _vm._e();
@@ -16578,6 +16578,10 @@ var render = function render() {
   }, [_vm._v(_vm._s((_vm$saleDetails = _vm.saleDetails) === null || _vm$saleDetails === void 0 ? void 0 : _vm$saleDetails.client_name))]), _vm._v(" "), _c("span", {
     staticClass: "text-sm text-gray-600"
   }, [_vm._v(_vm._s(_vm.saleDetails.created_at))])]), _vm._v(" "), _c("div", [_c("span", {
+    staticClass: "text-sm text-gray-600"
+  }, [_vm._v("Tipo de venta: ")]), _vm._v(" "), _c("span", {
+    staticClass: "text-sm font-semibold capitalize text-gray-700"
+  }, [_vm._v(_vm._s(_vm.saleDetails.typeOfSale))])]), _vm._v(" "), _c("div", [_c("span", {
     staticClass: "text-sm text-gray-600"
   }, [_vm._v("Nota #:")]), _vm._v(" "), _c("span", {
     staticClass: "text-lg font-semibold text-gray-900"

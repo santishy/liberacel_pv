@@ -14,8 +14,8 @@
         <div class="flex flex-wrap items-center justify-between w-full px-2 py-3">
             <button @click.prevent="openModal" :class="[statusStyle]">
                 <span class="mr-2">{{
-                    translate[currentFastSale.status]
-                }}</span>
+        translate[currentFastSale.status]
+    }}</span>
                 <span>
                     <exchange></exchange>
                 </span>
@@ -23,12 +23,12 @@
             <p class="text-gray-700 px-2 font-semibold">
                 Nuevos puntos:
                 <span class="rounded-full text-white bg-blue-600 px-2 py-1">{{
-                    getTotalPoints
-                }}</span>
+            getTotalPoints
+        }}</span>
             </p>
             <span class="text-xs text-gray-700">{{
-                currentFastSale.created_at
-            }}</span>
+            currentFastSale.created_at
+        }}</span>
         </div>
         <div class="w-full flex justify-end  items-baseline gap-4 p-2">
             <!-- <div
@@ -72,9 +72,7 @@
                 </tbody>
             </table>
         </div>
-
-        <authentication-form model="FastSale" :uri="`/fast-sales/${currentFastSale.id}/associated-users`"
-            :id="currentFastSale.id" />
+        <authentication-form model="FastSale" :uri="`/user-relationship`" :id="currentFastSale.id" />
     </div>
 </template>
 
@@ -160,4 +158,3 @@ export default {
     },
 };
 </script>
-

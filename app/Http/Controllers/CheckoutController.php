@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FastSaleUpdated;
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Http\Requests\StoreCheckoutRequest;
@@ -32,6 +33,9 @@ class CheckoutController extends Controller
         if ($model->isStockSale()) {
             TransactionComplete::dispatch($model, $this->factors["completed"]);
             $data["total"] = $model->calculateTotalSale();
+        } elseif ($model->isExpressSale()) {
+            //falta agregar bonus, pero hay un request() en el model mal mal
+            FastSaleUpdated::dispatch($model);
         }
 
         $model->update($data);

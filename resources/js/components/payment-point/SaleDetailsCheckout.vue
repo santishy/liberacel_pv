@@ -5,6 +5,10 @@
             <span class="text-sm text-gray-600">{{ saleDetails.created_at }}</span>
         </div>
         <div>
+            <span class="text-sm text-gray-600">Tipo de venta: </span>
+            <span class="text-sm font-semibold capitalize text-gray-700">{{ saleDetails.typeOfSale }}</span>
+        </div>
+        <div>
             <span class="text-sm text-gray-600">Nota #:</span>
             <span class="text-lg font-semibold text-gray-900">#{{ saleDetails.id }}</span>
         </div>
