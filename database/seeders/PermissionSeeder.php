@@ -115,5 +115,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'view credits']);
         Permission::create(['name' => 'edit credit']);
         Permission::create(['name' => 'delete credit']);
+
+        //permissions to checkout
+        Permission::create(["name" => 'complete sales checkout']);
     }
 }

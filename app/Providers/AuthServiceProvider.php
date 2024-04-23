@@ -35,8 +35,15 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('register',function(User $user,User $model){
+        Gate::before(function ($user) {
+            if ($user->hasRole('admin')) {
+                return true; // El usuario es un administrador, otorgar acceso automáticamente
+            }
+        });
+        Gate::define('checkout', function (User $user) {
+            return $user->hasPermissionTo('complete sales checkout');
+        });
+        Gate::define('register', function (User $user, User $model) {
             return $user->hasPermissionTo('create user') || $user->hasRole('admin');
         });
         /*
@@ -44,9 +51,10 @@ class AuthServiceProvider extends ServiceProvider
         * */
         $this->app->make('stockValidations');
         //resolve('stockValidations');
-        
+
     }
-    public function before(){
+    public function before()
+    {
         return false;
     }
 }

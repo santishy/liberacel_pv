@@ -8,7 +8,7 @@ use App\Events\TransactionComplete;
 use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Responses\SaleDetailsCheckoutResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 
 class CheckoutController extends Controller
 {
@@ -18,11 +18,12 @@ class CheckoutController extends Controller
     ];
     public function create()
     {
+        Gate::authorize("complete sales checkout");
         return view('payment-point.create');
     }
     public function store(StoreCheckoutRequest $request)
     {
-
+        Gate::authorize("complete sales checkout");
         $model = $this->getModel($request->model, $request->id);
 
 
