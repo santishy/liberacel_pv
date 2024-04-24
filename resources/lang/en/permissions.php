@@ -93,4 +93,7 @@ return [
     'create credit' => 'Crear credito',
     'edit credit' => 'Editar credito',
     'delete credit' => 'Eliminar credito',
+
+    //permissions to checkout
+    'complete sales checkout' => "completar el pago de las ventas"
 ];
