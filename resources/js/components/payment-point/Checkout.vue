@@ -129,7 +129,7 @@ export default {
             });
         },
         parseBarcodeData() {
-            const [model, id] = this.barcode.split('-');
+            const [model, id] = this.barcode.split(' ');
             this.model = model;
             this.id = id;
         }
