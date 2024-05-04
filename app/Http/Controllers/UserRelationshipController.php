@@ -38,6 +38,10 @@ class UserRelationshipController extends Controller
         $model->user()->associate($user);
         $model->save();
 
+        if (session()->has('fast-sale')) {
+            session()->forget('fast-sale');
+        }
+
         return response()->json([
             'sale' => $model,
         ]);
