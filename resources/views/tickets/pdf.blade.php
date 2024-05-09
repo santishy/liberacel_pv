@@ -235,7 +235,7 @@
             Nota #{{ $sale->id }}
         </div>
         <div class="mb-2 mt-1  text-center">
-            <div style="margin:auto;"> {!! DNS1D::getBarcodeHTML("$model $sale->id", 'C128', 1, 20) !!} </div>
+            <div style="margin:auto;" class="p-4"> {!! DNS1D::getBarcodeHTML("$model $sale->id", 'C128', 1, 20) !!} </div>
         </div>
         <div class="text-right font-bold p-1 text-sm border-b border-t">
             <span style="float:left" class="font-bold text-xl"> {{ $typeOfSale }} </span>
