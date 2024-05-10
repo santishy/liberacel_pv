@@ -81,7 +81,8 @@ export default {
                 { name: 'Stock', value: 'Sale' }
             ],
             products: [],
-            saleDetails: null
+            saleDetails: null,
+            allowedModels: ["FastSale", "Sale"]
         }
     },
     methods: {
@@ -110,7 +111,6 @@ export default {
 
         },
         async processBarcodeForm() {
-
             this.parseBarcodeData();
             await this.submit();
             this.barcode = '';
@@ -130,7 +130,13 @@ export default {
         },
         parseBarcodeData() {
             const [model, id] = this.barcode.split(' ');
-            this.model = model;
+            const allowedModelsInUppercase = this.allowedModels.map((model) => model.toUpperCase());
+            if (!allowedModelsInUppercase.includes(model.toUpperCase())) {
+                this.model = `wrong model: ${model}`;
+                return;
+            }
+            const index = allowedModelsInUppercase.indexOf(model.toUpperCase());
+            this.model = this.allowedModels[index];
             this.id = id;
         }
     }
