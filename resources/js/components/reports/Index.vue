@@ -9,8 +9,8 @@
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2">
                         <span class="text-xl font-mono text-slate-600 mr-4">Ventas</span>
                         <span class="font-semibold flex flex-wrap items-center">
-                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
                             </svg>
                             {{ formattedNumber(salesTotal) }}</span>
@@ -18,8 +18,8 @@
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2">
                         <span class="text-xl font-mono text-slate-600 mr-4">Expres</span>
                         <span class="font-semibold flex flex-wrap items-center">
-                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
                             </svg>
                             {{ formattedNumber(fastSalesTotal) }}</span>
@@ -27,8 +27,8 @@
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2"><span
                             class="text-xl font-mono text-slate-600 mr-4">Pagos</span>
                         <span class="font-semibold flex flex-wrap items-center">
-                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
                             </svg>
                             {{ formattedNumber(paymentsTotal) }}</span>
@@ -36,13 +36,14 @@
                     <li class="flex flex-wrap justify-between items-center text-red-500 rounded-sm p-1 px-2">
                         <span class="text-xl font-mono text-slate-600 mr-4">Egresos</span>
                         <span class="font-semibold flex flex-wrap items-center">
-                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg fill="none" class="h-4 w-4" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"></path>
                             </svg>
                             {{ formattedNumber(expensesTotal) }}</span>
                     </li>
-                    <li class="flex flex-wrap justify-end items-center bg-yellow-400 text-slate-700 rounded-sm p-1 px-2">
+                    <li
+                        class="flex flex-wrap justify-end items-center bg-yellow-400 text-slate-700 rounded-sm p-1 px-2">
                         <span class="text-xl mr-4 font-semibold text-slate-800">Total</span>
                         <span class="font-bold text-slate-900">{{ getTotal }}</span>
                     </li>
@@ -56,7 +57,11 @@
                 </div>
             </transition>
             <errors-component :errors-found="errors"></errors-component>
-            <report-by class="mt-4"></report-by>
+            <report-by class="mt-4">
+                <template #search>
+                    <search-by-id :uri="uri"></search-by-id>
+                </template>
+            </report-by>
             <warehouse-checklist :warehouses="warehouses">
             </warehouse-checklist>
         </div>
@@ -69,11 +74,12 @@
 import { mapState } from "vuex";
 import ReportBy from "./ReportBy.vue";
 import NavComponent from "../NavComponent.vue";
+import SearchById from "./partials/SearchById.vue";
 import ErrorsComponent from "../ErrorsComponent.vue";
 import WarehouseChecklist from "../warehouses/WarehouseChecklist.vue"
 
 export default {
-    components: { ReportBy, NavComponent, ErrorsComponent, WarehouseChecklist },
+    components: { ReportBy, SearchById, NavComponent, ErrorsComponent, WarehouseChecklist },
     props: {
         name: {
             type: String
