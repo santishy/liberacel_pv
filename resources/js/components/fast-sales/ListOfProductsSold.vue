@@ -36,6 +36,7 @@ import InfiniteLoading from "vue-infinite-loading";
 
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductSold from "./ProductSold.vue";
+import Vue from "vue";
 export default {
     props: {
         firstLoad: {
@@ -60,6 +61,7 @@ export default {
         };
     },
     mounted() {
+        EventBus.$on('search-result-by-id',this.showSaleResultById)
         EventBus.$on("id-for-authentication-form", (id) => {
             this.selectedFastSaleId = id;
         });
@@ -92,6 +94,14 @@ export default {
         }
     },
     methods: {
+        showSaleResultById(res){
+            EventBus.$emit('calculated-total',res.data.total)
+            this.products=res.data.data;
+           // this.$refs.infiniteLoading.loaded();
+          this.params =true;
+           
+            console.log({structure: this.structureTheData});
+        },
         infiniteHandler($state) {
             console.log("infiniteHandler express page: ", this.page)
             axios

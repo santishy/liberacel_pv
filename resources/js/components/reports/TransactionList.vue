@@ -73,10 +73,7 @@ export default {
         };
     },
     mounted() {
-        EventBus.$on('search-result-by-id', data => {
-            console.log({ data })
-            this.transactions.push(data);
-        })
+        
         EventBus.$on("set-parameters", data => {
             this.params = null;
             this.changeParams(data);

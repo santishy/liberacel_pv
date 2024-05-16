@@ -20,6 +20,7 @@ class FastSaleController extends Controller
     {
         $this->authorize('viewAny', new FastSale);
         if ($request->wantsJson()) {
+           // return response()->json(["query" => FastSale::query()]);
             return new  ReportResponse(FastSale::query());
         }
         return view('fast-sales.index');

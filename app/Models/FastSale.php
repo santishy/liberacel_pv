@@ -32,10 +32,7 @@ class FastSale extends Model
     protected $casts = [
         'concepts' => 'array',
     ];
-    public function scopeSearchById(Builder $query, $id)
-    {
-        $query->where('id', $id);
-    }
+    
     public function client()
     {
         return $this->belongsTo(Client::class);

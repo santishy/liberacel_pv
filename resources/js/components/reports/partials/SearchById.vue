@@ -32,10 +32,12 @@ export default {
             axios.get(this.uri, {
                 params: {
                     'filter[searchById]': this.id,
+                    'include':'user',
+                    'isFastSale': true
                 }
             }).then((res) => {
                 this.id = null;
-                EventBus.$emit("search-result-by-id", res.data.data)
+                EventBus.$emit("search-result-by-id", res);
             }).catch(error => {
                 console.log(error)
             })

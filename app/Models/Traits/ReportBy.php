@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 
 trait ReportBy
 {
+    public function scopeSearchById(Builder $query, $value)
+    {
+        $query->where('id', $value);
+    }
     public function scopeYear(Builder $query, $value)
     {
         $query->whereYear('created_at', $value);
