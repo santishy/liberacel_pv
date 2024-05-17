@@ -40,6 +40,7 @@ class SaleController extends Controller
 
         return view('transactions.index', [
             'uri' => '/sales',
+            'isSale' => true,
             'inventories' => $inventories,
             'name' => 'Ventas'
         ]);

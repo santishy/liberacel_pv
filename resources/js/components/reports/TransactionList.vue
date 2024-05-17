@@ -68,12 +68,12 @@ export default {
             searchTheWarehouses: {
                 "filter[byWarehouses]": null
             },
-
+            isSearchById: false,
             infiniteId: 1
         };
     },
     mounted() {
-        
+        EventBus.$on('search-result-by-id', this.showSaleResultById)
         EventBus.$on("set-parameters", data => {
             this.params = null;
             this.changeParams(data);
@@ -85,6 +85,10 @@ export default {
         });
     },
     methods: {
+        showSaleResultById(params) {
+            this.isSearchById = true;
+            this.changeParams(params);
+        },
         infiniteHandler($state) {
             axios
                 .get(this.uri, {
@@ -104,6 +108,10 @@ export default {
                     } else {
                         $state.complete();
                     }
+                }).catch(error => {
+                    console.log(error)
+                }).finally(() => {
+                    this.isSearchById = false;
                 });
         },
         changeParams(value) {
@@ -180,7 +188,8 @@ export default {
         },
         getParams() {
             if (this.areTheySales) {
-                return {
+
+                return this.isSearchById ? { ...this.params } : {
                     ...this.params,
                     "filter[isCredit]": false
                 }

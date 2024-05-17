@@ -29,18 +29,25 @@ export default {
     },
     methods: {
         submit() {
-            axios.get(this.uri, {
-                params: {
-                    'filter[searchById]': this.id,
-                    'include':'user',
-                    'isFastSale': true
-                }
-            }).then((res) => {
-                this.id = null;
-                EventBus.$emit("search-result-by-id", res);
-            }).catch(error => {
-                console.log(error)
-            })
+            const params = {
+                'filter[searchById]': this.id,
+                'include': 'user',
+                'isFastSale': true
+            }
+            EventBus.$emit("search-result-by-id", params);
+            this.id = null;
+            // axios.get(this.uri, {
+            //     params: {
+            //         'filter[searchById]': this.id,
+            //         'include': 'user',
+            //         'isFastSale': true
+            //     }
+            // }).then((res) => {
+            //     this.id = null;
+            //     EventBus.$emit("search-result-by-id", res);
+            // }).catch(error => {
+            //     console.log(error)
+            // })
         }
     }
 }

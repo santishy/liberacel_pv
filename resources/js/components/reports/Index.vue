@@ -58,7 +58,7 @@
             </transition>
             <errors-component :errors-found="errors"></errors-component>
             <report-by class="mt-4">
-                <template #search>
+                <template v-if="isSale" #search>
                     <search-by-id :uri="uri"></search-by-id>
                 </template>
             </report-by>
@@ -83,6 +83,10 @@ export default {
     props: {
         name: {
             type: String
+        },
+        isSale: {
+            type: Boolean,
+            default: false
         },
         uri: {
             type: String

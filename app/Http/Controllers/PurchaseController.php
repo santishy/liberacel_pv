@@ -30,6 +30,7 @@ class PurchaseController extends Controller
             [
                 'uri' => '/purchases',
                 'name' => 'Compras',
+                'isSale' => false,
                 'inventories' => $inventories
             ]
         );

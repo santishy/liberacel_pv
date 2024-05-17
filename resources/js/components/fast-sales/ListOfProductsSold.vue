@@ -58,10 +58,11 @@ export default {
             uri: "/fast-sales",
             nota: null,
             selectedFastSaleId: null,
+            isSearchById: false,
         };
     },
     mounted() {
-        EventBus.$on('search-result-by-id',this.showSaleResultById)
+        EventBus.$on('search-result-by-id', this.showSaleResultById)
         EventBus.$on("id-for-authentication-form", (id) => {
             this.selectedFastSaleId = id;
         });
@@ -94,25 +95,17 @@ export default {
         }
     },
     methods: {
-        showSaleResultById(res){
-            EventBus.$emit('calculated-total',res.data.total)
-            this.products=res.data.data;
-           // this.$refs.infiniteLoading.loaded();
-          this.params =true;
-           
-            console.log({structure: this.structureTheData});
+        showSaleResultById(params) {
+            this.isSearchById = true;
+            this.changeParams(params);
+
         },
         infiniteHandler($state) {
-            console.log("infiniteHandler express page: ", this.page)
+            console.log(this.getParams)
             axios
-                .get(this.uri, {
-                    params: {
-                        isFastSale: true,
-                        "filter[isCredit]": false, //me hace falta cambiar filtro aqui
-                        page: this.page,
-                        ..._.merge(this.params, this.getRelationships),
-                    },
-                })
+                .get(this.uri,
+                    { params: this.getParams }
+                )
                 .then((res) => {
                     if (this.page == 1) {
                         EventBus.$emit("calculated-total", res.data.total);
@@ -124,6 +117,10 @@ export default {
                     } else {
                         $state.complete();
                     }
+                }).catch(error => {
+                    console.log(error)
+                }).finally(() => {
+                    this.isSearchById = false;
                 });
         },
         changeParams(value) {
@@ -136,6 +133,17 @@ export default {
     computed: {
         getRelationships() {
             return { include: "user" };
+        },
+        getParams() {
+            const params = {
+                isFastSale: true,
+                page: this.page,
+                ..._.merge(this.params, this.getRelationships),
+            };
+            return this.isSearchById ? params : {
+                ...params,
+                ...{ "filter[isCredit]": false }, //me hace falta cambiar filtro aqui
+            }
         },
         structureTheData() {
             let newStructure = [];
