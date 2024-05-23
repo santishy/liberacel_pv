@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Bool_;
 use SebastianBergmann\Environment\Console;
 
 class SaleController extends Controller
@@ -29,8 +30,6 @@ class SaleController extends Controller
     public function index()
     {
         $this->authorize('viewAny', new Sale);
-
-        //return response()->json(['ok' => request('filter')]);
 
         if (request()->wantsJson()) {
             return new ReportResponse(Sale::query());

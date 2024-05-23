@@ -8,6 +8,7 @@
             <agree slot="button" :method="modalDataConfirm.action" @cancelTransaction="cancelTransaction"></agree>
         </information-component>
         <div class="table-container-responsive">
+
             <table v-if="params" class="report-table">
 
                 <thead class="report-table-thead">
@@ -94,8 +95,8 @@ export default {
                 .get(this.uri, {
                     params: {
                         page: this.page,
+                        ...this.searchTheWarehouses,
                         ..._.merge(this.getParams, this.getRelationships),
-                        ...this.searchTheWarehouses
                     }
                 })
                 .then(res => {
@@ -189,7 +190,7 @@ export default {
         getParams() {
             if (this.areTheySales) {
 
-                return this.isSearchById ? { ...this.params } : {
+                return this.isSearchById ? { ...this.params, isFastSale: false } : {
                     ...this.params,
                     "filter[isCredit]": false
                 }

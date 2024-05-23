@@ -20,7 +20,7 @@ class ReportResponse implements Responsable
     {
         $transactions = $this->model->include()->applyFilters();
         $className = class_basename($this->model);
-        if ($request->isFastSale) {
+        if ($this->isFastSale($request->isFastSale)) {
             $data = [
                 'data' =>  new FastSaleCollection($transactions->paginate(25)),
             ];
@@ -39,5 +39,9 @@ class ReportResponse implements Responsable
         }
 
         return response()->json($data);
+    }
+    private function isFastSale($value)
+    {
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 }

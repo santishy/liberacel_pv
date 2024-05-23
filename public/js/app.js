@@ -8964,7 +8964,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get(this.uri, {
         params: _objectSpread(_objectSpread({
           page: this.page
-        }, _.merge(this.getParams, this.getRelationships)), this.searchTheWarehouses)
+        }, this.searchTheWarehouses), _.merge(this.getParams, this.getRelationships))
       }).then(function (res) {
         if (_this2.page == 1) EventBus.$emit("calculated-total", res.data.total);
         if (res.data.data.length) {
@@ -9066,7 +9066,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getParams: function getParams() {
       if (this.areTheySales) {
-        return this.isSearchById ? _objectSpread({}, this.params) : _objectSpread(_objectSpread({}, this.params), {}, {
+        return this.isSearchById ? _objectSpread(_objectSpread({}, this.params), {}, {
+          isFastSale: false
+        }) : _objectSpread(_objectSpread({}, this.params), {}, {
           "filter[isCredit]": false
         });
       }
