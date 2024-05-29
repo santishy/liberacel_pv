@@ -14,7 +14,9 @@ class CategoryController extends Controller
         $this->authorize('view', new Category);
         if (request()->wantsJson()) {
             $categoryQuery = Category::query();
-            return CategoryResource::collection($categoryQuery->applyFilters()->orderBy('name')->get());
+            return CategoryResource::collection(
+                $categoryQuery->applyFilters()->orderBy('name')->get()
+            );
         }
         return view('categories.index');
     }
@@ -69,9 +71,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->products()->count()) {
+            $category->update(['active' => false]);
             return response()->json([
                 'deleted' => false,
-                'message' => 'No se puede eliminar, existen productos asociados.'
+                'category' => $category,
+                'message' => 'El producto a sido desactivado'
             ]);
         }
 

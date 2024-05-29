@@ -41,12 +41,11 @@ export default {
     methods: {
         destroy() {
             axios.delete(`/categories/${this.category.id}`).then(res => {
-                if (res.data.deleted) {
-                    return EventBus.$emit("deleted-category", this.index);
-                } else {
+                if (!res.data.deleted) {
                     this.message = res.data.message;
                     EventBus.$emit("open-modal-" + this.category.id, true);
                 }
+                EventBus.$emit("deleted-category", this.index);
             });
         }
     }

@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    public $fillable = ['name'];
+    public $fillable = ['name','active'];
 
     public function scopeSearch(Builder $query,$value){
         $values = Str::of($value)->explode(' ');
@@ -22,6 +22,10 @@ class Category extends Model
 
     public function products(){
         return $this->hasMany(Product::class);
+    }
+    public function scopeIsActive(Builder $query,$value){
+        $isActive = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        $query->where('active',$isActive);
     }
 
 }

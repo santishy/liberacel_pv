@@ -25,7 +25,11 @@ export default {
         EventBus.$on("category-created", category => {
             this.categories.unshift(category);
         });
-        axios.get("/categories?ALL=TRUE").then(res => {
+        axios.get("/categories?ALL=TRUE",{
+            params:{
+                'filter[isActive]':true
+            }
+        }).then(res => {
             this.categories = res.data.data;
         });
         EventBus.$on('deleted-category',this.removeCategory);
