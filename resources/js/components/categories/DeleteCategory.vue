@@ -43,7 +43,7 @@ export default {
             axios.delete(`/categories/${this.category.id}`).then(res => {
                 if (!res.data.deleted) {
                     this.message = res.data.message;
-                    EventBus.$emit("open-modal-" + this.category.id, true);
+                    EventBus.$emit("open-modal-" + this.category.id, true);  
                 }
                 EventBus.$emit("deleted-category", this.index);
             });

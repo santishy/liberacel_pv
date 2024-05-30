@@ -36,6 +36,7 @@ export default {
     },
     methods:{
         removeCategory(index){
+           // EventBus.$emit("open-modal-" + this.categories[index].id, true);  
             this.categories.splice(index,1);
         }
     }

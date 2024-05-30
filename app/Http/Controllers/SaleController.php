@@ -49,7 +49,8 @@ class SaleController extends Controller
         $this->authorize('create', new Sale);
         $sale = Sale::with('client')->where('id', session('sale_id'))->first();
         $inventories = Inventory::all();
-        $categories = Category::all();
+        $query = Category::query();
+        $categories = $query->isActive(true)->orderBy('name')->get();
         return view('sales.create', [
             'sale' => $sale ? TransactionResource::make($sale->load('products')) : null,
             'inventories' => $inventories,

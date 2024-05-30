@@ -20,14 +20,15 @@ class ProductController extends Controller
         if (request()->wantsJson()) {
             return ProductResource::collection(Product::with('category')->applyFilters()->paginate(21));
         }
-        $categories = Category::all();
+        $query = Category::query();
+        $categories = $query->orderBy('name')->isActive(true)->get();
         return view('products.index', compact('categories'));
     }
     public function create()
     {
         $this->authorize('create', new Product());
         $query = Category::query();
-        $categories = $query->isActive(true)->get();
+        $categories = $query->orderBy('name')->isActive(true)->get();
         $inventories = Inventory::all('id', 'name');
         return view('products.create', compact('categories', 'inventories'));
     }
@@ -70,7 +71,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
         return view('products.edit', compact('categories', 'product'));
     }
     public function update(Request $request, Product $product)

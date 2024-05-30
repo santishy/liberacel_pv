@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class="w-full  flex justify-center mt-20 bg-transparent"> -->
     <nav-component>
         <div class="p-4 w-9/12 mx-auto bg-white shadow rounded-lg ">
             <div class="flex flex-wrap justify-between rounded-sm gap-4 bg-gray-100 p-2">
