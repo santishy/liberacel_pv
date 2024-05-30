@@ -26,8 +26,8 @@ class ProductController extends Controller
     public function create()
     {
         $this->authorize('create', new Product());
-
-        $categories = Category::all();
+        $query = Category::query();
+        $categories = $query->isActive(true)->get();
         $inventories = Inventory::all('id', 'name');
         return view('products.create', compact('categories', 'inventories'));
     }
