@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <search-category/>
+    <div class="p-4 bg-white rounded">
+        <search-category />
     </div>
 </template>
 
 <script>
 import SearchCategory from "./SearchCategory.vue";
-export default{
-    componets:{
+export default {
+    components: {
         SearchCategory
     }
 }

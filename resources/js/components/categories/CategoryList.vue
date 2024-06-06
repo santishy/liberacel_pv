@@ -1,15 +1,8 @@
 <template>
-    <ul
-        class="w-full rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
-        v-can="'view categories'"
-        v-cloak
-    >
-        <category-list-item
-            v-for="(category,index) in categories"
-            :category="category"
-            :index="index"
-            :key="category.id"
-        ></category-list-item>
+    <ul class="w-full rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
+        v-can="'view categories'" v-cloak>
+        <category-list-item v-for="(category, index) in categories" :category="category" :index="index"
+            :key="category.id"></category-list-item>
     </ul>
 </template>
 <script>
@@ -25,19 +18,23 @@ export default {
         EventBus.$on("category-created", category => {
             this.categories.unshift(category);
         });
-        axios.get("/categories?ALL=TRUE",{
-            params:{
-                'filter[isActive]':true
+        EventBus.$on("matching-categories", this.setCategories)
+        axios.get("/categories?ALL=TRUE", {
+            params: {
+                'filter[isActive]': true
             }
         }).then(res => {
             this.categories = res.data.data;
         });
-        EventBus.$on('deleted-category',this.removeCategory);
+        EventBus.$on('deleted-category', this.removeCategory);
     },
-    methods:{
-        removeCategory(index){
-           // EventBus.$emit("open-modal-" + this.categories[index].id, true);  
-            this.categories.splice(index,1);
+    methods: {
+        removeCategory(index) {
+            // EventBus.$emit("open-modal-" + this.categories[index].id, true);
+            this.categories.splice(index, 1);
+        },
+        setCategories(data) {
+            this.categories = data;
         }
     }
 };

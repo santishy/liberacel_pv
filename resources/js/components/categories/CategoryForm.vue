@@ -1,21 +1,18 @@
 <template>
-    <form @submit.prevent="submit" v-can="'create category'"
-        class="w-full  shadow rounded-lg bg-white p-4 md:mt-0" :class="[getWidth]">
+    <form @submit.prevent="submit" v-can="'create category'" class="w-full  shadow rounded-lg bg-white p-4 md:mt-0"
+        :class="[getWidth]">
         <div class="flex items-center py-2 text-dark text-xl font-bold ">
             Crear categoría
         </div>
         <div class="w-full">
-            <label for=""
-                class="form-label">Nombre</label>
-            <input v-model="form.name" name="name"
-                class="form-text-input w-full"
-                :class="[
-                        'flex',
-                        'items-center',
-                        'border-b',
-                        this.errors ? 'border-transparent' : 'border-teal-500',
-                        'py-2'
-                    ]" type="text" placeholder="CATEGORÍA" aria-label="Full name" />
+            <label for="" class="form-label">Nombre</label>
+            <input v-model="form.name" name="name" class="form-text-input w-full" :class="[
+                'flex',
+                'items-center',
+                'border-b',
+                this.errors ? 'border-transparent' : 'border-teal-500',
+                'py-2'
+            ]" type="text" placeholder="CATEGORÍA" aria-label="Full name" />
         </div>
         <div class="flex items-center ">
             <errors-component :errors-found="errors" />
@@ -52,7 +49,7 @@ export default {
             axios
                 .post(this.uri, this.form)
                 .then(res => {
-                    EventBus.$emit("category-created", res.data);
+                    EventBus.$emit("category-created", res.data.data);
                     let obj = {
                         message: this.form.id
                             ? "Categoría modificada"

@@ -29,9 +29,9 @@ class CategoryController extends Controller
 
         $this->authorize('create', new Category);
 
-        return Category::create([
+        return CategoryResource::make(Category::create([
             'name' => $request->name
-        ]);
+        ])->fresh());
     }
 
     public function create()
@@ -59,8 +59,9 @@ class CategoryController extends Controller
             [
                 'name' => [
                     "required",
-                    Rule::unique('categories')->ignore(request()->id)
-                ]
+                    Rule::unique('categories')->ignore(request()->route('category'))
+                ],
+                "active" => ["boolean"]
             ],
             [
                 'name.required' => "El campo categoría es requerido.",
