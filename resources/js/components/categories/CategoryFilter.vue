@@ -10,7 +10,8 @@ import SearchCategory from "./SearchCategory.vue";
 import CategoryActiveFilter from "./CategoryActiveFilter.vue";
 export default {
     components: {
-        SearchCategory
+        SearchCategory,
+        CategoryActiveFilter
     }
 }
 </script>

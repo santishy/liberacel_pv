@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
         <div>
-            <input type="text" placeholder="Introduce el nombre de la categoría para buscar." v-model="name"
+            <input type="text" placeholder="Introduce el nombre + enter. Para buscar la categoria" v-model="name"
                 class="form-text-input w-full">
         </div>
     </form>
