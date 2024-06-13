@@ -10,6 +10,9 @@ export default {
         user: {
             type: Object,
             required: true
+        },
+        index: {
+            type: Number
         }
     },
     data() {
@@ -18,8 +21,14 @@ export default {
         }
     },
     methods: {
-        submit() {
-            axios.delete(`/users/${this.user.id}`)
+        async submit() {
+            try {
+                const res = await axios.delete(`/users/${this.user.id}`);
+                EventBus.$emit('disabled-user', this.index)
+            } catch (error) {
+                console.log(error);
+            }
+
         }
     }
 }
