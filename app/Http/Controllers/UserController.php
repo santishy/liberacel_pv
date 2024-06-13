@@ -43,4 +43,12 @@ class UserController extends Controller
         $user->syncRoles($request->roles);
         return $user->save();
     }
+
+    public function delete(User $user)
+    {
+        $user->update(["active" => false]);
+        return response()->json([
+            "user" => $user
+        ]);
+    }
 }

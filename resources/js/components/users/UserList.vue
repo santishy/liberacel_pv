@@ -1,12 +1,9 @@
 <template>
     <nav-component>
-        <div
-            v-can="'view users'"
-            class="  md:w-9/12 mx-auto flex justify-center sm:overflow-x-hidden overflow-x-auto"
-        >
+        <div v-can="'view users'" class="  md:w-9/12 mx-auto flex justify-center sm:overflow-x-hidden overflow-x-auto">
             <table class="table-auto text-center  bg-white shadow rounded ">
                 <thead class="bg-gray-400">
-                    <th class="border px-4 py-2">Nombre</th>
+                    <th class="border px-4 py-2">Nombres</th>
                     <th class="border px-4 py-2">Email</th>
                     <th class="border px-4 py-2">Rols</th>
                     <th class="border px-4 py-2">Acciones</th>
@@ -39,10 +36,10 @@ import NavComponent from "../NavComponent.vue";
 import UserEditIcon from "../icons/UserEditIcon.vue"
 import NinjaIcon from "../icons/NinjaIcon.vue"
 export default {
-    components: { NavComponent ,NinjaIcon,UserEditIcon},
+    components: { NavComponent, NinjaIcon, UserEditIcon },
     data: () => ({
         users: [],
-        csrf:document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     }),
     mounted() {
         this.getUsers();

@@ -27,7 +27,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
     }
 
     /**
@@ -46,10 +45,10 @@ class FortifyServiceProvider extends ServiceProvider
             return  view('auth.login');
         });
         Fortify::registerView(function () {
-            Gate::authorize('register',new User);
-            $roles = Role::all('id','name');
+            Gate::authorize('register', new User);
+            $roles = Role::all('id', 'name');
             $inventories = Inventory::all();
-            return view('auth.register',compact('roles','inventories'));
+            return view('auth.register', compact('roles', 'inventories'));
         });
         Fortify::requestPasswordResetLinkView(function () {
             return view('auth.forgot-password');
@@ -58,14 +57,13 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.reset-password', ['request' => $request]);
         });
         Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('username', $request->username)->first();
-    
-            if ($user &&
-                Hash::check($request->password, $user->password)) {
+            $user = User::where('username', $request->username)
+                ->where('active', true)
+                ->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
                 return $user;
             }
         });
-
-        
     }
 }
