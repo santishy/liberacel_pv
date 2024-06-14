@@ -29,7 +29,9 @@ class UserController extends Controller
         $this->authorize('update', $user);
         $roles  = Role::all('name', 'id');
         $inventories = Inventory::all();
-        $user = $user->with('roles:id,name')->where('id', $user->id)->first();
+        $user = $user->with(['roles:id,name'])
+            ->select('inventory_id', 'name', 'id', 'username', 'email')
+            ->where('id', $user->id)->first();
         return view('users.edit', compact('user', 'roles', 'inventories'));
     }
 
@@ -39,13 +41,17 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update($request->safe()->except('roles'));
-
-        $user->syncRoles($request->roles);
-        return $user->save();
+        if (!request()->has('active')) {
+            $user->syncRoles($request->roles);
+        } else {
+        }
+        $user->save();
+        return response()->json(["data" => $user->fresh()]);
     }
 
-    public function delete(User $user)
+    public function destroy(User $user, Request $request)
     {
+
         $user->update(["active" => false]);
         return response()->json([
             "user" => $user

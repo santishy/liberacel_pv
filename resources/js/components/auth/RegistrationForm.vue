@@ -1,118 +1,59 @@
 <template>
-    <form
-        @submit.prevent="submit"
-        v-can="definePermission"
-        class="md:w-7/12 shadow-lg rounded-lg bg-white md:px-6 md:py-8"
-    >
-        <div
-            class="flex items-center pb-2 pt-0 text-dark text-center justify-center text-xl font-bold"
-        >
+    <form @submit.prevent="submit" v-can="definePermission"
+        class="md:w-7/12 shadow-lg rounded-lg bg-white md:px-6 md:py-8">
+        <div class="flex items-center pb-2 pt-0 text-dark text-center justify-center text-xl font-bold">
             {{ getTitle }}
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
-            <select
-                v-model="form.inventory_id"
-                name="inventory_id"
+            <select v-model="form.inventory_id" name="inventory_id"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                placeholder="Nombre completo"
-                aria-label="Full name"
-            >
+                placeholder="Nombre completo" aria-label="Full name">
                 <option value="" disabled selected>Elige un almacén</option>
-                <option
-                    v-for="inventory in inventories"
-                    :key="inventory.id"
-                    :value="inventory.id"
-                >
+                <option v-for="inventory in inventories" :key="inventory.id" :value="inventory.id">
                     {{ inventory.name }}
                 </option>
             </select>
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Almacenes</label
-            >
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Almacenes</label>
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
-            <input
-                v-model="form.name"
-                name="name"
+            <input v-model="form.name" name="name"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                type="text"
-                placeholder="Nombre completo"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Nombre</label
-            >
+                type="text" placeholder="Nombre completo" aria-label="Full name" />
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Nombre</label>
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
-            <input
-                v-model="form.username"
-                name="username"
+            <input v-model="form.username" name="username"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                type="text"
-                placeholder="Nombre completo"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Username</label
-            >
+                type="text" placeholder="Nombre completo" aria-label="Full name" />
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Username</label>
         </div>
         <div class="flex items-center  border-t border-gray-500 py-2 relative">
-            <input
-                v-model="form.email"
-                name="email"
+            <input v-model="form.email" name="email"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                type="email"
-                placeholder="Correo electronico"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Email</label
-            >
+                type="email" placeholder="Correo electronico" aria-label="Full name" />
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Email</label>
         </div>
-        <div
-            class="flex items-center  border-t border-gray-500 py-2 relative"
-        >
-            <input
-                v-model="form.password"
-                name="password"
+        <div class="flex items-center  border-t border-gray-500 py-2 relative">
+            <input v-model="form.password" name="password"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                type="password"
-                placeholder="Contraseña"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Contraseña</label
-            >
+                type="password" placeholder="Contraseña" aria-label="Full name" />
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Contraseña</label>
         </div>
         <div class="px-4 bg-yellow-400 text-center" v-if="editableUser">
             <span class="text-xs text-gray-800 font-mono  w-full">Dejar en blanco sino desea cambiar contraseña.</span>
         </div>
-        <div
-            class="flex items-center  border-t border-b border-gray-500 py-2 relative"
-        >
-            <input
-                v-model="form.password_confirmation"
-                name="password_confirmation"
+        <div class="flex items-center  border-t border-b border-gray-500 py-2 relative">
+            <input v-model="form.password_confirmation" name="password_confirmation"
                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                type="password"
-                placeholder="Confirmar contraseña"
-                aria-label="Full name"
-            />
-            <label
-                for=""
-                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono"
-                >Confirmar Contraseña</label
-            >
+                type="password" placeholder="Confirmar contraseña" aria-label="Full name" />
+            <label for=""
+                class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Confirmar
+                Contraseña</label>
         </div>
         <div class="flex items-center">
             <errors-component :errors-found="errors" />
@@ -120,8 +61,7 @@
 
         <div class="flex justify-center mt-0 mb-0">
             <button
-                class="bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full"
-            >
+                class="bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full">
                 {{ getButtonTitle }}
             </button>
         </div>

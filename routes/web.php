@@ -105,7 +105,7 @@ Route::post('roles/{role}/permissions', [RolesPermissionsController::class, 'sto
 Route::get('users', [UserController::class, 'index'])->middleware('auth');
 Route::get('users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
 Route::put('users/{user}', [UserController::class, 'update'])->middleware('auth');
-
+Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('auth');
 //inventories
 Route::resource('inventories', InventoryController::class)->middleware('auth');
 Route::get('warehouses', [WarehouseController::class, 'index'])->middleware('auth');

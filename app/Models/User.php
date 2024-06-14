@@ -27,6 +27,7 @@ class User extends Authenticatable
         'email',
         'inventory_id',
         'password',
+        'active'
     ];
 
     /**
