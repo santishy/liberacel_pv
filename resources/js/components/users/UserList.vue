@@ -54,7 +54,6 @@ export default {
         this.getUsers();
         EventBus.$on("user-active-toggle", data => {
             if (this.users[data.index]) {
-                Vue.set(this.users, data.index, data.user.active);
                 this.users[data.index].active = data.user.active;
             }
         })

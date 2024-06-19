@@ -50,7 +50,8 @@ export default {
             this.status["filter[status]"] = status;
         });
         EventBus.$on("changed-status", status => {
-            this.status["filter[status]"] = status;
+            Vue.set(this.status, "filter[status]", status)
+            //this.status["filter[status]"] = status;
         });
     },
     data() {

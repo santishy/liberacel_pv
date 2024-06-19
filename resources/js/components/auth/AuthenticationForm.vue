@@ -165,9 +165,11 @@ export default {
                     this.uri,
                     this.form
                 );
+                console.log({ 'status': res.data })
                 if (res.status === 200) {
                     // this.disabled = false;
-                    EventBus.$emit("associated-user", this.form.id);
+                    if (res.data.sale.id)
+                        EventBus.$emit("associated-user", res.data.sale.id);
                     this.form.id = null;
                     this.form.username = "";
                     this.form.password = "";

@@ -1,5 +1,7 @@
 <template>
     <div v-if="params" class="table-container-responsive">
+        <pre>{{ getParams }}</pre>
+        {{ isSearchById }}
         <table class="report-table">
             <thead class="report-table-thead">
                 <tr class="bg-green-200">
@@ -71,12 +73,7 @@ export default {
         });
         EventBus.$on("associated-user", (id) => {
             EventBus.$emit("open-modal", false);
-            let index = this.products.findIndex(element => {
-                return element.id == id
-            });
-            if (index != -1) {
-                this.products.splice(index, 1);
-            }
+            this.products = this.products.filter((product) => product.id !== id);
         });
     },
     watch: {
@@ -98,10 +95,10 @@ export default {
         showSaleResultById(params) {
             this.isSearchById = true;
             this.changeParams(params);
-
         },
         infiniteHandler($state) {
             console.log(this.getParams)
+            console.log(this.params)
             axios
                 .get(this.uri,
                     { params: this.getParams }

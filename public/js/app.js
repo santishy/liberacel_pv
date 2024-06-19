@@ -2451,29 +2451,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post(_this2.uri, _this2.form);
               case 6:
                 res = _context.sent;
+                console.log({
+                  'status': res.data
+                });
                 if (res.status === 200) {
                   // this.disabled = false;
-                  EventBus.$emit("associated-user", _this2.form.id);
+                  if (res.data.sale.id) EventBus.$emit("associated-user", res.data.sale.id);
                   _this2.form.id = null;
                   _this2.form.username = "";
                   _this2.form.password = "";
                 }
-                _context.next = 13;
+                _context.next = 14;
                 break;
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
-              case 13:
-                _context.prev = 13;
+              case 14:
+                _context.prev = 14;
                 _this2.loading = false;
-                return _context.finish(13);
-              case 16:
+                return _context.finish(14);
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10, 13, 16]]);
+        }, _callee, null, [[0, 11, 14, 17]]);
       }))();
     },
     toggleStatus: function toggleStatus(event) {
@@ -5267,12 +5270,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     });
     EventBus.$on("associated-user", function (id) {
       EventBus.$emit("open-modal", false);
-      var index = _this.products.findIndex(function (element) {
-        return element.id == id;
+      _this.products = _this.products.filter(function (product) {
+        return product.id !== id;
       });
-      if (index != -1) {
-        _this.products.splice(index, 1);
-      }
     });
   },
   watch: {
@@ -5298,6 +5298,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     infiniteHandler: function infiniteHandler($state) {
       var _this2 = this;
       console.log(this.getParams);
+      console.log(this.params);
       axios.get(this.uri, {
         params: this.getParams
       }).then(function (res) {
@@ -9012,7 +9013,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.status["filter[status]"] = status;
     });
     EventBus.$on("changed-status", function (status) {
-      _this.status["filter[status]"] = status;
+      Vue.set(_this.status, "filter[status]", status);
+      //this.status["filter[status]"] = status;
     });
   },
   data: function data() {
@@ -10733,7 +10735,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getUsers();
     EventBus.$on("user-active-toggle", function (data) {
       if (_this.users[data.index]) {
-        Vue.set(_this.users, data.index, data.user.active);
         _this.users[data.index].active = data.user.active;
       }
     });
@@ -14912,7 +14913,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _vm.params ? _c("div", {
     staticClass: "table-container-responsive"
-  }, [_c("table", {
+  }, [_c("pre", [_vm._v(_vm._s(_vm.getParams))]), _vm._v("\n    " + _vm._s(_vm.isSearchById) + "\n    "), _c("table", {
     staticClass: "report-table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", {
     staticClass: "flex-1 sm:flex-none"
