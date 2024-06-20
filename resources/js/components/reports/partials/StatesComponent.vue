@@ -55,6 +55,11 @@ export default {
             selectedOption: 'completed'
         }
     },
+    mounted() {
+        EventBus.$on('sale-status-by-id', (status) => {
+            this.selectedOption = status;
+        });
+    },
     methods: {
         handleStatusChange() {
             EventBus.$emit('changed-status', this.selectedOption)

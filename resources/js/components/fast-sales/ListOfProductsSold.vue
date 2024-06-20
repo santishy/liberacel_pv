@@ -1,7 +1,5 @@
 <template>
     <div v-if="params" class="table-container-responsive">
-        <pre>{{ getParams }}</pre>
-        {{ isSearchById }}
         <table class="report-table">
             <thead class="report-table-thead">
                 <tr class="bg-green-200">
@@ -12,12 +10,8 @@
                     <th class="py-2 px-2">Precio</th>
                     <th class="py-2 px-2">Cantidad</th>
                     <th class="py-2 px-2">Subtotal</th>
-                    <th class="py-2 px-2">
-                        Total Venta Completa
-                    </th>
-                    <th class="py-2 px-2 text-left sm:text-center" width="110px">
-                        Actions
-                    </th>
+                    <th class="py-2 px-2">Total Venta Completa</th>
+                    <th class="py-2 px-2 text-left sm:text-center" width="110px">Actions</th>
                 </tr>
             </thead>
             <tbody class="flex-1 sm:flex-none">
@@ -35,10 +29,12 @@
 
 <script>
 import InfiniteLoading from "vue-infinite-loading";
-
 import AuthenticationForm from "../auth/AuthenticationForm.vue";
 import ProductSold from "./ProductSold.vue";
-import Vue from "vue";
+
+import axios from 'axios';
+import _ from 'lodash';
+
 export default {
     props: {
         firstLoad: {
@@ -64,7 +60,7 @@ export default {
         };
     },
     mounted() {
-        EventBus.$on('search-result-by-id', this.showSaleResultById)
+        EventBus.$on('search-result-by-id', this.showSaleResultById);
         EventBus.$on("id-for-authentication-form", (id) => {
             this.selectedFastSaleId = id;
         });
@@ -78,7 +74,7 @@ export default {
     },
     watch: {
         firstLoad: {
-            handler(newValue, oldValue) {
+            handler(newValue) {
                 if (!Array.isArray(newValue)) {
                     throw new Error("It is not an array")
                 }
@@ -97,12 +93,11 @@ export default {
             this.changeParams(params);
         },
         infiniteHandler($state) {
-            console.log(this.getParams)
-            console.log(this.params)
+
+            const params = this.getParams; // Forzar evaluación de la propiedad computada
+
             axios
-                .get(this.uri,
-                    { params: this.getParams }
-                )
+                .get(this.uri, { params })
                 .then((res) => {
                     if (this.page == 1) {
                         EventBus.$emit("calculated-total", res.data.total);
@@ -110,6 +105,9 @@ export default {
                     if (res.data.data.length) {
                         this.page += 1;
                         this.products.push(...res.data.data);
+                        if (this.isSearchById) {
+                            EventBus.$emit('sale-status-by-id', res.data.data[0].status)
+                        }
                         $state.loaded();
                     } else {
                         $state.complete();
@@ -121,7 +119,7 @@ export default {
                 });
         },
         changeParams(value) {
-            this.params = value;
+            this.params = { ...value };
             this.page = 1;
             this.products = [];
             this.infiniteId += 1;
@@ -135,18 +133,18 @@ export default {
             const params = {
                 isFastSale: true,
                 page: this.page,
-                ..._.merge(this.params, this.getRelationships),
+                ...this.params,
+                ...this.getRelationships,
             };
             return this.isSearchById ? params : {
                 ...params,
-                ...{ "filter[isCredit]": false }, //me hace falta cambiar filtro aqui
+                "filter[isCredit]": false,
             }
         },
         structureTheData() {
             let newStructure = [];
             this.products.forEach((item) => {
-                let { products, created_at, total, status, id, user_name } =
-                    item;
+                let { products, created_at, total, status, id, user_name } = item;
                 newStructure.push(
                     ...products.map((product) => {
                         return {

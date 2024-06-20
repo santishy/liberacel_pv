@@ -17,7 +17,6 @@ class FastSaleAssociatedUserController extends Controller
             $request->username,
             $request->password
         );
-
         $fastSale->toggleUser($associatedUser);
 
         FastSaleUpdated::dispatch($fastSale);

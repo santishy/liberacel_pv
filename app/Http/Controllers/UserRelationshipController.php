@@ -19,8 +19,15 @@ class UserRelationshipController extends Controller
          */
         $this->authorize('restore', $model);
 
-        $user = User::where('username', $request->username)->first();
-
+        $user = User::where('username', $request->username)
+            ->where('active', true)->first();
+        if (!$user) {
+            return response()
+                ->json(
+                    ['errors' => ['error' => 'El usuario no existe.']],
+                    422
+                );
+        }
         if (!Hash::check($request->password, optional($user)->password)) {
             return response()
                 ->json(

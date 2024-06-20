@@ -66,6 +66,9 @@
                         " :disabled="loading">
                         Enviar
                     </button>
+                    <div v-show="errors" class="flex items-center mt-2">
+                        <errors-component :errors-found="errors" />
+                    </div>
                     <div v-if="form.status == 'cancelled'" class="
                             bg-orange-100
                             border-l-4 border-orange-500
@@ -77,9 +80,6 @@
                         <p class="text-sm">
                             Esta a punto de cancelar la venta completa.
                         </p>
-                    </div>
-                    <div class="flex items-center mt-2">
-                        <errors-component :errors-found="errors" />
                     </div>
                 </div>
             </form>
@@ -176,6 +176,7 @@ export default {
                 }
             } catch (err) {
                 console.log(err);
+                this.getErrors(err)
             } finally {
                 this.loading = false;
             }

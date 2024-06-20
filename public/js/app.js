@@ -2461,22 +2461,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.form.username = "";
                   _this2.form.password = "";
                 }
-                _context.next = 14;
+                _context.next = 15;
                 break;
               case 11:
                 _context.prev = 11;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
-              case 14:
-                _context.prev = 14;
+                _this2.getErrors(_context.t0);
+              case 15:
+                _context.prev = 15;
                 _this2.loading = false;
-                return _context.finish(14);
-              case 17:
+                return _context.finish(15);
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 11, 14, 17]]);
+        }, _callee, null, [[0, 11, 15, 18]]);
       }))();
     },
     toggleStatus: function toggleStatus(event) {
@@ -5220,6 +5221,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _auth_AuthenticationForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../auth/AuthenticationForm.vue */ "./resources/js/components/auth/AuthenticationForm.vue");
 /* harmony import */ var _ProductSold_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductSold.vue */ "./resources/js/components/fast-sales/ProductSold.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -5229,6 +5234,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -5277,7 +5283,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   watch: {
     firstLoad: {
-      handler: function handler(newValue, oldValue) {
+      handler: function handler(newValue) {
         if (!Array.isArray(newValue)) {
           throw new Error("It is not an array");
         }
@@ -5297,10 +5303,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     infiniteHandler: function infiniteHandler($state) {
       var _this2 = this;
-      console.log(this.getParams);
-      console.log(this.params);
-      axios.get(this.uri, {
-        params: this.getParams
+      var params = this.getParams; // Forzar evaluación de la propiedad computada
+
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get(this.uri, {
+        params: params
       }).then(function (res) {
         if (_this2.page == 1) {
           EventBus.$emit("calculated-total", res.data.total);
@@ -5309,6 +5315,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           var _this2$products;
           _this2.page += 1;
           (_this2$products = _this2.products).push.apply(_this2$products, _toConsumableArray(res.data.data));
+          if (_this2.isSearchById) {
+            EventBus.$emit('sale-status-by-id', res.data.data[0].status);
+          }
           $state.loaded();
         } else {
           $state.complete();
@@ -5320,7 +5329,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     changeParams: function changeParams(value) {
-      this.params = value;
+      this.params = _objectSpread({}, value);
       this.page = 1;
       this.products = [];
       this.infiniteId += 1;
@@ -5333,11 +5342,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       };
     },
     getParams: function getParams() {
-      var params = _objectSpread({
+      var params = _objectSpread(_objectSpread({
         isFastSale: true,
         page: this.page
-      }, _.merge(this.params, this.getRelationships));
-      return this.isSearchById ? params : _objectSpread(_objectSpread({}, params), {
+      }, this.params), this.getRelationships);
+      return this.isSearchById ? params : _objectSpread(_objectSpread({}, params), {}, {
         "filter[isCredit]": false
       });
     },
@@ -9520,6 +9529,12 @@ __webpack_require__.r(__webpack_exports__);
       selectedOption: 'completed'
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    EventBus.$on('sale-status-by-id', function (status) {
+      _this.selectedOption = status;
+    });
+  },
   methods: {
     handleStatusChange: function handleStatusChange() {
       EventBus.$emit('changed-status', this.selectedOption);
@@ -11667,7 +11682,19 @@ var render = function render() {
       type: "submit",
       disabled: _vm.loading
     }
-  }, [_vm._v("\n                    Enviar\n                ")]), _vm._v(" "), _vm.form.status == "cancelled" ? _c("div", {
+  }, [_vm._v("\n                    Enviar\n                ")]), _vm._v(" "), _c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.errors,
+      expression: "errors"
+    }],
+    staticClass: "flex items-center mt-2"
+  }, [_c("errors-component", {
+    attrs: {
+      "errors-found": _vm.errors
+    }
+  })], 1), _vm._v(" "), _vm.form.status == "cancelled" ? _c("div", {
     staticClass: "bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2 mt-2",
     attrs: {
       role: "alert"
@@ -11676,13 +11703,7 @@ var render = function render() {
     staticClass: "font-bold"
   }, [_vm._v("Cancellar nota # " + _vm._s(_vm.local_id))]), _vm._v(" "), _c("p", {
     staticClass: "text-sm"
-  }, [_vm._v("\n                        Esta a punto de cancelar la venta completa.\n                    ")])]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center mt-2"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1)])]), _vm._v(" "), _c("template", {
+  }, [_vm._v("\n                        Esta a punto de cancelar la venta completa.\n                    ")])]) : _vm._e()])]), _vm._v(" "), _c("template", {
     slot: "button"
   }, [_c("label", {
     staticClass: "inline-flex items-start mt-3 border-2 p-2 rounded-sm border-gray-200"
@@ -14913,7 +14934,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _vm.params ? _c("div", {
     staticClass: "table-container-responsive"
-  }, [_c("pre", [_vm._v(_vm._s(_vm.getParams))]), _vm._v("\n    " + _vm._s(_vm.isSearchById) + "\n    "), _c("table", {
+  }, [_c("table", {
     staticClass: "report-table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", {
     staticClass: "flex-1 sm:flex-none"
@@ -14964,12 +14985,12 @@ var staticRenderFns = [function () {
     staticClass: "py-2 px-2"
   }, [_vm._v("Subtotal")]), _vm._v(" "), _c("th", {
     staticClass: "py-2 px-2"
-  }, [_vm._v("\n                    Total Venta Completa\n                ")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("Total Venta Completa")]), _vm._v(" "), _c("th", {
     staticClass: "py-2 px-2 text-left sm:text-center",
     attrs: {
       width: "110px"
     }
-  }, [_vm._v("\n                    Actions\n                ")])])]);
+  }, [_vm._v("Actions")])])]);
 }];
 render._withStripped = true;
 
