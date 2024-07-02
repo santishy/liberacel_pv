@@ -43,7 +43,7 @@
             </button>
             <button
                 class="bg-white border text-xs border-blue-500 text-sky-700 items-center justify-center flex flex-wrap gap-1 hover:bg-blue-700  hover:text-white duration-150 font-semibold p-1 rounded"
-                @click.prevent="showCreditPayments(credit)">
+                @click.prevent="showCreditNotes(credit)">
                 <svg data-slot="icon" class="w-4 h-4" fill="none" stroke-width="1.5" stroke="currentColor"
                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -79,6 +79,9 @@ export default {
         },
         showCreditPayments(credit) {
             EventBus.$emit("show-credit-payments", credit);
+        },
+        showCreditNotes(credit){
+            EventBus.$emit('show-credit-notes',credit);
         }
     }
 }

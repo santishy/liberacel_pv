@@ -51,6 +51,7 @@ export default {
                     }
                 })
                 .then((res) => {
+                    console.log(res.data.data)
                     if (res.data.data.length) {
                         this.page += 1;
                         this.notes.push(...res.data.data);

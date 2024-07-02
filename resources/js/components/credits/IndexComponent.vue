@@ -7,7 +7,7 @@
         <credit-list />
         <information-component v-show="Object.keys(credit).length">
             <template slot="title">
-                {{ title }}
+                {{ title }} 
             </template>
             <component :is="selectedComponent" v-if="Object.keys(credit).length" :credit="credit" />
         </information-component>
@@ -18,6 +18,7 @@ import CreditList from './CreditList.vue';
 import StatusFilter from './StatusFilter.vue'
 import NavComponent from '../NavComponent.vue';
 import CreditPayments from './payments/CreditPayments.vue';
+import CreditNotes from './notes/CreditNotes.vue';
 import PaymentForm from '../payments/PaymentForm.vue';
 import InformationComponent from '../modals/InformationComponent.vue';
 import SearchByPhoneNumber from './clients/SearchByPhoneNumber.vue';
@@ -34,6 +35,7 @@ export default {
         CreditList,
         InformationComponent,
         PaymentForm,
+        CreditNotes,
         SearchByPhoneNumber,
         StatusFilter,
         CreditPayments,
@@ -41,7 +43,7 @@ export default {
     created() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
         EventBus.$on('show-credit-payments', this.showCreditPayments)
-        EventBus.$on('see-credit-notes', this.showCreditNotes)
+        EventBus.$on('show-credit-notes', this.showCreditNotes)
         EventBus.$on('updated-payment', this.updateCredit)
     },
     methods: {
@@ -60,7 +62,7 @@ export default {
         showCreditNotes(credit) {
             Vue.set(this.$data, 'credit', credit);
             this.title = "Notas"
-            this.selectedComponent = "credit-notes"
+            this.selectedComponent = "credit-notes";
             EventBus.$emit("open-modal", true);
         },
         updateCredit(res) {

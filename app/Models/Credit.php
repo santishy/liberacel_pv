@@ -37,7 +37,7 @@ class Credit extends Model
     }
     public function scopeStatusDifferentFrom($value)
     {
-        return $this->where('status', '!=', $value);
+        return $this->where('status', $value);
     }
     public function client()
     {
