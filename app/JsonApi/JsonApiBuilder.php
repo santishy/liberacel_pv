@@ -12,6 +12,7 @@ class JsonApiBuilder
     public function applyFilters()
     {
         return function () {
+            /** @var Builder $this */
             foreach (request('filter', []) as $filter => $value) {
                 abort_unless($this->hasNamedScope($filter), 400, "El filtro {$filter} no existe");
                 $this->{$filter}($value);
@@ -24,6 +25,7 @@ class JsonApiBuilder
     public function applyRemovals()
     {
         return function () {
+            /** @var Builder $this */
             foreach (request('remove', []) as $method => $value) {
                 abort_unless($this->hasNamedScope($method), 400, "El metodo {$method} no existe");
                 $this->{$method}($value);
@@ -32,11 +34,12 @@ class JsonApiBuilder
         };
     }
     /**
-     * 
+     *
      */
     public function transactions()
     {
         return function ($product) {
+            /** @var Builder $this */
             $transaction = $this->model->products();
             $price = $this->model->client()->count() ?
                 $this->model->client->assigned_price : 'retail_price';
@@ -58,6 +61,7 @@ class JsonApiBuilder
     public function getTransaction()
     {
         return function () {
+            /** @var Builder $this */
             $transaction = $this->findOrCreateTheTransaction();
             return $transaction;
         };
@@ -67,6 +71,7 @@ class JsonApiBuilder
     {
         // include=relationship:scope|scope,relationship,
         return function () {
+            /** @var Builder $this */
             if (request()->has('include')) {
                 $relationships = Str::of(request()->include)->explode(',');
                 foreach ($relationships as $relationship) {

@@ -41,6 +41,7 @@ export default {
     created() {
         EventBus.$on('open-payment-modal', this.openModalCredit)
         EventBus.$on('show-credit-payments', this.showCreditPayments)
+        EventBus.$on('see-credit-notes', this.showCreditNotes)
         EventBus.$on('updated-payment', this.updateCredit)
     },
     methods: {
@@ -54,6 +55,12 @@ export default {
             Vue.set(this.$data, 'credit', credit);
             this.title = "Lista de Pagos"
             this.selectedComponent = "credit-payments"
+            EventBus.$emit("open-modal", true);
+        },
+        showCreditNotes(credit) {
+            Vue.set(this.$data, 'credit', credit);
+            this.title = "Notas"
+            this.selectedComponent = "credit-notes"
             EventBus.$emit("open-modal", true);
         },
         updateCredit(res) {
