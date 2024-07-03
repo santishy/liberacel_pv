@@ -7,7 +7,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\ProductInPurchaseController;
-use App\Http\Controllers\{BarcodeController, BarcodeToSellController, CheckoutController, ClientFastSaleController, CreditController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
+use App\Http\Controllers\{BarcodeController, BarcodeToSellController, CheckoutController, ClientFastSaleController, CreditController, CreditNotesController, CreditPaymentsController, ExpenseController, ExpenseReportController, FastSaleAssociatedUserController, FastSaleCustomerBonusController, GeneralReportController, PaymentPDFController, PaymentsController, ProductBarcodeController, PurchaseController, ProductInSaleController, RefundController, RoleController, SettingController, WarehouseCostsController};
 use App\Http\Controllers\{
     ClientController,
     FastSaleController,
@@ -255,3 +255,9 @@ Route::post("checkout", [CheckoutController::class, "store"])->middleware("auth"
  */
 
 Route::post("client/{sale}/fast-sales", [ClientFastSaleController::class, "store"])->middleware("auth");
+
+/**
+ * credit notes
+ */
+
+Route::get("credits/{credit}/notes", [CreditNotesController::class, "index"])->middleware('auth');

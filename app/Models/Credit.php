@@ -35,10 +35,7 @@ class Credit extends Model
     {
         return $this->morphedByMany(FastSale::class, 'creditable');
     }
-    public function scopeStatusDifferentFrom($value)
-    {
-        return $this->where('status', $value);
-    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);

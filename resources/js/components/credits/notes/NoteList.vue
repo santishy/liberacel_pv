@@ -8,7 +8,6 @@
                     <th class="p-2">Status</th>
                     <th class="px-2 py-2">Tipo</th>
                     <th class="px-2 py-2">Total</th>
-                    <!-- <th class="px-2 py-2">Acciones</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -22,10 +21,14 @@
 <script>
 import NoteListItem from './NoteListItem.vue';
 export default {
+    mounted() {
+        EventBus.$on('show-credit-notes', () => {
+            this.changeParams();
+        });
+    },
     props: {
-        note: {
-            type: Object,
-            required: true
+        credit: {
+            type: Object
         }
     },
     data() {
@@ -34,7 +37,7 @@ export default {
             page: 1,
             infiniteId: 1,
             params: {
-                "filter[statusDifferentFrom]": "cancelled",
+                "filter[getNotesByStatus]": "completed",
             }
         };
     },
@@ -51,10 +54,10 @@ export default {
                     }
                 })
                 .then((res) => {
-                    console.log(res.data.data)
-                    if (res.data.data.length) {
+                    console.log(res.data)
+                    if (res.data.notes.length) {
                         this.page += 1;
-                        this.notes.push(...res.data.data);
+                        this.notes.push(...res.data.notes);
                         $state.loaded();
                     }
                     else {
@@ -65,8 +68,8 @@ export default {
                     console.log(err);
                 });
         },
-        changeParams(value) {
-            this.params = value;
+        changeParams(value = "completed") {
+            this.params["filter[getNotesByStatus]"] = value;
             this.page = 1;
             this.notes = [];
             this.infiniteId += 1;

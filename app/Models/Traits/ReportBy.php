@@ -81,4 +81,8 @@ trait ReportBy
     {
         $query->where('is_credit', $value);
     }
+    public function scopeGetNotesByStatus(Builder $query, $value)
+    {
+        $query->where('status', $value);
+    }
 }

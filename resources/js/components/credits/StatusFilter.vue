@@ -57,7 +57,6 @@ export default {
             paid: {
                 "filter[withStatus]": "paid"
             },
-
             pending: {
                 "filter[withStatus]": "pending"
             }

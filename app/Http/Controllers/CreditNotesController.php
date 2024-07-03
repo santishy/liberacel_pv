@@ -12,10 +12,10 @@ class CreditNotesController extends Controller
     {
 
         $sales = CreditNoteResource::collection(
-            $credit->sales()->applyFilters()->paginate()
+            $credit->sales()->applyFilters()->orderBy('id', 'desc')->paginate()
         );
         $fastSales = CreditNoteResource::collection(
-            $credit->fastSales()->applyFilters()->paginate()
+            $credit->fastSales()->applyFilters()->orderBy('id', 'desc')->paginate()
         );
 
         $notes = $sales->merge($fastSales);
