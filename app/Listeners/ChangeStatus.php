@@ -47,7 +47,7 @@ class ChangeStatus
                     $inverse = -1;
                     $event->fastSale->handleCredit($this->factors[$event->fastSale->status] * $inverse);
                 }
-                session()->forget('fast-sale');
+                session()->forget('fast_sale_id');
             }
     }
     public function statusSentIsCompleted()

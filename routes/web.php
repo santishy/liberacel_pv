@@ -264,10 +264,4 @@ Route::post("client/{sale}/fast-sales", [ClientFastSaleController::class, "store
 
 Route::get("credits/{credit}/notes", [CreditNotesController::class, "index"])->middleware('auth');
 
-use Illuminate\Support\Str;
 
-Route::get('test', function () {
-    $model = new Sale();
-    $name = class_basename($model);
-    return Str::snake($name, '_');
-});

@@ -3,6 +3,7 @@
 namespace App\Models\Traits;
 
 use App\Models\FastSale;
+use Illuminate\Support\Str;
 use App\Models\Sale;
 use Illuminate\Validation\ValidationException;
 
@@ -34,5 +35,12 @@ trait SaleModelHandler
             return 'Express';
         }
         return null;
+    }
+    public function deleteTheSessionID(){
+        $name = class_basename($this);
+        $modelID = Str::snake($name, '_') . '_id';
+        if(session()->has($modelID)){
+            session()->forget($modelID);
+        }
     }
 }

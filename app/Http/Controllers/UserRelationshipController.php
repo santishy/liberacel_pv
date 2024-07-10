@@ -28,9 +28,7 @@ class UserRelationshipController extends Controller
             SaleTransactionProcessed::dispatch($model);
         }
 
-        if (session()->has('fast-sale')) {
-            session()->forget('fast-sale');
-        }
+        $model->deleteTheSessionID();
 
         return response()->json([
             'sale' => $model,

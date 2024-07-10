@@ -32,7 +32,7 @@ class FastSaleController extends Controller
 
         $pointData = Setting::where('name', 'precio_punto')->first();
         $productBonuses = ProductBonus::all();
-        $sale = optional(fastSale::find(session('fast-sale')))->load('customerBonus', 'productBonuses');
+        $sale = optional(fastSale::find(session('fast_sale_id')))->load('customerBonus', 'productBonuses');
 
         if (isset($sale)) {
             if ($sale->status != "pending") {
@@ -75,13 +75,13 @@ class FastSaleController extends Controller
     private function clearFastSaleSessionIfNotPending($fastSale)
     {
         if ($fastSale->status != "pending") {
-            session()->forget('fast-sale');
+            session()->forget('fast_sale_id');
         }
     }
     private function isTheStatusCompleted($fastSale)
     {
         if ($fastSale->status === "completed") {
-            session()->forget("fast-sale");
+            session()->forget("fast_sale_id");
             return FastSale::findOrCreateFastSale();
         }
         return $fastSale;

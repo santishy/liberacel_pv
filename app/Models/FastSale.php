@@ -83,11 +83,11 @@ class FastSale extends Model
 
     static function findOrCreateFastSale()
     {
-        if (session()->has('fast-sale')) {
-            return FastSale::find(session()->get('fast-sale'));
+        if (session()->has('fast_sale_id')) {
+            return FastSale::find(session()->get('fast_sale_id'));
         }
         $fastSale = FastSale::create();
-        session()->put('fast-sale', $fastSale->id);
+        session()->put('fast_sale_id', $fastSale->id);
         return $fastSale;
     }
     public function addConcept()
