@@ -1113,10 +1113,6 @@ select {
   max-height: 20rem;
 }
 
-.max-h-7 {
-  max-height: 1.75rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1441,10 +1437,6 @@ select {
   justify-content: space-around;
 }
 
-.justify-evenly {
-  justify-content: space-evenly;
-}
-
 .gap-4 {
   gap: 1rem;
 }
@@ -1504,10 +1496,6 @@ select {
 
 .self-start {
   align-self: flex-start;
-}
-
-.justify-self-start {
-  justify-self: start;
 }
 
 .overflow-hidden {
@@ -2655,11 +2643,6 @@ select {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity));
-}
-
-.text-emerald-800 {
-  --tw-text-opacity: 1;
-  color: rgb(6 95 70 / var(--tw-text-opacity));
 }
 
 .underline {

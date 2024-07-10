@@ -2,48 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SaleTransactionProcessed;
 use App\Http\Requests\StoreUserRelationshipRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
 
 class UserRelationshipController extends Controller
 {
+
     public function store(StoreUserRelationshipRequest $request)
     {
         $model = $this->getModel($request);
-        /**
-         * authorize ... mandamos el model al metodo update y lo adaptaoms en el policy correspondiente
-         */
+
         $this->authorize('restore', $model);
 
-        $user = User::where('username', $request->username)
-            ->where('active', true)->first();
-        if (!$user) {
-            return response()
-                ->json(
-                    ['errors' => ['error' => 'El usuario no existe.']],
-                    422
-                );
-        }
-        if (!Hash::check($request->password, optional($user)->password)) {
-            return response()
-                ->json(
-                    ['errors' => ['error' => 'Nombre de usuario ó contraseña, incorrectos.']],
-                    422
-                );
-        }
+        $user = $model->checkCredentials(request('username'), request('password'));
 
+        $model->toggleUser($user);
 
-
-        if ($model->user()->exists()) {
-            $model->user()->dissociate();
-            //$model->save();
+        if ($model->hasCredit()) {
+            $model->update(['status' => 'completed']);
+            $inverse = -1;
+            $model->handleCredit($model->factors["completed"] * $inverse);
+            SaleTransactionProcessed::dispatch($model);
         }
-        $model->user()->associate($user);
-        $model->save();
 
         if (session()->has('fast-sale')) {
             session()->forget('fast-sale');

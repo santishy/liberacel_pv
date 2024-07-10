@@ -14,7 +14,7 @@ trait HasUserRelationship
         $user = User::where('username', $username)
             ->where('active', true)->first();
 
-        if (!$user && !Hash::check($password, optional($user)->password)) {
+        if (!$user || !Hash::check($password, optional($user)->password)) {
             throw ValidationException::withMessages([
                 'check' => 'Usuario ó contraseña incorrectos.'
             ]);
@@ -26,7 +26,6 @@ trait HasUserRelationship
     {
         if ($this->user()->exists()) {
             $this->user()->dissociate();
-            //$model->save();
         }
         $this->user()->associate($user);
         $this->save();

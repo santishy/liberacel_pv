@@ -32,7 +32,7 @@ class FastSale extends Model
     protected $casts = [
         'concepts' => 'array',
     ];
-    
+
     public function client()
     {
         return $this->belongsTo(Client::class);

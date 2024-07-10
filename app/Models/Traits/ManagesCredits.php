@@ -7,6 +7,10 @@ use Illuminate\Validation\ValidationException;
 
 trait ManagesCredits
 {
+    public $factors = [
+        "completed" => -1,
+        "pending" => 1,
+    ];
 
     public function credits()
     {
