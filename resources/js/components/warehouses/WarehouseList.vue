@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="relative overflow-x-auto bg-white">
             <table v-if="inventories.length" v-can="'view warehouses'"
                 class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -28,20 +28,20 @@
                     @deleteWarehouse="deleteWarehouse" @emptyWarehouse="emptyWarehouse"></agree>
             </template>
         </information-component>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import Agree from "../alerts/Agree.vue";
 import Message from "../alerts/Message.vue";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import WarehouseListItem from "./WarehouseListItem.vue";
 import InformationComponent from "../modals/InformationComponent.vue";
 
 export default {
     components: {
-        NavComponent,
+      //  NavComponent,
         Agree,
         WarehouseListItem,
         InformationComponent,

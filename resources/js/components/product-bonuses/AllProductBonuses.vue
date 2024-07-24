@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="w-full px-4">
             <div class="w-full flex justify-end">
                 <button
@@ -39,18 +39,18 @@
                 ></agree>
             </template> -->
         </information-component>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import ProductBonusList from "./ProductBonusList.vue";
 import InformationComponent from "../modals/InformationComponent.vue";
 import CircleAdd from "../icons/CircleAdd.vue";
 import BonusForm from './BonusForm.vue';
 export default {
     components: {
-        NavComponent,
+       // NavComponent,
         CircleAdd,
         InformationComponent,
         ProductBonusList,

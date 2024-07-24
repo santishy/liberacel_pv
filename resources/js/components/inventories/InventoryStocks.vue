@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="w-10/12 mx-auto  flex" v-can="'view warehouses'">
             <div class="w-1/5 px-2 space-y-2">
                 <div>
@@ -40,19 +40,19 @@
                 <inventory-costs-by-warehouse v-if="selectedOption.toUpperCase() === 'COSTS'" />
             </div>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
 import ProductList from "./ProductList";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import InventoryList from "./InventoryList.vue";
 import InventoryCostsByWarehouse from "./InventoryCostsByWarehouse.vue";
 export default {
     components: {
         ProductList,
         InventoryList,
-        NavComponent,
+       // NavComponent,
         InventoryCostsByWarehouse,
     },
     data() {

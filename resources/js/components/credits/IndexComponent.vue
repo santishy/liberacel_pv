@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="flex flex-wrap items-center justify-between p-4">
             <search-by-phone-number />
             <status-filter />
@@ -11,12 +11,12 @@
             </template>
             <component :is="selectedComponent" v-if="Object.keys(credit).length" :credit="credit" />
         </information-component>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
 import CreditList from './CreditList.vue';
 import StatusFilter from './StatusFilter.vue'
-import NavComponent from '../NavComponent.vue';
+//import NavComponent from '../NavComponent.vue';
 import CreditPayments from './payments/CreditPayments.vue';
 import CreditNotes from './notes/CreditNotes.vue';
 import PaymentForm from '../payments/PaymentForm.vue';
@@ -31,7 +31,7 @@ export default {
         }
     },
     components: {
-        NavComponent,
+        //NavComponent,
         CreditList,
         InformationComponent,
         PaymentForm,

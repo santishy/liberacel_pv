@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <transition name="fade">
             <div v-if="selectedInventoryId == null && (isAdmin && !localSale.inventory_id)"
                 class="flex flex-col justify-center mx-auto px-4 w-full">
@@ -88,7 +88,7 @@
         <template v-if="currentSale">
             <authentication-form model="Sale" :uri="`/user-relationship`" :id="currentSale?.id" />
         </template>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
 import CreditStatus from "../credits/CreditStatus.vue";
@@ -98,7 +98,7 @@ import SearchComponent from "../products/SearchComponent.vue";
 import InventoryList from "../inventories/InventoryList.vue";
 import { mapMutations, mapGetters } from "vuex";
 import SalesCart from "./SalesCart";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import SearchByCategory from "../products/SearchByCategory.vue";
 import DeleteSale from "./DeleteSale.vue";
@@ -108,7 +108,7 @@ export default {
         SalesCart,
         ProductMatching,
         InventoryList,
-        NavComponent,
+       // NavComponent,
         SaleToCustomer,
         SearchByCategory,
         DeleteSale,

@@ -19,7 +19,7 @@ Vue.mixin(Errors);
 Vue.mixin(Authorizations);
 Vue.mixin(Notify);
 
-Vue.component('nav-component', require('./components/NavComponent.vue').default)
+Vue.component('layout-component', require('./components/LayoutComponent.vue').default)
 Vue.component('errors-component', require('./components/ErrorsComponent.vue').default)
 Vue.component('dropdown-component', require('./components/DropdownComponent.vue').default);
 Vue.component('product-form', require('./components/products/ProductForm.vue').default);

@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="w-9/12 mx-auto px-4  flex justify-center bg-transparent">
             <form
                 @submit.prevent="submit"
@@ -127,13 +127,13 @@
                 </div>
             </form>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+// import NavComponent from "../NavComponent.vue";
 export default {
-    components: { NavComponent },
+    // components: { NavComponent },
     data() {
         return {
             form: {assigned_price:''},

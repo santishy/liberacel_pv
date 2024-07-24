@@ -3,7 +3,7 @@
 </template>
 <script>
 import CreateInventory from "../inventories/CreateInventory.vue";
-import NavComponent from "../NavComponent.vue";
+
 export default {
     props: {
         inventory: {
@@ -12,7 +12,7 @@ export default {
     },
     components: {
         CreateInventory,
-        NavComponent
+      
     }
 };
 </script>

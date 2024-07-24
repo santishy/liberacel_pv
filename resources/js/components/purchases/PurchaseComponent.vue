@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div
             class="grid md:grid-cols-5   grid-flow-row mx-auto w-11/12"
         >
@@ -62,19 +62,19 @@
             >
             </product-list>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
 import CompletePurchaseButton from "./CompletePurchaseButton.vue";
 import CancelPurchaseButton from "./CancelPurchaseButton";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import ProductList from "./ProductList.vue";
 
 export default {
     components: {
         "complete-purchase-btn": CompletePurchaseButton,
         "cancel-purchase-btn": CancelPurchaseButton,
-        NavComponent,
+     //   NavComponent,
         ProductList
     },
     props: {

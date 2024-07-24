@@ -1,8 +1,8 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div
             class="md:w-9/12 mx-auto  flex justify-center bg-transparent "
-        >
+        >//
             <form
                 @submit.prevent="submit"
                 class="w-full  shadow-lg rounded-lg bg-white px-6 py-8"
@@ -87,11 +87,11 @@
                 <notifications group="foo"></notifications>
             </form>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 
 export default {
     created() {
@@ -102,7 +102,7 @@ export default {
             type: Object
         }
     },
-    components: { NavComponent },
+    // components: { NavComponent },
     data() {
         return {
             form: {},

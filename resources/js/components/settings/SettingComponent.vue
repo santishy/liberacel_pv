@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div
             class="
                 w-full
@@ -16,17 +16,17 @@
             <setting-form
             ></setting-form>
         </information-component>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import SettingList from "./SettingList.vue";
 import SettingForm from "./SettingForm.vue";
 import InformationComponent from "../modals/InformationComponent.vue";
 export default {
     components: {
-        NavComponent,
+      //  NavComponent,
         SettingList,
         InformationComponent,
         SettingForm,

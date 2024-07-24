@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <subtotals></subtotals>
         <div class="p-4 flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded">
             <h3 class="w-full font-mono text-2xl">
@@ -14,12 +14,12 @@
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
         <concepts-list :sale="sale" class="mt-4"></concepts-list>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
 import { mapMutations, mapState } from "vuex"
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
 import Subtotals from "./Subtotals.vue";
@@ -27,7 +27,7 @@ import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import CreditStatus from "../credits/CreditStatus.vue";
 export default {
     components: {
-        NavComponent,
+      //  NavComponent,
         FastSaleForm,
         ConceptsList,
         Subtotals,

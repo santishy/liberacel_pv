@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 ">
             <div class="col-span-4 2xl:col-span-5 flex justify-end items-baseline rounded-t-sm p-4 bg-white">
                 <search-by-category class="md:w-1/4 w-3/4 mr-2" :categories="categories"></search-by-category>
@@ -22,12 +22,12 @@
                 <agree :method="modalDataConfirm.action" @deleteProduct="deleteProduct"></agree>
             </template>
         </information-component>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
 import Agree from "../alerts/Agree.vue";
 import Message from "../alerts/Message.vue";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import SearchComponent from "./SearchComponent.vue";
 import SearchByCategory from "./SearchByCategory.vue";
@@ -71,7 +71,7 @@ export default {
         "product-card": ProductCardComponent,
         InfiniteLoading,
         "search-component": SearchComponent,
-        NavComponent,
+    //    NavComponent,
         InformationComponent,
         Agree,
         Message,

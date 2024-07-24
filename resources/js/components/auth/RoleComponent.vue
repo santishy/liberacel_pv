@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div
             class="md:w-11/12 mx-auto grid grid-cols-8 gap-4 grid-flow-col auto-cols-auto auto-rows-auto"
             v-can="'create role'"
@@ -9,12 +9,12 @@
             <permission-list class="col-span-5" :permissions="permissions">
             </permission-list>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 export default {
-    components: { NavComponent },
+  //  components: { NavComponent },
     props: {
         permissions: {
             type: Array

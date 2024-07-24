@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="p-4 w-9/12 mx-auto bg-white shadow rounded-lg ">
             <div class="flex flex-wrap justify-between rounded-sm gap-4 bg-gray-100 p-2">
                 <toggle-purchase-visibility class="w-56" :method="method"></toggle-purchase-visibility>
@@ -107,17 +107,17 @@
                 </div>
             </form>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import TogglePurchaseVisibility from "./TogglePurchaseVisibility.vue";
 import { mapState } from "vuex";
 import CategorySelect from "./CategorySelect.vue";
 export default {
     components: {
-        NavComponent,
+        //NavComponent,
         TogglePurchaseVisibility,
         CategorySelect,
     },

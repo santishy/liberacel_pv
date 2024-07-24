@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div v-can="'view users'" class="  md:w-9/12 mx-auto flex justify-center sm:overflow-x-hidden overflow-x-auto">
             <table class="table-auto text-center  bg-white shadow rounded ">
                 <thead class="bg-gray-400">
@@ -37,15 +37,15 @@
                 </tbody>
             </table>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
-import NavComponent from "../NavComponent.vue";
+// import NavComponent from "../NavComponent.vue";
 import UserEditIcon from "../icons/UserEditIcon.vue"
 import UserActiveToggle from "./UserActiveToggle.vue";
 import NinjaIcon from "../icons/NinjaIcon.vue"
 export default {
-    components: { NavComponent, NinjaIcon, UserEditIcon, UserActiveToggle },
+    components: {  NinjaIcon, UserEditIcon, UserActiveToggle },
     data: () => ({
         users: [],
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

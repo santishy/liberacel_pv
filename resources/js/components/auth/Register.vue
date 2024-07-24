@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="md:w-9/12 mx-auto flex flex-wrap items-baseline" >
             <registration-form
                 class="mr-4"
@@ -16,13 +16,13 @@
                 v-can="definePermission"
             ></assign-role>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 
 export default {
-    components: { NavComponent },
+   // components: { NavComponent },
     props: {
         roles: {
             type: Array

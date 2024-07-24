@@ -1,17 +1,17 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="w-6/12 mx-auto">
             <category-form class="w-full" :uri="`/categories/${category.id}`"> </category-form>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import CategoryForm from "./CategoryForm.vue";
 
 export default {
     components: {
-        NavComponent,
+  //      NavComponent,
         CategoryForm
     },
     props: {

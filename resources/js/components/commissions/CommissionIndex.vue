@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div
             class="w-full px-4 mx-auto  flex"
             v-can="'view user commissions'"
@@ -11,15 +11,15 @@
                 <commission-list></commission-list>
             </div>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import UserList from "./UserList.vue";
 import CommissionList from "./CommissionList.vue";
 export default {
-    components: { NavComponent, UserList, CommissionList },
+    components: {  UserList, CommissionList },
     props: {
         users: {
             type: Array,

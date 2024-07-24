@@ -1,20 +1,20 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="w-full  flex flex-wrap flex-col items-center  justify-center">
             <h3 class="bg-white shadow-sm rounded-sm p-2 mb-2 w-10/12 text-center text-xl font-medium">{{ getTitle }}
             </h3>
             <expense-form></expense-form>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import ExpenseForm from "./ExpenseForm.vue";
 import {  mapMutations } from "vuex"
 export default {
     components: {
-        NavComponent,
+  //      NavComponent,
         ExpenseForm
     },
     props: {

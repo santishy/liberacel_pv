@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="max-w-6xl mx-auto shadow  pb-4 bg-white rounded-sm px-4">
             <h1 class=" text-gray-700 border-b-2 border-sky-500  py-3 text-2xl font-extralight">
                 Reporte de {{ name }}
@@ -68,18 +68,18 @@
         <div class="mt-4 max-w-6xl mx-auto">
             <slot></slot>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 <script>
 import { mapState } from "vuex";
 import ReportBy from "./ReportBy.vue";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import SearchById from "./partials/SearchById.vue";
 import ErrorsComponent from "../ErrorsComponent.vue";
 import WarehouseChecklist from "../warehouses/WarehouseChecklist.vue"
 
 export default {
-    components: { ReportBy, SearchById, NavComponent, ErrorsComponent, WarehouseChecklist },
+    components: { ReportBy, SearchById,  ErrorsComponent, WarehouseChecklist },
     props: {
         name: {
             type: String

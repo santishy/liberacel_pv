@@ -1,5 +1,5 @@
 <template>
-    <nav-component>
+    <layout-component>
         <div class="flex flex-wrap mt-24 w-full px-4 justify-center space-y-4">
             <div class="bg-white rounded-sm w-full sm:w-4/12 px-4 py-4">
                 <h3 class="w-full text-lg font-semibold mb-4 text-center">
@@ -30,7 +30,7 @@
                     <refund-form :sale="sale"></refund-form>
             </div>
         </div>
-    </nav-component>
+    </layout-component>
 </template>
 
 <script>
@@ -38,14 +38,14 @@ import ProductListItemBase from "../sales/ProductListItemBase.vue";
 import RefundQuantityProduct from "./partials/RefundQuantityProduct.vue";
 import RefundForm from "./partials/RefundForm.vue"
 import ProductList from "../sales/ProductList.vue";
-import NavComponent from "../NavComponent.vue";
+//import NavComponent from "../NavComponent.vue";
 import SalesFinder from "./SalesFinder.vue";
 export default {
     components: {
         RefundQuantityProduct,
         ProductList,
         ProductListItemBase,
-        NavComponent,
+       // NavComponent,
         SalesFinder,
         RefundForm
     },
