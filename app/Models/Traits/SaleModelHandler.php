@@ -9,6 +9,12 @@ use Illuminate\Validation\ValidationException;
 
 trait SaleModelHandler
 {
+    public function validateUser(){
+        if(!$this->user()->exists()){
+            throw ValidationException::withMessages(["user_id" => "No hay usuario asociado a la venta."]);
+        }
+        return true;
+    }
     public function isStockSale()
     {
         return $this instanceof Sale;
