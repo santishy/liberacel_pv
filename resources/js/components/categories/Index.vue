@@ -11,12 +11,14 @@
 </template>
 <script>
 
-//import NavComponent from "../NavComponent.vue";
 import CategoryFilter from "./CategoryFilter.vue"
+import CategoryForm from "./CategoryForm.vue";
+import CategoryList from "./CategoryList.vue";
 export default {
     components: {
-  ///      NavComponent,
-        CategoryFilter
+        CategoryFilter,
+        CategoryForm,
+        CategoryList,
     }
 };
 </script>

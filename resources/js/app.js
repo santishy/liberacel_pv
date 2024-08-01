@@ -21,7 +21,7 @@ Vue.mixin(Notify);
 
 Vue.component('layout-component', require('./components/LayoutComponent.vue').default)
 Vue.component('errors-component', require('./components/ErrorsComponent.vue').default)
-Vue.component('dropdown-component', require('./components/DropdownComponent.vue').default);
+//Vue.component('dropdown-component', require('./components/DropdownComponent.vue').default);
 Vue.component('product-form', require('./components/products/ProductForm.vue').default);
 Vue.component('products-index', require('./components/products/IndexComponent.vue').default);
 Vue.component('purchase-component', require('./components/purchases/PurchaseComponent.vue').default)
@@ -30,8 +30,8 @@ Vue.component('client-form', require('./components/clients/ClientForm.vue').defa
 Vue.component('client-list', require('./components/clients/ClientList.vue').default)
 
 //CATEGORIES COMPONENTS
-Vue.component('category-form', require('./components/categories/CategoryForm.vue').default)
-Vue.component('category-list', require('./components/categories/CategoryList.vue').default)
+//Vue.component('category-form', require('./components/categories/CategoryForm.vue').default)
+//Vue.component('category-list', require('./components/categories/CategoryList.vue').default)
 Vue.component('category-index', require('./components/categories/Index.vue').default)
 Vue.component('edit-category', require('./components/categories/EditCategory.vue').default)
 
@@ -44,16 +44,16 @@ Vue.component('sale-component', require('./components/sales/SaleComponent').defa
 Vue.component('transaction-list', require('./components/reports/TransactionList.vue').default);
 
 //auth
-Vue.component('registration-form', require('./components/auth/RegistrationForm.vue').default);
+//Vue.component('registration-form', require('./components/auth/RegistrationForm.vue').default);
 Vue.component('register', require('./components/auth/Register.vue').default);
 
 //roles
-Vue.component('create-new-role', require('./components/auth/CreateNewRole.vue').default);
-Vue.component('assign-role', require('./components/auth/AssignRole.vue').default);
+//Vue.component('create-new-role', require('./components/auth/CreateNewRole.vue').default);
+//Vue.component('assign-role', require('./components/auth/AssignRole.vue').default);
 Vue.component('role-component', require('./components/auth/RoleComponent.vue').default)
 
 //permissions
-Vue.component('permission-list', require('./components/auth/PermissionList.vue').default);
+//Vue.component('permission-list', require('./components/auth/PermissionList.vue').default);
 
 //users
 Vue.component('user-list', require('./components/users/UserList.vue').default);
@@ -102,7 +102,7 @@ Vue.component('setting-component', require('./components/settings/SettingCompone
 /**
  * expenses
  */
-
+//AQUI ME QUEDE EN LA REVISION DE COMPONENTES
 Vue.component('expenses-component', require('./components/expenses/ExpensesComponent.vue').default);
 Vue.component('create-expense', require('./components/expenses/CreateExpense.vue').default);
 Vue.component('expense-list', require('./components/reports/expenses/ExpenseList.vue').default)

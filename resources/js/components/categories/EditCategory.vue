@@ -6,12 +6,11 @@
     </layout-component>
 </template>
 <script>
-//import NavComponent from "../NavComponent.vue";
+
 import CategoryForm from "./CategoryForm.vue";
 
 export default {
     components: {
-  //      NavComponent,
         CategoryForm
     },
     props: {
