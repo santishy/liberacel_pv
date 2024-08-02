@@ -1,10 +1,6 @@
 <template>
-    
-    <div
-        v-if="show"
-        class="w-full px-4 py-3 mb-3 text-red-700 bg-blue-100 border-t border-b border-red-500"
-        role="alert"
-    >
+    <div v-if="show" class="w-full px-4 z-100 py-3 mb-3 text-red-700 bg-blue-100 border-t border-b border-red-500"
+        role="alert">
         <p class="font-bold">Se detecto los siguientes errores:</p>
         <p v-for="error in errorsFound" class="text-sm" :key="error">
             {{ error }}
