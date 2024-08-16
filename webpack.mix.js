@@ -11,14 +11,16 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
+
 mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('tailwindcss'),
         tailwindcss('./tailwind.config.js')
     ]).version()
 mix.browserSync({
-    proxy: 'http://liberacel-pv.test',
-    host: 'liberacel-pv.test',
+    proxy: 'localhost',
+    host: '127.0.0.1',
+    port: 8083,
     open: false,
     browser: 'Google chrome',
     ghostMode: false,

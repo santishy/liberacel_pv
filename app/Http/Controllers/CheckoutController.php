@@ -9,6 +9,7 @@ use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Responses\SaleDetailsCheckoutResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class CheckoutController extends Controller
 {
@@ -27,6 +28,8 @@ class CheckoutController extends Controller
         $model = $this->getModel($request->model, $request->id);
 
         $model->validateUser();
+
+
 
         $model->validateSaleNotCompleted();
 
@@ -58,6 +61,9 @@ class CheckoutController extends Controller
     private function getModel($model, $id)
     {
         $model = app("App\Models\\$model")->find($id);
+        if (!$model) {
+            throw ValidationException::withMessages(["error" => "La venta no existe"]);
+        }
         return $model;
     }
 }
