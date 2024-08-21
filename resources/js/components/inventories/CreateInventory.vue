@@ -2,24 +2,22 @@
     <layout-component>
         <div class="w-full px-4  flex justify-center bg-transparent ">
             <form @submit.prevent="submit" v-can="'create warehouse'"
-                class="w-6/12 shadow rounded-lg border  bg-white p-4 ">//
+                class="w-6/12 shadow rounded-lg border  bg-white p-4 ">
                 <div class="flex items-center p-2 text-dark  text-xl font-semibold font-roboto">
                     Crear Almacén
                 </div>
                 <div class=" py-2 w-full">
-                    <label for=""
-                        class="form-label">Nombre</label>
-                    <input v-model="form.name" name="name"
-                        class="form-text-input w-full"
-                        type="text" placeholder="Jiquilpan " aria-label="Full name" />
+                    <label for="" class="form-label mb-1">Nombre</label>
+                    <input-text v-model="form.name" input-class="w-full" aria-label="Full name" />
+
+                    <!-- <input v-model="form.name" name="name" class="form-text-input w-full" type="text"
+                        placeholder="Jiquilpan " aria-label="Full name" /> -->
 
                 </div>
                 <div class=" py-2 w-full">
-                    <label
-                        class="form-label">Dirección</label>
-                    <input v-model="form.address" name="address"
-                        class="form-text-input w-full"
-                        type="text" placeholder="Sor Juana Inés #34 " aria-label="Full name" />
+                    <label class="form-label mb-1">Dirección</label>
+                    <input v-model="form.address" name="address" class="form-text-input w-full" type="text"
+                        placeholder="Sor Juana Inés #34 " aria-label="Full name" />
                 </div>
                 <div class="flex items-center ">
                     <errors-component :errors-found="errors" />
@@ -41,6 +39,7 @@
 <script>
 //import NavComponent from "../NavComponent.vue";
 import DatabaseIcon from "../icons/DatabaseIcon.vue";
+import InputText from "../partials/InputText.vue";
 export default {
     created() {
         if (!!this.inventory) {
@@ -58,7 +57,7 @@ export default {
             type: String
         }
     },
-    components: {  DatabaseIcon },
+    components: { DatabaseIcon, InputText },
     data() {
         return {
             form: {},
