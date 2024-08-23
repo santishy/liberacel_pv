@@ -1,6 +1,7 @@
 <template>
-    <aside :class="[isOpen ? 'w-72' : 'w-10']" @mouseenter="isOpen = true" @mouseleave="closeDropdown"
-        class="min-h-full h-screen scroll-smooth scrollbar-track-transparent  scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 px-2 py-4 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72">
+    <aside :class="[isOpen ? 'w-72 px-2 py-4' : 'w-0 sm:w-10 ', ' sm:block']" @mouseenter="isOpen = true"
+        @mouseleave="closeDropdown"
+        class="min-h-full h-screen scroll-smooth scrollbar-track-transparent  scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 sm:px-2 sm:py-4 sm:ml-0 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72">
         <div class="w-full overflow-x-hidden overflow-y-auto ">
             <h3 :class="[isOpen ? 'p-2' : 'p-1 bg-teal-800']"
                 class="text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm">
@@ -85,7 +86,7 @@
 </template>
 
 <script>
-import { config } from "process";
+//      import { config } from "process";
 import {
     clientsMenu,
     ConfigMenu,
@@ -100,6 +101,7 @@ import Dropdown from "../partials/Dropdown.vue";
 import { mapState } from "vuex"
 export default {
     components: { ArrowLeft, Dropdown },
+
     data() {
         return {
             clientsMenu,
@@ -112,9 +114,11 @@ export default {
             isOpen: false,
         };
     },
+    mounted() {
+        EventBus.$on('toggle-sidebar', this.toggleIsOpen)
+    },
     methods: {
         toggleIsOpen() {
-
             this.isOpen = !this.isOpen;
         },
         closeDropdown() {
