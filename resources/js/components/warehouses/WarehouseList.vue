@@ -1,9 +1,10 @@
 <template>
     <layout-component>
-        <div class="relative overflow-x-auto bg-white">
+        <div
+            class="relative overflow-x-auto bg-white rounded scroll-smooth scrollbar-track-transparent  scrollbar-thumb-sky-500 scrollbar-thin">
             <table v-if="inventories.length" v-can="'view warehouses'"
-                class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                class="w-full sm:text-sm text-left  text-slate-500">
+                <thead class="sm:text-xs text-slate-700 uppercase bg-gray-100 ">
                     <tr class="bg-danger">
                         <th scope="col" class="px-6 py-3">Nombre</th>
                         <th scope="col" class="px-6 py-3">Dirección</th>
@@ -41,7 +42,7 @@ import InformationComponent from "../modals/InformationComponent.vue";
 
 export default {
     components: {
-      //  NavComponent,
+        //  NavComponent,
         Agree,
         WarehouseListItem,
         InformationComponent,

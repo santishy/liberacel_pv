@@ -1,7 +1,8 @@
 <template>
     <layout-component>
-        <div class="p-4 w-9/12 mx-auto bg-white shadow rounded-lg ">
-            <div class="flex flex-wrap justify-between rounded-sm gap-4 bg-gray-100 p-2">
+        <div class="p-4 sm:max-w-5xl mx-auto bg-white shadow rounded-lg ">
+            <div
+                class="flex flex-wrap sm:flex-row flex-col justify-center sm:justify-between rounded-sm gap-4 bg-gray-100 p-2">
                 <toggle-purchase-visibility class="w-56" :method="method"></toggle-purchase-visibility>
                 <button @click.prevent="cleanForm"
                     class="rounded bg-indigo-200 text-black shadow hover:bg-indigo-500 hover:font-bold hover:shadow-none hover:text-white   font-mono text-xs p-2 transition-all">
@@ -12,10 +13,12 @@
                 {{ title }}
             </h1>
             <form id="product-form" @submit.prevent="submit" @keyup.enter.prevent="" @keydown.enter.prevent=""
-                @keypress.enter.prevent="" v-can="definePermission" class="w-full grid grid-cols-2 gap-4">
-                <div v-if="src" class="flex flex-wrap col-span-2 justify-center w-full bg-gray-200 p-2">
+                @keypress.enter.prevent="" v-can="definePermission"
+                class="w-full grid grid-rows-11 sm:grid-cols-2 gap-4">
+                <div v-if="src" class="flex flex-wrap sm:col-span-2 justify-center w-full bg-gray-200 p-2">
                     <div class="w-8/12 sm:w-6/12 px-4">
-                        <img :src="src" alt="Imagen a subir" class="rounded max-w-full h-auto align-middle border-none" />
+                        <img :src="src" alt="Imagen a subir"
+                            class="rounded max-w-full h-auto align-middle border-none" />
                     </div>
                     <div class="ml-2">
                         <p class="text-lg font-mono text-gray-700">
@@ -59,8 +62,8 @@
 
                 <div>
                     <label for="" class="form-label">Precio al por mayor</label>
-                    <input v-model="form.wholesale_price" name="wholesale_price" class="form-text-input w-full" type="text"
-                        placeholder="PRECIO AL POR MAYOR" aria-label="Full name" />
+                    <input v-model="form.wholesale_price" name="wholesale_price" class="form-text-input w-full"
+                        type="text" placeholder="PRECIO AL POR MAYOR" aria-label="Full name" />
                 </div>
                 <div>
                     <label for="" class="form-label">Precio al por menor</label>

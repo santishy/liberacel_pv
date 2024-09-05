@@ -1,26 +1,21 @@
 <template>
-    <form @submit.prevent="submit">
-        <input
-            type="text"
-            v-model="value"
-            placeholder="Busca por el SKU ó Descripción"
-            class="w-full  border-l-4 border-purple-500 appearance-none py-5 pl-64 leading-tight focus:outline-none mr-4 text-center"
-        />
+    <form @submit.prevent="submit" class="p-0 sm:w-64">
+        <input type="text" v-model="value" placeholder="Busca por el SKU ó Descripción"
+            class="w-full bg-slate-50 sm:rounded-none border-0 text-slate-500 placeholder:text-slate-300 rounded  py-5 focus:outline-none focus:border-o focus:ring-0 sm:mr-4 text-center" />
     </form>
 </template>
 <script>
 export default {
-    data(){
+    data() {
         return {
-            value:'',
+            value: '',
         }
     },
-    methods: 
+    methods:
     {
-        submit()
-        {
+        submit() {
             console.log('submit..')
-            EventBus.$emit("search-value-added",this.value);
+            EventBus.$emit("search-value-added", this.value);
         }
     }
 };

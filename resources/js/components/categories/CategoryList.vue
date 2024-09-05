@@ -1,5 +1,5 @@
 <template>
-    <ul class="w-full rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
+    <ul class="w-full max-h-96 sm:max-h-max overflow-y-auto sm:overflow-auto rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
         v-can="'view categories'" v-cloak>
         <category-list-item v-for="(category, index) in categories" :category="category" :index="index"
             :key="category.id"></category-list-item>

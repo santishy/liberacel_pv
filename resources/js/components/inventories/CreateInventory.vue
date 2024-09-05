@@ -1,8 +1,8 @@
 <template>
     <layout-component>
-        <div class="w-full px-4  flex justify-center bg-transparent ">
+        <div class="overflow-hidden flex justify-center bg-transparent ">
             <form @submit.prevent="submit" v-can="'create warehouse'"
-                class="w-6/12 shadow rounded-lg border  bg-white p-4 ">
+                class="block w-full sm:w-6/12 shadow rounded-lg border  bg-white p-4 ">
                 <div class="flex items-center p-2 text-dark  text-xl font-semibold font-roboto">
                     Crear Almacén
                 </div>

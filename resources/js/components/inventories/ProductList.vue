@@ -5,28 +5,28 @@
                 justify-center
                 items-center
                 mb-4
-                border-gray-300
-                relative
             ">
             <h3 class="
+                    hidden
+                    flex-1
+                    sm:block
                     w-64
-                    text-gray-800
+                    h-full
+                    text-slate-700
                     font-mono font-semibold
                     text-center
-                    bg-gray-100
-                    absolute
+                    bg-white
                     left-0
-                    border-l-4 border-teal-500
                     py-5
                     px-4
                 ">
                 <warehouse-icon></warehouse-icon> {{ inventory.name }}
             </h3>
-            <inventory-search-filter class="w-full"></inventory-search-filter>
+            <inventory-search-filter class="w-full sm:w-auto flex-1"></inventory-search-filter>
         </div>
         <div class="relative overflow-x-auto bg-white rounded-lg">
-            <table v-if="inventory" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <table v-if="inventory" class="w-full text-sm text-left text-slate-500 ">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-100 ">
                     <th scope="col" class="px-6 py-3">Categoría</th>
                     <th scope="col" class="px-6 py-3">SKU</th>
                     <th scope="col" class="px-6 py-3">Descripción</th>

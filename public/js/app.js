@@ -6078,7 +6078,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-//      import { config } from "process";
 
 
 
@@ -6102,6 +6101,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   mounted: function mounted() {
     EventBus.$on('toggle-sidebar', this.toggleIsOpen);
+    document.addEventListener('click', this.handleClickOutside);
+  },
+  beforeDestroy: function beforeDestroy() {
+    document.removeEventListener('click', this.handleClickOutside);
   },
   methods: {
     toggleIsOpen: function toggleIsOpen() {
@@ -6110,6 +6113,15 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     closeDropdown: function closeDropdown() {
       this.isOpen = false;
       EventBus.$emit('close-dropdown');
+      console.log(this.isOpen);
+    },
+    handleClickOutside: function handleClickOutside(event) {
+      var isMobile = window.innerWidth <= 768; // Ajusta el ancho según tus necesidades
+      var sidebar = this.$refs.sidebar;
+      var buttonMenu = document.querySelector("#buttonMenu");
+      if (!buttonMenu.contains(event.target) && isMobile && this.isOpen && !sidebar.contains(event.target)) {
+        this.closeDropdown();
+      }
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)(["appName"]))
@@ -11302,7 +11314,7 @@ var render = function render() {
   return _c("layout-component", [_c("div", {
     staticClass: "container mx-auto flex justify-center"
   }, [_c("div", {
-    staticClass: "text-center bg-white rounded-sm shadow-sm p-8 w-1/3"
+    staticClass: "text-center bg-white rounded-sm shadow-sm p-8 sm:w-1/3 w-svw"
   }, [_vm._v("\n            Bienvenido " + _vm._s(_vm.user.name) + "\n        ")])])]);
 };
 var staticRenderFns = [];
@@ -11374,7 +11386,11 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "lg:hidden flex justify-end"
   }, [_c("button", {
+    ref: "buttonMenu",
     staticClass: "rounded -ml-1 transition-colors p-1 hover:bg-sky-500 text-slate-500 hover:text-slate-100 focus:ring-2 focus:ring-offset-2 focus:ring-sky-200",
+    attrs: {
+      id: "buttonMenu"
+    },
     on: {
       click: _vm.toggleNavigation
     }
@@ -11526,7 +11542,7 @@ var render = function render() {
       id: "mobile-navigation"
     }
   })])]), _vm._v(" "), _c("main", {
-    staticClass: "mt-8 z-0 px-12 py-4"
+    staticClass: "mt-8 z-0 px-10 sm:px-16 py-4"
   }, [_vm._t("default")], 2), _vm._v(" "), _c("notifications", {
     attrs: {
       group: "foo"
@@ -12722,7 +12738,7 @@ var render = function render() {
       value: "view categories",
       expression: "'view categories'"
     }],
-    staticClass: "w-full rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
+    staticClass: "w-full max-h-96 sm:max-h-max overflow-y-auto sm:overflow-auto rounded-lg shadow bg-white p-4 divide-y divide-light-blue-400 text-gray-700"
   }, _vm._l(_vm.categories, function (category, index) {
     return _c("category-list-item", {
       key: category.id,
@@ -12911,14 +12927,14 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "flex flex-wrap md:w-10/12 mx-auto justify-center"
+    staticClass: "flex flex-wrap gap-4 mx-auto justify-between"
   }, [_c("category-form", {
-    staticClass: "self-start w-6/12",
+    staticClass: "self-start sm:w-6/12 sm:mt-4 mt-0",
     attrs: {
       uri: "/categories"
     }
   }), _vm._v(" "), _c("div", {
-    staticClass: "ml-6 w-6/12"
+    staticClass: "sm:w-6/12 flex-1"
   }, [_c("category-filter"), _vm._v(" "), _c("category-list", {
     staticClass: "w-full mt-4"
   })], 1)], 1)]);
@@ -16140,7 +16156,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "w-full px-4 flex justify-center bg-transparent"
+    staticClass: "overflow-hidden flex justify-center bg-transparent"
   }, [_c("form", {
     directives: [{
       name: "can",
@@ -16148,7 +16164,7 @@ var render = function render() {
       value: "create warehouse",
       expression: "'create warehouse'"
     }],
-    staticClass: "w-6/12 shadow rounded-lg border bg-white p-4",
+    staticClass: "block w-full sm:w-6/12 shadow rounded-lg border bg-white p-4",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -16328,13 +16344,13 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("ul", {
-    staticClass: "bg-white shadow-sm rounded w-full text-center border-2 border-gray-500"
+    staticClass: "bg-white shadow-sm rounded w-full text-center"
   }, _vm._l(_vm.inventories, function (inventory, index) {
     return _c("li", {
       key: inventory.id,
-      staticClass: "border-gray-500 border-b last:border-b-0",
+      staticClass: "border-slate-500 border-b last:border-b-0",
       "class": {
-        "bg-gray-500 text-white": _vm.selectedIndex === index
+        "bg-sky-500 text-white": _vm.selectedIndex === index
       },
       on: {
         click: function click($event) {
@@ -16376,6 +16392,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("form", {
+    staticClass: "p-0 sm:w-64",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -16389,7 +16406,7 @@ var render = function render() {
       value: _vm.value,
       expression: "value"
     }],
-    staticClass: "w-full border-l-4 border-purple-500 appearance-none py-5 pl-64 leading-tight focus:outline-none mr-4 text-center",
+    staticClass: "w-full bg-slate-50 sm:rounded-none border-0 text-slate-500 placeholder:text-slate-300 rounded py-5 focus:outline-none focus:border-o focus:ring-0 sm:mr-4 text-center",
     attrs: {
       type: "text",
       placeholder: "Busca por el SKU ó Descripción"
@@ -16437,10 +16454,12 @@ var render = function render() {
       value: "view warehouses",
       expression: "'view warehouses'"
     }],
-    staticClass: "w-10/12 mx-auto flex"
+    staticClass: "w-full sm:w-10/12 mx-auto flex flex-col sm:flex-row"
   }, [_c("div", {
-    staticClass: "w-1/5 px-2 space-y-2"
-  }, [_c("div", [_c("input", {
+    staticClass: "sm:w-1/5 sm:px-2 space-y-2 border"
+  }, [_c("div", {
+    staticClass: "sm:block flex flex-row flex-wrap"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -16463,7 +16482,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
-    staticClass: "flex items-center justify-around w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100",
+    staticClass: "flex items-center justify-around w-full p-2 text-slate-500 bg-white border border-slate-200 rounded-lg cursor-pointer peer-checked:border-sky-500 peer-checked:text-sky-500 hover:text-slate-600 hover:bg-slate-100",
     attrs: {
       "for": "stock"
     }
@@ -16510,7 +16529,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
-    staticClass: "flex items-center justify-around w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100",
+    staticClass: "flex items-center justify-around w-full p-2 text-slate-500 bg-white border border-slate-200 rounded-lg cursor-pointer peer-checked:border-sky-500 peer-checked:text-sky-500 hover:text-slate-600 hover:bg-slate-100",
     attrs: {
       "for": "costs"
     }
@@ -16535,7 +16554,7 @@ var render = function render() {
       d: "M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
     }
   })])])]), _vm._v(" "), _c("inventory-list")], 1), _vm._v(" "), _c("div", {
-    staticClass: "w-4/5"
+    staticClass: "sm:w-4/5 mt-4 sm:mt-0"
   }, [_vm.selectedOption.toUpperCase() === "STOCK" ? _c("product-list") : _vm._e(), _vm._v(" "), _vm.selectedOption.toUpperCase() === "COSTS" ? _c("inventory-costs-by-warehouse") : _vm._e()], 1)])]);
 };
 var staticRenderFns = [];
@@ -16560,9 +16579,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", {
-    staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    staticClass: "bg-white border-b"
   }, [_c("th", {
-    staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+    staticClass: "px-6 py-4 font-medium text-slate-700 whitespace-nowrap",
     attrs: {
       scope: "row"
     }
@@ -16611,15 +16630,15 @@ var render = function render() {
   return _vm.inventory ? _c("div", {
     staticClass: "justify-center"
   }, [_c("div", {
-    staticClass: "flex flex-wrap justify-center items-center mb-4 border-gray-300 relative"
+    staticClass: "flex flex-wrap justify-center items-center mb-4"
   }, [_c("h3", {
-    staticClass: "w-64 text-gray-800 font-mono font-semibold text-center bg-gray-100 absolute left-0 border-l-4 border-teal-500 py-5 px-4"
+    staticClass: "hidden flex-1 sm:block w-64 h-full text-slate-700 font-mono font-semibold text-center bg-white left-0 py-5 px-4"
   }, [_c("warehouse-icon"), _vm._v(" " + _vm._s(_vm.inventory.name) + "\n        ")], 1), _vm._v(" "), _c("inventory-search-filter", {
-    staticClass: "w-full"
+    staticClass: "w-full sm:w-auto flex-1"
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "relative overflow-x-auto bg-white rounded-lg"
   }, [_vm.inventory ? _c("table", {
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("transition-group", {
     attrs: {
       tag: "tbody",
@@ -16651,7 +16670,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "text-xs text-slate-700 uppercase bg-slate-100"
   }, [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
@@ -16694,9 +16713,15 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("aside", {
-    staticClass: "min-h-full h-screen scroll-smooth scrollbar-track-transparent scrollbar-thumb-teal-800 scrollbar-thin z-25 bg-teal-600 sm:px-2 sm:py-4 sm:ml-0 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-72",
-    "class": [_vm.isOpen ? "w-72 px-2 py-4" : "w-0 sm:w-10 ", " sm:block"],
+  return _c("div", [_vm.isOpen ? _c("div", {
+    staticClass: "absolute sm:fixed inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300",
+    on: {
+      click: _vm.closeDropdown
+    }
+  }) : _vm._e(), _vm._v(" "), _c("aside", {
+    ref: "sidebar",
+    staticClass: "min-h-full shadow h-screen scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-500 scrollbar-thin z-25 bg-white sm:px-2 sm:py-4 sm:ml-0 fixed duration-300 overflow-x-hidden overflow-y-auto hover:w-80",
+    "class": [_vm.isOpen ? "w-80 px-2 py-4" : "w-0 sm:w-10 ", " sm:block"],
     on: {
       mouseenter: function mouseenter($event) {
         _vm.isOpen = true;
@@ -16706,15 +16731,15 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "w-full overflow-x-hidden overflow-y-auto"
   }, [_c("h3", {
-    staticClass: "text-white overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm",
-    "class": [_vm.isOpen ? "p-2" : "p-1 bg-teal-800"]
+    staticClass: "text-sky-500 overflow-hidden text-center font-mono text-xl mb-16 border border-purple-200 rounded-sm",
+    "class": [_vm.isOpen ? "p-2" : "p-1 bg-sky-100"]
   }, [_vm.isOpen ? _c("span", [_vm._v(" " + _vm._s(_vm.appName) + " ")]) : _c("span", {
-    staticClass: "x text-white font-bold"
+    staticClass: "x text-sky-700 font-bold"
   }, [_vm._v(" " + _vm._s(_vm.appName.charAt(0)))])]), _vm._v(" "), _c("dropdown", {
     attrs: {
       title: "Inventario",
       menu: _vm.InventoryMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16741,7 +16766,7 @@ var render = function render() {
     attrs: {
       title: "Expres",
       menu: _vm.ExpressMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16766,7 +16791,7 @@ var render = function render() {
     attrs: {
       title: "Egresos",
       menu: _vm.ExpensesMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16791,7 +16816,7 @@ var render = function render() {
     attrs: {
       title: "Clientes",
       menu: _vm.clientsMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16816,7 +16841,7 @@ var render = function render() {
     attrs: {
       title: "Créditos",
       menu: _vm.CreditsMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16842,7 +16867,7 @@ var render = function render() {
     attrs: {
       title: "Reportes",
       menu: _vm.ReportsMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16867,7 +16892,7 @@ var render = function render() {
     attrs: {
       title: "Configuración",
       menu: _vm.ConfigMenu,
-      "title-font-color": "text-purple-100",
+      "title-font-color": "text-slate-700",
       "item-font-color": "text-gray-700"
     }
   }, [_c("template", {
@@ -16893,7 +16918,7 @@ var render = function render() {
       "stroke-linejoin": "round",
       d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
     }
-  })])])], 2)], 1)]);
+  })])])], 2)], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -17016,7 +17041,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("a", {
-    staticClass: "w-full flex text-xl font-semibold",
+    staticClass: "w-full flex text-xl font-normal",
     "class": [_vm.titleFontColor],
     attrs: {
       href: "#"
@@ -17029,7 +17054,9 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "mr-2"
-  }, [_vm._t("icon")], 2), _vm._v("\n        " + _vm._s(_vm.title))]), _vm._v(" "), _c("transition", {
+  }, [_vm._t("icon")], 2), _vm._v("\n        " + _vm._s(_vm.title))]), _vm._v(" "), _vm.isOpen ? _c("hr", {
+    staticClass: "border-slate-100 mt-2 mb-3"
+  }) : _vm._e(), _vm._v(" "), _c("transition", {
     attrs: {
       name: "expand"
     },
@@ -17039,13 +17066,13 @@ var render = function render() {
       leave: _vm.leave
     }
   }, [_vm.isOpen ? _c("ul", {
-    staticClass: "bg-white rounded p-1"
+    staticClass: "bg-white space-y-1"
   }, _vm._l(_vm.menu, function (item) {
     return _c("li", {
       key: item.url,
-      staticClass: "pl-8 pr-2w-full bg-white hover:bg-gray-200 duration-100 border-b border-gray-300 last:border-b-0"
+      staticClass: "pl-2 rounded bg-slate-100 hover:bg-sky-500 duration-100"
     }, [_c("a", {
-      staticClass: "block w-full px-0 py-1 font-normal hover:font-semibold text-sm hover:text-gray-800 duration-100",
+      staticClass: "block w-full px-0 py-1 font-normal text-slate-600 sm:text-sm hover:font-semibold hover:text-white duration-100",
       "class": [_vm.itemFontColor],
       attrs: {
         href: item.url
@@ -18545,9 +18572,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "p-4 w-9/12 mx-auto bg-white shadow rounded-lg"
+    staticClass: "p-4 sm:max-w-5xl mx-auto bg-white shadow rounded-lg"
   }, [_c("div", {
-    staticClass: "flex flex-wrap justify-between rounded-sm gap-4 bg-gray-100 p-2"
+    staticClass: "flex flex-wrap sm:flex-row flex-col justify-center sm:justify-between rounded-sm gap-4 bg-gray-100 p-2"
   }, [_c("toggle-purchase-visibility", {
     staticClass: "w-56",
     attrs: {
@@ -18570,7 +18597,7 @@ var render = function render() {
       value: _vm.definePermission,
       expression: "definePermission"
     }],
-    staticClass: "w-full grid grid-cols-2 gap-4",
+    staticClass: "w-full grid grid-rows-11 sm:grid-cols-2 gap-4",
     attrs: {
       id: "product-form"
     },
@@ -18593,7 +18620,7 @@ var render = function render() {
       }
     }
   }, [_vm.src ? _c("div", {
-    staticClass: "flex flex-wrap col-span-2 justify-center w-full bg-gray-200 p-2"
+    staticClass: "flex flex-wrap sm:col-span-2 justify-center w-full bg-gray-200 p-2"
   }, [_c("div", {
     staticClass: "w-8/12 sm:w-6/12 px-4"
   }, [_c("img", {
@@ -22297,7 +22324,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "relative overflow-x-auto bg-white"
+    staticClass: "relative overflow-x-auto bg-white rounded scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-500 scrollbar-thin"
   }, [_vm.inventories.length ? _c("table", {
     directives: [{
       name: "can",
@@ -22305,9 +22332,9 @@ var render = function render() {
       value: "view warehouses",
       expression: "'view warehouses'"
     }],
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full sm:text-sm text-left text-slate-500"
   }, [_c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "sm:text-xs text-slate-700 uppercase bg-gray-100"
   }, [_c("tr", {
     staticClass: "bg-danger"
   }, [_c("th", {
@@ -22374,9 +22401,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", {
-    staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    staticClass: "bg-white border-b text-slate-600"
   }, [_c("th", {
-    staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+    staticClass: "px-6 py-4 font-medium text-slate-700 whitespace-nowrap",
     attrs: {
       scope: "row"
     }
@@ -22385,7 +22412,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.inventory.address))]), _vm._v(" "), _c("td", {
     staticClass: "px-6 py-4"
   }, [_c("div", {
-    staticClass: "flex justify-start gap-2"
+    staticClass: "flex flex-col sm:flex-row justify-start gap-2"
   }, [_c("link-edit-warehouse", {
     staticClass: "mr-2",
     attrs: {

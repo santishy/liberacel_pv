@@ -5,7 +5,7 @@
             <nav class=" w-full max-w-full sticky shadow-sm  bg-white  top-0 z-10">
                 <div class="w-full py-3 px-6 ">
                     <div class=" lg:hidden flex justify-end">
-                        <button @click="toggleNavigation"
+                        <button id="buttonMenu" @click="toggleNavigation" ref="buttonMenu"
                             class="rounded -ml-1 transition-colors p-1 hover:bg-sky-500 text-slate-500 hover:text-slate-100 focus:ring-2 focus:ring-offset-2 focus:ring-sky-200">
                             <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <title>Menu</title>
@@ -82,7 +82,7 @@
                 </div>
             </nav>
             <!-- Page Content -->
-            <main class="mt-8 z-0 px-12 py-4">
+            <main class="mt-8 z-0 px-10 sm:px-16 py-4">
                 <slot />
             </main>
             <notifications group="foo"></notifications>

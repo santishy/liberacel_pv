@@ -1,11 +1,12 @@
 <template>
     <layout-component>
-        <div class="w-10/12 mx-auto  flex" v-can="'view warehouses'">
-            <div class="w-1/5 px-2 space-y-2">
-                <div>
-                    <input type="radio" value="STOCK" v-model="selectedOption" id="stock" name="filter" class="hidden peer">
+        <div class="w-full sm:w-10/12 mx-auto  flex flex-col sm:flex-row" v-can="'view warehouses'">
+            <div class="sm:w-1/5 sm:px-2 space-y-2 border">
+                <div class="sm:block flex flex-row flex-wrap">
+                    <input type="radio" value="STOCK" v-model="selectedOption" id="stock" name="filter"
+                        class="hidden peer">
                     <label for="stock"
-                        class="flex items-center justify-around w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 ">
+                        class="flex items-center justify-around w-full p-2 text-slate-500 bg-white border border-slate-200 rounded-lg cursor-pointer peer-checked:border-sky-500 peer-checked:text-sky-500 hover:text-slate-600 hover:bg-slate-100 ">
                         <div class="block">
                             <div class="w-full text-sm leading-tight">PRODUCTOS EN EXISTENCIA</div>
                         </div>
@@ -21,7 +22,7 @@
                     <input type="radio" :checked="true" value="COSTS" id="costs" v-model="selectedOption" name="filter"
                         class="hidden peer">
                     <label for="costs"
-                        class="flex items-center justify-around w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 ">
+                        class="flex items-center justify-around w-full p-2 text-slate-500 bg-white border border-slate-200 rounded-lg cursor-pointer peer-checked:border-sky-500 peer-checked:text-sky-500 hover:text-slate-600 hover:bg-slate-100 ">
                         <div class="block">
                             <div class="w-full text-sm leading-tight">COSTOS DE PRODUCTOS</div>
                         </div>
@@ -35,7 +36,7 @@
                 </div>
                 <inventory-list></inventory-list>
             </div>
-            <div class="w-4/5">
+            <div class="sm:w-4/5 mt-4 sm:mt-0">
                 <product-list v-if="selectedOption.toUpperCase() === 'STOCK'" />
                 <inventory-costs-by-warehouse v-if="selectedOption.toUpperCase() === 'COSTS'" />
             </div>
@@ -52,7 +53,7 @@ export default {
     components: {
         ProductList,
         InventoryList,
-       // NavComponent,
+        // NavComponent,
         InventoryCostsByWarehouse,
     },
     data() {

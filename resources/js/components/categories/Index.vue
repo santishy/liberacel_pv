@@ -1,8 +1,8 @@
 <template>
     <layout-component>
-        <div class="flex flex-wrap  md:w-10/12 mx-auto justify-center">
-            <category-form class="self-start w-6/12" uri='/categories'></category-form>
-            <div class="ml-6 w-6/12 ">
+        <div class="flex flex-wrap gap-4  mx-auto justify-between ">
+            <category-form class="self-start sm:w-6/12 sm:mt-4 mt-0" uri='/categories'></category-form>
+            <div class="  sm:w-6/12 flex-1 ">
                 <category-filter />
                 <category-list class="w-full mt-4"></category-list>
             </div>
