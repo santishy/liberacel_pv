@@ -14,7 +14,7 @@
             </h1>
             <form id="product-form" @submit.prevent="submit" @keyup.enter.prevent="" @keydown.enter.prevent=""
                 @keypress.enter.prevent="" v-can="definePermission"
-                class="w-full grid grid-rows-11 sm:grid-cols-2 gap-4">
+                class="w-full grid grid-cols-1  sm:grid-cols-2 gap-4">
                 <div v-if="src" class="flex flex-wrap sm:col-span-2 justify-center w-full bg-gray-200 p-2">
                     <div class="w-8/12 sm:w-6/12 px-4">
                         <img :src="src" alt="Imagen a subir"
@@ -54,7 +54,7 @@
                     <input v-model="form.commission_amount" name="commission_amount" class="form-text-input w-full"
                         type="text" placeholder="Monto de la comisión" aria-label="Full name" />
                 </div>
-                <div class="">
+                <div>
                     <label for="" class="form-label">Descripción</label>
                     <input v-model="form.description" name="description" class="form-text-input w-full" type="text"
                         placeholder="DESCRIPCIÓN DEL PRODUCTO" aria-label="Full name" />
@@ -75,7 +75,7 @@
                     <input v-model="form.distributor_price" name="distributor_price" class="form-text-input w-full"
                         type="text" placeholder="PRECIO PROVEEDOR" aria-label="Full name" />
                 </div>
-                <div class="col-span-2" v-if="purchaseVisibility && method.toUpperCase() == 'POST'">
+                <div class="sm:col-span-2" v-if="purchaseVisibility && method.toUpperCase() == 'POST'">
                     <div>
                         <label for="" class="form-label">Cantidad de compra
                             <span class="text-xs text-gray-600 block mt-0">(Opcional)</span></label>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-2">
+                <div class="sm:col-span-2">
                     <div class="flex items-center w-full">
                         <errors-component :errors-found="errors" />
                     </div>

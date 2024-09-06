@@ -1,21 +1,25 @@
 <template>
-    <div class="relative ">
+    <div class="relative">
         <slot name="labelCategory"> </slot>
-        <input v-model="term_search" :class="[inputClass]" class="
-                form-text-input
-                w-full
-            " autocomplete="off" @focus="allCategories" @keyup.prevent="search" @keyup.esc.prevent="close"
-            @keyup.down.prevent="nextFocused" @keyup.up.prevent="previousFocused"
-            @keyup.exact.enter.prevent="selectedCategory(focusedIndex, $event)" type="text"
-            placeholder="Click o Enter para seleccionar | Presione la tecla ESC para limpiar" aria-label="Full name" />
+        <div class=" flex items-center">
 
-        <button @click.prevent="close"
-            class="absolute  right-2 text-gray-700 bg-white text-center  font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow">
-            X
-        </button>
+            <input v-model="term_search" :class="[inputClass]" class="
+                    form-text-input
+                    w-full
+                " autocomplete="off" @focus="allCategories" @keyup.prevent="search" @keyup.esc.prevent="close"
+                @keyup.down.prevent="nextFocused" @keyup.up.prevent="previousFocused"
+                @keyup.exact.enter.prevent="selectedCategory(focusedIndex, $event)" type="text"
+                placeholder="Click o Enter para seleccionar | Presione la tecla ESC para limpiar"
+                aria-label="Full name" />
+
+            <button @click.prevent="close"
+                class="absolute right-2 text-slate-700 bg-white text-center  font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow">
+                X
+            </button>
+        </div>
         <div class="
                 absolute
-                mt-4
+                mt-6
                 top-10
                 w-full
                 shadow

@@ -18257,7 +18257,9 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "relative"
-  }, [_vm._t("labelCategory"), _vm._v(" "), _c("input", {
+  }, [_vm._t("labelCategory"), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -18304,15 +18306,15 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "absolute right-2 text-gray-700 bg-white text-center font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow",
+    staticClass: "absolute right-2 text-slate-700 bg-white text-center font-semibold px-2 py-0 hover:bg-gray-100 rounded-full shadow",
     on: {
       click: function click($event) {
         $event.preventDefault();
         return _vm.close.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n        X\n    ")]), _vm._v(" "), _vm.items.length ? _c("div", {
-    staticClass: "absolute mt-4 top-10 w-full shadow z-5 bg-white rounded max-h-64 overflow-x-auto"
+  }, [_vm._v("\n            X\n        ")])]), _vm._v(" "), _vm.items.length ? _c("div", {
+    staticClass: "absolute mt-6 top-10 w-full shadow z-5 bg-white rounded max-h-64 overflow-x-auto"
   }, [_c("ul", {
     ref: "dropdown",
     staticClass: "bg-white w-full relative"
@@ -18597,7 +18599,7 @@ var render = function render() {
       value: _vm.definePermission,
       expression: "definePermission"
     }],
-    staticClass: "w-full grid grid-rows-11 sm:grid-cols-2 gap-4",
+    staticClass: "w-full grid grid-cols-1 sm:grid-cols-2 gap-4",
     attrs: {
       id: "product-form"
     },
@@ -18732,7 +18734,7 @@ var render = function render() {
         _vm.$set(_vm.form, "commission_amount", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {}, [_c("label", {
+  })]), _vm._v(" "), _c("div", [_c("label", {
     staticClass: "form-label",
     attrs: {
       "for": ""
@@ -18845,7 +18847,7 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _vm.purchaseVisibility && _vm.method.toUpperCase() == "POST" ? _c("div", {
-    staticClass: "col-span-2"
+    staticClass: "sm:col-span-2"
   }, [_c("div", [_c("label", {
     staticClass: "form-label",
     attrs: {
@@ -18914,7 +18916,7 @@ var render = function render() {
       staticClass: "ml-2 text-gray-600"
     }, [_vm._v(_vm._s(warehouse.name.toUpperCase()))])])]);
   }), 0)]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "col-span-2"
+    staticClass: "sm:col-span-2"
   }, [_c("div", {
     staticClass: "flex items-center w-full"
   }, [_c("errors-component", {
