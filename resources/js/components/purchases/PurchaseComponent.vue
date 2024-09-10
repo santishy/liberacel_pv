@@ -1,65 +1,45 @@
 <template>
     <layout-component>
-        <div
-            class="grid md:grid-cols-5   grid-flow-row mx-auto w-11/12"
-        >
+        <div class="grid sm:grid-cols-5 grid-cols-1  sm:grid-flow-row mx-auto w-full">
             <div
-                class="col-span-5 flex justify-between items-center row-span-1  bg-white px-2 py-2"
-            >
-                <div class="text-xl text-gray-800 ml-4">
-                    <span class="text-2x text-gray-600">Status:</span>
-                    <span class="text-2x text-blue-600 font-semibold">{{
+                class="col-span-5 flex sm:justify-between gap-4 flex-col sm:flex-row justify-center items-center row-span-1  bg-white px-4 py-2">
+                <div class="text-xl ">
+                    <span class="text-2x text-slate-400">Status:</span>
+                    <span class="text-2x text-slate-600 font-semibold">{{
                         translateStatus
                     }}</span>
                 </div>
-                <div>
-                    <complete-purchase-btn
-                        :purchase="purchase"
-                        :total-purchase="localTotalPurchase"
-                    />
-                    <cancel-purchase-btn :id="purchase.id" />
+                <div class="flex flex-col sm:flex-row gap-2 sm:w-auto w-full">
+                    <complete-purchase-btn class="w-full sm:w-auto" :purchase="purchase"
+                        :total-purchase="localTotalPurchase" />
+                    <cancel-purchase-btn class="w-full sm:w-auto" :id="purchase.id" />
                 </div>
 
-                <div class="text-xl text-gray-800 mr-4">
-                    <span class="text-2xl">Total Compra:</span>
-                    <span class="text-2xl font-semibold"
-                        >${{
-                            new Intl.NumberFormat("es-MX").format(
-                                localTotalPurchase
-                            )
-                        }}</span
-                    >
+                <div class="text-xl bg-yellow-500 w-full sm:w-auto px-2">
+                    <span class="text-2xl text-slate-600">Total Compra:</span>
+                    <span class="text-2xl text-slate-700 font-semibold">${{
+                        new Intl.NumberFormat("es-MX").format(
+                            localTotalPurchase
+                        )
+                    }}</span>
                 </div>
             </div>
-            <div
-                v-if="isAdmin && !user.inventory_id"
-                class="bg-white border-b border-t border-blue-400 px-4 py-2 text-gray-700  text-center col-span-5"
-            >
+            <div v-if="isAdmin && !user.inventory_id"
+                class="bg-white border-b border-t border-blue-400 px-4 py-2 text-gray-700  text-center col-span-5">
                 <div class="grid md:grid-cols-5 grid-cols-1 ">
                     <h3 class="text-xl mb-2 text-center col-span-5">
                         Elige un almacén
                     </h3>
-                    <label
-                        v-for="inventory in inventories"
+                    <label v-for="inventory in inventories"
                         class="flex mr-2 mb-2 items-center rounded-md border border-teal-500 py-2 justify-center"
-                        :key="inventory.id"
-                        @click="selectedInventory(inventory)"
-                    >
+                        :key="inventory.id" @click="selectedInventory(inventory)">
                         <span class="mr-2">{{ inventory.name }}</span>
-                        <input
-                            type="radio"
-                            name="inventory_id"
-                            class="form-radio"
-                            :value="inventory.id"
-                        />
+                        <input type="radio" name="inventory_id" class="form-radio" :value="inventory.id" />
                     </label>
                 </div>
             </div>
 
-            <product-list
-                :products="localProductsInPurchase"
-                class="col-span-5 mt-4"
-            >
+            <product-list :products="localProductsInPurchase" class="col-span-5 mt-4">
             </product-list>
         </div>
     </layout-component>
@@ -74,7 +54,7 @@ export default {
     components: {
         "complete-purchase-btn": CompletePurchaseButton,
         "cancel-purchase-btn": CancelPurchaseButton,
-     //   NavComponent,
+        //   NavComponent,
         ProductList
     },
     props: {

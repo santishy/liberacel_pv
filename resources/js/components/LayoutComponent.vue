@@ -4,7 +4,9 @@
         <div class="w-full min-h-screen">
             <nav class=" w-full max-w-full sticky shadow-sm  bg-white  top-0 z-10">
                 <div class="w-full py-3 px-6 ">
+
                     <div class=" lg:hidden flex justify-end">
+
                         <button id="buttonMenu" @click="toggleNavigation" ref="buttonMenu"
                             class="rounded -ml-1 transition-colors p-1 hover:bg-sky-500 text-slate-500 hover:text-slate-100 focus:ring-2 focus:ring-offset-2 focus:ring-sky-200">
                             <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -15,10 +17,10 @@
                     </div>
                     <div id="navigation" class="hidden lg:flex lg:items-center lg:justify-center lg:w-auto">
                         <div class="text-sm lg:flex-grow  gap-4 flex justify-center -mr-52 ">
-                            <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
-                                class="block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0   ">
+                            <!-- <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
+                                class="block rounded bg-emerald-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0   ">
                                 Finalizar Compra
-                            </a>
+                            </a> -->
                             <a href="/sales/create/?queryType=sell"
                                 class="flex relative  border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800  md:text-base text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -99,7 +101,7 @@ export default {
             ...menuData,
             crfsToken: document.querySelector('meta[name="csrf-token"]')
                 .content,
-            purchase: false,
+            // purchase: false,
             impersonation_id: document.querySelector(
                 'meta[name="impersonation_id"]'
             ).content
@@ -109,20 +111,16 @@ export default {
         this.cleanLocalStorage();
     },
     mounted() {
-        this.purchase = document.head.querySelector(
-            'meta[name="purchase_id"]'
-        ).content;
-        EventBus.$on("purchase-created", this.setPurchaseId);
-        this.cleanLocalStorage();
+
     },
     methods: {
         toggleNavigation() {
             //document.querySelector("#navigation").classList.toggle("hidden");
             EventBus.$emit('toggle-sidebar');
         },
-        setPurchaseId(id) {
-            this.purchase = id;
-        },
+        // setPurchaseId(id) {
+        //     this.purchase = id;
+        // },
         cleanLocalStorage() {
             if (
                 document.head.querySelector('meta[name="purchase_id"]')
@@ -134,11 +132,11 @@ export default {
         }
     },
     computed: {
-        highlight() {
-            return this.purchase
-                ? "text-lg text-white hover:animate-none"
-                : "text-gray-200";
-        }
+        // highlight() {
+        //     return this.purchase
+        //         ? "text-lg text-white hover:animate-none"
+        //         : "text-gray-200";
+        // }
     }
 };
 </script>

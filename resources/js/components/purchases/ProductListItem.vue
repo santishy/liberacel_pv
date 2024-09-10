@@ -1,7 +1,7 @@
 <template>
-    <tr class="text-gray-700">
+    <tr class="text-slate-500">
         <td class="px-4 py-3 border">
-            <div class="font-semibold text-gray-800">
+            <div class="font-semibold text-slate-600">
                 {{ localProduct.sku }}
             </div>
         </td>
@@ -12,34 +12,21 @@
             {{ localProduct.description }}
         </td>
         <td class="px-4 py-3 border  ">
-            <input
-                type="number"
-                v-model="localProduct.purchase_price"
-                class="appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            />
+            <input type="number" v-model="localProduct.purchase_price" class="form-text-input w-full" />
         </td>
         <td class="px-4 py-3 border ">
-            <input
-                type="number"
-                v-model="localProduct.purchase_quantity"
-                class="appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            />
+            <input type="number" v-model="localProduct.purchase_quantity" class="form-text-input w-full" />
         </td>
         <td class="px-4 py-3 border ">
             {{ getTotal }}
         </td>
         <td class="px-4 py-3 border ">
-            <div class="flex flex-wrap">
-                <button
-                    @click="update"
-                    class="bg-blue-500 rounded p-0 px-2 text-center hover:bg-blue-400 mr-1"
-                >
+            <div class="flex flex-wrap gap-2">
+                <button @click="update"
+                    class="bg-sky-500 text-slate-100 rounded p-1 px-2 text-center hover:bg-sky-700 hover:text-white">
                     <edit-icon></edit-icon>
                 </button>
-                <button
-                    @click="destroy"
-                    class="bg-red-500 hover:bg-red-400 p-0 px-2 rounded "
-                >
+                <button @click="destroy" class="bg-red-500  text-slate-100  hover:bg-red-400 p-1 px-2 rounded ">
                     <trash-icon></trash-icon>
                 </button>
             </div>
@@ -55,7 +42,7 @@
             <input
                 type="number"
                 v-model="localProduct.pivot.purchase_price"
-                class="appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                class="appearance-none bg-transparent border-none w-full text-center bg-slate-300 text-slate-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
             />
         </div>
         <div class=" p-2 border-b-2 border-teal-400">
@@ -63,7 +50,7 @@
             <input
                 type="number"
                 v-model="localProduct.pivot.qty"
-                class="appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                class="appearance-none bg-transparent border-none w-full text-center bg-slate-300 text-slate-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
             />
         </div>
         <div class=" p-2 border-b-2 border-teal-400 flex justify-center">

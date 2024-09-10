@@ -2162,34 +2162,32 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   data: function data() {
     return _objectSpread(_objectSpread({}, (_utilities_menuData__WEBPACK_IMPORTED_MODULE_0___default())), {}, {
       crfsToken: document.querySelector('meta[name="csrf-token"]').content,
-      purchase: false,
+      // purchase: false,
       impersonation_id: document.querySelector('meta[name="impersonation_id"]').content
     });
   },
   created: function created() {
     this.cleanLocalStorage();
   },
-  mounted: function mounted() {
-    this.purchase = document.head.querySelector('meta[name="purchase_id"]').content;
-    EventBus.$on("purchase-created", this.setPurchaseId);
-    this.cleanLocalStorage();
-  },
+  mounted: function mounted() {},
   methods: {
     toggleNavigation: function toggleNavigation() {
       //document.querySelector("#navigation").classList.toggle("hidden");
       EventBus.$emit('toggle-sidebar');
     },
-    setPurchaseId: function setPurchaseId(id) {
-      this.purchase = id;
-    },
+    // setPurchaseId(id) {
+    //     this.purchase = id;
+    // },
     cleanLocalStorage: function cleanLocalStorage() {
       if (document.head.querySelector('meta[name="purchase_id"]').content == "" || document.head.querySelector('meta[name="purchase_id"]').content == null) localStorage.removeItem("productsInPurchase");
     }
   },
   computed: {
-    highlight: function highlight() {
-      return this.purchase ? "text-lg text-white hover:animate-none" : "text-gray-200";
-    }
+    // highlight() {
+    //     return this.purchase
+    //         ? "text-lg text-white hover:animate-none"
+    //         : "text-gray-200";
+    // }
   }
 });
 
@@ -7402,7 +7400,6 @@ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" 
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
-//import NavComponent from "../NavComponent.vue";
 
 
 
@@ -7428,7 +7425,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       infiniteId: 1,
       obj: new Object(),
       arr: new Array(),
-      message: null
+      message: null,
+      purchase: null
     };
   },
   created: function created() {
@@ -7437,6 +7435,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   mounted: function mounted() {
     var _this = this;
+    //  this.cleanLocalStorage();
+    EventBus.$on("purchase-created", this.setPurchaseId);
+    this.purchase = document.head.querySelector('meta[name="purchase_id"]').content;
     this.cleanLocalStorage();
     EventBus.$on("matching-products", this.matchingProducts);
     EventBus.$on("empty-search", this.reloadIndex);
@@ -7448,7 +7449,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     "product-card": _ProductCardComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     InfiniteLoading: (vue_infinite_loading__WEBPACK_IMPORTED_MODULE_2___default()),
     "search-component": _SearchComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    //    NavComponent,
     InformationComponent: _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     Agree: _alerts_Agree_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Message: _alerts_Message_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -7477,13 +7477,15 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         }
       })["catch"](function (err) {});
     },
+    setPurchaseId: function setPurchaseId(id) {
+      this.purchase = id;
+    },
     matchingProducts: function matchingProducts(data) {
       this.products = data.products;
       this.params = data.params;
       this.infiniteId++;
     },
     reloadIndex: function reloadIndex() {
-      console.log("entro");
       this.infiniteId++;
       this.params = {
         page: 1
@@ -7514,7 +7516,11 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       });
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapState)(["modalDataConfirm"]))
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapState)(["modalDataConfirm"])), {}, {
+    highlight: function highlight() {
+      return this.purchase ? "text-lg text-white hover:animate-none" : "text-gray-200";
+    }
+  })
 });
 
 /***/ }),
@@ -11411,13 +11417,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "text-sm lg:flex-grow gap-4 flex justify-center -mr-52"
-  }, [_vm.purchase ? _c("a", {
-    staticClass: "block rounded bg-green-500 px-2 py-1 animate-pulse mt-4 relative lg:inline-block lg:mt-0",
-    "class": _vm.highlight,
-    attrs: {
-      href: _vm.purchase ? "/purchases/".concat(_vm.purchase) : "#"
-    }
-  }, [_vm._v("\n                            Finalizar Compra\n                        ")]) : _vm._e(), _vm._v(" "), _c("a", {
+  }, [_c("a", {
     staticClass: "flex relative border-center justify-center mt-4 items-center lg:mt-0 text-gray-600 sm:hover:text-gray-800 md:text-base text-sm",
     attrs: {
       href: "/sales/create/?queryType=sell"
@@ -18404,17 +18404,26 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5"
+    staticClass: "grid gap-4 grid-cols-1 sm:grid-cols-5",
+    "class": [_vm.purchase ? "grid-reverse" : ""]
   }, [_c("div", {
-    staticClass: "col-span-4 2xl:col-span-5 flex justify-end items-baseline rounded-t-sm p-4 bg-white"
+    staticClass: "sm:col-span-2 col-span-5 flex items-center justify-center"
+  }, [_vm.purchase ? _c("a", {
+    staticClass: "block w-full text-center rounded text-slate-100 bg-sky-500 p-1",
+    "class": _vm.highlight,
+    attrs: {
+      href: _vm.purchase ? "/purchases/".concat(_vm.purchase) : "#"
+    }
+  }, [_vm._v("\n                Finalizar Compra\n            ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "col-span-5 sm:col-span-3 flex flex-col gap-4 sm:flex-row justify-end items-baseline rounded-t-sm py-4"
   }, [_c("search-by-category", {
-    staticClass: "md:w-1/4 w-3/4 mr-2",
+    staticClass: "sm:w-6/12",
     attrs: {
       categories: _vm.categories
     }
   }), _vm._v(" "), _c("search-component", {
     ref: "search",
-    staticClass: "md:w-1/4 w-3/4"
+    staticClass: "sm:w-6/12"
   })], 1), _vm._v(" "), _c("product-list", {
     staticClass: "col-span-5"
   }, _vm._l(_vm.products, function (product, index) {
@@ -18952,7 +18961,7 @@ var render = function render() {
   return _c("div", {
     staticClass: "relative overflow-x-auto bg-white"
   }, [_c("table", {
-    staticClass: "w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._t("default")], 2)])]);
 };
 var staticRenderFns = [function () {
@@ -18960,7 +18969,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c("thead", {
-    staticClass: "text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+    staticClass: "text-xs text-slate-700 uppercase bg-gray-100"
   }, [_c("tr", {
     staticClass: "bg-danger"
   }, [_c("th", {
@@ -19026,7 +19035,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", {
-    staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+    staticClass: "bg-white border-b"
   }, [_c("td", {
     staticClass: "px-6 py-4"
   }, [_c("div", {
@@ -19039,7 +19048,7 @@ var render = function render() {
       alt: "product.sku"
     }
   })])]), _vm._v(" "), _c("th", {
-    staticClass: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
+    staticClass: "px-6 py-4 font-medium text-slate-600 whitespace-nowrap",
     attrs: {
       scope: "row"
     }
@@ -19434,7 +19443,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "far fa-times-circle"
-  }), _vm._v(" Cancelar compra\n")]);
+  }), _vm._v(" Cancelar\n")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -19470,7 +19479,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "far fa-check-circle"
-  }), _vm._v(" Completar compra\n")]);
+  }), _vm._v(" Completar\n")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -19494,9 +19503,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "mx-auto"
+    staticClass: "relative overflow-x-auto bg-white"
   }, [_c("table", {
-    staticClass: "w-full shadow-sm"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", {
     staticClass: "bg-white"
   }, _vm._l(_vm.products, function (product, index) {
@@ -19512,8 +19521,10 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", {
-    staticClass: "text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600"
+  return _c("thead", {
+    staticClass: "text-xs text-slate-700 uppercase bg-gray-100"
+  }, [_c("tr", {
+    staticClass: "text-md font-semibold tracking-wide text-left text-slate-800 bg-slate-100 uppercase border-b border-slate-600"
   }, [_c("th", {
     staticClass: "px-4 py-3"
   }, [_vm._v("SKU")]), _vm._v(" "), _c("th", {
@@ -19551,11 +19562,11 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", {
-    staticClass: "text-gray-700"
+    staticClass: "text-slate-500"
   }, [_c("td", {
     staticClass: "px-4 py-3 border"
   }, [_c("div", {
-    staticClass: "font-semibold text-gray-800"
+    staticClass: "font-semibold text-slate-600"
   }, [_vm._v("\n            " + _vm._s(_vm.localProduct.sku) + "\n        ")])]), _vm._v(" "), _c("td", {
     staticClass: "px-4 py-3 border"
   }, [_vm._v("\n        " + _vm._s(_vm.localProduct.category_name) + "\n    ")]), _vm._v(" "), _c("td", {
@@ -19569,7 +19580,7 @@ var render = function render() {
       value: _vm.localProduct.purchase_price,
       expression: "localProduct.purchase_price"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       type: "number"
     },
@@ -19591,7 +19602,7 @@ var render = function render() {
       value: _vm.localProduct.purchase_quantity,
       expression: "localProduct.purchase_quantity"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-center bg-gray-300 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       type: "number"
     },
@@ -19609,14 +19620,14 @@ var render = function render() {
   }, [_vm._v("\n        " + _vm._s(_vm.getTotal) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "px-4 py-3 border"
   }, [_c("div", {
-    staticClass: "flex flex-wrap"
+    staticClass: "flex flex-wrap gap-2"
   }, [_c("button", {
-    staticClass: "bg-blue-500 rounded p-0 px-2 text-center hover:bg-blue-400 mr-1",
+    staticClass: "bg-sky-500 text-slate-100 rounded p-1 px-2 text-center hover:bg-sky-700 hover:text-white",
     on: {
       click: _vm.update
     }
   }, [_c("edit-icon")], 1), _vm._v(" "), _c("button", {
-    staticClass: "bg-red-500 hover:bg-red-400 p-0 px-2 rounded",
+    staticClass: "bg-red-500 text-slate-100 hover:bg-red-400 p-1 px-2 rounded",
     on: {
       click: _vm.destroy
     }
@@ -19644,30 +19655,34 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "grid md:grid-cols-5 grid-flow-row mx-auto w-11/12"
+    staticClass: "grid sm:grid-cols-5 grid-cols-1 sm:grid-flow-row mx-auto w-full"
   }, [_c("div", {
-    staticClass: "col-span-5 flex justify-between items-center row-span-1 bg-white px-2 py-2"
+    staticClass: "col-span-5 flex sm:justify-between gap-4 flex-col sm:flex-row justify-center items-center row-span-1 bg-white px-4 py-2"
   }, [_c("div", {
-    staticClass: "text-xl text-gray-800 ml-4"
+    staticClass: "text-xl"
   }, [_c("span", {
-    staticClass: "text-2x text-gray-600"
+    staticClass: "text-2x text-slate-400"
   }, [_vm._v("Status:")]), _vm._v(" "), _c("span", {
-    staticClass: "text-2x text-blue-600 font-semibold"
-  }, [_vm._v(_vm._s(_vm.translateStatus))])]), _vm._v(" "), _c("div", [_c("complete-purchase-btn", {
+    staticClass: "text-2x text-slate-600 font-semibold"
+  }, [_vm._v(_vm._s(_vm.translateStatus))])]), _vm._v(" "), _c("div", {
+    staticClass: "flex flex-col sm:flex-row gap-2 sm:w-auto w-full"
+  }, [_c("complete-purchase-btn", {
+    staticClass: "w-full sm:w-auto",
     attrs: {
       purchase: _vm.purchase,
       "total-purchase": _vm.localTotalPurchase
     }
   }), _vm._v(" "), _c("cancel-purchase-btn", {
+    staticClass: "w-full sm:w-auto",
     attrs: {
       id: _vm.purchase.id
     }
   })], 1), _vm._v(" "), _c("div", {
-    staticClass: "text-xl text-gray-800 mr-4"
+    staticClass: "text-xl bg-yellow-500 w-full sm:w-auto px-2"
   }, [_c("span", {
-    staticClass: "text-2xl"
+    staticClass: "text-2xl text-slate-600"
   }, [_vm._v("Total Compra:")]), _vm._v(" "), _c("span", {
-    staticClass: "text-2xl font-semibold"
+    staticClass: "text-2xl text-slate-700 font-semibold"
   }, [_vm._v("$" + _vm._s(new Intl.NumberFormat("es-MX").format(_vm.localTotalPurchase)))])])]), _vm._v(" "), _vm.isAdmin && !_vm.user.inventory_id ? _c("div", {
     staticClass: "bg-white border-b border-t border-blue-400 px-4 py-2 text-gray-700 text-center col-span-5"
   }, [_c("div", {

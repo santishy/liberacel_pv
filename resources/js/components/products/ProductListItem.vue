@@ -1,20 +1,15 @@
 <template>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr class="bg-white border-b">
         <td class="px-6 py-4">
             <div class="image-container">
-                <img
-                    :src="product.image_url"
-                    loading="lazy"
-                    alt="product.sku"
-                    class="object-contain md:object-fill"
-                />
+                <img :src="product.image_url" loading="lazy" alt="product.sku" class="object-contain md:object-fill" />
             </div>
         </td>
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <th scope="row" class="px-6 py-4 font-medium text-slate-600 whitespace-nowrap ">
             <div class="flex justify-start items-center">
                 <span class="mr-2">{{ product.sku }}</span>
                 <a :href="`/barcode/${product.sku}`" class="text-blue-700 " target="_blank">
-                    <barcode/>
+                    <barcode />
                 </a>
             </div>
         </th>
@@ -35,20 +30,14 @@
         </td>
         <td class="px-6 py-4">
             <div v-if="queryTypeExists" class="flex flex-wrap justify-center items-center">
-                <add-to-purchase
-                    v-show="isPurchase"
-                    :product_id="product.id"
-                    :purchase_price="product.distributor_price"
-                >
+                <add-to-purchase v-show="isPurchase" :product_id="product.id"
+                    :purchase_price="product.distributor_price">
                 </add-to-purchase>
                 <add-to-sale v-show="isSale" :index="index" :product="product">
                 </add-to-sale>
                 <edit-product v-show="isEdit" :product="product"></edit-product>
-                <remove-product-component
-                    v-show="isRemove"
-                    :product="product"
-                    :index="index"
-                ></remove-product-component>
+                <remove-product-component v-show="isRemove" :product="product"
+                    :index="index"></remove-product-component>
             </div>
         </td>
     </tr>
@@ -86,8 +75,8 @@ export default {
             },
         };
     },
-    methods:{
-        queryTypeExists(){
+    methods: {
+        queryTypeExists() {
             if (!this.queryType) {
                 console.log("Debe habilitar queryType en la url");
                 return false;

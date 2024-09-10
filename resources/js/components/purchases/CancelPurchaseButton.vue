@@ -1,16 +1,13 @@
 <template>
-    <button
-        class="rounded px-4 py-1 bg-red-600 hover:bg-red-400 text-white"
-        @click="cancelPurchase"
-    >
-        <i class="far fa-times-circle"></i> Cancelar compra
+    <button class="rounded px-4 py-1 bg-red-600 hover:bg-red-400 text-white" @click="cancelPurchase">
+        <i class="far fa-times-circle"></i> Cancelar
     </button>
 </template>
 <script>
 export default {
-    data(){
+    data() {
         return {
-            inventory_id:null
+            inventory_id: null
         }
     },
     props: {
@@ -18,19 +15,19 @@ export default {
             type: Number
         }
     },
-    mounted(){
+    mounted() {
         console.log(this.transaction)
-        EventBus.$on('selected-inventory',(id)=>{
+        EventBus.$on('selected-inventory', (id) => {
             this.inventory_id = id;
         })
     },
     methods: {
         cancelPurchase() {
             axios
-                .delete("/purchases/" + this.id,{
-                    params:{
-                        inventory_id:this.inventory_id,
-                        factor:-1
+                .delete("/purchases/" + this.id, {
+                    params: {
+                        inventory_id: this.inventory_id,
+                        factor: -1
                     }
                 })
                 .then(res => {

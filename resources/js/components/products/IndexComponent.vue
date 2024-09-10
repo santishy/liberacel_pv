@@ -1,9 +1,17 @@
 <template>
     <layout-component>
-        <div class="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-5 ">
-            <div class="col-span-4 2xl:col-span-5 flex justify-end items-baseline rounded-t-sm p-4 bg-white">
-                <search-by-category class="md:w-1/4 w-3/4 mr-2" :categories="categories"></search-by-category>
-                <search-component ref="search" class="md:w-1/4 w-3/4 " />
+        <div :class="[purchase ? 'grid-reverse' : '']" class="grid gap-4 grid-cols-1 sm:grid-cols-5 ">
+            <div class="sm:col-span-2 col-span-5 flex items-center justify-center ">
+
+                <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
+                    class="block w-full text-center  rounded text-slate-100 bg-sky-500 p-1    ">
+                    Finalizar Compra
+                </a>
+            </div>
+            <div
+                class="col-span-5 sm:col-span-3 flex flex-col gap-4 sm:flex-row justify-end items-baseline rounded-t-sm py-4">
+                <search-by-category class="sm:w-6/12" :categories="categories"></search-by-category>
+                <search-component ref="search" class="sm:w-6/12 " />
             </div>
             <product-list class="col-span-5">
                 <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
@@ -27,7 +35,6 @@
 <script>
 import Agree from "../alerts/Agree.vue";
 import Message from "../alerts/Message.vue";
-//import NavComponent from "../NavComponent.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import SearchComponent from "./SearchComponent.vue";
 import SearchByCategory from "./SearchByCategory.vue";
@@ -52,7 +59,8 @@ export default {
             infiniteId: 1,
             obj: new Object(),
             arr: new Array(),
-            message: null
+            message: null,
+            purchase: null
         };
     },
     created() {
@@ -60,6 +68,12 @@ export default {
         this.getQueryType();
     },
     mounted() {
+        //  this.cleanLocalStorage();
+        EventBus.$on("purchase-created", this.setPurchaseId);
+        this.purchase = document.head.querySelector(
+            'meta[name="purchase_id"]'
+        ).content;
+
         this.cleanLocalStorage();
         EventBus.$on("matching-products", this.matchingProducts);
         EventBus.$on("empty-search", this.reloadIndex);
@@ -71,7 +85,6 @@ export default {
         "product-card": ProductCardComponent,
         InfiniteLoading,
         "search-component": SearchComponent,
-    //    NavComponent,
         InformationComponent,
         Agree,
         Message,
@@ -102,13 +115,15 @@ export default {
                 })
                 .catch(err => { });
         },
+        setPurchaseId(id) {
+            this.purchase = id;
+        },
         matchingProducts(data) {
             this.products = data.products;
             this.params = data.params;
             this.infiniteId++;
         },
         reloadIndex() {
-            console.log("entro");
             this.infiniteId++;
             this.params = { page: 1 };
             this.products = [];
@@ -146,7 +161,12 @@ export default {
         }
     },
     computed: {
-        ...mapState(["modalDataConfirm"])
+        ...mapState(["modalDataConfirm"]),
+        highlight() {
+            return this.purchase
+                ? "text-lg text-white hover:animate-none"
+                : "text-gray-200";
+        }
     }
 };
 </script>
