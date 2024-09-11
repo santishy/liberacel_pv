@@ -1,6 +1,8 @@
 <template>
     <layout-component>
         <div class="grid sm:grid-cols-5 grid-cols-1  sm:grid-flow-row mx-auto w-full">
+            <errors-component :id="purchase.id" class="col-span-1 sm:col-span-5" />
+
             <div
                 class="col-span-5 flex sm:justify-between gap-4 flex-col sm:flex-row justify-center items-center row-span-1  bg-white px-4 py-2">
                 <div class="text-xl ">
@@ -38,7 +40,6 @@
                     </label>
                 </div>
             </div>
-
             <product-list :products="localProductsInPurchase" class="col-span-5 mt-4">
             </product-list>
         </div>
@@ -47,16 +48,15 @@
 <script>
 import CompletePurchaseButton from "./CompletePurchaseButton.vue";
 import CancelPurchaseButton from "./CancelPurchaseButton";
-//import NavComponent from "../NavComponent.vue";
 import ProductList from "./ProductList.vue";
 
 export default {
     components: {
         "complete-purchase-btn": CompletePurchaseButton,
         "cancel-purchase-btn": CancelPurchaseButton,
-        //   NavComponent,
         ProductList
     },
+
     props: {
         productsInPurchase: {
             type: Array

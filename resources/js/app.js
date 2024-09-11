@@ -8,14 +8,14 @@ import Notifications from 'vue-notification'
 Vue.component('notifications', Notifications);
 Vue.use(Notifications);
 import { store } from './vuex/store.js';
-import Errors from "./mixins/Errors";
+//import Errors from "./mixins/Errors";
 import Notify from "./mixins/Notify";
 
 //await store.dispatch('getUser');
 store.commit('SET_USER');
 store.commit('SET_APP_NAME');
 
-Vue.mixin(Errors);
+//Vue.mixin(Errors);
 Vue.mixin(Authorizations);
 Vue.mixin(Notify);
 

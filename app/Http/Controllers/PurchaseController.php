@@ -78,15 +78,16 @@ class PurchaseController extends Controller
             ->with(compact('purchase'))
             ->with(compact('inventories'));
     }
-    public function edit(Purchase $purchase)
-    {
-    }
+    public function edit(Purchase $purchase) {}
     public function update(Request $request, Purchase $purchase)
     {
         $this->authorize('update', $purchase); // puede ser el metodo create?
         $request->validate([
             'status' => ['required'],
             'inventory_id' => ['required']
+        ], [
+            "status" => "El status es requerido",
+            "inventory_id" => "El almacen es requerido."
         ]);
         if ($request->status === 'completed' && $purchase->status === "completed") {
             //new ValidationException()

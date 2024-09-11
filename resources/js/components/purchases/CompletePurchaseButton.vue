@@ -44,7 +44,11 @@ export default {
                     localStorage.removeItem("productsInPurchase");
                 }
             } catch (err) {
-                this.getErrors(err);
+                EventBus.$emit(`an-error-ocurred-${this.purchase.id}`, err);
+                console.log(this.purchase.id)
+            }
+            finally {
+                this.isProcessing = false;
             }
             // this.isProcessing = false;
         },

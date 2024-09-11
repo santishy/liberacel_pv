@@ -2,7 +2,6 @@
     <layout-component>
         <div :class="[purchase ? 'grid-reverse' : '']" class="grid gap-4 grid-cols-1 sm:grid-cols-5 ">
             <div class="sm:col-span-2 col-span-5 flex items-center justify-center ">
-
                 <a v-if="purchase" :href="purchase ? `/purchases/${purchase}` : '#'" :class="highlight"
                     class="block w-full text-center  rounded text-slate-100 bg-sky-500 p-1    ">
                     Finalizar Compra
