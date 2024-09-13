@@ -122,7 +122,7 @@ export default {
                     }
                 })
                 .catch((err) => {
-                    this.getErrors(err);
+                    console.log(err)
                 });
         },
     },

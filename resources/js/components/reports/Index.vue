@@ -56,7 +56,7 @@
                     <div class="font-bold text-2xl ml-2">${{ total }}</div>
                 </div>
             </transition>
-            <errors-component :errors-found="errors"></errors-component>
+            <errors-component />
             <report-by class="mt-4">
                 <template v-if="isSale" #search>
                     <search-by-id :uri="uri"></search-by-id>
@@ -79,7 +79,7 @@ import ErrorsComponent from "../ErrorsComponent.vue";
 import WarehouseChecklist from "../warehouses/WarehouseChecklist.vue"
 
 export default {
-    components: { ReportBy, SearchById,  ErrorsComponent, WarehouseChecklist },
+    components: { ReportBy, SearchById, ErrorsComponent, WarehouseChecklist },
     props: {
         name: {
             type: String
@@ -119,7 +119,8 @@ export default {
     },
     methods: {
         errorsFound(errors) {
-            this.getErrors(errors);
+            EventBus.$emit('an-error-ocurred', errors);
+            //this.getErrors(errors);
         },
         formattedNumber(amount) {
             if (!amount) return 0;

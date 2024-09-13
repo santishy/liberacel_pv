@@ -1,5 +1,6 @@
 <template>
     <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
+        <errors-component class="col-span-2" />
         <!-- <credit-status :form="form" class="col-span-2"></credit-status> -->
         <div>
             <label class="form-label">Descripción</label>
@@ -28,11 +29,9 @@
                 autocomplete="off" />
         </div>
 
-        <div class="flex items-center justify-start w-full col-span-2">
-            <div class="flex items-center w-full">
-                <errors-component :errors-found="errors" />
-            </div>
-        </div>
+
+
+
     </form>
 </template>
 
@@ -94,14 +93,14 @@ export default {
 
             }
             catch (err) {
-                this.getErrors(err);
+                EventBus.$emit('an-error-ocurred', err);
             }
             this.toggleDisabled();
             this.focusedIndex = 0;
             this.$refs.description.focus();
         },
         showErrors(err) {
-            this.getErrors(err);
+            EventBus.$emit('an-error-ocurred', err);
         },
         toggleDisabled() {
             const fields = document.getElementById("fastSaleForm").elements;

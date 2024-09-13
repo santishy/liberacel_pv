@@ -2103,18 +2103,15 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   mounted: function mounted() {
-    var _this = this;
     console.log("mounted error component");
-    EventBus.$on("an-error-ocurred-".concat(this.id), function (error) {
-      console.log({
-        id: _this.id
-      });
-      _this.getErrors(error);
-    });
+    //tratar de eliminar este evento sino se necesita
+    EventBus.$on("an-error-ocurred-".concat(this.id), this.getErrors);
+    EventBus.$on("an-error-ocurred", this.getErrors);
   },
   methods: {
     getErrors: function getErrors(err) {
       var _err$response, _err$response2, _Object$values, _err$response3;
+      console.log("entro aki");
       console.log({
         response: err.response.data
       });
@@ -2131,18 +2128,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     errors: {
       deep: true,
       handler: function handler() {
-        var _this2 = this;
+        var _this = this;
         return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
               case 0:
-                if (_this2.errors) {
-                  _this2.show = true;
+                if (_this.errors) {
+                  _this.show = true;
                 }
                 _context.next = 3;
                 return setTimeout(function () {
-                  _this2.show = false;
-                  _this2.errors = null;
+                  _this.show = false;
+                  _this.errors = null;
                 }, 3000);
               case 3:
               case "end":
@@ -2428,22 +2425,21 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this2.form.username = "";
                 _this2.form.password = "";
               }
-              _context.next = 15;
+              _context.next = 14;
               break;
             case 11:
               _context.prev = 11;
               _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
-              _this2.getErrors(_context.t0);
-            case 15:
-              _context.prev = 15;
+              EventBus.$emit('an-error-ocurred', _context.t0);
+            case 14:
+              _context.prev = 14;
               _this2.loading = false;
-              return _context.finish(15);
-            case 18:
+              return _context.finish(14);
+            case 17:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 11, 15, 18]]);
+        }, _callee, null, [[0, 11, 14, 17]]);
       }))();
     },
     toggleStatus: function toggleStatus(event) {
@@ -3459,7 +3455,7 @@ __webpack_require__.r(__webpack_exports__);
         if (_this.method == "post") _this.form = {};
         _this.errors = null;
       })["catch"](function (err) {
-        _this.getErrors(err);
+        EventBus.$emit('an-error-ocurred', err);
       });
     }
   },
@@ -4255,7 +4251,13 @@ __webpack_require__.r(__webpack_exports__);
         EventBus.$emit("product-added-sales-cart", res.data.sale);
         EventBus.$emit("sale-to-client", res.data);
       })["catch"](function (err) {
-        _this.getErrors(err);
+        var _Object$values, _err$response;
+        _this.$notify({
+          group: "foo",
+          title: "Cliente",
+          type: "error",
+          text: Object === null || Object === void 0 || (_Object$values = Object.values(err === null || err === void 0 || (_err$response = err.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
+        });
       });
     }
   },
@@ -4669,8 +4671,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     submit: function submit() {
       var _this = this;
       if (this.expenseMethodName.toUpperCase() === 'PATCH') {
-        this.form._method = 'PATCH';
-        this.uri = this.uri + "/".concat(this.currentExpense.id);
+        if (this.form._method != "PATCH") {
+          this.form._method = 'PATCH';
+          this.uri = this.uri + "/".concat(this.currentExpense.id);
+        }
       }
       axios.post(this.uri, this.form).then(function (res) {
         if (res.data.data) {
@@ -4681,8 +4685,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           if (_this.expenseMethodName.toUpperCase() === 'POST') _this.form = {};
         }
       })["catch"](function (err) {
-        console.log(err);
-        _this.getErrors(err);
+        console.log("...");
+        EventBus.$emit('an-error-ocurred', err);
       });
     }
   },
@@ -5302,7 +5306,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
             case 13:
               _context.prev = 13;
               _context.t0 = _context["catch"](0);
-              _this2.getErrors(_context.t0);
+              EventBus.$emit('an-error-ocurred', _context.t0);
             case 16:
               _this2.toggleDisabled();
               _this2.focusedIndex = 0;
@@ -5315,7 +5319,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }))();
     },
     showErrors: function showErrors(err) {
-      this.getErrors(err);
+      EventBus.$emit('an-error-ocurred', err);
     },
     toggleDisabled: function toggleDisabled() {
       var fields = document.getElementById("fastSaleForm").elements;
@@ -5705,7 +5709,7 @@ __webpack_require__.r(__webpack_exports__);
         if (_this.method != "put") _this.form = {};
         _this.errors = null;
       })["catch"](function (err) {
-        _this.getErrors(err);
+        EventBus.$emit('an-error-ocurred', err);
       });
     }
   }
@@ -6744,14 +6748,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 EventBus.$emit("open-modal", false);
                 window.open("/payments-pdf/".concat(res.data.payment.id), "_blank");
               }
-              _context.next = 13;
+              _context.next = 12;
               break;
             case 9:
               _context.prev = 9;
               _context.t0 = _context["catch"](1);
-              _this.getErrors(_context.t0);
-              console.log(_context.t0);
-            case 13:
+              EventBus.$emit('an-error-ocurred', _context.t0);
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -6837,7 +6840,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           $state.complete();
         }
       })["catch"](function (error) {
-        _this2.getErrors(error);
+        console.error(error);
       });
     },
     changeParams: function changeParams() {
@@ -6913,7 +6916,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     deletePayment: function deletePayment() {
       var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var res;
+        var res, _Object$values, _err$response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -6928,14 +6931,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                   index: _this2.index
                 });
               }
-              _context.next = 11;
+              _context.next = 10;
               break;
             case 7:
               _context.prev = 7;
               _context.t0 = _context["catch"](0);
-              _this2.getErrors(_context.t0);
-              console.log(_context.t0);
-            case 11:
+              _this2.$notify({
+                group: "foo",
+                title: "Cliente",
+                type: "error",
+                text: Object === null || Object === void 0 || (_Object$values = Object.values(_context.t0 === null || _context.t0 === void 0 || (_err$response = _context.t0.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
+              });
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -6945,7 +6952,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     updatePayment: function updatePayment() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var res;
+        var res, _Object$values2, _err$response2;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
@@ -6963,14 +6970,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                   index: _this3.index
                 });
               }
-              _context2.next = 11;
+              _context2.next = 10;
               break;
             case 7:
               _context2.prev = 7;
               _context2.t0 = _context2["catch"](0);
-              _this3.getErrors(_context2.t0);
-              console.log(_context2.t0);
-            case 11:
+              _this3.$notify({
+                group: "foo",
+                title: "Cliente",
+                type: "error",
+                text: Object === null || Object === void 0 || (_Object$values2 = Object.values(_context2.t0 === null || _context2.t0 === void 0 || (_err$response2 = _context2.t0.response) === null || _err$response2 === void 0 || (_err$response2 = _err$response2.data) === null || _err$response2 === void 0 ? void 0 : _err$response2.errors)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.flat()[0]
+              });
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -6997,14 +7008,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/InformationComponent.vue */ "./resources/js/components/modals/InformationComponent.vue");
 /* harmony import */ var _icons_CircleAdd_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../icons/CircleAdd.vue */ "./resources/js/components/icons/CircleAdd.vue");
 /* harmony import */ var _BonusForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BonusForm.vue */ "./resources/js/components/product-bonuses/BonusForm.vue");
-//import NavComponent from "../NavComponent.vue";
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    // NavComponent,
     CircleAdd: _icons_CircleAdd_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     InformationComponent: _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ProductBonusList: _ProductBonusList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -7043,11 +7052,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      var _this = this;
       axios.post("/product-bonuses", this.form).then(function (res) {
         EventBus.$emit("bonus-created", res.data);
       })["catch"](function (err) {
-        _this.getErrors(err);
+        EventBus.$emit('an-error-ocurred', err);
       });
     }
   },
@@ -7102,7 +7110,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submit: function submit() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var res;
+        var res, _Object$values, _err$response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -7121,7 +7129,12 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 11:
               _context.prev = 11;
               _context.t0 = _context["catch"](0);
-              console.log(_context.t0.message);
+              _this.$notify({
+                group: "foo",
+                title: "Cliente",
+                type: "error",
+                text: Object === null || Object === void 0 || (_Object$values = Object.values(_context.t0 === null || _context.t0 === void 0 || (_err$response = _context.t0.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
+              });
               if (_context.t0["response"].status === 419) {
                 window.location = "/";
               }
@@ -7202,7 +7215,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           $state.complete();
         }
       })["catch"](function (err) {
-        _this2.getErrors(err);
+        console.log(err);
       });
     }
   }
@@ -7728,7 +7741,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 };
                 _this2.errors = null;
               })["catch"](function (err) {
-                _this2.getErrors(err);
+                EventBus.$emit('an-error-ocurred', err);
               });
             case 5:
             case "end":
@@ -8513,7 +8526,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           _this.setProductsInPurchase(obj);
         }
       })["catch"](function (err) {
-        _this.getErrors(err);
+        var _Object$values, _err$response;
+        _this.$notify({
+          group: "foo",
+          title: "Error",
+          type: "error",
+          text: Object === null || Object === void 0 || (_Object$values = Object.values(err === null || err === void 0 || (_err$response = err.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
+        });
       });
     },
     destroy: function destroy() {
@@ -8526,7 +8545,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           EventBus.$emit("total-updated-purchase", res.data.totalPurchase);
         }
       })["catch"](function (err) {
-        _this2.getErrors(err);
+        var _Object$values2, _err$response2;
+        _this2.$notify({
+          group: "foo",
+          title: "Error",
+          type: "error",
+          text: Object === null || Object === void 0 || (_Object$values2 = Object.values(err === null || err === void 0 || (_err$response2 = err.response) === null || _err$response2 === void 0 || (_err$response2 = _err$response2.data) === null || _err$response2 === void 0 ? void 0 : _err$response2.errors)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.flat()[0]
+        });
       });
     }
   }),
@@ -9178,7 +9203,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   methods: {
     errorsFound: function errorsFound(errors) {
-      this.getErrors(errors);
+      EventBus.$emit('an-error-ocurred', errors);
+      //this.getErrors(errors);
     },
     formattedNumber: function formattedNumber(amount) {
       if (!amount) return 0;
@@ -10022,12 +10048,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         EventBus.$emit("toggle-product-list");
         _this.addProductToTranscation();
       })["catch"](function (err) {
-        _this.getErrors(err);
+        var _Object$values, _err$response;
+        // this.getErrors(err);
+
         _this.$notify({
           group: "foo",
           title: "Error",
           type: "error",
-          text: _this.errors[0]
+          text: Object === null || Object === void 0 || (_Object$values = Object.values(err === null || err === void 0 || (_err$response = err.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
         });
       });
     }
@@ -11372,7 +11400,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.show ? _c("div", {
-    staticClass: "w-full px-4 z-10 text-xl py-3 mb-3 shadow-sm text-red-700 border rounded bg-red-100 border-red-500 transition-all duration-150",
+    staticClass: "w-full px-4 z-10 text-xl py-2 mb-3 shadow-sm text-red-700 border rounded bg-red-100 border-red-500 transition-all duration-150",
     attrs: {
       role: "alert"
     }
@@ -11785,7 +11813,7 @@ var render = function render() {
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("div", {
+  }, [_c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "mb-1 px-2"
   }, [_c("input", {
     directives: [{
@@ -11845,19 +11873,7 @@ var render = function render() {
       type: "submit",
       disabled: _vm.loading
     }
-  }, [_vm._v("\n                    Enviar\n                ")]), _vm._v(" "), _c("div", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: _vm.errors,
-      expression: "errors"
-    }],
-    staticClass: "flex items-center mt-2"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _vm.form.status == "cancelled" ? _c("div", {
+  }, [_vm._v("\n                    Enviar\n                ")]), _vm._v(" "), _vm.form.status == "cancelled" ? _c("div", {
     staticClass: "bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2 mt-2",
     attrs: {
       role: "alert"
@@ -11866,7 +11882,7 @@ var render = function render() {
     staticClass: "font-bold"
   }, [_vm._v("Cancellar nota # " + _vm._s(_vm.local_id))]), _vm._v(" "), _c("p", {
     staticClass: "text-sm"
-  }, [_vm._v("\n                        Esta a punto de cancelar la venta completa.\n                    ")])]) : _vm._e()])]), _vm._v(" "), _c("template", {
+  }, [_vm._v("\n                        Esta a punto de cancelar la venta completa.\n                    ")])]) : _vm._e()])], 1), _vm._v(" "), _c("template", {
     slot: "button"
   }, [_c("label", {
     staticClass: "inline-flex items-start mt-3 border-2 p-2 rounded-sm border-gray-200"
@@ -13056,7 +13072,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "flex items-center py-2 text-dark text-center justify-center text-xl font-bold"
-  }, [_vm._v("\n                " + _vm._s(_vm.getTitle) + "\n            ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(_vm.getTitle) + "\n            ")]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "flex items-center border-t border-gray-500 py-2 relative"
   }, [_c("input", {
     directives: [{
@@ -13221,7 +13237,7 @@ var render = function render() {
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Precio asignado")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Precio\n                    asignado")])]), _vm._v(" "), _c("div", {
     staticClass: "flex items-center border-t border-gray-500 py-2 relative",
     "class": ["flex", "items-center", "border-b", this.errors ? "border-transparent" : "border-gray-500", "py-2"]
   }, [_c("input", {
@@ -13253,16 +13269,10 @@ var render = function render() {
       "for": ""
     }
   }, [_vm._v("Empresa")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _c("div", {
     staticClass: "flex justify-center mt-0 mb-0"
   }, [_c("button", {
     staticClass: "bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full"
-  }, [_vm._v("\n                    Guardar\n                ")])])])])]);
+  }, [_vm._v("\n                    Guardar\n                ")])])], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -14122,13 +14132,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n                Asociar Cliente\n            ")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1)]), _vm._v(" "), _c("information-component", {
+  }, [_vm._v("\n                Asociar Cliente\n            ")])])]), _vm._v(" "), _c("information-component", {
     attrs: {
       id: "client"
     },
@@ -14492,7 +14496,7 @@ var render = function render() {
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("div", {
+  }, [_c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "w-full flex"
   }, [_c("label", {
     staticClass: "w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6"
@@ -14546,14 +14550,7 @@ var render = function render() {
         _vm.$set(_vm.form, "amount", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center w-full justify-center"
-  }, [_c("errors-component", {
-    staticClass: "w-6/12",
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _vm._m(0)]);
+  })]), _vm._v(" "), _vm._m(0)], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -15073,7 +15070,9 @@ var render = function render() {
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("div", [_c("label", {
+  }, [_c("errors-component", {
+    staticClass: "col-span-2"
+  }), _vm._v(" "), _c("div", [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Descripción")]), _vm._v(" "), _c("input", {
     directives: [{
@@ -15217,15 +15216,7 @@ var render = function render() {
         _vm.$set(_vm.form, "qty", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-start w-full col-span-2"
-  }, [_c("div", {
-    staticClass: "flex items-center w-full"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1)])]);
+  })])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -16200,7 +16191,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "flex items-center p-2 text-dark text-xl font-semibold font-roboto"
-  }, [_vm._v("\n                Crear Almacén\n            ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                Crear Almacén\n            ")]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "py-2 w-full"
   }, [_c("label", {
     staticClass: "form-label mb-1",
@@ -16247,12 +16238,6 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _c("div", {
     staticClass: "flex items-center mt-2 mb-0"
   }, [_c("button", {
     staticClass: "bg-blue-500 rounded shadow-sm transition-all duration-500 ease-in-out hover:bg-blue-700 text-gray-100 font-semibold hover:text-white py-2 px-8 border-b-2 border-blue-500 hover:border-transparent"
@@ -17664,7 +17649,7 @@ var render = function render() {
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("div", {
+  }, [_c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "flex justify-left gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center"
   }, [_c("span", [_vm._v("Adeudo Total")]), _vm._v(" "), _c("span", {
     staticClass: "font-bold"
@@ -17698,13 +17683,7 @@ var render = function render() {
         _vm.$set(_vm.form, "amount", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center mt-2"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _vm._m(0)]);
+  })]), _vm._v(" "), _vm._m(0)], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -17895,7 +17874,7 @@ var render = function render() {
     staticClass: "ml-3"
   })], 1)]), _vm._v(" "), _c("product-bonus-list")], 1), _vm._v(" "), _c("information-component", [_c("template", {
     slot: "title"
-  }, [_vm._v("\n            Bonificacion de productos y categorías\n        ")]), _vm._v(" "), _c("bonus-form")], 2)], 1);
+  }, [_vm._v("\n            Bonificacion de productos y categorías\n        ")]), _vm._v(" "), _c("div", [_c("bonus-form")], 1)], 2)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -17926,7 +17905,7 @@ var render = function render() {
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("div", {
+  }, [_c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "flex gap-2 flex-col py-1"
   }, [_c("label", {
     staticClass: "text-slate-700 text-start py-1 font-mono",
@@ -18016,13 +17995,7 @@ var render = function render() {
         _vm.$set(_vm.form, "commission_amount", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _vm._m(0)]);
+  })]), _vm._v(" "), _vm._m(0)], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -18628,7 +18601,7 @@ var render = function render() {
     }
   }, [_vm._v("\n                Limpiar\n            ")])], 1), _vm._v(" "), _c("h1", {
     staticClass: "flex items-center pb-2 mt-4 text-dark justify-start text-xl font-bold"
-  }, [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]), _vm._v(" "), _c("form", {
+  }, [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("form", {
     directives: [{
       name: "can",
       rawName: "v-can",
@@ -18953,15 +18926,9 @@ var render = function render() {
     }, [_vm._v(_vm._s(warehouse.name.toUpperCase()))])])]);
   }), 0)]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "sm:col-span-2"
-  }, [_c("div", {
-    staticClass: "flex items-center w-full"
-  }, [_c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  })], 1), _vm._v(" "), _c("button", {
+  }, [_c("button", {
     staticClass: "bg-blue-500 rounded shadow-sm transition-all duration-500 ease-in-out hover:bg-blue-700 text-gray-100 font-semibold hover:text-white py-2 px-8 border-b-2 border-blue-500 hover:border-transparent"
-  }, [_vm._v("\n                    Guardar\n                ")])])])])]);
+  }, [_vm._v("\n                    Guardar\n                ")])])])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -20270,11 +20237,7 @@ var render = function render() {
     staticClass: "font-semibold text-xl"
   }, [_vm._v("Total:")]), _vm._v(" "), _c("div", {
     staticClass: "font-bold text-2xl ml-2"
-  }, [_vm._v("$" + _vm._s(_vm.total))])]) : _vm._e()]), _vm._v(" "), _c("errors-component", {
-    attrs: {
-      "errors-found": _vm.errors
-    }
-  }), _vm._v(" "), _c("report-by", {
+  }, [_vm._v("$" + _vm._s(_vm.total))])]) : _vm._e()]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("report-by", {
     staticClass: "mt-4",
     scopedSlots: _vm._u([_vm.isSale ? {
       key: "search",

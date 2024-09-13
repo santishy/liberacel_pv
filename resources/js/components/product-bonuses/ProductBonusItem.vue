@@ -33,7 +33,8 @@
                 block
                 md:table-cell
             ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Valor de comisión</span>{{ productBonus.commission_amount
+            <span class="inline-block w-1/3 md:hidden font-bold">Valor de comisión</span>{{
+                productBonus.commission_amount
             }}
         </td>
         <td class="
@@ -97,9 +98,16 @@ export default {
                 this.productBonus.points = res.data.points;
                 this.productBonus.commission_amount = res.data.commission_amount;
                 this.show = false;
-            } catch (error) {
-                console.log(error.message);
-                if (error["response"].status === 419) {
+            } catch (err) {
+                this.$notify({
+                    group: "foo",
+                    title: "Cliente",
+                    type: "error",
+                    text: Object?.values(
+                        err?.response?.data?.errors
+                    )?.flat()[0]
+                });
+                if (err["response"].status === 419) {
                     window.location = "/";
                 }
             }

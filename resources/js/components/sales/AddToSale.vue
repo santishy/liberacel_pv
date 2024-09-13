@@ -46,12 +46,15 @@ export default {
                     this.addProductToTranscation();
                 })
                 .catch(err => {
-                    this.getErrors(err);
+                    // this.getErrors(err);
+
                     this.$notify({
                         group: "foo",
                         title: "Error",
                         type: "error",
-                        text: this.errors[0]
+                        text: Object?.values(
+                            err?.response?.data?.errors
+                        )?.flat()[0]
                     });
                 });
         }

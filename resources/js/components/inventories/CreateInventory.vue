@@ -6,22 +6,18 @@
                 <div class="flex items-center p-2 text-dark  text-xl font-semibold font-roboto">
                     Crear Almacén
                 </div>
+                <errors-component />
                 <div class=" py-2 w-full">
                     <label for="" class="form-label mb-1">Nombre</label>
                     <input-text v-model="form.name" input-class="w-full" aria-label="Full name" />
-
-                    <!-- <input v-model="form.name" name="name" class="form-text-input w-full" type="text"
-                        placeholder="Jiquilpan " aria-label="Full name" /> -->
-
                 </div>
                 <div class=" py-2 w-full">
                     <label class="form-label mb-1">Dirección</label>
                     <input v-model="form.address" name="address" class="form-text-input w-full" type="text"
                         placeholder="Sor Juana Inés #34 " aria-label="Full name" />
                 </div>
-                <div class="flex items-center ">
-                    <errors-component :errors-found="errors" />
-                </div>
+
+
 
                 <div class="flex items-center mt-2 mb-0">
                     <button
@@ -78,7 +74,7 @@ export default {
                     this.errors = null;
                 })
                 .catch(err => {
-                    this.getErrors(err);
+                    EventBus.$emit('an-error-ocurred', err);
                 });
         }
     }

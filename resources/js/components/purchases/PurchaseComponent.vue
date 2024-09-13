@@ -2,14 +2,13 @@
     <layout-component>
         <div class="grid sm:grid-cols-5 grid-cols-1  sm:grid-flow-row mx-auto w-full">
             <errors-component :id="purchase.id" class="col-span-1 sm:col-span-5" />
-
             <div
                 class="col-span-5 flex sm:justify-between gap-4 flex-col sm:flex-row justify-center items-center row-span-1  bg-white px-4 py-2">
                 <div class="text-xl ">
                     <span class="text-2x text-slate-400">Status:</span>
                     <span class="text-2x text-slate-600 font-semibold">{{
                         translateStatus
-                    }}</span>
+                        }}</span>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 sm:w-auto w-full">
                     <complete-purchase-btn class="w-full sm:w-auto" :purchase="purchase"

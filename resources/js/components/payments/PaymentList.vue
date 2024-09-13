@@ -9,7 +9,8 @@
                 </tr>
             </thead>
             <tbody>
-                <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index" :key="payment.id">
+                <payment-list-item v-for="(payment, index) in payments" :payment="payment" :index="index"
+                    :key="payment.id">
                 </payment-list-item>
             </tbody>
             <infinite-loading @infinite="infiniteHandler" :identifier="infiniteId"></infinite-loading>
@@ -75,7 +76,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    this.getErrors(error)
+                    console.error(error)
                 });
         },
         changeParams() {

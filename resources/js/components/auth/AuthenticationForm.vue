@@ -7,6 +7,7 @@
                 </span>
             </template>
             <form @submit.prevent="submit" class="px-2">
+                <errors-component />
                 <div class="mb-1 px-2">
                     <input name="username" ref="username" class="
                             border-2
@@ -66,9 +67,6 @@
                         " :disabled="loading">
                         Enviar
                     </button>
-                    <div v-show="errors" class="flex items-center mt-2">
-                        <errors-component :errors-found="errors" />
-                    </div>
                     <div v-if="form.status == 'cancelled'" class="
                             bg-orange-100
                             border-l-4 border-orange-500
@@ -175,8 +173,7 @@ export default {
                     this.form.password = "";
                 }
             } catch (err) {
-                console.log(err);
-                this.getErrors(err)
+                EventBus.$emit('an-error-ocurred', err);
             } finally {
                 this.loading = false;
             }

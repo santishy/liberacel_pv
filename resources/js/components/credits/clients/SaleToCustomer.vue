@@ -12,9 +12,7 @@
                     Asociar Cliente
                 </button>
             </div>
-            <div class="flex items-center ">
-                <errors-component :errors-found="errors" />
-            </div>
+
         </form>
         <information-component :id="'client'">
             <template v-slot:title>Información del cliente</template>
@@ -24,11 +22,11 @@
 
                     <p class="uppercase border-yellow-400 border text-sm  text-slate-700 px-2 py-1 rounded-sm">
                         {{
-            client.name }}
+                            client.name }}
                     </p>
                     <p class="border-yellow-400 border text-sm text-slate-500  px-2 py-1 rounded-sm">{{
-            client.address
-        }}</p>
+                        client.address
+                    }}</p>
                     <p class=" border-yellow-400 border text-sm text-slate-700 px-2 py-1 rounded-sm">
                         {{ client.phone_number }}
                     </p>
@@ -75,7 +73,6 @@ export default {
                 .then(res => {
                     EventBus.$emit(`open-modal-client`, true);
                     if (res.data?.sale) {
-
                         this.client = res.data.sale.client;
                     }
                     else {
@@ -87,7 +84,14 @@ export default {
                     EventBus.$emit("sale-to-client", res.data);
                 })
                 .catch(err => {
-                    this.getErrors(err);
+                    this.$notify({
+                        group: "foo",
+                        title: "Cliente",
+                        type: "error",
+                        text: Object?.values(
+                            err?.response?.data?.errors
+                        )?.flat()[0]
+                    });
                 });
         },
 

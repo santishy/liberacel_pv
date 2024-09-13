@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="submit" class="w-full  md:mt-0">
+        <errors-component />
         <div class="
                 flex
                 gap-2
@@ -67,9 +68,7 @@
                     focus:outline-none
                 " type="number" placeholder="Valor de comisión en pesos" aria-label="Full name" />
         </div>
-        <div class="flex items-center">
-            <errors-component :errors-found="errors" />
-        </div>
+
 
         <div class="flex justify-center mt-0 mb-0">
             <button class="
@@ -112,7 +111,7 @@ export default {
                     EventBus.$emit("bonus-created", res.data)
                 })
                 .catch((err) => {
-                    this.getErrors(err);
+                    EventBus.$emit('an-error-ocurred', err);
                 });
         },
     },

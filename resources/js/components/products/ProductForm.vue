@@ -12,6 +12,7 @@
             <h1 class="flex items-center pb-2 mt-4 text-dark  justify-start text-xl font-bold">
                 {{ title }}
             </h1>
+            <errors-component />
             <form id="product-form" @submit.prevent="submit" @keyup.enter.prevent="" @keydown.enter.prevent=""
                 @keypress.enter.prevent="" v-can="definePermission"
                 class="w-full grid grid-cols-1  sm:grid-cols-2 gap-4">
@@ -100,9 +101,8 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <div class="flex items-center w-full">
-                        <errors-component :errors-found="errors" />
-                    </div>
+
+
                     <button
                         class="bg-blue-500 rounded shadow-sm transition-all duration-500 ease-in-out hover:bg-blue-700 text-gray-100 font-semibold hover:text-white py-2 px-8 border-b-2 border-blue-500 hover:border-transparent">
                         Guardar
@@ -193,7 +193,7 @@ export default {
                     this.errors = null;
                 })
                 .catch((err) => {
-                    this.getErrors(err);
+                    EventBus.$emit('an-error-ocurred', err);
                 });
         },
         onFileSelected(event) {

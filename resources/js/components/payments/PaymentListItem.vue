@@ -1,7 +1,8 @@
 <template>
     <tr>
         <td class="py-1 px-2 text-xs">{{ payment.created_at }}</td>
-        <td v-if="show" @dblclick="showInput" class="py-1 px-2 text-green-800 font-semibold">{{ payment.currency_amount }}
+        <td v-if="show" @dblclick="showInput" class="py-1 px-2 text-green-800 font-semibold">{{ payment.currency_amount
+            }}
         </td>
         <td v-else class="py-1 px-2">
             <input type="text" :ref="`amount_${index}`" @keydown.enter="updatePayment" v-model="amount"
@@ -62,9 +63,15 @@ export default {
                         "updated-payment", { data: res.data, index: this.index }
                     )
                 }
-            } catch (error) {
-                this.getErrors(error)
-                console.log(error)
+            } catch (err) {
+                this.$notify({
+                    group: "foo",
+                    title: "Cliente",
+                    type: "error",
+                    text: Object?.values(
+                        err?.response?.data?.errors
+                    )?.flat()[0]
+                });
             }
         },
         async updatePayment() {
@@ -79,9 +86,15 @@ export default {
                         "updated-payment", { data: res.data, index: this.index }
                     )
                 }
-            } catch (error) {
-                this.getErrors(error)
-                console.log(error)
+            } catch (err) {
+                this.$notify({
+                    group: "foo",
+                    title: "Cliente",
+                    type: "error",
+                    text: Object?.values(
+                        err?.response?.data?.errors
+                    )?.flat()[0]
+                });
             }
         }
 

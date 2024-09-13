@@ -1,6 +1,6 @@
 <template>
     <div v-if="show"
-        class="w-full px-4 z-10 text-xl py-3 mb-3 shadow-sm text-red-700  border rounded bg-red-100 border-red-500 transition-all duration-150"
+        class="w-full px-4 z-10 text-xl py-2 mb-3 shadow-sm text-red-700  border rounded bg-red-100 border-red-500 transition-all duration-150"
         role="alert">
         <p class="font-bold">Se detecto los siguientes errores:</p>
         <p v-for="error in errors" class="text-sm mt-2 ml-4" :key="error">
@@ -25,13 +25,13 @@ export default {
     },
     mounted() {
         console.log("mounted error component")
-        EventBus.$on(`an-error-ocurred-${this.id}`, (error) => {
-            console.log({ id: this.id })
-            this.getErrors(error);
-        })
+        //tratar de eliminar este evento sino se necesita
+        EventBus.$on(`an-error-ocurred-${this.id}`, this.getErrors)
+        EventBus.$on(`an-error-ocurred`, this.getErrors)
     },
     methods: {
         getErrors(err) {
+            console.log("entro aki");
             console.log({ response: err.response.data })
             if (err?.response?.status === 419) {
                 return window.location.href = '/';
