@@ -1,15 +1,16 @@
 <template>
     <layout-component>
         <subtotals></subtotals>
-        <div class="p-4 flex flex-wrap items-baseline md:w-9/12 mx-auto bg-white shadow-sm rounded">
+        <div class="p-4 flex flex-wrap items-baseline w-full sm:w-9/12 mx-auto bg-white shadow-sm rounded">
             <h3 class="w-full font-mono text-2xl">
                 Crear venta
             </h3>
             <!-- <sale-to-customer v-show="showSaleToCustomer" uri="/clients/" class="w-full"></sale-to-customer>-->
             <!-- <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" /> -->
-            <div v-if="currentFastSale?.id" class="flex py-2 items-center justify-between w-full flex-reverse gap-4">
+            <div v-if="currentFastSale?.id"
+                class="flex py-2 items-center justify-between w-full gap-4 flex-col sm:flex-row ">
+                <sale-to-customer :uri="`/client/${currentFastSale?.id}/fast-sales`" />
                 <credit-status :url="`/fast-sales/${currentFastSale?.id}`" />
-                <sale-to-customer :uri="` /client/${currentFastSale?.id}/fast-sales`" />
             </div>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
         </div>
@@ -27,7 +28,7 @@ import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import CreditStatus from "../credits/CreditStatus.vue";
 export default {
     components: {
-      //  NavComponent,
+        //  NavComponent,
         FastSaleForm,
         ConceptsList,
         Subtotals,

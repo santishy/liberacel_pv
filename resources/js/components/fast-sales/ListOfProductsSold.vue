@@ -21,7 +21,6 @@
             <infinite-loading v-if="!firstLoad.length" @infinite="infiniteHandler" :identifier="infiniteId"
                 ref="infiniteLoading"></infinite-loading>
         </table>
-
         <authentication-form model="FastSale" :uri="`/fast-sales/${selectedFastSaleId}/associated-users`"
             :id="nota"></authentication-form>
     </div>

@@ -2,26 +2,26 @@
     <form id="fastSaleForm" ref="quickSaleForm" class="grid w-full grid-cols-2 gap-4" @submit.prevent="submit">
         <errors-component class="col-span-2" />
         <!-- <credit-status :form="form" class="col-span-2"></credit-status> -->
-        <div>
+        <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Descripción</label>
             <input name="description" ref="description" v-model="form.description"
                 @keydown.down.exact.prevent="nextFocus" @keydown.ctrl.space.exact.prevent="openModal"
                 @click.prevent="focusedIndex = 0" class="form-text-input w-full"
                 placeholder="Descripción del producto o servicio" autocomplete="off" />
         </div>
-        <div>
+        <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Categoría</label>
             <search-select class="w-full" :collection="productBonuses"
                 input-class="form-text-input w-full"></search-select>
         </div>
-        <div>
+        <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Precio</label>
             <input type="text" ref="price" name="price" v-model="form.price" class="form-text-input w-full"
                 placeholder="Precio" @click.prevent="focusedIndex = 1" @keydown.enter="submit"
                 @keydown.down.exact.prevent="nextFocus" @keydown.up.exact.prevent="previousFocus"
                 @keydown.ctrl.space.exact.prevent="openModal" autocomplete="off" />
         </div>
-        <div>
+        <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Cantidad</label>
             <input type="text" name="qty" ref="qty" v-model="form.qty" class="form-text-input w-full"
                 placeholder="Cantidad de venta" @keydown.enter="submit" @click.prevent="focusedIndex = 2"

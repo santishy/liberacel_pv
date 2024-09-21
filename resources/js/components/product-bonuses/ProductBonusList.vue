@@ -1,73 +1,18 @@
 <template>
-    <div>
-        <table class="
-                min-w-full
-                border-collapse
-                block
-                md:table
-                shadow-sm
-                text-center
-                rounded-lg
-            ">
-            <thead class="block md:table-header-group">
-                <tr class="
-                        border-b border-gray-500
-                        rounded-t-sm
-                        md:border-none
-                        block
-                        md:table-row
-                        absolute
-                        -top-full
-                        md:top-auto
-                        -left-full
-                        md:left-auto md:relative
-                    ">
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
+    <div class="relative overflow-x-auto bg-white">
+        <table class="w-full text-sm text-left text-slate-500 ">
+            <thead class="text-xs text-slate-700 uppercase bg-gray-100">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
                         Categoría/Producto
                     </th>
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
+                    <th scope="col" class="px-6 py-3">
                         Puntos
                     </th>
-                    <th class="
-                            bg-blue-700
-                            p-2
-                            text-white
-                            font-semibold
-                            md:border md:border-grey-500
-                            text-left
-                            block
-                            md:table-cell
-                        ">
+                    <th scope="col" class="px-6 py-3">
                         Valor de comisión
                     </th>
-                    <th class="
-                    bg-blue-700
-                    p-2
-                    text-white
-                    font-semibold
-                    md:border md:border-grey-500
-                    text-left
-                    block
-                    md:table-cell
-                ">
+                    <th scope="col" class="px-6 py-3">
                         Desactivar
                     </th>
                 </tr>

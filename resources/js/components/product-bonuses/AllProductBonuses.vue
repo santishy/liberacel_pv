@@ -1,7 +1,7 @@
 <template>
     <layout-component>
-        <div class="w-full px-4">
-            <div class="w-full flex justify-end">
+        <div class="w-full sm:px-4">
+            <div class="w-full flex justify-end mb-4">
                 <button @click="openModal" class="
                         p-2
                         rounded

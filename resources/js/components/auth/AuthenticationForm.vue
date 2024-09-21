@@ -49,7 +49,6 @@
                 </div>
                 <div class="mb-0 px-2">
                     <button type="submit" ref="submit" class="
-                            bg-transparent
                             transition-all
                             duration-500
                             ease-in-out
@@ -61,7 +60,7 @@
                             hover:text-white
                             py-2
                             px-4
-                            bg-blue-500
+                            bg-sky-500
                             hover:border-transparent
                             w-full
                         " :disabled="loading">
@@ -82,11 +81,10 @@
                 </div>
             </form>
 
-            <template slot="button">
+            <template v-if="cancellationCheckbox" slot="button">
                 <label class="
                         inline-flex
                         items-start
-                        mt-3
                         border-2
                         p-2
                         rounded-sm
@@ -117,6 +115,10 @@ export default {
         uri: {
             type: String,
             required: true
+        },
+        cancellationCheckbox: {
+            type: Boolean,
+            default: true
         }
     },
     components: {
@@ -132,8 +134,8 @@ export default {
             loading: false,
         };
     },
-    created() { },
     mounted() {
+        console.log(this.cancellationCheckbox)
         this.local_id = this.id;
         EventBus.$on("id-for-authentication-form", (id) => {
             this.local_id = id;

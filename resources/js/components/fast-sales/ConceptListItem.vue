@@ -1,7 +1,7 @@
 <template>
-    <tr v-if="!show" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr v-if="!show" class="bg-white border-b ">
         <th @dblclick.prevent="dbClick('description', $event)" scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            class="px-6 py-4 font-medium text-slate-700 whitespace-nowrap">
             {{ product.description }}
         </th>
         <td @dblclick.prevent="dbClick('price')" class="px-6 py-4">
@@ -14,7 +14,7 @@
             <delete-concept :index="index" :id="id"></delete-concept>
         </td>
     </tr>
-    <tr v-else class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr v-else class="bg-white border-b ">
         <td colspan="4" class="border-grey-light border hover:bg-gray-100 p-3">
             <form class="grid grid-cols-3 gap-2" @submit.prevent="submit">
                 <input type="text" name="description" v-model="form.description" :class="[inputStyle]" />

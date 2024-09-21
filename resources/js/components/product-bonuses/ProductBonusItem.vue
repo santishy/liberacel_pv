@@ -1,56 +1,27 @@
 <template>
-    <tr v-if="!show" class="
-            bg-white
-            border-b border-gray-400
-            md:border-none
-            block
-            md:table-row
-            cursor-pointer
-        ">
-        <td @dblclick.prevent="dblclick" class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-                cursor-pointer
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Producto/Categoría</span>{{ productBonus.name }}
+    <tr v-if="!show" class=" px-6 py-4 ">
+        <td class="px-6 py-4">
+            {{ productBonus.name }}
         </td>
-        <td @dblclick.prevent="dblclick" class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Puntos</span>{{ productBonus.points }}
+        <td class="px-6 py-4">
+            {{ productBonus.points }}
         </td>
-        <td @dblclick.prevent="dblclick" class="
-                p-2
-                md:border md:border-grey-500
-                text-left
-                block
-                md:table-cell
-            ">
-            <span class="inline-block w-1/3 md:hidden font-bold">Valor de comisión</span>{{
+        <td class="px-6 py-4">
+            {{
                 productBonus.commission_amount
             }}
         </td>
-        <td class="
-            p-2
-            md:border md:border-grey-500
-            text-left
-            block
-            md:table-cell
-            cursor-pointer
-        ">
-            <remove-product-bonus :product-bonus="productBonus" :index="index">
-            </remove-product-bonus>
+        <td class="px-6 py-4">
+            <div class="flex items-center justify-center gap-2">
+                <remove-product-bonus :product-bonus="productBonus" :index="index">
+                </remove-product-bonus>
+                <edit-icon @click.prevent="dblclick"
+                    class="cursor-pointer active:ring-2 active:ring-offset-2 active:ring-sky-500 rounded " />
+            </div>
         </td>
     </tr>
     <tr v-else class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-        <td colspan="2" class="border-grey-light border hover:bg-gray-100 p-3">
+        <td colspan="3" class="border-grey-light border hover:bg-slate-100 p-3">
             <form class="grid grid-cols-3 gap-4" @submit.prevent="submit">
                 <input type="text" name="name" v-model="form.name" :class="[inputStyle]" />
                 <input type="text" name="points" v-model="form.points" :class="[inputStyle]" />
@@ -64,9 +35,11 @@
 <script>
 import axios from "axios";
 import RemoveProductBonus from "./RemoveProductBonus.vue";
+import EditIcon from "../icons/EditIcon.vue"
 export default {
     components: {
-        RemoveProductBonus
+        RemoveProductBonus,
+        EditIcon
     },
     props: {
         productBonus: Object,
@@ -85,7 +58,7 @@ export default {
     },
     methods: {
         dblclick() {
-            this.show = true;
+            this.show = !this.show;
         },
         async submit() {
             try {

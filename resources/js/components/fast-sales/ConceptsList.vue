@@ -1,21 +1,22 @@
 <template>
     <div v-if="products.length" class="flex flex-wrap p-2 mx-auto bg-white rounded shadow-sm md:w-9/12">
-        <div class="flex flex-wrap items-center justify-between w-full px-4 py-2">
+        <div class="flex sm:flex-row flex-col flex-wrap items-center justify-between w-full px-4 py-2">
             <div>
-                <span class="font-mono text-2xl text-gray-900">Nota #{{ currentFastSale.id }}</span>
+                <span class="font-mono text-2xl text-gray-800">Nota #{{ currentFastSale.id }}</span>
             </div>
             <div>
-                <span class="text-2xl font-semibold text-blue-700">Total:</span><span
-                    class="text-2xl font-semibold text-blue-700">
+                <span class="text-2xl font-semibold text-sky-700">Total:</span><span
+                    class="text-2xl font-semibold text-sky-700">
                     {{ currentFastSale.total }}</span>
             </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-between w-full px-2 py-3">
-            <button @click.prevent="openModal" :class="[statusStyle]">
+        <div
+            class="flex flex-col sm:flex-row gap-2 sm:gap-0 flex-wrap items-center justify-between w-full px-2 mb-4 sm:mb-0 sm:py-3">
+            <button @click.prevent="openModal" class="w-full sm:w-auto" :class="[statusStyle]">
                 <span class="mr-2">{{
-        translate[currentFastSale.status]
-    }}</span>
+                    translate[currentFastSale.status]
+                }}</span>
                 <span>
                     <exchange></exchange>
                 </span>
@@ -27,9 +28,9 @@
             getTotalPoints
         }}</span>
             </p> -->
-            <span class="text-xs text-gray-700">{{
-            currentFastSale.created_at
-        }}</span>
+            <span class="text-xl sm:text-xs text-slate-700">{{
+                currentFastSale.created_at
+            }}</span>
         </div>
         <!-- esto es del dinero electronico -->
         <!-- <div class="w-full flex justify-end  items-baseline gap-4 p-2">
@@ -50,8 +51,8 @@
 </div> -->
 
         <div class="relative overflow-x-auto bg-white w-full">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Descripción
@@ -63,11 +64,12 @@
                 </thead>
                 <tbody>
                     <concept-list-item v-for="(product, index) in products" :key="product.id" :product="product"
-                        :index="index" :id="localSale.id"></concept-list-item>
+                        :index="index" :id="localSale.id" />
                 </tbody>
             </table>
         </div>
-        <authentication-form model="FastSale" :uri="`/user-relationship`" :id="currentFastSale.id" />
+        <authentication-form model="FastSale" :cancellation-checkbox="false" :uri="`/user-relationship`"
+            :id="currentFastSale.id" />
     </div>
 </template>
 
@@ -136,7 +138,7 @@ export default {
         ...mapState(["currentFastSale"]),
         statusStyle() {
             if (this.currentFastSale.status == "pending") {
-                return "text-xs px-2 rounded bg-yellow-700 ring-offset-2 ring-2 font-sm text-white flex flex-wrap justify-center items-center";
+                return "text-xl sm:text-xs px-2 rounded bg-yellow-500 hover:ring-offset-2 hover:ring-2 font-sm text-slate-700 font-semibold flex flex-wrap justify-center items-center";
             }
 
             return "text-xs text-green-700";
