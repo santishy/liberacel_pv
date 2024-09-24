@@ -1,8 +1,8 @@
 <template>
     <div class="relative overflow-x-auto bg-white">
         <table class="w-full text-sm text-left text-slate-500 ">
-            <thead class="text-xs text-slate-700 uppercase bg-gray-100">
-                <tr>
+            <thead class=" text-slate-700 uppercase bg-slate-100">
+                <tr class="text-xs">
                     <th scope="col" class="px-6 py-3">Imagen</th>
                     <th scope="col" class="px-6 py-3">SKU</th>
                     <th scope="col" class="px-6 py-3">Categoría</th>

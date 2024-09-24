@@ -14590,9 +14590,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "table-container-responsive"
+    staticClass: "relative overflow-x-auto bg-white"
   }, [_c("table", {
-    staticClass: "report-table"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.expenses, function (expense, index) {
     return _c("expense-list-item", {
       key: expense.id,
@@ -14611,10 +14611,8 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "report-table-thead"
-  }, [_c("tr", {
-    staticClass: "bg-slate-100"
-  }, [_c("th", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", [_c("th", {
     staticClass: "px-2 py-2"
   }, [_vm._v("FECHA")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
@@ -18977,8 +18975,10 @@ var staticRenderFns = [function () {
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c("thead", {
-    staticClass: "text-xs text-slate-700 uppercase bg-gray-100"
-  }, [_c("tr", [_c("th", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", {
+    staticClass: "text-xs"
+  }, [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"
