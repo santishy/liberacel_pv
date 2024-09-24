@@ -8,20 +8,10 @@
                 py-1
             ">
             <label for="" class="
-                    text-slate-700
-                    text-start
-                    py-1
-                    font-mono
+                    form-label
                 ">Nombre</label>
             <input v-model="form.name" name="name" class="
-                    appearance-none
-                    bg-slate-200
-                    rounded-sm
-                    w-full
-                    text-slate-600
-                    py-1
-                    leading-tight
-                    focus:outline-none
+                    form-text-input w-full
                 " type="text" placeholder="CATEGORÍA" aria-label="Full name" />
         </div>
         <div class="
@@ -30,20 +20,10 @@
                 py-2
             ">
             <label for="" class="
-                    text-slate-700
-                    text-start
-                    py-1
-                    font-mono
+                    form-label
                 ">Puntos</label>
             <input v-model="form.points" name="points" class="
-                    appearance-none
-                    bg-slate-200
-                    rounded-sm
-                    w-full
-                    text-slate-600
-                    py-1
-                    leading-tight
-                    focus:outline-none
+                    form-text-input w-full
                 " type="number" placeholder="NOM PUNTOS" aria-label="Full name" />
         </div>
         <div class="
@@ -52,40 +32,14 @@
                 py-2
             ">
             <label for="" class="
-                    text-slate-700
-                    text-start
-                    py-1
-                    font-mono
+                    form-label
                 ">Comisión</label>
             <input v-model="form.commission_amount" name="commission_amount" class="
-                    appearance-none
-                    bg-slate-200
-                    rounded-sm
-                    w-full
-                    text-slate-600
-                    py-1
-                    leading-tight
-                    focus:outline-none
+                form-text-input w-full
                 " type="number" placeholder="Valor de comisión en pesos" aria-label="Full name" />
         </div>
-
-
-        <div class="flex justify-center mt-0 mb-0">
-            <button class="
-                    bg-transparent
-                    transition-all
-                    duration-500
-                    ease-in-out
-                    hover:bg-blue-500
-                    text-blue-700
-                    font-semibold
-                    hover:text-white
-                    py-2
-                    px-4
-                    border-b-2 border-blue-500
-                    hover:border-transparent
-                    w-full
-                ">
+        <div class="flex justify-center mt-2 mb-0">
+            <button class="primary-button w-full">
                 Guardar
             </button>
         </div>

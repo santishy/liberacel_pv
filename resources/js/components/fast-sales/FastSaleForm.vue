@@ -28,10 +28,6 @@
                 @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
                 autocomplete="off" />
         </div>
-
-
-
-
     </form>
 </template>
 

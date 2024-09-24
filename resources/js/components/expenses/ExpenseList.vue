@@ -1,16 +1,17 @@
 <template>
-    <div class="shadow-sm bg-white">
-        <table class="table-auto w-full">
-            <thead class="bg-blue-700">
-                <tr class="text-white font-extralight">
-                    <th class="px-1 py-2">FECHA</th>
-                    <th class="px-1 py-2">CONCEPTO</th>
-                    <th class="px-1 py-2">IMPORTE</th>
-                    <th class="px-1 py-2">ACCIONES</th>
+    <div class="table-container-responsive">
+        <table class="report-table">
+            <thead class="report-table-thead">
+                <tr class=" bg-slate-100">
+                    <th class="px-2 py-2">FECHA</th>
+                    <th class="px-2 py-2">CONCEPTO</th>
+                    <th class="px-2 py-2">IMPORTE</th>
+                    <th class="px-2 py-2">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <expense-list-item v-for="(expense, index) in expenses" :key="expense.id" :expense="expense" :index="index">
+                <expense-list-item v-for="(expense, index) in expenses" :key="expense.id" :expense="expense"
+                    :index="index">
                 </expense-list-item>
             </tbody>
         </table>

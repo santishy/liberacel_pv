@@ -1,9 +1,7 @@
 <template>
     <layout-component>
         <div class="w-full  flex flex-wrap flex-col items-center  justify-center">
-            <h3 class="bg-white shadow-sm rounded-sm p-2 mb-2 w-10/12 text-center text-xl font-medium">{{ getTitle }}
-            </h3>
-            <expense-form></expense-form>
+            <expense-form :title="getTitle" />
         </div>
     </layout-component>
 </template>
@@ -11,10 +9,10 @@
 <script>
 //import NavComponent from "../NavComponent.vue";
 import ExpenseForm from "./ExpenseForm.vue";
-import {  mapMutations } from "vuex"
+import { mapMutations } from "vuex"
 export default {
     components: {
-  //      NavComponent,
+        //      NavComponent,
         ExpenseForm
     },
     props: {
@@ -26,16 +24,18 @@ export default {
             required: true
         }
     },
-    created(){
+    created() {
         this.SET_CURRENT_EXPENSE(this.expense);
         this.SET_EXPENSE_METHOD_NAME(this.method);
     },
-    methods:{
-        ...mapMutations(['SET_CURRENT_EXPENSE','SET_EXPENSE_METHOD_NAME'])
+    methods: {
+        ...mapMutations(['SET_CURRENT_EXPENSE', 'SET_EXPENSE_METHOD_NAME'])
     },
     computed: {
         getTitle() {
-            return this.method ? 'Editar Egreso' : 'Crear Egreso';
+            if (this.method === 'POST')
+                return 'Crear Egreso';
+            return 'Editar Egreso';
         },
 
     }

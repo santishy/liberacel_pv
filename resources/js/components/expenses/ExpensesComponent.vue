@@ -1,9 +1,8 @@
 <template>
     <layout-component>
-        <div class="w-10/12 mx-auto ">
-            <h3 class="w-full rounded-sm p-4 bg-white shadow-sm text-center font-semibold text-xl">Egresos</h3>
-            <expense-list uri="/expenses" name="Expenses"></expense-list>
-        </div>
+
+        <expense-list uri="/expenses" name="Expenses"></expense-list>
+
     </layout-component>
 </template>
 
@@ -13,7 +12,7 @@ import ExpenseList from "./ExpenseList.vue";
 export default
     {
         components: {
-  //          NavComponent,
+            //          NavComponent,
             ExpenseList
         }
     }

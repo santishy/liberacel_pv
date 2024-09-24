@@ -2,7 +2,7 @@
     <div class="relative overflow-x-auto bg-white">
         <table class="w-full text-sm text-left text-slate-500 ">
             <thead class="text-xs text-slate-700 uppercase bg-gray-100">
-                <tr class="bg-danger">
+                <tr>
                     <th scope="col" class="px-6 py-3">Imagen</th>
                     <th scope="col" class="px-6 py-3">SKU</th>
                     <th scope="col" class="px-6 py-3">Categoría</th>

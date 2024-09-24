@@ -5,7 +5,7 @@
         <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
             v-show="modal">
             <div
-                class="flex items-center sm:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                class="flex items-center sm:items-end justify-center min-h-screen pt-4 px-6 pb-20 text-center sm:block sm:p-0">
                 <!--
                 Background overlay, show/hide based on modal state.
 
@@ -39,9 +39,9 @@
                     <!-- Se usa v-show aki y arriba para que funcione la transicion -->
                     <div v-show="modal"
                         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="bg-white px-8 pt-2 pb-4 sm:p-2">
                             <div class="sm:flex sm:items-start">
-                                <div class="mt-3 text-center sm:mt-0 w-full">
+                                <div class="px-6 pt-4 text-center sm:mt-0 w-full">
                                     <h3 class="w-full text-center text-lg leading-6 font-medium text-gray-900"
                                         id="modal-title">
                                         <slot name="title"></slot>
@@ -52,10 +52,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <div class="bg-slate-50 px-4 pb-3 pt-2 sm:px-6 sm:flex sm:flex-row-reverse">
                             <slot name="button"></slot>
                             <button type="button" @click="modal = false"
-                                class="mt-3 w-full inline-flex justify-center items-center rounded-md  border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400">
+                                class=" w-full inline-flex justify-center items-center rounded-md  border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400">
                                 Cerrar
                             </button>
                         </div>

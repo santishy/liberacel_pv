@@ -4592,7 +4592,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)(['SET_CURRENT_EXPENSE', 'SET_EXPENSE_METHOD_NAME'])),
   computed: {
     getTitle: function getTitle() {
-      return this.method ? 'Editar Egreso' : 'Crear Egreso';
+      if (this.method === 'POST') return 'Crear Egreso';
+      return 'Editar Egreso';
     }
   }
 });
@@ -4660,6 +4661,7 @@ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" 
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['title'],
   data: function data() {
     return {
       form: {},
@@ -14438,9 +14440,11 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
     staticClass: "w-full flex flex-wrap flex-col items-center justify-center"
-  }, [_c("h3", {
-    staticClass: "bg-white shadow-sm rounded-sm p-2 mb-2 w-10/12 text-center text-xl font-medium"
-  }, [_vm._v(_vm._s(_vm.getTitle) + "\n        ")]), _vm._v(" "), _c("expense-form")], 1)]);
+  }, [_c("expense-form", {
+    attrs: {
+      title: _vm.getTitle
+    }
+  })], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -14496,27 +14500,28 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("form", {
-    staticClass: "bg-white shadow-sm p-2 rounded-sm w-full md:w-10/12 space-y-2",
+    staticClass: "bg-white shadow-sm p-4 rounded-sm w-full md:max-w-2xl space-y-4",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
         return _vm.submit.apply(null, arguments);
       }
     }
-  }, [_c("errors-component"), _vm._v(" "), _c("div", {
-    staticClass: "w-full flex"
-  }, [_c("label", {
-    staticClass: "w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6"
-  }, [_vm._v("Concepto")]), _vm._v(" "), _c("input", {
+  }, [_c("h1", {
+    staticClass: "py-1 font-semibold text-2xl"
+  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("div", {}, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("Concepto")]), _vm._v(" "), _c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.concept,
       expression: "form.concept"
     }],
-    staticClass: "placeholder:italic font-font-light placeholder-gray-500 placeholder-shown:border-gray-500 appearance-none bg-gray-300 rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+    staticClass: "form-text-input w-full",
     attrs: {
       type: "text",
+      rows: "3",
       name: "concept",
       placeholder: "Concepto ejemplo: Trapeador para realizar aseo",
       autocomplete: "off"
@@ -14530,10 +14535,8 @@ var render = function render() {
         _vm.$set(_vm.form, "concept", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "w-full flex"
-  }, [_c("label", {
-    staticClass: "w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6"
+  })]), _vm._v(" "), _c("div", {}, [_c("label", {
+    staticClass: "form-label"
   }, [_vm._v("Monto")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
@@ -14541,7 +14544,7 @@ var render = function render() {
       value: _vm.form.amount,
       expression: "form.amount"
     }],
-    staticClass: "placeholder:italic font-font-light placeholder-gray-500 placeholder-shown:border-gray-500 appearance-none bg-gray-300 rounded w-8/12 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+    staticClass: "form-text-input w-full",
     attrs: {
       type: "text",
       name: "amount",
@@ -14562,10 +14565,8 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "w-full flex justify-center"
-  }, [_c("button", {
-    staticClass: "w-6/12 p-2 text-white bg-blue-400 font-bold font-mono rounded-sm shadow-sm hover:bg-blue-600 hover:text-gray-900"
+  return _c("div", {}, [_c("button", {
+    staticClass: "primary-button sm:w-auto w-full"
   }, [_vm._v("Guardar")])]);
 }];
 render._withStripped = true;
@@ -14589,9 +14590,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "shadow-sm bg-white"
+    staticClass: "table-container-responsive"
   }, [_c("table", {
-    staticClass: "table-auto w-full"
+    staticClass: "report-table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.expenses, function (expense, index) {
     return _c("expense-list-item", {
       key: expense.id,
@@ -14610,17 +14611,17 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "bg-blue-700"
+    staticClass: "report-table-thead"
   }, [_c("tr", {
-    staticClass: "text-white font-extralight"
+    staticClass: "bg-slate-100"
   }, [_c("th", {
-    staticClass: "px-1 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("FECHA")]), _vm._v(" "), _c("th", {
-    staticClass: "px-1 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("CONCEPTO")]), _vm._v(" "), _c("th", {
-    staticClass: "px-1 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("IMPORTE")]), _vm._v(" "), _c("th", {
-    staticClass: "px-1 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("ACCIONES")])])]);
 }];
 render._withStripped = true;
@@ -14643,14 +14644,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("tr", [_c("td", {
-    staticClass: "text-center"
+  return _c("tr", {
+    staticClass: "py-2 px-1 text-base"
+  }, [_c("td", {
+    staticClass: "py-1 px-2 text-xs"
   }, [_vm._v("\n        " + _vm._s(_vm.expense.created_at) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "text-center"
+    staticClass: "py-1 px-2"
   }, [_vm._v("\n        " + _vm._s(_vm.expense.concept) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "text-center"
+    staticClass: "py-1 px-2"
   }, [_vm._v("\n        " + _vm._s(_vm.expense.amount) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "text-center"
+    staticClass: "py-1 px-2"
   }, [_c("div", {
     staticClass: "flex flex-wrap space-x-2 items-center w-full justify-center"
   }, [_c("a", {
@@ -14685,16 +14688,12 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("layout-component", [_c("div", {
-    staticClass: "w-10/12 mx-auto"
-  }, [_c("h3", {
-    staticClass: "w-full rounded-sm p-4 bg-white shadow-sm text-center font-semibold text-xl"
-  }, [_vm._v("Egresos")]), _vm._v(" "), _c("expense-list", {
+  return _c("layout-component", [_c("expense-list", {
     attrs: {
       uri: "/expenses",
       name: "Expenses"
     }
-  })], 1)]);
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -16993,7 +16992,7 @@ var render = function render() {
       "aria-modal": "true"
     }
   }, [_c("div", {
-    staticClass: "flex items-center sm:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    staticClass: "flex items-center sm:items-end justify-center min-h-screen pt-4 px-6 pb-20 text-center sm:block sm:p-0"
   }, [_c("div", {
     staticClass: "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
     attrs: {
@@ -17022,11 +17021,11 @@ var render = function render() {
     }],
     staticClass: "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
   }, [_c("div", {
-    staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+    staticClass: "bg-white px-8 pt-2 pb-4 sm:p-2"
   }, [_c("div", {
     staticClass: "sm:flex sm:items-start"
   }, [_c("div", {
-    staticClass: "mt-3 text-center sm:mt-0 w-full"
+    staticClass: "px-6 pt-4 text-center sm:mt-0 w-full"
   }, [_c("h3", {
     staticClass: "w-full text-center text-lg leading-6 font-medium text-gray-900",
     attrs: {
@@ -17035,9 +17034,9 @@ var render = function render() {
   }, [_vm._t("title")], 2), _vm._v(" "), _c("div", {
     staticClass: "mt-2"
   }, [_vm._t("default")], 2)])])]), _vm._v(" "), _c("div", {
-    staticClass: "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+    staticClass: "bg-slate-50 px-4 pb-3 pt-2 sm:px-6 sm:flex sm:flex-row-reverse"
   }, [_vm._t("button"), _vm._v(" "), _c("button", {
-    staticClass: "mt-3 w-full inline-flex justify-center items-center rounded-md border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400",
+    staticClass: "w-full inline-flex justify-center items-center rounded-md border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400",
     attrs: {
       type: "button"
     },
@@ -17925,7 +17924,7 @@ var render = function render() {
   }, [_c("errors-component"), _vm._v(" "), _c("div", {
     staticClass: "flex gap-2 flex-col py-1"
   }, [_c("label", {
-    staticClass: "text-slate-700 text-start py-1 font-mono",
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
@@ -17936,7 +17935,7 @@ var render = function render() {
       value: _vm.form.name,
       expression: "form.name"
     }],
-    staticClass: "appearance-none bg-slate-200 rounded-sm w-full text-slate-600 py-1 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "name",
       type: "text",
@@ -17955,7 +17954,7 @@ var render = function render() {
   })]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-col py-2"
   }, [_c("label", {
-    staticClass: "text-slate-700 text-start py-1 font-mono",
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
@@ -17966,7 +17965,7 @@ var render = function render() {
       value: _vm.form.points,
       expression: "form.points"
     }],
-    staticClass: "appearance-none bg-slate-200 rounded-sm w-full text-slate-600 py-1 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "points",
       type: "number",
@@ -17985,7 +17984,7 @@ var render = function render() {
   })]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-col py-2"
   }, [_c("label", {
-    staticClass: "text-slate-700 text-start py-1 font-mono",
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
@@ -17996,7 +17995,7 @@ var render = function render() {
       value: _vm.form.commission_amount,
       expression: "form.commission_amount"
     }],
-    staticClass: "appearance-none bg-slate-200 rounded-sm w-full text-slate-600 py-1 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "commission_amount",
       type: "number",
@@ -18018,9 +18017,9 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "flex justify-center mt-0 mb-0"
+    staticClass: "flex justify-center mt-2 mb-0"
   }, [_c("button", {
-    staticClass: "bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full"
+    staticClass: "primary-button w-full"
   }, [_vm._v("\n            Guardar\n        ")])]);
 }];
 render._withStripped = true;
@@ -18979,9 +18978,7 @@ var staticRenderFns = [function () {
     _setup = _vm._self._setupProxy;
   return _c("thead", {
     staticClass: "text-xs text-slate-700 uppercase bg-gray-100"
-  }, [_c("tr", {
-    staticClass: "bg-danger"
-  }, [_c("th", {
+  }, [_c("tr", [_c("th", {
     staticClass: "px-6 py-3",
     attrs: {
       scope: "col"

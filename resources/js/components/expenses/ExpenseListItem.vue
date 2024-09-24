@@ -1,15 +1,15 @@
 <template>
-    <tr>
-        <td class="text-center">
+    <tr class="py-2 px-1 text-base">
+        <td class="py-1 px-2 text-xs">
             {{ expense.created_at }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2">
             {{ expense.concept }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2">
             {{ expense.amount }}
         </td>
-        <td class="text-center">
+        <td class="py-1 px-2">
             <div class="flex flex-wrap space-x-2 items-center w-full justify-center">
                 <a :href="`/expenses/${expense.id}/edit`">
                     <edit-icon></edit-icon>
