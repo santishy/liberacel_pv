@@ -13064,7 +13064,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "w-9/12 mx-auto px-4 flex justify-center bg-transparent"
+    staticClass: "w-full sm:max-w-2xl mx-auto flex justify-center bg-transparent"
   }, [_c("form", {
     directives: [{
       name: "can",
@@ -13072,7 +13072,7 @@ var render = function render() {
       value: _vm.definePermission,
       expression: "definePermission"
     }],
-    staticClass: "w-full shadow-lg rounded-lg bg-white px-6 py-8",
+    staticClass: "w-full shadow rounded bg-white px-6 py-4 space-y-4",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -13080,17 +13080,20 @@ var render = function render() {
       }
     }
   }, [_c("div", {
-    staticClass: "flex items-center py-2 text-dark text-center justify-center text-xl font-bold"
-  }, [_vm._v("\n                " + _vm._s(_vm.getTitle) + "\n            ")]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative"
-  }, [_c("input", {
+    staticClass: "flex items-center py-2 text-dark justify-start text-xl font-bold"
+  }, [_vm._v("\n                " + _vm._s(_vm.getTitle) + "\n            ")]), _vm._v(" "), _c("errors-component"), _vm._v(" "), _c("div", [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Nombre")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.name,
       expression: "form.name"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "name",
       type: "text",
@@ -13106,21 +13109,19 @@ var render = function render() {
         _vm.$set(_vm.form, "name", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
+  })]), _vm._v(" "), _c("div", [_c("label", {
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Nombre")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative"
-  }, [_c("input", {
+  }, [_vm._v("Dirección")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.address,
       expression: "form.address"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "address",
       type: "text",
@@ -13136,21 +13137,19 @@ var render = function render() {
         _vm.$set(_vm.form, "address", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
+  })]), _vm._v(" "), _c("div", [_c("label", {
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Dirección")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative"
-  }, [_c("input", {
+  }, [_vm._v("Telefono")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.phone_number,
       expression: "form.phone_number"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "phone_number",
       type: "text",
@@ -13166,21 +13165,19 @@ var render = function render() {
         _vm.$set(_vm.form, "phone_number", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
+  })]), _vm._v(" "), _c("div", [_c("label", {
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Telefono")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative"
-  }, [_c("input", {
+  }, [_vm._v("Email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.email,
       expression: "form.email"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "email",
       type: "email",
@@ -13196,21 +13193,21 @@ var render = function render() {
         _vm.$set(_vm.form, "email", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "max-w-full"
+  }, [_c("label", {
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Email")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative"
-  }, [_c("select", {
+  }, [_vm._v("Precio\n                    asignado")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.assigned_price,
       expression: "form.assigned_price"
     }],
-    staticClass: "block appearance-none w-full bg-white hover:border-gray-500 px-4 pl-60 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "assigned_price",
       plahceholder: "Asigna un precio al cliente"
@@ -13227,7 +13224,7 @@ var render = function render() {
       }
     }
   }, [_c("option", {
-    staticClass: "text-gray-600",
+    staticClass: "text-slate-500",
     attrs: {
       disabled: "",
       value: "",
@@ -13241,22 +13238,21 @@ var render = function render() {
     attrs: {
       value: "wholesale_price"
     }
-  }, [_vm._v("Precio al por mayor")])]), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
+  }, [_vm._v("Precio al por mayor")])])]), _vm._v(" "), _c("div", {
+    staticClass: "w-full overflow-x-hidden"
+  }, [_c("label", {
+    staticClass: "form-label",
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Precio\n                    asignado")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center border-t border-gray-500 py-2 relative",
-    "class": ["flex", "items-center", "border-b", this.errors ? "border-transparent" : "border-gray-500", "py-2"]
-  }, [_c("input", {
+  }, [_vm._v("Empresa")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.form.company,
       expression: "form.company"
     }],
-    staticClass: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none",
+    staticClass: "form-text-input w-full",
     attrs: {
       name: "distributor_price",
       type: "text",
@@ -13272,15 +13268,10 @@ var render = function render() {
         _vm.$set(_vm.form, "company", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "absolute pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono",
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Empresa")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
     staticClass: "flex justify-center mt-0 mb-0"
   }, [_c("button", {
-    staticClass: "bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full"
+    staticClass: "primary-button w-full"
   }, [_vm._v("\n                    Guardar\n                ")])])], 1)])]);
 };
 var staticRenderFns = [];
@@ -13305,31 +13296,23 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "w-full flex justify-center"
-  }, [_c("div", {
-    staticClass: "bg-white shadow rounded max-w-full sm:overflow-x-hidden overflow-x-auto"
-  }, [_vm.clients.length ? _c("table", {
-    directives: [{
-      name: "can",
-      rawName: "v-can",
-      value: "view clients",
-      expression: "'view clients'"
-    }],
-    staticClass: "table-auto"
-  }, [_c("thead", [_c("tr", {
-    staticClass: "bg-danger"
-  }, [_c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "relative overflow-x-auto bg-white scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-700 scrollbar-thin"
+  }, [_c("table", {
+    staticClass: "w-full text-sm text-left text-slate-500"
+  }, [_c("thead", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", [_c("th", {
+    staticClass: "px-2 py-2"
   }, [_vm._v("Nombre")]), _vm._v(" "), _c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("Dirección")]), _vm._v(" "), _c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("Número tel.")]), _vm._v(" "), _c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("Email")]), _vm._v(" "), _c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("Empresa")]), _vm._v(" "), _c("th", {
-    staticClass: "px-4 py-2"
+    staticClass: "px-2 py-2"
   }, [_vm._v("Acciones")])])]), _vm._v(" "), _c("tbody", _vm._l(_vm.clients, function (client, index) {
     return _c("client-list-item", {
       key: client.id,
@@ -13338,7 +13321,7 @@ var render = function render() {
         index: index
       }
     });
-  }), 1)]) : _vm._e()])])]);
+  }), 1)])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -13362,17 +13345,17 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("tr", [_c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1"
   }, [_vm._v(_vm._s(_vm.client.name))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1"
   }, [_vm._v(_vm._s(_vm.client.address))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1"
   }, [_vm._v(_vm._s(_vm.client.phone_number))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1"
   }, [_vm._v(_vm._s(_vm.client.email))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1"
   }, [_vm._v(_vm._s(_vm.client.company))]), _vm._v(" "), _c("td", {
-    staticClass: "border px-4 py-2"
+    staticClass: "py-2 px-1 flex items-center justify-start gap-2"
   }, [_c("a", {
     directives: [{
       name: "can",
@@ -13380,7 +13363,7 @@ var render = function render() {
       value: "edit client",
       expression: "'edit client'"
     }],
-    staticClass: "bg-blue-500 inline-block cursor-pointer hover:bg-blue-400 text-white font-bold py-2 px-4 hover:border-blue-500 rounded",
+    staticClass: "bg-sky-500 inline-block cursor-pointer hover:bg-sky-700 text-white font-bold p-1 focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 rounded",
     attrs: {
       href: " clients/".concat(_vm.client.phone_number, "/edit")
     }
@@ -13391,7 +13374,7 @@ var render = function render() {
       value: "delete client",
       expression: "'delete client'"
     }],
-    staticClass: "bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 hover:border-red-500 rounded",
+    staticClass: "bg-red-500 hover:bg-red-700 text-white font-bold p-1 hover:border-red-500 rounded focus:ring-2 focus:ring-slate-300 focus:ring-offset-2",
     on: {
       click: _vm.deleteClient
     }
@@ -16027,14 +16010,12 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("svg", {
-    staticClass: "inline-block",
+    staticClass: "h-4 w-4",
     attrs: {
       "aria-hidden": "true",
       focusable: "false",
       "data-prefix": "far",
       "data-icon": "trash-alt",
-      width: "1em",
-      height: "1em",
       role: "img",
       xmlns: "http://www.w3.org/2000/svg",
       viewBox: "0 0 448 512"

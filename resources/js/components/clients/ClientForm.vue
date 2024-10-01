@@ -1,71 +1,52 @@
 <template>
     <layout-component>
-        <div class="w-9/12 mx-auto px-4  flex justify-center bg-transparent">
+        <div class="w-full sm:max-w-2xl mx-auto flex justify-center bg-transparent">
             <form @submit.prevent="submit" v-can="definePermission"
-                class="w-full shadow-lg rounded-lg bg-white px-6 py-8">
-                <div class="flex items-center py-2 text-dark text-center justify-center text-xl font-bold">
+                class="w-full shadow rounded bg-white px-6 py-4 space-y-4">
+                <div class="flex items-center py-2 text-dark justify-start text-xl font-bold">
                     {{ getTitle }}
                 </div>
                 <errors-component />
-                <div class="flex items-center  border-t border-gray-500 py-2 relative">
-                    <input v-model="form.name" name="name"
-                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                        type="text" placeholder="NOMBRE" aria-label="Full name" />
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Nombre</label>
+                <div>
+                    <label for="" class="form-label">Nombre</label>
+                    <input v-model="form.name" name="name" class="form-text-input w-full" type="text"
+                        placeholder="NOMBRE" aria-label="Full name" />
                 </div>
-                <div class="flex items-center  border-t border-gray-500 py-2 relative">
-                    <input v-model="form.address" name="address"
-                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                        type="text" placeholder="DIRECCION" aria-label="Full name" />
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Dirección</label>
+                <div>
+                    <label for="" class="form-label">Dirección</label>
+                    <input v-model="form.address" name="address" class="form-text-input w-full" type="text"
+                        placeholder="DIRECCION" aria-label="Full name" />
                 </div>
-                <div class="flex items-center  border-t border-gray-500 py-2 relative">
-                    <input v-model="form.phone_number" name="phone_number"
-                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                        type="text" placeholder="NUMERO DE TELEFONO" aria-label="Full name" />
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Telefono</label>
+                <div>
+                    <label for="" class="form-label">Telefono</label>
+                    <input v-model="form.phone_number" name="phone_number" class="form-text-input w-full" type="text"
+                        placeholder="NUMERO DE TELEFONO" aria-label="Full name" />
                 </div>
-                <div class="flex items-center  border-t border-gray-500 py-2 relative">
-                    <input v-model="form.email" name="email"
-                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                        type="email" placeholder="EMAIL" aria-label="Full name" />
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Email</label>
+                <div>
+                    <label for="" class="form-label">Email</label>
+                    <input v-model="form.email" name="email" class="form-text-input w-full" type="email"
+                        placeholder="EMAIL" aria-label="Full name" />
                 </div>
-                <div class="flex items-center  border-t border-gray-500 py-2 relative">
+                <div class="max-w-full">
+                    <label for="" class="form-label">Precio
+                        asignado</label>
                     <select name="assigned_price" v-model="form.assigned_price"
-                        plahceholder="Asigna un precio al cliente"
-                        class="block appearance-none w-full bg-white hover:border-gray-500 px-4 pl-60 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                        <option disabled value="" selected class="text-gray-600">Asignar un precio</option>
+                        plahceholder="Asigna un precio al cliente" class="form-text-input w-full">
+                        <option disabled value="" selected class="text-slate-500">Asignar un precio</option>
                         <option value="retail_price">Precio al por menor</option>
                         <option value="wholesale_price">Precio al por mayor</option>
                     </select>
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Precio
-                        asignado</label>
                 </div>
-                <div class="flex items-center  border-t border-gray-500 py-2 relative" :class="[
-                    'flex',
-                    'items-center',
-                    'border-b',
-                    this.errors ? 'border-transparent' : 'border-gray-500',
-                    'py-2'
-                ]">
-                    <input v-model="form.company" name="distributor_price"
-                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 pl-60 leading-tight focus:outline-none"
-                        type="text" placeholder="EMPRESA O NEGOCIO" aria-label="Full name" />
-                    <label for=""
-                        class="absolute  pl-0 bg-gray-200 h-full flex items-center w-56 justify-center text-indigo-800 font-mono">Empresa</label>
+                <div class="w-full overflow-x-hidden">
+                    <label for="" class="form-label">Empresa</label>
+                    <input v-model="form.company" name="distributor_price" class="form-text-input w-full" type="text"
+                        placeholder="EMPRESA O NEGOCIO" aria-label="Full name" />
                 </div>
 
 
 
                 <div class="flex justify-center mt-0 mb-0">
-                    <button
-                        class="bg-transparent transition-all duration-500 ease-in-out hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border-b-2 border-blue-500 hover:border-transparent w-full">
+                    <button class="primary-button w-full">
                         Guardar
                     </button>
                 </div>
