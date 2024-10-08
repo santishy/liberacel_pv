@@ -39,10 +39,10 @@
                     <!-- Se usa v-show aki y arriba para que funcione la transicion -->
                     <div v-show="modal"
                         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                        <div class="bg-white px-8 pt-2 pb-4 sm:p-2">
+                        <div class="bg-white sm:px-4 px-4 pt-2 pb-4 sm:p-2">
                             <div class="sm:flex sm:items-start">
-                                <div class="px-6 pt-4 text-center sm:mt-0 w-full">
-                                    <h3 class="w-full text-center text-lg leading-6 font-medium text-gray-900"
+                                <div class="sm:px-6 pt-4 text-center sm:mt-0 w-full">
+                                    <h3 class="w-full text-left text-lg leading-6 font-medium text-slate-800"
                                         id="modal-title">
                                         <slot name="title"></slot>
                                     </h3>
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-slate-50 px-4 pb-3 pt-2 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <div class="bg-sky-100 px-4 py-2 sm:pt-2 sm:px-4 sm:flex sm:flex-row-reverse">
                             <slot name="button"></slot>
                             <button type="button" @click="modal = false"
                                 class=" w-full inline-flex justify-center items-center rounded-md  border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400">

@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-2">
-        <note-list class="!bg-green-100 !shadow-none" :credit="credit">
+        <note-list class=" !shadow-none" :credit="credit">
         </note-list>
     </div>
 </template>

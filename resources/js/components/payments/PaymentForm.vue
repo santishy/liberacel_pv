@@ -2,30 +2,27 @@
     <form @submit.prevent="submit" class="w-full  py-2  flex flex-col gap-2">
         <errors-component />
         <div
-            class="flex justify-left gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center">
+            class="flex justify-end gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center">
             <span>Adeudo Total</span>
             <span class=" font-bold ">
                 {{ credit.total_amount_formatted }}
             </span>
         </div>
-        <div
-            class="px-4 py-1 flex text-xl items-center justify-left text-slate-500 text-left leading-tight border rounded-sm border-slate-400">
+        <div class="bg-slate-50 flex text-xl sm:text-base items-center justify-left text-slate-600 text-left rounded">
             Nombre: {{ credit.client.name }}
         </div>
-        <div
-            class="px-4 py-1 text-xl flex items-center justify-left text-slate-500 text-left leading-tight border rounded-sm border-slate-400">
+        <div class="bg-slate-50 text-xl flex sm:text-base items-center justify-left text-slate-600 text-left rounded">
             Número telefonico: {{ credit.client.phone_number }}
         </div>
-        <div class="border-b border-t py-1 border-slate-400">
+        <div class=" py-1 border-slate-400">
             <label class="form-label">Monto</label>
-            <input type="text" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-300"
+            <input type="text" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-400"
                 placeholder="Monto" autocomplete="off" />
         </div>
 
 
-        <div class="w-full py-1 ">
-            <button
-                class="w-full py-2 bg-white border text-xs border-green-600 items-center justify-center flex flex-wrap gap-2 hover:bg-green-700 text-slate-700 hover:text-white duration-150 font-semibold  px-2 rounded">
+        <div class="w-full">
+            <button class="w-full primary-button">
                 Guardar
             </button>
         </div>

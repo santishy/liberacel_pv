@@ -1296,10 +1296,6 @@ select {
   width: 2.25rem;
 }
 
-.w-9\/12 {
-  width: 75%;
-}
-
 .w-96 {
   width: 24rem;
 }
@@ -2122,6 +2118,11 @@ select {
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
+.bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -2962,20 +2963,12 @@ select {
   --scrollbar-thumb: #0ea5e9 !important;
 }
 
-.scrollbar-thumb-teal-800 {
-  --scrollbar-thumb: #115e59 !important;
-}
-
-.scrollbar-thumb-sky-300 {
-  --scrollbar-thumb: #7dd3fc !important;
-}
-
-.scrollbar-thumb-slate-300 {
-  --scrollbar-thumb: #cbd5e1 !important;
-}
-
 .scrollbar-thumb-sky-700 {
   --scrollbar-thumb: #0369a1 !important;
+}
+
+.scrollbar-thumb-teal-800 {
+  --scrollbar-thumb: #115e59 !important;
 }
 
 html,
@@ -3424,10 +3417,6 @@ body {
 .hover\:animate-none:hover {
   animation: none;
 }
-.hover\:border-blue-500:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
-}
 .hover\:border-blue-700:hover {
   --tw-border-opacity: 1;
   border-color: rgb(29 78 216 / var(--tw-border-opacity));
@@ -3458,10 +3447,6 @@ body {
 .hover\:bg-amber-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(252 211 77 / var(--tw-bg-opacity));
-}
-.hover\:bg-blue-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
 .hover\:bg-blue-500:hover {
   --tw-bg-opacity: 1;
@@ -3859,6 +3844,10 @@ body {
     width: 100%;
   }
 
+  .sm\:max-w-2xl {
+    max-width: 42rem;
+  }
+
   .sm\:max-w-5xl {
     max-width: 64rem;
   }
@@ -3871,16 +3860,8 @@ body {
     max-width: 24rem;
   }
 
-  .sm\:max-w-4xl {
-    max-width: 56rem;
-  }
-
-  .sm\:max-w-3xl {
-    max-width: 48rem;
-  }
-
-  .sm\:max-w-2xl {
-    max-width: 42rem;
+  .sm\:max-w-6xl {
+    max-width: 72rem;
   }
 
   .sm\:flex-none {
@@ -3924,6 +3905,14 @@ body {
     flex-direction: row-reverse;
   }
 
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+
+  .sm\:flex-wrap {
+    flex-wrap: wrap;
+  }
+
   .sm\:items-start {
     align-items: flex-start;
   }
@@ -3946,6 +3935,10 @@ body {
 
   .sm\:gap-0 {
     gap: 0px;
+  }
+
+  .sm\:gap-4 {
+    gap: 1rem;
   }
 
   .sm\:overflow-auto {
@@ -4002,8 +3995,17 @@ body {
     padding-bottom: 1rem;
   }
 
+  .sm\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .sm\:pt-0 {
     padding-top: 0px;
+  }
+
+  .sm\:pt-2 {
+    padding-top: 0.5rem;
   }
 
   .sm\:text-left {
@@ -4030,6 +4032,11 @@ body {
   .sm\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .sm\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .sm\:hover\:text-gray-800:hover {

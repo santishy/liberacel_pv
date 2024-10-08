@@ -9,10 +9,10 @@
         <td class="py-1 px-2">
             {{ note.status }}
         </td>
-        <td class="py-1 px-2">
+        <td class="py-1 px-2 flex ">
             <span :class="getClasses" class="rounded-lg px-2 py-1 text-xs font-semibold  text-slate-900">{{
                 note.typeOfSale
-                }}</span>
+            }}</span>
         </td>
         <td class="py-1 px-2 text-green-800">
             {{ note.total }}

@@ -4437,7 +4437,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           page: this.page
         }, this.params)
       }).then(function (res) {
-        console.log(res.data);
         if (res.data.notes.length) {
           var _this2$notes;
           _this2.page += 1;
@@ -13658,9 +13657,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "table-container-responsive"
+    staticClass: "relative overflow-x-auto bg-white scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-700 scrollbar-thin"
   }, [_c("table", {
-    staticClass: "report-table"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.credits, function (credit, index) {
     return _c("credit-list-item", {
       key: credit.id,
@@ -13682,10 +13681,8 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "report-table-thead"
-  }, [_c("tr", {
-    staticClass: "bg-emerald-200"
-  }, [_c("th", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", [_c("th", {
     staticClass: "px-2 py-2"
   }, [_vm._v("FECHA CREDITO")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
@@ -13895,7 +13892,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "flex flex-wrap items-center justify-between p-4"
+    staticClass: "flex flex-wrap items-center justify-between gap-4 mb-4"
   }, [_c("search-by-phone-number"), _vm._v(" "), _c("status-filter")], 1), _vm._v(" "), _c("credit-list"), _vm._v(" "), _c("information-component", {
     directives: [{
       name: "show",
@@ -13905,7 +13902,7 @@ var render = function render() {
     }]
   }, [_c("template", {
     slot: "title"
-  }, [_vm._v("\n            " + _vm._s(_vm.title) + " \n        ")]), _vm._v(" "), Object.keys(_vm.credit).length ? _c(_vm.selectedComponent, {
+  }, [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]), _vm._v(" "), Object.keys(_vm.credit).length ? _c(_vm.selectedComponent, {
     tag: "component",
     attrs: {
       credit: _vm.credit
@@ -13934,8 +13931,10 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("ul", {
-    staticClass: "flex flex-wrap gap-4"
-  }, [_c("li", [_c("input", {
+    staticClass: "flex sm:flex-wrap sm:gap-4 gap-2 sm:flex-row flex-col w-full sm:w-auto"
+  }, [_c("li", {
+    staticClass: "sm:w-auto w-full bg-red-50"
+  }, [_c("input", {
     staticClass: "hidden peer",
     attrs: {
       type: "radio",
@@ -13968,7 +13967,9 @@ var render = function render() {
       "stroke-linejoin": "round",
       d: "M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
     }
-  })])])]), _vm._v(" "), _c("li", [_c("input", {
+  })])])]), _vm._v(" "), _c("li", {
+    staticClass: "sm:w-auto w-full bg-red-50"
+  }, [_c("input", {
     staticClass: "hidden peer",
     attrs: {
       type: "radio",
@@ -14001,7 +14002,9 @@ var render = function render() {
       "stroke-linejoin": "round",
       d: "M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
     }
-  })])])]), _vm._v(" "), _c("li", [_c("input", {
+  })])])]), _vm._v(" "), _c("li", {
+    staticClass: "sm:w-auto w-full bg-red-50"
+  }, [_c("input", {
     staticClass: "hidden peer",
     attrs: {
       type: "radio",
@@ -14231,7 +14234,7 @@ var render = function render() {
   return _c("div", {
     staticClass: "flex flex-col gap-2"
   }, [_c("note-list", {
-    staticClass: "!bg-green-100 !shadow-none",
+    staticClass: "!shadow-none",
     attrs: {
       credit: _vm.credit
     }
@@ -14259,9 +14262,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "table-container-responsive"
+    staticClass: "relative overflow-x-auto bg-white scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-700 scrollbar-thin"
   }, [_c("table", {
-    staticClass: "report-table"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.notes, function (note, index) {
     return _c("note-list-item", {
       key: note.id,
@@ -14283,10 +14286,8 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "report-table-thead"
-  }, [_c("tr", {
-    staticClass: "bg-emerald-200"
-  }, [_c("th", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", [_c("th", {
     staticClass: "px-2 py-2"
   }, [_vm._v("Fecha")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
@@ -14327,7 +14328,7 @@ var render = function render() {
   }, [_vm._v("\n        " + _vm._s(_vm.note.note) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-1 px-2"
   }, [_vm._v("\n        " + _vm._s(_vm.note.status) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "py-1 px-2"
+    staticClass: "py-1 px-2 flex"
   }, [_c("span", {
     staticClass: "rounded-lg px-2 py-1 text-xs font-semibold text-slate-900",
     "class": _vm.getClasses
@@ -14365,7 +14366,7 @@ var render = function render() {
   }, [_c("span", [_vm._v("Total pagado")]), _vm._v(_vm._s(_vm.credit.formatted_amount_paid) + "\n    ")]), _vm._v(" "), _c("div", {
     staticClass: "flex flex-wrap justify-end gap-2 bg-orange-400 p-1 rounded-sm font-mono text-white"
   }, [_c("span", [_vm._v("Saldo")]), _vm._v(_vm._s(_vm.credit.total_amount_formatted) + "\n    ")]), _vm._v(" "), _c("payment-list", {
-    staticClass: "!bg-green-100 !shadow-none",
+    staticClass: "!shadow-none",
     attrs: {
       credit: _vm.credit
     }
@@ -17000,20 +17001,20 @@ var render = function render() {
     }],
     staticClass: "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
   }, [_c("div", {
-    staticClass: "bg-white px-8 pt-2 pb-4 sm:p-2"
+    staticClass: "bg-white sm:px-4 px-4 pt-2 pb-4 sm:p-2"
   }, [_c("div", {
     staticClass: "sm:flex sm:items-start"
   }, [_c("div", {
-    staticClass: "px-6 pt-4 text-center sm:mt-0 w-full"
+    staticClass: "sm:px-6 pt-4 text-center sm:mt-0 w-full"
   }, [_c("h3", {
-    staticClass: "w-full text-center text-lg leading-6 font-medium text-gray-900",
+    staticClass: "w-full text-left text-lg leading-6 font-medium text-slate-800",
     attrs: {
       id: "modal-title"
     }
   }, [_vm._t("title")], 2), _vm._v(" "), _c("div", {
     staticClass: "mt-2"
   }, [_vm._t("default")], 2)])])]), _vm._v(" "), _c("div", {
-    staticClass: "bg-slate-50 px-4 pb-3 pt-2 sm:px-6 sm:flex sm:flex-row-reverse"
+    staticClass: "bg-sky-100 px-4 py-2 sm:pt-2 sm:px-4 sm:flex sm:flex-row-reverse"
   }, [_vm._t("button"), _vm._v(" "), _c("button", {
     staticClass: "w-full inline-flex justify-center items-center rounded-md border-2 shadow-sm px-4 py-2 mr-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm border-gray-400",
     attrs: {
@@ -17645,15 +17646,15 @@ var render = function render() {
       }
     }
   }, [_c("errors-component"), _vm._v(" "), _c("div", {
-    staticClass: "flex justify-left gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center"
+    staticClass: "flex justify-end gap-3 rounded-sm text-slate-700 text-lg bg-yellow-400 py-1 px-4 leading-snug items-center"
   }, [_c("span", [_vm._v("Adeudo Total")]), _vm._v(" "), _c("span", {
     staticClass: "font-bold"
   }, [_vm._v("\n            " + _vm._s(_vm.credit.total_amount_formatted) + "\n        ")])]), _vm._v(" "), _c("div", {
-    staticClass: "px-4 py-1 flex text-xl items-center justify-left text-slate-500 text-left leading-tight border rounded-sm border-slate-400"
+    staticClass: "bg-slate-50 flex text-xl sm:text-base items-center justify-left text-slate-600 text-left rounded"
   }, [_vm._v("\n        Nombre: " + _vm._s(_vm.credit.client.name) + "\n    ")]), _vm._v(" "), _c("div", {
-    staticClass: "px-4 py-1 text-xl flex items-center justify-left text-slate-500 text-left leading-tight border rounded-sm border-slate-400"
+    staticClass: "bg-slate-50 text-xl flex sm:text-base items-center justify-left text-slate-600 text-left rounded"
   }, [_vm._v("\n        Número telefonico: " + _vm._s(_vm.credit.client.phone_number) + "\n    ")]), _vm._v(" "), _c("div", {
-    staticClass: "border-b border-t py-1 border-slate-400"
+    staticClass: "py-1 border-slate-400"
   }, [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Monto")]), _vm._v(" "), _c("input", {
@@ -17663,7 +17664,7 @@ var render = function render() {
       value: _vm.form.amount,
       expression: "form.amount"
     }],
-    staticClass: "form-text-input w-full placeholder:text-slate-300",
+    staticClass: "form-text-input w-full placeholder:text-slate-400",
     attrs: {
       type: "text",
       placeholder: "Monto",
@@ -17684,9 +17685,9 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "w-full py-1"
+    staticClass: "w-full"
   }, [_c("button", {
-    staticClass: "w-full py-2 bg-white border text-xs border-green-600 items-center justify-center flex flex-wrap gap-2 hover:bg-green-700 text-slate-700 hover:text-white duration-150 font-semibold px-2 rounded"
+    staticClass: "w-full primary-button"
   }, [_vm._v("\n            Guardar\n        ")])]);
 }];
 render._withStripped = true;
@@ -17710,9 +17711,9 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "table-container-responsive"
+    staticClass: "relative overflow-x-auto bg-white scroll-smooth scrollbar-track-transparent scrollbar-thumb-sky-700 scrollbar-thin"
   }, [_c("table", {
-    staticClass: "report-table"
+    staticClass: "w-full text-sm text-left text-slate-500"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.payments, function (payment, index) {
     return _c("payment-list-item", {
       key: payment.id,
@@ -17734,10 +17735,8 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "report-table-thead"
-  }, [_c("tr", {
-    staticClass: "bg-green-200"
-  }, [_c("th", {
+    staticClass: "text-slate-700 uppercase bg-slate-100"
+  }, [_c("tr", [_c("th", {
     staticClass: "py-2 px-2"
   }, [_vm._v("Fecha")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
@@ -20119,11 +20118,11 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("layout-component", [_c("div", {
-    staticClass: "max-w-6xl mx-auto shadow pb-4 bg-white rounded-sm px-4"
+    staticClass: "sm:max-w-6xl w-full mx-auto shadow pb-4 bg-white rounded-sm px-4"
   }, [_c("h1", {
     staticClass: "text-gray-700 border-b-2 border-sky-500 py-3 text-2xl font-extralight"
   }, [_vm._v("\n            Reporte de " + _vm._s(_vm.name) + "\n        ")]), _vm._v(" "), _vm.isInGeneralReport ? _c("div", {
-    staticClass: "w-full mt-4 flex justify-start items-center"
+    staticClass: "w-full flex justify-start items-center"
   }, [_vm.paymentsTotal != null ? _c("ul", {
     staticClass: "divide-y-2 flex flex-wrap flex-col w-full"
   }, [_c("li", {
@@ -20275,13 +20274,13 @@ var render = function render() {
   return _c("div", {
     staticClass: "flex flex-wrap flex-col items-start justify-start"
   }, [_c("div", {
-    staticClass: "flex justify-start gap-4 flex-wrap items-center w-full mt-4"
+    staticClass: "flex justify-start gap-4 flex-wrap items-center w-full"
   }, [!_vm.isInGeneralReport ? _c("states-component") : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "grow"
   }, [_vm._t("search")], 2), _vm._v(" "), _c("div", {
-    staticClass: "w-full flex flex-wrap justify-start gap-4 mt-4"
+    staticClass: "w-full flex flex-wrap justify-start gap-4"
   }, [_c("div", {
-    staticClass: "p-1 border bg-orange-100 flex-grow rounded text-slate-700 font-mono px-3"
+    staticClass: "p-1 border bg-orange-100 w-full sm:w-auto overflow-x-hidden items-center gap-2 justify-center rounded text-slate-700 font-mono px-3 flex flex-row flex-wrap"
   }, [_c("span", [_vm._v("Reporte por rango")]), _vm._v(" "), _c("date-picker", {
     attrs: {
       placeholder: "Da click para eligir el rango de fechas",
@@ -20302,7 +20301,7 @@ var render = function render() {
       expression: "dates"
     }
   })], 1), _vm._v(" "), _c("button", {
-    staticClass: "report-button px-4 py-2",
+    staticClass: "report-button sm:w-auto w-full px-4 py-2",
     on: {
       click: function click($event) {
         $event.preventDefault();
@@ -20310,7 +20309,7 @@ var render = function render() {
       }
     }
   }, [_vm._v("\n                Hoy\n            ")]), _vm._v(" "), _c("button", {
-    staticClass: "report-button px-4 py-2",
+    staticClass: "report-button px-4 sm:w-auto w-full py-2",
     attrs: {
       href: "#"
     },
@@ -20321,7 +20320,7 @@ var render = function render() {
       }
     }
   }, [_vm._v("\n                Viernes a Jueves\n            ")]), _vm._v(" "), _c("button", {
-    staticClass: "report-button px-4 py-2",
+    staticClass: "report-button px-4 py-2 sm:w-auto w-full",
     attrs: {
       href: "#"
     },
@@ -20332,7 +20331,7 @@ var render = function render() {
       }
     }
   }, [_vm._v("\n                Semana\n            ")]), _vm._v(" "), _c("button", {
-    staticClass: "px-4 py-2 report-button",
+    staticClass: "px-4 py-2 report-button sm:w-auto w-full",
     attrs: {
       href: "#"
     },

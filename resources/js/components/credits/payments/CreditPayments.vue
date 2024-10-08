@@ -7,7 +7,7 @@
         <div class="flex flex-wrap justify-end gap-2 bg-orange-400 p-1 rounded-sm font-mono text-white">
             <span>Saldo</span>{{ credit.total_amount_formatted }}
         </div>
-        <payment-list class="!bg-green-100 !shadow-none" :credit="credit"></payment-list>
+        <payment-list class="!shadow-none" :credit="credit"></payment-list>
     </div>
 </template>
 

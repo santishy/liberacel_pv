@@ -1,8 +1,9 @@
 <template>
-    <div class="table-container-responsive">
-        <table class="report-table">
-            <thead class="report-table-thead">
-                <tr class="bg-green-200">
+    <div
+        class="relative overflow-x-auto bg-white scroll-smooth scrollbar-track-transparent  scrollbar-thumb-sky-700 scrollbar-thin">
+        <table class="w-full text-sm text-left text-slate-500 ">
+            <thead class=" text-slate-700 uppercase bg-slate-100">
+                <tr>
                     <th class="py-2 px-2 ">Fecha</th>
                     <th class="px-2 py-2">Monto</th>
                     <th class="px-2 py-2">Acciones</th>

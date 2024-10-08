@@ -1,10 +1,10 @@
 <template>
     <layout-component>
-        <div class="max-w-6xl mx-auto shadow  pb-4 bg-white rounded-sm px-4">
+        <div class="sm:max-w-6xl w-full mx-auto shadow  pb-4 bg-white rounded-sm px-4">
             <h1 class=" text-gray-700 border-b-2 border-sky-500  py-3 text-2xl font-extralight">
                 Reporte de {{ name }}
             </h1>
-            <div v-if="isInGeneralReport" class="w-full mt-4 flex justify-start items-center">
+            <div v-if="isInGeneralReport" class="w-full flex justify-start items-center">
                 <ul v-if="paymentsTotal != null" class=" divide-y-2 flex flex-wrap flex-col w-full">
                     <li class="flex flex-wrap justify-between items-center text-green-600 rounded-sm p-1 px-2">
                         <span class="text-xl font-mono text-slate-600 mr-4">Ventas</span>

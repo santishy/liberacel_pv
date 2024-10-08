@@ -1,13 +1,13 @@
 <template>
     <layout-component>
-        <div class="flex flex-wrap items-center justify-between p-4">
+        <div class="flex  flex-wrap items-center justify-between gap-4 mb-4">
             <search-by-phone-number />
             <status-filter />
         </div>
         <credit-list />
         <information-component v-show="Object.keys(credit).length">
             <template slot="title">
-                {{ title }} 
+                {{ title }}
             </template>
             <component :is="selectedComponent" v-if="Object.keys(credit).length" :credit="credit" />
         </information-component>
