@@ -4,13 +4,13 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://liberacel.test',
+    'url' => 'http://bazar.test',
     'asset_url' => NULL,
     'timezone' => 'America/Mexico_City',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:koWXFHSUsGN+W60bRJDhAA2tWMpZVK2gxT4rfGg1CEs=',
+    'key' => 'base64:uEUSHYSipmScR4+r48y5ZN/D4WDPiTEOFLGk6Uyhr/E=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -186,7 +186,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/html/storage/framework/cache/data',
+        'path' => '/Users/santiagoochoa/Herd/bazar/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -267,7 +267,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'liberacel_pv',
+        'database' => 'bazar_de_liz',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -275,11 +275,11 @@
       array (
         'driver' => 'mysql',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'liberacel_pv',
-        'username' => 'homestead',
-        'password' => 'password',
+        'database' => 'bazar_de_liz',
+        'username' => 'root',
+        'password' => '',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -295,11 +295,11 @@
       array (
         'driver' => 'pgsql',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'liberacel_pv',
-        'username' => 'homestead',
-        'password' => 'password',
+        'database' => 'bazar_de_liz',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -310,11 +310,11 @@
       array (
         'driver' => 'sqlsrv',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'liberacel_pv',
-        'username' => 'homestead',
-        'password' => 'password',
+        'database' => 'bazar_de_liz',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -354,10 +354,10 @@
     'convert_entities' => true,
     'options' => 
     array (
-      'font_dir' => '/var/www/html/storage/fonts',
-      'font_cache' => '/var/www/html/storage/fonts',
-      'temp_dir' => '/tmp',
-      'chroot' => '/var/www/html',
+      'font_dir' => '/Users/santiagoochoa/Herd/bazar/storage/fonts',
+      'font_cache' => '/Users/santiagoochoa/Herd/bazar/storage/fonts',
+      'temp_dir' => '/var/folders/3c/vyd30sq575v126zzqct8g_7w0000gn/T',
+      'chroot' => '/Users/santiagoochoa/Herd/bazar',
       'allowed_protocols' => 
       array (
         'file://' => 
@@ -396,10 +396,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => '/var/www/html/storage/fonts/',
-      'font_cache' => '/var/www/html/storage/fonts/',
-      'temp_dir' => '/tmp',
-      'chroot' => '/var/www/html',
+      'font_dir' => '/Users/santiagoochoa/Herd/bazar/storage/fonts/',
+      'font_cache' => '/Users/santiagoochoa/Herd/bazar/storage/fonts/',
+      'temp_dir' => '/var/folders/3c/vyd30sq575v126zzqct8g_7w0000gn/T',
+      'chroot' => '/Users/santiagoochoa/Herd/bazar',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -422,13 +422,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/storage/app',
+        'root' => '/Users/santiagoochoa/Herd/bazar/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/storage/app/public',
-        'url' => 'http://liberacel.test/storage',
+        'root' => '/Users/santiagoochoa/Herd/bazar/storage/app/public',
+        'url' => 'http://bazar.test/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -444,7 +444,7 @@
     ),
     'links' => 
     array (
-      '/var/www/html/public/storage' => '/var/www/html/storage/app/public',
+      '/Users/santiagoochoa/Herd/bazar/public/storage' => '/Users/santiagoochoa/Herd/bazar/storage/app/public',
     ),
   ),
   'fortify-options' => 
@@ -656,13 +656,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/html/storage/logs/laravel.log',
+        'path' => '/Users/santiagoochoa/Herd/bazar/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/html/storage/logs/laravel.log',
+        'path' => '/Users/santiagoochoa/Herd/bazar/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -712,7 +712,7 @@
       ),
       'emergency' => 
       array (
-        'path' => '/var/www/html/storage/logs/laravel.log',
+        'path' => '/Users/santiagoochoa/Herd/bazar/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -724,7 +724,7 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailpit',
+        'host' => 'mailhog',
         'port' => '1025',
         'encryption' => NULL,
         'username' => NULL,
@@ -761,7 +761,7 @@
     ),
     'from' => 
     array (
-      'address' => 'hello@example.com',
+      'address' => NULL,
       'name' => 'Laravel',
     ),
     'markdown' => 
@@ -769,7 +769,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/html/resources/views/vendor/mail',
+        0 => '/Users/santiagoochoa/Herd/bazar/resources/views/vendor/mail',
       ),
     ),
   ),
@@ -884,7 +884,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/html/storage/framework/sessions',
+    'files' => '/Users/santiagoochoa/Herd/bazar/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -904,9 +904,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/html/resources/views',
+      0 => '/Users/santiagoochoa/Herd/bazar/resources/views',
     ),
-    'compiled' => '/var/www/html/storage/framework/views',
+    'compiled' => '/Users/santiagoochoa/Herd/bazar/storage/framework/views',
   ),
   'image' => 
   array (
@@ -987,8 +987,8 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => '/var/www/html',
-    'local_sites_path' => '/home/ubuntu/code/liberacel_pv',
+    'remote_sites_path' => '/Users/santiagoochoa/Herd/bazar',
+    'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
     'recorders' => 

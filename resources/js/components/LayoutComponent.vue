@@ -4,7 +4,6 @@
         <div class="w-full min-h-screen">
             <nav class=" w-full max-w-full sticky shadow-sm  bg-white  top-0 z-10">
                 <div class="w-full py-3 px-6 ">
-
                     <div class=" lg:hidden flex justify-end">
 
                         <button id="buttonMenu" @click="toggleNavigation" ref="buttonMenu"
