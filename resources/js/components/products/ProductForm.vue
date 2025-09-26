@@ -12,7 +12,7 @@
             <h1 class="flex items-center pb-2 mt-4 text-dark  justify-start text-xl font-bold">
                 {{ title }}
             </h1>
-            <errors-component />
+
             <form id="product-form" @submit.prevent="submit" @keyup.enter.prevent="" @keydown.enter.prevent=""
                 @keypress.enter.prevent="" v-can="definePermission"
                 class="w-full grid grid-cols-1  sm:grid-cols-2 gap-4">
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="sm:col-span-2">
-
+                      <errors-component />
 
                     <button
                         class="bg-blue-500 rounded shadow-sm transition-all duration-500 ease-in-out hover:bg-blue-700 text-gray-100 font-semibold hover:text-white py-2 px-8 border-b-2 border-blue-500 hover:border-transparent">
@@ -187,9 +187,11 @@ export default {
                     this.notify(obj);
                     if (this.method == "post")
                         this.form = {
-                            sku: this.form.sku,
-                            category_id: this.form.category_id,
+                            // sku: this.form.sku,
+                            // category_id: this.form.category_id,
+                            commission_amount: 5
                         };
+                     EventBus.$emit("clean-search-term");
                     this.errors = null;
                 })
                 .catch((err) => {
