@@ -9,8 +9,9 @@ use Illuminate\Validation\ValidationException;
 
 trait SaleModelHandler
 {
-    public function validateUser(){
-        if(!$this->user()->exists()){
+    public function validateUser()
+    {
+        if (!$this->user()->exists()) {
             throw ValidationException::withMessages(["user_id" => "No hay usuario asociado a la venta."]);
         }
         return true;
@@ -25,6 +26,7 @@ trait SaleModelHandler
     }
     public function hasCredit()
     {
+        //dd($this->client_id && $this->is_credit);
         return $this->client_id && $this->is_credit;
     }
     public function validateSaleNotCompleted()
@@ -42,10 +44,11 @@ trait SaleModelHandler
         }
         return null;
     }
-    public function deleteTheSessionID(){
+    public function deleteTheSessionID()
+    {
         $name = class_basename($this);
         $modelID = Str::snake($name, '_') . '_id';
-        if(session()->has($modelID)){
+        if (session()->has($modelID)) {
             session()->forget($modelID);
         }
     }

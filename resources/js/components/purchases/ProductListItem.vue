@@ -81,13 +81,15 @@ export default {
                     }
                 })
                 .catch(err => {
+                    const message = err.response.data?.errors ? Object?.values(
+                            err?.response?.data?.errors
+                        )?.flat()[0] : err.response.data.message;
+
                     this.$notify({
                         group: "foo",
                         title: "Error",
                         type: "error",
-                        text: Object?.values(
-                            err?.response?.data?.errors
-                        )?.flat()[0]
+                        text: message
                     });
                 });
         },

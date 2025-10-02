@@ -24,8 +24,7 @@ export default {
         }
     },
     mounted() {
-        console.log("mounted error component")
-        //tratar de eliminar este evento sino se necesita
+      //tratar de eliminar este evento sino se necesita
         EventBus.$on(`an-error-ocurred-${this.id}`, this.getErrors)
         EventBus.$on(`an-error-ocurred`, this.getErrors)
     },

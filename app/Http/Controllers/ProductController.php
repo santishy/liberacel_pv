@@ -118,6 +118,7 @@ class ProductController extends Controller
             'category_id.required' => 'La categoría es obligatoría.',
             'category_id.numeric' => 'El identificador de la categoría debe ser numerico.',
             'image.image' => 'El archivo enviado no es una imagén valida.',
+            'image.mimes' => 'El archivo enviado debe tener una extensión valida:jpeg,png,jpg,gif.',
             'image.dimensions' => 'El ancho y alto de la imagen como "minimo" debe de ser de 500px ',
             'qty.numeric' => 'El campo cantidad de compra debe ser numerico',
             'qty.min' => 'La cantidad debe ser minimo 1',

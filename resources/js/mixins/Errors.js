@@ -5,14 +5,11 @@ module.exports = {
         }
     },
     created() {
-
-
-
+      //  console.log("mixin errors created")
     },
     methods: {
         getErrors(err) {
-            console.log("entro")
-            console.log({ response: err.response.data })
+
             if (err?.response?.status === 419) {
                 return window.location.href = '/';
             }
@@ -22,6 +19,7 @@ module.exports = {
             this.errors = Object?.values(
                 err?.response?.data?.errors
             )?.flat()
+            console.log(this.errors);
         }
     }
 }

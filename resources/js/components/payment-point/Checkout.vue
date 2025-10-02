@@ -1,6 +1,6 @@
 <template>
     <layout-component>
-        <errors-component :errors-found="errors" class="max-w-4xl m-auto mt-4" />
+        <errors-component class="max-w-4xl m-auto mt-4" />
         <div class="max-w-4xl m-auto bg-white rounded shadow p-4">
             <h1 class="font-bold text-2xl text-slate-800 p-2 text-center">Caja de cobro</h1>
             <div class="flex px-4 py-3 w-full gap-4 border border-gray-200 mb-4 rounded-sm">
@@ -47,13 +47,16 @@
 import SearchSelect from "../partials/SearchSelect.vue";
 import Products from "./products/Index.vue";
 import SaleDetailsCheckout from "./SaleDetailsCheckout.vue";
+
+import ErrorsComponent from "../ErrorsComponent";
+
 export default {
     components: {
         SearchSelect,
         Products,
         SaleDetailsCheckout
     },
-    created() {
+    mounted() {
         this.focusBarcodeInput();
         EventBus.$on('selected-item', item => {
             if (!item) {
@@ -104,7 +107,8 @@ export default {
                 delete res.data.products;
                 this.saleDetails = res.data;
             } catch (error) {
-                this.getErrors(error);
+                 EventBus.$emit('an-error-ocurred', error);
+                //this.getErrors(error);
                 console.error(error);
             }
 

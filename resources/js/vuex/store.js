@@ -8,11 +8,19 @@ import getters from "./getters";
 import sales from "./modules/sales/"
 import clients from "./modules/clients/";
 
+function safeParse(key,fallback) {
+    const item = localStorage.getItem(key);
+    try {
+       return item ? JSON.parse(item) : fallback;
+    } catch (e) {
+        console.warn(`Error parsing localStorage item "${key}":`, e);
+        return fallback;
+    }
+}
+
 export const store = new Vuex.Store({
     state: {
-        productsInPurchase: JSON.parse(
-            localStorage.getItem("productsInPurchase")
-        ),
+        productsInPurchase: safeParse("productsInPurchase", []),
         purchaseStatus: "",
         user: {},
         appName: '',

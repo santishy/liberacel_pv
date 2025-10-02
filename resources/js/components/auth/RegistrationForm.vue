@@ -56,7 +56,7 @@
                 Contraseña</label>
         </div>
         <div class="flex items-center">
-            <errors-component :errors-found="errors" />
+            <errors-component class="mt-4"  />
         </div>
 
         <div class="flex justify-center mt-0 mb-0">
@@ -124,7 +124,8 @@ export default {
                     this.notify(this.obj);
                 })
                 .catch(err => {
-                    this.getErrors(err);
+                    EventBus.$emit("an-error-ocurred", err);
+                    //this.getErrors(err);
                 });
         }
     },
