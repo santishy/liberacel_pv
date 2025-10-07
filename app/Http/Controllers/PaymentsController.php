@@ -41,9 +41,14 @@ class PaymentsController extends Controller
         $request->merge(['status' => true]);
         $data = $request->all();
         $credit = Credit::find(request()->credit_id);
-        if ($credit->total_amount == 0) {
-            return response([], 204);
+        if ($request->amount > $credit->total_amount) {
+            throw ValidationException::withMessages([
+                'amount' => 'El abono no puede ser mayor al adeudo actual $' . number_format($credit->total_amount, 2, '.', ',')
+            ]);
         }
+        // if ($credit->total_amount == 0) {
+        //     return response([], 204);
+        // }
         DB::beginTransaction();
         try {
             $payment = Payment::create($data);

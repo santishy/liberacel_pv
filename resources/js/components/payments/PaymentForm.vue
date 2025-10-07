@@ -19,8 +19,6 @@
             <input type="text" v-model="form.amount" class="form-text-input w-full placeholder:text-slate-400"
                 placeholder="Monto" autocomplete="off" />
         </div>
-
-
         <div class="w-full">
             <button class="w-full primary-button">
                 Guardar
@@ -43,6 +41,16 @@ export default {
             form: {}
         }
     },
+    watch: {
+        credit: {
+            handler(newValue) {
+                this.form.amount = null;
+            },
+            immediate: true,
+            deep: true
+        }
+    },
+
     methods: {
         async submit() {
             const { client } = this.credit;

@@ -48,7 +48,8 @@ export default {
     },
     methods: {
         openModalCredit(credit) {
-            Vue.set(this.$data, 'credit', credit);
+            // lo hago asi para que en el watch de payment form se dispare el handler
+            Vue.set(this.$data, 'credit', {...credit});
             this.title = "Crear Pago"
             this.selectedComponent = "payment-form"
             EventBus.$emit("open-modal", true);

@@ -19,10 +19,13 @@ class ReportResponse implements Responsable
     function toResponse($request)
     {
         $transactions = $this->model->include()->applyFilters();
-        $className = class_basename($this->model);
+        //AGREGUE ESTA LINEA PARA OMITIR LAS VENTAS CANCELADAS
+        $transactions->where('status', '!=', 'cancelled');
+        //  $className = class_basename($this->model);
         if ($this->isFastSale($request->isFastSale)) {
             $data = [
-                'data' =>  new FastSaleCollection($transactions->paginate(25)),
+                'data' =>  new FastSaleCollection($transactions
+                    ->paginate(25)),
             ];
         } else {
             $data = [

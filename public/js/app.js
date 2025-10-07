@@ -4141,7 +4141,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   },
   methods: {
     openModalCredit: function openModalCredit(credit) {
-      Vue.set(this.$data, 'credit', credit);
+      // lo hago asi para que en el watch de payment form se dispare el handler
+      Vue.set(this.$data, 'credit', _objectSpread({}, credit));
       this.title = "Crear Pago";
       this.selectedComponent = "payment-form";
       EventBus.$emit("open-modal", true);
@@ -6731,6 +6732,15 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     return {
       form: {}
     };
+  },
+  watch: {
+    credit: {
+      handler: function handler(newValue) {
+        this.form.amount = null;
+      },
+      immediate: true,
+      deep: true
+    }
   },
   methods: {
     submit: function submit() {
