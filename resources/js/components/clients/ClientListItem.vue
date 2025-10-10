@@ -3,7 +3,7 @@
         <td class="py-2 px-1">{{ client.name }}</td>
         <td class="py-2 px-1">{{ client.address }}</td>
         <td class="py-2 px-1">{{ client.phone_number }}</td>
-        <td class="py-2 px-1">{{ client.email }}</td>
+        <!-- <td class="py-2 px-1">{{ client.email }}</td> -->
         <td class="py-2 px-1">{{ client.company }}</td>
         <td class="py-2 px-1 flex items-center justify-start gap-2">
             <a :href="` clients/${client.phone_number}/edit`" v-can="'edit client'"

@@ -18,8 +18,8 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone_number')->unique()->index();
-            $table->enum('assigned_price',['retail_price','wholesale_price','distributor_price']);
-            $table->string('email');
+            $table->enum('assigned_price', ['retail_price', 'wholesale_price', 'distributor_price']);
+            //$table->string('email');
             $table->string('company');
             $table->timestamps();
         });

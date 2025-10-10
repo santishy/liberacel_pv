@@ -22,11 +22,11 @@
                     <input v-model="form.phone_number" name="phone_number" class="form-text-input w-full" type="text"
                         placeholder="NUMERO DE TELEFONO" aria-label="Full name" />
                 </div>
-                <div>
+                <!-- <div>
                     <label for="" class="form-label">Email</label>
                     <input v-model="form.email" name="email" class="form-text-input w-full" type="email"
                         placeholder="EMAIL" aria-label="Full name" />
-                </div>
+                </div> -->
                 <div class="max-w-full">
                     <label for="" class="form-label">Precio
                         asignado</label>

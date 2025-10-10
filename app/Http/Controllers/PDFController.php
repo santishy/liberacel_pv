@@ -30,8 +30,8 @@ class PDFController extends Controller
         $pdf = PDF::loadView(
             'tickets.pdf',
             compact('sale', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
-            //)->setPaper(array(0, 0, 227.67, 2000));
-        )->setPaper(array(0, 0, 210, 2000));
+        )->setPaper(array(0, 0, 227.67, 2000));
+
         /**
          * Se obtiene la altura, la logica esta guardada en el modelo .. midiendo la altura total del body que esta dentro del padding al menos asi lo entendi
          */
@@ -43,8 +43,8 @@ class PDFController extends Controller
         $pdf = PDF::loadView(
             'tickets.pdf',
             compact('sale', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
-            // )->setPaper(array(0, 0, 227.67, $height + 20));
-        )->setPaper(array(0, 0, 210, 2000));
+        )->setPaper(array(0, 0, 227.67, $height + 20));
+
         if (session()->has("sale_id")) {
             session()->forget('sale_id');
         }

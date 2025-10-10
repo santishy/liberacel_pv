@@ -8,7 +8,7 @@
                         <th class="px-2 py-2">Nombre</th>
                         <th class="px-2 py-2">Dirección</th>
                         <th class="px-2 py-2">Número tel.</th>
-                        <th class="px-2 py-2">Email</th>
+                        <!-- <th class="px-2 py-2">Email</th> -->
                         <th class="px-2 py-2">Empresa</th>
                         <th class="px-2 py-2">Acciones</th>
                     </tr>
