@@ -22,6 +22,7 @@ class PurchaseController extends Controller
     {
         $this->authorize('viewAny', new Purchase);
         if (request()->wantsJson()) {
+
             return new ReportResponse(Purchase::query());
         }
         $inventories = Inventory::all('id', 'name');
@@ -94,8 +95,6 @@ class PurchaseController extends Controller
         }
         if ($request->status === 'completed')
             $this->deleteSessionVariable('purchase_id');
-
-
 
         $purchase->update($request->all());
 

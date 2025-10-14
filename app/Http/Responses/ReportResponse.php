@@ -20,7 +20,7 @@ class ReportResponse implements Responsable
     {
         $transactions = $this->model->include()->applyFilters();
         //AGREGUE ESTA LINEA PARA OMITIR LAS VENTAS CANCELADAS
-        $transactions->where('status', '!=', 'cancelled');
+        // $transactions->where('status', '!=', 'cancelled');
         //  $className = class_basename($this->model);
         if ($this->isFastSale($request->isFastSale)) {
             $data = [

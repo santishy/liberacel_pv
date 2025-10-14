@@ -36,6 +36,7 @@ trait ReportBy
         if ($value === "1") {
             $value = 1;
         }
+
         $query->where('status', $value);
     }
     public function scopeWeek(Builder $query, $value)
