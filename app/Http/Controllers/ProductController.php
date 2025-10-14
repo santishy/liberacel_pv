@@ -63,7 +63,8 @@ class ProductController extends Controller
 
         $purchase->update([
             'status' => 'completed',
-            'inventory_id' => request()->inventory_id
+            'inventory_id' => request()->inventory_id,
+            'total' => $purchase->totalPurchase()
         ]);
 
         TransactionComplete::dispatch($purchase);
