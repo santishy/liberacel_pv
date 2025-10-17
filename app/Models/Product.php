@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sku', 'commission_amount', 'distributor_price', 'image', 'wholesale_price', 'retail_price', 'description', 'category_id'];
+    protected $fillable = ['sku', 'active', 'commission_amount', 'distributor_price', 'image', 'wholesale_price', 'retail_price', 'description', 'category_id'];
 
     public function scopeSearch(Builder $query, $values)
     {

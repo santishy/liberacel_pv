@@ -11,7 +11,7 @@ class ProductsSearchController extends Controller
     public function index(Request $request)
     {
         return ProductResource::collection(
-            Product::with('category')->applyFilters()->paginate(20)
+            Product::with('category')->applyFilters()->where('active', true)->paginate(20)
         );
     }
 }

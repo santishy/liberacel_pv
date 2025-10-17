@@ -18,7 +18,10 @@ class ProductController extends Controller
     {
         $this->authorize('view', new Product());
         if (request()->wantsJson()) {
-            return ProductResource::collection(Product::with('category')->applyFilters()->paginate(21));
+            return ProductResource::collection(
+                Product::with('category')
+                    ->applyFilters()->where('active', true)->paginate(21)
+            );
         }
         $query = Category::query();
         $categories = $query->orderBy('name')->isActive(true)->get();
@@ -35,7 +38,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', new Product());
-
+        // TODO: Validar que el sku no exista aunque este inactivo
+        // Y si lo esta avisar al usuario que el producto existe pero esta inactivo
         $this->validateProduct($request);
 
         $product = new Product($request->except('image'));
@@ -78,6 +82,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $this->authorize('update', $product);
+        //TODO: Validar que el sku no exista aunque este inactivo
+        // Y si lo esta avisar al usuario que el producto existe pero esta inactivo
         $this->validateProduct($request);
         $data['image'] = $product->uploadImage();
         $product->update(array_merge($request->except('_method'), $data));
@@ -86,11 +92,17 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $this->authorize('delete', $product);
-        if ($product->purchases()->exists())
-            return response()->json(['message' => 'No se puede eliminar, existen compras con este producto.']);
-        if ($product->sales()->exists())
-            return response()->json(['message' => 'No se puede eliminar, existen ventas con este producto.']);
-        return response()->json(['deleted' => $product->delete()]);
+
+        $product->update(['active' => false]);
+
+        return response()->json(['deleted' => $product]);
+
+        // if ($product->purchases()->exists())
+        //     return response()->json(['message' => 'No se puede eliminar, existen compras con este producto.']);
+        // if ($product->sales()->exists())
+        //     return response()->json(['message' => 'No se puede eliminar, existen ventas con este producto.']);
+
+        //response()->json(['deleted' => $product->delete()]);
     }
     public function validateProduct($request)
     {
