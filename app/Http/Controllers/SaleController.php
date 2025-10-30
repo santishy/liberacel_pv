@@ -60,6 +60,7 @@ class SaleController extends Controller
 
     public function store(StoreSaleRequest $request, Sale $sale)
     {
+        //return response()->json(['message' => 'aqui se usa el store']);
         $this->authorize('create', $sale);
 
         $fields = $request->validated();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SaleTransactionProcessed;
+use App\Events\TransactionComplete;
 use App\Http\Requests\StoreUserRelationshipRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -25,6 +26,7 @@ class UserRelationshipController extends Controller
             $model->update(['status' => 'completed']);
             $inverse = -1;
             $model->handleCredit($model->factors["completed"] * $inverse);
+            TransactionComplete::dispatch($model, $model->factors["completed"]);
             SaleTransactionProcessed::dispatch($model);
         }
 
