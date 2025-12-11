@@ -7,6 +7,8 @@ import mutations from "./mutations";
 import getters from "./getters";
 import sales from "./modules/sales/"
 import clients from "./modules/clients/";
+import inventories from "./modules/inventories";
+import raffles from "./modules/raffles";
 
 function safeParse(key,fallback) {
     const item = localStorage.getItem(key);
@@ -44,6 +46,8 @@ export const store = new Vuex.Store({
     getters,
     modules: {
         sales,
-        clients
+        clients,
+        inventories,
+        raffles
     }
 });

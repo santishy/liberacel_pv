@@ -128,7 +128,10 @@ Vue.component('general-report', require('./components/reports/GeneralComponent.v
  * Checkout
  */
 Vue.component('checkout', require('./components/payment-point/Checkout.vue').default);
-
+/**
+ * Raffles
+ */
+Vue.component('create-raffle', require('./components/raffles/CreateRaffle.vue').default);
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))

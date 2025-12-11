@@ -20,7 +20,10 @@ class Inventory extends Model
         //en la coudmentaicon decia ->withPivot('campo_1','campo_2');
         return $this->belongsToMany(Product::class)->withPivot('stock');
     }
-
+    public function raffles()
+    {
+        return $this->hasMany(Raffle::class);
+    }
     public function hasStock()
     {
         return  $this->products()

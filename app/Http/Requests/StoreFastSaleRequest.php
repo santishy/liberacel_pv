@@ -31,7 +31,8 @@ class StoreFastSaleRequest extends FormRequest
             'qty' => 'required|integer',
             'product_bonus_id' => 'required',
             'client_id' => 'exists:clients,id',
-            'is_credit' => [new IsCreditAccepted(optional($this->route('client_id')))]
+            'is_credit' => [new IsCreditAccepted(optional($this->route('client_id')))],
+            'customer_phone' => 'nullable|string|max:20',
         ];
     }
 }

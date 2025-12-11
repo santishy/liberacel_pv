@@ -31,7 +31,7 @@
                     <label for="" class="form-label">Precio
                         asignado</label>
                     <select name="assigned_price" v-model="form.assigned_price"
-                        plahceholder="Asigna un precio al cliente" class="form-text-input w-full">
+                        placeholder="Asigna un precio al cliente" class="form-text-input w-full">
                         <option disabled value="" selected class="text-slate-500">Asignar un precio</option>
                         <option value="retail_price">Precio al por menor</option>
                         <option value="wholesale_price">Precio al por mayor</option>

@@ -264,4 +264,7 @@ Route::post("client/{sale}/fast-sales", [ClientFastSaleController::class, "store
 
 Route::get("credits/{credit}/notes", [CreditNotesController::class, "index"])->middleware('auth');
 
-
+/**
+ * Raffles
+ */
+Route::resource('raffles', App\Http\Controllers\RaffleController::class)->middleware('auth');

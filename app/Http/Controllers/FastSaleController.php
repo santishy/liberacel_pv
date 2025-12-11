@@ -10,6 +10,7 @@ use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
 use App\Models\FastSale;
 use App\Models\ProductBonus;
+use App\Models\Raffle;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -20,7 +21,7 @@ class FastSaleController extends Controller
     {
         $this->authorize('viewAny', new FastSale);
         if ($request->wantsJson()) {
-           // return response()->json(["query" => FastSale::query()]);
+            // return response()->json(["query" => FastSale::query()]);
             return new  ReportResponse(FastSale::query());
         }
         return view('fast-sales.index');
@@ -42,7 +43,8 @@ class FastSaleController extends Controller
                 $sale = FastSaleResource::make($sale);
             }
         }
-        return view('fast-sales.create', compact('sale', 'productBonuses'));
+        $hasActiveRaffle = Raffle::where('status', 'active')->exists();
+        return view('fast-sales.create', compact('sale', 'productBonuses', 'hasActiveRaffle'));
     }
 
     public function store(StoreFastSaleRequest $request)

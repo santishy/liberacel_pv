@@ -7,6 +7,7 @@ use App\Events\FastSaleUpdated;
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Listeners\AddPointsToCustomerBonus;
+use App\Listeners\AssignRaffleNumberToSale;
 use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
 use App\Listeners\CreateOrUpdateCommission;
@@ -32,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         SaleTransactionProcessed::class => [
             CreateOrUpdateCommission::class,
+            AssignRaffleNumberToSale::class
         ],
         FastSaleUpdated::class => [
             ChangeStatus::class,

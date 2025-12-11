@@ -25,11 +25,10 @@ class CheckoutController extends Controller
     public function store(StoreCheckoutRequest $request)
     {
         Gate::authorize("complete sales checkout");
+
         $model = $this->getModel($request->model, $request->id);
 
         $model->validateUser();
-
-
 
         $model->validateSaleNotCompleted();
 
