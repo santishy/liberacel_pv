@@ -19,6 +19,7 @@
                 </tbody>
             </table>
         </div>
+        <infinite-loading @infinite="getClients"></infinite-loading>
     </layout-component>
 </template>
 <script>
@@ -29,7 +30,8 @@ export default {
 
     data() {
         return {
-            clients: []
+            clients: [],
+            page: 1,
         };
     },
 
@@ -37,15 +39,25 @@ export default {
         EventBus.$on("client-removed", index => {
             this.clients.splice(index, 1);
         });
-        this.getClients();
+
     },
     methods: {
-        getClients() {
+        getClients($state) {
             axios
-                .get("/clients")
+                .get("/clients", {
+                    params: {
+                        page: this.page,
+                    }
+                })
                 .then(res => {
-                    this.clients.push(...res.data.data);
-                    console.log(res.data.data);
+                    if (res.data.data.length) {
+                        this.page += 1;
+                        this.clients.push(...res.data.data);
+                        $state.loaded();
+                    } else {
+                        $state.complete();
+                    }
+
                 })
                 .catch(err => {
                     console.log(err);
