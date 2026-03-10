@@ -14,11 +14,7 @@ use App\Models\Category;
 use App\Models\Inventory;
 use App\Models\Sale;
 use Illuminate\Validation\ValidationException;
-use Facade\Ignition\QueryRecorder\Query;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Bool_;
-use SebastianBergmann\Environment\Console;
+
 
 class SaleController extends Controller
 {
@@ -100,7 +96,7 @@ class SaleController extends Controller
         if ($data['is_credit']) {
             if (!$sale->client_id) {
                 throw ValidationException::withMessages([
-                    'client_id' => 'El campo cliente es requerido'
+                    'client_id' => 'El campo cliente es requerido cuando la venta es a crédito.'
                 ]);
             }
         }

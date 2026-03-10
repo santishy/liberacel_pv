@@ -4085,40 +4085,78 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // props: ['form'],
-  props: ['url'],
+  props: {
+    url: {
+      type: String,
+      required: true
+    },
+    sale: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
   data: function data() {
     return {
       is_credit: false
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    EventBus.$on('associated-user', function () {
+      _this.is_credit = false;
+    });
+  },
   methods: {
     creditStatusChange: function creditStatusChange() {
-      var _this = this;
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var res;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios.post(_this.url, {
+              if (_this2.is_credit) {
+                _context.next = 2;
+                break;
+              }
+              return _context.abrupt("return");
+            case 2:
+              _context.prev = 2;
+              _context.next = 5;
+              return axios.post(_this2.url, {
                 _method: 'PUT',
-                is_credit: _this.is_credit
+                is_credit: _this2.is_credit
               });
-            case 3:
+            case 5:
               res = _context.sent;
-              _context.next = 9;
+              _context.next = 13;
               break;
-            case 6:
-              _context.prev = 6;
-              _context.t0 = _context["catch"](0);
-              EventBus.$emit('errors-found', _context.t0);
-            case 9:
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](2);
+              _this2.$refs.credit.checked = false;
+              _this2.is_credit = false;
+              EventBus.$emit('an-error-ocurred', _context.t0);
+            case 13:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee, null, [[2, 8]]);
       }))();
+    }
+  },
+  watch: {
+    'sale.is_credit': {
+      handler: function handler(newValue) {
+        this.is_credit = newValue;
+      },
+      immediate: true
+    }
+  },
+  computed: {
+    isCredit: function isCredit() {
+      return this.is_credit ? 'Si' : 'No';
     }
   }
 });
@@ -4265,6 +4303,12 @@ __webpack_require__.r(__webpack_exports__);
     uri: {
       type: String,
       required: true
+    },
+    sale: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
     }
   },
   components: {
@@ -4279,11 +4323,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
     this.uriCopy = this.uri;
+    EventBus.$on('associated-user', function () {
+      _this.form = {};
+      _this.client = {};
+    });
   },
   methods: {
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
       if (sessionStorage.getItem('inventory_id')) {
         this.form.inventory_id = sessionStorage.getItem('inventory_id');
       }
@@ -4291,21 +4340,32 @@ __webpack_require__.r(__webpack_exports__);
         var _res$data;
         EventBus.$emit("open-modal-client", true);
         if ((_res$data = res.data) !== null && _res$data !== void 0 && _res$data.sale) {
-          _this.client = res.data.sale.client;
+          _this2.client = res.data.sale.client;
         } else {
-          _this.client = res.data.data;
+          _this2.client = res.data.data;
         }
         EventBus.$emit("product-added-sales-cart", res.data.sale);
         EventBus.$emit("sale-to-client", res.data);
       })["catch"](function (err) {
         var _Object$values, _err$response;
-        _this.$notify({
+        _this2.$notify({
           group: "foo",
           title: "Cliente",
           type: "error",
           text: Object === null || Object === void 0 || (_Object$values = Object.values(err === null || err === void 0 || (_err$response = err.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.errors)) === null || _Object$values === void 0 ? void 0 : _Object$values.flat()[0]
         });
       });
+    }
+  },
+  watch: {
+    sale: {
+      handler: function handler(newValue) {
+        if (newValue !== null && newValue !== void 0 && newValue.client) {
+          this.client = newValue.client;
+          this.form.phone_number = newValue.client.phone_number;
+        }
+      },
+      immediate: true
     }
   },
   computed: {
@@ -4321,6 +4381,12 @@ __webpack_require__.r(__webpack_exports__);
         method: this.method,
         data: this.form
       };
+    },
+    textButton: function textButton() {
+      return Object.keys(this.client).length > 0 ? 'Cambiar cliente' : 'Asociar cliente';
+    },
+    associatedClient: function associatedClient() {
+      return Object.keys(this.client).length > 0;
     }
   }
 });
@@ -10482,7 +10548,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
-//import NavComponent from "../NavComponent.vue";
 
 
 
@@ -14023,6 +14088,7 @@ var render = function render() {
       value: _vm.is_credit,
       expression: "is_credit"
     }],
+    ref: "credit",
     staticClass: "sr-only peer",
     attrs: {
       type: "checkbox"
@@ -14052,7 +14118,9 @@ var render = function render() {
     staticClass: "w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
   }), _vm._v(" "), _c("span", {
     staticClass: "ml-3 text-sky-800 font-mono text-lg"
-  }, [_vm._v("Venta a crédito")])]);
+  }, [_vm._v("Venta a crédito: "), _c("b", {
+    staticClass: "text-xl"
+  }, [_vm._v(_vm._s(_vm.isCredit))])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -14307,11 +14375,9 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("\n                Asociar Cliente\n            ")])])]), _vm._v(" "), _c("information-component", {
+    staticClass: "flex-shrink-0 text-sm border-4 text-white py-1 px-2 rounded",
+    "class": _vm.associatedClient ? "bg-sky-500 hover:bg-sky-700 border-sky-500 hover:border-sky-700" : "bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700"
+  }, [_vm._v("\n                " + _vm._s(_vm.textButton) + " ")])])]), _vm._v(" "), _c("information-component", {
     attrs: {
       id: "client"
     },
@@ -21488,7 +21554,9 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("search-component", {
     staticClass: "md:w-2/4 w-full sm:mt-0 mt-4"
-  })], 1), _vm._v(" "), _c("product-matching"), _vm._v(" "), _c("div", {
+  })], 1), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center w-full"
+  }, [_c("errors-component")], 1), _vm._v(" "), _c("product-matching"), _vm._v(" "), _c("div", {
     staticClass: "w-full flex flex-wrap justify-center items-center"
   }, [_c("div", {
     staticClass: "bg-white mt-4 sm:mt-0 px-2 py-2 w-full md:mx-0 rounded-sm shadow-sm"
@@ -21510,10 +21578,12 @@ var render = function render() {
     staticClass: "flex gap-4 flex-wrap items-center"
   }, [(_vm$localSale = _vm.localSale) !== null && _vm$localSale !== void 0 && _vm$localSale.id ? _c("credit-status", {
     attrs: {
+      sale: _vm.localSale,
       url: "/sales/".concat(_vm.localSale.id)
     }
   }) : _vm._e(), _vm._v(" "), _c("sale-to-customer", {
     attrs: {
+      sale: _vm.localSale,
       uri: "/sales-to-clients"
     }
   })], 1)], 1), _vm._v(" "), _vm.localSale ? _c("div", {

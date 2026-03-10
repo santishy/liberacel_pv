@@ -17,16 +17,16 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('tailwindcss'),
         tailwindcss('./tailwind.config.js')
     ]).version()
-    mix.browserSync('bazar.test');// uso esta configuración para que funcione con herd
+//     mix.browserSync('bazar.test');// uso esta configuración para que funcione con herd
 
     //uso esta configuración para que funcione con laravel sail
-// mix.browserSync({
-//     proxy: 'localhost',
-//     host: '127.0.0.1',
-//     port: 8083,
-//     open: false,
-//     browser: 'Google chrome',
-//     ghostMode: false,
-//     online: true,
-//     watch: true,
-// });
+mix.browserSync({
+    proxy: 'localhost',
+    host: '127.0.0.1',
+    port: 8083,
+    open: false,
+    browser: 'Google chrome',
+    ghostMode: false,
+    online: true,
+    watch: true,
+});

@@ -33,6 +33,9 @@
                     <search-by-category class="sm:w-2/4 w-full sm:mr-2 " :categories="categories"></search-by-category>
                     <search-component class="md:w-2/4 w-full sm:mt-0 mt-4" />
                 </div>
+                <div class="flex items-center w-full">
+                    <errors-component />
+                </div>
                 <product-matching></product-matching>
                 <div class="w-full flex flex-wrap justify-center items-center">
                     <div class="
@@ -60,14 +63,16 @@
                                 class="px-2 py-1 rounded bg-green-400 text-slate-100 font-bold hover:bg-green-600 hover:text-white">Finalizar
                                 venta </button>
                             <div class="flex gap-4 flex-wrap items-center">
-                                <credit-status v-if="localSale?.id" :url="`/sales/${localSale.id}`"></credit-status>
-                                <sale-to-customer uri="/sales-to-clients" />
+                                <credit-status v-if="localSale?.id" :sale="localSale"
+                                    :url="`/sales/${localSale.id}`"></credit-status>
+                                <sale-to-customer :sale="localSale" uri="/sales-to-clients" />
                             </div>
+
                         </div>
                         <div v-if="localSale" :class="[
-                'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
-                alignStatus,
-            ]">
+                            'flex flex-wrap px-2 py-2 items-center mb-4 border-b-2 border-blue-400',
+                            alignStatus,
+                        ]">
                             <div class="text-gray-600">
                                 ID Venta - #{{ localSale?.id }}
                             </div>
@@ -98,17 +103,17 @@ import SearchComponent from "../products/SearchComponent.vue";
 import InventoryList from "../inventories/InventoryList.vue";
 import { mapMutations, mapGetters } from "vuex";
 import SalesCart from "./SalesCart";
-//import NavComponent from "../NavComponent.vue";
 import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import SearchByCategory from "../products/SearchByCategory.vue";
 import DeleteSale from "./DeleteSale.vue";
 export default {
+
     components: {
         SearchComponent,
         SalesCart,
         ProductMatching,
         InventoryList,
-       // NavComponent,
+        // NavComponent,
         SaleToCustomer,
         SearchByCategory,
         DeleteSale,

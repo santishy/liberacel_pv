@@ -6,11 +6,10 @@
                     class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                     type="text" placeholder="Número de teléfono del cliente." name="phone_number"
                     v-model="form.phone_number" aria-label="Full name" />
-                <button
-                    class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-                    type="submit">
-                    Asociar Cliente
-                </button>
+                <button class="flex-shrink-0 text-sm border-4 text-white py-1 px-2 rounded" :class="associatedClient
+                    ? 'bg-sky-500 hover:bg-sky-700 border-sky-500 hover:border-sky-700'
+                    : 'bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700'">
+                    {{ textButton }} </button>
             </div>
 
         </form>
@@ -48,6 +47,10 @@ export default {
             type: String,
             required: true,
         },
+        sale: {
+            type: Object,
+            default: () => ({}),
+        }
     },
     components: {
         InformationComponent
@@ -62,6 +65,10 @@ export default {
     },
     mounted() {
         this.uriCopy = this.uri;
+        EventBus.$on('associated-user', () => {
+            this.form = {};
+            this.client = {};
+        })
     },
     methods: {
         submit() {
@@ -79,6 +86,7 @@ export default {
 
                         this.client = res.data.data
                     }
+
                     EventBus.$emit("product-added-sales-cart", res.data.sale)
 
                     EventBus.$emit("sale-to-client", res.data);
@@ -96,6 +104,17 @@ export default {
         },
 
     },
+    watch: {
+        sale: {
+            handler(newValue) {
+                if (newValue?.client) {
+                    this.client = newValue.client;
+                    this.form.phone_number = newValue.client.phone_number;
+                }
+            },
+            immediate: true,
+        }
+    },
     computed: {
         axiosConfig() {
             if (this.uriCopy === '/clients/' ||
@@ -110,7 +129,14 @@ export default {
                 method: this.method,
                 data: this.form,
             }
-        }
+        },
+        textButton() {
+            return Object.keys(this.client).length > 0 ? 'Cambiar cliente' : 'Asociar cliente';
+        },
+        associatedClient() {
+            return Object.keys(this.client).length > 0;
+        },
     }
+
 };
 </script>
