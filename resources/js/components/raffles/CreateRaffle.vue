@@ -1,5 +1,5 @@
 <template>
-    <layout-component >
+    <layout-component>
         <div class="flex justify-center items-center flex-col w-full px-4">
             <raffle-form></raffle-form>
         </div>
@@ -11,14 +11,21 @@ import RaffleForm from './RaffleForm.vue';
 export default {
     name: "CreateRaffle",
     components: { RaffleForm },
-     mounted() {
+    provide() {
+        return {
+            raffleCtx: {
+                raffle: null
+            }
+        }
+    },
+    mounted() {
         this.$store.dispatch('inventories/fetchInventories');
-       },
+    },
 
     data() {
-        return {  }
+        return {}
     },
-    methods: {  }
+    methods: {}
 
 }
 </script>

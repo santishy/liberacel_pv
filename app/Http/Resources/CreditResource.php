@@ -20,8 +20,8 @@ class CreditResource extends JsonResource
             'status' => __("status.{$this->resource->status}"),
             'amount_paid' => $this->resource->amount_paid,
             'total_amount' => $this->resource->total_amount,
-            'formatted_amount_paid' => "$" . number_format($this->resource->amount_paid, 2),
-            'total_amount_formatted' => "$" . number_format($this->resource->total_amount, 2),
+            'formatted_amount_paid' => '$'.number_format($this->resource->amount_paid, 2),
+            'total_amount_formatted' => '$'.number_format($this->resource->total_amount, 2),
             'client' => $this->whenLoaded('client'),
         ];
     }

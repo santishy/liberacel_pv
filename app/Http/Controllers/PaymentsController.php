@@ -16,34 +16,37 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        $this->authorize("viewAny", new Payment);
+        $this->authorize('viewAny', new Payment);
 
         if (request()->wantsJson()) {
             $payments = Payment::with(['client', 'credit'])->applyFilters();
             $data = [
-                "data" => PaymentResource::collection(
+                'data' => PaymentResource::collection(
                     $payments->paginate(5)
-                )
+                ),
             ];
             if (request('page') == 1) {
                 $data['total'] = $payments->sum('amount');
             }
+
             return response()->json($data);
         }
         $inventories = Inventory::all('id', 'name');
+
         return view('payments.index', [
-            'inventories' => $inventories
+            'inventories' => $inventories,
         ]);
     }
+
     public function store(SavePaymentRequest $request)
     {
-        $this->authorize("create", new Payment);
+        $this->authorize('create', new Payment);
         $request->merge(['status' => true]);
         $data = $request->all();
         $credit = Credit::find(request()->credit_id);
         if ($request->amount > $credit->total_amount) {
             throw ValidationException::withMessages([
-                'amount' => 'El abono no puede ser mayor al adeudo actual $' . number_format($credit->total_amount, 2, '.', ',')
+                'amount' => 'El abono no puede ser mayor al adeudo actual $'.number_format($credit->total_amount, 2, '.', ','),
             ]);
         }
         // if ($credit->total_amount == 0) {
@@ -54,22 +57,23 @@ class PaymentsController extends Controller
             $payment = Payment::create($data);
             $updatedCredit = $payment->handleCredit();
             DB::commit();
+
             return response([
                 'payment' => PaymentResource::make($payment),
             ], 201);
         } catch (\Exception $e) {
             DB::rollback();
             throw ValidationException::withMessages([
-                'db' => $e->getMessage()
+                'db' => $e->getMessage(),
             ]);
         }
     }
 
     public function update(Request $request, Payment $payment)
     {
-        $this->authorize("update", $payment);
+        $this->authorize('update', $payment);
         $data = $request->validate([
-            "amount" => ['required', 'min:1', 'numeric']
+            'amount' => ['required', 'min:1', 'numeric'],
         ]);
         DB::beginTransaction();
         try {
@@ -77,38 +81,43 @@ class PaymentsController extends Controller
             $payment->update($data);
             $updatedCredit = $payment->handleCredit();
             DB::commit();
-            return response()->json([
-                "payment" => PaymentResource::make($payment),
 
-                //"credit" => CreditResource::make($updatedCredit->load('client')),
+            return response()->json([
+                'payment' => PaymentResource::make($payment),
+
+                // "credit" => CreditResource::make($updatedCredit->load('client')),
             ]);
         } catch (\Exception $e) {
             $this->handleErrorWithRollback($e);
         }
     }
+
     public function destroy(Payment $payment)
     {
-        $this->authorize("delete", $payment);
+        $this->authorize('delete', $payment);
         DB::beginTransaction();
         try {
-            $payment->update(["status" => 0]);
+            $payment->update(['status' => 0]);
             $payment->fresh();
             $updatedCredit = $payment->handleCredit();
             DB::commit();
+
             return response()->json([
-                "payment" => PaymentResource::make($payment),
-                //"credit" => CreditResource::make($updatedCredit->load('client')),
+                'payment' => PaymentResource::make($payment),
+                // "credit" => CreditResource::make($updatedCredit->load('client')),
             ], 202);
         } catch (\Exception $e) {
             $this->handleErrorWithRollback($e);
         }
     }
+
     private function handleErrorWithRollback($e)
     {
         DB::rollBack();
+
         return response()->json([
-            "error" => "An error has ocurred",
-            "exception" => $e->getMessage()
+            'error' => 'An error has ocurred',
+            'exception' => $e->getMessage(),
         ], 500);
     }
 }

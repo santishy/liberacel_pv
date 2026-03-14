@@ -8,10 +8,10 @@ use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Listeners\AddPointsToCustomerBonus;
 use App\Listeners\AssignRaffleNumberToSale;
-use App\Listeners\UpdateInventory;
 use App\Listeners\ChangeStatus;
 use App\Listeners\CreateOrUpdateCommission;
 use App\Listeners\DecreaseCustomerBonusDiscountPoints;
+use App\Listeners\UpdateInventory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -33,7 +33,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         SaleTransactionProcessed::class => [
             CreateOrUpdateCommission::class,
-            AssignRaffleNumberToSale::class
+            AssignRaffleNumberToSale::class,
         ],
         FastSaleUpdated::class => [
             ChangeStatus::class,
@@ -42,7 +42,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         ApplyElectronicMoneyDiscount::class => [
             DecreaseCustomerBonusDiscountPoints::class,
-        ]
+        ],
     ];
 
     /**

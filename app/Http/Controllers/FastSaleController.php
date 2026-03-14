@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Facades\InventoryContext;
 use App\Http\Requests\StoreFastSaleRequest;
 use App\Http\Requests\UpdateFastSaleRequest;
-use App\Http\Resources\FastSaleCollection;
 use App\Http\Resources\FastSaleResource;
 use App\Http\Responses\ReportResponse;
 use App\Models\FastSale;
@@ -22,8 +21,9 @@ class FastSaleController extends Controller
         $this->authorize('viewAny', new FastSale);
         if ($request->wantsJson()) {
             // return response()->json(["query" => FastSale::query()]);
-            return new  ReportResponse(FastSale::query());
+            return new ReportResponse(FastSale::query());
         }
+
         return view('fast-sales.index');
     }
 
@@ -36,14 +36,15 @@ class FastSaleController extends Controller
         $sale = optional(fastSale::find(session('fast_sale_id')))->load('customerBonus', 'productBonuses');
 
         if (isset($sale)) {
-            if ($sale->status != "pending") {
-                session()->forget("sale-id");
+            if ($sale->status != 'pending') {
+                session()->forget('sale-id');
                 $sale = null;
-            } elseif ($sale->status === "pending") {
+            } elseif ($sale->status === 'pending') {
                 $sale = FastSaleResource::make($sale);
             }
         }
-        $hasActiveRaffle = Raffle::where('status', 'active')->exists();
+        $hasActiveRaffle = (bool) Raffle::activeForInventory(InventoryContext::id());
+
         return view('fast-sales.create', compact('sale', 'productBonuses', 'hasActiveRaffle'));
     }
 
@@ -58,34 +59,43 @@ class FastSaleController extends Controller
         /**
          * Pasar a controlador CheckoutController
          */
-        //$fastSale->addBonus();
+        // $fastSale->addBonus();
+        $updates = [];
 
         if (
             $request->is_credit &&
             $request->client_id &&
             $fastSale->client_id === null
         ) {
-
-            $fastSale->update(
-                $request->only(['is_credit', 'client_id'])
-            );
+            $updates['is_credit'] = $request->is_credit;
+            $updates['client_id'] = $request->client_id;
         }
+        $hasActiveRaffle = (bool) Raffle::activeForInventory(InventoryContext::id());
+        if ($request->filled('customer_phone') && $hasActiveRaffle) {
+
+            $updates['customer_phone'] = $request->customer_phone;
+        }
+        $fastSale->update($updates);
         $fastSaleFresh = $fastSale->fresh();
 
         return FastSaleResource::make($fastSaleFresh->load('productBonuses', 'customerBonus'));
     }
+
     private function clearFastSaleSessionIfNotPending($fastSale)
     {
-        if ($fastSale->status != "pending") {
+        if ($fastSale->status != 'pending') {
             session()->forget('fast_sale_id');
         }
     }
+
     private function isTheStatusCompleted($fastSale)
     {
-        if ($fastSale->status === "completed") {
-            session()->forget("fast_sale_id");
+        if ($fastSale->status === 'completed') {
+            session()->forget('fast_sale_id');
+
             return FastSale::findOrCreateFastSale();
         }
+
         return $fastSale;
     }
 
@@ -94,7 +104,6 @@ class FastSaleController extends Controller
         $this->authorize('update', new FastSale);
 
         $data = $request->all();
-
 
         if ($request->has('index')) {
 
@@ -106,7 +115,7 @@ class FastSaleController extends Controller
         if ($request->has('is_credit')) {
             if ($sale->client_id === null && $request->is_credit) {
                 throw ValidationException::withMessages([
-                    'client_id' => 'El cliente es requerido para realizar una venta a crédito'
+                    'client_id' => 'El cliente es requerido para realizar una venta a crédito',
                 ]);
             }
             $sale->is_credit = $request->is_credit;

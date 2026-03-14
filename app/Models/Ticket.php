@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     use HasFactory;
+
     protected $fillable = ['address', 'image', 'company', 'footer', 'phone_number'];
 
     /**
@@ -18,21 +19,22 @@ class Ticket extends Model
     {
         $GLOBALS['bodyHeight'] = 0;
         $dompdf->setCallbacks(
-            array(
-                'myCallbacks' => array(
+            [
+                'myCallbacks' => [
                     'event' => 'end_frame',
-                    'f' => function (\Dompdf\Frame $frame) { //function ($infos) {
+                    'f' => function (\Dompdf\Frame $frame) { // function ($infos) {
                         //  $frame = $infos["frame"];
-                        if (strtolower($frame->get_node()->nodeName) === "body") {
+                        if (strtolower($frame->get_node()->nodeName) === 'body') {
                             $padding_box = $frame->get_padding_box();
                             $GLOBALS['bodyHeight'] += $padding_box['h'];
                         }
-                    }
-                )
-            )
+                    },
+                ],
+            ]
         );
         $dompdf->render();
         unset($dompdf);
         return $GLOBALS['bodyHeight'];
     }
+   
 }

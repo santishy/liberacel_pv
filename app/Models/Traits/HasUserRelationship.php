@@ -8,17 +8,17 @@ use Illuminate\Validation\ValidationException;
 
 trait HasUserRelationship
 {
-
     public function checkCredentials($username, $password)
     {
         $user = User::where('username', $username)
             ->where('active', true)->first();
 
-        if (!$user || !Hash::check($password, optional($user)->password)) {
+        if (! $user || ! Hash::check($password, optional($user)->password)) {
             throw ValidationException::withMessages([
-                'check' => 'Usuario ó contraseña incorrectos.'
+                'check' => 'Usuario ó contraseña incorrectos.',
             ]);
         }
+
         return $user;
     }
 

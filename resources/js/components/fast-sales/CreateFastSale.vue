@@ -20,7 +20,6 @@
 
 <script>
 import { mapMutations, mapState } from "vuex"
-//import NavComponent from "../NavComponent.vue";
 import FastSaleForm from "./FastSaleForm.vue";
 import ConceptsList from "./ConceptsList.vue";
 import Subtotals from "./Subtotals.vue";
@@ -28,7 +27,6 @@ import SaleToCustomer from "../credits/clients/SaleToCustomer.vue";
 import CreditStatus from "../credits/CreditStatus.vue";
 export default {
     components: {
-        //  NavComponent,
         FastSaleForm,
         ConceptsList,
         Subtotals,
@@ -42,7 +40,7 @@ export default {
         },
         hasActiveRaffle: {
             type: Boolean,
-            default: false
+           default:false
         },
         productBonuses: { type: Array },
     },
@@ -51,9 +49,14 @@ export default {
             showSaleToCustomer: false
         }
     }, */
+    mounted(){
+        
+    },
     created() {
-        this.SET_CURRENT_FAST_SALE(this.sale);
+        console.log("entro aki: ",this.sale)
         this.setActiveRaffle(this.hasActiveRaffle);
+        this.SET_CURRENT_FAST_SALE(this.sale);
+        
         /* EventBus.$on('associated-user',(id)=>{
             this.SET_CURRENT_FAST_SALE({});
         }) */
@@ -67,7 +70,8 @@ export default {
          }) */
     },
     methods: {
-        ...mapMutations(["SET_CURRENT_FAST_SALE","setActiveRaffle"]),
+        ...mapMutations(["SET_CURRENT_FAST_SALE"]),
+        ...mapMutations("raffles",["setActiveRaffle"])
     },
     computed: {
         ...mapState(["currentFastSale"]),

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CreditResource;
 use App\Http\Resources\PaymentResource;
 use App\Models\Credit;
-use Illuminate\Http\Request;
 
 class CreditPaymentsController extends Controller
 {
@@ -15,13 +14,13 @@ class CreditPaymentsController extends Controller
     public function show(Credit $credit)
     {
 
-        $this->authorize("view", $credit);
+        $this->authorize('view', $credit);
 
         return response()->json([
-            "credit" => CreditResource::make($credit),
-            "payments" => PaymentResource::collection(
+            'credit' => CreditResource::make($credit),
+            'payments' => PaymentResource::collection(
                 $credit->payments()->where('status', true)->orderBy('id', 'desc')->paginate(5)
-            )
+            ),
         ]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CreditNoteResource;
 use App\Models\Credit;
-use Illuminate\Http\Request;
 
 class CreditNotesController extends Controller
 {
@@ -21,7 +20,7 @@ class CreditNotesController extends Controller
         $notes = $sales->merge($fastSales);
 
         return response()->json([
-            'notes' => $notes
+            'notes' => $notes,
         ]);
     }
 }

@@ -13,6 +13,8 @@
             <span class="text-sm text-gray-600">{{ saleDetails.created_at }}</span>
         </div>
         <div>
+        </div>
+        <div>
             <span class="text-sm text-gray-600">Tipo de venta: </span>
             <span class="text-sm font-semibold capitalize text-gray-700">{{ saleDetails.typeOfSale }}</span>
         </div>
@@ -42,6 +44,8 @@ export default {
         cleanCheckout() {
             EventBus.$emit("clean-checkout");
         }
-    }
+    },
+
 }
+
 </script>

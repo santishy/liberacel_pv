@@ -18,19 +18,20 @@ class RefundController extends Controller
             $sale = Sale::with('client', 'products')->applyFilters();
             if ($sale->count() <= 0) {
                 throw ValidationException::withMessages([
-                    'id' => 'La Ventas no fue encontrada o el estado no es completado.'
+                    'id' => 'La Ventas no fue encontrada o el estado no es completado.',
                 ]);
             }
             $sale = $sale->first();
+
             //   session()->put('sale_id', $sale->id);
             return response()->json([
-                'sale' => TransactionResource::make($sale)
+                'sale' => TransactionResource::make($sale),
             ]);
         }
     }
-    public function index()
-    {
-    }
+
+    public function index() {}
+
     public function create()
     {
         return view('refunds.create');
@@ -45,35 +46,32 @@ class RefundController extends Controller
             'refund_products.*.product_id' => 'required|exists:products,id',
             'refund_products.*.refund_amount' => 'required|min:1',
             'refund_products.*.sku' => '',
-            'total_refund' => 'required|numeric'
+            'total_refund' => 'required|numeric',
         ]);
-        $sale = Sale::with(['inventory','products', 'inventory.products'])
+        $sale = Sale::with(['inventory', 'products', 'inventory.products'])
             ->find($data['sale_id']);
         $refundAmount = 0;
         foreach ($data['refund_products'] as $item) {
             $sale->refundProduct($item['product_id'], $item['qty']);
             $sale->inventory->products()->updateExistingPivot(
                 $item['product_id'],
-                ['stock' => DB::raw('stock + ' . $item['refund_amount'])]
+                ['stock' => DB::raw('stock + '.$item['refund_amount'])]
             );
         }
         $refund = $sale->refunds()->create([
             'user_id' => Auth::user()->id,
             'comment' => $request->comment,
-            'amount' =>  $request->total_refund,
-            'products' => collect($data['refund_products'])->pluck('sku')
+            'amount' => $request->total_refund,
+            'products' => collect($data['refund_products'])->pluck('sku'),
         ]);
+
         return response()->json([
             'refund' => $refund,
-            'skus' => collect($data['refund_products'])->pluck('sku')
+            'skus' => collect($data['refund_products'])->pluck('sku'),
         ]);
     }
 
-    public function edit()
-    {
-    }
+    public function edit() {}
 
-    public function update(Request $request, Refund $refund)
-    {
-    }
+    public function update(Request $request, Refund $refund) {}
 }

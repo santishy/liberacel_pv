@@ -12,8 +12,6 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @param  string|null  ...$guards
      * @return mixed
      */
@@ -23,11 +21,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if (Auth::check())
+                if (Auth::check()) {
                     return $next($request);
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }
+
         return $next($request);
     }
 }

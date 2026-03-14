@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Events\TransactionComplete;
-use App\Http\Resources\PurchaseResource;
 use App\Http\Resources\ProductResource;
-use App\Http\Resources\TransactionResource;
+use App\Http\Resources\PurchaseResource;
 use App\Http\Responses\ReportResponse;
 use App\Http\Traits\HasTransaction;
 use App\Models\Inventory;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 
 class PurchaseController extends Controller
 {
     use HasTransaction;
+
     public function index()
     {
         $this->authorize('viewAny', new Purchase);
@@ -26,30 +24,33 @@ class PurchaseController extends Controller
             return new ReportResponse(Purchase::query());
         }
         $inventories = Inventory::all('id', 'name');
+
         return view(
             'transactions.index',
             [
                 'uri' => '/purchases',
                 'name' => 'Compras',
                 'isSale' => false,
-                'inventories' => $inventories
+                'inventories' => $inventories,
             ]
         );
     }
-    /*FALTA VALIDAR QUE EL PRODUCTO NO SE REPITA EN LA MISMA COMPRA!!!  PUEDE AGREGARSE OTRO AL DARLE DOBLE CLICK ;) */
+
+    /* FALTA VALIDAR QUE EL PRODUCTO NO SE REPITA EN LA MISMA COMPRA!!!  PUEDE AGREGARSE OTRO AL DARLE DOBLE CLICK ;) */
     public function store(Request $request)
     {
 
         $this->authorize('create', new Purchase);
         request()->validate(
             [
-                'product_id' => 'exists:products,id'
+                'product_id' => 'exists:products,id',
             ]
         );
         $purchase = Purchase::findOrCreateThePurchase();
-        //$productInPurchase = $purchase->getProductInPurchase();
+        // $productInPurchase = $purchase->getProductInPurchase();
 
         $purchase->addProduct();
+
         /*if ($productInPurchase->exists()) {
             $productInPurchase->updateExistingPivot(
                 $request->product_id,
@@ -73,36 +74,40 @@ class PurchaseController extends Controller
         $productsInPurchase = ProductResource::collection($purchase->products()->with('category')->get())->resolve();
         $totalPurchase = $purchase->totalPurchase();
         $inventories = Inventory::all();
+
         return view('purchases.show')
             ->with(compact('productsInPurchase'))
             ->with(compact('totalPurchase'))
             ->with(compact('purchase'))
             ->with(compact('inventories'));
     }
+
     public function edit(Purchase $purchase) {}
+
     public function update(Request $request, Purchase $purchase)
     {
         $this->authorize('update', $purchase); // puede ser el metodo create?
         $request->validate([
             'status' => ['required'],
-            'inventory_id' => ['required']
+            'inventory_id' => ['required'],
         ], [
-            "status" => "El status es requerido",
-            "inventory_id" => "El almacen es requerido."
+            'status' => 'El status es requerido',
+            'inventory_id' => 'El almacen es requerido.',
         ]);
-        if ($request->status === 'completed' && $purchase->status === "completed") {
-            //new ValidationException()
+        if ($request->status === 'completed' && $purchase->status === 'completed') {
+            // new ValidationException()
         }
-        if ($request->status === 'completed')
+        if ($request->status === 'completed') {
             $this->deleteSessionVariable('purchase_id');
+        }
 
         $purchase->update($request->all());
-
 
         TransactionComplete::dispatch($purchase);
 
         return new PurchaseResource($purchase);
     }
+
     public function destroy(Purchase $purchase)
     {
         $this->authorize('delete', $purchase);
@@ -110,8 +115,9 @@ class PurchaseController extends Controller
         $purchase->status = 'cancelled';
         $purchase->save();
         $this->deleteSessionVariable('purchase_id');
+
         return response()->json([
-            'status' => $purchase->status
+            'status' => $purchase->status,
         ]);
     }
 }

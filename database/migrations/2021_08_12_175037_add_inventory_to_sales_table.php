@@ -31,9 +31,8 @@ class AddInventoryToSalesTable extends Migration
     {
         Schema::table('sales', function (Blueprint $table) {
 
-
             $table->dropForeign(['inventory_id']);
-            $table->dropColumn("inventory_id");
+            $table->dropColumn('inventory_id');
         });
     }
 }

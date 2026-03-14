@@ -8,28 +8,27 @@ use Illuminate\Contracts\Support\Responsable;
 
 class ReportResponse implements Responsable
 {
-
     public $model;
 
-    function __construct($model)
+    public function __construct($model)
     {
         $this->model = $model;
     }
 
-    function toResponse($request)
+    public function toResponse($request)
     {
         $transactions = $this->model->include()->applyFilters();
-        //AGREGUE ESTA LINEA PARA OMITIR LAS VENTAS CANCELADAS
+        // AGREGUE ESTA LINEA PARA OMITIR LAS VENTAS CANCELADAS
         // $transactions->where('status', '!=', 'cancelled');
         //  $className = class_basename($this->model);
         if ($this->isFastSale($request->isFastSale)) {
             $data = [
-                'data' =>  new FastSaleCollection($transactions
+                'data' => new FastSaleCollection($transactions
                     ->paginate(25)),
             ];
         } else {
             $data = [
-                'data' =>  TransactionResource::collection(
+                'data' => TransactionResource::collection(
                     $transactions->paginate(25)
                 ),
             ];
@@ -37,12 +36,13 @@ class ReportResponse implements Responsable
 
         if (request('page') == 1) {
             $total = $transactions->sum('total');
-            $data["rawTotal"] = $total;
+            $data['rawTotal'] = $total;
             $data['total'] = number_format($total, 2);
         }
 
         return response()->json($data);
     }
+
     private function isFastSale($value)
     {
         return filter_var($value, FILTER_VALIDATE_BOOLEAN);

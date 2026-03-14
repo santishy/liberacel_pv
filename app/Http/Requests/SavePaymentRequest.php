@@ -24,9 +24,9 @@ class SavePaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            "client_id" => ["required", "exists:clients,id"],
-            "credit_id" => ["required", "exists:credits,id"],
-            "amount" => ["required", "min:1", "numeric"]
+            'client_id' => ['required', 'exists:clients,id'],
+            'credit_id' => ['required', 'exists:credits,id'],
+            'amount' => ['required', 'min:1', 'numeric'],
         ];
     }
 }

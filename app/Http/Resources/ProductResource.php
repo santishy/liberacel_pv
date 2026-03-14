@@ -22,9 +22,9 @@ class ProductResource extends JsonResource
             'retail_price' => $this->retail_price,
             'image_url' => $this->image,
             'distributor_price' => $this->distributor_price,
-            'formatted_wholesale_price' => '$' . number_format($this->wholesale_price, 2),
-            'formatted_retail_price' => '$' . number_format($this->retail_price, 2),
-            'formatted_distributor_price' => '$' . number_format($this->distributor_price, 2),
+            'formatted_wholesale_price' => '$'.number_format($this->wholesale_price, 2),
+            'formatted_retail_price' => '$'.number_format($this->retail_price, 2),
+            'formatted_distributor_price' => '$'.number_format($this->distributor_price, 2),
             'sale_quantity' => $this->whenPivotLoaded('product_sale', function () {
                 return $this->pivot->qty;
             }),
@@ -37,10 +37,10 @@ class ProductResource extends JsonResource
             'purchase_price' => $this->whenPivotLoaded('product_purchase', function () {
                 return $this->pivot->purchase_price;
             }),
-            'stock' =>  $this->whenPivotLoaded('inventory_product', function () {
+            'stock' => $this->whenPivotLoaded('inventory_product', function () {
                 return $this->pivot->stock;
             }),
-            'category_name' =>  $this->category->name,
+            'category_name' => $this->category->name,
         ];
     }
 }

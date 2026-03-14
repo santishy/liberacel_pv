@@ -18,7 +18,7 @@ class PermissionResource extends JsonResource
             'name' => $this->name,
             'id' => $this->id,
             'checked' => false,
-            'translate' => __("permissions.{$this->name}")
+            'translate' => __("permissions.{$this->name}"),
         ];
     }
 }

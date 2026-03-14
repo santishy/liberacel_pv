@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('end_date')->nullable();
             $table->decimal('min_sale_total', 8, 2)->default(5);
             $table->enum('status', ['active', 'inactive', 'finished'])->default('active');
+            $table->integer('total_numbers')->default(0);
             $table->timestamps();
         });
     }

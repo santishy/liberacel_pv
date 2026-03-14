@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\SaleTransactionProcessed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class CreateOrUpdateCommission
 {
@@ -17,10 +15,10 @@ class CreateOrUpdateCommission
     {
         //
     }
+
     /**
      * Handle the event.
      *
-     * @param  \App\Events\SaleTransactionProcessed  $event
      * @return void
      */
     public function handle(SaleTransactionProcessed $event)
@@ -28,7 +26,7 @@ class CreateOrUpdateCommission
         $model = $event->model;
         switch ($model->status) {
             case 'completed':
-                //comprueba que no sea recursivo esto cuando se agrega el dispatch directamente en el modelo
+                // comprueba que no sea recursivo esto cuando se agrega el dispatch directamente en el modelo
                 /* if ($model->getOriginal('status') == 'completed') {
                     break;
                 } */

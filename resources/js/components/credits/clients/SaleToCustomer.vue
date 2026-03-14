@@ -42,6 +42,7 @@
 <script>
 
 import InformationComponent from "../../modals/InformationComponent.vue";
+import { mapGetters } from "vuex";
 export default {
     props: {
         uri: {
@@ -54,14 +55,26 @@ export default {
     },
     data() {
         return {
-            form: {},
+            form: {
+                phone_number:''
+            },
             client: {},
             uriCopy: null,
             method: 'POST',
         };
     },
     mounted() {
+        console.log('uri: ',this.uri)
         this.uriCopy = this.uri;
+    },
+    watch:{
+        getCustomerPhone:
+        {
+            immediate:true,
+            handler(val){
+                this.form.phone_number = val;
+            }
+        }
     },
     methods: {
         submit() {
@@ -97,7 +110,9 @@ export default {
 
     },
     computed: {
+        ...mapGetters("raffles",["getCustomerPhone"]),
         axiosConfig() {
+            //creo que el primer if, nunca entra en toda la app, revisar!! 
             if (this.uriCopy === '/clients/' ||
                 this.uriCopy === `/clients/${this.form.phone_number}`) {
                 this.uriCopy = this.uri + this.form.phone_number;

@@ -19,8 +19,11 @@ class Product extends Model
     {
         $index = 0;
         foreach (Str::of($values)->explode(' ') as $value) {
-            if ($index == 0) $clause = 'where';
-            else $clause = 'orWhere';
+            if ($index == 0) {
+                $clause = 'where';
+            } else {
+                $clause = 'orWhere';
+            }
 
             $query->{$clause}('sku', 'LIKE', "%{$value}%")
                 ->orWhere('description', 'LIKE', "%{$value}%");
@@ -32,6 +35,7 @@ class Product extends Model
     {
         $query->where('category_id', $id);
     }
+
     public function sales()
     {
         return $this->belongsToMany(Sale::class);
@@ -56,8 +60,8 @@ class Product extends Model
     {
 
         if (request()->exists('image')) {
-            if (!is_null($this->image)) {
-                if (file_exists(storage_path('app/' . $this->image))) {
+            if (! is_null($this->image)) {
+                if (file_exists(storage_path('app/'.$this->image))) {
                     Storage::delete($this->image);
                 }
             }
@@ -67,10 +71,12 @@ class Product extends Model
             $resize = $img->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $name = str::uuid() . '.' . request()->file('image')->extension();
-            $resize->save(storage_path('app/public/images/' . $name));
+            $name = str::uuid().'.'.request()->file('image')->extension();
+            $resize->save(storage_path('app/public/images/'.$name));
+
             return Storage::url("public/images/$name");
         }
-        return "/images/not-found.png";
+
+        return '/images/not-found.png';
     }
 }

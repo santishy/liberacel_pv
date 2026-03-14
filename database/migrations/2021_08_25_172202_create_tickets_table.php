@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
             $table->string('company');
             $table->string('address');
             $table->string('phone_number');
-            $table->string('footer',500);
+            $table->string('footer', 500);
             $table->string('image')->nullable();
             $table->timestamps();
         });

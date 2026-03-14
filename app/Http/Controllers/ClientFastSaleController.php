@@ -11,14 +11,14 @@ class ClientFastSaleController extends Controller
     public function store(FastSale $sale, Request $request)
     {
         $data = $request->validate([
-            "phone_number" => "required|exists:clients,phone_number",
+            'phone_number' => 'required|exists:clients,phone_number',
         ]);
 
-        $client = Client::where("phone_number", $data["phone_number"])->first();
+        $client = Client::where('phone_number', $data['phone_number'])->first();
 
-        if (!$client) {
+        if (! $client) {
             return response()->json([
-                "message" => "Client not found",
+                'message' => 'Client not found',
             ], 404);
         }
 
@@ -27,7 +27,7 @@ class ClientFastSaleController extends Controller
         $sale->save();
 
         return response()->json([
-            "sale" => $sale,
+            'sale' => $sale,
         ]);
     }
 }

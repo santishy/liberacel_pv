@@ -12,7 +12,7 @@
         <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Categoría</label>
             <search-select class="w-full" :collection="productBonuses"
-            input-class="form-text-input w-full"></search-select>
+                input-class="form-text-input w-full"></search-select>
         </div>
         <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Precio</label>
@@ -24,29 +24,28 @@
         <div class="col-span-2 sm:col-span-1">
             <label class="form-label">Cantidad</label>
             <input type="text" name="qty" ref="qty" v-model="form.qty" class="form-text-input w-full"
-            placeholder="Cantidad de venta" @keydown.enter="submit" @click.prevent="focusedIndex = 2"
-            @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
-            autocomplete="off" />
+                placeholder="Cantidad de venta" @keydown.enter="submit" @click.prevent="focusedIndex = 2"
+                @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
+                autocomplete="off" />
         </div>
-        <div v-if="hasActiveRaffle" class="col-span-2 sm:col-span-1">
+        <div v-if="hasActiveRaffle && !hasCurrentFastSale" class="col-span-2 sm:col-span-1">
             <label class="form-label">Teléfono</label>
-            <input type="text" ref="customer_phone" name="customer_phone" v-model="form.customer_phone" class="form-text-input w-full"
-                placeholder="Nom. teléfono para rifa" @click.prevent="focusedIndex = 1" @keydown.enter="submit"
-                @keydown.down.exact.prevent="nextFocus" @keydown.up.exact.prevent="previousFocus"
-                @keydown.ctrl.space.exact.prevent="openModal" autocomplete="off" />
+            <input type="text" ref="customer_phone" name="customer_phone" v-model="customerPhone"
+                class="form-text-input w-full" placeholder="Nom. teléfono para rifa" @click.prevent="focusedIndex = 1"
+                @keydown.enter="submit" @keydown.down.exact.prevent="nextFocus"
+                @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
+                autocomplete="off" />
         </div>
     </form>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapGetters, mapState } from "vuex";
 import SearchSelect from "../partials/SearchSelect.vue";
-// import CreditStatus from "../credits/CreditStatus.vue";
 
 export default {
     components: {
         SearchSelect,
-        // CreditStatus,
     },
     props: {
         productBonuses: {
@@ -74,12 +73,21 @@ export default {
     },
     methods: {
         ...mapMutations(['SET_CURRENT_FAST_SALE']),
+        ...mapMutations('raffles', ['setCustomerPhone']),
         async submit() {
+            const payload = {
+                ...this.form
+            }
+            if (!this.hasCurrentFastSale && this.customerPhone) {
+                payload.customer_phone = this.customerPhone;
+            }
             try {
                 this.toggleDisabled();
                 const {
                     data: { data },
-                } = await axios.post("/fast-sales", this.form);
+                } = await axios.post("/fast-sales", {
+                    ...payload
+                });
 
                 EventBus.$emit("fast-sale", data);
 
@@ -88,7 +96,7 @@ export default {
                 EventBus.$emit("reset-search-select");
 
                 this.form = {};
-
+                this.customerPhone = '';
                 this.notify({
                     title: "Venta rapida",
                     message: "Producto agregado",
@@ -132,7 +140,20 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(["hasActiveRaffle"]),
+        ...mapGetters("raffles", ["hasActiveRaffle", "getCustomerPhone"]),
+        ...mapState(["currentFastSale"]),
+        customerPhone: {
+            set(value) {
+                this.setCustomerPhone(value)
+            },
+            get() {
+                return this.getCustomerPhone
+            }
+        },
+        hasCurrentFastSale() {
+            const sale = this.currentFastSale;
+            return !!sale?.id;
+        },
         labelStyle() {
             return " w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6";
         },

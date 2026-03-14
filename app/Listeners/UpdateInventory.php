@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\TransactionComplete;
 use App\Models\Inventory;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +22,6 @@ class UpdateInventory
     /**
      * Handle the event.
      *
-     * @param  TransactionComplete  $event
      * @return void
      */
     public function handle(TransactionComplete $event)
@@ -42,7 +39,7 @@ class UpdateInventory
                     if ($stock < 0) {
                         DB::rollBack();
                         throw ValidationException::withMessages([
-                            'stock' => "Las existencias del producto: {$product->sku}, no son suficientes para realizar esta operación"
+                            'stock' => "Las existencias del producto: {$product->sku}, no son suficientes para realizar esta operación",
                         ]);
                     }
                     $inventory->products()->updateExistingPivot(

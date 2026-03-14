@@ -45,11 +45,13 @@ export default {
     props: {
         collection: { type: Array },
         inputClass: { type: String, default: "" },
+        value: { type: Number }
     },
     created() {
 
     },
     mounted() {
+        console.log('value', this.value)
         EventBus.$on("reset-search-select", this.reset);
         EventBus.$on("focus-search-select", () => {
             if (!this.$refs?.["search-select"]) return;
@@ -133,6 +135,29 @@ export default {
             this.highlightedIndex = 0;
             if (item) EventBus.$emit("selected-item", item);
         },
+        syncFromValue(value) {
+            if (this.collection.length) {
+                const item = this.collection.find((item) => String(value) === String(item.id))
+                if (item) this.query = item.name;
+                console.log('item', item);
+            }
+        }
     },
+    watch: {
+        value: {
+            immediate: true,
+            handler(val) {
+                this.syncFromValue(val);
+            }
+        },
+        collection: {
+            immediate: true,
+            handler() {
+                if (!!this.value) {
+                    this.syncFromValue(this.value)
+                }
+            }
+        }
+    }
 };
 </script>

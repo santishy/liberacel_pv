@@ -21,7 +21,7 @@ class FastSaleCollection extends ResourceCollection
                     'total' => number_format($sale->total, 2),
                     'status' => $sale->status,
                     'products' => collect($sale->concepts),
-                    'user_id' =>optional( $sale->user)->id,
+                    'user_id' => optional($sale->user)->id,
                     'user_name' => optional($sale->user)->name,
                     'created_at' => $sale->created_at->format('Y-m-d H:i:s'),
                 ];

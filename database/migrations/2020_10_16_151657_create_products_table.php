@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('description');
             $table->string('sku')->unique();
-            $table->float('retail_price',8,2);
-            $table->float('wholesale_price',8,2);
-            $table->float('distributor_price',8,2);
+            $table->float('retail_price', 8, 2);
+            $table->float('wholesale_price', 8, 2);
+            $table->float('distributor_price', 8, 2);
             $table->timestamps();
         });
     }

@@ -17,30 +17,30 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //User::truncate();
-        //Role::truncate();
-        //Ticket::truncate();
+        // User::truncate();
+        // Role::truncate();
+        // Ticket::truncate();
         // Inventory::truncate();
         // Inventory::factory()->create();
-        //Ticket::factory()->create();
-        if(Ticket::count() === 0){
+        // Ticket::factory()->create();
+        if (Ticket::count() === 0) {
             Ticket::factory()->create();
         }
-        if(Inventory::count() === 0)
-        {
+        if (Inventory::count() === 0) {
             Inventory::factory()->create();
         }
-        $adminRole = Role::where('name','admin');
-        if(!$adminRole->exists())
+        $adminRole = Role::where('name', 'admin');
+        if (! $adminRole->exists()) {
             $adminRole = Role::create(['name' => 'admin']);
-        else
+        } else {
             $adminRole = $adminRole->first();
+        }
 
         $user = new User;
         $user->email = 'admin@saeseg.app';
         $user->name = 'Santiago Martín OE';
         $user->username = 'admin';
-        $user->password = 'san10mar';//bcrypt('san10mar');
+        $user->password = 'san10mar'; // bcrypt('san10mar');
         $user->inventory_id = null;
         $user->save();
         $user->assignRole($adminRole);

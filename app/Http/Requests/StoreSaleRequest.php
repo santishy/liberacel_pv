@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Rules\IsCreditAccepted;
-use App\Rules\NotNullIsCreditRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSaleRequest extends FormRequest
@@ -31,8 +30,8 @@ class StoreSaleRequest extends FormRequest
             'inventory_id' => ['required'],
             'is_credit' => [
                 'nullable',
-                new IsCreditAccepted(optional($this->route('sale'))->client_id)
-            ]
+                new IsCreditAccepted(optional($this->route('sale'))->client_id),
+            ],
         ];
     }
 }

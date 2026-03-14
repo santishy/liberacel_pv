@@ -13,11 +13,11 @@ trait HasTransaction
     {
         return $model->find($key);
     }
+
     protected function deleteTransactionProduct($transaction, $id)
     {
         return $transaction->products()->detach($id);
     }
-    protected function addProduct($product){
-        
-    }
+
+    protected function addProduct($product) {}
 }

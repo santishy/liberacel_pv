@@ -132,6 +132,11 @@ Vue.component('checkout', require('./components/payment-point/Checkout.vue').def
  * Raffles
  */
 Vue.component('create-raffle', require('./components/raffles/CreateRaffle.vue').default);
+Vue.component('raffle-index', require('./components/raffles/RaffleIndex.vue').default);
+Vue.component('edit-raffle', require('./components/raffles/EditRaffle.vue').default);
+Vue.component('edit-raffle-number', require('./components/raffle-numbers/EditRaffleNumber.vue').default);
+Vue.component('raffle-number-index', require('./components/raffle-numbers/RaffleNumberIndex.vue').default);
+Vue.component('raffle-assignament', require('./components/raffle-assignaments/RaffleAsignament.vue').default);
 Vue.directive('can',
     async function (el, binding) {
         if (store.getters.isAdmin || store.state.user?.permissions?.includes(binding.value))

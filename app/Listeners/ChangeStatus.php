@@ -2,18 +2,16 @@
 
 namespace App\Listeners;
 
-
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 class ChangeStatus
 {
     protected $currentStatus = null;
+
     private $factors = [
-        "completed" => -1,
-        "pending" => 1,
-        "cancelled" => 1
+        'completed' => -1,
+        'pending' => 1,
+        'cancelled' => 1,
     ];
+
     /**
      * Create the event listener.
      *
@@ -30,13 +28,12 @@ class ChangeStatus
      * @param  object  $event
      * @return void
      */
-
     public function handle($event)
     {
 
         $this->currentStatus = $event->fastSale->status;
 
-        if (request()->has('status') && !is_null($event->fastSale->user_id))
+        if (request()->has('status') && ! is_null($event->fastSale->user_id)) {
             if (
                 $this->statusSentIsCompleted() ||
                 $this->statusSentIsCancelled()
@@ -49,19 +46,24 @@ class ChangeStatus
                 }
                 session()->forget('fast_sale_id');
             }
+        }
     }
+
     public function statusSentIsCompleted()
     {
         if (request('status') == 'completed' && $this->currentStatus == 'pending') {
             return true;
         }
+
         return false;
     }
+
     public function statusSentIsCancelled()
     {
         if (request('status') == 'cancelled' && $this->currentStatus != 'cancelled') {
             return true;
         }
+
         return false;
     }
 }

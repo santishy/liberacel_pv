@@ -232,7 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'CurrentUser' => App\Authorization\Facades\CurrentUser::class,
-        //'PDF' => \DomPDF\Facade::class,
+        // 'PDF' => \DomPDF\Facade::class,
         // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,

@@ -14,7 +14,7 @@ return [
     'edit user' => 'Editar usuario',
 
     // permissions to purchases
-    'create purchase'  => 'Crear compra',
+    'create purchase' => 'Crear compra',
     'view purchase' => 'Ver compra (La compra actual)',
     'view purchases' => 'Ver compras (reportes)',
     'delete purchase' => 'Borrar compra',
@@ -39,29 +39,29 @@ return [
     'view category' => 'Ver categoría',
     'delete category' => 'Borrar categoría',
 
-    //permissions to warehouses
+    // permissions to warehouses
     'create warehouse' => 'Crear almacen',
     'view warehouses' => 'Ver almances',
     'view warehouse' => 'Ver almacen',
     'delete warehouse' => 'Borrar almacen',
     'edit warehouse' => 'Editar almacen',
 
-    //permissions to stock
+    // permissions to stock
     'edit stock' => 'Editar existencias',
     'view stock' => 'Ver existencias',
     'empty stock' => 'Vaciar inventario',
 
-    //permissions to roles
+    // permissions to roles
     'create role' => 'Crear rol',
     'view roles' => 'Ver roles',
     'view role' => 'Ver rol',
     'delete role' => 'Borrar rol',
     'edit role' => 'Editar rol',
 
-    //permissions to ticket
+    // permissions to ticket
     'edit ticket' => 'Editar ticket',
 
-    //permissions to fast sales
+    // permissions to fast sales
     'create fast sale' => 'Crear venta rápida',
     'edit fast sale' => 'Editar venta rápida',
     'view fast sales' => 'Ver ventas rápidas (Reportes)',
@@ -69,31 +69,31 @@ return [
     'delete fast sale product' => 'Eliminar productos de la venta rápida actual',
     'cancel fast sale' => 'Cancelar venta rápida',
 
-    //permissions to commissions
+    // permissions to commissions
     'view user commissions' => 'Ver comisiones',
     'edit user commission' => 'Editar comisión',
 
-    //permissions to expenses
+    // permissions to expenses
     'view expenses' => 'Ver egresos',
     'view expense' => 'Ver egreso',
     'create expense' => 'Crear egreso',
     'edit expense' => 'Editar egreso',
     'delete expense' => 'Eliminar egreso',
 
-    //permissions to expenses
+    // permissions to expenses
     'view payments' => 'Ver pagos',
     'view payment' => 'Ver pago',
     'create payment' => 'Crear pago',
     'edit payment' => 'Editar pago',
     'delete payment' => 'Eliminar pago',
 
-    //permissions to credits
+    // permissions to credits
     'view credits' => 'Ver creditos',
     'view credit' => 'Ver credito',
     'create credit' => 'Crear credito',
     'edit credit' => 'Editar credito',
     'delete credit' => 'Eliminar credito',
 
-    //permissions to checkout
-    'complete sales checkout' => "completar el pago de las ventas"
+    // permissions to checkout
+    'complete sales checkout' => 'completar el pago de las ventas',
 ];

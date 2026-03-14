@@ -13,6 +13,7 @@ trait ReportBy
     {
         $query->where('id', $value);
     }
+
     public function scopeYear(Builder $query, $value)
     {
         $query->whereYear('created_at', $value);
@@ -22,28 +23,32 @@ trait ReportBy
     {
         $query->whereMonth('created_at', $value);
     }
+
     public function scopeToday(Builder $query, $value)
     {
 
         $query->whereDate('created_at', Carbon::now()->format('Y-m-d'));
     }
+
     public function scopeCurrentMonth(Builder $query, $value)
     {
         $query->whereMonth('created_at', Carbon::now()->month);
     }
+
     public function scopeStatus(Builder $query, $value)
     {
-        if ($value === "1") {
+        if ($value === '1') {
             $value = 1;
         }
 
         $query->where('status', $value);
     }
+
     public function scopeWeek(Builder $query, $value)
     {
         $query->whereBetween('created_at', [
             Carbon::now()->startOfWeek(),
-            Carbon::now()->endOfWeek()
+            Carbon::now()->endOfWeek(),
         ]);
     }
 
@@ -73,15 +78,18 @@ trait ReportBy
             $query->whereIn('inventory_id', $warehouses);
         }
     }
+
     public function scopeSearchByIdAndCompletedStatus(Builder $query, $id)
     {
         $query->where('id', $id)
             ->where('status', 'completed');
     }
+
     public function scopeIsCredit(Builder $query, $value)
     {
         $query->where('is_credit', $value);
     }
+
     public function scopeGetNotesByStatus(Builder $query, $value)
     {
         $query->where('status', $value);

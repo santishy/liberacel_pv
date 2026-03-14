@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Http\Requests\StoreUserRelationshipRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
 
 class UserRelationshipController extends Controller
 {
-
     public function store(StoreUserRelationshipRequest $request)
     {
         $model = $this->getModel($request);
@@ -25,8 +22,10 @@ class UserRelationshipController extends Controller
         if ($model->hasCredit()) {
             $model->update(['status' => 'completed']);
             $inverse = -1;
-            $model->handleCredit($model->factors["completed"] * $inverse);
-            TransactionComplete::dispatch($model, $model->factors["completed"]);
+            $model->handleCredit($model->factors['completed'] * $inverse);
+            if ($request->model === 'Sale') {
+                TransactionComplete::dispatch($model, $model->factors['completed']);
+            }
             SaleTransactionProcessed::dispatch($model);
         }
 
@@ -36,10 +35,12 @@ class UserRelationshipController extends Controller
             'sale' => $model,
         ]);
     }
+
     public function getModel($request)
     {
         $model = str::of($request->model);
         $model = app("App\Models\\$model->ucfirst")->find($request->id);
+
         return $model;
     }
 }

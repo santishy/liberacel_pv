@@ -18,6 +18,7 @@ class GenerateRaffleNumbers implements ShouldQueue
      * Create a new job instance.
      */
     public int $raffleId;
+
     public function __construct(Raffle $raffle)
     {
         $this->raffleId = $raffle->id;
@@ -37,8 +38,8 @@ class GenerateRaffleNumbers implements ShouldQueue
                 'number' => $i,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'ticketable_id' => null,
-                'ticketable_type' => null,
+                'saleable_id' => null,
+                'saleable_type' => null,
             ];
             if (count($numbers) >= $chunkSize) {
                 RaffleNumber::insert($numbers);

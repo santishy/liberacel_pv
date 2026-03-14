@@ -1,18 +1,14 @@
-<?php 
+<?php
 
 namespace App\Providers;
 
+use App\JsonApi\JsonApiBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use App\JsonApi\JsonApiBuilder;
 
 class JsonApiProvider extends ServiceProvider
 {
-    public function register()
-    {
-
-    }
+    public function register() {}
 
     /**
      * Bootstrap any application services.
@@ -21,6 +17,6 @@ class JsonApiProvider extends ServiceProvider
      */
     public function boot()
     {
-      Builder::mixin(new JsonApiBuilder);
+        Builder::mixin(new JsonApiBuilder);
     }
 }

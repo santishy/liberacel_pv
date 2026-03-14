@@ -15,7 +15,7 @@ class CreateRefundsTable extends Migration
     {
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->float('amount',8,2)->default(0);
+            $table->float('amount', 8, 2)->default(0);
             $table->unsignedBigInteger('user_id');
             $table->string('comment')->default('');
             $table->json('products');

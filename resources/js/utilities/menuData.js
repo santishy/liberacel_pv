@@ -59,6 +59,24 @@ const menuData = {
             url: "/product-bonuses"
         }
     ],
+    RaffleMenu: [
+        {
+            name: "Crear Rifa",
+            url: "/raffles/create"
+        },
+        {
+            name: "Lista de rifas",
+            url: "/raffles"
+        },
+        {
+            name: "Boletos de rifa ",
+            url: "/raffle-numbers"
+        },
+        {
+            name: "Asignar boleto",
+            url: "/raffle-assignaments/assign-by-saleable/create"
+        },
+    ],
     ReportsMenu: [
         {
             name: "Reporte General",

@@ -15,10 +15,10 @@ class InventoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            //'id' => $this->resource->id,
-            //'name' => $this->resource->name,
+            // 'id' => $this->resource->id,
+            // 'name' => $this->resource->name,
             'products' => ProductResource::collection($this->resource->products),
-            //'address' => $this->resource->address
+            // 'address' => $this->resource->address
         ];
     }
 }

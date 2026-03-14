@@ -40,6 +40,6 @@ class IsCreditAccepted implements Rule
      */
     public function message()
     {
-        return "Verifique si asigno un cliente a la venta o envío correctamente el campo crédito. ";
+        return 'Verifique si asigno un cliente a la venta o envío correctamente el campo crédito. ';
     }
 }

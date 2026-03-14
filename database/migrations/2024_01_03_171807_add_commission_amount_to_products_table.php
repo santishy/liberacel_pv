@@ -14,7 +14,7 @@ class AddCommissionAmountToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal("commission_amount", 8, 2)->default(5);
+            $table->decimal('commission_amount', 8, 2)->default(5);
         });
     }
 
@@ -26,7 +26,7 @@ class AddCommissionAmountToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn("commission_amount");
+            $table->dropColumn('commission_amount');
         });
     }
 }

@@ -26,7 +26,7 @@ class AddPaymentTypeToSalesTable extends Migration
     public function down()
     {
         Schema::table('sales', function (Blueprint $table) {
-            //aqui tenia otro nombre asi que lo subi con ana y cuando haga un refrsh no funcionara creo 
+            // aqui tenia otro nombre asi que lo subi con ana y cuando haga un refrsh no funcionara creo
             $table->dropColumn('is_credit');
         });
     }

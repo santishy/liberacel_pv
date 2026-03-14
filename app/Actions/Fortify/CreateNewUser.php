@@ -3,21 +3,20 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Spatie\Permission\Models\Role;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    use PasswordValidationRules, AuthorizesRequests;
+    use AuthorizesRequests, PasswordValidationRules;
 
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
      * @return \App\Models\User
      */
     public function create(array $input)
@@ -36,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
             'inventory_id' => $isAdmin,
             'password' => $this->passwordRules(),
             'username' => [Rule::unique(User::class), 'required'],
-            'roles.*' => 'exists:roles,id'
+            'roles.*' => 'exists:roles,id',
 
         ], [
             'inventory_id.required' => 'El campo inventario es obligatorio si el usuario es administrador',
@@ -44,25 +43,28 @@ class CreateNewUser implements CreatesNewUsers
             'email' => 'El campo email es obligatorio',
             'username' => 'El campo usuario es obligatorio',
             'roles.*.exists' => 'El rol seleccionado no existe',
-            'password' => 'El campo contraseña es obligatorio y debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número'
+            'password' => 'El campo contraseña es obligatorio y debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número',
         ])->validate();
-        //no encripto password, ya que se hace en el modelo con setAttribute
+        // no encripto password, ya que se hace en el modelo con setAttribute
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'username' => $input['username'],
-            'password' => $input['password'], //Hash::make($input['password']),
+            'password' => $input['password'], // Hash::make($input['password']),
             'inventory_id' => $input['inventory_id'],
         ]);
+
         return $user->assignRole(request()->roles);
     }
 
-    function isAdmin()
+    public function isAdmin()
     {
         foreach (request('roles', []) as $role) {
-            if (Role::where('name', 'admin')->first()->id === $role)
+            if (Role::where('name', 'admin')->first()->id === $role) {
                 return [];
+            }
         }
+
         return ['required'];
     }
 }

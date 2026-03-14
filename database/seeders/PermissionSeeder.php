@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class PermissionSeeder extends Seeder
@@ -62,7 +61,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'view category']);
         Permission::create(['name' => 'delete category']);
 
-        //permissions to warehouses
+        // permissions to warehouses
         Permission::create(['name' => 'create warehouse']);
         Permission::create(['name' => 'view warehouse']);
         Permission::create(['name' => 'view warehouses']);
@@ -73,17 +72,17 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'empty stock']);
         Permission::create(['name' => 'view stock']);
 
-        //permissions to roles
+        // permissions to roles
         Permission::create(['name' => 'create role']);
         Permission::create(['name' => 'view roles']);
         Permission::create(['name' => 'view role']);
         Permission::create(['name' => 'delete role']);
         Permission::create(['name' => 'edit role']);
 
-        //permissions to ticket
+        // permissions to ticket
         Permission::create(['name' => 'edit ticket']);
 
-        //permissions to fast sale
+        // permissions to fast sale
         Permission::create(['name' => 'create fast sale']);
         Permission::create(['name' => 'view fast sale']);
         Permission::create(['name' => 'view fast sales']);
@@ -91,32 +90,32 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'delete fast sale product']);
         Permission::create(['name' => 'cancel fast sale']);
 
-        //permissions to commissions
+        // permissions to commissions
         Permission::create(['name' => 'view user commissions']);
         Permission::create(['name' => 'edit user commission']);
 
-        //permissions to expenses
+        // permissions to expenses
         Permission::create(['name' => 'create expense']);
         Permission::create(['name' => 'view expense']);
         Permission::create(['name' => 'view expenses']);
         Permission::create(['name' => 'edit expense']);
         Permission::create(['name' => 'delete expense']);
 
-        //permissions to payments
+        // permissions to payments
         Permission::create(['name' => 'create payment']);
         Permission::create(['name' => 'view payment']);
         Permission::create(['name' => 'view payments']);
         Permission::create(['name' => 'edit payment']);
         Permission::create(['name' => 'delete payment']);
 
-        //permissions to credits
+        // permissions to credits
         Permission::create(['name' => 'create credit']);
         Permission::create(['name' => 'view credit']);
         Permission::create(['name' => 'view credits']);
         Permission::create(['name' => 'edit credit']);
         Permission::create(['name' => 'delete credit']);
 
-        //permissions to checkout
-        Permission::create(["name" => 'complete sales checkout']);
+        // permissions to checkout
+        Permission::create(['name' => 'complete sales checkout']);
     }
 }

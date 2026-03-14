@@ -18,8 +18,12 @@ class RaffleResource extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
-            'formatted_start_date' => $this->resource->start_date->format('d/m/Y H:i'),
-            'formatted_end_date' => $this->resource->end_date->format('d/m/Y H:i'),
+            'status' => $this->resource->status,
+            'formatted_start_date' => $this->resource->start_date->format('d/m/Y'),
+            'formatted_end_date' => $this->resource->end_date->format('d/m/Y'),
+            'start_date' => $this->resource->start_date,
+            'end_date' => $this->resource->end_date,
+            'inventory_id' => $this->resource->inventory_id,
             'min_sale_total' => $this->resource->min_sale_total,
         ];
     }

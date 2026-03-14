@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Facades\InventoryContext;
 use App\Facades\Settings;
 use App\Models\Traits\HasCommission;
 use App\Models\Traits\HasUserRelationship;
@@ -14,8 +15,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FastSale extends Model
 {
+    use HasCommission, ManagesCredits, ReportBy;
     use HasFactory, HasUserRelationship;
-    use ReportBy, ManagesCredits, HasCommission;
     use SaleModelHandler;
 
     protected $fillable = [
@@ -25,22 +26,31 @@ class FastSale extends Model
         'user_id',
         'electronic_money_discount',
         'customer_bonus_id',
+        'customer_phone',
         'client_id',
-        'is_credit'
+        'is_credit',
+        'inventory_id',
     ];
 
     protected $casts = [
         'concepts' => 'array',
     ];
 
+    public function raffleNumber()
+    {
+        return $this->morphOne(RaffleNumber::class, 'saleable')
+            ->where('status', 'assigned');;
+    }
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
+
     public function products()
     {
         return collect($this->concepts);
     }
+
     public function addBonus()
     {
         $product_bonus_id = request('product_bonus_id');
@@ -48,7 +58,7 @@ class FastSale extends Model
             ->wherePivot('product_bonus_id', $product_bonus_id)
             ->first();
 
-        if (!$productBonus) {
+        if (! $productBonus) {
             $this->productBonuses()
                 ->attach(
                     $product_bonus_id,
@@ -56,7 +66,7 @@ class FastSale extends Model
                 );
         } else {
             $this->productBonuses()->updateExistingPivot($product_bonus_id, [
-                'qty' => $productBonus->pivot->qty + request('qty')
+                'qty' => $productBonus->pivot->qty + request('qty'),
             ]);
         }
     }
@@ -65,10 +75,12 @@ class FastSale extends Model
     {
         return $this->belongsToMany(ProductBonus::class)->withPivot('qty');
     }
+
     public function setConceptsAttribute($value)
     {
-        if (is_null($this->concepts))
+        if (is_null($this->concepts)) {
             $this->concepts = [];
+        }
         $this->attributes['concepts'] = collect($this->concepts)->prepend($value);
     }
 
@@ -80,26 +92,36 @@ class FastSale extends Model
         });
     }
 
-
-    static function findOrCreateFastSale()
+    public static function findOrCreateFastSale()
     {
+        // TODO (post-rifas): mover aquí la lógica de isTheStatusCompleted()
+        // y eliminar ese método del controller.
+
         if (session()->has('fast_sale_id')) {
-            return FastSale::find(session()->get('fast_sale_id'));
+            $fastSale = FastSale::find(session()->get('fast_sale_id'));
+            if ($fastSale && (int) $fastSale->inventory_id === (int) InventoryContext::id()) {
+                return $fastSale;
+            }
         }
-        $fastSale = FastSale::create();
+
+        $fastSale = FastSale::create(['inventory_id' => InventoryContext::id()]);
         session()->put('fast_sale_id', $fastSale->id);
+
         return $fastSale;
     }
+
     public function addConcept()
     {
         $this['concepts'] = request()->only('description', 'price', 'qty', 'product_bonus_id', 'commission_amount');
         $this->updateTotal();
     }
-    public  function updateTotal()
+
+    public function updateTotal()
     {
         $this->total += request()->price * request()->qty;
         $this->save();
     }
+
     public function calculateTotal()
     {
         $total = 0;
@@ -123,12 +145,14 @@ class FastSale extends Model
         $this->attributes['concepts'] = collect($products);
         $this->total = $this->calculateTotal();
         $this->save();
-        return;
+
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function customerBonus()
     {
         return $this->belongsTo(CustomerBonus::class);
@@ -142,6 +166,7 @@ class FastSale extends Model
         } else {
             $data = $this->discountElectronicMoney($this->total, 0);
         }
+
         return $data;
     }
 
@@ -149,9 +174,10 @@ class FastSale extends Model
     {
         $this->total = $total;
         $this->electronic_money_discount = $discount;
+
         return [
-            "total" => $total,
-            "electronic_money_discount" => $discount
+            'total' => $total,
+            'electronic_money_discount' => $discount,
         ];
     }
 
@@ -162,12 +188,13 @@ class FastSale extends Model
         }
         $customerBonus = $this->customerBonus();
         $customerBonus->dissociate();
-        $points  = $customerBonus->first()->conversionToPoints(
+        $points = $customerBonus->first()->conversionToPoints(
             Settings::getDataFrom('precio_punto'),
             $this->electronic_money_discount
         );
         $customerBonus->update(['accumulated_points' => $customerBonus->first()->accumulated_points + $points]);
         $this->electronic_money_discount = 0;
+
         return $this->save();
     }
 }

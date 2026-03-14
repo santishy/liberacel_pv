@@ -23,8 +23,8 @@ class StoreCheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model' => [Rule::in(['FastSale', 'Sale']), "required"],
-            "id" => ["numeric", "required"]
+            'model' => [Rule::in(['FastSale', 'Sale']), 'required'],
+            'id' => ['numeric', 'required'],
         ];
     }
 }

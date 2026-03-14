@@ -8,15 +8,12 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\Inventory;
 use App\Models\User;
-use App\Http\Responses\RegisterResponse;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Spatie\Permission\Models\Role;
-use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -25,9 +22,7 @@ class FortifyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-    }
+    public function register() {}
 
     /**
      * Bootstrap any application services.
@@ -42,12 +37,13 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         Fortify::loginView(function () {
-            return  view('auth.login');
+            return view('auth.login');
         });
         Fortify::registerView(function () {
             Gate::authorize('register', new User);
             $roles = Role::all('id', 'name');
             $inventories = Inventory::all();
+
             return view('auth.register', compact('roles', 'inventories'));
         });
         Fortify::requestPasswordResetLinkView(function () {

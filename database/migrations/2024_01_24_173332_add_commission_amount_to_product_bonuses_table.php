@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('product_bonuses', function (Blueprint $table) {
-            $table->decimal("commission_amount", 8, 2)->default(5);
+            $table->decimal('commission_amount', 8, 2)->default(5);
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('product_bonuses', function (Blueprint $table) {
-            $table->dropColumn("commission_amount");
+            $table->dropColumn('commission_amount');
         });
     }
 };

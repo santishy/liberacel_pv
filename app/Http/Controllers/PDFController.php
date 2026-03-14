@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Models\Ticket;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Dompdf\Dompdf;
-use Illuminate\Support\Facades\DB;
 
 class PDFController extends Controller
 {
-    function __invoke(Sale $sale)
+    public function __invoke(Sale $sale)
     {
         $now = $sale->created_at->format('Y-m-d');
 
@@ -24,13 +20,13 @@ class PDFController extends Controller
 
         $model = 'Sale';
         $typeOfSale = 'Stock';
-
+        $raffleNumber = null;
+        $raffle = null;
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
-
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
-        )->setPaper(array(0, 0, 227.67, 2000));
+            compact('sale', 'raffleNumber', 'raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
+        )->setPaper([0, 0, 227.67, 2000]);
 
         /**
          * Se obtiene la altura, la logica esta guardada en el modelo .. midiendo la altura total del body que esta dentro del padding al menos asi lo entendi
@@ -42,10 +38,10 @@ class PDFController extends Controller
          */
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
-        )->setPaper(array(0, 0, 227.67, $height + 20));
+            compact('sale', 'raffleNumber', 'raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
+        )->setPaper([0, 0, 227.67, $height + 20]);
 
-        if (session()->has("sale_id")) {
+        if (session()->has('sale_id')) {
             session()->forget('sale_id');
         }
 

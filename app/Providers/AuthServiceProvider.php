@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Models\Inventory;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Inventory' => 'App\Policies\WarehousePolicy',
         'Spatie\Permission\Models\Role' => 'App\Policies\RolePolicy',
         'App\Models\User' => 'App\Policies\UserPolicy',
-        'App\Models\FastSale' => 'App\Policies\FastSalePolicy'
+        'App\Models\FastSale' => 'App\Policies\FastSalePolicy',
     ];
 
     /**
@@ -50,9 +49,10 @@ class AuthServiceProvider extends ServiceProvider
         *Invokando las demas gates de autorizacion para las existencias
         * */
         $this->app->make('stockValidations');
-        //resolve('stockValidations');
+        // resolve('stockValidations');
 
     }
+
     public function before()
     {
         return false;

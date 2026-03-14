@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Settings;
+use App\Http\Requests\StoreCustomerBonusRequest;
+use App\Http\Resources\FastSaleResource;
 use App\Models\CustomerBonus;
 use App\Models\FastSale;
-use App\Http\Resources\FastSaleResource;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreCustomerBonusRequest;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 
 class FastSaleCustomerBonusController extends Controller
 {
@@ -33,10 +33,11 @@ class FastSaleCustomerBonusController extends Controller
                 'electronicMoney' => number_format(
                     $updatedCustomerBonus->getElectronicMoney($pointData),
                     2
-                )
+                ),
             ]
         );
     }
+
     public function update(Request $request, FastSale $sale)
     {
         $customerBonus = $sale->customerBonus()->first();
@@ -59,15 +60,16 @@ class FastSaleCustomerBonusController extends Controller
         $customerBonus->update(['accumulated_points' => $accumulatedPoints]);
 
         return response()->json([
-            'fastSale' => FastSaleResource::make($sale->load('customerBonus', 'productBonuses'))
+            'fastSale' => FastSaleResource::make($sale->load('customerBonus', 'productBonuses')),
         ]);
     }
 
     public function destroy(FastSale $sale)
     {
         $customerBonusStatus = $sale->removeCustomerBonus();
+
         return response()->json([
-            'fastSale' => FastSaleResource::make($sale->load('customerBonus', 'productBonuses'))
+            'fastSale' => FastSaleResource::make($sale->load('customerBonus', 'productBonuses')),
         ]);
     }
 }

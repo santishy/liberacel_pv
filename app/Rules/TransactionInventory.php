@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class TransactionInventory implements Rule
 {
     protected $model;
+
     /**
      * Create a new rule instance.
      *
@@ -26,14 +27,15 @@ class TransactionInventory implements Rule
      */
     public function passes($attribute, $value)
     {
-        if($this->model->inventory_id)
-        {
-            if($this->model->inventory_id != $value){
+        if ($this->model->inventory_id) {
+            if ($this->model->inventory_id != $value) {
                 return false;
             }
         }
+
         return true;
     }
+
     /**
      * Get the validation error message.
      *

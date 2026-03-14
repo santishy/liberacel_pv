@@ -106,9 +106,10 @@ export default {
                 }
                 delete res.data.products;
                 this.saleDetails = res.data;
+                this.printCheckoutTicket();
+
             } catch (error) {
-                 EventBus.$emit('an-error-ocurred', error);
-                //this.getErrors(error);
+                EventBus.$emit('an-error-ocurred', error);
                 console.error(error);
             }
 
@@ -141,6 +142,23 @@ export default {
             const index = allowedModelsInUppercase.indexOf(model.toUpperCase());
             this.model = this.allowedModels[index];
             this.id = id;
+        },
+        printCheckoutTicket() {
+            let url = '';
+            switch (this.saleDetails.typeOfSale) {
+                case 'Express':
+                    url = `/fast-sale-tickets/${this.saleDetails.id}`;
+                    break;
+                case 'Stock':
+                    url = `/pdf-tickets/${this.saleDetails.id}`;
+                    break;
+                default:
+                    console.warn(`No receipt printing method defined for sale type: ${this.saleDetails.typeOfSale}`);
+            }
+
+            if (url === '') return;
+
+            window.open(url, '_blank');
         }
     }
 }

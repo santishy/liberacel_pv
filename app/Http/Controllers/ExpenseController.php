@@ -19,13 +19,15 @@ class ExpenseController extends Controller
         if (request()->wantsJson()) {
             $expenses = Expense::applyFilters();
             $data = [
-                "data" => ExpenseResource::collection($expenses->paginate(25))
+                'data' => ExpenseResource::collection($expenses->paginate(25)),
             ];
             if (request('page') == 1) {
                 $data['total'] = $expenses->sum('amount');
             }
+
             return response()->json($data);
         }
+
         return view('expenses.index');
     }
 
@@ -36,14 +38,14 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', new Expense());
+        $this->authorize('create', new Expense);
+
         return view('expenses.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,29 +54,30 @@ class ExpenseController extends Controller
         $data = $request->validate(
             [
                 'concept' => ['required'],
-                'amount' => ['required', 'numeric']
+                'amount' => ['required', 'numeric'],
             ],
             [
                 'concept.required' => 'El concepto es requerido.',
                 'amount.required' => 'El importe es requerido.',
-                'amount.numeric' => 'El campo amount debe ser numerico'
+                'amount.numeric' => 'El campo amount debe ser numerico',
             ]
         );
         $expense = Expense::create(
             $data
         );
+
         return response()->json([
-            'data' =>   [
+            'data' => [
                 'created_at' => $expense->created_at->format('Y-m-d H:m:s'),
                 'concept' => $expense->concept,
-                'amount' => $expense->amount
-            ]
+                'amount' => $expense->amount,
+            ],
         ]);
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function show(Expense $expense)
@@ -85,46 +88,44 @@ class ExpenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function edit(Expense $expense)
     {
         $this->authorize('update', $expense);
+
         return view('expenses.edit', compact('expense'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Expense $expense)
     {
         $this->authorize('update', $expense);
         $data = $request->validate([
-            "amount" => "numeric",
-            "concept" => "string"
+            'amount' => 'numeric',
+            'concept' => 'string',
         ]);
         $expense->update($data);
 
         return response()->json([
-            'data' => $expense
+            'data' => $expense,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function destroy(Expense $expense)
     {
         $this->authorize('delete', $expense);
         $expense->delete();
+
         return response()->json(null, 204);
     }
 }

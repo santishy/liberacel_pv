@@ -19,7 +19,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ]).version()
 //     mix.browserSync('bazar.test');// uso esta configuración para que funcione con herd
 
-    //uso esta configuración para que funcione con laravel sail
+//uso esta configuración para que funcione con laravel sail
 mix.browserSync({
     proxy: 'localhost',
     host: '127.0.0.1',

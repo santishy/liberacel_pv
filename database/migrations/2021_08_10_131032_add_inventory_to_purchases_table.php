@@ -30,7 +30,7 @@ class AddInventoryToPurchasesTable extends Migration
     {
         Schema::table('purchases', function (Blueprint $table) {
             $table->dropForeign(['inventory_id']);
-            $table->dropColumn("inventory_id");
+            $table->dropColumn('inventory_id');
         });
     }
 }

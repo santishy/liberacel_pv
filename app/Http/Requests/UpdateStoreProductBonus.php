@@ -27,19 +27,20 @@ class UpdateStoreProductBonus extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('product_bonuses')->ignore(optional($this->productBonus)->id)
+                Rule::unique('product_bonuses')->ignore(optional($this->productBonus)->id),
             ],
             'points' => ['required', 'numeric', 'min:1'],
-            'commission_amount' => 'numeric'
+            'commission_amount' => 'numeric',
         ];
     }
+
     public function messages()
     {
         return [
             'name.required' => 'El nombre es requerido: ',
             'name.unique' => 'El nombre ya existe en la base de datos',
             'points.required' => 'El campo puntos es requerido',
-            'points.numeric' => 'El campo puntos debe ser un número entero'
+            'points.numeric' => 'El campo puntos debe ser un número entero',
         ];
     }
 }

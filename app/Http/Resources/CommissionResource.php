@@ -21,9 +21,9 @@ class CommissionResource extends JsonResource
             'note' => $this->commissionable->id,
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'total' => $this->total,
-            'commissionable' => $this->getResourceCommissionable($this->whenLoaded('commissionable')), //json_decode($this->concepts),
-            'type_of_sale' => ($this->whenLoaded('commissionable') instanceof Sale) ? "Venta Stock" : "Venta Expres",
-            'amount' => $this->amount
+            'commissionable' => $this->getResourceCommissionable($this->whenLoaded('commissionable')), // json_decode($this->concepts),
+            'type_of_sale' => ($this->whenLoaded('commissionable') instanceof Sale) ? 'Venta Stock' : 'Venta Expres',
+            'amount' => $this->amount,
         ];
     }
 

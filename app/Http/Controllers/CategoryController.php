@@ -14,13 +14,14 @@ class CategoryController extends Controller
         $this->authorize('view', new Category);
         if (request()->wantsJson()) {
             $categoryQuery = Category::query();
+
             return CategoryResource::collection(
                 $categoryQuery->applyFilters()->orderBy('name')->get()
             );
         }
+
         return view('categories.index');
     }
-
 
     public function store(Request $request)
     {
@@ -30,7 +31,7 @@ class CategoryController extends Controller
         $this->authorize('create', new Category);
 
         return CategoryResource::make(Category::create([
-            'name' => $request->name
+            'name' => $request->name,
         ])->fresh());
     }
 
@@ -48,8 +49,9 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $this->validateCategory($request);
+
         return response()->json([
-            'updated' => $category->update(request()->except('_method'))
+            'updated' => $category->update(request()->except('_method')),
         ]);
     }
 
@@ -58,30 +60,32 @@ class CategoryController extends Controller
         $request->validate(
             [
                 'name' => [
-                    "required",
-                    Rule::unique('categories')->ignore(request()->route('category'))
+                    'required',
+                    Rule::unique('categories')->ignore(request()->route('category')),
                 ],
-                "active" => ["boolean"]
+                'active' => ['boolean'],
             ],
             [
-                'name.required' => "El campo categoría es requerido.",
-                'name.unique' => "La categoría ya existe en la base de datos."
+                'name.required' => 'El campo categoría es requerido.',
+                'name.unique' => 'La categoría ya existe en la base de datos.',
             ]
         );
     }
+
     public function destroy(Category $category)
     {
         if ($category->products()->count()) {
             $category->update(['active' => false]);
+
             return response()->json([
                 'deleted' => false,
                 'category' => $category,
-                'message' => 'El producto a sido desactivado'
+                'message' => 'El producto a sido desactivado',
             ]);
         }
 
         return response()->json([
-            'deleted' => $category->delete()
+            'deleted' => $category->delete(),
         ]);
     }
 }

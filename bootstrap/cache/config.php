@@ -1,16 +1,16 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Laravel',
+    'name' => 'Liberacel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost:8084',
+    'url' => 'http://liberacel.test',
     'asset_url' => NULL,
     'timezone' => 'America/Mexico_City',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:jkX5Vz0mC+/GVBWjx2KivEfzgsbwZybry26zObOOfbg=',
+    'key' => 'base64:qctaPqrbzSebSJeu/1KGio5XQUENpmZv6da5stvd1/o=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -133,7 +133,7 @@
   ),
   'broadcasting' => 
   array (
-    'default' => 'null',
+    'default' => 'log',
     'connections' => 
     array (
       'pusher' => 
@@ -204,7 +204,7 @@
         array (
           0 => 
           array (
-            'host' => '127.0.0.1',
+            'host' => 'memcached',
             'port' => 11211,
             'weight' => 100,
           ),
@@ -225,7 +225,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => '',
+    'prefix' => 'liberacel_cache',
   ),
   'cors' => 
   array (
@@ -256,7 +256,7 @@
   ),
   'dashboard' => 
   array (
-    'APP_NAME' => 'Laravel',
+    'APP_NAME' => 'Liberacel',
   ),
   'database' => 
   array (
@@ -267,7 +267,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'laravel',
+        'database' => 'liberacel_pv',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -277,7 +277,7 @@
         'url' => NULL,
         'host' => 'mysql',
         'port' => '3306',
-        'database' => 'laravel',
+        'database' => 'liberacel_pv',
         'username' => 'sail',
         'password' => 'password',
         'unix_socket' => '',
@@ -297,7 +297,7 @@
         'url' => NULL,
         'host' => 'mysql',
         'port' => '3306',
-        'database' => 'laravel',
+        'database' => 'liberacel_pv',
         'username' => 'sail',
         'password' => 'password',
         'charset' => 'utf8',
@@ -312,7 +312,7 @@
         'url' => NULL,
         'host' => 'mysql',
         'port' => '3306',
-        'database' => 'laravel',
+        'database' => 'liberacel_pv',
         'username' => 'sail',
         'password' => 'password',
         'charset' => 'utf8',
@@ -327,12 +327,12 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'laravel_database_',
+        'prefix' => 'liberacel_database_',
       ),
       'default' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.1',
+        'host' => 'redis',
         'password' => NULL,
         'port' => '6379',
         'database' => '0',
@@ -340,7 +340,7 @@
       'cache' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.1',
+        'host' => 'redis',
         'password' => NULL,
         'port' => '6379',
         'database' => '1',
@@ -428,7 +428,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/html/storage/app/public',
-        'url' => 'http://localhost:8084/storage',
+        'url' => 'http://liberacel.test/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -536,7 +536,7 @@
     'driver' => 'bcrypt',
     'bcrypt' => 
     array (
-      'rounds' => '12',
+      'rounds' => 10,
     ),
     'argon' => 
     array (
@@ -550,7 +550,7 @@
     'name' => 'LaravelPWA',
     'manifest' => 
     array (
-      'name' => 'Laravel',
+      'name' => 'Liberacel',
       'short_name' => 'PWA',
       'start_url' => '/',
       'background_color' => '#ffffff',
@@ -724,8 +724,8 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => '127.0.0.1',
-        'port' => '2525',
+        'host' => 'mailpit',
+        'port' => '1025',
         'encryption' => NULL,
         'username' => NULL,
         'password' => NULL,
@@ -761,8 +761,8 @@
     ),
     'from' => 
     array (
-      'address' => 'hello@example.com',
-      'name' => 'Laravel',
+      'address' => 'no-reply@liberacel.test',
+      'name' => 'Liberacel',
     ),
     'markdown' => 
     array (
@@ -880,7 +880,7 @@
   ),
   'session' => 
   array (
-    'driver' => 'database',
+    'driver' => 'file',
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
@@ -893,7 +893,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'laravel_session',
+    'cookie' => 'liberacel_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -988,7 +988,7 @@
     ),
     'enable_runnable_solutions' => NULL,
     'remote_sites_path' => '/var/www/html',
-    'local_sites_path' => '/Users/santiagoochoa/code/liberacel_pv',
+    'local_sites_path' => '/Users/santiago/code/liberacel_pv',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
     'recorders' => 

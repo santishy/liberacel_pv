@@ -26,15 +26,16 @@ class UpdateStoreWarehouse extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique('inventories')->ignore(optional($this->inventory)->id)],
-            'address' => ['required']
+            'address' => ['required'],
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'name.required' => 'El nombre es requerido: ',
             'name.unique' => 'El nombre ya existe en la base de datos',
-            'address.required' => 'La dirección es requerida'
+            'address.required' => 'La dirección es requerida',
         ];
     }
 }

@@ -7,16 +7,17 @@ use App\Http\Resources\ProductResource;
 use App\Http\Traits\HasTransaction;
 use App\Models\Category;
 use App\Models\Inventory;
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Purchase;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     use HasTransaction;
+
     public function index()
     {
-        $this->authorize('view', new Product());
+        $this->authorize('view', new Product);
         if (request()->wantsJson()) {
             return ProductResource::collection(
                 Product::with('category')
@@ -25,19 +26,23 @@ class ProductController extends Controller
         }
         $query = Category::query();
         $categories = $query->orderBy('name')->isActive(true)->get();
+
         return view('products.index', compact('categories'));
     }
+
     public function create()
     {
-        $this->authorize('create', new Product());
+        $this->authorize('create', new Product);
         $query = Category::query();
         $categories = $query->orderBy('name')->isActive(true)->get();
         $inventories = Inventory::all('id', 'name');
+
         return view('products.create', compact('categories', 'inventories'));
     }
+
     public function store(Request $request)
     {
-        $this->authorize('create', new Product());
+        $this->authorize('create', new Product);
         // TODO: Validar que el sku no exista aunque este inactivo
         // Y si lo esta avisar al usuario que el producto existe pero esta inactivo
         $this->validateProduct($request);
@@ -52,12 +57,14 @@ class ProductController extends Controller
 
         return $product;
     }
+
     public function toBuy($product = null)
     {
         $this->authorize('create', new Purchase);
 
-        if (empty(request()->inventory_id) || empty(request()->qty))
+        if (empty(request()->inventory_id) || empty(request()->qty)) {
             return;
+        }
 
         $purchase = Purchase::findOrCreateThePurchase();
 
@@ -68,27 +75,32 @@ class ProductController extends Controller
         $purchase->update([
             'status' => 'completed',
             'inventory_id' => request()->inventory_id,
-            'total' => $purchase->totalPurchase()
+            'total' => $purchase->totalPurchase(),
         ]);
 
         TransactionComplete::dispatch($purchase);
     }
+
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
         $categories = Category::orderBy('name')->get();
+
         return view('products.edit', compact('categories', 'product'));
     }
+
     public function update(Request $request, Product $product)
     {
         $this->authorize('update', $product);
-        //TODO: Validar que el sku no exista aunque este inactivo
+        // TODO: Validar que el sku no exista aunque este inactivo
         // Y si lo esta avisar al usuario que el producto existe pero esta inactivo
         $this->validateProduct($request);
         $data['image'] = $product->uploadImage();
         $product->update(array_merge($request->except('_method'), $data));
+
         return ProductResource::make($product);
     }
+
     public function destroy(Product $product)
     {
         $this->authorize('delete', $product);
@@ -102,8 +114,9 @@ class ProductController extends Controller
         // if ($product->sales()->exists())
         //     return response()->json(['message' => 'No se puede eliminar, existen ventas con este producto.']);
 
-        //response()->json(['deleted' => $product->delete()]);
+        // response()->json(['deleted' => $product->delete()]);
     }
+
     public function validateProduct($request)
     {
         return $request->validate([

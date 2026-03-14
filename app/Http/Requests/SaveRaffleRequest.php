@@ -22,8 +22,8 @@ class SaveRaffleRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        $rules =  [
+        $raffle = $this->route('raffle');
+        $rules = [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'start_date' => 'required|date',
@@ -31,10 +31,16 @@ class SaveRaffleRequest extends FormRequest
             'min_sale_total' => 'required|numeric|min:1',
         ];
         if (request()->user()->hasRole('admin')) {
-            $rules['inventory_id'] = ['required', 'exists:inventories,id', new NoActiveRaffle];
+            $rules['inventory_id'] = [
+                'required',
+                'exists:inventories,id',
+                new NoActiveRaffle(ignoredId: $raffle?->id), // esto lo puse para cuando se tenga que editar algo, pero solo edita si la raffle esta activa en este inventario
+            ];
         }
+
         return $rules;
     }
+
     public function messages()
     {
         return [

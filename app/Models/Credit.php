@@ -10,13 +10,13 @@ class Credit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["client_id", "total_amount", "amount_paid"];
+    protected $fillable = ['client_id', 'total_amount', 'amount_paid'];
 
     // public function creditables()
     // {
     //     return $this->hasMany(Creditable::class);
     // }
-    static public function findOrCreate($client_id)
+    public static function findOrCreate($client_id)
     {
         $credit = Credit::where('status', '!=', 'cancelled')
             ->where('status', '!=', 'paid')
@@ -26,6 +26,7 @@ class Credit extends Model
 
         return $credit ?? Credit::create(['client_id' => $client_id]);
     }
+
     public function sales()
     {
         return $this->morphedByMany(Sale::class, 'creditable');
@@ -40,16 +41,19 @@ class Credit extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
     public function scopeWithStatus(Builder $query, $status)
     {
         $query->where('status', $status);
     }
+
     public function scopeSearchByPhoneNumber(Builder $query, $phoneNumber)
     {
         $query->whereHas('client', function ($clientQuery) use ($phoneNumber) {
-            $clientQuery->where('phone_number',  $phoneNumber);
+            $clientQuery->where('phone_number', $phoneNumber);
         });
     }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);

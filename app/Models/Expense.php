@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory, ReportBy;
+
     protected $fillable = ['concept', 'amount'];
 }

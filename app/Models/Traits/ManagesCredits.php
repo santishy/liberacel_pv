@@ -3,13 +3,12 @@
 namespace App\Models\Traits;
 
 use App\Models\Credit;
-use Illuminate\Validation\ValidationException;
 
 trait ManagesCredits
 {
     public $factors = [
-        "completed" => -1,
-        "pending" => 1,
+        'completed' => -1,
+        'pending' => 1,
     ];
 
     public function credits()
@@ -22,7 +21,7 @@ trait ManagesCredits
         $credit = Credit::findOrCreate($this->client_id);
 
         $credit->update([
-            "total_amount" => $credit->total_amount + ($this->total * $factor)
+            'total_amount' => $credit->total_amount + ($this->total * $factor),
         ]);
 
         $isNewCredit = $this->isNewCredit($credit);
@@ -30,17 +29,23 @@ trait ManagesCredits
         if ($isNewCredit) {
             return $this->deleteCredit($credit);
         }
+
         return $this->syncCredit($credit);
     }
+
     private function isNewCredit($credit)
     {
-        if ($credit->fresh()->total_amount != 0.00)
+        if ($credit->fresh()->total_amount != 0.00) {
             return false;
+        }
+
         return $credit->status === 'pending';
     }
+
     private function deleteCredit($credit)
     {
         $this->credits()->detach($credit->id);
+
         return $credit->delete();
     }
 

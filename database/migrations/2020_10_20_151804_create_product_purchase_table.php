@@ -16,7 +16,7 @@ class CreateProductPurchaseTable extends Migration
         Schema::create('product_purchase', function (Blueprint $table) {
             $table->id();
             $table->integer('qty')->default(0);
-            $table->float('purchase_price',8,2)->nullable();
+            $table->float('purchase_price', 8, 2)->nullable();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

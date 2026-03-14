@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Seeder;
 use App\Models\Product;
+use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
@@ -17,9 +17,9 @@ class ProductSeeder extends Seeder
     {
         Product::truncate();
         $categories = Category::factory()->count(50)->create();
-        $categories->each(function($category){
-            Product::factory()->times(rand(12,40))->create(['category_id' => $category->id]);
+        $categories->each(function ($category) {
+            Product::factory()->times(rand(12, 40))->create(['category_id' => $category->id]);
         });
-        
+
     }
 }

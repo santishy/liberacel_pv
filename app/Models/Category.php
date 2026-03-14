@@ -25,6 +25,7 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
     public function scopeIsActive(Builder $query, $value)
     {
         $isActive = filter_var($value, FILTER_VALIDATE_BOOLEAN);

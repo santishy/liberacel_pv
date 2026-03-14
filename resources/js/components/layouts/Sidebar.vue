@@ -76,6 +76,12 @@
                         </svg>
                     </template>
                 </dropdown>
+                <dropdown class="mt-4" title="Rifas" :menu="RaffleMenu" title-font-color="text-slate-700"
+                    item-font-color="text-gray-700">
+                    <template slot="icon">
+                        <ticket-icon class="w-6 h-6" />
+                    </template>
+                </dropdown>
                 <dropdown class="mt-4" title="Configuración" :menu="ConfigMenu" title-font-color="text-slate-700"
                     item-font-color="text-gray-700">
                     <template slot="icon">
@@ -101,12 +107,14 @@ import {
     InventoryMenu,
     ReportsMenu,
     CreditsMenu,
+    RaffleMenu,
 } from "../../utilities/menuData.js";
 import ArrowLeft from "../icons/ArrowLeft.vue";
 import Dropdown from "../partials/Dropdown.vue";
 import { mapState } from "vuex"
+import TicketIcon from "../icons/TicketIcon.vue"
 export default {
-    components: { ArrowLeft, Dropdown },
+    components: { ArrowLeft, Dropdown, TicketIcon },
 
     data() {
         return {
@@ -117,6 +125,7 @@ export default {
             InventoryMenu,
             ReportsMenu,
             CreditsMenu,
+            RaffleMenu,
             isOpen: false,
         };
     },

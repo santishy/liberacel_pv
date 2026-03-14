@@ -9,16 +9,16 @@ class SaleAssociatedUserController extends Controller
 {
     public function store(Request $request, Sale $sale)
     {
-        //$this->authorize('restore', $sale);
+        // $this->authorize('restore', $sale);
 
-        $associatedUser  = $sale->checkCredentials(
+        $associatedUser = $sale->checkCredentials(
             $request->username,
             $request->password
         );
         $sale->toggleUser($associatedUser);
 
         return response()->json([
-            'sale' => $sale
+            'sale' => $sale,
         ]);
     }
 }

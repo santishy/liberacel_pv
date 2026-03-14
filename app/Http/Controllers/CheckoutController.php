@@ -14,17 +14,20 @@ use Illuminate\Validation\ValidationException;
 class CheckoutController extends Controller
 {
     private $factors = [
-        "completed" => -1,
-        "pending" => 1,
+        'completed' => -1,
+        'pending' => 1,
     ];
+
     public function create()
     {
-        Gate::authorize("complete sales checkout");
+        Gate::authorize('complete sales checkout');
+
         return view('payment-point.create');
     }
+
     public function store(StoreCheckoutRequest $request)
     {
-        Gate::authorize("complete sales checkout");
+        Gate::authorize('complete sales checkout');
 
         $model = $this->getModel($request->model, $request->id);
 
@@ -32,13 +35,13 @@ class CheckoutController extends Controller
 
         $model->validateSaleNotCompleted();
 
-        $data = ['status' => "completed"];
+        $data = ['status' => 'completed'];
 
         if ($model->isStockSale()) {
-            TransactionComplete::dispatch($model, $this->factors["completed"]);
-            $data["total"] = $model->calculateTotalSale();
+            TransactionComplete::dispatch($model, $this->factors['completed']);
+            $data['total'] = $model->calculateTotalSale();
         } elseif ($model->isExpressSale()) {
-            //falta agregar bonus, pero hay un request() en el model mal mal
+            // falta agregar bonus, pero hay un request() en el model mal mal
             FastSaleUpdated::dispatch($model);
         }
 
@@ -46,7 +49,7 @@ class CheckoutController extends Controller
 
         if ($model->hasCredit()) {
             $inverse = -1;
-            $model->handleCredit($this->factors["completed"] * $inverse);
+            $model->handleCredit($this->factors['completed'] * $inverse);
         }
 
         SaleTransactionProcessed::dispatch($model);
@@ -56,13 +59,13 @@ class CheckoutController extends Controller
         return new SaleDetailsCheckoutResponse($model);
     }
 
-
     private function getModel($model, $id)
     {
         $model = app("App\Models\\$model")->find($id);
-        if (!$model) {
-            throw ValidationException::withMessages(["error" => "La venta no existe"]);
+        if (! $model) {
+            throw ValidationException::withMessages(['error' => 'La venta no existe']);
         }
+
         return $model;
     }
 }

@@ -11,69 +11,60 @@ class PaymentPolicy
 {
     use HandlesAuthorization;
     use HasAdministrator;
+
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissionTo("view payments");
+        return $user->hasPermissionTo('view payments');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, Payment $payment)
     {
-        return $user->hasPermissionTo("view payment");
+        return $user->hasPermissionTo('view payment');
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo("create payment");
+        return $user->hasPermissionTo('create payment');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Payment $payment)
     {
-        return $user->hasPermissionTo("edit payment");
+        return $user->hasPermissionTo('edit payment');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Payment $payment)
     {
-        return $user->hasPermissionTo("delete payment");
+        return $user->hasPermissionTo('delete payment');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, Payment $payment)
@@ -84,8 +75,6 @@ class PaymentPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, Payment $payment)

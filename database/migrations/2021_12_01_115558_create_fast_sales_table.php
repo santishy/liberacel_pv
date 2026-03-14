@@ -16,7 +16,7 @@ class CreateFastSalesTable extends Migration
         Schema::create('fast_sales', function (Blueprint $table) {
             $table->id();
             $table->float('total')->default(0);
-            $table->enum('status',['pending','cancelled','completed'])->default('pending');
+            $table->enum('status', ['pending', 'cancelled', 'completed'])->default('pending');
             $table->json('concepts')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();

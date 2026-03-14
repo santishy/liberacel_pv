@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class NotNullIsCreditRule implements Rule
 {
     private $sale;
+
     /**
      * Create a new rule instance.
      *

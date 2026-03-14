@@ -32,7 +32,6 @@
                 ">Total: {{ totalWithFormat }}</span>
         </div>
         <div class="table-container-responsive">
-
             <table class="report-table">
                 <thead class="report-table-thead">
                     <tr class="bg-emerald-200">
@@ -54,11 +53,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <commission-list-item v-for="commission in commissions" :key="commission.id" :commission="commission">
+                    <commission-list-item v-for="commission in commissions" :key="commission.id"
+                        :commission="commission">
                     </commission-list-item>
                 </tbody>
             </table>
-            <infinite-loading @infinite="getCommissions" :identifier="infiniteId" ref="infiniteLoading"></infinite-loading>
+            <infinite-loading @infinite="getCommissions" :identifier="infiniteId"
+                ref="infiniteLoading"></infinite-loading>
         </div>
     </div>
 </template>

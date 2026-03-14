@@ -7,10 +7,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class PurchaseResource extends JsonResource
 {
     protected $statuses = [
-        'pending' => 'PENDIENTE', 
+        'pending' => 'PENDIENTE',
         'completed' => 'COMPLETADA',
-        'cancelled' => 'CANCELADA' 
+        'cancelled' => 'CANCELADA',
     ];
+
     /**
      * Transform the resource into an array.
      *

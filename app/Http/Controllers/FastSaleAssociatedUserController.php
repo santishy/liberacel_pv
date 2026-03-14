@@ -13,7 +13,7 @@ class FastSaleAssociatedUserController extends Controller
     {
         $this->authorize('restore', $fastSale);
 
-        $associatedUser  = $fastSale->checkCredentials(
+        $associatedUser = $fastSale->checkCredentials(
             $request->username,
             $request->password
         );
@@ -30,7 +30,7 @@ class FastSaleAssociatedUserController extends Controller
         //     $fastSale->handleCredit($this->factors[$fastSale->status] * $inverse);
         // }
         return response()->json([
-            'sale' => $fastSale
+            'sale' => $fastSale,
         ]);
     }
 }

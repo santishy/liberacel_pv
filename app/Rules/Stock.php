@@ -8,7 +8,9 @@ use Illuminate\Contracts\Validation\Rule;
 class Stock implements Rule
 {
     public $stock;
+
     public $product_id;
+
     /**
      * Create a new rule instance.
      *
@@ -35,8 +37,9 @@ class Stock implements Rule
 
         $this->stock = $product->pivot->stock;
 
-        if($this->stock > $value || $this->stock == $value)
+        if ($this->stock > $value || $this->stock == $value) {
             return true;
+        }
 
         return false;
     }

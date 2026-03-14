@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ImpersonationController extends Controller
@@ -12,8 +11,10 @@ class ImpersonationController extends Controller
         if (Auth::user()->hasRole('admin')) {
             session(['impersonation_id' => Auth::user()->id]);
             Auth::loginUsingId(request('user_id'));
+
             return redirect()->back();
         }
+
         return abort(403);
     }
 
@@ -21,6 +22,7 @@ class ImpersonationController extends Controller
     {
         Auth::loginUsingId(session('impersonation_id'));
         session()->forget('impersonation_id');
+
         return redirect()->back();
     }
 }

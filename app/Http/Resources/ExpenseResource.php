@@ -17,7 +17,7 @@ class ExpenseResource extends JsonResource
         return [
             'id' => $this->id,
             'concept' => $this->concept,
-            'amount' => '$'.number_format($this->amount,2),
+            'amount' => '$'.number_format($this->amount, 2),
             'created_at' => $this->created_at->format('Y-m-d H:m:s'),
         ];
     }

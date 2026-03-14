@@ -18,8 +18,9 @@ class CustomerBonus extends Model
         if (is_null($fastSale->customer_bonus_id)) {
             $this->fastSales()->save($fastSale);
         }
-        return;
+
     }
+
     public function scorePoints($fastSale = null)
     {
 
@@ -32,14 +33,16 @@ class CustomerBonus extends Model
         }
         $this->accumulated_points += $this->getPoints($fastSale);
         $this->save();
+
         return $this;
     }
 
     public function getPoints($fastSale)
     {
 
-        if (is_null($fastSale->customer_bonus_id))
+        if (is_null($fastSale->customer_bonus_id)) {
             return 0;
+        }
 
         return $fastSale->productBonuses()
             ->sum(DB::raw('product_bonuses.points * fast_sale_product_bonus.qty'));
@@ -49,6 +52,7 @@ class CustomerBonus extends Model
     {
         return FastSale::find(request('fast_sale_id', $id));
     }
+
     public function fastSales()
     {
         return $this->hasMany(FastSale::class);
@@ -59,10 +63,13 @@ class CustomerBonus extends Model
         return $this->accumulated_points * floatval($pointData->value);
     }
 
-    public function conversionToPoints($pointData,$value){
-        if($value == 0)/**Revisar aqui, me marcaba un error por division entre 0 , al parecer si en ventas
+    public function conversionToPoints($pointData, $value)
+    {
+        if ($value == 0) {/**Revisar aqui, me marcaba un error por division entre 0 , al parecer si en ventas
         rapidas buscas un cliente como 3531097842 y no tiene puntos acumulados, y le pones borrar entonces marca este error */
             return;
+        }
+
         return $value / floatval($pointData->value);
     }
 }
