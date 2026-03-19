@@ -1,11 +1,6 @@
 <template>
-    <input
-        type="text"
-        v-model="sku"
-        v-on:keyup.enter="handleSearh"
-        placeholder="Busca por el SKU del producto"
-        class="form-text-input w-full"
-    />
+    <input type="text" v-model="sku" v-on:keyup.enter="handleSearh" placeholder="Busca por el SKU del producto"
+        class="form-text-input" />
 </template>
 <script>
 import { mapActions } from "vuex";
@@ -49,8 +44,7 @@ export default {
         setPage(page) {
             this.page = page;
         },
-        mostrar(e)
-        {
+        mostrar(e) {
             console.log(this.sku)
         }
     }

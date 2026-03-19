@@ -15797,6 +15797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _RaffleNumberListItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RaffleNumberListItem.vue */ "./resources/js/components/raffle-numbers/RaffleNumberListItem.vue");
+/* harmony import */ var _ui_SearchInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ui/SearchInput.vue */ "./resources/js/components/ui/SearchInput.vue");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
@@ -15815,9 +15816,11 @@ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" 
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    RaffleNumberListItem: _RaffleNumberListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    RaffleNumberListItem: _RaffleNumberListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SearchInput: _ui_SearchInput_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
     var _this = this;
@@ -15840,7 +15843,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   data: function data() {
     return {
       numbers: [],
-      page: 1
+      page: 1,
+      searchQuery: ''
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('raffles', ['getRaffleNumbers'])), {}, {
@@ -15854,7 +15858,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               _context.p = 0;
               _context.n = 1;
               return _this3.getRaffleNumbers({
-                page: _this3.page
+                page: _this3.page,
+                filter: {
+                  search: _this3.searchQuery
+                }
               });
             case 1:
               res = _context.v;
@@ -15877,6 +15884,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           }
         }, _callee, null, [[0, 2]]);
       }))();
+    },
+    handleSearch: function handleSearch() {
+      this.page = 1;
+      this.numbers = [];
+      this.fetchRaffleNumbers({
+        loaded: function loaded() {},
+        complete: function complete() {}
+      });
     }
   })
 });
@@ -16159,6 +16174,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       if (!!raffle) {
         var _raffle$start_date, _raffle$end_date;
         this.form.name = raffle.name;
+        this.form.total_numbers = raffle.total_numbers;
         this.form.inventory_id = raffle.inventory_id;
         this.form.description = raffle.description;
         this.form.start_date = ((_raffle$start_date = raffle.start_date) !== null && _raffle$start_date !== void 0 ? _raffle$start_date : '').toString().slice(0, 10);
@@ -18655,6 +18671,36 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this.getErrors(err);
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    value: {
+      type: String,
+      "default": ''
+    },
+    classes: {
+      type: String,
+      "default": ''
+    },
+    placeholder: {
+      type: String,
+      "default": ''
     }
   }
 });
@@ -27100,7 +27146,7 @@ var render = function render() {
       value: _vm.sku,
       expression: "sku"
     }],
-    staticClass: "form-text-input w-full",
+    staticClass: "form-text-input",
     attrs: {
       type: "text",
       placeholder: "Busca por el SKU del producto"
@@ -27947,7 +27993,24 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "table-container-responsive"
-  }, [_c("table", {
+  }, [_c("div", {
+    staticClass: "flex justify-end px-4 py-2"
+  }, [_c("search-input", {
+    attrs: {
+      classes: "w-96",
+      placeholder: "Buscar número de rifa"
+    },
+    on: {
+      search: _vm.handleSearch
+    },
+    model: {
+      value: _vm.searchQuery,
+      callback: function callback($$v) {
+        _vm.searchQuery = $$v;
+      },
+      expression: "searchQuery"
+    }
+  })], 1), _vm._v(" "), _c("table", {
     staticClass: "report-table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.numbers, function (number, index) {
     return _c("raffle-number-list-item", {
@@ -27958,6 +28021,7 @@ var render = function render() {
       }
     });
   }), 1)]), _vm._v(" "), _c("infinite-loading", {
+    ref: "infiniteLoading",
     on: {
       infinite: _vm.fetchRaffleNumbers
     }
@@ -28221,8 +28285,9 @@ var render = function render() {
       value: _vm.form.total_numbers,
       expression: "form.total_numbers"
     }],
-    staticClass: "form-text-input w-full",
+    staticClass: "form-text-input w-full disabled:cursor-not-allowed disabled:bg-gray-200",
     attrs: {
+      disabled: _vm.isEdit,
       type: " number",
       name: "total_numbers",
       placeholder: "Ingresa el número total de boletos",
@@ -28380,6 +28445,8 @@ var staticRenderFns = [function () {
     staticClass: "px-2 py-2"
   }, [_vm._v("Fecha Fin")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
+  }, [_vm._v("Total Números")]), _vm._v(" "), _c("th", {
+    staticClass: "px-2 py-2"
   }, [_vm._v("Status")]), _vm._v(" "), _c("th", {
     staticClass: "px-2 py-2"
   }, [_vm._v("Acciones")])])]);
@@ -28413,8 +28480,10 @@ var render = function render() {
   }, [_vm._v("\n        " + _vm._s(_vm.raffle.description) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-1 px-2 text-xs"
   }, [_vm._v("\n        " + _vm._s(_vm.raffle.formatted_start_date) + "\n    ")]), _vm._v(" "), _c("td", {
-    staticClass: "py-1 px-2 text-xs"
+    staticClass: "`py-1 px-2 text-xs`"
   }, [_vm._v("\n        " + _vm._s(_vm.raffle.formatted_end_date) + "\n    ")]), _vm._v(" "), _c("td", {
+    staticClass: "py-1 px-2 text-xs"
+  }, [_vm._v("\n        " + _vm._s(_vm.raffle.total_numbers) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-1 px-2 text-xs"
   }, [_vm._v("\n        " + _vm._s(_vm.raffle.status) + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-1 px-2 text-xs flex items-center justify-around text-white"
@@ -30657,6 +30726,48 @@ var render = function render() {
       group: "foo"
     }
   })], 1)])]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("input", {
+    staticClass: "form-text-input",
+    "class": _vm.classes,
+    attrs: {
+      type: "text",
+      placeholder: _vm.placeholder
+    },
+    domProps: {
+      value: _vm.value
+    },
+    on: {
+      input: function input($event) {
+        return _vm.$emit("input", $event.target.value);
+      },
+      keyup: function keyup($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.$emit("search", _vm.value);
+      }
+    }
+  });
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -82987,6 +83098,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketForm_vue_vue_type_template_id_65a9d07a__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketForm_vue_vue_type_template_id_65a9d07a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TicketForm.vue?vue&type=template&id=65a9d07a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tickets/TicketForm.vue?vue&type=template&id=65a9d07a");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/SearchInput.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ui/SearchInput.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchInput.vue?vue&type=template&id=6c4cf91c */ "./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c");
+/* harmony import */ var _SearchInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchInput.vue?vue&type=script&lang=js */ "./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SearchInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__.render,
+  _SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/ui/SearchInput.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SearchInput.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=script&lang=js");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchInput_vue_vue_type_template_id_6c4cf91c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SearchInput.vue?vue&type=template&id=6c4cf91c */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ui/SearchInput.vue?vue&type=template&id=6c4cf91c");
 
 
 /***/ }),

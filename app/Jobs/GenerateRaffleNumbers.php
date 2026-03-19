@@ -17,11 +17,11 @@ class GenerateRaffleNumbers implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public int $raffleId;
+    public $raffle;
 
     public function __construct(Raffle $raffle)
     {
-        $this->raffleId = $raffle->id;
+        $this->raffle = $raffle;
     }
 
     /**
@@ -31,9 +31,10 @@ class GenerateRaffleNumbers implements ShouldQueue
     {
         $numbers = [];
         $chunkSize = 1000;
-        for ($i = 1; $i <= 9999; $i++) {
+        $totalNumbers = $this->raffle->total_numbers ? $this->raffle->total_numbers : 9999; // Assuming this is the total number of raffle numbers to generate
+        for ($i = 1; $i <= $totalNumbers; $i++) {
             $numbers[] = [
-                'raffle_id' => $this->raffleId,
+                'raffle_id' => (int) $this->raffle->id,
                 'code' => str_pad($i, 4, '0', STR_PAD_LEFT),
                 'number' => $i,
                 'created_at' => now(),

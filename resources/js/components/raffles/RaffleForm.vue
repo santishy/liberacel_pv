@@ -23,7 +23,8 @@
         </div>
         <div>
             <label class="form-label"">Número total de boletos</label>
-            <input type=" number" name="total_numbers" v-model="form.total_numbers" class="form-text-input w-full"
+            <input :disabled="isEdit" type=" number" name="total_numbers" v-model="form.total_numbers"
+                class="form-text-input w-full disabled:cursor-not-allowed disabled:bg-gray-200"
                 placeholder="Ingresa el número total de boletos" autocomplete="off" />
         </div>
         <div>
@@ -114,6 +115,7 @@ export default {
         fillForm(raffle) {
             if (!!raffle) {
                 this.form.name = raffle.name;
+                this.form.total_numbers = raffle.total_numbers;
                 this.form.inventory_id = raffle.inventory_id;
                 this.form.description = raffle.description;
                 this.form.start_date = (raffle.start_date ?? '').toString().slice(0, 10);

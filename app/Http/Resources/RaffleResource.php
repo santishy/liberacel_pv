@@ -24,6 +24,7 @@ class RaffleResource extends JsonResource
             'start_date' => $this->resource->start_date,
             'end_date' => $this->resource->end_date,
             'inventory_id' => $this->resource->inventory_id,
+            'total_numbers' => $this->resource->total_numbers,
             'min_sale_total' => $this->resource->min_sale_total,
         ];
     }

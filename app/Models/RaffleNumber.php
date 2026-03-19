@@ -41,4 +41,16 @@ class RaffleNumber extends Model
             $q->where('status', 'active');
         });
     }
+    public function scopeSearch(Builder $query, $value)
+    {
+        $query->where(function (Builder $q) use ($value) {
+            $q->where('number', 'LIKE', "%{$value}%")
+              ->orWhere('code', 'LIKE', "%{$value}%")
+              ->orWhere('saleable_id', 'LIKE', "%{$value}%")
+              ->orWhereHasMorph('saleable',[Sale::class,FastSale::class], function (Builder $q) use ($value) {
+                  $q->where('customer_phone', 'LIKE', "%{$value}%");
+              });
+
+        });
+    }
 }

@@ -28,6 +28,7 @@ class SaveRaffleRequest extends FormRequest
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'total_numbers' => 'required|integer|min:10',
             'min_sale_total' => 'required|numeric|min:1',
         ];
         if (request()->user()->hasRole('admin')) {
@@ -57,6 +58,9 @@ class SaveRaffleRequest extends FormRequest
             'min_sale_total.numeric' => 'El total mínimo de venta debe ser un número.',
             'min_sale_total.min' => 'El total mínimo de venta debe ser al menos 1.',
             'inventory_id.required' => 'El inventario es requerido.',
+            'total_numbers.required' => 'El total de números es requerido.',
+            'total_numbers.integer' => 'El total de números debe ser un número entero.',
+            'total_numbers.min' => 'El total de números debe ser al menos 10.',
         ];
     }
 }

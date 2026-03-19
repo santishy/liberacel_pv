@@ -1,5 +1,10 @@
 <template>
     <div class=" table-container-responsive ">
+
+        <div class="flex justify-end px-4 py-2">
+            <search-input classes="w-96" placeholder="Buscar número de rifa" v-model="searchQuery"
+                @search="handleSearch"></search-input>
+        </div>
         <table class="report-table">
             <thead class=" report-table-thead">
                 <tr>
@@ -17,17 +22,19 @@
                 </raffle-number-list-item>
             </tbody>
         </table>
-        <infinite-loading @infinite="fetchRaffleNumbers"></infinite-loading>
+        <infinite-loading ref="infiniteLoading" @infinite="fetchRaffleNumbers"></infinite-loading>
     </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import RaffleNumberListItem from './RaffleNumberListItem.vue';
+import SearchInput from '../ui/SearchInput.vue';
 export default {
 
     components: {
-        RaffleNumberListItem
+        RaffleNumberListItem,
+        SearchInput
     },
     created() {
         EventBus.$on('delete-raffle', (index) => {
@@ -44,20 +51,20 @@ export default {
                 this.numbers[index].customer_phone = '-'
                 this.numbers[index].ticket_number = '-'
             }
-
         });
     },
     data() {
         return {
             numbers: [],
             page: 1,
+            searchQuery: '',
         }
     },
     methods: {
         ...mapActions('raffles', ['getRaffleNumbers']),
         async fetchRaffleNumbers($state) {
             try {
-                const res = await this.getRaffleNumbers({ page: this.page })
+                const res = await this.getRaffleNumbers({ page: this.page, filter: { search: this.searchQuery } });
                 const rows = res.data || [];
                 this.numbers.push(...rows);
                 if (res.data.length) {
@@ -69,6 +76,15 @@ export default {
             } catch (error) {
                 console.log(error)
             }
+        },
+        handleSearch() {
+
+            this.page = 1;
+            this.numbers = [];
+            this.fetchRaffleNumbers({
+                loaded: () => { },
+                complete: () => { }
+            });
         }
     }
 }

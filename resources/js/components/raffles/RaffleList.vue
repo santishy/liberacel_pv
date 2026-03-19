@@ -7,6 +7,7 @@
                     <th class="px-2 py-2">Descripcion</th>
                     <th class="px-2 py-2">Fecha Inicio</th>
                     <th class="px-2 py-2">Fecha Fin</th>
+                    <th class="px-2 py-2">Total Números</th>
                     <th class="px-2 py-2">Status</th>
                     <th class="px-2 py-2">Acciones</th>
                 </tr>

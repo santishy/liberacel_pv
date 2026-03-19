@@ -9,8 +9,11 @@
         <td class="py-1 px-2 text-xs">
             {{ raffle.formatted_start_date }}
         </td>
-        <td class="py-1 px-2 text-xs">
+        <td class="`py-1 px-2 text-xs`">
             {{ raffle.formatted_end_date }}
+        </td>
+        <td class="py-1 px-2 text-xs">
+            {{ raffle.total_numbers }}
         </td>
         <td class="py-1 px-2 text-xs">
             {{ raffle.status }}
