@@ -24,7 +24,7 @@
         </form>
         <div v-if="localSale !== null" class="overflow-x-auto relative max-h-80 overflow-y-auto">
             <product-list>
-                <product-list-item v-for="( product, index ) in  products " :key="product.id" :product="product"
+                <product-list-item v-for="(product, index) in products" :key="product.id" :product="product"
                     :sale-status="getStatus" :index="index">
                 </product-list-item>
             </product-list>
@@ -40,9 +40,9 @@
                     ">
             <label class="mr-4 text-2xl">Total</label>
             <p class="text-gray-700 text-3xl font-bold">{{ getTotal.toLocaleString("es-MX", {
-            style: "currency",
-            currency: "MXN",
-                }) }}</p>
+                style: "currency",
+                currency: "MXN",
+            }) }}</p>
         </div>
 
     </div>
@@ -128,6 +128,7 @@ export default {
     },
     methods: {
         ...mapMutations("sales", ["setSale"]),
+        ...mapMutations("raffles", ["setCustomerPhone"]),
         printTicket(id) {
             EventBus.$emit(`open-modal-${id}`, false);
             window.open(`/pdf-tickets/${id}`, "_blank");
@@ -135,6 +136,8 @@ export default {
         },
         clearCurrentSale() {
             sessionStorage.removeItem("salePriceOption");
+            this.setCustomerPhone("");
+            EventBus.$emit("sale-deleted", true);
             this.products = []
             this.setSale(null);
         },
@@ -188,7 +191,7 @@ export default {
                         'Accept': 'application/pdf'
                     }
                 });
-                console.log({ res })
+
                 // Crear un blob desde la respuesta para el contenido del PDF
                 const blob = new Blob([res.data], { type: 'application/pdf' });
 

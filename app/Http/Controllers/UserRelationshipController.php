@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Events\SaleTransactionProcessed;
 use App\Events\TransactionComplete;
 use App\Http\Requests\StoreUserRelationshipRequest;
+use App\Models\Raffle;
+
 use Illuminate\Support\Str;
 
 class UserRelationshipController extends Controller
@@ -30,9 +32,10 @@ class UserRelationshipController extends Controller
         }
 
         $model->deleteTheSessionID();
-
+        $activeRaffle = (bool) Raffle::activeForInventory($model->inventory_id);
         return response()->json([
             'sale' => $model,
+            'hasActiveRaffle' => $activeRaffle,
         ]);
     }
 

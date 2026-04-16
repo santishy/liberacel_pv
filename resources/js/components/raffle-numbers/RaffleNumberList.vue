@@ -1,7 +1,8 @@
 <template>
     <div class=" table-container-responsive ">
 
-        <div class="flex justify-end px-4 py-2">
+        <div class="flex justify-between px-4 py-2">
+            <raffle-number-status-filter @filter-changed="handleSearch" />
             <search-input classes="w-96" placeholder="Buscar número de rifa" v-model="searchQuery"
                 @search="handleSearch"></search-input>
         </div>
@@ -12,6 +13,7 @@
                     <th class="px-2 py-2">Status</th>
                     <th class="px-2 py-2">Fecha</th>
                     <th class="px-2 py-2">Nom. Tel.</th>
+                    <th class="px-2 py-2">Tipo de venta</th>
                     <th class="px-2 py-2">Nota</th>
                     <th class="px-2 py-2 text-center">Acciones</th>
                 </tr>
@@ -30,11 +32,13 @@
 import { mapActions } from 'vuex';
 import RaffleNumberListItem from './RaffleNumberListItem.vue';
 import SearchInput from '../ui/SearchInput.vue';
+import RaffleNumberStatusFilter from './RaffleNumberStatusFilter.vue';
 export default {
 
     components: {
         RaffleNumberListItem,
-        SearchInput
+        SearchInput,
+        RaffleNumberStatusFilter
     },
     created() {
         EventBus.$on('delete-raffle', (index) => {
@@ -58,13 +62,19 @@ export default {
             numbers: [],
             page: 1,
             searchQuery: '',
+            status: null,
+            statusOptions: [
+                'available',
+                'assigned',
+                null
+            ]
         }
     },
     methods: {
         ...mapActions('raffles', ['getRaffleNumbers']),
         async fetchRaffleNumbers($state) {
             try {
-                const res = await this.getRaffleNumbers({ page: this.page, filter: { search: this.searchQuery } });
+                const res = await this.getRaffleNumbers({ page: this.page, filter: { search: this.searchQuery, byStatus: this.status } });
                 const rows = res.data || [];
                 this.numbers.push(...rows);
                 if (res.data.length) {
@@ -77,8 +87,11 @@ export default {
                 console.log(error)
             }
         },
-        handleSearch() {
-
+        handleSearch(status) {
+            this.status = null;
+            if (typeof status === 'string' && this.statusOptions.includes(status)) {
+                this.status = status;
+            }
             this.page = 1;
             this.numbers = [];
             this.fetchRaffleNumbers({

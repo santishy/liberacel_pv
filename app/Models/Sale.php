@@ -10,6 +10,7 @@ use App\Models\Traits\SaleModelHandler;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Facades\InventoryContext;
 
 class Sale extends Model
 {
@@ -50,10 +51,11 @@ class Sale extends Model
 
     public function scopeFindOrCreateTheTransaction(Builder $query)
     {
+        $inventory_id = InventoryContext::id();
         if (! session()->has('sale_id')) {
             $sale = $query->create([
                 'user_id' => auth()->id(),
-                'inventory_id' => request('inventory_id', null),
+                'inventory_id' => $inventory_id,
             ]);
             session()->put('sale_id', $sale->id);
         }

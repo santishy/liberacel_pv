@@ -9,7 +9,8 @@
             <!-- <sale-to-customer v-show="showSaleToCustomer" :uri="`/client/${currentFastSale?.id}/fast-sales`" /> -->
             <div v-if="currentFastSale?.id"
                 class="flex py-2 items-center justify-between w-full gap-4 flex-col sm:flex-row ">
-                <sale-to-customer :customer-phone="currentFastSale.customer_phone" :uri="`/client/${currentFastSale?.id}/fast-sales`" />
+                <sale-to-customer :customer-phone="currentFastSale.customer_phone"
+                    :uri="`/client/${currentFastSale?.id}/fast-sales`" />
                 <credit-status :url="`/fast-sales/${currentFastSale?.id}`" />
             </div>
             <fast-sale-form :product-bonuses="productBonuses" class="mt-4"></fast-sale-form>
@@ -40,7 +41,7 @@ export default {
         },
         hasActiveRaffle: {
             type: Boolean,
-           default:false
+            default: false
         },
         productBonuses: { type: Array },
     },
@@ -49,14 +50,13 @@ export default {
             showSaleToCustomer: false
         }
     }, */
-    mounted(){
-        
+    mounted() {
+
     },
     created() {
-        console.log("entro aki: ",this.sale)
         this.setActiveRaffle(this.hasActiveRaffle);
         this.SET_CURRENT_FAST_SALE(this.sale);
-        
+
         /* EventBus.$on('associated-user',(id)=>{
             this.SET_CURRENT_FAST_SALE({});
         }) */
@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"]),
-        ...mapMutations("raffles",["setActiveRaffle"])
+        ...mapMutations("raffles", ["setActiveRaffle"])
     },
     computed: {
         ...mapState(["currentFastSale"]),

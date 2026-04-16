@@ -16,7 +16,7 @@
             <button @click.prevent="openModal" class="w-full sm:w-auto" :class="[statusStyle]">
                 <span class="mr-2">{{
                     translate[currentFastSale.status]
-                }}</span>
+                    }}</span>
                 <span>
                     <exchange></exchange>
                 </span>
@@ -30,7 +30,7 @@
             </p> -->
             <span class="text-xl sm:text-xs text-slate-700">{{
                 currentFastSale.created_at
-            }}</span>
+                }}</span>
         </div>
         <!-- esto es del dinero electronico -->
         <!-- <div class="w-full flex justify-end  items-baseline gap-4 p-2">
@@ -122,10 +122,14 @@ export default {
                 "_blank"
             );
             this.SET_CURRENT_FAST_SALE({});
+            this.setCustomerPhone('');
+
+            //this.setActiveRaffle(null);
         });
     },
     methods: {
         ...mapMutations(["SET_CURRENT_FAST_SALE"]),
+        ...mapMutations('raffles', ['setCustomerPhone', 'setActiveRaffle']),
         fillData(sale) {
             this.products = sale.products;
             this.localSale = sale;
@@ -136,6 +140,7 @@ export default {
     },
     computed: {
         ...mapState(["currentFastSale"]),
+
         statusStyle() {
             if (this.currentFastSale.status == "pending") {
                 return "text-xl sm:text-xs px-2 rounded bg-yellow-500 hover:ring-offset-2 hover:ring-2 font-sm text-slate-700 font-semibold flex flex-wrap justify-center items-center";

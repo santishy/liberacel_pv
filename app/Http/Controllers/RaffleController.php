@@ -44,7 +44,6 @@ class RaffleController extends Controller
     {
         $raffle = Raffle::create($request->validated());
         GenerateRaffleNumbers::dispatch($raffle);
-
         return RaffleResource::make($raffle);
     }
 

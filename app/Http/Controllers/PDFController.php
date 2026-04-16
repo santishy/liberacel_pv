@@ -20,8 +20,11 @@ class PDFController extends Controller
 
         $model = 'Sale';
         $typeOfSale = 'Stock';
-        $raffleNumber = null;
+        $raffleNumber = $sale->raffleNumber;
         $raffle = null;
+        if($raffleNumber) {
+            $raffle = $raffleNumber->raffle;
+        }
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
         $pdf = PDF::loadView(
             'tickets.pdf',
@@ -36,6 +39,7 @@ class PDFController extends Controller
         /**
          * Se vuelve a mandar a crear el frame con la altura correspondiente al documento, de forma mas precisa y se manda pintar al final
          */
+        
         $pdf = PDF::loadView(
             'tickets.pdf',
             compact('sale', 'raffleNumber', 'raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')

@@ -12,6 +12,8 @@ use App\Models\Sale;
 use App\Rules\TransactionInventory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use App\Facades\InventoryContext;
+
 
 class ProductInSaleController extends Controller
 {
@@ -37,13 +39,8 @@ class ProductInSaleController extends Controller
     {
         $sale = Sale::getTransaction();
         $this->authorize('create', $sale);
-
-        $request->validate(
-            [
-                'inventory_id' => ['required', new TransactionInventory($sale)],
-            ],
-        );
-        Inventory::find($request->inventory_id)->existsProductInStock($product);
+        $inventory_id = InventoryContext::id();
+        Inventory::find($inventory_id)->existsProductInStock($product);
         $sale->transactions($product);
         $sale->update(['total' => $sale->calculateTotalSale()]);
 

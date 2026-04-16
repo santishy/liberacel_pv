@@ -26,7 +26,7 @@
                     </p>
                     <p class="border-yellow-400 border text-sm text-slate-500  px-2 py-1 rounded-sm">{{
                         client.address
-                    }}</p>
+                        }}</p>
                     <p class=" border-yellow-400 border text-sm text-slate-700 px-2 py-1 rounded-sm">
                         {{ client.phone_number }}
                     </p>
@@ -56,7 +56,7 @@ export default {
     data() {
         return {
             form: {
-                phone_number:''
+                phone_number: ''
             },
             client: {},
             uriCopy: null,
@@ -64,14 +64,14 @@ export default {
         };
     },
     mounted() {
-        console.log('uri: ',this.uri)
+
         this.uriCopy = this.uri;
     },
-    watch:{
+    watch: {
         getCustomerPhone:
         {
-            immediate:true,
-            handler(val){
+            immediate: true,
+            handler(val) {
                 this.form.phone_number = val;
             }
         }
@@ -110,7 +110,7 @@ export default {
 
     },
     computed: {
-        ...mapGetters("raffles",["getCustomerPhone"]),
+        ...mapGetters("raffles", ["getCustomerPhone"]),
         axiosConfig() {
             //creo que el primer if, nunca entra en toda la app, revisar!! 
             if (this.uriCopy === '/clients/' ||

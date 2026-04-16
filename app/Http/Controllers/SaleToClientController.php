@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\TransactionResource;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use App\Facades\InventoryContext;
 use Illuminate\Validation\ValidationException;
 
 class SaleToClientController extends Controller
@@ -14,9 +15,9 @@ class SaleToClientController extends Controller
         $this->authorize('create', new Sale);
         $fields = $request->validate([
             'phone_number' => 'exists:clients,phone_number|required',
-            'inventory_id' => 'required',
+           // 'inventory_id' => 'required',
         ]);
-
+        $fields['inventory_id'] = InventoryContext::id();
         // $this->validateTypeOfSale();
 
         $sale = Sale::with('products')->getTransaction();

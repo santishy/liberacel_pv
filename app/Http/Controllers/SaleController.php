@@ -13,6 +13,9 @@ use App\Models\Inventory;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use App\Models\Raffle;
+use App\Facades\InventoryContext;
+
 
 class SaleController extends Controller
 {
@@ -48,11 +51,12 @@ class SaleController extends Controller
         $inventories = Inventory::all();
         $query = Category::query();
         $categories = $query->isActive(true)->orderBy('name')->get();
-
+        $activeRaffle = (bool) Raffle::activeForInventory(InventoryContext::id());
         return view('sales.create', [
             'sale' => $sale ? TransactionResource::make($sale->load('products')) : null,
             'inventories' => $inventories,
             'categories' => $categories,
+            'activeRaffle' => $activeRaffle,
         ]);
     }
 

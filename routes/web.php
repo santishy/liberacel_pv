@@ -47,7 +47,7 @@ use App\Http\Controllers\RaffleAssignmentController;
 use App\Models\FastSale;
 use App\Http\Controllers\RaffleTicketController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UpdateSaleCustomerPhone;
 // use App\Models\Category;
 // use App\Models\Ticket;
 // use Illuminate\Support\Facades\Auth;
@@ -294,3 +294,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('select-inventory', [InventoryContextController::class, 'show'])->name('select-inventory');
     Route::post('select-inventory', [InventoryContextController::class, 'store'])->name('select.inventory.store');
 });
+
+/**
+ * Sale customer phone update
+ */
+Route::patch('sales/{sale}/customer-phone', [UpdateSaleCustomerPhone::class, '__invoke'])->middleware(['auth', 'context.inventory']);

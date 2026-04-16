@@ -14,7 +14,10 @@
             {{ raffleNumber.customer_phone ?? '-' }}
         </td>
         <td class="py-1 px-2 text-xs">
-            {{ raffleNumber.ticket_number ?? '-' }} {{ raffleNumber.now }}
+            {{ raffleNumber.saleable_type ?? '-' }}
+        </td>
+        <td class="py-1 px-2 text-xs">
+            {{ raffleNumber.ticket_number ?? '-' }}
         </td>
         <td class="py-1 px-2 text-xs flex items-center justify-center space-x-2 text-white">
 
@@ -47,7 +50,6 @@ export default {
                 const resp = await axios.put('/raffle-numbers/' + id, {
                     status: 'available'
                 });
-                console.log('status', resp.data.data.status)
                 if (resp.data.data.status === 'DISPONIBLE') {
                     EventBus.$emit('raffle-number-available', this.index);
                 }

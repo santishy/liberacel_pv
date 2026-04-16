@@ -104,6 +104,7 @@
 </template>
 <script>
 import InformationComponent from "../modals/InformationComponent.vue";
+import { mapMutations } from "vuex";
 export default {
     props: {
         model: {
@@ -135,7 +136,6 @@ export default {
         };
     },
     mounted() {
-        console.log(this.cancellationCheckbox)
         this.local_id = this.id;
         EventBus.$on("id-for-authentication-form", (id) => {
             this.local_id = id;
@@ -155,8 +155,8 @@ export default {
         },
     },
     methods: {
+        ...mapMutations('raffles', ['setActiveRaffle']),
         async submit() {
-            //`/fast-sales/${this.local_id}/associated-users`
             try {
                 this.loading = true;
                 this.form.model = this.model;
@@ -165,17 +165,23 @@ export default {
                     this.uri,
                     this.form
                 );
-                console.log({ 'status': res.data })
                 if (res.status === 200) {
-                    // this.disabled = false;
-                    if (res.data.sale.id)
+                    console.log("respuesta: ", res.data);
+                    if (!res.data.hasActiveRaffle) {
+                        this.setActiveRaffle(null);
+                    }
+                    if (res.data.sale.id) {
                         EventBus.$emit("associated-user", res.data.sale.id);
+
+                    } else {
+                        console.log("No se recibió el ID de la venta en la respuesta.");
+                    }
                     this.form.id = null;
                     this.form.username = "";
                     this.form.password = "";
                 }
             } catch (err) {
-                EventBus.$emit('an-error-ocurred', err);
+                console.error("ocurrio un error: ", err);
             } finally {
                 this.loading = false;
             }
@@ -189,6 +195,8 @@ export default {
         },
     },
     computed: {
+
+
         getStatus() {
             return this.disabled;
         },

@@ -15,13 +15,17 @@ class AssignRaffleNumberToSaleable
         }
         $raffleNumber = RaffleNumber::getRandomAvailableNumber($raffle->id);
         if (! $raffleNumber) {
-            Raffle::where('id', $raffle->id)->update(['status' => 'completed']);
+            Raffle::where('id', $raffle->id)->update(['status' => 'finished']);
             return;
         }
         $raffleNumber->saleable()->associate($saleable);
         $raffleNumber->status = 'assigned';
         $raffleNumber->save();
-
+        $raffleNumberAreAvailable = RaffleNumber::where('raffle_id', $raffle->id)->where('status', 'available')->exists();
+        if (! $raffleNumberAreAvailable) {
+            Raffle::where('id', $raffle->id)->update(['status' => 'finished']);
+        }
+       // $raffleNumberAreAvailable = RaffleNumber::availableForRaffle($raffle->id)->exists();
         return $raffleNumber;
     }
 

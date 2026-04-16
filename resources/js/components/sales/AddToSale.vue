@@ -30,11 +30,11 @@ export default {
     methods: {
         ...mapMutations("sales", ["setSale"]),
         submit() {
-            const inventory_id = this.isAdmin ? sessionStorage.getItem('inventory_id') : this.user.inventory_id;
+            //const inventory_id = this.isAdmin ? sessionStorage.getItem('inventory_id') : this.user.inventory_id;
             axios
                 .post(`/sales/${this.product.id}/products`, {
                     salePriceOption: this.salePriceOption,
-                    inventory_id,
+                    // inventory_id,
                 })
                 .then(res => {
                     this.setSale(res.data.transaction);

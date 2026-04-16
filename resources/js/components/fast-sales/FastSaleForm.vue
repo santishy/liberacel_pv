@@ -67,8 +67,7 @@ export default {
             this.form.commission_amount = item?.commission_amount;
         });
         EventBus.$on("sale-to-client", (res) => {
-            console.log(res.data)
-            this.form.client_id = res.data.id;
+            this.form.client_id = res.sale.client.id;
         })
     },
     methods: {
@@ -96,7 +95,7 @@ export default {
                 EventBus.$emit("reset-search-select");
 
                 this.form = {};
-                this.customerPhone = '';
+                //this.customerPhone = '';
                 this.notify({
                     title: "Venta rapida",
                     message: "Producto agregado",
