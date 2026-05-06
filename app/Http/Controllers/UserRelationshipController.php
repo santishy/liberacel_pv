@@ -14,7 +14,6 @@ class UserRelationshipController extends Controller
     public function store(StoreUserRelationshipRequest $request)
     {
         $model = $this->getModel($request);
-
         $this->authorize('restore', $model);
 
         $user = $model->checkCredentials(request('username'), request('password'));

@@ -96,4 +96,18 @@ return [
 
     // permissions to checkout
     'complete sales checkout' => 'completar el pago de las ventas',
+
+    // permissions to raffles
+    'create raffle' => 'Crear rifa',
+    'view raffle' => 'Ver rifa',
+    'view raffles' => 'Ver rifas',
+    'edit raffle' => 'Editar rifa',
+    'delete raffle' => 'Eliminar rifa',
+
+    //permissions to raffle numbers
+    'view raffle numbers' => 'Ver números de rifa',
+    'update raffle number' => 'Editar números de rifa',
+    'view raffle number' => 'Ver número de rifa',
+    'assign raffle number' => 'Asignar número de rifa',
+    'release raffle number' => 'Liberar número de rifa',
 ];

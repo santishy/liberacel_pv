@@ -12933,6 +12933,70 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {},
+  props: {
+    inventories: {
+      type: Array,
+      required: true
+    }
+  },
+  components: {},
+  data: function data() {
+    return {};
+  },
+  methods: {
+    selectInventory: function selectInventory(event) {
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var resp, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _context.p = 0;
+              _context.n = 1;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/select-inventory', {
+                inventory_id: event.target.value
+              });
+            case 1:
+              resp = _context.v;
+              if (resp.status === 200) {
+                window.location.href = '/';
+              }
+              _context.n = 3;
+              break;
+            case 2:
+              _context.p = 2;
+              _t = _context.v;
+              console.log(_t);
+              return _context.a(2);
+            case 3:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 2]]);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layouts/Sidebar.vue?vue&type=script&lang=js":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layouts/Sidebar.vue?vue&type=script&lang=js ***!
@@ -15659,6 +15723,94 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    raffleNumber: {
+      type: Object
+    }
+  },
+  data: function data() {
+    var _this$raffleNumber;
+    return {
+      customerPhone: ((_this$raffleNumber = this.raffleNumber) === null || _this$raffleNumber === void 0 ? void 0 : _this$raffleNumber.customer_phone) || '',
+      error: null
+    };
+  },
+  methods: {
+    handleSubmit: function handleSubmit() {
+      var _this = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _this$raffleNumber2, resp, _error$response, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _context.p = 0;
+              _context.n = 1;
+              return axios.patch("/raffle-numbers/".concat((_this$raffleNumber2 = _this.raffleNumber) === null || _this$raffleNumber2 === void 0 ? void 0 : _this$raffleNumber2.id, "/customer-phone"), {
+                customer_phone: _this.customerPhone
+              });
+            case 1:
+              resp = _context.v;
+              _this.$emit('raffle-number-customer-phone-updated', _this.customerPhone);
+              _context.n = 3;
+              break;
+            case 2:
+              _context.p = 2;
+              _t = _context.v;
+              console.error(_t);
+              _this.error = ((_error$response = _t.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || 'Ocurrió un error al actualizar el número de teléfono del cliente.';
+            case 3:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 2]]);
+      }))();
+    }
+  },
+  computed: {
+    saleContext: function saleContext() {
+      var _this$raffleNumber3, _this$raffleNumber4;
+      var saleType = ((_this$raffleNumber3 = this.raffleNumber) === null || _this$raffleNumber3 === void 0 ? void 0 : _this$raffleNumber3.saleable_type) || 'Venta';
+      var ticketNumber = ((_this$raffleNumber4 = this.raffleNumber) === null || _this$raffleNumber4 === void 0 ? void 0 : _this$raffleNumber4.ticket_number) || '-';
+      return "".concat(saleType, " \xB7 Nota ").concat(ticketNumber);
+    }
+  },
+  watch: {
+    raffleNumber: {
+      handler: function handler(newVal) {
+        this.customerPhone = (newVal === null || newVal === void 0 ? void 0 : newVal.customer_phone) || '';
+      },
+      immediate: true
+    },
+    error: {
+      handler: function handler(newVal) {
+        var _this2 = this;
+        if (newVal) {
+          setTimeout(function () {
+            _this2.error = null;
+          }, 3000);
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberForm.vue?vue&type=script&lang=js":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberForm.vue?vue&type=script&lang=js ***!
@@ -15676,7 +15828,6 @@ function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present,
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -15810,6 +15961,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RaffleNumberListItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RaffleNumberListItem.vue */ "./resources/js/components/raffle-numbers/RaffleNumberListItem.vue");
 /* harmony import */ var _ui_SearchInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ui/SearchInput.vue */ "./resources/js/components/ui/SearchInput.vue");
 /* harmony import */ var _RaffleNumberStatusFilter_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RaffleNumberStatusFilter.vue */ "./resources/js/components/raffle-numbers/RaffleNumberStatusFilter.vue");
+/* harmony import */ var _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/InformationComponent.vue */ "./resources/js/components/modals/InformationComponent.vue");
+/* harmony import */ var _RaffleNumberCustomerPhoneForm_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RaffleNumberCustomerPhoneForm.vue */ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
@@ -15830,11 +15983,15 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     RaffleNumberListItem: _RaffleNumberListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     SearchInput: _ui_SearchInput_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    RaffleNumberStatusFilter: _RaffleNumberStatusFilter_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    RaffleNumberStatusFilter: _RaffleNumberStatusFilter_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    InformationComponent: _modals_InformationComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    RaffleNumberCustomerPhoneForm: _RaffleNumberCustomerPhoneForm_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   created: function created() {
     var _this = this;
@@ -15845,7 +16002,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   mounted: function mounted() {
     var _this2 = this;
     EventBus.$on('raffle-number-available', function (index) {
-      console.log('raffle-number-available', index);
       if (_this2.numbers[index]) {
         _this2.numbers[index].status = 'DISPONIBLE';
         _this2.numbers[index].assigned_at = '';
@@ -15860,10 +16016,18 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       page: 1,
       searchQuery: '',
       status: null,
-      statusOptions: ['available', 'assigned', null]
+      statusOptions: ['available', 'assigned', null],
+      raffleNumber: null,
+      raffleNumberIndex: null
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('raffles', ['getRaffleNumbers'])), {}, {
+    raffleNumberCustomerPhoneUpdated: function raffleNumberCustomerPhoneUpdated(customer_phone) {
+      if (this.raffleNumberIndex !== null && this.numbers[this.raffleNumberIndex]) {
+        this.numbers[this.raffleNumberIndex].customer_phone = customer_phone;
+      }
+      EventBus.$emit('open-modal', false);
+    },
     fetchRaffleNumbers: function fetchRaffleNumbers($state) {
       var _this3 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
@@ -15901,6 +16065,11 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           }
         }, _callee, null, [[0, 2]]);
       }))();
+    },
+    openPhoneEditModal: function openPhoneEditModal(raffleNumber, index) {
+      this.raffleNumber = raffleNumber;
+      this.raffleNumberIndex = index;
+      EventBus.$emit('open-modal-edit-raffle-number', true);
     },
     handleSearch: function handleSearch(status) {
       this.status = null;
@@ -24686,6 +24855,53 @@ render._withStripped = true;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0 ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("layout-component", [_c("div", {
+    staticClass: "bg-white p-4 rounded shadow sm:max-w-xl m-auto mt-4 space-y-2"
+  }, _vm._l(_vm.inventories, function (inventory) {
+    return _c("div", {
+      staticClass: "border border-gray-200 bg-gray-100 px-4 py-2 rounded"
+    }, [_c("input", {
+      staticClass: "w-4 h-4 text-blue-600 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:ring-2",
+      attrs: {
+        id: "inventory-".concat(inventory.id),
+        type: "radio",
+        name: "inventory"
+      },
+      domProps: {
+        value: inventory.id
+      },
+      on: {
+        change: _vm.selectInventory
+      }
+    }), _vm._v(" "), _c("label", {
+      staticClass: "ml-2 cursor-pointer text-sm font-medium text-gray-900",
+      attrs: {
+        "for": "inventory-".concat(inventory.id)
+      }
+    }, [_vm._v(_vm._s(inventory.name))])]);
+  }), 0)]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layouts/Sidebar.vue?vue&type=template&id=54bfa98a&scoped=true":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/layouts/Sidebar.vue?vue&type=template&id=54bfa98a&scoped=true ***!
@@ -24993,18 +25209,18 @@ var render = function render() {
     }],
     staticClass: "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
   }, [_c("div", {
-    staticClass: "bg-white sm:px-4 px-4 pt-2 pb-4 sm:p-2"
+    staticClass: "bg-white sm:px-4 px-2 pt-2 pb-4 sm:p-2"
   }, [_c("div", {
     staticClass: "sm:flex sm:items-start"
   }, [_c("div", {
-    staticClass: "sm:px-6 pt-4 text-center sm:mt-0 w-full"
+    staticClass: "sm:px-6 pt-2 text-center sm:mt-0 w-full"
   }, [_c("h3", {
     staticClass: "w-full text-left text-lg leading-6 font-medium text-slate-800",
     attrs: {
       id: "modal-title"
     }
   }, [_vm._t("title")], 2), _vm._v(" "), _c("div", {
-    staticClass: "mt-2"
+    staticClass: "mt-4"
   }, [_vm._t("default")], 2)])])]), _vm._v(" "), _c("div", {
     staticClass: "bg-sky-100 px-4 py-2 sm:pt-2 sm:px-4 sm:flex sm:flex-row-reverse"
   }, [_vm._t("button"), _vm._v(" "), _c("button", {
@@ -27868,6 +28084,73 @@ render._withStripped = true;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4 ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("form", {
+    staticClass: "space-y-2 flex flex-col items-start justify-start mb-4",
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.handleSubmit.apply(null, arguments);
+      }
+    }
+  }, [_c("p", {
+    staticClass: "text-xs text-slate-500"
+  }, [_vm._v("\n        " + _vm._s(_vm.saleContext) + "\n    ")]), _vm._v(" "), _c("label", {
+    staticClass: "text-left w-full",
+    attrs: {
+      "for": "customer_phone"
+    }
+  }, [_vm._v("Número de teléfono")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.customerPhone,
+      expression: "customerPhone"
+    }],
+    staticClass: "input-style w-full",
+    attrs: {
+      type: "text",
+      id: "customer_phone",
+      placeholder: "Ingrese el número de teléfono del cliente"
+    },
+    domProps: {
+      value: _vm.customerPhone
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.customerPhone = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.error ? _c("div", {
+    staticClass: "text-red-500 bg-red-100 rounded-sm w-full p-1 transition-all"
+  }, [_vm._v("\n        " + _vm._s(_vm.error) + "\n    ")]) : _vm._e(), _vm._v(" "), _c("button", {
+    staticClass: "primary-button w-full",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("\n        Guardar\n    ")])]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberForm.vue?vue&type=template&id=5519f044":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberForm.vue?vue&type=template&id=5519f044 ***!
@@ -28096,7 +28379,26 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "table-container-responsive"
-  }, [_c("div", {
+  }, [_c("information-component", {
+    attrs: {
+      id: "edit-raffle-number"
+    },
+    scopedSlots: _vm._u([{
+      key: "title",
+      fn: function fn() {
+        var _vm$raffleNumber$code, _vm$raffleNumber;
+        return [_vm._v("\n            Boleto número: " + _vm._s((_vm$raffleNumber$code = (_vm$raffleNumber = _vm.raffleNumber) === null || _vm$raffleNumber === void 0 ? void 0 : _vm$raffleNumber.code) !== null && _vm$raffleNumber$code !== void 0 ? _vm$raffleNumber$code : "") + "\n        ")];
+      },
+      proxy: true
+    }])
+  }, [_vm._v(" "), _c("raffle-number-customer-phone-form", {
+    attrs: {
+      "raffle-number": _vm.raffleNumber
+    },
+    on: {
+      "raffle-number-customer-phone-updated": _vm.raffleNumberCustomerPhoneUpdated
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "flex justify-between px-4 py-2"
   }, [_c("raffle-number-status-filter", {
     on: {
@@ -28125,6 +28427,9 @@ var render = function render() {
       attrs: {
         "raffle-number": number,
         index: index
+      },
+      on: {
+        "raffle-number-selected": _vm.openPhoneEditModal
       }
     });
   }), 1)]), _vm._v(" "), _c("infinite-loading", {
@@ -28193,13 +28498,18 @@ var render = function render() {
   }, [_vm._v("\n        " + _vm._s((_vm$raffleNumber$tick = _vm.raffleNumber.ticket_number) !== null && _vm$raffleNumber$tick !== void 0 ? _vm$raffleNumber$tick : "-") + "\n    ")]), _vm._v(" "), _c("td", {
     staticClass: "py-1 px-2 text-xs flex items-center justify-center space-x-2 text-white"
   }, [_c("button", {
-    directives: [{
-      name: "can",
-      rawName: "v-can",
-      value: "delete raffleNumber",
-      expression: "'delete raffleNumber'"
-    }],
-    staticClass: "bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-500 hover:bg-gray-700 font-bold hover:shadow-none transition-all shadow-xs font-bold p-1 rounded",
+    staticClass: "bg-sky-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-sky-300 hover:bg-sky-700 hover:shadow-none transition-all shadow-xs font-bold p-1 rounded",
+    attrs: {
+      disabled: _vm.raffleNumber.status === "DISPONIBLE"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.$emit("raffle-number-selected", _vm.raffleNumber, _vm.index);
+      }
+    }
+  }, [_c("edit-icon")], 1), _vm._v(" "), _c("button", {
+    staticClass: "bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-500 hover:bg-gray-700 hover:shadow-none transition-all shadow-xs font-bold p-1 rounded",
     attrs: {
       disabled: _vm.raffleNumber.status === "DISPONIBLE"
     },
@@ -28650,12 +28960,6 @@ var render = function render() {
       href: "/raffles/".concat(_vm.raffle.id, "/edit")
     }
   }, [_c("edit-icon")], 1), _vm._v(" "), _c("button", {
-    directives: [{
-      name: "can",
-      rawName: "v-can",
-      value: "delete raffle",
-      expression: "'delete raffle'"
-    }],
     staticClass: "bg-red-500 hover:bg-red-700 hover:shadow-none transition-all shadow-xs font-bold p-1 rounded",
     on: {
       click: function click($event) {
@@ -71131,6 +71435,7 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('user-list', (__webpack_re
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('create-inventory', (__webpack_require__(/*! ./components/inventories/CreateInventory.vue */ "./resources/js/components/inventories/CreateInventory.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('inventory-stocks', (__webpack_require__(/*! ./components/inventories/InventoryStocks.vue */ "./resources/js/components/inventories/InventoryStocks.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('edit-warehouse', (__webpack_require__(/*! ./components/warehouses/EditWarehouse.vue */ "./resources/js/components/warehouses/EditWarehouse.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('select-inventory', (__webpack_require__(/*! ./components/inventories/SelectInventory.vue */ "./resources/js/components/inventories/SelectInventory.vue")["default"]));
 
 //Inventories -> warehouses
 
@@ -77488,6 +77793,79 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/inventories/SelectInventory.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/inventories/SelectInventory.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectInventory.vue?vue&type=template&id=f68aa3e0 */ "./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0");
+/* harmony import */ var _SelectInventory_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectInventory.vue?vue&type=script&lang=js */ "./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SelectInventory_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__.render,
+  _SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/inventories/SelectInventory.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectInventory_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectInventory.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=script&lang=js");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectInventory_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0 ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectInventory_vue_vue_type_template_id_f68aa3e0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectInventory.vue?vue&type=template&id=f68aa3e0 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inventories/SelectInventory.vue?vue&type=template&id=f68aa3e0");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/layouts/Sidebar.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/layouts/Sidebar.vue ***!
@@ -80280,6 +80658,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRaffleNumber_vue_vue_type_template_id_23a5300a__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRaffleNumber_vue_vue_type_template_id_23a5300a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditRaffleNumber.vue?vue&type=template&id=23a5300a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/EditRaffleNumber.vue?vue&type=template&id=23a5300a");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4 */ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4");
+/* harmony import */ var _RaffleNumberCustomerPhoneForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js */ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RaffleNumberCustomerPhoneForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__.render,
+  _RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) // removed by dead control flow
+{ var api; }
+component.options.__file = "resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RaffleNumberCustomerPhoneForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=script&lang=js");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RaffleNumberCustomerPhoneForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4 ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RaffleNumberCustomerPhoneForm_vue_vue_type_template_id_1384bfc4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/raffle-numbers/RaffleNumberCustomerPhoneForm.vue?vue&type=template&id=1384bfc4");
 
 
 /***/ }),

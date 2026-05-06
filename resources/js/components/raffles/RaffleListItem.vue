@@ -23,7 +23,7 @@
                 :href="`/raffles/${raffle.id}/edit`">
                 <edit-icon />
             </a>
-            <button @click.prevent="deactivate(raffle.id)" v-can="'delete raffle'"
+            <button @click.prevent="deactivate(raffle.id)"
                 class="bg-red-500 hover:bg-red-700 hover:shadow-none transition-all shadow-xs  font-bold p-1  rounded">
                 <trash-icon></trash-icon>
             </button>

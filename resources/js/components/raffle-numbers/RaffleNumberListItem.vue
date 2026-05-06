@@ -20,10 +20,14 @@
             {{ raffleNumber.ticket_number ?? '-' }}
         </td>
         <td class="py-1 px-2 text-xs flex items-center justify-center space-x-2 text-white">
-
-            <button @click.prevent="deactivate(raffleNumber.id)" v-can="'delete raffleNumber'"
+            <button @click.prevent="$emit('raffle-number-selected', raffleNumber, index)"
                 :disabled="raffleNumber.status === 'DISPONIBLE'"
-                class="bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-500 hover:bg-gray-700 font-bold hover:shadow-none transition-all shadow-xs  font-bold p-1  rounded">
+                class="bg-sky-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-sky-300 hover:bg-sky-700  hover:shadow-none transition-all shadow-xs  font-bold p-1  rounded">
+                <edit-icon></edit-icon>
+            </button>
+            <button @click.prevent="deactivate(raffleNumber.id)"
+                :disabled="raffleNumber.status === 'DISPONIBLE'"
+                class="bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-500 hover:bg-gray-700  hover:shadow-none transition-all shadow-xs  font-bold p-1  rounded">
                 <minus></minus>
             </button>
         </td>
@@ -57,7 +61,8 @@ export default {
                 console.log(error)
             }
 
-        }
+        },
+
     }
 }
 </script>

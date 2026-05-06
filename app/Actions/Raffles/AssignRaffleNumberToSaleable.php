@@ -25,7 +25,6 @@ class AssignRaffleNumberToSaleable
         if (! $raffleNumberAreAvailable) {
             Raffle::where('id', $raffle->id)->update(['status' => 'finished']);
         }
-       // $raffleNumberAreAvailable = RaffleNumber::availableForRaffle($raffle->id)->exists();
         return $raffleNumber;
     }
 

@@ -117,5 +117,17 @@ class PermissionSeeder extends Seeder
 
         // permissions to checkout
         Permission::create(['name' => 'complete sales checkout']);
+        // permissions to raffles
+        Permission::create(['name' => 'create raffle']);
+        Permission::create(['name' => 'view raffle']);
+        Permission::create(['name' => 'view raffles']);
+        Permission::create(['name' => 'edit raffle']);  
+        Permission::create(['name' => 'delete raffle']);
+        // permissions to raffle numbers
+        Permission::create(['name' => 'view raffle numbers']);
+        Permission::create(['name' => 'view raffle number']);
+        Permission::create(['name' => 'assign raffle number']);
+        Permission::create(['name' => 'update raffle number']);
+        Permission::create(['name' => 'release raffle number']);
     }
 }

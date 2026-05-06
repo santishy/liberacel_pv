@@ -6,14 +6,19 @@ use App\Http\Resources\RaffleNumberResource;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Rules\SaleableHasNoRaffleNumber;
+use App\Facades\InventoryContext;
+use Illuminate\Validation\ValidationException;
+
 class RaffleAssignmentController extends Controller
 {
     public function create()
     {
+            $this->authorize('assign', new \App\Models\RaffleNumber);
         return view('raffle-assignaments.create');
     }
     public function store(Request $request)
     {
+        $this->authorize('assign', new \App\Models\RaffleNumber);
         $request->validate([
             'customer_phone' => 'required|string',
             'saleable_id' => ['required','integer',Rule::exists(
@@ -35,16 +40,25 @@ class RaffleAssignmentController extends Controller
         $saleableClass = $this->mapSaleable($request->input('saleable_type'));
         
         if (!$saleableClass) {
-            throw \Illuminate\validation\ValidationException::withMessages(
+            throw ValidationException::withMessages(
                 ['saleable_type' => 'Tipo de venta invalida.']
             );
         }
-        $saleable = $saleableClass::findOrFail($request->input('saleable_id'));
+        $saleable = $saleableClass::where('inventory_id', InventoryContext::id())
+        ->whereKey($request->input('saleable_id'))
+        ->first();
+
+        if(!$saleable) {
+            throw ValidationException::withMessages(
+                ['saleable_id' => 'El ID de la venta no existe en el inventario actual.']
+            );
+        }
+        
         $saleable->customer_phone = $request->input('customer_phone');
         $saleable->save();
         $raffleNumber = app(\App\Actions\Raffles\AssignRaffleNumberToSaleable::class)->execute($saleable);
         if (!$raffleNumber) {
-             throw \Illuminate\validation\ValidationException::withMessages(
+             throw ValidationException::withMessages(
                 ['sale' => 'Tipo de venta invalida.']
             );
         }

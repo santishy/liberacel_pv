@@ -1,6 +1,12 @@
 <template>
     <div class=" table-container-responsive ">
-
+        <information-component id="edit-raffle-number">
+            <template #title>
+                Boleto número: {{ raffleNumber?.code ?? '' }}
+            </template>
+            <raffle-number-customer-phone-form @raffle-number-customer-phone-updated="raffleNumberCustomerPhoneUpdated"
+                :raffle-number="raffleNumber" />
+        </information-component>
         <div class="flex justify-between px-4 py-2">
             <raffle-number-status-filter @filter-changed="handleSearch" />
             <search-input classes="w-96" placeholder="Buscar número de rifa" v-model="searchQuery"
@@ -20,11 +26,12 @@
             </thead>
             <tbody>
                 <raffle-number-list-item v-for="(number, index) in numbers" :key="number.id" :raffle-number="number"
-                    :index="index">
+                    @raffle-number-selected="openPhoneEditModal" :index="index">
                 </raffle-number-list-item>
             </tbody>
         </table>
         <infinite-loading ref="infiniteLoading" @infinite="fetchRaffleNumbers"></infinite-loading>
+
     </div>
 </template>
 
@@ -33,12 +40,16 @@ import { mapActions } from 'vuex';
 import RaffleNumberListItem from './RaffleNumberListItem.vue';
 import SearchInput from '../ui/SearchInput.vue';
 import RaffleNumberStatusFilter from './RaffleNumberStatusFilter.vue';
+import InformationComponent from '../modals/InformationComponent.vue';
+import RaffleNumberCustomerPhoneForm from './RaffleNumberCustomerPhoneForm.vue';
 export default {
 
     components: {
         RaffleNumberListItem,
         SearchInput,
-        RaffleNumberStatusFilter
+        RaffleNumberStatusFilter,
+        InformationComponent,
+        RaffleNumberCustomerPhoneForm
     },
     created() {
         EventBus.$on('delete-raffle', (index) => {
@@ -48,7 +59,6 @@ export default {
     },
     mounted() {
         EventBus.$on('raffle-number-available', (index) => {
-            console.log('raffle-number-available', index)
             if (this.numbers[index]) {
                 this.numbers[index].status = 'DISPONIBLE'
                 this.numbers[index].assigned_at = ''
@@ -67,11 +77,19 @@ export default {
                 'available',
                 'assigned',
                 null
-            ]
+            ],
+            raffleNumber: null,
+            raffleNumberIndex: null,
         }
     },
     methods: {
         ...mapActions('raffles', ['getRaffleNumbers']),
+        raffleNumberCustomerPhoneUpdated(customer_phone) {
+            if (this.raffleNumberIndex !== null && this.numbers[this.raffleNumberIndex]) {
+                this.numbers[this.raffleNumberIndex].customer_phone = customer_phone;
+            }
+            EventBus.$emit('open-modal', false);
+        },
         async fetchRaffleNumbers($state) {
             try {
                 const res = await this.getRaffleNumbers({ page: this.page, filter: { search: this.searchQuery, byStatus: this.status } });
@@ -86,6 +104,11 @@ export default {
             } catch (error) {
                 console.log(error)
             }
+        },
+        openPhoneEditModal(raffleNumber, index) {
+            this.raffleNumber = raffleNumber;
+            this.raffleNumberIndex = index;
+            EventBus.$emit('open-modal-edit-raffle-number', true);
         },
         handleSearch(status) {
             this.status = null;

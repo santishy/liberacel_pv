@@ -30,6 +30,7 @@ use App\Http\Controllers\ProductInSaleController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RaffleNumberController;
+use App\Http\Controllers\RaffleNumberCustomerPhoneController;
 use App\Http\Controllers\RefundController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolesPermissionsController;
@@ -281,6 +282,7 @@ Route::resource('raffles', App\Http\Controllers\RaffleController::class)->middle
 Route::middleware(['auth', 'context.inventory'])->group(function () {
     Route::get('raffle-numbers', [RaffleNumberController::class, 'index'])->name('raffle-numbers.index');
     Route::get('raffle-numbers/{raffleNumber}/ticket', RaffleTicketController::class)->name('raffle-numbers.ticket');
+    Route::patch('raffle-numbers/{raffleNumber}/customer-phone', [RaffleNumberCustomerPhoneController::class, 'update'])->name('raffle-numbers.customer-phone.update');
     Route::put('raffle-numbers/{raffleNumber}', [RaffleNumberController::class, 'update'])->name('raffle-numbers.update');
 });
 Route::middleware(['auth', 'context.inventory'])->group(function () {

@@ -68,7 +68,13 @@ class SalePolicy
      */
     public function restore(User $user, sale $sale)
     {
-        //
+        if (request()->has('status')) {
+            if (request()->get('status') == 'cancelled') {
+                return $user->hasPermissionTo('cancel fast sale');
+            }
+        }
+
+        return $user->hasPermissionTo('create fast sale');
     }
 
     /**

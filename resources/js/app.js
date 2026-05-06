@@ -62,6 +62,7 @@ Vue.component('user-list', require('./components/users/UserList.vue').default);
 Vue.component('create-inventory', require('./components/inventories/CreateInventory.vue').default)
 Vue.component('inventory-stocks', require('./components/inventories/InventoryStocks.vue').default)
 Vue.component('edit-warehouse', require('./components/warehouses/EditWarehouse.vue').default);
+Vue.component('select-inventory', require('./components/inventories/SelectInventory.vue').default);
 
 //Inventories -> warehouses
 

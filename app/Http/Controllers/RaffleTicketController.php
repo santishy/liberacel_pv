@@ -15,6 +15,7 @@ class RaffleTicketController extends Controller
      */
     public function __invoke(RaffleNumber $raffleNumber)
     {
+        $this->authorize('view', $raffleNumber);
         $raffleNumber = RaffleNumberResource::make($raffleNumber->load('saleable', 'raffle'))->resolve();
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
         $pdf = PDF::loadView(

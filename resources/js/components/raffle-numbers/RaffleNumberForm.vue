@@ -44,7 +44,6 @@
 <script>
 import InputText from '../partials/InputText.vue';
 import SearchSelect from '../partials/SearchSelect.vue';
-import { mapGetters } from 'vuex';
 export default {
     name: "RaffleForm",
     components: { InputText, SearchSelect },

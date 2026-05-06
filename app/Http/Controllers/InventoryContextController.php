@@ -17,13 +17,10 @@ class InventoryContextController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'iventory_id' => 'exists:inventories,id|required',
-        ], [
-            'inventory_id.required' => 'El inventario es requerido.',
-            'inventory_id.exists' => 'El inventario no existe en la base de datos.',
+            'inventory_id' => 'exists:inventories,id|required',
         ]);
-        session('inventory_id')->put($request->inventory_id);
+        $request->session()->put('inventory_id', $request->inventory_id);
 
-        return redirect()->intented('/');
+        return response()->json(['message' => 'Inventory selected successfully']);
     }
 }
