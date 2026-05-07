@@ -11,12 +11,13 @@ class FastSaleAssociatedUserController extends Controller
 {
     public function store(Request $request, FastSale $fastSale)
     {
-        $this->authorize('restore', $fastSale);
-
         $associatedUser = $fastSale->checkCredentials(
             $request->username,
             $request->password
         );
+
+        $this->authorizeForUser($associatedUser, 'restore', $fastSale);
+
         $fastSale->toggleUser($associatedUser);
 
         FastSaleUpdated::dispatch($fastSale);

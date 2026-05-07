@@ -30,7 +30,6 @@ class FastSaleController extends Controller
     public function create()
     {
         $this->authorize('create', new FastSale);
-
         $pointData = Setting::where('name', 'precio_punto')->first();
         $productBonuses = ProductBonus::all();
         $sale = optional(fastSale::find(session('fast_sale_id')))->load('customerBonus', 'productBonuses');
