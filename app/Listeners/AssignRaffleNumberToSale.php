@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Enums\RaffleAssignmentResult;
 use App\Events\SaleTransactionProcessed;
-use App\Models\Raffle;
-use App\Models\RaffleNumber;
+use Illuminate\Support\Facades\Log;
 
 class AssignRaffleNumberToSale
 {
@@ -18,34 +18,16 @@ class AssignRaffleNumberToSale
      */
     public function handle(SaleTransactionProcessed $event): void
     {
-        app(\App\Actions\Raffles\AssignRaffleNumberToSaleable::class)->execute($event->model);
-        // $raffle = Raffle::activeForInventory($event->model->inventory_id);
-        // if (! $this->isParticipating($event->model, $raffle)) {
-        //     return;
-        // }
-        // $raffleNumber = RaffleNumber::getRandomAvailableNumber($raffle->id);
-        // if (! $raffleNumber) {
-        //     Raffle::where('id', $raffle->id)->update(['status' => 'completed']);
-
-        //     return;
-        // }
-        // $raffleNumber->saleable()->associate($event->model);
-        // $raffleNumber->status = 'assigned';
-        // $raffleNumber->save();
+        $model = $event->model;
+        $result = app(\App\Actions\Raffles\AssignRaffleNumberToSaleable::class)->execute($model);
+        if($result instanceof RaffleAssignmentResult){
+            $details = [
+                "reason" => $result->value,
+                "saleable_type" => $model->getMorphClass(),
+                "saleable_id" => $model->id,
+                "inventory_id" => $model->inventory_id
+            ];
+            Log::{$result->logLevel()}('Venta sin boleto de rifa',$details);
+        }
     }
-
-    // public function isParticipating($sale, $raffle)
-    // {
-    //     if (
-    //         ! $raffle || $sale->created_at < $raffle->start_date
-    //         || $sale->created_at > $raffle->end_date
-    //     ) {
-    //         return false;
-    //     }
-    //     if (! $sale->customer_phone || $sale->total < $raffle->min_sale_total) {
-    //         return false;
-    //     }
-
-    //     return true;
-    // }
 }

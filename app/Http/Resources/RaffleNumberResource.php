@@ -20,15 +20,10 @@ class RaffleNumberResource extends JsonResource
             'code' => $this->resource->code,
             'status' => $this->statusTranslation($this->resource->status),
             'created_at' => $this->created_at,
-            // 'assigned_at' => $this->when(
-            //     $this->resource->status === 'assigned',
-            //     optional($this->resource->updated_at)->format('Y-m-d H:i:s'),
-            //     '0000-00-00 00:00:00'
-            // ),
             'assigned_at' => $this->whenLoaded('saleable', function () {
-                 return $this->when(
+                return $this->when(
                     $this->resource->status === 'assigned',
-                    optional($this->resource->created_at)->format('Y-m-d H:i:s'),
+                    optional($this->resource->updated_at)->format('Y-m-d H:i:s'),
                     '0000-00-00 00:00:00'
                 );
             }),
@@ -59,9 +54,10 @@ class RaffleNumberResource extends JsonResource
             default => strtoupper($key)
         };
     }
+
     public function getTypeOfSale($classBasename)
     {
-        return match($classBasename) {
+        return match ($classBasename) {
             'FastSale' => 'Expres',
             'Sale' => 'Stock',
             default => null,
