@@ -29,8 +29,10 @@ use App\Http\Controllers\ProductInPurchaseController;
 use App\Http\Controllers\ProductInSaleController;
 use App\Http\Controllers\ProductsSearchController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RaffleAssignmentController;
 use App\Http\Controllers\RaffleNumberController;
 use App\Http\Controllers\RaffleNumberCustomerPhoneController;
+use App\Http\Controllers\RaffleTicketController;
 use App\Http\Controllers\RefundController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolesPermissionsController;
@@ -39,16 +41,15 @@ use App\Http\Controllers\SaleToClientController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TransactionProductsController;
+use App\Http\Controllers\UpdateSaleCustomerPhone;
 use App\Http\Controllers\UserCommissionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRelationshipController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseCostsController;
-use App\Http\Controllers\RaffleAssignmentController;
 use App\Models\FastSale;
-use App\Http\Controllers\RaffleTicketController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UpdateSaleCustomerPhone;
+
 // use App\Models\Category;
 // use App\Models\Ticket;
 // use Illuminate\Support\Facades\Auth;
@@ -274,6 +275,8 @@ Route::get('credits/{credit}/notes', [CreditNotesController::class, 'index'])->m
 /**
  * Raffles
  */
+Route::view('documentacion/rifas', 'documentation.raffles')->name('documentation.raffles')->middleware(['auth', 'context.inventory']);
+
 Route::resource('raffles', App\Http\Controllers\RaffleController::class)->middleware(['auth', 'context.inventory']);
 
 /**
@@ -286,8 +289,8 @@ Route::middleware(['auth', 'context.inventory'])->group(function () {
     Route::put('raffle-numbers/{raffleNumber}', [RaffleNumberController::class, 'update'])->name('raffle-numbers.update');
 });
 Route::middleware(['auth', 'context.inventory'])->group(function () {
-    Route::get('raffle-assignaments/assign-by-saleable/create',[RaffleAssignmentController::class,'create'])->name('raffle-assginaments.assign-by-saleable.create');
-    Route::post('raffle-assginaments/assign-by-saleable',[RaffleAssignmentController::class,'store'])->name('raffle-assginaments.store-by-saleable');
+    Route::get('raffle-assignaments/assign-by-saleable/create', [RaffleAssignmentController::class, 'create'])->name('raffle-assginaments.assign-by-saleable.create');
+    Route::post('raffle-assginaments/assign-by-saleable', [RaffleAssignmentController::class, 'store'])->name('raffle-assginaments.store-by-saleable');
 });
 /**
  * Select inventory

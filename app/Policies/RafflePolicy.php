@@ -2,16 +2,15 @@
 
 namespace App\Policies;
 
-use App\Models\Raffle;
-use App\Http\Traits\HasAdministrator;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use App\Facades\InventoryContext;
+use App\Http\Traits\HasAdministrator;
+use App\Models\Raffle;
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RafflePolicy
 {
-        use HandlesAuthorization, HasAdministrator;
+    use HandlesAuthorization, HasAdministrator;
 
     /**
      * Determine whether the user can view any models.
@@ -34,7 +33,7 @@ class RafflePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create raffle') ;
+        return $user->hasPermissionTo('create raffle');
     }
 
     /**
@@ -50,7 +49,7 @@ class RafflePolicy
      */
     public function delete(User $user, Raffle $raffle): bool
     {
-        return $user->hasPermissionTo('delete raffle') && (int) $raffle->inventory_id === (int) InventoryContext::id(); 
+        return $user->hasPermissionTo('delete raffle') && (int) $raffle->inventory_id === (int) InventoryContext::id();
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\InventoryContext;
 use App\Http\Requests\SaveRaffleRequest;
 use App\Http\Resources\RaffleResource;
 use App\Jobs\GenerateRaffleNumbers;
 use App\Models\Raffle;
 use Illuminate\Http\Request;
-use App\Facades\InventoryContext;
 
 class RaffleController extends Controller
 {
@@ -16,7 +16,7 @@ class RaffleController extends Controller
         $this->authorize('viewAny', new Raffle);
         if ($request->wantsJson()) {
             return RaffleResource::collection(
-                Raffle::query()->where('inventory_id',InventoryContext::id())->paginate(25)
+                Raffle::query()->where('inventory_id', InventoryContext::id())->latest('start_date')->paginate(25)
             );
         }
 
@@ -26,6 +26,7 @@ class RaffleController extends Controller
     public function create()
     {
         $this->authorize('create', new Raffle);
+
         return view('raffles.create');
     }
 
@@ -51,6 +52,7 @@ class RaffleController extends Controller
         $this->authorize('create', new Raffle);
         $raffle = Raffle::create($request->validated());
         GenerateRaffleNumbers::dispatch($raffle);
+
         return RaffleResource::make($raffle);
     }
 

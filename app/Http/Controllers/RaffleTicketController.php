@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\RaffleNumber;
 use App\Http\Resources\RaffleNumberResource;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\RaffleNumber;
 use App\Models\Ticket;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class RaffleTicketController extends Controller
 {
@@ -26,7 +26,7 @@ class RaffleTicketController extends Controller
          * Se obtiene la altura, la logica esta guardada en el modelo .. midiendo la altura total del body que esta dentro del padding al menos asi lo entendi
          */
         $height = (new Ticket)->getBodyHeight($pdf->getdomPDF());
-       
+
         return PDF::loadView(
             'raffle-numbers.ticket',
             compact('raffleNumber')
