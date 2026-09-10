@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RaffleNumberResource;
 use App\Models\RaffleNumber;
 use Illuminate\Http\Request;
-use App\Http\Resources\RaffleNumberResource;
 use Illuminate\Validation\ValidationException;
 
 class RaffleNumberCustomerPhoneController extends Controller
@@ -22,6 +22,7 @@ class RaffleNumberCustomerPhoneController extends Controller
             ]);
         }
         $saleable->update(['customer_phone' => $validated['customer_phone']]);
+
         return RaffleNumberResource::make($raffleNumber);
     }
 }

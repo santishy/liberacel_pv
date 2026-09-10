@@ -19,13 +19,13 @@ class FastSalePDFController extends Controller
         $typeOfSale = 'Express';
         $raffleNumber = $sale->raffleNumber;
         $raffle = null;
-        if($raffleNumber) {
+        if ($raffleNumber) {
             $raffle = $raffleNumber->raffle;
         }
         /** Se crea el frame de pdf la primera vez para calcular que tan grande sera el ticket, mando en altura 2000 como un maximo de altura sin que se rompa el codigo */
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale','raffleNumber','raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
+            compact('sale', 'raffleNumber', 'raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
         )->setPaper([0, 0, 225, 2000]);
 
         /**
@@ -38,7 +38,7 @@ class FastSalePDFController extends Controller
          */
         $pdf = PDF::loadView(
             'tickets.pdf',
-            compact('sale','raffleNumber','raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
+            compact('sale', 'raffleNumber', 'raffle', 'typeOfSale', 'now', 'products', 'ticketConfig', 'model', 'user')
         )->setPaper([0, 0, 225, $height + 20]);
 
         return $pdf->stream();

@@ -9,7 +9,7 @@ class Raffle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'date', 'description', 'status', 'start_date', 'end_date', 'min_sale_total', 'inventory_id','total_numbers'];
+    protected $fillable = ['name', 'date', 'description', 'status', 'start_date', 'end_date', 'min_sale_total', 'inventory_id', 'total_numbers'];
 
     protected $casts = [
         'start_date' => 'datetime',

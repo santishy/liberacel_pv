@@ -117,6 +117,6 @@ class PermissionSeeder extends Seeder
 
         // permissions to checkout
         Permission::create(['name' => 'complete sales checkout']);
-       
+
     }
 }

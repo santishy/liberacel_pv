@@ -1,5 +1,5 @@
-const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
+const mix = require("laravel-mix");
+const tailwindcss = require("tailwindcss");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,21 +11,22 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
-
-mix.js('resources/js/app.js', 'public/js').vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-        tailwindcss('./tailwind.config.js')
-    ]).version()
+mix.js("resources/js/app.js", "public/js")
+    .vue()
+    .postCss("resources/css/app.css", "public/css", [
+        require("tailwindcss"),
+        tailwindcss("./tailwind.config.js"),
+    ])
+    .version();
 //     mix.browserSync('bazar.test');// uso esta configuración para que funcione con herd
 
 //uso esta configuración para que funcione con laravel sail
 mix.browserSync({
-    proxy: 'localhost',
-    host: '127.0.0.1',
+    proxy: "localhost",
+    host: "127.0.0.1",
     port: 8083,
     open: false,
-    browser: 'Google chrome',
+    browser: "Google chrome",
     ghostMode: false,
     online: true,
     watch: true,

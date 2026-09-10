@@ -13,21 +13,21 @@ class RafflePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-         app(PermissionRegistrar::class)->forgetCachedPermissions();
-        $permissions =[
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        $permissions = [
             'create raffle',
             'view raffle',
             'view raffles',
-            'edit raffle',  
+            'edit raffle',
             'delete raffle',
-                // permissions to raffle numbers
+            // permissions to raffle numbers
             'view raffle numbers',
             'view raffle number',
             'assign raffle number',
             'update raffle number',
             'release raffle number',
-     ];
-    
+        ];
+
         foreach ($permissions as $permission) {
             Permission::findOrCreate($permission);
         }

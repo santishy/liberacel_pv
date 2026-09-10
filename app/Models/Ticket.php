@@ -34,7 +34,7 @@ class Ticket extends Model
         );
         $dompdf->render();
         unset($dompdf);
+
         return $GLOBALS['bodyHeight'];
     }
-   
 }

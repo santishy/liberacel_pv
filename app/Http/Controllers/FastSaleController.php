@@ -71,7 +71,6 @@ class FastSaleController extends Controller
         }
         $hasActiveRaffle = (bool) Raffle::activeForInventory(InventoryContext::id());
         if ($request->filled('customer_phone') && $hasActiveRaffle) {
-
             $updates['customer_phone'] = $request->customer_phone;
         }
         $fastSale->update($updates);

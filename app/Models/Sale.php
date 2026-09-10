@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Facades\InventoryContext;
 use App\Models\Traits\HasCommission;
 use App\Models\Traits\HasUserRelationship;
 use App\Models\Traits\ManagesCredits;
@@ -10,7 +11,6 @@ use App\Models\Traits\SaleModelHandler;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Facades\InventoryContext;
 
 class Sale extends Model
 {
@@ -23,7 +23,7 @@ class Sale extends Model
     public function raffleNumber()
     {
         return $this->morphOne(RaffleNumber::class, 'saleable')
-            ->where('status', 'assigned');;
+            ->where('status', 'assigned');
     }
 
     public function refunds()

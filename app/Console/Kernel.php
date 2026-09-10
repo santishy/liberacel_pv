@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('raffles:close-expired')
-        ->everyMinute()          // o ->hourly() / ->everyFiveMinutes()
-        ->withoutOverlapping();
+            ->everyMinute()          // o ->hourly() / ->everyFiveMinutes()
+            ->withoutOverlapping();
     }
 
     /**

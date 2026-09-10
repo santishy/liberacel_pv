@@ -30,7 +30,7 @@ class NoActiveRaffle implements ValidationRule
 
         /*
             si existe el id de $raffle quiere decir que es un update
-            entonces si el ID enviado, valida que este activa una rifa 
+            entonces si el ID enviado, valida que este activa una rifa
             y sea diferente de el id que se mando entonces invalida la accion
             por que ya hay una rifa activa
         */

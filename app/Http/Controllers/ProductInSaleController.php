@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\InventoryContext;
 use App\Http\Resources\TransactionResource;
 use App\Http\Responses\SessionInactive;
 use App\Http\Responses\TransactionResponse;
@@ -9,11 +10,8 @@ use App\Http\Traits\HasTransaction;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Sale;
-use App\Rules\TransactionInventory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use App\Facades\InventoryContext;
-
 
 class ProductInSaleController extends Controller
 {

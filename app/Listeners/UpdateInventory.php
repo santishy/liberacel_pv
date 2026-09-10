@@ -3,10 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\TransactionComplete;
+use App\Facades\InventoryContext;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use App\Facades\InventoryContext;
 
 class UpdateInventory
 {
@@ -29,8 +29,8 @@ class UpdateInventory
     {
         $inventory_id = request()->has('inventory_id') ?
             request('inventory_id') : $event->transaction->inventory_id;
-        if(!$inventory_id) {
-           $inventory_id = InventoryContext::id();
+        if (! $inventory_id) {
+            $inventory_id = InventoryContext::id();
         }
         $inventory = Inventory::find($inventory_id);
         $factor = $event->factor; // para sumar o restar segun se tenga que actualizar

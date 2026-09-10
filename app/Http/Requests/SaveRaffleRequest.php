@@ -31,7 +31,7 @@ class SaveRaffleRequest extends FormRequest
             'total_numbers' => 'required|integer|min:5',
             'min_sale_total' => 'required|numeric|min:1',
         ];
-        //TODO: esto se puede mejorar, por que si el usuario no es admin, no se le va a mostrar el select de inventarios, entonces no se va a enviar el inventory_id, entonces no se va a validar, pero si el usuario es admin, entonces si se va a validar el inventory_id, entonces se le va a mostrar el select de inventarios, entonces se va a enviar el inventory_id, entonces se va a validar, entonces se va a validar que no haya una rifa activa en ese inventario, entonces se va a validar que el inventory_id exista en la base de datos, entonces se va a validar que el inventory_id sea requerido
+        // TODO: esto se puede mejorar, por que si el usuario no es admin, no se le va a mostrar el select de inventarios, entonces no se va a enviar el inventory_id, entonces no se va a validar, pero si el usuario es admin, entonces si se va a validar el inventory_id, entonces se le va a mostrar el select de inventarios, entonces se va a enviar el inventory_id, entonces se va a validar, entonces se va a validar que no haya una rifa activa en ese inventario, entonces se va a validar que el inventory_id exista en la base de datos, entonces se va a validar que el inventory_id sea requerido
         if (request()->user()->hasRole('admin')) {
             $rules['inventory_id'] = [
                 'required',

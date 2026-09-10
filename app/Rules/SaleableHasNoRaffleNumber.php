@@ -2,9 +2,9 @@
 
 namespace App\Rules;
 
+use App\Models\RaffleNumber;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use App\Models\RaffleNumber;
 
 class SaleableHasNoRaffleNumber implements ValidationRule
 {
@@ -17,8 +17,8 @@ class SaleableHasNoRaffleNumber implements ValidationRule
     {
         $saleable_id = $value;
         $saleable_type = request()->input('saleable_type');
-        
-        if (!$saleable_type || !$saleable_id) {
+
+        if (! $saleable_type || ! $saleable_id) {
             return;
         }
         $saleable_type = match ($saleable_type) {
@@ -30,10 +30,10 @@ class SaleableHasNoRaffleNumber implements ValidationRule
             ->where('saleable_id', $saleable_id)
             ->where('saleable_type', $saleable_type)
             ->where('status', 'assigned')
-            ->exists() ;
+            ->exists();
 
         if ($raffleNumber) {
-            $fail('La venta seleccionada ya tiene un número de rifa asignado.');    
+            $fail('La venta seleccionada ya tiene un número de rifa asignado.');
         }
 
     }

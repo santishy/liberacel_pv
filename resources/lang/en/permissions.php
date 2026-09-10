@@ -104,7 +104,7 @@ return [
     'edit raffle' => 'Editar rifa',
     'delete raffle' => 'Eliminar rifa',
 
-    //permissions to raffle numbers
+    // permissions to raffle numbers
     'view raffle numbers' => 'Ver números de rifa',
     'update raffle number' => 'Editar números de rifa',
     'view raffle number' => 'Ver número de rifa',

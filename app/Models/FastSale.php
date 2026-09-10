@@ -39,8 +39,9 @@ class FastSale extends Model
     public function raffleNumber()
     {
         return $this->morphOne(RaffleNumber::class, 'saleable')
-            ->where('status', 'assigned');;
+            ->where('status', 'assigned');
     }
+
     public function client()
     {
         return $this->belongsTo(Client::class);
