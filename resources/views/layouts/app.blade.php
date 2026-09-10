@@ -18,6 +18,9 @@
    
 </head>
 <body class="bg-gray-200 h-screen">
+    @if (request()->is('raffles*', 'raffle-numbers*', 'raffle-assignaments*'))
+        @include('documentation.raffles-link')
+    @endif
     <div id="app">
         @yield('content')
     </div>

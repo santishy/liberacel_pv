@@ -76,6 +76,10 @@ const menuData = {
             name: "Asignar boleto",
             url: "/raffle-assignaments/assign-by-saleable/create"
         },
+        {
+            name: "Ayuda de rifas",
+            url: "/documentacion/rifas"
+        },
     ],
     ReportsMenu: [
         {
