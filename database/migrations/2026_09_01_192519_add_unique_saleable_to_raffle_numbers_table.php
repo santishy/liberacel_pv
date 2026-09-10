@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('raffle_numbers', function (Blueprint $table) {
             $table->unique(['saleable_type', 'saleable_id']);
+            $table->dropIndex(['saleable_type', 'saleable_id']);
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('raffle_numbers', function (Blueprint $table) {
             $table->dropUnique(['saleable_type', 'saleable_id']);
+            $table->index(['saleable_type', 'saleable_id']);
         });
     }
 };
