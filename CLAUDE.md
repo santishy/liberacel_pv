@@ -72,10 +72,16 @@ Una rifa por sucursal a la vez (lo garantiza la regla `NoActiveRaffle`). Al crea
 - Asignación: `App\Actions\Raffles\AssignRaffleNumberToSaleable` es la **única** lógica de asignación. Elige un número disponible al azar, lo asocia por relación polimórfica `saleable` (`Sale` o `FastSale`) y marca `assigned`; si se agotan los números pasa la rifa a `finished`.
 - `isParticipating()` exige: rifa activa, venta dentro de `start_date`/`end_date`, `customer_phone` presente, `total >= min_sale_total` y `status = 'completed'`. Un boleto por venta (no por artículo), sin importar cuántos artículos tenga.
 - Dos caminos hacia esa acción: automático vía listener `AssignRaffleNumberToSale` en `SaleTransactionProcessed`, y manual vía `RaffleAssignmentController@store` (captura el teléfono de una venta ya hecha y asigna; `SaleableHasNoRaffleNumber` evita duplicar).
+- Captura del `customer_phone` (requisito de `isParticipating()`) mientras la venta sigue abierta, sin pasar por la asignación manual ni su permiso:
+  - Express — `RafflePhoneNumber.vue` vive sobre el carrito en `CreateFastSale.vue` y **no se oculta** mientras la nota esté abierta; guarda, cambia y quita con `PATCH fast-sales/{sale}/customer-phone` (`UpdateFastSaleCustomerPhoneController`, `nullable` para borrarlo). `FastSaleController@store` ya no recibe el teléfono: `currentFastSale.customer_phone` (expuesto en `FastSaleResource`) es la única fuente, y el store solo se escribe con lo que responde el backend.
+  - Stock — el recuadro de `SaleComponent.vue` con `PATCH sales/{sale}/customer-phone` (`UpdateSaleCustomerPhone`); ahí sí hay botón *Omitir*, que lo oculta hasta recargar.
+  - Una nota Express vacía conserva `customer_phone` y se reutiliza (`findOrCreateFastSale()` la devuelve mientras exista `session('fast_sale_id')`), por eso el botón *Quitar*.
+  - `AuthenticationForm.vue` recibe `notification` + `customerPhone` desde `ConceptsList.vue` y avisa antes de cerrar la venta a qué teléfono irá el boleto, o que no participa. En `ListOfProductsSold.vue` ese mismo modal no recibe las props y el aviso no se muestra.
 - `RaffleNumberController@update` libera un número (`available` + `dissociate()`) bajo la habilidad `release`, distinta de `update`.
 - `raffles:close-expired` cierra rifas vencidas; corre cada minuto por el scheduler.
 - Los permisos de rifas viven en `RafflePermissionSeeder` (`create/view/edit/delete raffle`, `view/assign/update/release raffle number`), no en `PermissionSeeder`.
 - El listener `AssignRaffleNumberToSale` aún conserva la implementación vieja comentada; la fuente de verdad es la Action.
+- La guía para el usuario final está en `resources/views/documentation/raffles.blade.php` (ruta `documentacion/rifas`, botón flotante desde `raffles-link.blade.php`). Es HTML plano sin assets; actualízala cuando cambie el flujo de cara al mostrador.
 
 ### Filtros y relaciones vía query string (`JsonApiBuilder`)
 

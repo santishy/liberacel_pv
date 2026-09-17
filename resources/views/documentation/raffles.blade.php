@@ -123,11 +123,22 @@
                 <ol>
                     <li>Verifica que estás trabajando en la sucursal correcta.</li>
                     <li>Captura la venta Express o Stock como de costumbre.</li>
-                    <li>Si aparece el campo de teléfono para la rifa, pide el número al cliente y comprueba que esté bien escrito.</li>
+                    <li>Si aparece el recuadro <strong>Rifa activa</strong>, pide el número al cliente y comprueba que esté bien escrito. El teléfono es opcional: sin él la venta no participa, pero se cobra igual.</li>
                     <li>Completa el proceso de venta y, si corresponde, su autorización.</li>
                     <li>Consulta el comprobante de la venta: cuando se asignó un boleto, aparece el nombre de la rifa y <strong>«Boleto de rifa asignado»</strong> con su número.</li>
                 </ol>
                 <p>Confirma el número asignado antes de comunicarlo al cliente. Si no aparece, revisa los requisitos y la lista de boletos.</p>
+                <h3>Venta Express: el teléfono se captura en cualquier momento</h3>
+                <p>El recuadro <strong>Rifa activa</strong> aparece arriba del carrito en cuanto la nota tiene su primer artículo y <strong>permanece visible hasta que la venta se cierra</strong>. No hay que capturar el teléfono al principio: puede pedirse a media venta o justo antes de cobrar.</p>
+                <ul>
+                    <li><strong>Guardar:</strong> registra el teléfono en la nota.</li>
+                    <li><strong>Cambiar número tel.:</strong> abre el número guardado para corregirlo. Mientras no pulses Guardar, sigue vigente el número anterior.</li>
+                    <li><strong>Quitar:</strong> borra el teléfono de la nota.</li>
+                </ul>
+                <div class="note attention"><p>Una nota que se queda sin artículos <strong>conserva su número de nota y su teléfono</strong>, y se reutiliza para el siguiente cliente. Si el cliente anterior se fue sin comprar, pulsa <strong>Quitar</strong>: de lo contrario el boleto de la próxima venta se asignaría a su teléfono.</p></div>
+                <p>Al pulsar <strong>Completar venta</strong>, la ventana de usuario y contraseña muestra un aviso con el teléfono al que se asignará el boleto, o la advertencia de que esa venta no participa en la rifa. Si el aviso no corresponde a tu cliente, cierra la ventana, corrige el teléfono en el recuadro y vuelve a completar la venta.</p>
+                <h3>Venta Stock</h3>
+                <p>El recuadro aparece junto al carrito con las opciones <strong>Guardar</strong> y <strong>Omitir</strong>. Al usar cualquiera de las dos el recuadro se oculta; para volver a verlo hay que recargar la pantalla. Si la venta ya se cerró, usa <strong>Asignar boleto</strong> (apartado 3).</p>
             </section>
             <section id="asignar">
                 <h2>3. ¿La venta se hizo sin teléfono?</h2>
@@ -142,6 +153,7 @@
                 </ol>
                 <div class="note"><p>La asignación manual también elige el número al azar y exige <strong>todos los requisitos</strong>. Debe hacerse mientras la rifa siga activa y vigente, aunque la venta se haya realizado dentro del periodo.</p></div>
                 <p>El teléfono se guarda en la venta antes de intentar asignar el boleto. Si después aparece un aviso de que la venta no participa, el teléfono puede haber quedado guardado; eso no significa que ya tenga boleto.</p>
+                <p>En una venta Express que todavía no se cierra no hace falta esta pantalla: agrega o corrige el teléfono en el recuadro <strong>Rifa activa</strong> de la propia venta (apartado 2).</p>
                 <p>Si ya existe un boleto, consulta el asignado. Para corregir su teléfono, sigue el apartado 5.</p>
             </section>
             <section id="consultar">
@@ -212,7 +224,7 @@
                         <tbody>
                             <tr><td>«No hay rifas activas.»</td><td>Revisa la sucursal, el estado y las fechas de la rifa. Debe estar vigente al intentar asignar.</td></tr>
                             <tr><td>«La rifa está fuera de la fecha actual.»</td><td>Comprueba que la fecha de creación de la venta esté dentro del inicio y fin de la rifa.</td></tr>
-                            <tr><td>La venta no tiene teléfono.</td><td>Usa «Asignar boleto» con el teléfono, la nota y el tipo de venta correctos.</td></tr>
+                            <tr><td>La venta no tiene teléfono.</td><td>Si la nota Express sigue abierta, agrégalo en el recuadro «Rifa activa». Si la venta ya se cerró, usa «Asignar boleto» con el teléfono, la nota y el tipo de venta correctos.</td></tr>
                             <tr><td>El total es inferior al mínimo.</td><td>Revisa el total de esa venta. No se suman varias notas para alcanzar el mínimo.</td></tr>
                             <tr><td>«La venta no está completada.»</td><td>Revisa su estado y termina el proceso habitual de venta o autorización.</td></tr>
                             <tr><td>La venta ya tiene un boleto.</td><td>Busca el número asignado en «Boletos de rifa»; la misma venta no recibe un segundo boleto.</td></tr>
