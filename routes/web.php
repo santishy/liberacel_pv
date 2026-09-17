@@ -15,6 +15,7 @@ use App\Http\Controllers\FastSaleAssociatedUserController;
 use App\Http\Controllers\FastSaleController;
 use App\Http\Controllers\FastSaleCustomerBonusController;
 use App\Http\Controllers\FastSalePDFController;
+use App\Http\Controllers\UpdateFastSaleCustomerPhoneController;
 use App\Http\Controllers\GeneralReportController;
 use App\Http\Controllers\ImpersonationController;
 use App\Http\Controllers\InventoryContextController;
@@ -169,6 +170,7 @@ Route::get('fast-sales/create', [FastSaleController::class, 'create'])->middlewa
 Route::put('fast-sales/{sale}', [FastSaleController::class, 'update'])->middleware(['auth', 'context.inventory']);
 Route::delete('fast-sales/{sale}', [FastSaleController::class, 'destroy'])->middleware(['auth', 'context.inventory']);
 Route::get('fast-sales', [FastSaleController::class, 'index'])->middleware(['auth', 'context.inventory']);
+Route::patch('fast-sales/{sale}/customer-phone', [UpdateFastSaleCustomerPhoneController::class, '__invoke'])->middleware(['auth', 'context.inventory']);
 /**
  * Relacionar a usuario con cualquier tabla
  */

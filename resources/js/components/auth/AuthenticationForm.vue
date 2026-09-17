@@ -6,73 +6,61 @@
                     Completar venta
                 </span>
             </template>
-            <form @submit.prevent="submit" class="px-2">
+            <form @submit.prevent="submit">
                 <errors-component />
+                <div class="mb-4 px-2" v-if="notification">
+                    <p
+                        class="border border-1 rounded border-sky-700 bg-sky-200 text-sky-800 px-3 py-2 text-sm"
+                        v-if="customerPhone"
+                    >
+                        <span class="font-semibold">Rifa:</span> el boleto se
+                        asignará al
+                        <span class="font-semibold">{{ customerPhone }}</span>
+                    </p>
+                    <p
+                        class="border border-1 rounded border-amber-400 bg-amber-50 text-amber-800 px-3 py-2 text-sm"
+                        v-else
+                    >
+                        <span class="font-semibold">Sin teléfono:</span> esta
+                        venta no participa en la rifa. Si el cliente quiere
+                        participar, cierra y agrégalo.
+                    </p>
+                </div>
                 <div class="mb-1 px-2">
-                    <input name="username" ref="username" class="
-                            border-2
-                            placeholder-gray-600
-                            bg-gray-100
-                            rounded
-                            relative
-                            rounded-bl-none rounded-br-none
-                            appearance-none
-                            w-full
-                            py-3
-                            px-3
-                            text-gray-700
-                            leading-tight
-                            focus:outline-none
-                            focus:ring-indigo-500
-                            focus:border-indigo-500
-                            focus:z-10
-                        " id="username" v-model="form.username" type="text" placeholder="Nombre de usuario..." />
+                    <input
+                        name="username"
+                        ref="username"
+                        class="border-2 placeholder-gray-600 bg-gray-100 rounded relative rounded-bl-none rounded-br-none appearance-none w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
+                        id="username"
+                        v-model="form.username"
+                        type="text"
+                        placeholder="Nombre de usuario..."
+                    />
                 </div>
                 <div class="mb-0 px-2">
-                    <input name="password" class="
-                            border-2
-                            placeholder-gray-600
-                            bg-gray-100
-                            relative
-                            appearance-none
-                            rounded rounded-tl-none rounded-tr-none
-                            w-full
-                            py-3
-                            px-3
-                            text-gray-700
-                            leading-tight
-                            focus:outline-none
-                            focus:ring-indigo-500
-                            focus:border-indigo-500
-                            focus:z-10
-                        " id="password" type="password" v-model="form.password" placeholder="Contraseña..." />
+                    <input
+                        name="password"
+                        class="border-2 placeholder-gray-600 bg-gray-100 relative appearance-none rounded rounded-tl-none rounded-tr-none w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
+                        id="password"
+                        type="password"
+                        v-model="form.password"
+                        placeholder="Contraseña..."
+                    />
                 </div>
                 <div class="mb-0 px-2">
-                    <button type="submit" ref="submit" class="
-                            transition-all
-                            duration-500
-                            ease-in-out
-                            hover:bg-blue-500
-                            text-white
-                            rounded-sm
-                            mt-1
-                            font-semibold
-                            hover:text-white
-                            py-2
-                            px-4
-                            bg-sky-500
-                            hover:border-transparent
-                            w-full
-                        " :disabled="loading">
+                    <button
+                        type="submit"
+                        ref="submit"
+                        class="transition-all duration-500 ease-in-out hover:bg-blue-500 text-white rounded-sm mt-1 font-semibold hover:text-white py-2 px-4 bg-sky-500 hover:border-transparent w-full"
+                        :disabled="loading"
+                    >
                         Enviar
                     </button>
-                    <div v-if="form.status == 'cancelled'" class="
-                            bg-orange-100
-                            border-l-4 border-orange-500
-                            text-orange-700
-                            p-2
-                            mt-2
-                        " role="alert">
+                    <div
+                        v-if="form.status == 'cancelled'"
+                        class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2 mt-2"
+                        role="alert"
+                    >
                         <p class="font-bold">Cancellar nota # {{ local_id }}</p>
                         <p class="text-sm">
                             Esta a punto de cancelar la venta completa.
@@ -82,21 +70,16 @@
             </form>
 
             <template v-if="cancellationCheckbox" slot="button">
-                <label class="
-                        inline-flex
-                        items-start
-                        border-2
-                        p-2
-                        rounded-sm
-                        border-gray-200
-                    ">
-                    <input type="checkbox" @change="toggleStatus" class="
-                            form-checkbox
-                            h-5
-                            w-5
-                            text-pink-600
-                            checked:bg-red-500
-                        " /><span class="ml-2 text-red-700 text-sm font-bold">Cancelar venta</span>
+                <label
+                    class="inline-flex items-start border-2 p-2 rounded-sm border-gray-200"
+                >
+                    <input
+                        type="checkbox"
+                        @change="toggleStatus"
+                        class="form-checkbox h-5 w-5 text-pink-600 checked:bg-red-500"
+                    /><span class="ml-2 text-red-700 text-sm font-bold"
+                        >Cancelar venta</span
+                    >
                 </label>
             </template>
         </information-component>
@@ -115,12 +98,19 @@ export default {
         },
         uri: {
             type: String,
-            required: true
+            required: true,
         },
         cancellationCheckbox: {
             type: Boolean,
-            default: true
-        }
+            default: true,
+        },
+        notification: {
+            type: Boolean,
+            default: false,
+        },
+        customerPhone: {
+            type: String,
+        },
     },
     components: {
         InformationComponent,
@@ -155,16 +145,13 @@ export default {
         },
     },
     methods: {
-        ...mapMutations('raffles', ['setActiveRaffle']),
+        ...mapMutations("raffles", ["setActiveRaffle"]),
         async submit() {
             try {
                 this.loading = true;
                 this.form.model = this.model;
                 this.form.id = this.id;
-                const res = await axios.post(
-                    this.uri,
-                    this.form
-                );
+                const res = await axios.post(this.uri, this.form);
                 if (res.status === 200) {
                     console.log("respuesta: ", res.data);
                     if (!res.data.hasActiveRaffle) {
@@ -172,9 +159,10 @@ export default {
                     }
                     if (res.data.sale.id) {
                         EventBus.$emit("associated-user", res.data.sale.id);
-
                     } else {
-                        console.log("No se recibió el ID de la venta en la respuesta.");
+                        console.log(
+                            "No se recibió el ID de la venta en la respuesta."
+                        );
                     }
                     this.form.id = null;
                     this.form.username = "";
@@ -195,8 +183,6 @@ export default {
         },
     },
     computed: {
-
-
         getStatus() {
             return this.disabled;
         },

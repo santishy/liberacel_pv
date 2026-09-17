@@ -22,6 +22,7 @@ class FastSaleResource extends JsonResource
             'client' => $this->whenLoaded('client'),
             'client_id' => $this->client_id,
             'products' => $this->concepts ? $this->concepts : [],
+            'customer_phone' => $this->customer_phone,
             'total' => '$'.number_format($this->total, 2),
             'created_at' => optional($this->created_at)->format('Y-m-d H:m:s'),
             'customer_bonus' => $this->whenLoaded('customerBonus'),

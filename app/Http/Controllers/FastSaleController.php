@@ -50,7 +50,6 @@ class FastSaleController extends Controller
     public function store(StoreFastSaleRequest $request)
     {
         $this->authorize('create', new FastSale);
-
         $fastSale = $this->isTheStatusCompleted(FastSale::findOrCreateFastSale());
 
         $fastSale->addConcept();
@@ -69,10 +68,7 @@ class FastSaleController extends Controller
             $updates['is_credit'] = $request->is_credit;
             $updates['client_id'] = $request->client_id;
         }
-        $hasActiveRaffle = (bool) Raffle::activeForInventory(InventoryContext::id());
-        if ($request->filled('customer_phone') && $hasActiveRaffle) {
-            $updates['customer_phone'] = $request->customer_phone;
-        }
+        
         $fastSale->update($updates);
         $fastSaleFresh = $fastSale->fresh();
 

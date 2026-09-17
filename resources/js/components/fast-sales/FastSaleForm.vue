@@ -28,14 +28,14 @@
                 @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
                 autocomplete="off" />
         </div>
-        <div v-if="hasActiveRaffle && !hasCurrentFastSale" class="col-span-2 sm:col-span-1">
+        <!-- <div v-if="hasActiveRaffle && !hasCurrentFastSale" class="col-span-2 sm:col-span-1">
             <label class="form-label">Teléfono</label>
             <input type="text" ref="customer_phone" name="customer_phone" v-model="customerPhone"
                 class="form-text-input w-full" placeholder="Nom. teléfono para rifa" @click.prevent="focusedIndex = 1"
                 @keydown.enter="submit" @keydown.down.exact.prevent="nextFocus"
                 @keydown.up.exact.prevent="previousFocus" @keydown.ctrl.space.exact.prevent="openModal"
                 autocomplete="off" />
-        </div>
+        </div> -->
     </form>
 </template>
 
@@ -68,24 +68,24 @@ export default {
         });
         EventBus.$on("sale-to-client", (res) => {
             this.form.client_id = res.sale.client.id;
-        })
+        });
     },
     methods: {
-        ...mapMutations(['SET_CURRENT_FAST_SALE']),
-        ...mapMutations('raffles', ['setCustomerPhone']),
+        ...mapMutations(["SET_CURRENT_FAST_SALE"]),
+        ...mapMutations("raffles", ["setCustomerPhone"]),
         async submit() {
             const payload = {
-                ...this.form
-            }
-            if (!this.hasCurrentFastSale && this.customerPhone) {
-                payload.customer_phone = this.customerPhone;
-            }
+                ...this.form,
+            };
+            // if (!this.hasCurrentFastSale && this.customerPhone) {
+            //     payload.customer_phone = this.customerPhone;
+            // }
             try {
                 this.toggleDisabled();
                 const {
                     data: { data },
                 } = await axios.post("/fast-sales", {
-                    ...payload
+                    ...payload,
                 });
 
                 EventBus.$emit("fast-sale", data);
@@ -100,17 +100,15 @@ export default {
                     title: "Venta rapida",
                     message: "Producto agregado",
                 });
-
-            }
-            catch (err) {
-                EventBus.$emit('an-error-ocurred', err);
+            } catch (err) {
+                EventBus.$emit("an-error-ocurred", err);
             }
             this.toggleDisabled();
             this.focusedIndex = 0;
             this.$refs.description.focus();
         },
         showErrors(err) {
-            EventBus.$emit('an-error-ocurred', err);
+            EventBus.$emit("an-error-ocurred", err);
         },
         toggleDisabled() {
             const fields = document.getElementById("fastSaleForm").elements;
@@ -139,20 +137,17 @@ export default {
         },
     },
     computed: {
-        ...mapGetters("raffles", ["hasActiveRaffle", "getCustomerPhone"]),
+        ...mapGetters("raffles", ["getCustomerPhone"]),
         ...mapState(["currentFastSale"]),
         customerPhone: {
             set(value) {
-                this.setCustomerPhone(value)
+                this.setCustomerPhone(value);
             },
             get() {
-                return this.getCustomerPhone
-            }
+                return this.getCustomerPhone;
+            },
         },
-        hasCurrentFastSale() {
-            const sale = this.currentFastSale;
-            return !!sale?.id;
-        },
+
         labelStyle() {
             return " w-3/12 text-center text-gray-700 font-serif font-semibold mr-2 rounded-sm py-3 px-6";
         },
