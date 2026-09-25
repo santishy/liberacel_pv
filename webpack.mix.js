@@ -17,7 +17,8 @@ mix.js("resources/js/app.js", "public/js")
         require("tailwindcss"),
         tailwindcss("./tailwind.config.js"),
     ])
-    .version();
+    .version()
+    .disableNotifications(); // el binario de notificaciones es x86 y falla en Apple Silicon sin Rosetta
 //     mix.browserSync('bazar.test');// uso esta configuración para que funcione con herd
 
 //uso esta configuración para que funcione con laravel sail
