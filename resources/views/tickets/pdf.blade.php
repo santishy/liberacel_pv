@@ -263,12 +263,6 @@
                 @endif
             </tbody>
         </table>
-        @if($raffleNumber && $sale->status === 'completed' )
-            <div class="text-center text-sm p-0  border-t  mt-2">
-                <h4 class="p-0  mt-0 mb-0">{{$raffle->name}}</h4>
-                <span class="font-mono" >Boleto de rifa asignado:</span> <strong>{{ $raffleNumber->code }} </strong>
-            </div>
-        @endif
         <div class="mt-0 mb-0">
             <pre style="white-space: pre-line;" class="text-sm">
                 {{ $ticketConfig->footer }}
@@ -277,6 +271,12 @@
         <div class="p-1 text-sm font-bold border-b text-center">
             {{ $user->name }}
         </div>
+        @if($raffleNumber && $sale->status === 'completed' )
+            <div class="text-center text-sm p-0   ">
+                <h4 class="p-0  mt-0 mb-0">{{$raffle->name}}</h4>
+                <span class="font-mono" >Boleto de rifa asignado:</span> <strong>{{ $raffleNumber->code }} </strong>
+            </div>
+        @endif
     </div>
 </body>
 
