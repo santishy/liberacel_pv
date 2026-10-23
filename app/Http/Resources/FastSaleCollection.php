@@ -23,6 +23,9 @@ class FastSaleCollection extends ResourceCollection
                     'products' => collect($sale->concepts),
                     'user_id' => optional($sale->user)->id,
                     'user_name' => optional($sale->user)->name,
+                    'customer_phone' => $sale->customer_phone,
+                    'raffle_number_code' => $sale->relationLoaded('raffleNumber') ?
+                         optional($sale->raffleNumber)->code : null,
                     'created_at' => $sale->created_at->format('Y-m-d H:i:s'),
                 ];
             });

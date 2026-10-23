@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white w-full">
-        <information-component :id="id">
+        <information-component :id="this.getId">
             <template slot="title">
                 <span class="text-xl font-mono font-semibold text-blue-700">
                     Completar venta
@@ -96,6 +96,9 @@ export default {
         id: {
             type: Number,
         },
+        modalId: {
+            type: [String, Number],
+        },
         uri: {
             type: String,
             required: true,
@@ -130,8 +133,7 @@ export default {
         EventBus.$on("id-for-authentication-form", (id) => {
             this.local_id = id;
         });
-
-        EventBus.$on(`open-modal-${this.id}`, (val) => {
+        EventBus.$on(`open-modal-${this.getId}`, (val) => {
             if (val) {
                 this.$nextTick(() => {
                     if (this.$refs?.username) this.$refs.username.focus();
@@ -153,16 +155,11 @@ export default {
                 this.form.id = this.id;
                 const res = await axios.post(this.uri, this.form);
                 if (res.status === 200) {
-                    console.log("respuesta: ", res.data);
                     if (!res.data.hasActiveRaffle) {
                         this.setActiveRaffle(null);
                     }
                     if (res.data.sale.id) {
                         EventBus.$emit("associated-user", res.data.sale.id);
-                    } else {
-                        console.log(
-                            "No se recibió el ID de la venta en la respuesta."
-                        );
                     }
                     this.form.id = null;
                     this.form.username = "";
@@ -185,6 +182,9 @@ export default {
     computed: {
         getStatus() {
             return this.disabled;
+        },
+        getId() {
+            return this.modalId ? this.modalId : this.id;
         },
     },
 };

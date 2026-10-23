@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use App\Facades\InventoryContext;
 use App\Models\FastSale;
 use App\Models\Sale;
 use Illuminate\Support\Str;
@@ -40,7 +41,22 @@ trait SaleModelHandler
             throw ValidationException::withMessages(['status' => 'La venta ya ha sido completada']);
         }
     }
-
+    public function validateSaleNotCancelled()
+    {
+        if ($this->status === 'cancelled') {
+            throw ValidationException::withMessages(['status' => 'La venta está cancelada']);
+        }
+    }
+    public function validateHasNoRaffleNumber(){
+        if($this->raffleNumber()->exists()){
+            throw ValidationException::withMessages(['status' =>"La nota #{$this->id} ya tiene un número de rifa asignado, cambialo en el menu Rifas -> Boletos de rifa " ]);
+        }
+    }
+    public function validateInventory(){
+        if($this->inventory_id !== (int)InventoryContext::id()){
+            throw ValidationException::withMessages(['inventory_id' => 'La venta se realizó en otra sucursal.  ']);
+        }
+    }
     public function determineSaleType()
     {
         if ($this->isStockSale()) {
