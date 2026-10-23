@@ -1,7 +1,6 @@
 <template>
     <layout-component>
-        <div class="flex justify-center items-center w-full ">
-
+        <div class="flex flex-wrap justify-center items-center w-full ">
             <div class="flex justify-center items-center flex-col w-9/12 px-4 bg-white py-6 rounded">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Asignar boleto</h2>
                 <form @submit.prevent="submit" class="flex gap-4 justify-center items-center flex-col w-full max-w-3xl">
@@ -33,11 +32,16 @@
                     </div>
                 </form>
             </div>
+            <div class="w-9/12 pt-4">
+                <assignable-sale-list />
+            </div>
         </div>
     </layout-component>
 </template>
 <script>
+import AssignableSaleList from './AssignableSaleList.vue'
 export default {
+    components: { AssignableSaleList },
     data() {
         return {
             form: {

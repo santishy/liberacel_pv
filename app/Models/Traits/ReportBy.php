@@ -24,7 +24,7 @@ trait ReportBy
         $query->whereMonth('created_at', $value);
     }
 
-    public function scopeToday(Builder $query, $value)
+    public function scopeToday(Builder $query, $value = '')
     {
 
         $query->whereDate('created_at', Carbon::now()->format('Y-m-d'));

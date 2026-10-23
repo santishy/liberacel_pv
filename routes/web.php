@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignableSalesController;
 use App\Http\Controllers\BarcodeToSellController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -293,6 +294,7 @@ Route::middleware(['auth', 'context.inventory'])->group(function () {
 Route::middleware(['auth', 'context.inventory'])->group(function () {
     Route::get('raffle-assignaments/assign-by-saleable/create', [RaffleAssignmentController::class, 'create'])->name('raffle-assginaments.assign-by-saleable.create');
     Route::post('raffle-assginaments/assign-by-saleable', [RaffleAssignmentController::class, 'store'])->name('raffle-assginaments.store-by-saleable');
+    Route::get('raffle-assignments/assignables', AssignableSalesController::class);
 });
 /**
  * Select inventory
