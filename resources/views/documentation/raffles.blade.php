@@ -85,7 +85,7 @@
             <h2>En esta guía</h2>
             <a href="#requisitos">1. Cuándo participa una venta</a>
             <a href="#vender">2. Al realizar una venta</a>
-            <a href="#asignar">3. Asignar después de vender</a>
+            <a href="#asignar">3. Teléfono o boleto después de vender</a>
             <a href="#consultar">4. Consultar e imprimir</a>
             <a href="#telefono">5. Corregir el teléfono</a>
             <a href="#liberar">6. Liberar un boleto</a>
@@ -142,7 +142,40 @@
             </section>
             <section id="asignar">
                 <h2>3. ¿La venta se hizo sin teléfono?</h2>
-                <p>Utiliza <strong>Rifas → Asignar boleto</strong> para registrar el teléfono en una venta que ya existe e intentar asignarle un número.</p>
+                <p>El teléfono se puede agregar o corregir cuando la nota ya salió del carrito: mientras espera en caja (<strong>pendiente</strong>) o después de cobrarla (<strong>completada</strong>). Elige el lugar según el caso:</p>
+                <div class="table-wrap">
+                    <table>
+                        <caption>Dónde agregar el teléfono</caption>
+                        <thead><tr><th scope="col">Caso</th><th scope="col">Dónde</th></tr></thead>
+                        <tbody>
+                            <tr><td>Nota Express o Stock de <strong>hoy</strong>, pendiente o ya cobrada.</td><td><strong>Rifas → Asignar boleto</strong>, lista «Agregar o corregir teléfono de rifa en las notas de hoy».</td></tr>
+                            <tr><td>Nota Express de cualquier día y tienes acceso a reportes.</td><td><strong>Reportes → Venta Expres</strong>, botón del teléfono.</td></tr>
+                            <tr><td>Venta ya cobrada de <strong>otro día</strong>.</td><td><strong>Rifas → Asignar boleto</strong>, formulario por número de nota.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Lo que ocurre al guardar depende del estado de la nota:</p>
+                <ul>
+                    <li><strong>Pendiente:</strong> solo se guarda el teléfono. <strong>No se asigna boleto todavía</strong>; cuando caja cobre la nota, el boleto se asigna solo si cumple los requisitos.</li>
+                    <li><strong>Completada:</strong> se guarda el teléfono y se intenta asignar el boleto en ese momento. En Express, si se asigna, el boleto se abre en otra pestaña.</li>
+                    <li><strong>Cancelada:</strong> no se puede agregar teléfono ni aparece en la lista.</li>
+                </ul>
+                <h3>Lista de notas de hoy</h3>
+                <p>Sirve para el caso más común: la vendedora olvidó pedir el teléfono y la nota ya pasó a caja.</p>
+                <ol>
+                    <li>Abre <a href="{{ route('raffle-assginaments.assign-by-saleable.create') }}">Asignar boleto</a>. La lista está debajo del formulario.</li>
+                    <li>En <strong>Elige un tipo de venta</strong>, selecciona <strong>Expres</strong> o <strong>Stock</strong>.</li>
+                    <li>Aparecen las notas <strong>de hoy</strong> de tu sucursal, pendientes o completadas, que todavía no tienen boleto, de la más reciente a la más antigua. Al bajar se cargan más. Cada fila muestra nota, estado, usuario, teléfono, total y fecha.</li>
+                    <li>Localiza la nota con su número, hora y total. Pulsa <strong>Agregar teléfono</strong> si no tiene uno, o <strong>Corregir teléfono</strong> si ya tiene.</li>
+                    <li>Escribe el teléfono y pulsa <strong>Guardar</strong>.</li>
+                </ol>
+                <p>Se muestran todas las notas del día, sin importar qué usuario las hizo, para que puedan atenderse entre turnos. Después de guardar, la fila actualiza el teléfono pero <strong>la nota sigue en la lista hasta que recargues la pantalla</strong>.</p>
+                <div class="note attention"><p>En una nota <strong>Stock ya cobrada</strong>, el aviso puede decir que el boleto «se asignará al pagar la nota» aunque ya se haya asignado, y no abre el boleto. Compruébalo en <strong>Rifas → Boletos de rifa</strong> antes de decirle al cliente que no tiene boleto.</p></div>
+                <p>Para ver la pantalla necesitas permiso para asignar boletos, y para guardar el teléfono, permiso para editar ventas. Si no lo tienes, el sistema te llevará a la pantalla de acceso denegado: pide que revisen tus permisos.</p>
+                <h3>Desde el reporte de Venta Expres</h3>
+                <p>En <strong>Reportes → Venta Expres</strong>, las notas pendientes o completadas que todavía no tienen boleto muestran un botón azul con un teléfono en las filas de la nota. Al pulsarlo se abre la ventana <strong>Agregar teléfono</strong>, con el número actual si ya lo tiene. Se comporta igual que la lista: en pendiente solo guarda, en completada guarda y asigna el boleto. Requiere permiso para editar ventas Express; si no tienes acceso al reporte, usa la lista de notas de hoy.</p>
+                <h3>Por número de nota (cualquier día)</h3>
+                <p>Úsalo para una venta ya cobrada que no es de hoy. El formulario superior de <strong>Rifas → Asignar boleto</strong> registra el teléfono y asigna el boleto.</p>
                 <ol>
                     <li>Selecciona la misma sucursal en la que se hizo la venta.</li>
                     <li>Abre <a href="{{ route('raffle-assginaments.assign-by-saleable.create') }}">Asignar boleto</a>.</li>
@@ -224,7 +257,8 @@
                         <tbody>
                             <tr><td>«No hay rifas activas.»</td><td>Revisa la sucursal, el estado y las fechas de la rifa. Debe estar vigente al intentar asignar.</td></tr>
                             <tr><td>«La rifa está fuera de la fecha actual.»</td><td>Comprueba que la fecha de creación de la venta esté dentro del inicio y fin de la rifa.</td></tr>
-                            <tr><td>La venta no tiene teléfono.</td><td>Si la nota Express sigue abierta, agrégalo en el recuadro «Rifa activa». Si la venta ya se cerró, usa «Asignar boleto» con el teléfono, la nota y el tipo de venta correctos.</td></tr>
+                            <tr><td>La venta no tiene teléfono.</td><td>Si la nota Express sigue abierta, agrégalo en el recuadro «Rifa activa». Si ya pasó a caja o se cobró hoy, usa la lista de notas de hoy en «Asignar boleto» (o el reporte Venta Expres). Si es de otro día, usa el formulario por número de nota.</td></tr>
+                            <tr><td>La nota está pendiente y no tiene boleto.</td><td>Es lo esperado: una nota pendiente no recibe boleto. Guarda el teléfono; el boleto se asigna cuando caja la cobre.</td></tr>
                             <tr><td>El total es inferior al mínimo.</td><td>Revisa el total de esa venta. No se suman varias notas para alcanzar el mínimo.</td></tr>
                             <tr><td>«La venta no está completada.»</td><td>Revisa su estado y termina el proceso habitual de venta o autorización.</td></tr>
                             <tr><td>La venta ya tiene un boleto.</td><td>Busca el número asignado en «Boletos de rifa»; la misma venta no recibe un segundo boleto.</td></tr>
